@@ -1,0 +1,598 @@
+'use client';
+
+import { useTranslations, useLocale } from "next-intl";
+import Link from "next/link";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useState, useRef, useEffect } from "react";
+import { Menu, X, ChevronDown } from "lucide-react";
+import FlagIcon from "./FlagIcon";
+import ThemeToggle from "./ThemeToggle";
+
+const languages = [
+  { code: "es", label: "ES" },
+  { code: "en", label: "EN" },
+  { code: "de", label: "DE" },
+] as const;
+
+const programsSubmenu = [
+  { key: "incidencia", href: "/programas/incidencia" },
+  { key: "avanzaJoven", href: "/programas/avanza-joven" },
+  { key: "empleo", href: "/programas/empleo" },
+  { key: "miCuerpo", href: "/programas/mi-cuerpo" },
+  { key: "marcoPolitico", href: "/programas/marco-politico" },
+];
+
+const casasSubmenu = [
+  { key: "areas", href: "/casas-del-saber/areas" },
+  { key: "lineas", href: "/casas-del-saber/lineas" },
+  { key: "modalidades", href: "/casas-del-saber/modalidades" },
+  { key: "rutaEgreso", href: "/casas-del-saber/ruta-egreso" },
+];
+
+const leySections = [
+  { key: "leyQueEs", href: "/ley-de-egreso#que-es" },
+  { key: "leyObjetivos", href: "/ley-de-egreso#objetivos" },
+  { key: "leyDirigida", href: "/ley-de-egreso#dirigida" },
+  { key: "leyCambio", href: "/ley-de-egreso#cambio" },
+  { key: "leyProceso", href: "/ley-de-egreso#proceso" },
+  { key: "leyParticipa", href: "/ley-de-egreso#participa" },
+];
+
+type DropdownState = "quienes" | "programas" | "ley" | "comoAyudar" | null;
+
+export default function Header() {
+  const t = useTranslations("nav");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const currentPath = pathname.replace(/^\/(es|en|de)/, "") || "/";
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState<DropdownState>(null);
+  const [openCasas, setOpenCasas] = useState(false);
+  const [openMobileProg, setOpenMobileProg] = useState(false);
+  const [openMobileCasas, setOpenMobileCasas] = useState(false);
+  const [openMobileLey, setOpenMobileLey] = useState(false);
+  const [openMobileAyudar, setOpenMobileAyudar] = useState(false);
+  const [openMobileQuienes, setOpenMobileQuienes] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const langTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const handleMouseEnter = (dropdown: DropdownState) => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setOpenDropdown(dropdown);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => setOpenDropdown(null), 200);
+  };
+
+  const handleLangEnter = () => {
+    if (langTimeoutRef.current) clearTimeout(langTimeoutRef.current);
+    setLangOpen(true);
+  };
+
+  const handleLangLeave = () => {
+    langTimeoutRef.current = setTimeout(() => setLangOpen(false), 200);
+  };
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      if (langTimeoutRef.current) clearTimeout(langTimeoutRef.current);
+    };
+  }, []);
+
+  const currentLang = languages.find((l) => l.code === locale) || languages[0];
+  const otherLangs = languages.filter((l) => l.code !== locale);
+
+  return (
+    <header className="sticky top-0 z-50 bg-bg-base shadow-sm">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
+        <Link href={`/${locale}`} className="flex items-center gap-2">
+          <Image
+            src="/logos/10 logo ascep horizontal azul.png"
+            alt="ASCEP"
+            width={144}
+            height={48}
+            className="h-12 w-auto"
+            priority
+          />
+        </Link>
+
+        <nav className="hidden items-center gap-1 md:flex">
+          <Link
+            href={`/${locale}`}
+            className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+          >
+            {t("inicio")}
+          </Link>
+          {/* Quienes Somos dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter("quienes")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button className="flex items-center gap-1 rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
+              {t("quienesSomos")} <ChevronDown size={14} />
+            </button>
+            {openDropdown === "quienes" && (
+              <div className="absolute left-0 top-full z-40 w-56 rounded-[10px] border border-border-subtle bg-bg-card p-2 shadow-lg">
+                <Link
+                  href={`/${locale}/quienes-somos`}
+                  className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                >
+                  {t("quienesSomos")}
+                </Link>
+                <Link
+                  href={`/${locale}/como-lo-hacemos`}
+                  className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                >
+                  {t("comoLoHacemos")}
+                </Link>
+                <Link
+                  href={`/${locale}/impacto`}
+                  className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                >
+                  {t("impacto")}
+                </Link>
+                <Link
+                  href={`/${locale}/aliados`}
+                  className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                >
+                  {t("aliados")}
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Programas dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter("programas")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button className="flex items-center gap-1 rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
+              {t("programas")} <ChevronDown size={14} />
+            </button>
+            {openDropdown === "programas" && (
+              <div className="absolute left-0 top-full z-40 w-64 rounded-[10px] border border-border-subtle bg-bg-card p-2 shadow-lg">
+                {programsSubmenu.map((item) => (
+                  <Link
+                    key={item.key}
+                    href={`/${locale}${item.href}`}
+                    className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                  >
+                    {t(item.key)}
+                  </Link>
+                ))}
+                <div className="my-1 h-px bg-[var(--color-border-subtle)]" />
+                <div
+                  className="relative"
+                  onMouseEnter={() => setOpenCasas(true)}
+                  onMouseLeave={() => setOpenCasas(false)}
+                >
+                  <Link
+                    href={`/${locale}/casas-del-saber`}
+                    className="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                  >
+                    {t("casasDelSaber")} <ChevronDown size={14} className="-rotate-90" />
+                  </Link>
+                  {openCasas && (
+                    <div className="absolute left-full top-0 z-40 w-56 rounded-[10px] border border-border-subtle bg-bg-card p-2 shadow-lg">
+                      {casasSubmenu.map((item) => (
+                        <Link
+                          key={item.key}
+                          href={`/${locale}${item.href}`}
+                          className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                        >
+                          {t(item.key)}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Ley de Egreso mega menu */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter("ley")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button className="flex items-center gap-1 rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
+              {t("leyEgreso")} <ChevronDown size={14} />
+            </button>
+            {openDropdown === "ley" && (
+              <div className="absolute right-0 top-full z-40 w-[580px] rounded-[10px] border border-border-subtle bg-bg-card p-4 shadow-lg">
+                <div className="flex gap-6">
+                  <div className="w-2/5 shrink-0">
+                    <Image
+                      src="/images/encuentro-2025/GIS06446.JPG"
+                      alt="Ley de Egreso"
+                      width={280}
+                      height={200}
+                      className="mb-3 w-full rounded-[10px] object-cover"
+                      style={{ aspectRatio: "7/5" }}
+                    />
+                    <Link
+                      href={`/${locale}/ley-de-egreso`}
+                      className="block text-sm font-bold text-text-primary"
+                    >
+                      {t("leyEgreso")}
+                    </Link>
+                    <p className="mt-1 text-xs text-text-muted">
+                      Ley 2479 de 2025
+                    </p>
+                  </div>
+                  <div className="flex-1">
+                    <div className="grid grid-cols-2 gap-1">
+                      {leySections.map((section) => (
+                        <Link
+                          key={section.key}
+                          href={`/${locale}${section.href}`}
+                          className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                        >
+                          {t(section.key)}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Como Ayudar mega menu */}
+          <div
+            className="relative"
+            onMouseEnter={() => handleMouseEnter("comoAyudar")}
+            onMouseLeave={handleMouseLeave}
+          >
+            <button className="flex items-center gap-1 rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
+              {t("comoAyudar")} <ChevronDown size={14} />
+            </button>
+            {openDropdown === "comoAyudar" && (
+              <div className="absolute right-0 top-full z-40 w-[580px] rounded-[10px] border border-border-subtle bg-bg-card p-4 shadow-lg">
+                <div className="flex gap-6">
+                  <div className="w-2/5 shrink-0">
+                    <Image
+                      src="/images/encuentro-2025/GIS06447.JPG"
+                      alt={t("comoAyudar")}
+                      width={280}
+                      height={200}
+                      className="mb-3 w-full rounded-[10px] object-cover"
+                      style={{ aspectRatio: "7/5" }}
+                    />
+                    <p className="text-sm font-bold text-text-primary">
+                      {t("comoAyudar")}
+                    </p>
+                    <p className="mt-1 text-xs text-text-muted">
+                      Tu apoyo transforma vidas
+                    </p>
+                  </div>
+                  <div className="flex-1">
+                    <div className="grid grid-cols-1 gap-1">
+                      <Link
+                        href={`/${locale}/donar`}
+                        className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                      >
+                        {t("donacionMonetaria")}
+                      </Link>
+                      <Link
+                        href={`/${locale}/como-ayudar/plan-padrino`}
+                        className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                      >
+                        {t("planPadrino")}
+                      </Link>
+                      <Link
+                        href={`/${locale}/como-ayudar/enredate-con-ascep`}
+                        className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                      >
+                        {t("enredateConAscep")}
+                      </Link>
+                      <Link
+                        href={`/${locale}/como-ayudar/voluntariado`}
+                        className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                      >
+                        {t("voluntariado")}
+                      </Link>
+                      <Link
+                        href={`/${locale}/participa`}
+                        className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                      >
+                        {t("participa")}
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <Link
+            href={`/${locale}/transparencia`}
+            className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+          >
+            {t("transparencia")}
+          </Link>
+          <Link
+            href={`/${locale}/contacto`}
+            className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+          >
+            {t("contacto")}
+          </Link>
+        </nav>
+
+        <div className="hidden items-center gap-1 md:flex">
+          <ThemeToggle />
+          {/* Language dropdown */}
+          <div
+            className="relative"
+            onMouseEnter={handleLangEnter}
+            onMouseLeave={handleLangLeave}
+          >
+            <button className="flex items-center gap-1.5 rounded-[10px] border border-border-default px-2.5 py-1.5 text-xs font-semibold uppercase text-text-primary transition-colors hover:border-brand-purple">
+              <FlagIcon country={currentLang.code as "es" | "en" | "de"} className="h-3.5 w-5" />
+              <span>{currentLang.label}</span>
+              <ChevronDown size={12} />
+            </button>
+            {langOpen && (
+              <div className="absolute right-0 top-full z-40 mt-1 w-28 rounded-[10px] border border-border-subtle bg-bg-card py-1 shadow-lg">
+                {otherLangs.map((lang) => (
+                  <Link
+                    key={lang.code}
+                    href={`/${lang.code}${currentPath}`}
+                    className="flex items-center gap-2 rounded-[10px] px-3 py-1.5 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                  >
+                    <FlagIcon country={lang.code as "es" | "en" | "de"} className="h-3.5 w-5" />
+                    <span>{lang.label}</span>
+                  </Link>
+                ))}
+              </div>
+            )}
+          </div>
+          <Link
+            href={`/${locale}/donar`}
+            className="inline-flex items-center rounded-[10px] bg-brand-orange px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-orange-dark"
+          >
+            Donar
+          </Link>
+        </div>
+
+        <button
+          className="flex items-center md:hidden"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label={menuOpen ? "Cerrar menu" : "Abrir menu"}
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {menuOpen && (
+        <div className="border border-border-subtle bg-bg-card rounded-[10px] m-4 md:hidden shadow-lg">
+          <nav className="flex flex-col px-4 py-4">
+            <Link
+              href={`/${locale}`}
+              className="py-2 text-sm font-semibold text-text-primary"
+              onClick={() => setMenuOpen(false)}
+            >
+              {t("inicio")}
+            </Link>
+            {/* Quienes Somos mobile */}
+            <div>
+              <button
+                onClick={() => setOpenMobileQuienes(!openMobileQuienes)}
+                className="flex w-full items-center justify-between py-2 text-sm font-semibold text-text-primary"
+              >
+                {t("quienesSomos")} <ChevronDown size={16} className={`transition-transform ${openMobileQuienes ? "rotate-180" : ""}`} />
+              </button>
+              {openMobileQuienes && (
+                <div className="ml-2 bg-[var(--color-bg-elevated)]/50 rounded-[10px] p-2 space-y-1">
+                  <Link
+                    href={`/${locale}/quienes-somos`}
+                    className="block py-1.5 text-sm font-semibold text-text-primary"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {t("quienesSomos")}
+                  </Link>
+                  <Link
+                    href={`/${locale}/como-lo-hacemos`}
+                    className="block py-1.5 text-sm font-semibold text-text-primary"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {t("comoLoHacemos")}
+                  </Link>
+                  <Link
+                    href={`/${locale}/impacto`}
+                    className="block py-1.5 text-sm font-semibold text-text-primary"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {t("impacto")}
+                  </Link>
+                  <Link
+                    href={`/${locale}/aliados`}
+                    className="block py-1.5 text-sm font-semibold text-text-primary"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {t("aliados")}
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Programas mobile */}
+            <div>
+              <button
+                onClick={() => setOpenMobileProg(!openMobileProg)}
+                className="flex w-full items-center justify-between py-2 text-sm font-semibold text-text-primary"
+              >
+                {t("programas")} <ChevronDown size={16} className={`transition-transform ${openMobileProg ? "rotate-180" : ""}`} />
+              </button>
+              {openMobileProg && (
+                <div className="ml-2 bg-[var(--color-bg-elevated)]/50 rounded-[10px] p-2 space-y-1">
+                  {programsSubmenu.map((item) => (
+                    <Link
+                      key={item.key}
+                      href={`/${locale}${item.href}`}
+                      className="block py-1.5 text-sm font-semibold text-text-primary"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {t(item.key)}
+                    </Link>
+                  ))}
+                  <button
+                    onClick={() => setOpenMobileCasas(!openMobileCasas)}
+                    className="flex w-full items-center justify-between py-1.5 text-sm font-semibold text-text-primary"
+                  >
+                    {t("casasDelSaber")} <ChevronDown size={14} className={`transition-transform ${openMobileCasas ? "rotate-180" : ""}`} />
+                  </button>
+                  {openMobileCasas && (
+                    <div className="ml-2 bg-[var(--color-bg-elevated)]/50 rounded-[10px] p-2 space-y-1">
+                      {casasSubmenu.map((item) => (
+                        <Link
+                          key={item.key}
+                          href={`/${locale}${item.href}`}
+                          className="block py-1.5 text-sm font-semibold text-text-primary"
+                          onClick={() => setMenuOpen(false)}
+                        >
+                          {t(item.key)}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* Ley de Egreso mobile */}
+            <div>
+              <button
+                onClick={() => setOpenMobileLey(!openMobileLey)}
+                className="flex w-full items-center justify-between py-2 text-sm font-semibold text-text-primary"
+              >
+                {t("leyEgreso")} <ChevronDown size={16} className={`transition-transform ${openMobileLey ? "rotate-180" : ""}`} />
+              </button>
+              {openMobileLey && (
+                <div className="ml-2 bg-[var(--color-bg-elevated)]/50 rounded-[10px] p-2 space-y-1">
+                  <Link
+                    href={`/${locale}/ley-de-egreso`}
+                    className="block py-1.5 text-sm font-bold text-text-primary"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {t("leyEgreso")}
+                  </Link>
+                  {leySections.map((section) => (
+                    <Link
+                      key={section.key}
+                      href={`/${locale}${section.href}`}
+                      className="block py-1.5 text-sm font-semibold text-text-primary"
+                      onClick={() => setMenuOpen(false)}
+                    >
+                      {t(section.key)}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Como Ayudar mobile */}
+            <div>
+              <button
+                onClick={() => setOpenMobileAyudar(!openMobileAyudar)}
+                className="flex w-full items-center justify-between py-2 text-sm font-semibold text-text-primary"
+              >
+                {t("comoAyudar")} <ChevronDown size={16} className={`transition-transform ${openMobileAyudar ? "rotate-180" : ""}`} />
+              </button>
+              {openMobileAyudar && (
+                <div className="ml-2 bg-[var(--color-bg-elevated)]/50 rounded-[10px] p-2 space-y-1">
+                  <Link
+                    href={`/${locale}/donar`}
+                    className="block py-1.5 text-sm font-semibold text-text-primary"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {t("donacionMonetaria")}
+                  </Link>
+                  <Link
+                    href={`/${locale}/como-ayudar/plan-padrino`}
+                    className="block py-1.5 text-sm font-semibold text-text-primary"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {t("planPadrino")}
+                  </Link>
+                  <Link
+                    href={`/${locale}/como-ayudar/enredate-con-ascep`}
+                    className="block py-1.5 text-sm font-semibold text-text-primary"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {t("enredateConAscep")}
+                  </Link>
+                  <Link
+                    href={`/${locale}/como-ayudar/voluntariado`}
+                    className="block py-1.5 text-sm font-semibold text-text-primary"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {t("voluntariado")}
+                  </Link>
+                  <Link
+                    href={`/${locale}/participa`}
+                    className="block py-1.5 text-sm font-semibold text-text-primary"
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {t("participa")}
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            <Link
+              href={`/${locale}/transparencia`}
+              className="py-2 text-sm font-semibold text-text-primary"
+              onClick={() => setMenuOpen(false)}
+            >
+              {t("transparencia")}
+            </Link>
+            <Link
+              href={`/${locale}/contacto`}
+              className="py-2 text-sm font-semibold text-text-primary"
+              onClick={() => setMenuOpen(false)}
+            >
+              {t("contacto")}
+            </Link>
+
+            <div className="mt-3 h-px bg-[var(--color-border-subtle)]" />
+            <div className="mt-3 flex items-center gap-3">
+              <div className="flex items-center gap-1.5">
+                {languages.map((lang) => (
+                  <Link
+                    key={lang.code}
+                    href={`/${lang.code}${currentPath}`}
+                    className={`flex items-center gap-1 rounded-[10px] border px-2 py-1.5 text-xs font-semibold uppercase transition-colors ${
+                      lang.code === locale
+                        ? "border-brand-purple bg-brand-purple/10 text-text-primary"
+                        : "border-border-default text-text-primary"
+                    }`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    <FlagIcon country={lang.code as "es" | "en" | "de"} className="h-3 w-5" />
+                    <span>{lang.label}</span>
+                  </Link>
+                ))}
+              </div>
+              <ThemeToggle />
+              <Link
+                href={`/${locale}/donar`}
+                className="inline-flex items-center rounded-[10px] bg-brand-orange px-5 py-2 text-sm font-semibold text-white"
+                onClick={() => setMenuOpen(false)}
+              >
+                Donar
+              </Link>
+            </div>
+          </nav>
+        </div>
+      )}
+    </header>
+  );
+}

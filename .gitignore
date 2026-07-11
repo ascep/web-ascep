@@ -1,0 +1,60 @@
+node_modules/
+.next/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Source assets (already copied to web/public/)
+fotos para la web/
+/logos/
+DOCUMENTO BASE ASOCIACIÓN.docx
+~$*.docx
+
+# Large videos
+*.mkv
+
+# Large root dirs
+podcast/
+videos/
+inpiration/
+
+# Large images in public root
+web/public/images/GIS0*.JPG
+web/public/images/GIS0*.jpg
+web/public/images/DSC_0*.JPG
+web/public/images/_MG_*.JPG
+web/public/images/FL3.jpg
+web/public/images/Egresado 1.png
+web/public/images/proyecto*
+web/public/images/UNICEF*
+
+# Large asset directories (deploy separately)
+web/public/documents/
+web/public/videos/
+web/public/images/encuentro-2025/
+web/public/images/equipo-shoot/
+web/public/images/eventos/
+
+# Python cache
+.opencode/skills/
+
+# Python cache
+.opencode/skills/ui-ux-pro-max/scripts/__pycache__/
+
+# Environment
+.env
+.env.local
+.env.production
+
+# IDE
+.vscode/settings.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS
+Thumbs.db
+.DS_Store

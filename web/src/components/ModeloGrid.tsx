@@ -1,0 +1,89 @@
+'use client';
+
+import { motion } from "motion/react";
+import Link from "next/link";
+import {
+  Heart,
+  Users,
+  Globe,
+  Sparkles,
+  Target,
+  TrendingUp,
+} from "lucide-react";
+
+const dimensions = [
+  { title: "Autoaceptacion", icon: Heart, desc: "Valoracion positiva de si mismo y de la propia historia.", color: "#019E9F" },
+  { title: "Relaciones Positivas", icon: Users, desc: "Capacidad de establecer relaciones sociales de calidad y confianza.", color: "#44BCC5" },
+  { title: "Dominio del Entorno", icon: Globe, desc: "Percepcion de control del medio y habilidad para crear entornos favorables.", color: "#EC6620" },
+  { title: "Autonomia", icon: Sparkles, desc: "Capacidad de sostener la propia individualidad y autodeterminacion.", color: "#EC6620" },
+  { title: "Proposito en la Vida", icon: Target, desc: "Capacidad de tener metas claras y definir objetivos vitales.", color: "#019E9F" },
+  { title: "Crecimiento Personal", icon: TrendingUp, desc: "Desarrollo de las potencialidades individuales para crecer como persona.", color: "#44BCC5" },
+];
+
+export default function ModeloGrid({ locale }: { locale: string }) {
+  return (
+    <section className="bg-[var(--color-bg-surface)] py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-start gap-14 lg:grid-cols-5">
+          <div className="lg:col-span-2">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-orange">
+              Nuestro Enfoque
+            </p>
+            <h2 className="mb-5 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              Nuestro Modelo
+            </h2>
+            <p className="mb-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
+              Nuestro modelo esta enfocado al fortalecimiento del ser, como
+              base para que los jovenes que egresan del sistema de proteccion
+              puedan gestionar su proyecto de vida.
+            </p>
+            <p className="mb-6 text-sm leading-relaxed text-[var(--color-text-muted)]">
+              Trabajamos transversalmente las seis dimensiones del bienestar
+              psicologico de Carol Ryff en todos nuestros procesos.
+            </p>
+            <Link
+              href={`/${locale}/quienes-somos`}
+              className="inline-flex items-center rounded-[10px] bg-brand-purple px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-purple-dark hover:shadow-lg"
+            >
+              Saber mas
+            </Link>
+          </div>
+          <div className="lg:col-span-3">
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {dimensions.map((dim, i) => {
+                const Icon = dim.icon;
+                return (
+                  <motion.div
+                    key={dim.title}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: i * 0.06, ease: [0.23, 1, 0.32, 1] }}
+                    whileHover={{ y: -6 }}
+                    className="group rounded-[10px] border border-[var(--color-border-subtle)] bg-[var(--color-bg-card)] p-5 transition-all duration-300"
+                    style={{
+                      boxShadow: "0 2px 12px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)",
+                    }}
+                  >
+                    <div
+                      className="mb-4 flex h-10 w-10 items-center justify-center rounded-[10px] transition-transform duration-300 group-hover:scale-110"
+                      style={{ backgroundColor: `${dim.color}14` }}
+                    >
+                      <Icon size={20} style={{ color: dim.color }} />
+                    </div>
+                    <h3 className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">
+                      {dim.title}
+                    </h3>
+                    <p className="text-xs leading-relaxed text-[var(--color-text-muted)]">
+                      {dim.desc}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,0 +1,10 @@
+{
+  "hero": "/videos/FONDO-WEB-16-9.mp4",
+  "eventos": [
+    { "id": "evento-1", "src": "/videos/20241112_100031.mp4", "title": "Evento 2024" },
+    { "id": "evento-2", "src": "/videos/20241112_102554.mp4", "title": "Taller 2024" },
+    { "id": "evento-3", "src": "/videos/20241112_102610.mp4", "title": "Actividad 2024" },
+    { "id": "evento-4", "src": "/videos/WhatsApp-Video-2024-11-12-at-11.09.43-AM.mp4", "title": "Entrevista 1" },
+    { "id": "evento-5", "src": "/videos/WhatsApp-Video-2024-11-12-at-11.09.45-AM.mp4", "title": "Entrevista 2" }
+  ]
+}

@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-blue: #019E9F;
+  /* brand-purple se mapea al mismo valor de brand-blue (#019E9F) por compatibilidad semantica en componentes existentes */
+  --color-brand-purple: #019E9F;
+  --color-brand-teal: #44BCC5;
+  --color-brand-orange: #EC6620;
+  --color-brand-yellow: #F2CA11;
+  /* brand-purple-dark se mapea a Primary Blue Dark (#005C5D) */
+  --color-brand-purple-dark: #005C5D;
+  --color-brand-teal-dark: #2E8A92;
+  --color-brand-orange-dark: #C45118;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --color-bg-base: #FFFFFF;
+  --color-bg-surface: #F8F8FA;
+  --color-bg-elevated: #F0F0F4;
+  --color-bg-card: #FFFFFF;
+  --color-text-primary: #18181B;
+  --color-text-secondary: #52525B;
+  --color-text-muted: #71717A;
+  --color-border-subtle: #E4E4E7;
+  --color-border-default: #D4D4D8;
+}
+
+.dark {
+  --color-bg-base: #0A0A0F;
+  --color-bg-surface: #12121A;
+  --color-bg-elevated: #1A1A2E;
+  --color-bg-card: #22223A;
+  --color-text-primary: #F1F1F6;
+  --color-text-secondary: #A0A0B8;
+  --color-text-muted: #6B6B82;
+  --color-border-subtle: #2A2A3E;
+  --color-border-default: #3A3A52;
+}
+
+.bg-bg-base { background-color: var(--color-bg-base); }
+.bg-bg-surface { background-color: var(--color-bg-surface); }
+.bg-bg-elevated { background-color: var(--color-bg-elevated); }
+.bg-bg-card { background-color: var(--color-bg-card); }
+.text-text-primary { color: var(--color-text-primary); }
+.text-text-secondary { color: var(--color-text-secondary); }
+.text-text-muted { color: var(--color-text-muted); }
+.border-border-subtle { border-color: var(--color-border-subtle); }
+.border-border-default { border-color: var(--color-border-default); }
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

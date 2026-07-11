@@ -1,0 +1,39 @@
+{
+  "institucionales": [
+    { "id": "presentacion", "title": "Presentacion Institucional", "path": "/documents/Presentacion.pdf", "category": "institucional" },
+    { "id": "documento-base", "title": "Documento Base ASCEP", "path": "/documents/DOCUMENTO BASE ASOCIACION.docx.pdf", "category": "institucional" },
+    { "id": "manual-identidad", "title": "Manual de Identidad", "path": "/logos/01 Manual de Identidad ascep.pdf", "category": "institucional" }
+  ],
+  "financieros": [
+    { "id": "estados-2023", "title": "Estados Financieros 2023", "path": "/documents/3.Estados_Financieros_2023_ASCEP.pdf", "category": "financiero" },
+    { "id": "estados-2024", "title": "Estados Financieros 2024", "path": "/documents/3.Estados-Financieros-2024_ASCEP_firmados.pdf", "category": "financiero" },
+    { "id": "declaracion-renta-2023", "title": "Declaracion de Renta 2023", "path": "/documents/5.Declaracion_Renta_2023.pdf", "category": "financiero" },
+    { "id": "rut", "title": "RUT ASCEP", "path": "/documents/4.RUT_ASCEP.pdf", "category": "legal" }
+  ],
+  "informes": [
+    { "id": "informe-gestion-2023", "title": "Informe de Gestion 2023", "path": "/documents/2.Informe_de_Gestion_2023.pdf", "category": "gestion" },
+    { "id": "informe-gestion-2024", "title": "Informe de Gestion 2024", "path": "/documents/2.Informe-de-Gestion-2024-ASCEP_Maicol-Londono.pdf", "category": "gestion" },
+    { "id": "informe-integrado-2018", "title": "Informe Integrado ASCEP 2018", "path": "/documents/INFORME-INTEGRADO-ASCEP-2018.pdf", "category": "gestion" }
+  ],
+  "registros": [
+    { "id": "registro-2024", "title": "Registro Web 2024", "path": "/documents/1.Registro_Web_2024.pdf", "category": "registro" },
+    { "id": "registro-2025", "title": "Registro Web 2025", "path": "/documents/1.Registro_WEB_2025.pdf", "category": "registro" }
+  ],
+  "legales": [
+    { "id": "certificado-requisitos", "title": "Certificado Requisitos", "path": "/documents/6.Certificado_requisitos.pdf", "category": "legal" },
+    { "id": "certificado-cargos", "title": "Certificado Cargos Directivos", "path": "/documents/7.Certificado_cargos_directivos-y-gerenciales.pdf", "category": "legal" },
+    { "id": "certificado-antecedentes", "title": "Certificado Antecedentes Judiciales", "path": "/documents/8.Certificado_antecedentes_judiciales.pdf", "category": "legal" },
+    { "id": "formato-2530", "title": "Formato 2530-2531", "path": "/documents/9.Formato_2530_2531.pdf", "category": "legal" }
+  ],
+  "cartillas": [
+    { "id": "caja-herramientas", "title": "Caja de Herramientas - Familias en Plural", "path": "/documents/BF_Caja_herramientas_Familias_en_Plural.pdf", "category": "cartilla" },
+    { "id": "proyecto-formativo", "title": "Cartilla Proyecto Formativo LET", "path": "/documents/Cartilla-Proyecto-Formativo-LET-ve-sep-20-2018.pdf", "category": "cartilla" },
+    { "id": "manual-familias", "title": "Manual Familias", "path": "/documents/Manual-Familias.pdf", "category": "cartilla" },
+    { "id": "sistematizacion-pflet", "title": "Sistematizacion PFLET 3.0", "path": "/documents/SISTEMATIZACION-PFLET-3.0.pdf", "category": "cartilla" },
+    { "id": "revista-adolescencia", "title": "Revista Adolescencia", "path": "/documents/REVISTA-ADOLESCENCIA.pdf", "category": "cartilla" },
+    { "id": "campana-voces", "title": "Campaña Voces que Inspiran", "path": "/documents/Campana-voces-que-inspiran-.pdf", "category": "cartilla" },
+    { "id": "infor-compressed", "title": "INFOR", "path": "/documents/INFOR-compressed.pdf", "category": "cartilla" },
+    { "id": "ascep-web", "title": "ASCEP Web", "path": "/documents/ascep_web.pdf", "category": "cartilla" },
+    { "id": "hoja-interior", "title": "Hoja Interior", "path": "/documents/hoja-interior.pdf", "category": "cartilla" }
+  ]
+}
