@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { ChevronDown } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 type DarkHeroProps = {
   title: string;
@@ -16,7 +17,7 @@ export default function DarkHero({
   subtitle,
   cta,
   secondary,
-  bgImage = "/videos/FONDO-WEB-16-9.mp4",
+  bgImage = assetPath("/videos/FONDO-WEB-16-9.mp4"),
 }: DarkHeroProps) {
   const prefersReducedMotion = useReducedMotion();
   return (
@@ -27,7 +28,6 @@ export default function DarkHero({
           muted
           loop
           playsInline
-          poster="/images/hero-poster.webp"
           className="h-full w-full object-cover opacity-40"
         >
           <source src={bgImage} type="video/mp4" />

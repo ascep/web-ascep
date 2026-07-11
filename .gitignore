@@ -35,11 +35,17 @@ web/public/images/encuentro-2025/
 web/public/images/equipo-shoot/
 web/public/images/eventos/
 
-# Python cache
-.opencode/skills/
+# opencode local config (not needed for deployment)
+.opencode/
 
-# Python cache
-.opencode/skills/ui-ux-pro-max/scripts/__pycache__/
+# Source documents (already processed)
+KIT DE COMUNICACIÓN LEY DE EGRESO 2026*
+
+# Local agent instructions
+AGENTS.md
+
+# Local scripts
+scripts/
 
 # Environment
 .env

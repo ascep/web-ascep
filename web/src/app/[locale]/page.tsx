@@ -10,20 +10,21 @@ import Timeline from "@/components/Timeline";
 import ModeloGrid from "@/components/ModeloGrid";
 import ProgramStack from "@/components/ProgramStack";
 import LogoLoop from "@/components/LogoLoop";
+import { assetPath } from "@/lib/asset-path";
 
 const gallery = [
-  { src: "/images/eventos/20241112_092951.jpg", alt: "Taller con jovenes" },
-  { src: "/images/eventos/20241112_100049.jpg", alt: "Actividad grupal" },
-  { src: "/images/eventos/20241112_102515.jpg", alt: "Sesion de trabajo" },
-  { src: "/images/encuentro-2025/GIS06449.JPG", alt: "Encuentro ASCEP 2025" },
+  { src: assetPath("/images/eventos/20241112_092951.jpg"), alt: "Taller con jovenes" },
+  { src: assetPath("/images/eventos/20241112_100049.jpg"), alt: "Actividad grupal" },
+  { src: assetPath("/images/eventos/20241112_102515.jpg"), alt: "Sesion de trabajo" },
+  { src: assetPath("/images/encuentro-2025/GIS06449.JPG"), alt: "Encuentro ASCEP 2025" },
 ];
 
 const milestones = [
-  { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: "/images/eventos/20241112_092855.jpg" },
-  { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: "/images/eventos/20241112_092951.jpg" },
-  { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: "/images/eventos/20241112_095957.jpg" },
-  { year: "2023", title: "Proyecto de Ley", description: "Impulsamos el proyecto de Ley de Egreso, construido colectivamente con egresados de todo el pais y respaldado por la senadora Lorena Rios.", image: "/images/eventos/20241112_100147.jpg" },
-  { year: "2025", title: "Ley 2479 de 2025", description: "Se sanciona la Ley Hijos del Estado, creando el Programa Nacional de Acompanamiento Integral al Egresado del ICBF.", image: "/images/eventos/20241112_111016.jpg" },
+  { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: assetPath("/images/eventos/20241112_092855.jpg") },
+  { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: assetPath("/images/eventos/20241112_092951.jpg") },
+  { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: assetPath("/images/eventos/20241112_095957.jpg") },
+  { year: "2023", title: "Proyecto de Ley", description: "Impulsamos el proyecto de Ley de Egreso, construido colectivamente con egresados de todo el pais y respaldado por la senadora Lorena Rios.", image: assetPath("/images/eventos/20241112_100147.jpg") },
+  { year: "2025", title: "Ley 2479 de 2025", description: "Se sanciona la Ley Hijos del Estado, creando el Programa Nacional de Acompanamiento Integral al Egresado del ICBF.", image: assetPath("/images/eventos/20241112_111016.jpg") },
 ];
 
 const programs = [
@@ -48,7 +49,7 @@ const programs = [
     slug: "empleo",
     desc: "Modelo piloto para promover capacidades laborales y fortalecer la empleabilidad de jovenes en proceso de egreso del sistema de proteccion.",
     logo: "/images/programas/LOGO-FOMENTO1.png",
-    image: "/images/eventos/GIS08397.jpg",
+    image: assetPath("/images/eventos/GIS08397.jpg"),
     color: "#EC6620",
   },
   {
@@ -56,7 +57,7 @@ const programs = [
     slug: "mi-cuerpo",
     desc: "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad.",
     logo: "/images/programas/logo-MCSD.png",
-    image: "/images/eventos/20241112_111009.jpg",
+    image: assetPath("/images/eventos/20241112_111009.jpg"),
     color: "#EC6620",
   },
 ];
@@ -153,7 +154,7 @@ export default async function HomePage({
               <div className="relative inline-block w-full">
                 <div className="absolute -left-4 -top-4 h-full w-full rounded-[10px] bg-brand-purple/10" />
                 <Image
-                  src="/images/equipo-shoot/GIS08548.JPG"
+                  src={assetPath("/images/equipo-shoot/GIS08548.JPG")}
                   alt="Equipo ASCEP"
                   width={600}
                   height={400}
@@ -188,7 +189,7 @@ export default async function HomePage({
             </div>
             <div className="relative">
               <Image
-                src="/images/eventos/20241112_102357.jpg"
+                src={assetPath("/images/eventos/20241112_102357.jpg")}
                 alt="Jovenes en taller"
                 width={600}
                 height={400}

@@ -6,6 +6,18 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const assetsUrl = process.env.ASSETS_URL;
 
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "*.public.blob.vercel-storage.com",
+      },
+      {
+        protocol: "https",
+        hostname: "*.private.blob.vercel-storage.com",
+      },
+    ],
+  },
   async rewrites() {
     if (!assetsUrl) return [];
     return [

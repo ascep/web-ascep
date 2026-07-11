@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 type HomeHeroProps = {
   title: string;
@@ -33,7 +34,7 @@ export default function HomeHero({
           playsInline
           className="h-full w-full object-cover"
         >
-          <source src="/videos/FONDO-WEB-16-9.mp4" type="video/mp4" />
+          <source src={assetPath("/videos/FONDO-WEB-16-9.mp4")} type="video/mp4" />
         </video>
       </div>
 
@@ -69,7 +70,7 @@ export default function HomeHero({
               <div className="absolute -right-6 -top-6 h-48 w-48 rounded-2xl bg-brand-teal/20" />
               <div className="absolute -bottom-4 -left-4 h-32 w-32 rounded-2xl bg-brand-orange/20" />
               <Image
-                src="/images/encuentro-2025/GIS06445.JPG"
+                src={assetPath("/images/encuentro-2025/GIS06445.JPG")}
                 alt="ASCEP team"
                 width={600}
                 height={450}
