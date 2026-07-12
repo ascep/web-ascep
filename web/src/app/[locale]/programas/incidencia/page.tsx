@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { ArrowUpRight, Home, Search, Users } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Incidencia y Participacion - ASCEP",
@@ -63,7 +64,7 @@ export default function IncidenciaPage() {
   return (
     <>
       <PageHero
-        bgImage="/images/programas/incidencia-scaled-1.jpg"
+        bgImage={assetPath("/images/programas/incidencia-scaled-1.jpg")}
         tag="Programa"
         title="Incidencia y Participacion"
         subtitle="Fortalecemos la participacion ciudadana y la incidencia politica de los jovenes egresados."
@@ -81,7 +82,7 @@ export default function IncidenciaPage() {
           </div>
           <div className="grid gap-12 md:grid-cols-2 items-center">
             <div className="relative h-72 overflow-hidden rounded-[10px] md:h-96">
-              <Image src="/images/programas/incidencia-scaled-1.jpg" alt="Incidencia y Participacion" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+              <Image src={assetPath("/images/programas/incidencia-scaled-1.jpg")} alt="Incidencia y Participacion" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
               <p>

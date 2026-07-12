@@ -1,7 +1,7 @@
 'use client';
 
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 const socialLinks = [
   {
@@ -23,6 +23,7 @@ const socialLinks = [
 
 export default function TopBar() {
   const locale = useLocale();
+  const t = useTranslations("topBar");
 
   return (
     <div className="bg-brand-purple">
@@ -68,7 +69,7 @@ export default function TopBar() {
           href={`/${locale}/ley-de-egreso`}
           className="rounded-[10px] bg-white px-4 py-1 text-xs font-semibold text-text-primary transition-colors hover:bg-zinc-100"
         >
-          Conozca la Ley
+          {t("leyCta")}
         </Link>
       </div>
     </div>

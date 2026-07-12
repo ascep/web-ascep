@@ -13,7 +13,7 @@ import ThemeToggle from "./ThemeToggle";
 const languages = [
   { code: "es", label: "ES" },
   { code: "en", label: "EN" },
-  { code: "de", label: "DE" },
+  { code: "pt", label: "PT" },
 ] as const;
 
 const programsSubmenu = [
@@ -46,7 +46,7 @@ export default function Header() {
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
-  const currentPath = pathname.replace(/^\/(es|en|de)/, "") || "/";
+  const currentPath = pathname.replace(/^\/(es|en|pt)/, "") || "/";
   const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownState>(null);
   const [openCasas, setOpenCasas] = useState(false);
@@ -92,7 +92,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href={`/${locale}`} className="flex items-center gap-2">
           <Image
-            src="/logos/10 logo ascep horizontal azul.png"
+            src={assetPath("/logos/10 logo ascep horizontal azul.png")}
             alt="ASCEP"
             width={144}
             height={48}
@@ -225,7 +225,7 @@ export default function Header() {
                       {t("leyEgreso")}
                     </Link>
                     <p className="mt-1 text-xs text-text-muted">
-                      Ley 2479 de 2025
+                      {t("leyNumero")}
                     </p>
                   </div>
                   <div className="flex-1">
@@ -271,7 +271,7 @@ export default function Header() {
                       {t("comoAyudar")}
                     </p>
                     <p className="mt-1 text-xs text-text-muted">
-                      Tu apoyo transforma vidas
+                      {t("apoyoTransforma")}
                     </p>
                   </div>
                   <div className="flex-1">
@@ -336,7 +336,7 @@ export default function Header() {
             onMouseLeave={handleLangLeave}
           >
             <button className="flex items-center gap-1.5 rounded-[10px] border border-border-default px-2.5 py-1.5 text-xs font-semibold uppercase text-text-primary transition-colors hover:border-brand-purple">
-              <FlagIcon country={currentLang.code as "es" | "en" | "de"} className="h-3.5 w-5" />
+              <FlagIcon country={currentLang.code as "es" | "en" | "pt"} className="h-3.5 w-5" />
               <span>{currentLang.label}</span>
               <ChevronDown size={12} />
             </button>
@@ -348,7 +348,7 @@ export default function Header() {
                     href={`/${lang.code}${currentPath}`}
                     className="flex items-center gap-2 rounded-[10px] px-3 py-1.5 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
                   >
-                    <FlagIcon country={lang.code as "es" | "en" | "de"} className="h-3.5 w-5" />
+                    <FlagIcon country={lang.code as "es" | "en" | "pt"} className="h-3.5 w-5" />
                     <span>{lang.label}</span>
                   </Link>
                 ))}
@@ -359,14 +359,14 @@ export default function Header() {
             href={`/${locale}/donar`}
             className="inline-flex items-center rounded-[10px] bg-brand-orange px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-orange-dark"
           >
-            Donar
+            {t("donarBtn")}
           </Link>
         </div>
 
         <button
           className="flex items-center md:hidden"
           onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? "Cerrar menu" : "Abrir menu"}
+          aria-label={menuOpen ? t("cerrarMenu") : t("abrirMenu")}
         >
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -577,7 +577,7 @@ export default function Header() {
                     }`}
                     onClick={() => setMenuOpen(false)}
                   >
-                    <FlagIcon country={lang.code as "es" | "en" | "de"} className="h-3 w-5" />
+                    <FlagIcon country={lang.code as "es" | "en" | "pt"} className="h-3 w-5" />
                     <span>{lang.label}</span>
                   </Link>
                 ))}
@@ -588,7 +588,7 @@ export default function Header() {
                 className="inline-flex items-center rounded-[10px] bg-brand-orange px-5 py-2 text-sm font-semibold text-white"
                 onClick={() => setMenuOpen(false)}
               >
-                Donar
+                {t("donarBtn")}
               </Link>
             </div>
           </nav>

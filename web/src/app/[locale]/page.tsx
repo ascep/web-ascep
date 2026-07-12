@@ -32,23 +32,23 @@ const programs = [
     title: "Incidencia y Participacion",
     slug: "incidencia",
     desc: "Desarrollamos acciones que involucran a actores clave y tomadores de decisiones en la transformacion de los cuidados alternativos.",
-    logo: "/images/programas/LOGO-PROGRAMA-DE-INCIDENCIA.png",
-    image: "/images/programas/incidencia-scaled-1.jpg",
+    logo: assetPath("/images/programas/LOGO-PROGRAMA-DE-INCIDENCIA.png"),
+    image: assetPath("/images/programas/incidencia-scaled-1.jpg"),
     color: "#019E9F",
   },
   {
     title: "Avanza Joven",
     slug: "avanza-joven",
     desc: "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida.",
-    logo: "/images/programas/LOGO-AVANZA-JOVEN.png",
-    image: "/images/programas/Avanza-1-scaled-1.jpg",
+    logo: assetPath("/images/programas/LOGO-AVANZA-JOVEN.png"),
+    image: assetPath("/images/programas/Avanza-1-scaled-1.jpg"),
     color: "#44BCC5",
   },
   {
     title: "Fomento para el Empleo",
     slug: "empleo",
     desc: "Modelo piloto para promover capacidades laborales y fortalecer la empleabilidad de jovenes en proceso de egreso del sistema de proteccion.",
-    logo: "/images/programas/LOGO-FOMENTO1.png",
+    logo: assetPath("/images/programas/LOGO-FOMENTO1.png"),
     image: assetPath("/images/eventos/GIS08397.jpg"),
     color: "#EC6620",
   },
@@ -56,17 +56,17 @@ const programs = [
     title: "Mi Cuerpo, Mi Sexualidad",
     slug: "mi-cuerpo",
     desc: "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad.",
-    logo: "/images/programas/logo-MCSD.png",
+    logo: assetPath("/images/programas/logo-MCSD.png"),
     image: assetPath("/images/eventos/20241112_111009.jpg"),
     color: "#EC6620",
   },
 ];
 
 const aliados = [
-  { src: "/images/aliados/colombia.svg", alt: "Colombia" },
-  { src: "/images/aliados/empower-logo-blue.svg", alt: "Empower" },
-  { src: "/images/aliados/gapi-icesi-logo.jpg", alt: "GAPI Icesi" },
-  { src: "/images/aliados/Vaki.png", alt: "Vaki" },
+  { src: assetPath("/images/aliados/colombia.svg"), alt: "Colombia" },
+  { src: assetPath("/images/aliados/empower-logo-blue.svg"), alt: "Empower" },
+  { src: assetPath("/images/aliados/gapi-icesi-logo.jpg"), alt: "GAPI Icesi" },
+  { src: assetPath("/images/aliados/Vaki.png"), alt: "Vaki" },
 ];
 
 const stats = [
@@ -89,6 +89,7 @@ export default async function HomePage({
 }) {
   const { locale } = await params;
   const h = await getTranslations({ locale, namespace: "home" });
+  const g = await getTranslations({ locale, namespace: "generales" });
 
   const testimonials = testimonialsData.map((t) => ({
     text: h(t.textKey),
@@ -107,7 +108,7 @@ export default async function HomePage({
             href={`/${locale}/programas`}
             className="inline-flex items-center rounded-[10px] bg-brand-orange px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-orange-dark hover:shadow-lg hover:shadow-brand-orange/30"
           >
-            Conoce nuestros programas
+            {g("conoceNuestrosProgramas")}
           </Link>
         }
         secondary={
@@ -115,7 +116,7 @@ export default async function HomePage({
             href={`/${locale}/quienes-somos`}
             className="inline-flex items-center rounded-[10px] border-2 border-white/30 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:border-white hover:bg-white/10"
           >
-            Conocenos
+            {g("conocenos")}
           </Link>
         }
       />
@@ -163,7 +164,7 @@ export default async function HomePage({
               </div>
               <div className="absolute -bottom-4 -right-4 z-20 flex h-28 w-28 flex-col items-center justify-center rounded-[10px] bg-brand-orange text-white shadow-lg">
                 <span className="text-2xl font-extrabold">2019</span>
-                <span className="text-[10px] font-semibold uppercase leading-tight tracking-wider">Trabajando</span>
+                <span className="text-[10px] font-semibold uppercase leading-tight tracking-wider">{h("heroBadge")}</span>
               </div>
             </div>
           </div>
@@ -175,16 +176,16 @@ export default async function HomePage({
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
               <span className="mb-3 inline-block rounded-[10px] bg-brand-orange/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
-                Los retos
+                {h("retosTag")}
               </span>
               <h2 className="mb-4 text-2xl font-bold leading-tight text-[var(--color-text-primary)] sm:text-3xl">
-                Retos que enfrentamos
+                {h("retosTitle")}
               </h2>
               <p className="mb-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
-                Los adolescentes y jovenes en proceso de egreso del sistema de proteccion estatal enfrentan retos significativos, como la definicion de su situacion juridica, la vulneracion de derechos o el impacto del desplazamiento forzado. Estos jovenes requieren apoyo integral para construir su proyecto de vida, acceder a oportunidades educativas y laborales, y lograr su plena integracion social.
+                {h("retosDesc1")}
               </p>
               <p className="text-base font-semibold text-[var(--color-text-primary)]">
-                Generamos capacidades y habilidades en los pre-egresados y egresados del sistema de proteccion.
+                {h("retosDesc2")}
               </p>
             </div>
             <div className="relative">
@@ -211,7 +212,7 @@ export default async function HomePage({
             href={`/${locale}/impacto`}
             className="inline-flex items-center rounded-[10px] bg-brand-purple px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-purple-dark hover:shadow-lg"
           >
-            Ver mas impacto
+            {g("verMasImpacto")}
           </Link>
         }
       />
@@ -219,16 +220,16 @@ export default async function HomePage({
       <section className="relative overflow-hidden bg-brand-orange/5 py-20">
         <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-orange">
-            Historia y logros
+            {h("trayectoriaTag")}
           </span>
           <h2 className="mb-12 text-center text-3xl font-bold text-[var(--color-text-primary)]">
-            Nuestra Trayectoria
+            {h("trayectoriaTitle")}
           </h2>
           <Timeline items={milestones} />
         </AnimatedSection>
       </section>
 
-      <ModeloGrid locale={locale} />
+      <ModeloGrid />
 
       <ProgramStack programs={programs} locale={locale} />
 
@@ -241,10 +242,10 @@ export default async function HomePage({
       <section className="relative overflow-hidden bg-brand-purple/5 py-24">
         <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-purple">
-            Galeria de momentos
+            {h("galeriaTag")}
           </span>
           <h2 className="mb-12 text-center text-3xl font-bold text-[var(--color-text-primary)]">
-            Nuestra labor en imagenes
+            {h("galeriaTitle")}
           </h2>
           <div className="grid gap-4 sm:grid-cols-3">
             <AnimatedSection delay={0.05} className="sm:col-span-2 sm:row-span-2">
@@ -281,10 +282,10 @@ export default async function HomePage({
       <section className="relative overflow-hidden bg-brand-teal/5 py-20">
         <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-orange">
-            Quienes nos acompanan
+            {h("aliadosTag")}
           </span>
           <h2 className="mb-10 text-center text-3xl font-bold text-[var(--color-text-primary)]">
-            Aliados estrategicos
+            {h("aliadosTitle")}
           </h2>
           <LogoLoop logos={aliados} />
         </AnimatedSection>

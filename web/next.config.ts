@@ -3,8 +3,6 @@ import createNextIntlPlugin from "next-intl/plugin";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
-const assetsUrl = process.env.ASSETS_URL;
-
 const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
@@ -17,14 +15,6 @@ const nextConfig: NextConfig = {
         hostname: "*.private.blob.vercel-storage.com",
       },
     ],
-  },
-  async rewrites() {
-    if (!assetsUrl) return [];
-    return [
-      { source: "/images/:path*", destination: `${assetsUrl}/images/:path*` },
-      { source: "/documents/:path*", destination: `${assetsUrl}/documents/:path*` },
-      { source: "/videos/:path*", destination: `${assetsUrl}/videos/:path*` },
-    ];
   },
 };
 

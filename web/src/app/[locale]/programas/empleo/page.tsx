@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { BookOpen, Briefcase, Building, Search, Compass, Route } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Fomento para el Empleo y Emprendimiento - ASCEP",
@@ -58,7 +59,7 @@ export default function EmpleoPage() {
   return (
     <>
       <PageHero
-        bgImage="/images/eventos/20241112_102515.jpg"
+        bgImage={assetPath("/images/eventos/20241112_102515.jpg")}
         bgColor="bg-brand-orange"
         tag="Programa"
         title="Fomento para el Empleo Juvenil"
@@ -77,7 +78,7 @@ export default function EmpleoPage() {
           </div>
           <div className="grid gap-12 md:grid-cols-2 items-center">
             <div className="relative flex h-72 items-center justify-center overflow-hidden rounded-[10px] bg-brand-orange/5 md:h-96">
-              <Image src="/images/programas/LOGO-FOMENTO.png" alt="Fomento para el Empleo y Emprendimiento" width={240} height={150} className="h-auto max-h-48 w-auto max-w-[80%] object-contain" />
+              <Image src={assetPath("/images/programas/LOGO-FOMENTO.png")} alt="Fomento para el Empleo y Emprendimiento" width={240} height={150} className="h-auto max-h-48 w-auto max-w-[80%] object-contain" />
             </div>
             <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
               <p>

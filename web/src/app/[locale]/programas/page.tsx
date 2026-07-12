@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { ArrowRight } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Programas - ASCEP",
@@ -13,28 +14,28 @@ const programs = [
     title: "Incidencia y Participacion",
     slug: "incidencia",
     desc: "Desarrollamos acciones que involucran a actores clave y tomadores de decisiones en la transformacion de los cuidados alternativos.",
-    image: "/images/programas/incidencia-scaled-1.jpg",
+    image: assetPath("/images/programas/incidencia-scaled-1.jpg"),
     label: "Liderazgo",
   },
   {
     title: "Avanza Joven",
     slug: "avanza-joven",
     desc: "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida.",
-    image: "/images/programas/Avanza-1-scaled-1.jpg",
+    image: assetPath("/images/programas/Avanza-1-scaled-1.jpg"),
     label: "Formacion",
   },
   {
     title: "Fomento para el Empleo y Emprendimiento",
     slug: "empleo",
     desc: "Modelo piloto para promover capacidades laborales y fortalecer la empleabilidad de jovenes en proceso de egreso del sistema de proteccion.",
-    image: "/images/programas/LOGO-FOMENTO.png",
+    image: assetPath("/images/programas/LOGO-FOMENTO.png"),
     label: "Insercion",
   },
   {
     title: "Mi Cuerpo, Mi Sexualidad, Mi Decision",
     slug: "mi-cuerpo",
     desc: "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad.",
-    image: "/images/programas/logo-MCSD.png",
+    image: assetPath("/images/programas/logo-MCSD.png"),
     label: "Bienestar",
   },
   {
@@ -56,7 +57,7 @@ export default async function ProgramasPage({
   return (
     <>
       <PageHero
-        bgImage="/images/encuentro-2025/GIS06470.JPG"
+        bgImage={assetPath("/images/encuentro-2025/GIS06470.JPG")}
         tag="Programas"
         title="Nuestros Programas"
         subtitle="Disenados para acompanar a adolescentes y jovenes en su transicion hacia la vida adulta."

@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { useTranslations } from "next-intl";
 
 type HomeHeroProps = {
   title: string;
@@ -21,6 +22,7 @@ export default function HomeHero({
   secondary,
 }: HomeHeroProps) {
   const prefersReducedMotion = useReducedMotion();
+  const t = useTranslations("home");
 
   return (
     <section className="relative flex min-h-[85vh] items-center bg-brand-purple">
@@ -81,7 +83,7 @@ export default function HomeHero({
               <div className="absolute -bottom-3 -right-3 z-20 rounded-[10px] bg-brand-orange px-4 py-2.5 text-sm font-bold text-white shadow-lg">
                 <span className="text-lg">2019</span>
                 <br />
-                <span className="text-xs font-normal opacity-80">Trabajando por la ninez</span>
+                <span className="text-xs font-normal opacity-80">{t("heroBadge")}</span>
               </div>
             </div>
           </motion.div>

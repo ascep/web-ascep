@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Marco Politico - ASCEP",
@@ -55,7 +56,7 @@ export default function MarcoPoliticoPage() {
   return (
     <>
       <PageHero
-        bgImage="/images/eventos/20241112_103351.jpg"
+        bgImage={assetPath("/images/eventos/20241112_103351.jpg")}
         tag="Marco Politico"
         title="Marco"
         highlight="Politico"

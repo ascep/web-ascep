@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Como Ayudar - ASCEP",
@@ -39,7 +40,7 @@ export default async function ComoAyudarPage({
   return (
     <div>
       <PageHero
-        bgImage="/images/eventos/20241112_102357.jpg"
+        bgImage={assetPath("/images/eventos/20241112_102357.jpg")}
         tag={t("heroTag")}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}

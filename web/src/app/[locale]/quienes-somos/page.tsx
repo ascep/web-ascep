@@ -4,26 +4,28 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Timeline from "@/components/Timeline";
 import AnimatedSection from "@/components/AnimatedSection";
+import { getTranslations } from "next-intl/server";
 import { Target, Eye, Heart } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Quienes Somos - ASCEP",
 };
 
 const team = [
-  { name: "Maicol Londoño", role: "Director", src: "/images/equipo/maicol.png" },
-  { name: "Kevin Ortega", role: "Coordinador", src: "/images/equipo/phtos-ascep-kevin.png" },
-  { name: "Monica", role: "Equipo Psicosocial", src: "/images/equipo/phtos-ascep-monica.png" },
-  { name: "Jhon Eduard Angulo", role: "Equipo de Formacion", src: "/images/equipo/phtos-ascep-jhon.png" },
-  { name: "Ana", role: "Equipo ASCEP", src: "/images/equipo/phtos-ascep.png" },
+  { name: "Maicol Londoño", role: "Director", src: assetPath("/images/equipo/maicol.png") },
+  { name: "Kevin Ortega", role: "Coordinador", src: assetPath("/images/equipo/phtos-ascep-kevin.png") },
+  { name: "Monica", role: "Equipo Psicosocial", src: assetPath("/images/equipo/phtos-ascep-monica.png") },
+  { name: "Jhon Eduard Angulo", role: "Equipo de Formacion", src: assetPath("/images/equipo/phtos-ascep-jhon.png") },
+  { name: "Ana", role: "Equipo ASCEP", src: assetPath("/images/equipo/phtos-ascep.png") },
 ];
 
 const milestones = [
-  { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: "/images/eventos/20241112_092855.jpg" },
-  { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: "/images/eventos/20241112_092951.jpg" },
-  { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: "/images/eventos/20241112_095957.jpg" },
-  { year: "2023", title: "Proyecto de Ley", description: "Impulsamos el proyecto de Ley de Egreso, construido colectivamente con egresados de todo el pais y respaldado por la senadora Lorena Rios.", image: "/images/eventos/20241112_100147.jpg" },
-  { year: "2025", title: "Ley 2479 de 2025", description: "Se sanciona la Ley Hijos del Estado, creando el Programa Nacional de Acompanamiento Integral al Egresado del ICBF.", image: "/images/eventos/20241112_111016.jpg" },
+  { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: assetPath("/images/eventos/20241112_092855.jpg") },
+  { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: assetPath("/images/eventos/20241112_092951.jpg") },
+  { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: assetPath("/images/eventos/20241112_095957.jpg") },
+  { year: "2023", title: "Proyecto de Ley", description: "Impulsamos el proyecto de Ley de Egreso, construido colectivamente con egresados de todo el pais y respaldado por la senadora Lorena Rios.", image: assetPath("/images/eventos/20241112_100147.jpg") },
+  { year: "2025", title: "Ley 2479 de 2025", description: "Se sanciona la Ley Hijos del Estado, creando el Programa Nacional de Acompanamiento Integral al Egresado del ICBF.", image: assetPath("/images/eventos/20241112_111016.jpg") },
 ];
 
 const dimensions = [
@@ -36,13 +38,6 @@ const dimensions = [
   { title: "enredete con ascep", desc: "Desarrollo de las potencialidades individuales para crecer como persona." },
 ];
 
-const fullText = [
-  "Somos un grupo de personas egresadas del Sistema de Proteccion Estatal de Colombia que, a partir de nuestra propia experiencia, nos hemos unido para contribuir a la transformacion y mejora de la forma en que el Estado, a traves de sus operadores, aborda el cuidado, la proteccion y restablecimiento de derechos de ninos, ninas, adolescentes y jovenes en el pais.",
-  "Reconocemos y agradecemos el apoyo que el Estado ha brindado a nuestras vidas, garantizando que pudieramos crecer alejados de los diferentes factores que nos llevaron a ingresar al sistema de proteccion. Sin embargo, consideramos que hay aspectos de como el Estado proporciona esta proteccion y cuidado que deben ser evaluados de manera objetiva y corregidos de manera eficiente, especialmente en lo que respecta a la preparacion para la vida autonoma e independiente y el acompanamiento una vez cesa el apoyo Estatal.",
-  "Creemos firmemente que el egreso del sistema de proteccion no debe ser un evento solitario ni abrupto. Cada joven merece una transicion gradual y acompanada hacia la vida adulta, con acceso a educacion, vivienda, salud mental y oportunidades laborales que le permitan construir su proyecto de vida con dignidad.",
-  "Desde nuestra fundacion en 2019, hemos trabajado incansablemente para visibilizar las realidades de los egresados, incidir en politicas publicas que garanticen sus derechos y crear programas que fortalezcan las habilidades para la vida de quienes estan proximos a egresar o ya han egresado del sistema.",
-  "Hoy somos una organizacion reconocida a nivel nacional e internacional, con alianzas estrategicas que nos permiten amplificar nuestra voz y extender nuestro impacto. Pero sobre todo, somos una comunidad de jovenes que se niega a ser invisible, que alza la voz para decir: existimos, resistimos y construimos un futuro mejor para las proximas generaciones.",
-];
 
 export default async function QuienesSomosPage({
   params,
@@ -50,13 +45,14 @@ export default async function QuienesSomosPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "quienesSomos" });
   return (
     <div>
       <PageHero
-        bgImage="/images/equipo-shoot/GIS08542.JPG"
-        title="Quienes"
-        highlight="Somos"
-        subtitle="Somos un grupo de personas egresadas del Sistema de Proteccion Estatal de Colombia que, a partir de nuestra propia experiencia, nos hemos unido para contribuir a la transformacion y mejora de la forma en que el Estado aborda el cuidado y proteccion de ninos, ninas, adolescentes y jovenes en el pais."
+        bgImage={assetPath("/images/equipo-shoot/GIS08542.JPG")}
+        title={t("heroTitle")}
+        highlight={t("heroHighlight")}
+        subtitle={t("heroSubtitle")}
       />
 
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
@@ -65,7 +61,7 @@ export default async function QuienesSomosPage({
             <AnimatedSection direction="left" className="relative">
               <div className="absolute -left-4 -top-4 h-full w-full rounded-[10px] bg-brand-purple/10" />
               <Image
-                src="/images/equipo-shoot/GIS08550.JPG"
+                src={assetPath("/images/equipo-shoot/GIS08550.JPG")}
                 alt="Equipo ASCEP"
                 width={600}
                 height={400}
@@ -76,18 +72,18 @@ export default async function QuienesSomosPage({
             <div>
               <AnimatedSection direction="right">
                 <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-                  NUESTRA HISTORIA
+                  {t("historiaTag")}
                 </span>
               </AnimatedSection>
               <AnimatedSection direction="right" delay={0.1}>
                 <h2 className="mb-4 text-3xl font-bold text-[var(--color-text-primary)]">
-                  Nuestra <span className="text-brand-purple">Historia</span>
+                  {t("historiaTitle")} <span className="text-brand-purple">{t("historiaHighlight")}</span>
                 </h2>
               </AnimatedSection>
-              {fullText.map((paragraph, i) => (
+              {[1, 2, 3, 4, 5].map((i) => (
                 <AnimatedSection key={i} direction="up" delay={0.15 * i}>
                   <p className="mb-4 text-lg leading-relaxed text-[var(--color-text-secondary)]">
-                    {paragraph}
+                    {t(`historiaP${i}`)}
                   </p>
                 </AnimatedSection>
               ))}
@@ -99,12 +95,12 @@ export default async function QuienesSomosPage({
           <div className="mb-12 text-center">
             <AnimatedSection direction="up">
               <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-                MISION, VISION Y PROPOSITO
+                {t("propositoTag")}
               </span>
             </AnimatedSection>
             <AnimatedSection direction="up" delay={0.1}>
               <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-                Nuestro <span className="text-brand-purple">Proposito</span>
+                {t("propositoTitle")} <span className="text-brand-purple">{t("propositoHighlight")}</span>
               </h2>
             </AnimatedSection>
           </div>
@@ -114,14 +110,10 @@ export default async function QuienesSomosPage({
                 <Target size={22} className="text-brand-teal" />
               </div>
               <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">
-                Nuestra Mision
+                {t("misionTitle")}
               </h3>
               <p className="text-[var(--color-text-secondary)]">
-                Buscamos que cada joven desarrolle las competencias y habilidades
-                esenciales para integrarse plenamente en la sociedad y construir un
-                proyecto de vida autonomo, responsable y con conciencia social,
-                fortaleciendo las politicas publicas para la proteccion de la ninez
-                y la juventud en Colombia.
+                {t("misionDesc")}
               </p>
             </AnimatedSection>
 
@@ -130,13 +122,10 @@ export default async function QuienesSomosPage({
                 <Eye size={22} className="text-brand-purple" />
               </div>
               <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">
-                Nuestra Vision
+                {t("visionTitle")}
               </h3>
               <p className="text-[var(--color-text-secondary)]">
-                Ser una organizacion lider en la transformacion del sistema de
-                proteccion estatal en Colombia y Latinoamerica, donde cada joven
-                egresado cuente con las herramientas, el apoyo y las oportunidades
-                necesarias para construir una vida autonoma, digna y plena.
+                {t("visionDesc")}
               </p>
             </AnimatedSection>
 
@@ -145,14 +134,10 @@ export default async function QuienesSomosPage({
                 <Heart size={22} className="text-brand-orange" />
               </div>
               <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">
-                Nuestro Proposito
+                {t("propositoCardTitle")}
               </h3>
               <p className="text-[var(--color-text-secondary)]">
-                Trabajar incansablemente para que ningun joven egresado del sistema
-                de proteccion enfrente solo su transicion a la vida adulta,
-                garantizando que cada uno cuente con las herramientas, el
-                acompanamiento y las oportunidades necesarias para construir un
-                proyecto de vida autonomo, digno y pleno.
+                {t("propositoCardDesc")}
               </p>
             </AnimatedSection>
           </div>
@@ -161,10 +146,10 @@ export default async function QuienesSomosPage({
         <section className="mb-20">
           <AnimatedSection direction="up" className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              TRAYECTORIA
+              {t("trayectoriaTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Nuestra <span className="text-brand-purple">Trayectoria</span>
+              {t("trayectoriaTitle")} <span className="text-brand-purple">{t("trayectoriaHighlight")}</span>
             </h2>
           </AnimatedSection>
           <Timeline items={milestones} />
@@ -175,20 +160,17 @@ export default async function QuienesSomosPage({
             <div className="lg:col-span-5">
               <AnimatedSection direction="left">
                 <span className="mb-3 inline-block rounded-[10px] bg-brand-teal/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-teal">
-                  EQUIPO
+                  {t("equipoTag")}
                 </span>
               </AnimatedSection>
               <AnimatedSection direction="left" delay={0.1}>
                 <h2 className="mb-4 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-                  Nuestro <span className="text-brand-purple">Equipo</span>
+                  {t("equipoTitle")} <span className="text-brand-purple">{t("equipoHighlight")}</span>
                 </h2>
               </AnimatedSection>
               <AnimatedSection direction="left" delay={0.2}>
                 <p className="text-base leading-relaxed text-[var(--color-text-secondary)]">
-                  Somos un grupo de personas egresadas del Sistema de Proteccion
-                  Estatal que, desde nuestra propia experiencia, trabajamos para
-                  transformar la forma en que el Estado aborda el cuidado de la
-                  ninez y la juventud en Colombia.
+                  {t("equipoDesc")}
                 </p>
               </AnimatedSection>
             </div>
@@ -248,18 +230,15 @@ export default async function QuienesSomosPage({
         <section className="mb-20">
           <AnimatedSection direction="up" className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              ENFOQUE
+              {t("enfoqueTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Enfoque <span className="text-brand-purple">Metodologico</span>
+              {t("enfoqueTitle")} <span className="text-brand-purple">{t("enfoqueHighlight")}</span>
             </h2>
           </AnimatedSection>
           <AnimatedSection direction="up" delay={0.1}>
             <p className="mb-8 text-center text-lg leading-relaxed text-[var(--color-text-secondary)]">
-              Nuestro modelo esta enfocado al fortalecimiento del ser, como base
-              para que los jovenes que egresan del sistema de proteccion puedan
-              gestionar su proyecto de vida. Trabajamos transversalmente las seis
-              dimensiones del bienestar psicologico de Carol Ryff:
+              {t("enfoqueDesc")}
             </p>
           </AnimatedSection>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -281,24 +260,23 @@ export default async function QuienesSomosPage({
         <AnimatedSection direction="up">
           <section className="rounded-[10px] bg-brand-purple p-10 text-center shadow-sm transition-all hover:shadow-md">
             <h2 className="mb-4 text-3xl font-bold text-white">
-              Unete a nuestra causa
+              {t("ctaTitle")}
             </h2>
             <p className="mb-6 text-lg text-white/80">
-              Si compartes nuestra vision, te invitamos a sumarte como aliado,
-              voluntario o donante.
+              {t("ctaDesc")}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href={`/${locale}/contacto`}
                 className="inline-flex items-center rounded-[10px] bg-white px-6 py-3 text-sm font-semibold text-brand-purple transition-all hover:bg-white/90 hover:shadow-lg"
               >
-                Contactanos
+                {t("ctaBtn")}
               </Link>
               <Link
                 href={`/${locale}/donar`}
                 className="inline-flex items-center rounded-[10px] border-2 border-white px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-white hover:text-brand-purple"
               >
-                Donar
+                {t("ctaBtnDonar")}
               </Link>
             </div>
           </section>

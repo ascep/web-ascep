@@ -3,17 +3,18 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import DonationForm from "@/components/DonationForm";
 import { Heart, Users, Target, TrendingUp, Coffee, Sunrise, Star, Shield, Sparkles } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Donar - ASCEP",
 };
 
 const GALLERY = [
-  { src: "/images/encuentro-2025/GIS06460.JPG", alt: "Jovenes en taller de habilidades" },
-  { src: "/images/encuentro-2025/GIS06450.JPG", alt: "Acompanamiento psicosocial" },
-  { src: "/images/encuentro-2025/GIS06470.JPG", alt: "Actividades grupales" },
-  { src: "/images/encuentro-2025/GIS06447.JPG", alt: "Jornada educativa" },
-  { src: "/images/encuentro-2025/GIS06475.JPG", alt: "Momentos de integracion" },
+  { src: assetPath("/images/encuentro-2025/GIS06460.JPG"), alt: "Jovenes en taller de habilidades" },
+  { src: assetPath("/images/encuentro-2025/GIS06450.JPG"), alt: "Acompanamiento psicosocial" },
+  { src: assetPath("/images/encuentro-2025/GIS06470.JPG"), alt: "Actividades grupales" },
+  { src: assetPath("/images/encuentro-2025/GIS06447.JPG"), alt: "Jornada educativa" },
+  { src: assetPath("/images/encuentro-2025/GIS06475.JPG"), alt: "Momentos de integracion" },
 ];
 
 const CREATIVE_IMPACT = [
@@ -61,6 +62,7 @@ export default async function DonarPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "donar" });
+  const g = await getTranslations({ locale, namespace: "generales" });
 
   const stats = [
     { icon: Users, value: "71.148", label: "NNA protegidos por el ICBF", color: "text-brand-teal", bg: "bg-brand-teal/10" },
@@ -78,22 +80,21 @@ export default async function DonarPage({
           loop
           muted
           playsInline
-          poster="/images/hero-poster.webp"
+          poster={assetPath("/images/hero-poster.webp")}
           className="absolute inset-0 h-full w-full object-cover opacity-30"
         >
-          <source src="/videos/FONDO-WEB-16-9.mp4" type="video/mp4" />
+          <source src={assetPath("/videos/FONDO-WEB-16-9.mp4")} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-gradient-to-b from-brand-purple/60 via-brand-purple/40 to-brand-purple/90" />
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <span className="mb-4 inline-block rounded-full border border-white/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-            DONACIONES
+            {t("heroTag")}
           </span>
           <h1 className="mb-4 text-4xl font-bold text-white sm:text-5xl lg:text-6xl">
-            Tu generosidad transforma vidas
+            {t("heroTitle")}
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-white/80">
-            Cada aporte, por pequeno que sea, construye un futuro digno para
-            jovenes que egresan del sistema de proteccion.
+            {t("heroSubtitle")}
           </p>
         </div>
       </section>
@@ -103,7 +104,7 @@ export default async function DonarPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              IMPACTO
+              {t("impactoTag")}
             </span>
             <h2 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
               {t("porque")}
@@ -128,7 +129,7 @@ export default async function DonarPage({
           {/* Creative impact */}
           <div className="mb-16">
             <h3 className="mb-8 text-center text-2xl font-bold text-text-primary">
-              Pequenas acciones, grandes cambios
+              {t("pequenasAcciones")}
             </h3>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {CREATIVE_IMPACT.map((item) => {
@@ -149,7 +150,7 @@ export default async function DonarPage({
           {/* Gallery */}
           <div className="mb-16">
             <h3 className="mb-8 text-center text-2xl font-bold text-text-primary">
-              Asi trabajamos
+              {t("asiTrabajamos")}
             </h3>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               <div className="sm:col-span-2 sm:row-span-2">
@@ -181,10 +182,10 @@ export default async function DonarPage({
             <div className="lg:col-span-3">
               <div className="rounded-[10px] bg-white p-8 shadow-sm">
                 <h3 className="mb-2 text-center text-xl font-bold text-text-primary">
-                  Elige tu donacion
+                  {t("eligeDonacion")}
                 </h3>
                 <p className="mb-6 text-center text-sm text-text-muted">
-                  Selecciona una opcion o ingresa el monto que deseas donar
+                  {t("eligeDonacionDesc")}
                 </p>
                 <DonationForm />
               </div>
@@ -193,30 +194,30 @@ export default async function DonarPage({
             <div className="lg:col-span-2">
               <div className="space-y-4">
                 <div className="rounded-[10px] bg-brand-purple p-6 text-white">
-                  <h4 className="mb-4 text-lg font-bold">Tu donacion transforma vidas</h4>
+                  <h4 className="mb-4 text-lg font-bold">{t("donacionTransforma")}</h4>
                   <ul className="space-y-3 text-sm text-white/80">
                     <li className="flex items-start gap-2">
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-orange" />
-                      Materiales educativos y talleres de formacion
+                      {t("donacionItem1")}
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-orange" />
-                      Acompanamiento psicosocial individual
+                      {t("donacionItem2")}
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-orange" />
-                      Programas de insercion laboral
+                      {t("donacionItem3")}
                     </li>
                     <li className="flex items-start gap-2">
                       <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-orange" />
-                      Incidencia politica para mejorar el sistema
+                      {t("donacionItem4")}
                     </li>
                   </ul>
                 </div>
 
                 <div className="rounded-[10px] border border-brand-purple/10 bg-white p-6 shadow-sm">
                   <Image
-                    src="/images/encuentro-2025/GIS06475.JPG"
+                    src={assetPath("/images/encuentro-2025/GIS06475.JPG")}
                     alt=""
                     width={400}
                     height={200}
@@ -224,18 +225,14 @@ export default async function DonarPage({
                     style={{ aspectRatio: "16/9" }}
                   />
                   <p className="text-sm leading-relaxed text-text-secondary">
-                    Trabajamos para que ningun joven enfrente solo su egreso del
-                    sistema de proteccion. Cada donacion es un paso hacia una
-                    vida autonoma y digna.
+                    {t("donacionSideDesc")}
                   </p>
                 </div>
 
                 <div className="rounded-[10px] border border-brand-purple/10 bg-white p-5 shadow-sm">
-                  <h5 className="mb-2 text-sm font-bold text-text-primary">Transparencia</h5>
+                  <h5 className="mb-2 text-sm font-bold text-text-primary">{t("transparenciaLabel")}</h5>
                   <p className="text-xs leading-relaxed text-text-muted">
-                    ASCEP rinde cuentas de cada donacion recibida. Revisa
-                    nuestros informes financieros y de impacto en la seccion de
-                    transparencia.
+                    {t("transparenciaSideDesc")}
                   </p>
                 </div>
               </div>
@@ -245,8 +242,7 @@ export default async function DonarPage({
           <div className="rounded-[10px] bg-brand-purple p-8 text-center text-white">
             <p className="mb-2 text-xl font-semibold">{t("gracias")}</p>
             <p className="text-sm text-white/70">
-              Juntos construimos un futuro donde cada joven tenga las herramientas
-              para volar.
+              {t("graciasDesc")}
             </p>
           </div>
         </div>

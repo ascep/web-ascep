@@ -1,46 +1,56 @@
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { Building2, Globe, Briefcase, GraduationCap, Heart, Radio } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Aliados - ASCEP",
 };
 
 const partnerLogos = [
-  { src: "/images/aliados/colombia.svg", alt: "Colombia" },
-  { src: "/images/aliados/empower-logo-blue.svg", alt: "Empower" },
-  { src: "/images/aliados/gapi-icesi-logo.jpg", alt: "GAPI Icesi" },
-  { src: "/images/aliados/Vaki.png", alt: "Vaki" },
+  { src: assetPath("/images/aliados/colombia.svg"), alt: "Colombia" },
+  { src: assetPath("/images/aliados/empower-logo-blue.svg"), alt: "Empower" },
+  { src: assetPath("/images/aliados/gapi-icesi-logo.jpg"), alt: "GAPI Icesi" },
+  { src: assetPath("/images/aliados/Vaki.png"), alt: "Vaki" },
 ];
 
-const sectors = [
-  { sector: "Sector Publico", desc: "ICBF, Ministerios, entidades gubernamentales.", aliados: "Instituto Colombiano de Bienestar Familiar", icon: Building2 },
-  { sector: "Cooperacion Internacional", desc: "Organismos internacionales y agencias de cooperacion.", aliados: "UNICEF, OIM, USAID", icon: Globe },
-  { sector: "Sector Privado", desc: "Empresas comprometidas con la responsabilidad social.", aliados: "Empresas aliadas", icon: Briefcase },
-  { sector: "Academia", desc: "Universidades y centros de investigacion.", aliados: "Instituciones educativas", icon: GraduationCap },
-  { sector: "Organizaciones Sociales", desc: "ONG y organizaciones de la sociedad civil.", aliados: "Red de organizaciones", icon: Heart },
-  { sector: "Medios de Comunicacion", desc: "Aliados para la difusion y sensibilizacion.", aliados: "Medios aliados", icon: Radio },
-];
+export default async function AliadosPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "aliados" });
+  const g = await getTranslations({ locale, namespace: "generales" });
 
-export default function AliadosPage() {
+  const sectors = [
+    { sector: t("sector1"), desc: t("sector1Desc"), aliados: t("sector1Aliados"), icon: Building2 },
+    { sector: t("sector2"), desc: t("sector2Desc"), aliados: t("sector2Aliados"), icon: Globe },
+    { sector: t("sector3"), desc: t("sector3Desc"), aliados: t("sector3Aliados"), icon: Briefcase },
+    { sector: t("sector4"), desc: t("sector4Desc"), aliados: t("sector4Aliados"), icon: GraduationCap },
+    { sector: t("sector5"), desc: t("sector5Desc"), aliados: t("sector5Aliados"), icon: Heart },
+    { sector: t("sector6"), desc: t("sector6Desc"), aliados: t("sector6Aliados"), icon: Radio },
+  ];
+
   return (
     <div>
       <PageHero
-        bgImage="/images/eventos/20241112_092855.jpg"
-        tag="Aliados Estrategicos"
-        title="Aliados Estrategicos"
-        subtitle="Creemos en el poder de las alianzas para generar cambios profundos y sostenibles. Trabajamos con actores del sector publico, privado, academia y cooperacion internacional."
+        bgImage={assetPath("/images/eventos/20241112_092855.jpg")}
+        tag={t("heroTag")}
+        title={t("heroTitle")}
+        subtitle={t("heroSubtitle")}
       />
 
       <section className="bg-brand-teal/5 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              Nuestros Aliados
+              {t("sectionTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Organizaciones que confian en nosotros
+              {t("sectionTitle")}
             </h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -66,10 +76,10 @@ export default function AliadosPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              Sectores
+              {t("sectoresTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Areas de Alianza
+              {t("sectoresTitle")}
             </h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

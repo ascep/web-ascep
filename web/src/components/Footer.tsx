@@ -4,12 +4,14 @@ import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { assetPath } from "@/lib/asset-path";
 
 export default function Footer() {
   const t = useTranslations("nav");
+  const f = useTranslations("footer");
   const locale = useLocale();
   const pathname = usePathname();
-  const currentPath = pathname.replace(/^\/(es|en|de)/, "") || "/";
+  const currentPath = pathname.replace(/^\/(es|en|pt)/, "") || "/";
 
   return (
     <footer className="border border-[var(--color-border-subtle)] bg-[var(--color-bg-surface)] text-[var(--color-text-primary)] m-4 rounded-[10px]">
@@ -17,21 +19,20 @@ export default function Footer() {
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Image
-              src="/logos/06 logo ascep azul.png"
+              src={assetPath("/logos/06 logo ascep azul.png")}
               alt="ASCEP"
               width={160}
               height={50}
               className="mb-3 h-12 w-auto"
             />
             <p className="text-sm text-[var(--color-text-secondary)]">
-              Asociacion de Egresados del Sistema de Proteccion Estatal de
-              Colombia.
+              {f("desc")}
             </p>
           </div>
 
           <div>
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-primary">
-              Navegacion
+              {f("navegacion")}
             </h3>
             <ul className="space-y-2">
             {([
@@ -69,17 +70,17 @@ export default function Footer() {
 
           <div>
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-primary">
-              Contacto
+              {f("contacto")}
             </h3>
             <ul className="space-y-1 text-sm text-[var(--color-text-secondary)]">
-              <li>Cali, Colombia</li>
-              <li>contacto@ascep.org</li>
+              <li>{f("ubicacion")}</li>
+              <li>{f("email")}</li>
             </ul>
           </div>
 
           <div>
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-primary">
-              Idioma
+              {f("idioma")}
             </h3>
             <div className="flex gap-2">
               <Link
@@ -97,10 +98,10 @@ export default function Footer() {
               </Link>
               <span className="text-[var(--color-text-muted)]">|</span>
               <Link
-                href={`/de${currentPath}`}
-                className={`text-sm ${locale === "de" ? "font-bold text-text-primary" : "text-[var(--color-text-secondary)] hover:text-brand-purple"}`}
+                href={`/pt${currentPath}`}
+                className={`text-sm ${locale === "pt" ? "font-bold text-text-primary" : "text-[var(--color-text-secondary)] hover:text-brand-purple"}`}
               >
-                DE
+                PT
               </Link>
             </div>
           </div>
@@ -108,8 +109,7 @@ export default function Footer() {
 
         <div className="mt-8 h-px bg-[var(--color-border-subtle)]" />
         <div className="mt-6 text-center text-xs text-[var(--color-text-muted)]">
-          &copy; {new Date().getFullYear()} ASCEP. Todos los derechos
-          reservados.
+          &copy; {new Date().getFullYear()} ASCEP. {f("copyright")}
         </div>
       </div>
     </footer>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { Heart, MapPin, Scale, Shield, AlertTriangle, Handshake, Users, Star, Brain } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Mi Cuerpo, Mi Sexualidad, Mi Decision - ASCEP",
@@ -65,7 +66,7 @@ export default function MiCuerpoPage() {
   return (
     <>
       <PageHero
-        bgImage="/images/eventos/20241112_092951.jpg"
+        bgImage={assetPath("/images/eventos/20241112_092951.jpg")}
         tag="Programa"
         title="Mi Cuerpo, Mi Sexualidad, Mi Vida"
         subtitle="Promovemos el ejercicio pleno de los derechos sexuales y reproductivos."
@@ -83,7 +84,7 @@ export default function MiCuerpoPage() {
           </div>
           <div className="grid gap-12 md:grid-cols-2 items-center">
             <div className="relative flex h-72 items-center justify-center overflow-hidden rounded-[10px] bg-brand-purple/5 md:h-96">
-              <Image src="/images/programas/logo-MCSD.png" alt="Mi Cuerpo, Mi Sexualidad, Mi Decision" width={240} height={150} className="h-auto max-h-48 w-auto max-w-[80%] object-contain" />
+              <Image src={assetPath("/images/programas/logo-MCSD.png")} alt="Mi Cuerpo, Mi Sexualidad, Mi Decision" width={240} height={150} className="h-auto max-h-48 w-auto max-w-[80%] object-contain" />
             </div>
             <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
               <p>

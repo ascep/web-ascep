@@ -2,25 +2,19 @@
 
 import { useState } from "react";
 import { Coffee, Sunrise, Heart, Star, Rocket, CreditCard, Landmark, Loader } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface Tier {
   cop: number;
   usd: number;
-  label: string;
+  labelKey: string;
   icon: typeof Coffee;
 }
-
-const TIERS: Tier[] = [
-  { cop: 5000, usd: 2, label: "Dona un cafe", icon: Coffee },
-  { cop: 20000, usd: 5, label: "Por un buen amanecer", icon: Sunrise },
-  { cop: 50000, usd: 10, label: "Una segunda oportunidad", icon: Heart },
-  { cop: 100000, usd: 25, label: "Transforma una vida", icon: Star },
-  { cop: 200000, usd: 50, label: "Un futuro brillante", icon: Rocket },
-];
 
 const DONATARIO_URL = "https://donatario.com/recaudo/8cec07d1-f20c-4e30-adb1-5f4eedd9de2a";
 
 export default function DonationForm() {
+  const t = useTranslations("donationForm");
   const [currency, setCurrency] = useState<"COP" | "USD">("COP");
   const [selectedTier, setSelectedTier] = useState<number | null>(null);
   const [custom, setCustom] = useState("");
@@ -29,10 +23,18 @@ export default function DonationForm() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
+  const TIERS: Tier[] = [
+    { cop: 5000, usd: 2, labelKey: "tier1Label", icon: Coffee },
+    { cop: 20000, usd: 5, labelKey: "tier2Label", icon: Sunrise },
+    { cop: 50000, usd: 10, labelKey: "tier3Label", icon: Heart },
+    { cop: 100000, usd: 25, labelKey: "tier4Label", icon: Star },
+    { cop: 200000, usd: 50, labelKey: "tier5Label", icon: Rocket },
+  ];
+
   const symbol = "$";
 
   const getAmount = (): number | "" => {
-    const tier = TIERS.find((t) => t.cop === selectedTier);
+    const tier = TIERS.find((item) => item.cop === selectedTier);
     if (tier) return currency === "COP" ? tier.cop : tier.usd;
     if (custom) {
       const parsed = parseInt(custom.replace(/[^0-9]/g, ""));
@@ -73,10 +75,10 @@ export default function DonationForm() {
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert(data.error || "Error al crear el pago");
+        alert(data.error || t("errorPago"));
       }
     } catch {
-      alert("Error de conexion. Intenta de nuevo.");
+      alert(t("errorConexion"));
     } finally {
       setLoading(false);
     }
@@ -122,7 +124,7 @@ export default function DonationForm() {
                 <Icon size={18} className={active ? "text-white" : "text-brand-purple"} />
               </div>
               <div className="flex-1">
-                <div className={`text-sm font-bold ${active ? "text-white" : "text-text-primary"}`}>{tier.label}</div>
+                <div className={`text-sm font-bold ${active ? "text-white" : "text-text-primary"}`}>{t(tier.labelKey)}</div>
                 <div className={`text-xs ${active ? "text-white/70" : "text-text-muted"}`}>{symbol}{val.toLocaleString()} {currency}</div>
               </div>
               <div className={`h-5 w-5 rounded-full border-2 ${active ? "border-white bg-white" : "border-brand-purple/30"}`}>
@@ -136,7 +138,7 @@ export default function DonationForm() {
       {/* Custom amount */}
       <div className="mb-6">
         <label className="mb-2 block text-xs font-medium text-text-muted uppercase tracking-wider">
-          Otra cantidad
+          {t("customAmount")}
         </label>
         <div className="relative">
           <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted">{symbol}</span>
@@ -158,20 +160,20 @@ export default function DonationForm() {
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
-          placeholder="Nombre completo"
+          placeholder={t("namePlaceholder")}
           className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-3 text-sm text-text-primary transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
         />
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Correo electronico"
+          placeholder={t("emailPlaceholder")}
           className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-3 text-sm text-text-primary transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
         />
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          placeholder="Mensaje (opcional)"
+          placeholder={t("messagePlaceholder")}
           rows={3}
           className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-3 text-sm text-text-primary transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
         />
@@ -185,7 +187,7 @@ export default function DonationForm() {
           className="flex items-center justify-center gap-2 rounded-[10px] bg-brand-purple py-3 text-sm font-bold text-white transition-all hover:bg-brand-purple-dark disabled:opacity-50"
         >
           {loading ? <Loader className="h-4 w-4 animate-spin" /> : <Landmark size={18} />}
-          {loading ? "Procesando..." : amount ? `Donar ${symbol}${amount.toLocaleString()} con Mercado Pago` : "Donar con Mercado Pago"}
+          {loading ? t("processing") : amount ? t("donarConMercadoPago", { amount: `${symbol}${amount.toLocaleString()}` }) : t("donarMercadoPago")}
         </button>
         <button
           onClick={() => handleSubmit("stripe")}
@@ -193,7 +195,7 @@ export default function DonationForm() {
           className="flex items-center justify-center gap-2 rounded-[10px] border-2 border-brand-purple py-3 text-sm font-bold text-brand-purple transition-all hover:bg-brand-purple hover:text-white disabled:opacity-50"
         >
           {loading ? <Loader className="h-4 w-4 animate-spin" /> : <CreditCard size={18} />}
-          {loading ? "Procesando..." : amount ? `Pagar ${symbol}${amount.toLocaleString()} con Tarjeta` : "Pagar con Tarjeta"}
+          {loading ? t("processing") : amount ? t("pagarConTarjeta", { amount: `${symbol}${amount.toLocaleString()}` }) : t("pagarTarjeta")}
         </button>
         <a
           href={DONATARIO_URL}
@@ -201,7 +203,7 @@ export default function DonationForm() {
           rel="noopener noreferrer"
           className="mt-2 text-center text-xs text-text-muted underline underline-offset-2 hover:text-brand-purple"
         >
-          o dona por Donatario (PSE, Nequi, Efectivo)
+          {t("donatario")}
         </a>
       </div>
     </div>

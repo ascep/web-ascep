@@ -1,8 +1,10 @@
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { FileText, DollarSign, BarChart3, FileBadge, Scale, FileCheck, Download } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Transparencia - ASCEP",
@@ -75,23 +77,29 @@ const documents = [
   },
 ];
 
-export default function TransparenciaPage() {
+export default async function TransparenciaPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "transparencia" });
   return (
     <div>
       <PageHero
-        bgImage="/images/eventos/20241112_100147.jpg"
+        bgImage={assetPath("/images/eventos/20241112_100147.jpg")}
         bgColor="bg-brand-teal"
-        tag="TRANSPARENCIA"
-        title="Transparencia"
-        highlight="y Rendicion de Cuentas"
-        subtitle="En ASCEP creemos firmemente en la transparencia como pilar fundamental de nuestra gestion. Aqui encontraras nuestros documentos legales, informes financieros, politicas institucionales y todo el marco normativo que rige nuestra actuacion."
+        tag={t("heroTag")}
+        title={t("heroTitle")}
+        highlight={t("heroHighlight")}
+        subtitle={t("heroSubtitle")}
       />
 
       <section className="relative overflow-hidden bg-brand-teal/5 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="relative mb-12 overflow-hidden rounded-[10px]">
             <Image
-              src="/images/eventos/20241112_103402.jpg"
+              src={assetPath("/images/eventos/20241112_103402.jpg")}
               alt=""
               width={1200}
               height={300}
@@ -100,8 +108,7 @@ export default function TransparenciaPage() {
             <div className="absolute inset-0 bg-brand-teal/70" />
             <div className="absolute inset-0 flex items-center p-8">
               <p className="max-w-2xl text-lg leading-relaxed text-white">
-                En ASCEP creemos en la transparencia como pilar fundamental. Todos
-                nuestros documentos estan disponibles para consulta publica.
+                {t("bannerDesc")}
               </p>
             </div>
           </div>

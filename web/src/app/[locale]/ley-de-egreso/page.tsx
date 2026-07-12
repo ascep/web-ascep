@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import ImageCarousel from "@/components/ImageCarousel";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Ley Hijos del Estado - ASCEP",
@@ -39,7 +40,7 @@ export default async function LeyDeEgresoPage({
   return (
     <div>
       <PageHero
-        bgImage="/images/eventos/20241112_111016.jpg"
+        bgImage={assetPath("/images/eventos/20241112_111016.jpg")}
         bgColor="bg-brand-orange"
         tag="LEY DE EGRESO"
         title="Ley"
@@ -51,7 +52,7 @@ export default async function LeyDeEgresoPage({
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
-              GALERIA
+              {t("galeriaTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               {t("title")}
@@ -59,13 +60,13 @@ export default async function LeyDeEgresoPage({
           </div>
           <ImageCarousel
             images={[
-              { src: "/images/ley-egreso/1.png" },
-              { src: "/images/ley-egreso/2.png" },
-              { src: "/images/ley-egreso/3.png" },
-              { src: "/images/ley-egreso/4.png" },
-              { src: "/images/ley-egreso/5.png" },
-              { src: "/images/ley-egreso/7.png" },
-              { src: "/images/ley-egreso/8.png" },
+              { src: assetPath("/images/ley-egreso/1.png") },
+              { src: assetPath("/images/ley-egreso/2.png") },
+              { src: assetPath("/images/ley-egreso/3.png") },
+              { src: assetPath("/images/ley-egreso/4.png") },
+              { src: assetPath("/images/ley-egreso/5.png") },
+              { src: assetPath("/images/ley-egreso/7.png") },
+              { src: assetPath("/images/ley-egreso/8.png") },
             ]}
             interval={5000}
           />
@@ -76,7 +77,7 @@ export default async function LeyDeEgresoPage({
         <div id="que-es" className="mb-16">
           <div className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
-              QUE ES
+              {t("queEsTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               {t("queEs")}
@@ -92,7 +93,7 @@ export default async function LeyDeEgresoPage({
         <div id="objetivos" className="mb-16">
           <div className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
-              OBJETIVOS
+              {t("objetivosTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               {t("objetivos")}
@@ -141,7 +142,7 @@ export default async function LeyDeEgresoPage({
         <div id="dirigida" className="mb-16">
           <div className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
-              DIRIGIDA A
+              {t("dirigidaTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               {t("dirigida")}
@@ -182,7 +183,7 @@ export default async function LeyDeEgresoPage({
         <div id="cambio" className="mb-16">
           <div className="relative mb-8 overflow-hidden rounded-[10px]">
             <Image
-              src="/images/eventos/20241112_103406.jpg"
+              src={assetPath("/images/eventos/20241112_103406.jpg")}
               alt=""
               width={1200}
               height={300}
@@ -192,7 +193,7 @@ export default async function LeyDeEgresoPage({
             <div className="absolute inset-0 flex items-center p-8">
               <div>
                 <span className="mb-2 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-                  EL CAMBIO
+                  {t("cambioTag")}
                 </span>
                 <h2 className="mb-2 text-3xl font-bold text-white">{t("cambio")}</h2>
                 <p className="max-w-3xl text-lg leading-relaxed text-white/80">
@@ -291,7 +292,7 @@ export default async function LeyDeEgresoPage({
         <div id="proceso" className="mb-16">
           <div className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
-              PROCESO
+              {t("procesoTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               {t("proceso")}
@@ -307,7 +308,7 @@ export default async function LeyDeEgresoPage({
         <div id="participa" className="mb-16">
           <div className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
-              PARTICIPA
+              {t("participaTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               {t("participa")}

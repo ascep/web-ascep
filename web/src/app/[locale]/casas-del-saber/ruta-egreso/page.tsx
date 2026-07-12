@@ -1,51 +1,11 @@
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Ruta de Egreso Progresivo - Casas del Saber - ASCEP",
 };
-
-const fases = [
-  {
-    fase: "Fase 1",
-    periodo: "Meses 1 - 6",
-    nombre: "Acogida y Diagnostico",
-    items: [
-      "Evaluacion psicosocial inicial.",
-      "Construccion del itinerario individual.",
-      "Vinculacion a la linea tematica.",
-      "Regularizacion documental.",
-      "Establecimiento de metas de corto plazo.",
-      "Mapeo de la red de apoyo.",
-    ],
-  },
-  {
-    fase: "Fase 2",
-    periodo: "Meses 7 - 18",
-    nombre: "Formacion y Consolidacion",
-    items: [
-      "Desarrollo activo en la linea tematica.",
-      "Formacion en la Escuela de Vida Independiente.",
-      "Practicas laborales y primer acercamiento al mercado.",
-      "Fortalecimiento de redes.",
-      "Seguimiento psicoemocional trimestral.",
-      "Construccion del proyecto productivo.",
-    ],
-  },
-  {
-    fase: "Fase 3",
-    periodo: "Meses 19 - 24",
-    nombre: "Egreso y Seguimiento",
-    items: [
-      "Plan de egreso personalizado.",
-      "Consolidacion del proyecto laboral o emprendimiento.",
-      "Transferencia progresiva de responsabilidades.",
-      "Cierre de ciclo terapeutico.",
-      "Integracion a redes de egresados.",
-      "Seguimiento post-egreso a los 3, 6 y 12 meses.",
-    ],
-  },
-];
 
 const badgeColors = [
   "bg-brand-purple",
@@ -59,25 +19,74 @@ const borderColors = [
   "border border-brand-orange/20",
 ];
 
-export default function RutaEgresoPage() {
+export default async function RutaEgresoPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "casasDelSaberRutaEgreso" });
+
+  const fases = [
+    {
+      fase: t("fase1Label"),
+      periodo: t("fase1Periodo"),
+      nombre: t("fase1Nombre"),
+      items: [
+        t("fase1Item1"),
+        t("fase1Item2"),
+        t("fase1Item3"),
+        t("fase1Item4"),
+        t("fase1Item5"),
+        t("fase1Item6"),
+      ],
+    },
+    {
+      fase: t("fase2Label"),
+      periodo: t("fase2Periodo"),
+      nombre: t("fase2Nombre"),
+      items: [
+        t("fase2Item1"),
+        t("fase2Item2"),
+        t("fase2Item3"),
+        t("fase2Item4"),
+        t("fase2Item5"),
+        t("fase2Item6"),
+      ],
+    },
+    {
+      fase: t("fase3Label"),
+      periodo: t("fase3Periodo"),
+      nombre: t("fase3Nombre"),
+      items: [
+        t("fase3Item1"),
+        t("fase3Item2"),
+        t("fase3Item3"),
+        t("fase3Item4"),
+        t("fase3Item5"),
+        t("fase3Item6"),
+      ],
+    },
+  ];
+
   return (
     <div>
       <PageHero
-        bgImage="/images/encuentro-2025/GIS06475.JPG"
-        tag="Proceso"
-        title="Ruta de Egreso"
-        highlight="Progresivo"
-        subtitle="El egreso no es un evento, es un proceso."
+        bgImage={assetPath("/images/encuentro-2025/GIS06475.JPG")}
+        tag={t("heroTag")}
+        title={t("heroTitle")}
+        highlight={t("heroHighlight")}
+        subtitle={t("heroSubtitle")}
       />
 
       <section className="bg-brand-teal/5 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              Fases
+              {t("sectionTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Proceso de egreso progresivo
+              {t("sectionTitle")}
             </h2>
           </div>
           <div className="space-y-8">

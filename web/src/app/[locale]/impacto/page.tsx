@@ -1,7 +1,9 @@
+import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { Users, Calendar, GraduationCap, Layers, Target } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Impacto - ASCEP",
@@ -25,36 +27,35 @@ const statColors = [
   { bg: "bg-brand-purple/10", icon: "text-brand-purple", num: "text-brand-purple" },
 ];
 
-const resultados = [
-  "Politicas publicas que transformen los cuidados alternativos y la atencion a ninos, ninas, adolescentes y jovenes en transicion.",
-  "Jovenes lideres que transformen y ejerzan su ciudadania, fortaleciendo el proyecto de vida de sus pares.",
-  "Instalacion y funcionamiento de una mesa intersectorial para la autonomia progresiva.",
-  "Jovenes con experiencia laboral, habilidades fortalecidas y estabilidad economica.",
-];
-
 const galeriaImages = [
-  "/images/encuentro-2025/GIS06448.JPG",
-  "/images/encuentro-2025/GIS06455.JPG",
-  "/images/encuentro-2025/GIS06462.JPG",
-  "/images/encuentro-2025/GIS06470.JPG",
-  "/images/equipo-shoot/GIS08514.JPG",
-  "/images/equipo-shoot/GIS08522.JPG",
-  "/images/equipo-shoot/GIS08531.JPG",
-  "/images/equipo-shoot/GIS08544.JPG",
-  "/images/eventos/20241112_095957.jpg",
-  "/images/eventos/20241112_100147.jpg",
-  "/images/eventos/20241112_102405.jpg",
-  "/images/eventos/20241112_115147.jpg",
+  assetPath("/images/encuentro-2025/GIS06448.JPG"),
+  assetPath("/images/encuentro-2025/GIS06455.JPG"),
+  assetPath("/images/encuentro-2025/GIS06462.JPG"),
+  assetPath("/images/encuentro-2025/GIS06470.JPG"),
+  assetPath("/images/equipo-shoot/GIS08514.JPG"),
+  assetPath("/images/equipo-shoot/GIS08522.JPG"),
+  assetPath("/images/equipo-shoot/GIS08531.JPG"),
+  assetPath("/images/equipo-shoot/GIS08544.JPG"),
+  assetPath("/images/eventos/20241112_095957.jpg"),
+  assetPath("/images/eventos/20241112_100147.jpg"),
+  assetPath("/images/eventos/20241112_102405.jpg"),
+  assetPath("/images/eventos/20241112_115147.jpg"),
 ];
 
-export default function ImpactoPage() {
+export default async function ImpactoPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "impacto" });
   return (
     <div>
       <PageHero
-        bgImage="/images/encuentro-2025/GIS06455.JPG"
-        tag="NUESTRO IMPACTO"
-        title="Impacto en Cifras"
-        subtitle="Conoce el alcance de nuestro trabajo y las metas que nos proponemos."
+        bgImage={assetPath("/images/encuentro-2025/GIS06455.JPG")}
+        tag={t("heroTag")}
+        title={t("heroTitle")}
+        subtitle={t("heroSubtitle")}
       />
 
       <section className="bg-brand-teal/5 py-20">
@@ -91,20 +92,20 @@ export default function ImpactoPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              RESULTADOS
+              {t("resultadosTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Resultados <span className="text-brand-purple">Esperados</span>
+              {t("resultadosTitle")} <span className="text-brand-purple">{t("resultadosHighlight")}</span>
             </h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-2">
-            {resultados.map((item, i) => (
+            {[1, 2, 3, 4].map((i) => (
               <div
                 key={i}
                 className="rounded-[10px] border border-brand-teal/20 bg-bg-card p-6 transition-all hover:shadow-md"
               >
                 <p className="text-sm text-[var(--color-text-secondary)]">
-                  {item}
+                  {t(`resultado${i}`)}
                 </p>
               </div>
             ))}
@@ -116,10 +117,10 @@ export default function ImpactoPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              GALERIA
+              {t("galeriaTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Galeria <span className="text-brand-purple">de Impacto</span>
+              {t("galeriaTitle")} <span className="text-brand-purple">{t("galeriaHighlight")}</span>
             </h2>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">

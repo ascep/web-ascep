@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { BookOpen, Users, DollarSign, Heart, Target, Star } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Avanza Joven - ASCEP",
@@ -77,7 +78,7 @@ export default function AvanzaJovenPage() {
   return (
     <>
       <PageHero
-        bgImage="/images/programas/Avanza-1-scaled-1.jpg"
+        bgImage={assetPath("/images/programas/Avanza-1-scaled-1.jpg")}
         tag="Programa"
         title="Avanza"
         highlight="Joven"
@@ -96,7 +97,7 @@ export default function AvanzaJovenPage() {
           </div>
           <div className="grid gap-12 md:grid-cols-2 items-center">
             <div className="relative h-72 overflow-hidden rounded-[10px] md:h-96">
-              <Image src="/images/programas/Avanza-1-scaled-1.jpg" alt="Avanza Joven" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+              <Image src={assetPath("/images/programas/Avanza-1-scaled-1.jpg")} alt="Avanza Joven" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
               <p>

@@ -7,7 +7,7 @@ import Footer from "@/components/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
-const locales = ["es", "en", "de"];
+const locales = ["es", "en", "pt"];
 
 export default async function LocaleLayout({
   children,

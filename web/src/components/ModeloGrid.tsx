@@ -10,42 +10,42 @@ import {
   Target,
   TrendingUp,
 } from "lucide-react";
+import { useTranslations, useLocale } from "next-intl";
 
 const dimensions = [
-  { title: "Autoaceptacion", icon: Heart, desc: "Valoracion positiva de si mismo y de la propia historia.", color: "#019E9F" },
-  { title: "Relaciones Positivas", icon: Users, desc: "Capacidad de establecer relaciones sociales de calidad y confianza.", color: "#44BCC5" },
-  { title: "Dominio del Entorno", icon: Globe, desc: "Percepcion de control del medio y habilidad para crear entornos favorables.", color: "#EC6620" },
-  { title: "Autonomia", icon: Sparkles, desc: "Capacidad de sostener la propia individualidad y autodeterminacion.", color: "#EC6620" },
-  { title: "Proposito en la Vida", icon: Target, desc: "Capacidad de tener metas claras y definir objetivos vitales.", color: "#019E9F" },
-  { title: "Crecimiento Personal", icon: TrendingUp, desc: "Desarrollo de las potencialidades individuales para crecer como persona.", color: "#44BCC5" },
+  { titleKey: "dim1Title", descKey: "dim1Desc", icon: Heart, color: "#019E9F" },
+  { titleKey: "dim2Title", descKey: "dim2Desc", icon: Users, color: "#44BCC5" },
+  { titleKey: "dim3Title", descKey: "dim3Desc", icon: Globe, color: "#EC6620" },
+  { titleKey: "dim4Title", descKey: "dim4Desc", icon: Sparkles, color: "#EC6620" },
+  { titleKey: "dim5Title", descKey: "dim5Desc", icon: Target, color: "#019E9F" },
+  { titleKey: "dim6Title", descKey: "dim6Desc", icon: TrendingUp, color: "#44BCC5" },
 ];
 
-export default function ModeloGrid({ locale }: { locale: string }) {
+export default function ModeloGrid() {
+  const t = useTranslations("modelo");
+  const locale = useLocale();
   return (
     <section className="bg-[var(--color-bg-surface)] py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-14 lg:grid-cols-5">
           <div className="lg:col-span-2">
             <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-brand-orange">
-              Nuestro Enfoque
+              {t("tag")}
             </p>
             <h2 className="mb-5 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Nuestro Modelo
+              {t("title")}
             </h2>
             <p className="mb-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
-              Nuestro modelo esta enfocado al fortalecimiento del ser, como
-              base para que los jovenes que egresan del sistema de proteccion
-              puedan gestionar su proyecto de vida.
+              {t("desc")}
             </p>
             <p className="mb-6 text-sm leading-relaxed text-[var(--color-text-muted)]">
-              Trabajamos transversalmente las seis dimensiones del bienestar
-              psicologico de Carol Ryff en todos nuestros procesos.
+              {t("desc2")}
             </p>
             <Link
               href={`/${locale}/quienes-somos`}
               className="inline-flex items-center rounded-[10px] bg-brand-purple px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-purple-dark hover:shadow-lg"
             >
-              Saber mas
+              {t("cta")}
             </Link>
           </div>
           <div className="lg:col-span-3">
@@ -54,7 +54,7 @@ export default function ModeloGrid({ locale }: { locale: string }) {
                 const Icon = dim.icon;
                 return (
                   <motion.div
-                    key={dim.title}
+                    key={dim.titleKey}
                     initial={{ opacity: 0, y: 24 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -72,10 +72,10 @@ export default function ModeloGrid({ locale }: { locale: string }) {
                       <Icon size={20} style={{ color: dim.color }} />
                     </div>
                     <h3 className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">
-                      {dim.title}
+                      {t(dim.titleKey)}
                     </h3>
                     <p className="text-xs leading-relaxed text-[var(--color-text-muted)]">
-                      {dim.desc}
+                      {t(dim.descKey)}
                     </p>
                   </motion.div>
                 );

@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import { Newspaper } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Noticias - ASCEP",
@@ -20,7 +21,7 @@ export default async function NoticiasPage({
   return (
     <div>
       <PageHero
-        bgImage="/images/eventos/20241112_103725.jpg"
+        bgImage={assetPath("/images/eventos/20241112_103725.jpg")}
         tag="Actualidad"
         title={t("title")}
         subtitle={t("subtitle")}

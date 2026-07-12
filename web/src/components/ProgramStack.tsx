@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { motion, useReducedMotion } from "motion/react";
+import { useTranslations } from "next-intl";
 
 type Program = {
   title: string;
@@ -20,32 +21,30 @@ type ProgramStackProps = {
 };
 
 const pillLabels: Record<string, string> = {
-  "avanza-joven": "Formacion",
-  avanzaJoven: "Formacion",
-  empleo: "Insercion",
-  incidencia: "Liderazgo",
-  "mi-cuerpo": "Bienestar",
-  miCuerpo: "Bienestar",
+  "avanza-joven": "pillFormacion",
+  avanzaJoven: "pillFormacion",
+  empleo: "pillInsercion",
+  incidencia: "pillLiderazgo",
+  "mi-cuerpo": "pillBienestar",
+  miCuerpo: "pillBienestar",
 };
 
 export default function ProgramStack({ programs, locale }: ProgramStackProps) {
   const prefersReducedMotion = useReducedMotion();
+  const t = useTranslations("programas");
 
   return (
     <section className="bg-brand-purple">
       <div className="mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
         <div className="mb-16 text-center">
           <span className="inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-            Programas
+            {t("badge")}
           </span>
           <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
-            Nuestros <span className="text-brand-orange">Programas</span>
+            {t("title")} <span className="text-brand-orange">{t("titleHighlight")}</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-base text-white/70">
-            Nuestros programas se estructuran en un plan de apoyo para los
-            adolescentes y jovenes en estrategias que se articula con diferentes
-            actores como los centros de proteccion, ICBF, la academia, las
-            empresas y otros aliados estrategicos.
+            {t("desc")}
           </p>
         </div>
 
@@ -73,7 +72,7 @@ export default function ProgramStack({ programs, locale }: ProgramStackProps) {
                     className="inline-block rounded-[10px] px-3 py-1 text-xs font-semibold text-white"
                     style={{ backgroundColor: program.color }}
                   >
-                    {pillLabels[program.slug] || "Programa"}
+                    {t(pillLabels[program.slug] || "pillPrograma")}
                   </span>
                 </div>
               </div>
@@ -100,7 +99,7 @@ export default function ProgramStack({ programs, locale }: ProgramStackProps) {
                   className="mt-auto inline-flex items-center gap-2 self-start rounded-[10px] px-5 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg"
                   style={{ backgroundColor: program.color }}
                 >
-                  Leer mas
+                  {t("leerMas")}
                   <ArrowRight size={14} className="transition-transform group-hover:translate-x-0.5" />
                 </Link>
               </div>
