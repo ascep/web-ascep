@@ -28,18 +28,18 @@ const statColors = [
 ];
 
 const galeriaImages = [
-  assetPath("/images/encuentro-2025/GIS06448.JPG"),
-  assetPath("/images/encuentro-2025/GIS06455.JPG"),
-  assetPath("/images/encuentro-2025/GIS06462.JPG"),
-  assetPath("/images/encuentro-2025/GIS06470.JPG"),
-  assetPath("/images/equipo-shoot/GIS08514.JPG"),
-  assetPath("/images/equipo-shoot/GIS08522.JPG"),
-  assetPath("/images/equipo-shoot/GIS08531.JPG"),
-  assetPath("/images/equipo-shoot/GIS08544.JPG"),
-  assetPath("/images/eventos/20241112_095957.jpg"),
-  assetPath("/images/eventos/20241112_100147.jpg"),
-  assetPath("/images/eventos/20241112_102405.jpg"),
-  assetPath("/images/eventos/20241112_115147.jpg"),
+  assetPath("/images/encuentro-2025/GIS06448.webp"),
+  assetPath("/images/encuentro-2025/GIS06455.webp"),
+  assetPath("/images/encuentro-2025/GIS06462.webp"),
+  assetPath("/images/encuentro-2025/GIS06470.webp"),
+  assetPath("/images/equipo-shoot/GIS08514.webp"),
+  assetPath("/images/equipo-shoot/GIS08522.webp"),
+  assetPath("/images/equipo-shoot/GIS08531.webp"),
+  assetPath("/images/equipo-shoot/GIS08544.webp"),
+  assetPath("/images/eventos/20241112_095957.webp"),
+  assetPath("/images/eventos/20241112_100147.webp"),
+  assetPath("/images/eventos/20241112_102405.webp"),
+  assetPath("/images/eventos/20241112_115147.webp"),
 ];
 
 export default async function ImpactoPage({
@@ -52,7 +52,7 @@ export default async function ImpactoPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/encuentro-2025/GIS06455.JPG")}
+        bgImage={assetPath("/images/encuentro-2025/GIS06455.webp")}
         tag={t("heroTag")}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}

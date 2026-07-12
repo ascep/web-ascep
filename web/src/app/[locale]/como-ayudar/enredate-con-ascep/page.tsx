@@ -8,6 +8,7 @@ import EnredateActividades from "./EnredateActividades";
 import EnredateStats from "./EnredateStats";
 import EnredateTestimonials from "./EnredateTestimonials";
 import EnredateCTA from "./EnredateCTA";
+import PodcastSection from "./PodcastSection";
 
 export const metadata: Metadata = {
   title: "Enredate con ASCEP - ASCEP",
@@ -108,6 +109,23 @@ export default async function EnredatePage({
             </p>
           </div>
           <VideoGrid />
+        </div>
+      </section>
+
+      <section className="relative bg-bg-elevated py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full bg-brand-orange/10 px-4 py-1 text-sm font-semibold text-brand-orange">
+              {t("podcastTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+              {t("podcastTitle")}
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
+              {t("podcastDesc")}
+            </p>
+          </div>
+          <PodcastSection />
         </div>
       </section>
 

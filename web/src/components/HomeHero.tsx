@@ -72,7 +72,7 @@ export default function HomeHero({
               <div className="absolute -right-6 -top-6 h-48 w-48 rounded-2xl bg-brand-teal/20" />
               <div className="absolute -bottom-4 -left-4 h-32 w-32 rounded-2xl bg-brand-orange/20" />
               <Image
-                src={assetPath("/images/encuentro-2025/GIS06445.JPG")}
+                src={assetPath("/images/encuentro-2025/GIS06445.webp")}
                 alt="ASCEP team"
                 width={600}
                 height={450}

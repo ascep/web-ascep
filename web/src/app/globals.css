@@ -19,6 +19,7 @@
 }
 
 :root {
+  --sat: env(safe-area-inset-bottom, 0px);
   --color-bg-base: #FFFFFF;
   --color-bg-surface: #F8F8FA;
   --color-bg-elevated: #F0F0F4;

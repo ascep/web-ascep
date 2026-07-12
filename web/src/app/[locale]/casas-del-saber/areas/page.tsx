@@ -54,7 +54,7 @@ export default async function AreasPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/encuentro-2025/GIS06448.JPG")}
+        bgImage={assetPath("/images/encuentro-2025/GIS06448.webp")}
         tag={t("heroTag")}
         title={t("heroTitle")}
         highlight={t("heroHighlight")}

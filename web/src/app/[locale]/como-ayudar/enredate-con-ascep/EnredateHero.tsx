@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import Link from "next/link";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 
 type Slide = {
   tag: string;
@@ -19,6 +19,12 @@ type EnredateHeroProps = {
   secondaryHref: string;
 };
 
+interface VideoData {
+  videoId: string;
+  title: string;
+  thumbnail: string;
+}
+
 export default function EnredateHero({
   slides,
   ctaLabel,
@@ -27,8 +33,16 @@ export default function EnredateHero({
   secondaryHref,
 }: EnredateHeroProps) {
   const [current, setCurrent] = useState(0);
+  const [videos, setVideos] = useState<VideoData[]>([]);
+  const [showOverlay, setShowOverlay] = useState(false);
   const prefersReduced = useReducedMotion();
   const total = slides.length;
+
+  useEffect(() => {
+    fetch("/api/youtube/videos").then((r) => r.json()).then((data) => {
+      if (data?.videos?.length) setVideos(data.videos);
+    }).catch(() => {});
+  }, []);
 
   const goTo = useCallback(
     (i: number) => setCurrent((i + total) % total),
@@ -44,6 +58,7 @@ export default function EnredateHero({
     return () => clearInterval(id);
   }, [next, prefersReduced]);
 
+  const slideVideo = videos[current];
   const dur = prefersReduced ? 0 : 0.6;
 
   return (
@@ -67,10 +82,10 @@ export default function EnredateHero({
               <span className="mb-4 inline-block rounded-full bg-brand-orange/20 px-5 py-2 text-sm font-bold text-brand-orange">
                 {slides[current].tag}
               </span>
-              <h1 className="mb-6 text-4xl font-bold leading-tight text-white sm:text-5xl lg:text-6xl">
+              <h1 className="mb-6 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
                 {slides[current].title}
               </h1>
-              <p className="mb-8 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl">
+              <p className="mb-8 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
                 {slides[current].desc}
               </p>
             </motion.div>
@@ -109,51 +124,92 @@ export default function EnredateHero({
         </div>
 
         <div className="mt-12 flex-1 lg:mt-0">
-          <div className="relative mx-auto aspect-[4/3] w-full max-w-lg">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={dur ? { opacity: 0, scale: 0.9 } : undefined}
-                animate={dur ? { opacity: 1, scale: 1 } : undefined}
-                exit={dur ? { opacity: 0, scale: 0.9 } : undefined}
-                transition={dur ? { duration: 0.5, ease: [0.23, 1, 0.32, 1] } : undefined}
-                className="absolute inset-0"
-              >
-                <div className="absolute inset-0 rounded-[10px] bg-gradient-to-br from-brand-purple/40 to-brand-teal/30 backdrop-blur" />
+          {slideVideo ? (
+            <div className="w-full max-w-lg">
+              <div className="relative">
                 <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full border-8 border-brand-teal/30" />
                 <div className="absolute -bottom-4 -left-4 h-24 w-24 rounded-full border-8 border-brand-orange/20" />
-                <div className="relative flex h-full w-full items-center justify-center rounded-[10px] border border-white/10 bg-white/5">
-                  <div className="text-center">
-                    <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-white/10 backdrop-blur">
-                      <svg className="ml-1 h-12 w-12 text-white" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M8 5v14l11-7z" />
-                      </svg>
+                <button onClick={() => setShowOverlay(true)}
+                  className="group relative block w-full overflow-hidden rounded-[10px] border border-white/10 transition-shadow hover:shadow-2xl"
+                >
+                  <img src={slideVideo.thumbnail} alt={slideVideo.title}
+                    className="aspect-video w-full object-cover" />
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur transition-transform group-hover:scale-110">
+                      <Play className="ml-1 h-7 w-7 text-white" fill="white" />
                     </div>
-                    <p className="text-sm font-medium text-white/60">
-                      Videos, testimonios y mas
-                    </p>
                   </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                </button>
+              </div>
+              <p className="mt-3 text-center text-sm font-semibold text-white/80 line-clamp-2">
+                {slideVideo.title}
+              </p>
+            </div>
+          ) : (
+            <div className="relative mx-auto aspect-[4/3] w-full max-w-lg">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={current}
+                  initial={dur ? { opacity: 0, scale: 0.9 } : undefined}
+                  animate={dur ? { opacity: 1, scale: 1 } : undefined}
+                  exit={dur ? { opacity: 0, scale: 0.9 } : undefined}
+                  transition={dur ? { duration: 0.5, ease: [0.23, 1, 0.32, 1] } : undefined}
+                  className="absolute inset-0"
+                >
+                  <div className="absolute inset-0 rounded-[10px] bg-gradient-to-br from-brand-purple/40 to-brand-teal/30 backdrop-blur" />
+                  <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full border-8 border-brand-teal/30" />
+                  <div className="absolute -bottom-4 -left-4 h-24 w-24 rounded-full border-8 border-brand-orange/20" />
+                  <div className="relative flex h-full w-full items-center justify-center rounded-[10px] border border-white/10 bg-white/5">
+                    <div className="text-center">
+                      <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-white/10 backdrop-blur">
+                        <Play className="ml-1 h-12 w-12 text-white" />
+                      </div>
+                      <p className="text-sm font-medium text-white/60">
+                        Videos, testimonios y mas
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
 
-            <button
-              onClick={prev}
-              className="absolute -left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
-              aria-label="Previous slide"
-            >
-              <ChevronLeft className="h-5 w-5" />
-            </button>
-            <button
-              onClick={next}
-              className="absolute -right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
-              aria-label="Next slide"
-            >
-              <ChevronRight className="h-5 w-5" />
-            </button>
-          </div>
+              <button onClick={prev}
+                className="absolute -left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button onClick={next}
+                className="absolute -right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
+                aria-label="Next slide"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          )}
         </div>
       </div>
+
+      {showOverlay && slideVideo && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4"
+          onClick={() => setShowOverlay(false)}>
+          <div className="relative w-full max-w-3xl" onClick={(e) => e.stopPropagation()}>
+            <button onClick={() => setShowOverlay(false)}
+              className="absolute -right-3 -top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white text-black shadow-lg">
+              <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+            <div className="aspect-video w-full">
+              <iframe
+                src={`https://www.youtube.com/embed/${slideVideo.videoId}?autoplay=1&rel=0&modestbranding=1`}
+                allow="autoplay; encrypted-media; picture-in-picture"
+                className="h-full w-full rounded-[10px]"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="absolute bottom-0 left-0 right-0">
         <svg viewBox="0 0 1440 60" preserveAspectRatio="none" className="h-12 w-full sm:h-16">

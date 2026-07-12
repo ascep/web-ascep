@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 const partnerLogos = [
   { src: assetPath("/images/aliados/colombia.svg"), alt: "Colombia" },
   { src: assetPath("/images/aliados/empower-logo-blue.svg"), alt: "Empower" },
-  { src: assetPath("/images/aliados/gapi-icesi-logo.jpg"), alt: "GAPI Icesi" },
+  { src: assetPath("/images/aliados/gapi-icesi-logo.webp"), alt: "GAPI Icesi" },
   { src: assetPath("/images/aliados/Vaki.png"), alt: "Vaki" },
 ];
 
@@ -37,7 +37,7 @@ export default async function AliadosPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_092855.jpg")}
+        bgImage={assetPath("/images/eventos/20241112_092855.webp")}
         tag={t("heroTag")}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}

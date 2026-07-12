@@ -20,7 +20,7 @@ export default async function CasasDelSaberPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/encuentro-2025/GIS06475.JPG")}
+        bgImage={assetPath("/images/encuentro-2025/GIS06475.webp")}
         tag={t("heroTag")}
         title={t("heroTitle")}
         highlight={t("heroHighlight")}

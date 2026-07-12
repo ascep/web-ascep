@@ -59,7 +59,7 @@ export default function EmpleoPage() {
   return (
     <>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_102515.jpg")}
+        bgImage={assetPath("/images/eventos/20241112_102515.webp")}
         bgColor="bg-brand-orange"
         tag="Programa"
         title="Fomento para el Empleo Juvenil"

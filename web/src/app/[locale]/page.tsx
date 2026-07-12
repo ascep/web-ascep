@@ -13,18 +13,18 @@ import LogoLoop from "@/components/LogoLoop";
 import { assetPath } from "@/lib/asset-path";
 
 const gallery = [
-  { src: assetPath("/images/eventos/20241112_092951.jpg"), alt: "Taller con jovenes" },
-  { src: assetPath("/images/eventos/20241112_100049.jpg"), alt: "Actividad grupal" },
-  { src: assetPath("/images/eventos/20241112_102515.jpg"), alt: "Sesion de trabajo" },
-  { src: assetPath("/images/encuentro-2025/GIS06449.JPG"), alt: "Encuentro ASCEP 2025" },
+  { src: assetPath("/images/eventos/20241112_092951.webp"), alt: "Taller con jovenes" },
+  { src: assetPath("/images/eventos/20241112_100049.webp"), alt: "Actividad grupal" },
+  { src: assetPath("/images/eventos/20241112_102515.webp"), alt: "Sesion de trabajo" },
+  { src: assetPath("/images/encuentro-2025/GIS06449.webp"), alt: "Encuentro ASCEP 2025" },
 ];
 
 const milestones = [
-  { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: assetPath("/images/eventos/20241112_092855.jpg") },
-  { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: assetPath("/images/eventos/20241112_092951.jpg") },
-  { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: assetPath("/images/eventos/20241112_095957.jpg") },
-  { year: "2023", title: "Proyecto de Ley", description: "Impulsamos el proyecto de Ley de Egreso, construido colectivamente con egresados de todo el pais y respaldado por la senadora Lorena Rios.", image: assetPath("/images/eventos/20241112_100147.jpg") },
-  { year: "2025", title: "Ley 2479 de 2025", description: "Se sanciona la Ley Hijos del Estado, creando el Programa Nacional de Acompanamiento Integral al Egresado del ICBF.", image: assetPath("/images/eventos/20241112_111016.jpg") },
+  { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: assetPath("/images/eventos/20241112_092855.webp") },
+  { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: assetPath("/images/eventos/20241112_092951.webp") },
+  { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: assetPath("/images/eventos/20241112_095957.webp") },
+  { year: "2023", title: "Proyecto de Ley", description: "Impulsamos el proyecto de Ley de Egreso, construido colectivamente con egresados de todo el pais y respaldado por la senadora Lorena Rios.", image: assetPath("/images/eventos/20241112_100147.webp") },
+  { year: "2025", title: "Ley 2479 de 2025", description: "Se sanciona la Ley Hijos del Estado, creando el Programa Nacional de Acompanamiento Integral al Egresado del ICBF.", image: assetPath("/images/eventos/20241112_111016.webp") },
 ];
 
 const programs = [
@@ -33,7 +33,7 @@ const programs = [
     slug: "incidencia",
     desc: "Desarrollamos acciones que involucran a actores clave y tomadores de decisiones en la transformacion de los cuidados alternativos.",
     logo: assetPath("/images/programas/LOGO-PROGRAMA-DE-INCIDENCIA.png"),
-    image: assetPath("/images/programas/incidencia-scaled-1.jpg"),
+    image: assetPath("/images/programas/incidencia-scaled-1.webp"),
     color: "#019E9F",
   },
   {
@@ -41,7 +41,7 @@ const programs = [
     slug: "avanza-joven",
     desc: "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida.",
     logo: assetPath("/images/programas/LOGO-AVANZA-JOVEN.png"),
-    image: assetPath("/images/programas/Avanza-1-scaled-1.jpg"),
+    image: assetPath("/images/programas/Avanza-1-scaled-1.webp"),
     color: "#44BCC5",
   },
   {
@@ -49,7 +49,7 @@ const programs = [
     slug: "empleo",
     desc: "Modelo piloto para promover capacidades laborales y fortalecer la empleabilidad de jovenes en proceso de egreso del sistema de proteccion.",
     logo: assetPath("/images/programas/LOGO-FOMENTO1.png"),
-    image: assetPath("/images/eventos/GIS08397.jpg"),
+    image: assetPath("/images/eventos/GIS08397.webp"),
     color: "#EC6620",
   },
   {
@@ -57,7 +57,7 @@ const programs = [
     slug: "mi-cuerpo",
     desc: "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad.",
     logo: assetPath("/images/programas/logo-MCSD.png"),
-    image: assetPath("/images/eventos/20241112_111009.jpg"),
+    image: assetPath("/images/eventos/20241112_111009.webp"),
     color: "#EC6620",
   },
 ];
@@ -65,7 +65,7 @@ const programs = [
 const aliados = [
   { src: assetPath("/images/aliados/colombia.svg"), alt: "Colombia" },
   { src: assetPath("/images/aliados/empower-logo-blue.svg"), alt: "Empower" },
-  { src: assetPath("/images/aliados/gapi-icesi-logo.jpg"), alt: "GAPI Icesi" },
+  { src: assetPath("/images/aliados/gapi-icesi-logo.webp"), alt: "GAPI Icesi" },
   { src: assetPath("/images/aliados/Vaki.png"), alt: "Vaki" },
 ];
 
@@ -155,7 +155,7 @@ export default async function HomePage({
               <div className="relative inline-block w-full">
                 <div className="absolute -left-4 -top-4 h-full w-full rounded-[10px] bg-brand-purple/10" />
                 <Image
-                  src={assetPath("/images/equipo-shoot/GIS08548.JPG")}
+                  src={assetPath("/images/equipo-shoot/GIS08548.webp")}
                   alt="Equipo ASCEP"
                   width={600}
                   height={400}
@@ -190,7 +190,7 @@ export default async function HomePage({
             </div>
             <div className="relative">
               <Image
-                src={assetPath("/images/eventos/20241112_102357.jpg")}
+                src={assetPath("/images/eventos/20241112_102357.webp")}
                 alt="Jovenes en taller"
                 width={600}
                 height={400}

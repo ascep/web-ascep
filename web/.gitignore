@@ -18,6 +18,9 @@ public/videos/
 public/images/encuentro-2025/
 public/images/equipo-shoot/
 
+# Source photo folders (raw JPGs, not optimized for web)
+FOTOS CASAS DEL SABER/
+
 # Environment
 .env
 .env.local

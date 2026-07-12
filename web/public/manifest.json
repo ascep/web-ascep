@@ -1,0 +1,36 @@
+{
+  "name": "ASCEP - Asociaci\u00f3n de Egresados del Sistema de Protecci\u00f3n Estatal",
+  "short_name": "ASCEP",
+  "description": "Transformando la vida de j\u00f3venes egresados del sistema de protecci\u00f3n estatal en Colombia.",
+  "start_url": "/es",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#019E9F",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logos/10%20logo%20ascep%20horizontal%20azul.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logos/10%20logo%20ascep%20horizontal%20azul.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logos/10%20logo%20ascep%20horizontal%20azul.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logos/10%20logo%20ascep%20horizontal%20azul.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
+import ContactForm from "@/components/ContactForm";
 import { MapPin, Mail, Share2 } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 
@@ -19,7 +20,7 @@ export default async function ContactoPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/equipo-shoot/GIS08546.JPG")}
+        bgImage={assetPath("/images/equipo-shoot/GIS08546.webp")}
         tag={t("heroTag")}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
@@ -36,31 +37,13 @@ export default async function ContactoPage({
                 {t("formTitle")}
               </h2>
 
-              <form className="space-y-4">
-                <div>
-                  <label htmlFor="nombre" className="mb-1 block text-sm font-medium text-[var(--color-text-secondary)]">{t("formName")}</label>
-                  <input type="text" id="nombre" name="nombre" className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-2 text-sm transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20" />
-                </div>
-                <div>
-                  <label htmlFor="email" className="mb-1 block text-sm font-medium text-[var(--color-text-secondary)]">{t("formEmail")}</label>
-                  <input type="email" id="email" name="email" className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-2 text-sm transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20" />
-                </div>
-                <div>
-                  <label htmlFor="asunto" className="mb-1 block text-sm font-medium text-[var(--color-text-secondary)]">{t("formAsunto")}</label>
-                  <input type="text" id="asunto" name="asunto" className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-2 text-sm transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20" />
-                </div>
-                <div>
-                  <label htmlFor="mensaje" className="mb-1 block text-sm font-medium text-[var(--color-text-secondary)]">{t("formMensaje")}</label>
-                  <textarea id="mensaje" name="mensaje" rows={5} className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-2 text-sm transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20" />
-                </div>
-                <button type="submit" className="rounded-[10px] bg-brand-purple px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-purple-dark hover:shadow-lg">{t("formSubmit")}</button>
-              </form>
+              <ContactForm />
             </div>
 
             <div>
               <div className="relative mb-6 overflow-hidden rounded-[10px]">
                 <Image
-                  src={assetPath("/images/equipo-shoot/GIS08545.JPG")}
+                  src={assetPath("/images/equipo-shoot/GIS08545.webp")}
                   alt=""
                   width={600}
                   height={300}

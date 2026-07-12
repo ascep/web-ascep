@@ -40,7 +40,7 @@ export default async function ComoAyudarPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_102357.jpg")}
+        bgImage={assetPath("/images/eventos/20241112_102357.webp")}
         tag={t("heroTag")}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}

@@ -19,7 +19,7 @@ export default async function ModalidadesPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/encuentro-2025/GIS06460.JPG")}
+        bgImage={assetPath("/images/encuentro-2025/GIS06460.webp")}
         tag={t("heroTag")}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}

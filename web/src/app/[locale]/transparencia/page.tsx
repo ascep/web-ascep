@@ -87,7 +87,7 @@ export default async function TransparenciaPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_100147.jpg")}
+        bgImage={assetPath("/images/eventos/20241112_100147.webp")}
         bgColor="bg-brand-teal"
         tag={t("heroTag")}
         title={t("heroTitle")}
@@ -99,7 +99,7 @@ export default async function TransparenciaPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="relative mb-12 overflow-hidden rounded-[10px]">
             <Image
-              src={assetPath("/images/eventos/20241112_103402.jpg")}
+              src={assetPath("/images/eventos/20241112_103402.webp")}
               alt=""
               width={1200}
               height={300}

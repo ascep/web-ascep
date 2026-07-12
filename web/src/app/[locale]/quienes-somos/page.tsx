@@ -21,11 +21,11 @@ const team = [
 ];
 
 const milestones = [
-  { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: assetPath("/images/eventos/20241112_092855.jpg") },
-  { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: assetPath("/images/eventos/20241112_092951.jpg") },
-  { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: assetPath("/images/eventos/20241112_095957.jpg") },
-  { year: "2023", title: "Proyecto de Ley", description: "Impulsamos el proyecto de Ley de Egreso, construido colectivamente con egresados de todo el pais y respaldado por la senadora Lorena Rios.", image: assetPath("/images/eventos/20241112_100147.jpg") },
-  { year: "2025", title: "Ley 2479 de 2025", description: "Se sanciona la Ley Hijos del Estado, creando el Programa Nacional de Acompanamiento Integral al Egresado del ICBF.", image: assetPath("/images/eventos/20241112_111016.jpg") },
+  { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: assetPath("/images/eventos/20241112_092855.webp") },
+  { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: assetPath("/images/eventos/20241112_092951.webp") },
+  { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: assetPath("/images/eventos/20241112_095957.webp") },
+  { year: "2023", title: "Proyecto de Ley", description: "Impulsamos el proyecto de Ley de Egreso, construido colectivamente con egresados de todo el pais y respaldado por la senadora Lorena Rios.", image: assetPath("/images/eventos/20241112_100147.webp") },
+  { year: "2025", title: "Ley 2479 de 2025", description: "Se sanciona la Ley Hijos del Estado, creando el Programa Nacional de Acompanamiento Integral al Egresado del ICBF.", image: assetPath("/images/eventos/20241112_111016.webp") },
 ];
 
 const dimensions = [
@@ -49,7 +49,7 @@ export default async function QuienesSomosPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/equipo-shoot/GIS08542.JPG")}
+        bgImage={assetPath("/images/equipo-shoot/GIS08542.webp")}
         title={t("heroTitle")}
         highlight={t("heroHighlight")}
         subtitle={t("heroSubtitle")}
@@ -61,7 +61,7 @@ export default async function QuienesSomosPage({
             <AnimatedSection direction="left" className="relative">
               <div className="absolute -left-4 -top-4 h-full w-full rounded-[10px] bg-brand-purple/10" />
               <Image
-                src={assetPath("/images/equipo-shoot/GIS08550.JPG")}
+                src={assetPath("/images/equipo-shoot/GIS08550.webp")}
                 alt="Equipo ASCEP"
                 width={600}
                 height={400}

@@ -10,11 +10,11 @@ export const metadata: Metadata = {
 };
 
 const GALLERY = [
-  { src: assetPath("/images/encuentro-2025/GIS06460.JPG"), alt: "Jovenes en taller de habilidades" },
-  { src: assetPath("/images/encuentro-2025/GIS06450.JPG"), alt: "Acompanamiento psicosocial" },
-  { src: assetPath("/images/encuentro-2025/GIS06470.JPG"), alt: "Actividades grupales" },
-  { src: assetPath("/images/encuentro-2025/GIS06447.JPG"), alt: "Jornada educativa" },
-  { src: assetPath("/images/encuentro-2025/GIS06475.JPG"), alt: "Momentos de integracion" },
+  { src: assetPath("/images/encuentro-2025/GIS06460.webp"), alt: "Jovenes en taller de habilidades" },
+  { src: assetPath("/images/encuentro-2025/GIS06450.webp"), alt: "Acompanamiento psicosocial" },
+  { src: assetPath("/images/encuentro-2025/GIS06470.webp"), alt: "Actividades grupales" },
+  { src: assetPath("/images/encuentro-2025/GIS06447.webp"), alt: "Jornada educativa" },
+  { src: assetPath("/images/encuentro-2025/GIS06475.webp"), alt: "Momentos de integracion" },
 ];
 
 const CREATIVE_IMPACT = [
@@ -217,7 +217,7 @@ export default async function DonarPage({
 
                 <div className="rounded-[10px] border border-brand-purple/10 bg-white p-6 shadow-sm">
                   <Image
-                    src={assetPath("/images/encuentro-2025/GIS06475.JPG")}
+                    src={assetPath("/images/encuentro-2025/GIS06475.webp")}
                     alt=""
                     width={400}
                     height={200}

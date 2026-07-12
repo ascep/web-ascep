@@ -40,7 +40,7 @@ export default async function LeyDeEgresoPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_111016.jpg")}
+        bgImage={assetPath("/images/eventos/20241112_111016.webp")}
         bgColor="bg-brand-orange"
         tag="LEY DE EGRESO"
         title="Ley"
@@ -183,7 +183,7 @@ export default async function LeyDeEgresoPage({
         <div id="cambio" className="mb-16">
           <div className="relative mb-8 overflow-hidden rounded-[10px]">
             <Image
-              src={assetPath("/images/eventos/20241112_103406.jpg")}
+              src={assetPath("/images/eventos/20241112_103406.webp")}
               alt=""
               width={1200}
               height={300}

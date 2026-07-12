@@ -20,7 +20,7 @@ export default async function ParticipaPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_103406.jpg")}
+        bgImage={assetPath("/images/eventos/20241112_103406.webp")}
         tag={t("heroTag")}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
@@ -30,7 +30,7 @@ export default async function ParticipaPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="relative mb-12 overflow-hidden rounded-[10px]">
             <Image
-              src={assetPath("/images/equipo-shoot/GIS08547.JPG")}
+              src={assetPath("/images/equipo-shoot/GIS08547.webp")}
               alt=""
               width={1200}
               height={300}

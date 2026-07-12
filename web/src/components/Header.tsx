@@ -5,10 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import FlagIcon from "./FlagIcon";
 import ThemeToggle from "./ThemeToggle";
+import MobileMenu from "./MobileMenu";
 
 const languages = [
   { code: "es", label: "ES" },
@@ -47,14 +48,8 @@ export default function Header() {
   const locale = useLocale();
   const pathname = usePathname();
   const currentPath = pathname.replace(/^\/(es|en|pt)/, "") || "/";
-  const [menuOpen, setMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<DropdownState>(null);
   const [openCasas, setOpenCasas] = useState(false);
-  const [openMobileProg, setOpenMobileProg] = useState(false);
-  const [openMobileCasas, setOpenMobileCasas] = useState(false);
-  const [openMobileLey, setOpenMobileLey] = useState(false);
-  const [openMobileAyudar, setOpenMobileAyudar] = useState(false);
-  const [openMobileQuienes, setOpenMobileQuienes] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const langTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -88,6 +83,7 @@ export default function Header() {
   const otherLangs = languages.filter((l) => l.code !== locale);
 
   return (
+    <>
     <header className="sticky top-0 z-50 bg-bg-base shadow-sm">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href={`/${locale}`} className="flex items-center gap-2">
@@ -211,7 +207,7 @@ export default function Header() {
                 <div className="flex gap-6">
                   <div className="w-2/5 shrink-0">
                     <Image
-                      src={assetPath("/images/encuentro-2025/GIS06446.JPG")}
+                      src={assetPath("/images/encuentro-2025/GIS06446.webp")}
                       alt="Ley de Egreso"
                       width={280}
                       height={200}
@@ -260,7 +256,7 @@ export default function Header() {
                 <div className="flex gap-6">
                   <div className="w-2/5 shrink-0">
                     <Image
-                      src={assetPath("/images/encuentro-2025/GIS06447.JPG")}
+                      src={assetPath("/images/encuentro-2025/GIS06447.webp")}
                       alt={t("comoAyudar")}
                       width={280}
                       height={200}
@@ -363,237 +359,13 @@ export default function Header() {
           </Link>
         </div>
 
-        <button
-          className="flex items-center md:hidden"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label={menuOpen ? t("cerrarMenu") : t("abrirMenu")}
-        >
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center md:hidden">
+          <ThemeToggle />
+        </div>
       </div>
 
-      {menuOpen && (
-        <div className="border border-border-subtle bg-bg-card rounded-[10px] m-4 md:hidden shadow-lg">
-          <nav className="flex flex-col px-4 py-4">
-            <Link
-              href={`/${locale}`}
-              className="py-2 text-sm font-semibold text-text-primary"
-              onClick={() => setMenuOpen(false)}
-            >
-              {t("inicio")}
-            </Link>
-            {/* Quienes Somos mobile */}
-            <div>
-              <button
-                onClick={() => setOpenMobileQuienes(!openMobileQuienes)}
-                className="flex w-full items-center justify-between py-2 text-sm font-semibold text-text-primary"
-              >
-                {t("quienesSomos")} <ChevronDown size={16} className={`transition-transform ${openMobileQuienes ? "rotate-180" : ""}`} />
-              </button>
-              {openMobileQuienes && (
-                <div className="ml-2 bg-[var(--color-bg-elevated)]/50 rounded-[10px] p-2 space-y-1">
-                  <Link
-                    href={`/${locale}/quienes-somos`}
-                    className="block py-1.5 text-sm font-semibold text-text-primary"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {t("quienesSomos")}
-                  </Link>
-                  <Link
-                    href={`/${locale}/como-lo-hacemos`}
-                    className="block py-1.5 text-sm font-semibold text-text-primary"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {t("comoLoHacemos")}
-                  </Link>
-                  <Link
-                    href={`/${locale}/impacto`}
-                    className="block py-1.5 text-sm font-semibold text-text-primary"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {t("impacto")}
-                  </Link>
-                  <Link
-                    href={`/${locale}/aliados`}
-                    className="block py-1.5 text-sm font-semibold text-text-primary"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {t("aliados")}
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            {/* Programas mobile */}
-            <div>
-              <button
-                onClick={() => setOpenMobileProg(!openMobileProg)}
-                className="flex w-full items-center justify-between py-2 text-sm font-semibold text-text-primary"
-              >
-                {t("programas")} <ChevronDown size={16} className={`transition-transform ${openMobileProg ? "rotate-180" : ""}`} />
-              </button>
-              {openMobileProg && (
-                <div className="ml-2 bg-[var(--color-bg-elevated)]/50 rounded-[10px] p-2 space-y-1">
-                  {programsSubmenu.map((item) => (
-                    <Link
-                      key={item.key}
-                      href={`/${locale}${item.href}`}
-                      className="block py-1.5 text-sm font-semibold text-text-primary"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {t(item.key)}
-                    </Link>
-                  ))}
-                  <button
-                    onClick={() => setOpenMobileCasas(!openMobileCasas)}
-                    className="flex w-full items-center justify-between py-1.5 text-sm font-semibold text-text-primary"
-                  >
-                    {t("casasDelSaber")} <ChevronDown size={14} className={`transition-transform ${openMobileCasas ? "rotate-180" : ""}`} />
-                  </button>
-                  {openMobileCasas && (
-                    <div className="ml-2 bg-[var(--color-bg-elevated)]/50 rounded-[10px] p-2 space-y-1">
-                      {casasSubmenu.map((item) => (
-                        <Link
-                          key={item.key}
-                          href={`/${locale}${item.href}`}
-                          className="block py-1.5 text-sm font-semibold text-text-primary"
-                          onClick={() => setMenuOpen(false)}
-                        >
-                          {t(item.key)}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Ley de Egreso mobile */}
-            <div>
-              <button
-                onClick={() => setOpenMobileLey(!openMobileLey)}
-                className="flex w-full items-center justify-between py-2 text-sm font-semibold text-text-primary"
-              >
-                {t("leyEgreso")} <ChevronDown size={16} className={`transition-transform ${openMobileLey ? "rotate-180" : ""}`} />
-              </button>
-              {openMobileLey && (
-                <div className="ml-2 bg-[var(--color-bg-elevated)]/50 rounded-[10px] p-2 space-y-1">
-                  <Link
-                    href={`/${locale}/ley-de-egreso`}
-                    className="block py-1.5 text-sm font-bold text-text-primary"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {t("leyEgreso")}
-                  </Link>
-                  {leySections.map((section) => (
-                    <Link
-                      key={section.key}
-                      href={`/${locale}${section.href}`}
-                      className="block py-1.5 text-sm font-semibold text-text-primary"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {t(section.key)}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Como Ayudar mobile */}
-            <div>
-              <button
-                onClick={() => setOpenMobileAyudar(!openMobileAyudar)}
-                className="flex w-full items-center justify-between py-2 text-sm font-semibold text-text-primary"
-              >
-                {t("comoAyudar")} <ChevronDown size={16} className={`transition-transform ${openMobileAyudar ? "rotate-180" : ""}`} />
-              </button>
-              {openMobileAyudar && (
-                <div className="ml-2 bg-[var(--color-bg-elevated)]/50 rounded-[10px] p-2 space-y-1">
-                  <Link
-                    href={`/${locale}/donar`}
-                    className="block py-1.5 text-sm font-semibold text-text-primary"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {t("donacionMonetaria")}
-                  </Link>
-                  <Link
-                    href={`/${locale}/como-ayudar/plan-padrino`}
-                    className="block py-1.5 text-sm font-semibold text-text-primary"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {t("planPadrino")}
-                  </Link>
-                  <Link
-                    href={`/${locale}/como-ayudar/enredate-con-ascep`}
-                    className="block py-1.5 text-sm font-semibold text-text-primary"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {t("enredateConAscep")}
-                  </Link>
-                  <Link
-                    href={`/${locale}/como-ayudar/voluntariado`}
-                    className="block py-1.5 text-sm font-semibold text-text-primary"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {t("voluntariado")}
-                  </Link>
-                  <Link
-                    href={`/${locale}/participa`}
-                    className="block py-1.5 text-sm font-semibold text-text-primary"
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {t("participa")}
-                  </Link>
-                </div>
-              )}
-            </div>
-
-            <Link
-              href={`/${locale}/transparencia`}
-              className="py-2 text-sm font-semibold text-text-primary"
-              onClick={() => setMenuOpen(false)}
-            >
-              {t("transparencia")}
-            </Link>
-            <Link
-              href={`/${locale}/contacto`}
-              className="py-2 text-sm font-semibold text-text-primary"
-              onClick={() => setMenuOpen(false)}
-            >
-              {t("contacto")}
-            </Link>
-
-            <div className="mt-3 h-px bg-[var(--color-border-subtle)]" />
-            <div className="mt-3 flex items-center gap-3">
-              <div className="flex items-center gap-1.5">
-                {languages.map((lang) => (
-                  <Link
-                    key={lang.code}
-                    href={`/${lang.code}${currentPath}`}
-                    className={`flex items-center gap-1 rounded-[10px] border px-2 py-1.5 text-xs font-semibold uppercase transition-colors ${
-                      lang.code === locale
-                        ? "border-brand-purple bg-brand-purple/10 text-text-primary"
-                        : "border-border-default text-text-primary"
-                    }`}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    <FlagIcon country={lang.code as "es" | "en" | "pt"} className="h-3 w-5" />
-                    <span>{lang.label}</span>
-                  </Link>
-                ))}
-              </div>
-              <ThemeToggle />
-              <Link
-                href={`/${locale}/donar`}
-                className="inline-flex items-center rounded-[10px] bg-brand-orange px-5 py-2 text-sm font-semibold text-white"
-                onClick={() => setMenuOpen(false)}
-              >
-                {t("donarBtn")}
-              </Link>
-            </div>
-          </nav>
-        </div>
-      )}
     </header>
+    <MobileMenu />
+  </>
   );
 }

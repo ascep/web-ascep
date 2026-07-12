@@ -21,7 +21,7 @@ export default async function NoticiasPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_103725.jpg")}
+        bgImage={assetPath("/images/eventos/20241112_103725.webp")}
         tag="Actualidad"
         title={t("title")}
         subtitle={t("subtitle")}

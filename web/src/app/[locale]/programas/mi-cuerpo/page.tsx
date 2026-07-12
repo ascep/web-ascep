@@ -66,7 +66,7 @@ export default function MiCuerpoPage() {
   return (
     <>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_092951.jpg")}
+        bgImage={assetPath("/images/eventos/20241112_092951.webp")}
         tag="Programa"
         title="Mi Cuerpo, Mi Sexualidad, Mi Vida"
         subtitle="Promovemos el ejercicio pleno de los derechos sexuales y reproductivos."

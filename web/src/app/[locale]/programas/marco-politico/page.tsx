@@ -56,7 +56,7 @@ export default function MarcoPoliticoPage() {
   return (
     <>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_103351.jpg")}
+        bgImage={assetPath("/images/eventos/20241112_103351.webp")}
         tag="Marco Politico"
         title="Marco"
         highlight="Politico"

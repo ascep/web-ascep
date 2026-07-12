@@ -51,7 +51,7 @@ export default async function ComoLoHacemosPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/encuentro-2025/GIS06448.JPG")}
+        bgImage={assetPath("/images/encuentro-2025/GIS06448.webp")}
         tag={t("heroTag")}
         title={t("heroTitle")}
         highlight={t("heroHighlight")}
@@ -71,7 +71,7 @@ export default async function ComoLoHacemosPage({
 
           <div className="relative mb-12 overflow-hidden rounded-[10px]">
             <Image
-              src={assetPath("/images/encuentro-2025/GIS06452.JPG")}
+              src={assetPath("/images/encuentro-2025/GIS06452.webp")}
               alt=""
               width={1200}
               height={400}
@@ -113,7 +113,7 @@ export default async function ComoLoHacemosPage({
 
           <div className="relative mb-12 overflow-hidden rounded-[10px]">
             <Image
-              src={assetPath("/images/eventos/20241112_092855.jpg")}
+              src={assetPath("/images/eventos/20241112_092855.webp")}
               alt=""
               width={1200}
               height={300}
@@ -160,9 +160,9 @@ export default async function ComoLoHacemosPage({
           </div>
           <div className="grid gap-3 sm:grid-cols-3">
             {[
-              assetPath("/images/encuentro-2025/GIS06453.JPG"),
-              assetPath("/images/equipo-shoot/GIS08543.JPG"),
-              assetPath("/images/equipo-shoot/GIS08540.JPG"),
+              assetPath("/images/encuentro-2025/GIS06453.webp"),
+              assetPath("/images/equipo-shoot/GIS08543.webp"),
+              assetPath("/images/equipo-shoot/GIS08540.webp"),
             ].map((src, i) => (
               <Image
                 key={i}

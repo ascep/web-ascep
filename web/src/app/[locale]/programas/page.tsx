@@ -14,14 +14,14 @@ const programs = [
     title: "Incidencia y Participacion",
     slug: "incidencia",
     desc: "Desarrollamos acciones que involucran a actores clave y tomadores de decisiones en la transformacion de los cuidados alternativos.",
-    image: assetPath("/images/programas/incidencia-scaled-1.jpg"),
+    image: assetPath("/images/programas/incidencia-scaled-1.webp"),
     label: "Liderazgo",
   },
   {
     title: "Avanza Joven",
     slug: "avanza-joven",
     desc: "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida.",
-    image: assetPath("/images/programas/Avanza-1-scaled-1.jpg"),
+    image: assetPath("/images/programas/Avanza-1-scaled-1.webp"),
     label: "Formacion",
   },
   {
@@ -57,7 +57,7 @@ export default async function ProgramasPage({
   return (
     <>
       <PageHero
-        bgImage={assetPath("/images/encuentro-2025/GIS06470.JPG")}
+        bgImage={assetPath("/images/encuentro-2025/GIS06470.webp")}
         tag="Programas"
         title="Nuestros Programas"
         subtitle="Disenados para acompanar a adolescentes y jovenes en su transicion hacia la vida adulta."
@@ -69,7 +69,7 @@ export default async function ProgramasPage({
             {programs.map((program) => (
               <div key={program.slug} className="group overflow-hidden rounded-[10px] bg-white shadow-sm transition-all hover:shadow-lg hover:-translate-y-1">
                 <div className="relative h-52 overflow-hidden">
-                  {program.image && program.image.endsWith(".jpg") ? (
+                  {program.image && program.image.endsWith(".webp") ? (
                     <Link href={`/${locale}/programas/${program.slug}`} className="relative block h-full">
                       <Image src={program.image} alt={program.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Coffee, Sunrise, Heart, Star, Rocket, CreditCard, Landmark, Loader } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -22,6 +22,17 @@ export default function DonationForm() {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const method = params.get("method");
+    if (method === "mp" || method === "stripe") {
+      const tier = 50000;
+      setSelectedTier(tier);
+      setCustom("");
+      setCurrency(method === "stripe" ? "USD" : "COP");
+    }
+  }, []);
 
   const TIERS: Tier[] = [
     { cop: 5000, usd: 2, labelKey: "tier1Label", icon: Coffee },
