@@ -15,7 +15,7 @@ DOCUMENTO BASE ASOCIACIÓN.docx
 
 # Large root dirs
 podcast/
-videos/
+/videos/
 inpiration/
 
 # Large images in public root
@@ -60,3 +60,6 @@ scripts/
 # OS
 Thumbs.db
 .DS_Store
+
+.vercel
+.env*
