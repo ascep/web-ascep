@@ -28,12 +28,8 @@ web/public/images/Egresado 1.png
 web/public/images/proyecto*
 web/public/images/UNICEF*
 
-# Large asset directories (deploy separately)
+# Large asset directories (deploy separately - documents only, too large for git)
 web/public/documents/
-web/public/videos/
-web/public/images/encuentro-2025/
-web/public/images/equipo-shoot/
-web/public/images/eventos/
 
 # opencode local config (not needed for deployment)
 .opencode/

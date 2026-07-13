@@ -15,8 +15,6 @@ next-env.d.ts
 # Large assets (deploy separately)
 public/documents/
 public/videos/
-public/images/encuentro-2025/
-public/images/equipo-shoot/
 
 # Source photo folders (raw JPGs, not optimized for web)
 FOTOS CASAS DEL SABER/

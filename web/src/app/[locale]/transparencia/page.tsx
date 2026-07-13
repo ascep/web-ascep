@@ -22,7 +22,7 @@ const documents = [
   {
     title: "Documento Base",
     desc: "Marco estrategico de la Asociacion de Egresados del Sistema de Proteccion Estatal.",
-    files: [{ name: "Documento Base ASCEP", path: "/documents/DOCUMENTO BASE ASOCIACION.docx.pdf" }],
+    files: [{ name: "Documento Base ASCEP", path: "/documents/DOCUMENTO BASE ASOCIACIÓN.docx.pdf" }],
     icon: FileCheck,
     iconBg: "bg-brand-teal/10",
     iconColor: "text-brand-teal",
@@ -123,16 +123,15 @@ export default async function TransparenciaPage({
                 >
                   {/* PDF Preview */}
                   <Link
-                    href={previewFile.path}
+                    href={assetPath(previewFile.path)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="group relative block h-[200px] overflow-hidden bg-zinc-100"
                   >
-                    <embed
-                      src={previewFile.path}
-                      type="application/pdf"
+                    <iframe
+                      src={assetPath(previewFile.path)}
                       className="h-full w-full transition-transform duration-300 group-hover:scale-[1.02]"
-                      style={{ pointerEvents: "none" }}
+                      title={previewFile.name}
                     />
                     <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/30">
                       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
@@ -163,7 +162,7 @@ export default async function TransparenciaPage({
                       {doc.files.map((file) => (
                         <li key={file.path}>
                           <Link
-                            href={file.path}
+                            href={assetPath(file.path)}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="flex items-center justify-between gap-2 rounded-[8px] bg-bg-surface px-3 py-2 text-xs font-medium text-[var(--color-text-primary)] transition-colors hover:bg-brand-purple/10"
