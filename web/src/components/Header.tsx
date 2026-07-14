@@ -304,16 +304,16 @@ export default function Header() {
           </div>
 
           <Link
+            href={`/${locale}/como-ayudar/enredate-con-ascep`}
+            className="rounded-[10px] px-3 py-2 text-sm font-semibold text-brand-orange transition-colors hover:bg-brand-orange/10"
+          >
+            {t("enredateConAscep")}
+          </Link>
+          <Link
             href={`/${locale}/contacto`}
             className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
           >
             {t("contacto")}
-          </Link>
-          <Link
-            href={`/${locale}/como-ayudar/enredate-con-ascep`}
-            className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-          >
-            {t("enredateConAscep")}
           </Link>
         </nav>
 

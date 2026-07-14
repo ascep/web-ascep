@@ -4,6 +4,7 @@
 
 @theme {
   --color-brand-blue: #019E9F;
+  --color-brand-blue-dark: #005C5D;
   /* brand-purple se mapea al mismo valor de brand-blue (#019E9F) por compatibilidad semantica en componentes existentes */
   --color-brand-purple: #019E9F;
   --color-brand-teal: #44BCC5;
