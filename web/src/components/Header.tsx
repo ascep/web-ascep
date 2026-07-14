@@ -305,9 +305,12 @@ export default function Header() {
 
           <Link
             href={`/${locale}/como-ayudar/enredate-con-ascep`}
-            className="rounded-[10px] px-3 py-2 text-sm font-semibold text-brand-orange transition-colors hover:bg-brand-orange/10"
+            className="flex items-center gap-1.5 rounded-[10px] px-3 py-2 text-sm font-semibold text-brand-orange transition-colors hover:bg-brand-orange/10"
           >
             {t("enredateConAscep")}
+            <span className="rounded-full bg-brand-orange/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-orange">
+              Nuevo
+            </span>
           </Link>
           <Link
             href={`/${locale}/contacto`}
