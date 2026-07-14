@@ -65,12 +65,20 @@ export default function TopBar() {
             3234831547
           </a>
         </div>
-        <Link
-          href={`/${locale}/ley-de-egreso`}
-          className="rounded-[10px] bg-white px-4 py-1 text-xs font-semibold text-text-primary transition-colors hover:bg-zinc-100"
-        >
-          {t("leyCta")}
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link
+            href={`/${locale}/transparencia`}
+            className="rounded-[10px] border border-white/30 px-3 py-1 text-[11px] font-semibold text-white transition-colors hover:bg-white/10"
+          >
+            Transparencia
+          </Link>
+          <Link
+            href={`/${locale}/ley-de-egreso`}
+            className="rounded-[10px] bg-white px-4 py-1 text-xs font-semibold text-text-primary transition-colors hover:bg-zinc-100"
+          >
+            {t("leyCta")}
+          </Link>
+        </div>
       </div>
     </div>
   );

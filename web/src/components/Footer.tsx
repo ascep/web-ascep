@@ -14,24 +14,24 @@ export default function Footer() {
   const currentPath = pathname.replace(/^\/(es|en|pt)/, "") || "/";
 
   return (
-    <footer className="border border-[var(--color-border-subtle)] bg-[var(--color-bg-surface)] text-[var(--color-text-primary)] m-4 rounded-[10px]">
+    <footer className="m-4 rounded-[10px] bg-brand-blue-dark text-white">
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Image
-              src={assetPath("/logos/06 logo ascep azul.png")}
+              src={assetPath("/logos/12 logo ascep blanco sin slogan.png")}
               alt="ASCEP"
               width={160}
               height={50}
               className="mb-3 h-12 w-auto"
             />
-            <p className="text-sm text-[var(--color-text-secondary)]">
+            <p className="text-sm text-white/70">
               {f("desc")}
             </p>
           </div>
 
           <div>
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-primary">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/90">
               {f("navegacion")}
             </h3>
             <ul className="space-y-2">
@@ -44,7 +44,6 @@ export default function Footer() {
               "comoAyudar",
               "impacto",
               "aliados",
-              "transparencia",
               "contacto",
             ] as const).map((key) => {
               const hrefMap: Record<string, string> = {
@@ -58,7 +57,7 @@ export default function Footer() {
                 <li key={key}>
                   <Link
                     href={`/${locale}${href}`}
-                    className="text-sm text-[var(--color-text-secondary)] transition-colors hover:text-brand-purple"
+                    className="text-sm text-white/70 transition-colors hover:text-white"
                   >
                     {t(key)}
                   </Link>
@@ -69,37 +68,37 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-primary">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/90">
               {f("contacto")}
             </h3>
-            <ul className="space-y-1 text-sm text-[var(--color-text-secondary)]">
+            <ul className="space-y-1 text-sm text-white/70">
               <li>{f("ubicacion")}</li>
               <li>{f("email")}</li>
             </ul>
           </div>
 
           <div>
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-primary">
+            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/90">
               {f("idioma")}
             </h3>
             <div className="flex gap-2">
               <Link
                 href={`/es${currentPath}`}
-                className={`text-sm ${locale === "es" ? "font-bold text-text-primary" : "text-[var(--color-text-secondary)] hover:text-brand-purple"}`}
+                className={`text-sm ${locale === "es" ? "font-bold text-white" : "text-white/70 hover:text-white"}`}
               >
                 ES
               </Link>
-              <span className="text-[var(--color-text-muted)]">|</span>
+              <span className="text-white/40">|</span>
               <Link
                 href={`/en${currentPath}`}
-                className={`text-sm ${locale === "en" ? "font-bold text-text-primary" : "text-[var(--color-text-secondary)] hover:text-brand-purple"}`}
+                className={`text-sm ${locale === "en" ? "font-bold text-white" : "text-white/70 hover:text-white"}`}
               >
                 EN
               </Link>
-              <span className="text-[var(--color-text-muted)]">|</span>
+              <span className="text-white/40">|</span>
               <Link
                 href={`/pt${currentPath}`}
-                className={`text-sm ${locale === "pt" ? "font-bold text-text-primary" : "text-[var(--color-text-secondary)] hover:text-brand-purple"}`}
+                className={`text-sm ${locale === "pt" ? "font-bold text-white" : "text-white/70 hover:text-white"}`}
               >
                 PT
               </Link>
@@ -107,8 +106,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 h-px bg-[var(--color-border-subtle)]" />
-        <div className="mt-6 text-center text-xs text-[var(--color-text-muted)]">
+        <div className="mt-8 h-px bg-white/20" />
+        <div className="mt-6 text-center text-xs text-white/50">
           &copy; {new Date().getFullYear()} ASCEP. {f("copyright")}
         </div>
       </div>

@@ -285,12 +285,6 @@ export default function Header() {
                         {t("planPadrino")}
                       </Link>
                       <Link
-                        href={`/${locale}/como-ayudar/enredate-con-ascep`}
-                        className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                      >
-                        {t("enredateConAscep")}
-                      </Link>
-                      <Link
                         href={`/${locale}/como-ayudar/voluntariado`}
                         className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
                       >
@@ -310,16 +304,16 @@ export default function Header() {
           </div>
 
           <Link
-            href={`/${locale}/transparencia`}
-            className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-          >
-            {t("transparencia")}
-          </Link>
-          <Link
             href={`/${locale}/contacto`}
             className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
           >
             {t("contacto")}
+          </Link>
+          <Link
+            href={`/${locale}/como-ayudar/enredate-con-ascep`}
+            className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+          >
+            {t("enredateConAscep")}
           </Link>
         </nav>
 

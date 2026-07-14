@@ -331,6 +331,25 @@ export default function MobileMenu() {
                     ))}
                   </AccordionItem>
 
+                  {/* Enrédate con ASCEP */}
+                  <Link
+                    href={`/${locale}/como-ayudar/enredate-con-ascep`}
+                    onClick={close}
+                    className="flex items-center gap-3 rounded-[10px] border border-brand-orange/20 bg-brand-orange/5 px-4 py-3 min-h-[48px]"
+                  >
+                    <div className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-brand-orange text-white">
+                      <Play size={16} />
+                    </div>
+                    <div className="flex-1">
+                      <span className="text-sm font-bold text-text-primary">
+                        {t("enredateConAscep")}
+                      </span>
+                    </div>
+                    <span className="rounded-full bg-brand-orange/10 px-2 py-0.5 text-[10px] font-bold uppercase text-brand-orange tracking-wider">
+                      Nuevo
+                    </span>
+                  </Link>
+
                   {/* Cómo Ayudar */}
                   <AccordionItem
                     icon={Heart}
@@ -367,37 +386,6 @@ export default function MobileMenu() {
                       {t("participa")}
                     </Link>
                   </AccordionItem>
-
-                  {/* Enrédate con ASCEP — destacado */}
-                  <Link
-                    href={`/${locale}/como-ayudar/enredate-con-ascep`}
-                    onClick={close}
-                    className="flex items-center gap-3 rounded-[10px] border border-brand-orange/20 bg-brand-orange/5 px-4 py-3 min-h-[48px]"
-                  >
-                    <div className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-brand-orange text-white">
-                      <Play size={16} />
-                    </div>
-                    <div className="flex-1">
-                      <span className="text-sm font-bold text-text-primary">
-                        {t("enredateConAscep")}
-                      </span>
-                    </div>
-                    <span className="rounded-full bg-brand-orange/10 px-2 py-0.5 text-[10px] font-bold uppercase text-brand-orange tracking-wider">
-                      Nuevo
-                    </span>
-                  </Link>
-
-                  {/* Transparencia */}
-                  <Link
-                    href={`/${locale}/transparencia`}
-                    onClick={close}
-                    className="flex items-center gap-3 rounded-[10px] border border-border-subtle bg-bg-card px-4 py-3 min-h-[48px]"
-                  >
-                    <Shield size={20} className="shrink-0 text-brand-blue" />
-                    <span className="text-sm font-bold text-text-primary">
-                      {t("transparencia")}
-                    </span>
-                  </Link>
 
                   {/* WhatsApp */}
                   <a
