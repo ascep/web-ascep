@@ -2,11 +2,18 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import DonationForm from "@/components/DonationForm";
+import FaqAccordion from "@/components/FaqAccordion";
 import { Heart, Users, Target, TrendingUp, Coffee, Sunrise, Star, Shield, Sparkles } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Donar - ASCEP",
+  description:
+    "Tu donacion transforma vidas. Apoya a jovenes egresados del sistema de proteccion estatal con programas de formacion, apoyo psicosocial y oportunidades laborales.",
+  openGraph: {
+    description:
+      "Tu donacion transforma vidas. Apoya a jovenes egresados del sistema de proteccion estatal con programas de formacion, apoyo psicosocial y oportunidades laborales.",
+  },
 };
 
 const GALLERY = [
@@ -244,6 +251,39 @@ export default async function DonarPage({
             <p className="text-sm text-white/70">
               {t("graciasDesc")}
             </p>
+          </div>
+
+          {/* FAQ */}
+          <div className="mt-20">
+            <h3 className="mb-8 text-center text-2xl font-bold text-text-primary">
+              Preguntas frecuentes sobre donaciones
+            </h3>
+            <div className="mx-auto max-w-2xl">
+              <FaqAccordion
+                items={[
+                  {
+                    question: "¿Cómo se utiliza mi donación?",
+                    answer: "Tu donación se destina directamente a nuestros programas de formación, apoyo psicosocial y oportunidades laborales para jóvenes egresados del sistema de protección estatal. Publicamos informes periódicos de transparencia con el detalle de ingresos y gastos.",
+                  },
+                  {
+                    question: "¿Mi donación es deducible de impuestos?",
+                    answer: "ASCEP es una organización constituida legalmente en Colombia. Las donaciones pueden ser deducibles de impuestos. Consúltanos a contacto@ascep.org para recibir la certificación correspondiente y conocer los requisitos fiscales.",
+                  },
+                  {
+                    question: "¿Puedo hacer una donación recurrente?",
+                    answer: "Sí. Puedes configurar donaciones mensuales a través de Mercado Pago o Stripe seleccionando el monto de tu preferencia. También puedes contactarnos para establecer un Plan Padrino con aportes periódicos.",
+                  },
+                  {
+                    question: "¿Qué métodos de pago aceptan?",
+                    answer: "Aceptamos pagos con tarjeta de crédito, débito (a través de Mercado Pago y Stripe), y también donaciones por PSE, Nequi y efectivo a través de Donatario.",
+                  },
+                  {
+                    question: "¿Cómo sé que mi donación llegó?",
+                    answer: "Recibirás un comprobante de tu transacción y, si nos proporcionas tu correo electrónico, te enviaremos información sobre el impacto de tu contribución. También publicamos informes de transparencia trimestrales.",
+                  },
+                ]}
+              />
+            </div>
           </div>
         </div>
       </section>

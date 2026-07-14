@@ -7,6 +7,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Aliados - ASCEP",
+  description:
+    "Conoce los aliados estrategicos de ASCEP: organizaciones, empresas e instituciones que confian en nuestra labor por la ninez y juventud colombiana.",
+  openGraph: {
+    description:
+      "Conoce los aliados estrategicos de ASCEP: organizaciones, empresas e instituciones que confian en nuestra labor por la ninez y juventud colombiana.",
+  },
 };
 
 const partnerLogos = [

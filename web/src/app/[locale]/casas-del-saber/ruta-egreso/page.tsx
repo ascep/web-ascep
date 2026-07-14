@@ -5,6 +5,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Ruta de Egreso Progresivo - Casas del Saber - ASCEP",
+  description:
+    "El egreso no es un evento, es un proceso. Conoce las tres fases de la ruta de egreso progresivo: acogida, formacion y consolidacion.",
+  openGraph: {
+    description:
+      "El egreso no es un evento, es un proceso. Conoce las tres fases de la ruta de egreso progresivo: acogida, formacion y consolidacion.",
+  },
 };
 
 const badgeColors = [

@@ -6,6 +6,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Modalidades - Casas del Saber - ASCEP",
+  description:
+    "Dos modalidades de participacion en las Casas del Saber: con servicio habitacional para residentes y sin servicio habitacional para externos.",
+  openGraph: {
+    description:
+      "Dos modalidades de participacion en las Casas del Saber: con servicio habitacional para residentes y sin servicio habitacional para externos.",
+  },
 };
 
 export default async function ModalidadesPage({

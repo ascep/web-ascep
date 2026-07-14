@@ -8,6 +8,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Transparencia - ASCEP",
+  description:
+    "Documentos legales, informes financieros, politicas institucionales y todo el marco normativo que rige la actuacion de ASCEP.",
+  openGraph: {
+    description:
+      "Documentos legales, informes financieros, politicas institucionales y todo el marco normativo que rige la actuacion de ASCEP.",
+  },
 };
 
 const documents = [

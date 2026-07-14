@@ -10,6 +10,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Quienes Somos - ASCEP",
+  description:
+    "Conoce la historia, mision, vision y equipo de ASCEP. Somos egresados del sistema de proteccion estatal unidos para transformar la ninez en Colombia.",
+  openGraph: {
+    description:
+      "Conoce la historia, mision, vision y equipo de ASCEP. Somos egresados del sistema de proteccion estatal unidos para transformar la ninez en Colombia.",
+  },
 };
 
 const team = [

@@ -7,6 +7,12 @@ import BorderGlow from "@/components/BorderGlow";
 
 export const metadata: Metadata = {
   title: "Plan Padrino - ASCEP",
+  description:
+    "Conviertete en padrino o madrina de un joven en proceso de egreso del sistema de proteccion y acompanalo en su transicion a la vida independiente.",
+  openGraph: {
+    description:
+      "Conviertete en padrino o madrina de un joven en proceso de egreso del sistema de proteccion y acompanalo en su transicion a la vida independiente.",
+  },
 };
 
 export default async function PlanPadrinoPage({

@@ -6,6 +6,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Fomento para el Empleo y Emprendimiento - ASCEP",
+  description:
+    "Modelo piloto para promover capacidades laborales y fortalecer la empleabilidad de jovenes en proceso de egreso del sistema de proteccion estatal.",
+  openGraph: {
+    description:
+      "Modelo piloto para promover capacidades laborales y fortalecer la empleabilidad de jovenes en proceso de egreso del sistema de proteccion estatal.",
+  },
 };
 
 const objetivosEspecificos = [

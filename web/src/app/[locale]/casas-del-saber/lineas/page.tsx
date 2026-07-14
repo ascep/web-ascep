@@ -4,6 +4,12 @@ import { BookOpen, Monitor, Palette, Heart } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Lineas Tematicas - Casas del Saber - ASCEP",
+  description:
+    "Cuatro lineas tematicas de formacion en las Casas del Saber: ciencias del conocimiento, tecnologia, arte y cultura, desarrollo humano y liderazgo.",
+  openGraph: {
+    description:
+      "Cuatro lineas tematicas de formacion en las Casas del Saber: ciencias del conocimiento, tecnologia, arte y cultura, desarrollo humano y liderazgo.",
+  },
 };
 
 export default async function LineasPage({

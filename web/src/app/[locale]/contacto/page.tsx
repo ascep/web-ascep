@@ -8,6 +8,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Contacto - ASCEP",
+  description:
+    "Contacta a ASCEP para conocer nuestros programas, sumarte como aliado o recibir informacion sobre nuestro trabajo con jovenes egresados.",
+  openGraph: {
+    description:
+      "Contacta a ASCEP para conocer nuestros programas, sumarte como aliado o recibir informacion sobre nuestro trabajo con jovenes egresados.",
+  },
 };
 
 export default async function ContactoPage({
@@ -70,7 +76,12 @@ export default async function ContactoPage({
                   <Mail size={24} className="text-brand-purple" />
                 </div>
                 <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{t("emailTitle")}</h4>
-                <p className="text-sm text-[var(--color-text-muted)]">{t("emailValue")}</p>
+                <a
+                  href={`mailto:${t("emailValue")}`}
+                  className="text-sm text-brand-purple transition-colors hover:text-brand-purple-dark hover:underline"
+                >
+                  {t("emailValue")}
+                </a>
               </div>
 
               <div className="rounded-[10px] bg-white p-8 text-center shadow-sm transition-all hover:shadow-md">

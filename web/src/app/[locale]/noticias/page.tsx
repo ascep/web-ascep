@@ -6,6 +6,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Noticias - ASCEP",
+  description:
+    "Mantente informado sobre las actividades, logros y novedades de ASCEP en la transformacion del sistema de cuidados alternativos en Colombia.",
+  openGraph: {
+    description:
+      "Mantente informado sobre las actividades, logros y novedades de ASCEP en la transformacion del sistema de cuidados alternativos en Colombia.",
+  },
 };
 
 export default async function NoticiasPage({

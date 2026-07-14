@@ -4,6 +4,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Marco Politico - ASCEP",
+  description:
+    "Conoce el marco politico y legal de ASCEP: derechos humanos de la ninez, Convencion sobre los Derechos del Nino y proteccion estatal.",
+  openGraph: {
+    description:
+      "Conoce el marco politico y legal de ASCEP: derechos humanos de la ninez, Convencion sobre los Derechos del Nino y proteccion estatal.",
+  },
 };
 
 const pilares = [

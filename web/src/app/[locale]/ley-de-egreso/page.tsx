@@ -8,6 +8,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Ley Hijos del Estado - ASCEP",
+  description:
+    "Ley 2479 de 2025: crea el Programa Nacional de Acompanamiento Integral al Egresado del ICBF. Un paso hacia la autonomia de los jovenes en proteccion.",
+  openGraph: {
+    description:
+      "Ley 2479 de 2025: crea el Programa Nacional de Acompanamiento Integral al Egresado del ICBF. Un paso hacia la autonomia de los jovenes en proteccion.",
+  },
 };
 
 const objectives = [

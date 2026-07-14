@@ -7,6 +7,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Impacto - ASCEP",
+  description:
+    "Conoce el impacto de ASCEP en cifras: jovenes acompanados, programas activos, resultados esperados y metas para la transformacion del sistema de proteccion.",
+  openGraph: {
+    description:
+      "Conoce el impacto de ASCEP en cifras: jovenes acompanados, programas activos, resultados esperados y metas para la transformacion del sistema de proteccion.",
+  },
 };
 
 const impactStats = [

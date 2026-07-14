@@ -6,6 +6,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Mi Cuerpo, Mi Sexualidad, Mi Decision - ASCEP",
+  description:
+    "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad de jovenes en el sistema de proteccion.",
+  openGraph: {
+    description:
+      "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad de jovenes en el sistema de proteccion.",
+  },
 };
 
 const components = [

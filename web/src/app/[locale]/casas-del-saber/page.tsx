@@ -7,6 +7,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Casas del Saber y la Transformacion - ASCEP",
+  description:
+    "Un espacio de acompanamiento integral para jovenes en proceso de egreso del sistema de proteccion estatal, con modalidad habitacional y externa.",
+  openGraph: {
+    description:
+      "Un espacio de acompanamiento integral para jovenes en proceso de egreso del sistema de proteccion estatal, con modalidad habitacional y externa.",
+  },
 };
 
 export default async function CasasDelSaberPage({

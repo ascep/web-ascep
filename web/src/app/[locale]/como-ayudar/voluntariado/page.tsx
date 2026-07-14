@@ -7,6 +7,12 @@ import StaggerGrid from "@/components/StaggerGrid";
 
 export const metadata: Metadata = {
   title: "Voluntariado - ASCEP",
+  description:
+    "Tu tiempo y talento pueden transformar la vida de un joven egresado del sistema de proteccion. Conoce los roles de voluntariado en ASCEP.",
+  openGraph: {
+    description:
+      "Tu tiempo y talento pueden transformar la vida de un joven egresado del sistema de proteccion. Conoce los roles de voluntariado en ASCEP.",
+  },
 };
 
 export default async function VoluntariadoPage({

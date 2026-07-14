@@ -9,9 +9,33 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ascep.org"),
   title: "ASCEP - Asociacion de Egresados del Sistema de Proteccion Estatal",
   description:
     "Somos un grupo de personas egresadas del Sistema de Proteccion Estatal de Colombia que, a partir de nuestra propia experiencia, nos hemos unido para contribuir a la transformacion y mejora de la forma en que el Estado aborda el cuidado, la proteccion y restablecimiento de derechos de ninos, ninas, adolescentes y jovenes en el pais.",
+  openGraph: {
+    type: "website",
+    locale: "es_CO",
+    siteName: "ASCEP",
+    title: "ASCEP - Asociacion de Egresados del Sistema de Proteccion Estatal",
+    description:
+      "Somos un grupo de personas egresadas del Sistema de Proteccion Estatal de Colombia que trabajamos para transformar la vida de jovenes en el sistema de proteccion.",
+    images: [
+      {
+        url: "/logos/10%20logo%20ascep%20horizontal%20azul.png",
+        width: 1200,
+        height: 630,
+        alt: "ASCEP",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ASCEP - Asociacion de Egresados del Sistema de Proteccion Estatal",
+    description:
+      "Somos un grupo de personas egresadas del Sistema de Proteccion Estatal de Colombia que trabajamos para transformar la vida de jovenes en el sistema de proteccion.",
+    images: ["/logos/10%20logo%20ascep%20horizontal%20azul.png"],
+  },
 };
 
 export default function RootLayout({

@@ -8,6 +8,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Participa - ASCEP",
+  description:
+    "Hay muchas maneras de sumarte a nuestra causa: como joven, voluntario, aliado o donante. Tu participacion transforma vidas.",
+  openGraph: {
+    description:
+      "Hay muchas maneras de sumarte a nuestra causa: como joven, voluntario, aliado o donante. Tu participacion transforma vidas.",
+  },
 };
 
 export default async function ParticipaPage({

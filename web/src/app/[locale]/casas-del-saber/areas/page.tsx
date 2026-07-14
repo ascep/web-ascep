@@ -5,6 +5,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Areas de Intervencion - Casas del Saber - ASCEP",
+  description:
+    "Las cinco areas de intervencion del programa Casas del Saber: necesidades basicas, apoyo psicosocial, formacion, insercion laboral e incidencia.",
+  openGraph: {
+    description:
+      "Las cinco areas de intervencion del programa Casas del Saber: necesidades basicas, apoyo psicosocial, formacion, insercion laboral e incidencia.",
+  },
 };
 
 const borderColors = [

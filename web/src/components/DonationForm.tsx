@@ -34,12 +34,23 @@ export default function DonationForm() {
     }
   }, []);
 
+  const [fxRate, setFxRate] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch("https://api.frankfurter.app/latest?from=COP&to=USD")
+      .then((r) => r.json())
+      .then((data) => setFxRate(data.rates.USD))
+      .catch(() => setFxRate(0.00021));
+  }, []);
+
+  const toUsd = (cop: number) => Math.round(cop * (fxRate ?? 0.00021));
+
   const TIERS: Tier[] = [
-    { cop: 5000, usd: 2, labelKey: "tier1Label", icon: Coffee },
-    { cop: 20000, usd: 5, labelKey: "tier2Label", icon: Sunrise },
-    { cop: 50000, usd: 10, labelKey: "tier3Label", icon: Heart },
-    { cop: 100000, usd: 25, labelKey: "tier4Label", icon: Star },
-    { cop: 200000, usd: 50, labelKey: "tier5Label", icon: Rocket },
+    { cop: 5000, usd: toUsd(5000), labelKey: "tier1Label", icon: Coffee },
+    { cop: 20000, usd: toUsd(20000), labelKey: "tier2Label", icon: Sunrise },
+    { cop: 50000, usd: toUsd(50000), labelKey: "tier3Label", icon: Heart },
+    { cop: 100000, usd: toUsd(100000), labelKey: "tier4Label", icon: Star },
+    { cop: 200000, usd: toUsd(200000), labelKey: "tier5Label", icon: Rocket },
   ];
 
   const symbol = "$";

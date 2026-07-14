@@ -7,6 +7,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Programas - ASCEP",
+  description:
+    "Descubre los programas de ASCEP disenados para acompanar a jovenes en su transicion a la vida adulta: incidencia, avanza joven, empleo y formacion.",
+  openGraph: {
+    description:
+      "Descubre los programas de ASCEP disenados para acompanar a jovenes en su transicion a la vida adulta: incidencia, avanza joven, empleo y formacion.",
+  },
 };
 
 const programs = [

@@ -1,4 +1,9 @@
 import { NextResponse } from "next/server";
+import { Resend } from "resend";
+
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 export async function POST(request: Request) {
   try {
@@ -12,16 +17,22 @@ export async function POST(request: Request) {
       );
     }
 
-    // En producción, enviar email via Resend / SendGrid / Nodemailer
-    // Ejemplo con Resend:
-    // await resend.emails.send({
-    //   from: "ASCEP Web <noreply@ascep.org>",
-    //   to: "contacto@ascep.org",
-    //   subject: `Contacto: ${subject || "Sin asunto"}`,
-    //   text: `De: ${name} (${email})\n\n${message}`,
-    // });
-
-    console.log("Contact form submission:", { name, email, subject, message });
+    if (resend) {
+      await resend.emails.send({
+        from: "ASCEP Web <noreply@ascep.org>",
+        to: "contacto@ascep.org",
+        replyTo: email,
+        subject: `Contacto ASCEP: ${subject || "Sin asunto"}`,
+        text: `De: ${name} (${email})\n\n${message}`,
+      });
+    } else {
+      console.log("Contact form submission (no RESEND_API_KEY set):", {
+        name,
+        email,
+        subject,
+        message,
+      });
+    }
 
     return NextResponse.json({ success: true });
   } catch {

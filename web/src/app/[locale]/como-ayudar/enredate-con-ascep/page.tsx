@@ -12,6 +12,12 @@ import PodcastSection from "./PodcastSection";
 
 export const metadata: Metadata = {
   title: "Enredate con ASCEP - ASCEP",
+  description:
+    "Un espacio donde jovenes egresados del sistema de proteccion se encuentran, comparten experiencias y construyen redes de apoyo mutuo.",
+  openGraph: {
+    description:
+      "Un espacio donde jovenes egresados del sistema de proteccion se encuentran, comparten experiencias y construyen redes de apoyo mutuo.",
+  },
 };
 
 export default async function EnredatePage({

@@ -7,6 +7,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Como lo Hacemos - ASCEP",
+  description:
+    "Conoce la metodologia y el enfoque de ASCEP: conexion, formacion, programas e incidencia para transformar el sistema de proteccion estatal.",
+  openGraph: {
+    description:
+      "Conoce la metodologia y el enfoque de ASCEP: conexion, formacion, programas e incidencia para transformar el sistema de proteccion estatal.",
+  },
 };
 
 export default async function ComoLoHacemosPage({

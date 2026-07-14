@@ -6,6 +6,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Avanza Joven - ASCEP",
+  description:
+    "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida y la autonomia.",
+  openGraph: {
+    description:
+      "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida y la autonomia.",
+  },
 };
 
 const objetivosEspecificos = [

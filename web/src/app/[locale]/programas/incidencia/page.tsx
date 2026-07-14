@@ -6,6 +6,12 @@ import { assetPath } from "@/lib/asset-path";
 
 export const metadata: Metadata = {
   title: "Incidencia y Participacion - ASCEP",
+  description:
+    "Desarrollamos acciones que involucran a actores clave y tomadores de decisiones en la transformacion de los cuidados alternativos en Colombia.",
+  openGraph: {
+    description:
+      "Desarrollamos acciones que involucran a actores clave y tomadores de decisiones en la transformacion de los cuidados alternativos en Colombia.",
+  },
 };
 
 const objetivos = [
