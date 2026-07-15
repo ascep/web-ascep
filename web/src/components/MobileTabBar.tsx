@@ -24,7 +24,7 @@ export default function MobileTabBar() {
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
-  const currentPath = pathname.replace(/^\/(es|en|pt)/, "") || "/";
+  const currentPath = pathname.replace(/^\/(es|pt)/, "") || "/";
   const [showSheet, setShowSheet] = useState(false);
 
   return (

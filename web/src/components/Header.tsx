@@ -111,7 +111,7 @@ export default function Header() {
 
   return (
     <>
-    <header className="sticky top-0 z-50 bg-bg-base shadow-sm">
+    <header className="sticky top-0 z-50 bg-bg-base shadow-sm" style={{ paddingTop: "env(safe-area-inset-top, 0px)" }}>
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href={`/${locale}`} className="flex items-center gap-2">
           <Image
