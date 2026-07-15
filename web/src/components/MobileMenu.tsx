@@ -26,7 +26,6 @@ import ThemeToggle from "./ThemeToggle";
 
 const languages = [
   { code: "es", label: "ES" },
-  { code: "en", label: "EN" },
   { code: "pt", label: "PT" },
 ] as const;
 
@@ -110,7 +109,7 @@ export default function MobileMenu() {
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
-  const currentPath = pathname.replace(/^\/(es|en|pt)/, "") || "/";
+  const currentPath = pathname.replace(/^\/(es|pt)/, "") || "/";
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<Section>(null);
   const [casasOpen, setCasasOpen] = useState(false);
@@ -442,7 +441,7 @@ export default function MobileMenu() {
                         }`}
                       >
                         <FlagIcon
-                          country={lang.code as "es" | "en" | "pt"}
+                          country={lang.code as "es" | "pt"}
                           className="h-3 w-5"
                         />
                         <span>{lang.label}</span>

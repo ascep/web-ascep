@@ -8,7 +8,7 @@ import ThemeProvider from "@/components/ThemeProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import MobileTabBar from "@/components/MobileTabBar";
 
-const locales = ["es", "en", "pt"];
+const locales = ["es", "pt"];
 
 export default async function LocaleLayout({
   children,

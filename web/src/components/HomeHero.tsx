@@ -34,6 +34,7 @@ export default function HomeHero({
           muted
           loop
           playsInline
+          poster={assetPath("/images/MG_1563.webp")}
           className="h-full w-full object-cover"
         >
           <source src={assetPath("/videos/FONDO-WEB-16-9.mp4")} type="video/mp4" />

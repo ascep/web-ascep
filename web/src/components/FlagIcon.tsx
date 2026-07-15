@@ -1,7 +1,7 @@
 'use client';
 
 type FlagIconProps = {
-  country: "es" | "en" | "pt";
+  country: "es" | "pt";
   className?: string;
 };
 
@@ -39,21 +39,5 @@ export default function FlagIcon({ country, className }: FlagIconProps) {
     );
   }
 
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 30 20"
-      className={className}
-      aria-label="English"
-      role="img"
-    >
-      <rect width="30" height="20" fill="#FFFFFF" />
-      <rect y="2" width="30" height="2" fill="#B22234" />
-      <rect y="6" width="30" height="2" fill="#B22234" />
-      <rect y="10" width="30" height="2" fill="#B22234" />
-      <rect y="14" width="30" height="2" fill="#B22234" />
-      <rect y="18" width="30" height="2" fill="#B22234" />
-      <rect width="12" height="10" fill="#3C3B6E" />
-    </svg>
-  );
+  return null;
 }

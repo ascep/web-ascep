@@ -14,7 +14,6 @@ import SearchDialog from "./SearchDialog";
 
 const languages = [
   { code: "es", label: "ES" },
-  { code: "en", label: "EN" },
   { code: "pt", label: "PT" },
 ] as const;
 
@@ -48,7 +47,7 @@ export default function Header() {
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
-  const currentPath = pathname.replace(/^\/(es|en|pt)/, "") || "/";
+  const currentPath = pathname.replace(/^\/(es|pt)/, "") || "/";
   const [openDropdown, setOpenDropdown] = useState<DropdownState>(null);
   const [openCasas, setOpenCasas] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -373,7 +372,7 @@ export default function Header() {
             onMouseLeave={handleLangLeave}
           >
             <button className="flex items-center gap-1.5 rounded-[10px] border border-border-default px-2.5 py-1.5 text-xs font-semibold uppercase text-text-primary transition-colors hover:border-brand-purple">
-              <FlagIcon country={currentLang.code as "es" | "en" | "pt"} className="h-3.5 w-5" />
+              <FlagIcon country={currentLang.code as "es" | "pt"} className="h-3.5 w-5" />
               <span>{currentLang.label}</span>
               <ChevronDown size={12} />
             </button>
@@ -385,7 +384,7 @@ export default function Header() {
                     href={`/${lang.code}${currentPath}`}
                     className="flex items-center gap-2 rounded-[10px] px-3 py-1.5 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
                   >
-                    <FlagIcon country={lang.code as "es" | "en" | "pt"} className="h-3.5 w-5" />
+                    <FlagIcon country={lang.code as "es" | "pt"} className="h-3.5 w-5" />
                     <span>{lang.label}</span>
                   </Link>
                 ))}

@@ -95,8 +95,6 @@ export default function Footer() {
           <div className="flex gap-2">
             <Link href={`/es${currentPath}`} className={`transition-colors ${locale === "es" ? "font-bold text-white" : "hover:text-white"}`}>ES</Link>
             <span>|</span>
-            <Link href={`/en${currentPath}`} className={`transition-colors ${locale === "en" ? "font-bold text-white" : "hover:text-white"}`}>EN</Link>
-            <span>|</span>
             <Link href={`/pt${currentPath}`} className={`transition-colors ${locale === "pt" ? "font-bold text-white" : "hover:text-white"}`}>PT</Link>
           </div>
         </div>

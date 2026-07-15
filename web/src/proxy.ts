@@ -152,7 +152,6 @@ function isTerminal(request: NextRequest): boolean {
 
 function getLocale(request: NextRequest): string {
   const al = request.headers.get("accept-language") || "";
-  if (al.startsWith("en")) return "en";
   if (al.startsWith("pt")) return "pt";
   return "es";
 }
@@ -222,7 +221,7 @@ ${badge}
 }
 
 const nextIntlMiddleware = createNextIntlMiddleware({
-  locales: ["es", "en", "pt"],
+  locales: ["es", "pt"],
   defaultLocale: "es",
   localePrefix: "always",
 });
