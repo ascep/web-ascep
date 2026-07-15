@@ -60,13 +60,14 @@ export default async function QuienesSomosPage({
     getMilestones(),
   ]);
 
-  const team = cmsTeam.length > 0
+  const cmsMapped = cmsTeam.length > 0
     ? cmsTeam.map((m) => ({
         name: m.name?.es || "",
         role: m.role?.es || "",
         src: imageUrl(m.photo) || "",
-      }))
-    : fallbackTeam;
+      })).filter((m) => m.src)
+    : [];
+  const team = cmsMapped.length > 0 ? cmsMapped : fallbackTeam;
 
   const milestones = cmsMilestones.length > 0
     ? cmsMilestones.map((m) => ({

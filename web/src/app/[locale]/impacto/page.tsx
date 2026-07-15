@@ -71,11 +71,12 @@ export default async function ImpactoPage({
       }))
     : fallbackStats;
 
-  const galeriaImages = cmsAlbums.length > 0
+  const cmsGaleria = cmsAlbums.length > 0
     ? cmsAlbums.flatMap((a) =>
         (a.images || []).map((img) => imageUrl(img)).filter(Boolean) as string[]
       )
-    : fallbackGaleria;
+    : [];
+  const galeriaImages = cmsGaleria.length > 0 ? cmsGaleria : fallbackGaleria;
   return (
     <div>
       <PageHero
@@ -89,8 +90,8 @@ export default async function ImpactoPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {impactStats.map((stat, i) => {
-              const Icon = statIcons[i];
-              const colors = statColors[i];
+              const Icon = statIcons[i] || statIcons[0];
+              const colors = statColors[i] || statColors[0];
               return (
                 <div
                   key={i}

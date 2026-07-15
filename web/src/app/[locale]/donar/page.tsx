@@ -124,7 +124,7 @@ export default async function DonarPage({
 
   const stats = cmsStats.length > 0
     ? cmsStats.map((s) => {
-        const Icon = s.icon ? iconMap[s.icon] : Users;
+        const Icon = s.icon && iconMap[s.icon] ? iconMap[s.icon] : Users;
         const v = s.value?.toLocaleString(locale) ?? "0";
         return {
           icon: Icon,
@@ -138,22 +138,23 @@ export default async function DonarPage({
 
   const tiers = cmsTiers.length > 0
     ? cmsTiers.map((t) => {
-        const Icon = t.icon ? iconMap[t.icon] : Heart;
-        const c = t.color ? tierColorMap[t.color] : { color: "text-brand-purple", bg: "bg-brand-purple/10" };
+        const Icon = t.icon && iconMap[t.icon] ? iconMap[t.icon] : Heart;
+        const c = t.color && tierColorMap[t.color] ? tierColorMap[t.color] : { color: "text-brand-purple", bg: "bg-brand-purple/10" };
         const label = localize(t.label, locale) || `$${t.monthlyCop?.toLocaleString(locale)}`;
         const desc = localize(t.description, locale) || "";
         return { icon: Icon, label, desc, color: c.color, bg: c.bg };
       })
     : fallbackTiers;
 
-  const gallery = cmsAlbums.length > 0
+  const cmsGallery = cmsAlbums.length > 0
     ? cmsAlbums.flatMap((a) =>
         (a.images || []).map((img) => ({
           src: imageUrl(img) || "",
           alt: localize(img.alt, locale) || "",
         }))
       ).filter((g) => g.src)
-    : fallbackGallery;
+    : [];
+  const gallery = cmsGallery.length > 0 ? cmsGallery : fallbackGallery;
 
   const faqItems = cmsFaq?.items && cmsFaq.items.length > 0
     ? cmsFaq.items.map((item) => ({

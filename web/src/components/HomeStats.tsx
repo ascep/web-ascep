@@ -62,7 +62,7 @@ export default function HomeStats({
           <div className="lg:col-span-8">
             <div className="grid gap-6 sm:grid-cols-2">
               {stats.map((stat, i) => {
-                const Icon = iconMap[stat.icon];
+                const Icon = iconMap[stat.icon] || Users;
                 return (
                   <motion.div
                     key={stat.label}

@@ -34,12 +34,13 @@ export default async function AliadosPage({
   const g = await getTranslations({ locale, namespace: "generales" });
 
   const cmsPartners = await getPartners();
-  const partnerLogos = cmsPartners.length > 0
+  const cmsLogos = cmsPartners.length > 0
     ? cmsPartners.map((p) => ({
         src: imageUrl(p.logo) || "",
         alt: p.name?.es || "",
-      }))
-    : fallbackLogos;
+      })).filter((l) => l.src)
+    : [];
+  const partnerLogos = cmsLogos.length > 0 ? cmsLogos : fallbackLogos;
 
   const sectors = [
     { sector: t("sector1"), desc: t("sector1Desc"), aliados: t("sector1Aliados"), icon: Building2 },

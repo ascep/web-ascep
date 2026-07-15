@@ -117,12 +117,13 @@ export default async function HomePage({
 
   const resolvedPrograms = fallbackPrograms;
 
-  const resolvedAliados = cmsPartners.length > 0
+  const cmsAliados = cmsPartners.length > 0
     ? cmsPartners.map((p) => ({
         src: imageUrl(p.logo) || "",
         alt: p.name?.es || "",
-      }))
-    : fallbackAliados;
+      })).filter((l) => l.src)
+    : [];
+  const resolvedAliados = cmsAliados.length > 0 ? cmsAliados : fallbackAliados;
 
   const resolvedStats = cmsStats.length > 0
     ? cmsStats.map((s) => ({
