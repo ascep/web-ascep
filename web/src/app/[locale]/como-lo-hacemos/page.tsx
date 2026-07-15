@@ -4,6 +4,7 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { User, Home, Zap } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Como lo Hacemos - ASCEP",
@@ -22,6 +23,7 @@ export default async function ComoLoHacemosPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "comoLoHacemos" });
+  const pageData = await getPageContent("como-lo-hacemos");
 
   const strategies = [
     {
@@ -57,11 +59,11 @@ export default async function ComoLoHacemosPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/encuentro-2025/GIS06448.webp")}
-        tag={t("heroTag")}
-        title={t("heroTitle")}
-        highlight={t("heroHighlight")}
-        subtitle={t("heroSubtitle")}
+        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath("/images/encuentro-2025/GIS06448.webp")}
+        tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
+        title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
+        highlight={localize(pageData?.hero?.highlight, locale) || t("heroHighlight")}
+        subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
       <section className="bg-brand-teal/5 py-20">
