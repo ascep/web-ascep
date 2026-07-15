@@ -31,6 +31,7 @@ export default async function ContactoPage({
         bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath("/images/equipo-shoot/GIS08546.webp")}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
+        highlight={localize(pageData?.hero?.highlight, locale) || ""}
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 

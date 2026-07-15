@@ -43,6 +43,7 @@ export default async function VoluntariadoPage({
         bgColor={pageData?.hero?.bgColor || "bg-brand-purple"}
         tag={localize(pageData?.hero?.tag, locale) || "VOLUNTARIADO"}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
+        highlight={localize(pageData?.hero?.highlight, locale) || ""}
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 

@@ -52,6 +52,7 @@ export default async function ComoAyudarPage({
         bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath("/images/eventos/20241112_102357.webp")}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
+        highlight={localize(pageData?.hero?.highlight, locale) || ""}
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 

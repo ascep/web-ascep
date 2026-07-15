@@ -42,6 +42,7 @@ export default async function PlanPadrinoPage({
         bgColor={pageData?.hero?.bgColor || "bg-brand-teal"}
         tag={localize(pageData?.hero?.tag, locale) || "PLAN PADRINO"}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
+        highlight={localize(pageData?.hero?.highlight, locale) || ""}
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
