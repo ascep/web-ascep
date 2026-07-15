@@ -7,6 +7,8 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { getTranslations } from "next-intl/server";
 import { Target, Eye, Heart } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { imageUrl } from "@/lib/sanity/image";
+import { getTeamMembers, getMilestones } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Quienes Somos - ASCEP",
@@ -18,7 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-const team = [
+const fallbackTeam = [
   { name: "Maicol Londoño", role: "Director", src: assetPath("/images/equipo/maicol.png") },
   { name: "Kevin Ortega", role: "Coordinador", src: assetPath("/images/equipo/phtos-ascep-kevin.png") },
   { name: "Monica", role: "Equipo Psicosocial", src: assetPath("/images/equipo/phtos-ascep-monica.png") },
@@ -26,7 +28,7 @@ const team = [
   { name: "Ana", role: "Equipo ASCEP", src: assetPath("/images/equipo/phtos-ascep.png") },
 ];
 
-const milestones = [
+const fallbackMilestones = [
   { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: assetPath("/images/eventos/20241112_092855.webp") },
   { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: assetPath("/images/eventos/20241112_092951.webp") },
   { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: assetPath("/images/eventos/20241112_095957.webp") },
@@ -52,6 +54,28 @@ export default async function QuienesSomosPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "quienesSomos" });
+
+  const [cmsTeam, cmsMilestones] = await Promise.all([
+    getTeamMembers(),
+    getMilestones(),
+  ]);
+
+  const team = cmsTeam.length > 0
+    ? cmsTeam.map((m) => ({
+        name: m.name?.es || "",
+        role: m.role?.es || "",
+        src: imageUrl(m.photo) || "",
+      }))
+    : fallbackTeam;
+
+  const milestones = cmsMilestones.length > 0
+    ? cmsMilestones.map((m) => ({
+        year: m.year || "",
+        title: m.title?.es || "",
+        description: m.description?.es || "",
+        image: imageUrl(m.image) || fallbackMilestones[0].image,
+      }))
+    : fallbackMilestones;
   return (
     <div>
       <PageHero

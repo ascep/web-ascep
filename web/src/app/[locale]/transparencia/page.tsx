@@ -5,6 +5,8 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import { FileText, DollarSign, BarChart3, FileBadge, Scale, FileCheck, Download } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getDocuments } from "@/lib/sanity/fetch";
+import { imageUrl } from "@/lib/sanity/image";
 
 export const metadata: Metadata = {
   title: "Transparencia - ASCEP",
@@ -16,7 +18,16 @@ export const metadata: Metadata = {
   },
 };
 
-const documents = [
+const categoryConfig: Record<string, { icon: React.ElementType; iconBg: string; iconColor: string }> = {
+  institucionales: { icon: FileText, iconBg: "bg-brand-purple/10", iconColor: "text-brand-purple" },
+  financieros: { icon: DollarSign, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange" },
+  informes: { icon: BarChart3, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange" },
+  registros: { icon: FileBadge, iconBg: "bg-brand-purple/10", iconColor: "text-brand-purple" },
+  legales: { icon: Scale, iconBg: "bg-brand-teal/10", iconColor: "text-brand-teal" },
+  cartillas: { icon: FileCheck, iconBg: "bg-brand-teal/10", iconColor: "text-brand-teal" },
+};
+
+const fallbackDocuments = [
   {
     title: "Nuestro Desafio",
     desc: "Conoce los retos y desafios que enfrentamos como organizacion en la transformacion del sistema de proteccion estatal.",
@@ -90,6 +101,35 @@ export default async function TransparenciaPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "transparencia" });
+
+  const cmsDocs = await getDocuments();
+  const documents = cmsDocs.length > 0
+    ? (() => {
+        const grouped: Record<string, { entries: typeof cmsDocs; config: typeof categoryConfig[keyof typeof categoryConfig] }> = {};
+        for (const doc of cmsDocs) {
+          const cat = doc.category || "institucionales";
+          if (!grouped[cat]) {
+            grouped[cat] = { entries: [], config: categoryConfig[cat] || categoryConfig.institucionales };
+          }
+          grouped[cat].entries.push(doc);
+        }
+        return Object.entries(grouped).map(([, group]) => {
+          const config = group.config;
+          return {
+            title: group.entries[0].title?.es || "",
+            desc: group.entries[0].description?.es || "",
+            files: group.entries.map((d) => ({
+              name: d.title?.es || "Documento",
+              path: d.externalUrl || (d.file?.asset?._ref ? imageUrl(d.file) : "") || "#",
+            })),
+            icon: config.icon,
+            iconBg: config.iconBg,
+            iconColor: config.iconColor,
+          };
+        });
+      })()
+    : fallbackDocuments;
+
   return (
     <div>
       <PageHero

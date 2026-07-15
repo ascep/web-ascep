@@ -1,7 +1,7 @@
 {
   "nav": {
     "inicio": "Inicio",
-    "quienesSomos": "Quienes Somos",
+    "quienesSomos": "Nosotros",
     "comoLoHacemos": "Como lo Hacemos",
     "programas": "Programas",
     "incidencia": "Incidencia y Participacion",
@@ -14,7 +14,7 @@
     "lineas": "Lineas",
     "modalidades": "Modalidades",
     "rutaEgreso": "Ruta de Egreso",
-    "leyEgreso": "Ley de Egreso",
+    "leyEgreso": "Ley Egreso",
     "leyQueEs": "Que es la Ley",
     "leyObjetivos": "Objetivos",
     "leyDirigida": "A quien va dirigida",
@@ -30,7 +30,7 @@
     "comoAyudar": "Como Ayudar",
     "donacionMonetaria": "Donacion Monetaria",
     "planPadrino": "Plan Padrino",
-    "enredateConAscep": "Enredate con ASCEP",
+    "enredateConAscep": "Enrédate",
     "voluntariado": "Voluntariado",
     "donarBtn": "Donar",
     "mas": "Más",
@@ -228,7 +228,8 @@
     "programas": "Programas",
     "incidencia": "Incidencia",
     "eventos": "Eventos",
-    "ley": "Ley de Egreso"
+    "ley": "Ley de Egreso",
+    "backToNoticias": "Volver a noticias"
   },
   "home": {
     "heroTag": "ASCEP",
@@ -699,7 +700,9 @@
     "ubicacion": "Cali, Colombia",
     "email": "contacto@ascep.org",
     "idioma": "Idioma",
-    "copyright": "Todos los derechos reservados."
+    "copyright": "Todos los derechos reservados.",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Recibe nuestras novedades y eventos"
   },
   "topBar": {
     "leyCta": "Conozca la Ley"

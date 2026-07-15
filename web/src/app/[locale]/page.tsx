@@ -11,6 +11,14 @@ import ModeloGrid from "@/components/ModeloGrid";
 import ProgramStack from "@/components/ProgramStack";
 import LogoLoop from "@/components/LogoLoop";
 import { assetPath } from "@/lib/asset-path";
+import { imageUrl } from "@/lib/sanity/image";
+import {
+  getMilestones,
+  getPartners,
+  getFeaturedPartners,
+  getImpactStats,
+  getTestimonials,
+} from "@/lib/sanity/fetch";
 
 const gallery = [
   { src: assetPath("/images/eventos/20241112_092951.webp"), alt: "Taller con jovenes" },
@@ -19,7 +27,7 @@ const gallery = [
   { src: assetPath("/images/encuentro-2025/GIS06449.webp"), alt: "Encuentro ASCEP 2025" },
 ];
 
-const milestones = [
+const fallbackMilestones = [
   { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: assetPath("/images/eventos/20241112_092855.webp") },
   { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: assetPath("/images/eventos/20241112_092951.webp") },
   { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: assetPath("/images/eventos/20241112_095957.webp") },
@@ -27,7 +35,7 @@ const milestones = [
   { year: "2025", title: "Ley 2479 de 2025", description: "Se sanciona la Ley Hijos del Estado, creando el Programa Nacional de Acompanamiento Integral al Egresado del ICBF.", image: assetPath("/images/eventos/20241112_111016.webp") },
 ];
 
-const programs = [
+const fallbackPrograms = [
   {
     title: "Incidencia y Participacion",
     slug: "incidencia",
@@ -62,21 +70,21 @@ const programs = [
   },
 ];
 
-const aliados = [
+const fallbackAliados = [
   { src: assetPath("/images/aliados/colombia.svg"), alt: "Colombia" },
   { src: assetPath("/images/aliados/empower-logo-blue.svg"), alt: "Empower" },
   { src: assetPath("/images/aliados/gapi-icesi-logo.webp"), alt: "GAPI Icesi" },
   { src: assetPath("/images/aliados/Vaki.png"), alt: "Vaki" },
 ];
 
-const stats = [
+const fallbackStats = [
   { value: "71148", label: "NNA protegidos por el ICBF", icon: "Users", color: "#019E9F" },
   { value: "13000+", label: "Jovenes egresados", icon: "GraduationCap", color: "#44BCC5" },
   { value: "5+", label: "Programas activos", icon: "Layers", color: "#EC6620" },
   { value: "2019", label: "Inicio de operaciones", icon: "Calendar", color: "#EC6620" },
 ];
 
-const testimonialsData = [
+const fallbackTestimonialsKeys = [
   { textKey: "testimonial1Text", authorKey: "testimonial1Author", roleKey: "testimonial1Role" },
   { textKey: "testimonial2Text", authorKey: "testimonial2Author", roleKey: "testimonial2Role" },
   { textKey: "testimonial3Text", authorKey: "testimonial3Author", roleKey: "testimonial3Role" },
@@ -91,11 +99,51 @@ export default async function HomePage({
   const h = await getTranslations({ locale, namespace: "home" });
   const g = await getTranslations({ locale, namespace: "generales" });
 
-  const testimonials = testimonialsData.map((t) => ({
-    text: h(t.textKey),
-    author: h(t.authorKey),
-    role: h(t.roleKey),
-  }));
+  const [cmsMilestones, cmsPartners, cmsStats, cmsTestimonials] = await Promise.all([
+    getMilestones(),
+    getFeaturedPartners(),
+    getImpactStats(),
+    getTestimonials("home"),
+  ]);
+
+  const resolvedMilestones = cmsMilestones.length > 0
+    ? cmsMilestones.map((m) => ({
+        year: m.year || "",
+        title: m.title?.es || "",
+        description: m.description?.es || "",
+        image: imageUrl(m.image) || assetPath("/images/eventos/20241112_092855.webp"),
+      }))
+    : fallbackMilestones;
+
+  const resolvedPrograms = fallbackPrograms;
+
+  const resolvedAliados = cmsPartners.length > 0
+    ? cmsPartners.map((p) => ({
+        src: imageUrl(p.logo) || "",
+        alt: p.name?.es || "",
+      }))
+    : fallbackAliados;
+
+  const resolvedStats = cmsStats.length > 0
+    ? cmsStats.map((s) => ({
+        value: s.prefix ? `${s.prefix}${s.value}` : `${s.value}${s.suffix || ""}`,
+        label: s.label?.es || "",
+        icon: s.icon || "Users",
+        color: s.color || "#019E9F",
+      }))
+    : fallbackStats;
+
+  const testimonials = cmsTestimonials.length > 0
+    ? cmsTestimonials.map((t) => ({
+        text: t.quote?.es || "",
+        author: t.author?.es || "",
+        role: t.role?.es || "",
+      }))
+    : fallbackTestimonialsKeys.map((t) => ({
+        text: h(t.textKey),
+        author: h(t.authorKey),
+        role: h(t.roleKey),
+      }));
 
   return (
     <div>
@@ -206,7 +254,7 @@ export default async function HomePage({
         tag={h("statsTag")}
         title={h("statsTitle")}
         description={h("statsDesc")}
-        stats={stats}
+        stats={resolvedStats}
         cta={
           <Link
             href={`/${locale}/impacto`}
@@ -225,13 +273,13 @@ export default async function HomePage({
           <h2 className="mb-12 text-center text-3xl font-bold text-[var(--color-text-primary)]">
             {h("trayectoriaTitle")}
           </h2>
-          <Timeline items={milestones} />
+          <Timeline items={resolvedMilestones} />
         </AnimatedSection>
       </section>
 
       <ModeloGrid />
 
-      <ProgramStack programs={programs} locale={locale} />
+      <ProgramStack programs={resolvedPrograms} locale={locale} />
 
       <HomeTestimonials
         tag={h("testimonialsTag")}
@@ -287,7 +335,7 @@ export default async function HomePage({
           <h2 className="mb-10 text-center text-3xl font-bold text-[var(--color-text-primary)]">
             {h("aliadosTitle")}
           </h2>
-          <LogoLoop logos={aliados} />
+          <LogoLoop logos={resolvedAliados} />
         </AnimatedSection>
       </section>
 

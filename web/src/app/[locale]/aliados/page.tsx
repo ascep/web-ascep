@@ -4,6 +4,8 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { Building2, Globe, Briefcase, GraduationCap, Heart, Radio } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getPartners } from "@/lib/sanity/fetch";
+import { imageUrl } from "@/lib/sanity/image";
 
 export const metadata: Metadata = {
   title: "Aliados - ASCEP",
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const partnerLogos = [
+const fallbackLogos = [
   { src: assetPath("/images/aliados/colombia.svg"), alt: "Colombia" },
   { src: assetPath("/images/aliados/empower-logo-blue.svg"), alt: "Empower" },
   { src: assetPath("/images/aliados/gapi-icesi-logo.webp"), alt: "GAPI Icesi" },
@@ -30,6 +32,14 @@ export default async function AliadosPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "aliados" });
   const g = await getTranslations({ locale, namespace: "generales" });
+
+  const cmsPartners = await getPartners();
+  const partnerLogos = cmsPartners.length > 0
+    ? cmsPartners.map((p) => ({
+        src: imageUrl(p.logo) || "",
+        alt: p.name?.es || "",
+      }))
+    : fallbackLogos;
 
   const sectors = [
     { sector: t("sector1"), desc: t("sector1Desc"), aliados: t("sector1Aliados"), icon: Building2 },

@@ -14,7 +14,7 @@
     "lineas": "Lines",
     "modalidades": "Modalities",
     "rutaEgreso": "Graduation Route",
-    "leyEgreso": "Graduation Law",
+    "leyEgreso": "The Law",
     "leyQueEs": "What is the Law",
     "leyObjetivos": "Objectives",
     "leyDirigida": "Who it is for",
@@ -30,7 +30,7 @@
     "comoAyudar": "How to Help",
     "donacionMonetaria": "Monetary Donation",
     "planPadrino": "Sponsorship Plan",
-    "enredateConAscep": "Connect with ASCEP",
+    "enredateConAscep": "Connect",
     "voluntariado": "Volunteer",
     "donarBtn": "Donate",
     "mas": "More",
@@ -227,7 +227,8 @@
     "programas": "Programs",
     "incidencia": "Advocacy",
     "eventos": "Events",
-    "ley": "Graduation Law"
+    "ley": "Graduation Law",
+    "backToNoticias": "Back to news"
   },
   "home": {
     "heroTag": "ASCEP",
@@ -561,7 +562,9 @@
     "ubicacion": "Cali, Colombia",
     "email": "contacto@ascep.org",
     "idioma": "Language",
-    "copyright": "All rights reserved."
+    "copyright": "All rights reserved.",
+    "newsletter": "Newsletter",
+    "newsletterDesc": "Get our latest news and events"
   },
   "topBar": {
     "leyCta": "Learn About the Law"

@@ -272,6 +272,10 @@ export default function middleware(request: NextRequest) {
     });
   }
 
+  if (request.nextUrl.pathname.startsWith('/studio')) {
+    return NextResponse.next();
+  }
+
   return nextIntlMiddleware(request);
 }
 

@@ -5,11 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Search } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import FlagIcon from "./FlagIcon";
 import ThemeToggle from "./ThemeToggle";
 import MobileMenu from "./MobileMenu";
+import SearchDialog from "./SearchDialog";
 
 const languages = [
   { code: "es", label: "ES" },
@@ -51,6 +52,8 @@ export default function Header() {
   const [openDropdown, setOpenDropdown] = useState<DropdownState>(null);
   const [openCasas, setOpenCasas] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [showNuevo, setShowNuevo] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const langTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -71,6 +74,31 @@ export default function Header() {
   const handleLangLeave = () => {
     langTimeoutRef.current = setTimeout(() => setLangOpen(false), 200);
   };
+
+  useEffect(() => {
+    const val = localStorage.getItem("ascep_nuevo");
+    if (!val) {
+      localStorage.setItem("ascep_nuevo", "1");
+      setShowNuevo(true);
+    } else {
+      const count = parseInt(val, 10);
+      if (count < 2) {
+        localStorage.setItem("ascep_nuevo", String(count + 1));
+        setShowNuevo(true);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -100,7 +128,7 @@ export default function Header() {
         <nav className="hidden items-center gap-1 md:flex">
           <Link
             href={`/${locale}`}
-            className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+            className="whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
           >
             {t("inicio")}
           </Link>
@@ -110,7 +138,7 @@ export default function Header() {
             onMouseEnter={() => handleMouseEnter("quienes")}
             onMouseLeave={handleMouseLeave}
           >
-            <button className="flex items-center gap-1 rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
+            <button className="flex items-center gap-1 whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
               {t("quienesSomos")} <ChevronDown size={14} />
             </button>
             {openDropdown === "quienes" && (
@@ -149,7 +177,7 @@ export default function Header() {
             onMouseEnter={() => handleMouseEnter("programas")}
             onMouseLeave={handleMouseLeave}
           >
-            <button className="flex items-center gap-1 rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
+            <button className="flex items-center gap-1 whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
               {t("programas")} <ChevronDown size={14} />
             </button>
             {openDropdown === "programas" && (
@@ -303,24 +331,40 @@ export default function Header() {
             )}
           </div>
 
-          <Link
-            href={`/${locale}/como-ayudar/enredate-con-ascep`}
-            className="flex items-center gap-1.5 rounded-[10px] px-3 py-2 text-sm font-semibold text-brand-orange transition-colors hover:bg-brand-orange/10"
-          >
-            {t("enredateConAscep")}
-            <span className="rounded-full bg-brand-orange/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-orange">
-              Nuevo
-            </span>
-          </Link>
+          {showNuevo ? (
+            <Link
+              href={`/${locale}/como-ayudar/enredate-con-ascep`}
+              className="relative flex flex-col items-center whitespace-nowrap rounded-[10px] px-3 pb-2 pt-4 text-sm font-semibold text-brand-orange transition-colors hover:bg-brand-orange/10"
+            >
+              <span className="absolute -top-0.5 left-6 rounded-full bg-brand-orange/10 px-1 py-0.5 text-[8px] font-bold uppercase tracking-wider text-brand-orange">
+                Nuevo
+              </span>
+              {t("enredateConAscep")}
+            </Link>
+          ) : (
+            <Link
+              href={`/${locale}/como-ayudar/enredate-con-ascep`}
+              className="whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+            >
+              {t("enredateConAscep")}
+            </Link>
+          )}
           <Link
             href={`/${locale}/contacto`}
-            className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+            className="whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
           >
             {t("contacto")}
           </Link>
         </nav>
 
         <div className="hidden items-center gap-1 md:flex">
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="rounded-[10px] p-2 text-[var(--color-text-tertiary)] transition-colors hover:bg-bg-elevated hover:text-text-primary"
+            aria-label="Buscar"
+          >
+            <Search size={18} />
+          </button>
           <ThemeToggle />
           {/* Language dropdown */}
           <div
@@ -363,6 +407,7 @@ export default function Header() {
 
     </header>
     <MobileMenu />
+    <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
   </>
   );
 }

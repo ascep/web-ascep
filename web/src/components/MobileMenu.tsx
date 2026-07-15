@@ -114,6 +114,21 @@ export default function MobileMenu() {
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<Section>(null);
   const [casasOpen, setCasasOpen] = useState(false);
+  const [showNuevo, setShowNuevo] = useState(false);
+
+  useEffect(() => {
+    const val = localStorage.getItem("ascep_nuevo");
+    if (!val) {
+      localStorage.setItem("ascep_nuevo", "1");
+      setShowNuevo(true);
+    } else {
+      const count = parseInt(val, 10);
+      if (count < 2) {
+        localStorage.setItem("ascep_nuevo", String(count + 1));
+        setShowNuevo(true);
+      }
+    }
+  }, []);
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -335,9 +350,15 @@ export default function MobileMenu() {
                   <Link
                     href={`/${locale}/como-ayudar/enredate-con-ascep`}
                     onClick={close}
-                    className="flex items-center gap-3 rounded-[10px] border border-brand-orange/20 bg-brand-orange/5 px-4 py-3 min-h-[48px]"
+                    className={`flex items-center gap-3 rounded-[10px] px-4 py-3 min-h-[48px] transition-colors ${
+                      showNuevo
+                        ? "border border-brand-orange/20 bg-brand-orange/5"
+                        : "border border-bg-elevated/20 hover:bg-bg-elevated"
+                    }`}
                   >
-                    <div className="flex h-8 w-8 items-center justify-center rounded-[8px] bg-brand-orange text-white">
+                    <div className={`flex h-8 w-8 items-center justify-center rounded-[8px] text-white transition-colors ${
+                      showNuevo ? "bg-brand-orange" : "bg-text-tertiary"
+                    }`}>
                       <Play size={16} />
                     </div>
                     <div className="flex-1">
@@ -345,9 +366,11 @@ export default function MobileMenu() {
                         {t("enredateConAscep")}
                       </span>
                     </div>
-                    <span className="rounded-full bg-brand-orange/10 px-2 py-0.5 text-[10px] font-bold uppercase text-brand-orange tracking-wider">
-                      Nuevo
-                    </span>
+                    {showNuevo && (
+                      <span className="rounded-full bg-brand-orange/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-orange">
+                        Nuevo
+                      </span>
+                    )}
                   </Link>
 
                   {/* Cómo Ayudar */}

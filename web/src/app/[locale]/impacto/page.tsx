@@ -4,6 +4,8 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { Users, Calendar, GraduationCap, Layers, Target } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getImpactStats, getGalleryAlbums } from "@/lib/sanity/fetch";
+import { imageUrl } from "@/lib/sanity/image";
 
 export const metadata: Metadata = {
   title: "Impacto - ASCEP",
@@ -15,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const impactStats = [
+const fallbackStats = [
   { end: 71148, suffix: "", label: "NNA en PARD protegidos por el ICBF" },
   { end: 2019, suffix: "", label: "Inicio de operaciones" },
   { end: 13000, suffix: "+", label: "Jovenes egresados (2011-2024)" },
@@ -33,7 +35,7 @@ const statColors = [
   { bg: "bg-brand-purple/10", icon: "text-brand-purple", num: "text-brand-purple" },
 ];
 
-const galeriaImages = [
+const fallbackGaleria = [
   assetPath("/images/encuentro-2025/GIS06448.webp"),
   assetPath("/images/encuentro-2025/GIS06455.webp"),
   assetPath("/images/encuentro-2025/GIS06462.webp"),
@@ -55,6 +57,25 @@ export default async function ImpactoPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "impacto" });
+
+  const [cmsStats, cmsAlbums] = await Promise.all([
+    getImpactStats(),
+    getGalleryAlbums(),
+  ]);
+
+  const impactStats = cmsStats.length > 0
+    ? cmsStats.map((s) => ({
+        end: s.value || 0,
+        suffix: s.suffix || "",
+        label: s.label?.es || "",
+      }))
+    : fallbackStats;
+
+  const galeriaImages = cmsAlbums.length > 0
+    ? cmsAlbums.flatMap((a) =>
+        (a.images || []).map((img) => imageUrl(img)).filter(Boolean) as string[]
+      )
+    : fallbackGaleria;
   return (
     <div>
       <PageHero

@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { assetPath } from "@/lib/asset-path";
+import NewsletterForm from "./NewsletterForm";
 
 export default function Footer() {
   const t = useTranslations("nav");
@@ -79,36 +80,25 @@ export default function Footer() {
 
           <div>
             <h3 className="mb-3 text-sm font-semibold uppercase tracking-wider text-white/90">
-              {f("idioma")}
+              {f("newsletter")}
             </h3>
-            <div className="flex gap-2">
-              <Link
-                href={`/es${currentPath}`}
-                className={`text-sm ${locale === "es" ? "font-bold text-white" : "text-white/70 hover:text-white"}`}
-              >
-                ES
-              </Link>
-              <span className="text-white/40">|</span>
-              <Link
-                href={`/en${currentPath}`}
-                className={`text-sm ${locale === "en" ? "font-bold text-white" : "text-white/70 hover:text-white"}`}
-              >
-                EN
-              </Link>
-              <span className="text-white/40">|</span>
-              <Link
-                href={`/pt${currentPath}`}
-                className={`text-sm ${locale === "pt" ? "font-bold text-white" : "text-white/70 hover:text-white"}`}
-              >
-                PT
-              </Link>
-            </div>
+            <p className="mb-3 text-sm text-white/70">
+              {f("newsletterDesc")}
+            </p>
+            <NewsletterForm />
           </div>
         </div>
 
         <div className="mt-8 h-px bg-white/20" />
-        <div className="mt-6 text-center text-xs text-white/50">
-          &copy; {new Date().getFullYear()} ASCEP. {f("copyright")}
+        <div className="mt-6 flex flex-col items-center gap-2 text-center text-xs text-white/50 sm:flex-row sm:justify-between">
+          <span>&copy; {new Date().getFullYear()} ASCEP. {f("copyright")}</span>
+          <div className="flex gap-2">
+            <Link href={`/es${currentPath}`} className={`transition-colors ${locale === "es" ? "font-bold text-white" : "hover:text-white"}`}>ES</Link>
+            <span>|</span>
+            <Link href={`/en${currentPath}`} className={`transition-colors ${locale === "en" ? "font-bold text-white" : "hover:text-white"}`}>EN</Link>
+            <span>|</span>
+            <Link href={`/pt${currentPath}`} className={`transition-colors ${locale === "pt" ? "font-bold text-white" : "hover:text-white"}`}>PT</Link>
+          </div>
         </div>
       </div>
     </footer>
