@@ -16,8 +16,8 @@ export default function Footer() {
 
   return (
     <footer className="m-4 rounded-[10px] bg-brand-blue-dark text-white">
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="hidden sm:grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Image
               src={assetPath("/logos/12 logo ascep blanco sin slogan.png")}
@@ -89,8 +89,8 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-4 h-px bg-white/20 sm:mt-8" />
-        <div className="mt-3 flex flex-col items-center gap-2 text-center text-xs text-white/50 sm:mt-6 sm:flex-row sm:justify-between">
+        <div className="mt-8 h-px bg-white/20" />
+        <div className="mt-6 flex flex-col items-center gap-2 text-center text-xs text-white/50 sm:flex-row sm:justify-between">
           <span>&copy; {new Date().getFullYear()} ASCEP. {f("copyright")}</span>
           <div className="flex gap-2">
             <Link href={`/es${currentPath}`} className={`transition-colors ${locale === "es" ? "font-bold text-white" : "hover:text-white"}`}>ES</Link>
