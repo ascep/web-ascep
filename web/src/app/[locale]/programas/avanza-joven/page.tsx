@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
-import { BookOpen, Users, DollarSign, Heart, Target, Star } from "lucide-react";
+import { BookOpen, Users, DollarSign, Heart, Target, Star, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Avanza Joven - ASCEP",
@@ -14,7 +15,11 @@ export const metadata: Metadata = {
   },
 };
 
-const objetivosEspecificos = [
+const iconMap: Record<string, LucideIcon> = {
+  BookOpen, Users, DollarSign, Heart, Target, Star,
+};
+
+const fallbackObjetivos = [
   {
     title: "Fortalecer las habilidades comunicativas de los jovenes participantes",
     desc: "Desarrollar la escucha activa, la empatia, la expresion oral y escrita, la capacidad de argumentacion y persuasion, y la resolucion de conflictos, para que los jovenes puedan comunicarse de manera efectiva en diferentes contextos y relaciones interpersonales, mejorando sus habilidades sociales, profesionales y personales, y contribuyendo a su desarrollo integral.",
@@ -41,50 +46,43 @@ const objetivosEspecificos = [
   },
 ];
 
-const modules = [
-  {
-    code: "Modulo 1",
-    title: "En voz alta",
-    desc: "Comunicacion asertiva.",
-    icon: BookOpen,
-  },
-  {
-    code: "Modulo 2",
-    title: "Ciudadanos Triple A",
-    desc: "Derechos y deberes ciudadanos, conocimiento de la ciudad, servicios y oportunidades.",
-    icon: Users,
-  },
-  {
-    code: "Modulo 3",
-    title: "Finanza Joven",
-    desc: "Educacion financiera basica: presupuesto personal.",
-    icon: DollarSign,
-  },
-  {
-    code: "Modulo 4",
-    title: "Vital Joven",
-    desc: "Capacitacion en autocuidado, nutricion y buenas practicas para el desarrollo fisico, emocional y mental. Autoconocimiento y manejo de emociones.",
-    icon: Heart,
-  },
-  {
-    code: "Modulo 5",
-    title: "Jovenes Aptos",
-    desc: "Proyecto de vida.",
-    icon: Target,
-  },
-  {
-    code: "Modulo 6",
-    title: "Jovenes Agentes de Cambio",
-    desc: "Liderazgo y participacion comunitaria.",
-    icon: Star,
-  },
+const fallbackModules = [
+  { code: "Modulo 1", title: "En voz alta", desc: "Comunicacion asertiva.", icon: BookOpen },
+  { code: "Modulo 2", title: "Ciudadanos Triple A", desc: "Derechos y deberes ciudadanos, conocimiento de la ciudad, servicios y oportunidades.", icon: Users },
+  { code: "Modulo 3", title: "Finanza Joven", desc: "Educacion financiera basica: presupuesto personal.", icon: DollarSign },
+  { code: "Modulo 4", title: "Vital Joven", desc: "Capacitacion en autocuidado, nutricion y buenas practicas para el desarrollo fisico, emocional y mental. Autoconocimiento y manejo de emociones.", icon: Heart },
+  { code: "Modulo 5", title: "Jovenes Aptos", desc: "Proyecto de vida.", icon: Target },
+  { code: "Modulo 6", title: "Jovenes Agentes de Cambio", desc: "Liderazgo y participacion comunitaria.", icon: Star },
 ];
 
-export default function AvanzaJovenPage() {
+export default async function AvanzaJovenPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const cms = await getProgramBySlug("avanza-joven");
+
+  const objetivos: { title: string; desc: string }[] = cms?.objectives && cms.objectives.length > 0
+    ? cms.objectives.map((o: any) => ({
+        title: localize(o.title, locale) || "",
+        desc: localize(o.description, locale) || "",
+      }))
+    : fallbackObjetivos;
+
+  const modules: { code: string; title: string; desc: string; icon: LucideIcon }[] = cms?.modules && cms.modules.length > 0
+    ? cms.modules.map((m: any) => ({
+        code: m.code || "",
+        title: localize(m.title, locale) || "",
+        desc: localize(m.description, locale) || "",
+        icon: (m.icon && iconMap[m.icon]) || Heart,
+      }))
+    : fallbackModules;
+
   return (
     <>
       <PageHero
-        bgImage={assetPath("/images/programas/Avanza-1-scaled-1.webp")}
+        bgImage={sanityImage(cms?.heroImage) || assetPath("/images/programas/Avanza-1-scaled-1.webp")}
         tag="Programa"
         title="Avanza"
         highlight="Joven"
@@ -103,7 +101,7 @@ export default function AvanzaJovenPage() {
           </div>
           <div className="grid gap-12 md:grid-cols-2 items-center">
             <div className="relative h-72 overflow-hidden rounded-[10px] md:h-96">
-              <Image src={assetPath("/images/programas/Avanza-1-scaled-1.webp")} alt="Avanza Joven" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+              <Image src={sanityImage(cms?.heroImage) || assetPath("/images/programas/Avanza-1-scaled-1.webp")} alt="Avanza Joven" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
               <p>
@@ -146,7 +144,7 @@ export default function AvanzaJovenPage() {
             </h2>
           </div>
           <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2">
-            {objetivosEspecificos.map((obj, i) => (
+            {objetivos.map((obj, i) => (
               <div key={i} className="flex gap-4 rounded-[10px] bg-white p-6 shadow-sm transition-all hover:shadow-md">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-brand-purple/10 text-lg font-bold text-brand-purple">
                   {String(i + 1).padStart(2, "0")}

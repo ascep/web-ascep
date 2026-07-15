@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
-import { BookOpen, Briefcase, Building, Search, Compass, Route } from "lucide-react";
+import { BookOpen, Briefcase, Building, Search, Compass, Route, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Fomento para el Empleo y Emprendimiento - ASCEP",
@@ -14,58 +15,61 @@ export const metadata: Metadata = {
   },
 };
 
-const objetivosEspecificos = [
+const iconMap: Record<string, LucideIcon> = {
+  BookOpen, Briefcase, Building, Search, Compass, Route,
+};
+
+const fallbackObjetivos = [
   "Promover espacios de insercion social, capacidades y competencias aptas para la insercion laboral en adolescentes y jovenes.",
   "Impulsar la aplicacion de talleres experimentales que permitan a los jovenes conocer las ofertas laborales y su contenido a traves del ejercicio practico del area de conocimiento, talleres aplicados por las entidades competentes.",
   "Vincular laboralmente a los jovenes pre-egresados que se encuentran en la ultima instancia de egreso de proteccion y de aquellos que ya egresaron.",
   "Disminuir el fracaso que experimentan los jovenes por motivos de escasa educacion para desarrollarse en un determinado trabajo u oficio.",
 ];
 
-const componentes = [
-  {
-    title: "Formacion y busqueda de empleo",
-    desc: "Espacio para la formacion y busqueda de empleo con apoyo profesional.",
-    icon: BookOpen,
-  },
-  {
-    title: "Intermediacion laboral",
-    desc: "Intermediacion laboral y entrenamiento en competencias y habilidades personales para el empleo.",
-    icon: Briefcase,
-  },
-  {
-    title: "Experiencias vocacionales",
-    desc: "Acceso a experiencias vocacionales en empresa como primera toma de contacto con el mercado laboral.",
-    icon: Building,
-  },
-  {
-    title: "Identificacion de oportunidades",
-    desc: "Identificacion de jovenes con pocas oportunidades de desarrollo.",
-    icon: Search,
-  },
-  {
-    title: "Orientacion laboral",
-    desc: "Orientacion, informacion y planificacion de la busqueda laboral.",
-    icon: Compass,
-  },
-  {
-    title: "Itinerario formativo",
-    desc: "Itinerario de formacion e intermediacion laboral para practicas en empresas.",
-    icon: Route,
-  },
+const fallbackComponentes = [
+  { title: "Formacion y busqueda de empleo", desc: "Espacio para la formacion y busqueda de empleo con apoyo profesional.", icon: BookOpen },
+  { title: "Intermediacion laboral", desc: "Intermediacion laboral y entrenamiento en competencias y habilidades personales para el empleo.", icon: Briefcase },
+  { title: "Experiencias vocacionales", desc: "Acceso a experiencias vocacionales en empresa como primera toma de contacto con el mercado laboral.", icon: Building },
+  { title: "Identificacion de oportunidades", desc: "Identificacion de jovenes con pocas oportunidades de desarrollo.", icon: Search },
+  { title: "Orientacion laboral", desc: "Orientacion, informacion y planificacion de la busqueda laboral.", icon: Compass },
+  { title: "Itinerario formativo", desc: "Itinerario de formacion e intermediacion laboral para practicas en empresas.", icon: Route },
 ];
 
-const resultados = [
+const fallbackResultados = [
   "Jovenes con experiencia laboral.",
   "Jovenes con habilidades laborales fortalecidas.",
   "Jovenes con estabilidad economica.",
   "Jovenes que contribuyen al desarrollo social.",
 ];
 
-export default function EmpleoPage() {
+export default async function EmpleoPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const cms = await getProgramBySlug("empleo");
+
+  const objetivos = cms?.objectives && cms.objectives.length > 0
+    ? cms.objectives.map((o: any) => localize(o.description, locale) || "")
+    : fallbackObjetivos;
+
+  const componentes = cms?.components && cms.components.length > 0
+    ? cms.components.map((c: any) => ({
+        title: localize(c.title, locale) || "",
+        desc: localize(c.description, locale) || "",
+        icon: (c.icon && iconMap[c.icon]) || BookOpen,
+      }))
+    : fallbackComponentes;
+
+  const resultados = cms?.results && cms.results.length > 0
+    ? cms.results.map((r: any) => localize(r, locale) || "")
+    : fallbackResultados;
+
   return (
     <>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_102515.webp")}
+        bgImage={sanityImage(cms?.heroImage) || assetPath("/images/eventos/20241112_102515.webp")}
         bgColor="bg-brand-orange"
         tag="Programa"
         title="Fomento para el Empleo Juvenil"
@@ -84,7 +88,7 @@ export default function EmpleoPage() {
           </div>
           <div className="grid gap-12 md:grid-cols-2 items-center">
             <div className="relative flex h-72 items-center justify-center overflow-hidden rounded-[10px] bg-brand-orange/5 md:h-96">
-              <Image src={assetPath("/images/programas/LOGO-FOMENTO.png")} alt="Fomento para el Empleo y Emprendimiento" width={240} height={150} className="h-auto max-h-48 w-auto max-w-[80%] object-contain" />
+              <Image src={sanityImage(cms?.programLogo) || assetPath("/images/programas/LOGO-FOMENTO.png")} alt="Fomento para el Empleo y Emprendimiento" width={240} height={150} className="h-auto max-h-48 w-auto max-w-[80%] object-contain" />
             </div>
             <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
               <p>
@@ -124,7 +128,7 @@ export default function EmpleoPage() {
             </h2>
           </div>
           <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2">
-            {objetivosEspecificos.map((item, i) => (
+            {objetivos.map((item, i) => (
               <div key={i} className="flex gap-4 rounded-[10px] bg-white p-6 shadow-sm transition-all hover:shadow-md">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-brand-orange/10 text-lg font-bold text-brand-orange">
                   {String(i + 1).padStart(2, "0")}

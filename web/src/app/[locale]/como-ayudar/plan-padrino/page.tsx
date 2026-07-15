@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Heart, CheckCircle, ArrowRight, Gift, Users, Shield, Target } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Plan Padrino - ASCEP",
@@ -33,15 +34,15 @@ export default async function PlanPadrinoPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "planPadrino" });
-
+  const pageData = await getPageContent("plan-padrino");
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/encuentro-2025/GIS06460.webp")}
-        bgColor="bg-brand-teal"
-        tag="PLAN PADRINO"
-        title={t("heroTitle")}
-        subtitle={t("heroSubtitle")}
+        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath("/images/encuentro-2025/GIS06460.webp")}
+        bgColor={pageData?.hero?.bgColor || "bg-brand-teal"}
+        tag={localize(pageData?.hero?.tag, locale) || "PLAN PADRINO"}
+        title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
+        subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
       <section className="bg-bg-surface py-20">

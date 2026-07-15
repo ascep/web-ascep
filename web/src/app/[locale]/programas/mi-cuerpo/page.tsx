@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
-import { Heart, MapPin, Scale, Shield, AlertTriangle, Handshake, Users, Star, Brain } from "lucide-react";
+import { Heart, MapPin, Scale, Shield, AlertTriangle, Handshake, Users, Star, Brain, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Mi Cuerpo, Mi Sexualidad, Mi Decision - ASCEP",
@@ -14,65 +15,52 @@ export const metadata: Metadata = {
   },
 };
 
-const components = [
-  {
-    title: "Derechos sexuales y reproductivos",
-    desc: "Promocion de los derechos sexuales y reproductivos.",
-    icon: Heart,
-  },
-  {
-    title: "Ruta de atencion integral",
-    desc: "Ruta de atencion integral en Salud Sexual y Reproductiva.",
-    icon: MapPin,
-  },
-  {
-    title: "Enfoque y equidad de genero",
-    desc: "Enfoque y equidad de genero.",
-    icon: Scale,
-  },
-  {
-    title: "Violencias basadas en genero",
-    desc: "Abordaje de las violencias basadas en genero y violencias sexuales.",
-    icon: Shield,
-  },
-  {
-    title: "Prevencion de ITS/VIH/SIDA",
-    desc: "Prevencion de ITS/VIH/SIDA.",
-    icon: AlertTriangle,
-  },
-  {
-    title: "Consentimiento y relaciones saludables",
-    desc: "Educacion en Consentimiento y Relaciones Saludables.",
-    icon: Handshake,
-  },
-  {
-    title: "Diversidad sexual y afectiva",
-    desc: "Educacion sobre Diversidad Sexual y Afectiva.",
-    icon: Users,
-  },
-  {
-    title: "Autonomia y toma de decisiones",
-    desc: "Promocion de la Autonomia y Toma de Decisiones.",
-    icon: Star,
-  },
-  {
-    title: "Salud mental",
-    desc: "Acceso a Servicios de Salud Mental.",
-    icon: Brain,
-  },
+const iconMap: Record<string, LucideIcon> = {
+  Heart, MapPin, Scale, Shield, AlertTriangle, Handshake, Users, Star, Brain,
+};
+
+const fallbackComponents = [
+  { title: "Derechos sexuales y reproductivos", desc: "Promocion de los derechos sexuales y reproductivos.", icon: Heart },
+  { title: "Ruta de atencion integral", desc: "Ruta de atencion integral en Salud Sexual y Reproductiva.", icon: MapPin },
+  { title: "Enfoque y equidad de genero", desc: "Enfoque y equidad de genero.", icon: Scale },
+  { title: "Violencias basadas en genero", desc: "Abordaje de las violencias basadas en genero y violencias sexuales.", icon: Shield },
+  { title: "Prevencion de ITS/VIH/SIDA", desc: "Prevencion de ITS/VIH/SIDA.", icon: AlertTriangle },
+  { title: "Consentimiento y relaciones saludables", desc: "Educacion en Consentimiento y Relaciones Saludables.", icon: Handshake },
+  { title: "Diversidad sexual y afectiva", desc: "Educacion sobre Diversidad Sexual y Afectiva.", icon: Users },
+  { title: "Autonomia y toma de decisiones", desc: "Promocion de la Autonomia y Toma de Decisiones.", icon: Star },
+  { title: "Salud mental", desc: "Acceso a Servicios de Salud Mental.", icon: Brain },
 ];
 
-const objetivosSecundarios = [
+const fallbackSecundarios = [
   "Desarrollar procesos formativos en los centros de proteccion.",
   "Capacitar al personal para que pueda desarrollar estrategias de Promocion de los DRSyR en los centros.",
   "Integrar los grupos de trabajo a otros grupos, colectivos y redes externas a ICBF y los centros de proteccion.",
 ];
 
-export default function MiCuerpoPage() {
+export default async function MiCuerpoPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const cms = await getProgramBySlug("mi-cuerpo");
+
+  const components = cms?.components && cms.components.length > 0
+    ? cms.components.map((c: any) => ({
+        title: localize(c.title, locale) || "",
+        desc: localize(c.description, locale) || "",
+        icon: (c.icon && iconMap[c.icon]) || Heart,
+      }))
+    : fallbackComponents;
+
+  const objetivosSecundarios = cms?.secondaryObjectives && cms.secondaryObjectives.length > 0
+    ? cms.secondaryObjectives.map((o: any) => localize(o, locale) || "")
+    : fallbackSecundarios;
+
   return (
     <>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_092951.webp")}
+        bgImage={sanityImage(cms?.heroImage) || assetPath("/images/eventos/20241112_092951.webp")}
         tag="Programa"
         title="Mi Cuerpo, Mi Sexualidad, Mi Vida"
         subtitle="Promovemos el ejercicio pleno de los derechos sexuales y reproductivos."
@@ -90,7 +78,7 @@ export default function MiCuerpoPage() {
           </div>
           <div className="grid gap-12 md:grid-cols-2 items-center">
             <div className="relative flex h-72 items-center justify-center overflow-hidden rounded-[10px] bg-brand-purple/5 md:h-96">
-              <Image src={assetPath("/images/programas/logo-MCSD.png")} alt="Mi Cuerpo, Mi Sexualidad, Mi Decision" width={240} height={150} className="h-auto max-h-48 w-auto max-w-[80%] object-contain" />
+              <Image src={sanityImage(cms?.programLogo) || assetPath("/images/programas/logo-MCSD.png")} alt="Mi Cuerpo, Mi Sexualidad, Mi Decision" width={240} height={150} className="h-auto max-h-48 w-auto max-w-[80%] object-contain" />
             </div>
             <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
               <p>

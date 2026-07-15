@@ -4,6 +4,7 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { ArrowRight } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getPrograms, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Programas - ASCEP",
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-const programs = [
+const fallbackPrograms = [
   {
     title: "Incidencia y Participacion",
     slug: "incidencia",
@@ -53,12 +54,32 @@ const programs = [
   },
 ];
 
+const slugLabels: Record<string, string> = {
+  incidencia: "Liderazgo",
+  "avanza-joven": "Formacion",
+  empleo: "Insercion",
+  "mi-cuerpo": "Bienestar",
+  "marco-politico": "Incidencia",
+};
+
 export default async function ProgramasPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+
+  const cmsPrograms = await getPrograms();
+
+  const programs = cmsPrograms.length > 0
+    ? cmsPrograms.map((p) => ({
+        title: localize(p.title, locale) || "",
+        slug: p.slug?.current || "",
+        desc: localize(p.shortDescription, locale) || "",
+        image: sanityImage(p.heroImage) || (p.programLogo ? sanityImage(p.programLogo) : "") || "",
+        label: slugLabels[p.slug?.current || ""] || "",
+      }))
+    : fallbackPrograms;
 
   return (
     <>

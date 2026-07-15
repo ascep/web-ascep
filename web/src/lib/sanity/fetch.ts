@@ -22,6 +22,8 @@ import {
   donationTiersQuery,
   faqByPageQuery,
   galleryAlbumsQuery,
+  programasQuery,
+  programaBySlugQuery,
 } from "./queries";
 
 export type SiteSettings = {
@@ -162,7 +164,7 @@ async function sanityFetch<T>(query: string, params?: Record<string, string | nu
   }
 }
 
-function localize<T>(obj: { es?: T; en?: T; pt?: T } | null | undefined, locale: string): T | undefined {
+function localize<T = string>(obj: { es?: T; en?: T; pt?: T } | null | undefined, locale: string): T | undefined {
   if (!obj) return undefined;
   return obj[locale as keyof typeof obj] ?? obj.es;
 }
@@ -232,6 +234,41 @@ export async function getFaqByPage(page: string): Promise<FaqSection | null> {
 export async function getGalleryAlbums(): Promise<GalleryAlbum[]> {
   const data = await sanityFetch<GalleryAlbum[]>(galleryAlbumsQuery);
   return data ?? [];
+}
+
+export type Programa = {
+  _id: string;
+  title?: { es?: string; en?: string; pt?: string };
+  slug?: { current: string };
+  shortDescription?: { es?: string; en?: string; pt?: string };
+  heroImage?: SanityImage;
+  programLogo?: SanityImage;
+  brandColor?: string;
+  order?: number;
+};
+
+export type ProgramaDetail = Programa & {
+  introText?: any;
+  objectives?: Array<{ title?: any; description?: any }>;
+  components?: Array<{ title?: any; description?: any; icon?: string }>;
+  results?: Array<{ es?: string; en?: string; pt?: string }>;
+  modules?: Array<{ code?: string; title?: any; description?: any; icon?: string }>;
+  actionLines?: Array<{ title?: any; description?: any; icon?: string }>;
+  pillars?: Array<{ title?: any; description?: any }>;
+  crossCutting?: Array<{ title?: any; description?: any }>;
+  incidenciaItems?: Array<{ es?: string; en?: string; pt?: string }>;
+  secondaryObjectives?: Array<{ es?: string; en?: string; pt?: string }>;
+  gallery?: SanityImage[];
+  seo?: any;
+};
+
+export async function getPrograms(): Promise<Programa[]> {
+  const data = await sanityFetch<Programa[]>(programasQuery);
+  return data ?? [];
+}
+
+export async function getProgramBySlug(slug: string): Promise<ProgramaDetail | null> {
+  return sanityFetch<ProgramaDetail>(programaBySlugQuery, { slug });
 }
 
 export { localize, sanityImage };

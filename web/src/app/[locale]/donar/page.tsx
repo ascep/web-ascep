@@ -3,8 +3,10 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import DonationForm from "@/components/DonationForm";
 import FaqAccordion from "@/components/FaqAccordion";
-import { Heart, Users, Target, TrendingUp, Coffee, Sunrise, Star, Shield, Sparkles } from "lucide-react";
+import { Heart, Users, Target, TrendingUp, Coffee, Sunrise, Star, Shield, Sparkles, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getImpactStats, getDonationTiers, getFaqByPage, getGalleryAlbums, localize } from "@/lib/sanity/fetch";
+import { imageUrl } from "@/lib/sanity/image";
 
 export const metadata: Metadata = {
   title: "Donar - ASCEP",
@@ -16,7 +18,11 @@ export const metadata: Metadata = {
   },
 };
 
-const GALLERY = [
+const iconMap: Record<string, LucideIcon> = {
+  Heart, Users, Target, TrendingUp, Coffee, Sunrise, Star, Shield, Sparkles,
+};
+
+const fallbackGallery = [
   { src: assetPath("/images/encuentro-2025/GIS06460.webp"), alt: "Jovenes en taller de habilidades" },
   { src: assetPath("/images/encuentro-2025/GIS06450.webp"), alt: "Acompanamiento psicosocial" },
   { src: assetPath("/images/encuentro-2025/GIS06470.webp"), alt: "Actividades grupales" },
@@ -24,7 +30,7 @@ const GALLERY = [
   { src: assetPath("/images/encuentro-2025/GIS06475.webp"), alt: "Momentos de integracion" },
 ];
 
-const CREATIVE_IMPACT = [
+const fallbackTiers = [
   {
     icon: Coffee,
     label: "$5.000",
@@ -62,6 +68,44 @@ const CREATIVE_IMPACT = [
   },
 ];
 
+const tierColorMap: Record<string, { color: string; bg: string }> = {
+  "#019E9F": { color: "text-brand-teal", bg: "bg-brand-teal/10" },
+  "#005C5D": { color: "text-brand-teal", bg: "bg-brand-teal/10" },
+  "#44BCC5": { color: "text-brand-teal", bg: "bg-brand-teal/10" },
+  "#EC6620": { color: "text-brand-orange", bg: "bg-brand-orange/10" },
+  "#F2CA11": { color: "text-brand-yellow", bg: "bg-brand-yellow/10" },
+};
+
+const fallbackStats = [
+  { icon: Users, value: "71.148", label: "NNA protegidos por el ICBF", color: "text-brand-teal", bg: "bg-brand-teal/10" },
+  { icon: Heart, value: "13.000+", label: "Jovenes egresados", color: "text-brand-orange", bg: "bg-brand-orange/10" },
+  { icon: Target, value: "5", label: "Programas activos", color: "text-brand-orange", bg: "bg-brand-orange/10" },
+  { icon: TrendingUp, value: "2019", label: "Inicio de operaciones", color: "text-brand-purple", bg: "bg-brand-purple/10" },
+];
+
+const fallbackFaq = [
+  {
+    question: "¿Cómo se utiliza mi donación?",
+    answer: "Tu donación se destina directamente a nuestros programas de formación, apoyo psicosocial y oportunidades laborales para jóvenes egresados del sistema de protección estatal. Publicamos informes periódicos de transparencia con el detalle de ingresos y gastos.",
+  },
+  {
+    question: "¿Mi donación es deducible de impuestos?",
+    answer: "ASCEP es una organización constituida legalmente en Colombia. Las donaciones pueden ser deducibles de impuestos. Consúltanos a contacto@ascep.org para recibir la certificación correspondiente y conocer los requisitos fiscales.",
+  },
+  {
+    question: "¿Puedo hacer una donación recurrente?",
+    answer: "Sí. Puedes configurar donaciones mensuales a través de Mercado Pago o Stripe seleccionando el monto de tu preferencia. También puedes contactarnos para establecer un Plan Padrino con aportes periódicos.",
+  },
+  {
+    question: "¿Qué métodos de pago aceptan?",
+    answer: "Aceptamos pagos con tarjeta de crédito, débito (a través de Mercado Pago y Stripe), y también donaciones por PSE, Nequi y efectivo a través de Donatario.",
+  },
+  {
+    question: "¿Cómo sé que mi donación llegó?",
+    answer: "Recibirás un comprobante de tu transacción y, si nos proporcionas tu correo electrónico, te enviaremos información sobre el impacto de tu contribución. También publicamos informes de transparencia trimestrales.",
+  },
+];
+
 export default async function DonarPage({
   params,
 }: {
@@ -71,12 +115,52 @@ export default async function DonarPage({
   const t = await getTranslations({ locale, namespace: "donar" });
   const g = await getTranslations({ locale, namespace: "generales" });
 
-  const stats = [
-    { icon: Users, value: "71.148", label: "NNA protegidos por el ICBF", color: "text-brand-teal", bg: "bg-brand-teal/10" },
-    { icon: Heart, value: "13.000+", label: "Jovenes egresados", color: "text-brand-orange", bg: "bg-brand-orange/10" },
-    { icon: Target, value: "5", label: "Programas activos", color: "text-brand-orange", bg: "bg-brand-orange/10" },
-    { icon: TrendingUp, value: "2019", label: "Inicio de operaciones", color: "text-brand-purple", bg: "bg-brand-purple/10" },
-  ];
+  const [cmsStats, cmsTiers, cmsFaq, cmsAlbums] = await Promise.all([
+    getImpactStats(),
+    getDonationTiers(),
+    getFaqByPage("donar"),
+    getGalleryAlbums(),
+  ]);
+
+  const stats = cmsStats.length > 0
+    ? cmsStats.map((s) => {
+        const Icon = s.icon ? iconMap[s.icon] : Users;
+        const v = s.value?.toLocaleString(locale) ?? "0";
+        return {
+          icon: Icon,
+          value: v + (s.suffix || ""),
+          label: localize(s.label, locale) || "",
+          color: s.color ? tierColorMap[s.color]?.color || "text-brand-purple" : "text-brand-purple",
+          bg: s.color ? tierColorMap[s.color]?.bg || "bg-brand-purple/10" : "bg-brand-purple/10",
+        };
+      })
+    : fallbackStats;
+
+  const tiers = cmsTiers.length > 0
+    ? cmsTiers.map((t) => {
+        const Icon = t.icon ? iconMap[t.icon] : Heart;
+        const c = t.color ? tierColorMap[t.color] : { color: "text-brand-purple", bg: "bg-brand-purple/10" };
+        const label = localize(t.label, locale) || `$${t.monthlyCop?.toLocaleString(locale)}`;
+        const desc = localize(t.description, locale) || "";
+        return { icon: Icon, label, desc, color: c.color, bg: c.bg };
+      })
+    : fallbackTiers;
+
+  const gallery = cmsAlbums.length > 0
+    ? cmsAlbums.flatMap((a) =>
+        (a.images || []).map((img) => ({
+          src: imageUrl(img) || "",
+          alt: localize(img.alt, locale) || "",
+        }))
+      ).filter((g) => g.src)
+    : fallbackGallery;
+
+  const faqItems = cmsFaq?.items && cmsFaq.items.length > 0
+    ? cmsFaq.items.map((item) => ({
+        question: localize(item.question, locale) || "",
+        answer: localize(item.answer, locale) || "",
+      }))
+    : fallbackFaq;
 
   return (
     <div>
@@ -139,7 +223,7 @@ export default async function DonarPage({
               {t("pequenasAcciones")}
             </h3>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              {CREATIVE_IMPACT.map((item) => {
+              {tiers.map((item) => {
                 const Icon = item.icon;
                 return (
                   <div key={item.label} className="rounded-[10px] border border-brand-purple/10 bg-white p-5 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
@@ -162,15 +246,15 @@ export default async function DonarPage({
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               <div className="sm:col-span-2 sm:row-span-2">
                 <Image
-                  src={GALLERY[0].src}
-                  alt={GALLERY[0].alt}
+                  src={gallery[0]?.src || ""}
+                  alt={gallery[0]?.alt || ""}
                   width={800}
                   height={600}
                   className="h-full w-full rounded-[10px] object-cover"
                   style={{ minHeight: "300px" }}
                 />
               </div>
-              {GALLERY.slice(1).map((img) => (
+              {gallery.slice(1).map((img) => (
                 <Image
                   key={img.src}
                   src={img.src}
@@ -259,30 +343,7 @@ export default async function DonarPage({
               Preguntas frecuentes sobre donaciones
             </h3>
             <div className="mx-auto max-w-2xl">
-              <FaqAccordion
-                items={[
-                  {
-                    question: "¿Cómo se utiliza mi donación?",
-                    answer: "Tu donación se destina directamente a nuestros programas de formación, apoyo psicosocial y oportunidades laborales para jóvenes egresados del sistema de protección estatal. Publicamos informes periódicos de transparencia con el detalle de ingresos y gastos.",
-                  },
-                  {
-                    question: "¿Mi donación es deducible de impuestos?",
-                    answer: "ASCEP es una organización constituida legalmente en Colombia. Las donaciones pueden ser deducibles de impuestos. Consúltanos a contacto@ascep.org para recibir la certificación correspondiente y conocer los requisitos fiscales.",
-                  },
-                  {
-                    question: "¿Puedo hacer una donación recurrente?",
-                    answer: "Sí. Puedes configurar donaciones mensuales a través de Mercado Pago o Stripe seleccionando el monto de tu preferencia. También puedes contactarnos para establecer un Plan Padrino con aportes periódicos.",
-                  },
-                  {
-                    question: "¿Qué métodos de pago aceptan?",
-                    answer: "Aceptamos pagos con tarjeta de crédito, débito (a través de Mercado Pago y Stripe), y también donaciones por PSE, Nequi y efectivo a través de Donatario.",
-                  },
-                  {
-                    question: "¿Cómo sé que mi donación llegó?",
-                    answer: "Recibirás un comprobante de tu transacción y, si nos proporcionas tu correo electrónico, te enviaremos información sobre el impacto de tu contribución. También publicamos informes de transparencia trimestrales.",
-                  },
-                ]}
-              />
+              <FaqAccordion items={faqItems} />
             </div>
           </div>
         </div>

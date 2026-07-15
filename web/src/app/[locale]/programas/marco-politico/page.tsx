@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import { assetPath } from "@/lib/asset-path";
+import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Marco Politico - ASCEP",
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   },
 };
 
-const pilares = [
+const fallbackPilares = [
   {
     title: "Derechos Humanos de la Ninez y Adolescencia",
     desc: "Colombia ha suscrito tratados internacionales como la Convencion sobre los Derechos del Nino, que establecen el interes superior del nino, el derecho a ser oido y el derecho a una familia. ASCEP aboga por la implementacion efectiva de estos principios en todas las politicas publicas dirigidas a la ninez y adolescencia.",
@@ -31,26 +32,14 @@ const pilares = [
   },
 ];
 
-const enfoques = [
-  {
-    title: "Enfoque de Derechos",
-    desc: "Todos los programas y acciones de ASCEP se fundamentan en el reconocimiento de los adolescentes y jovenes como sujetos titulares de derechos, promoviendo su ejercicio pleno y exigibilidad.",
-  },
-  {
-    title: "Enfoque Diferencial y Territorial",
-    desc: "Reconocemos las particularidades de los territorios y las poblaciones, adaptando nuestras estrategias a las realidades locales, culturales y etnicas de los jovenes que acompanamos.",
-  },
-  {
-    title: "Enfoque de Genero",
-    desc: "Incorporamos una perspectiva de genero en todas nuestras acciones, reconociendo las desigualdades estructurales y promoviendo la equidad entre hombres y mujeres jovenes.",
-  },
-  {
-    title: "Participacion Protagonica",
-    desc: "Los jovenes no son solo beneficiarios de nuestras acciones, sino protagonistas activos en la construccion de politicas, programas y decisiones que afectan sus vidas.",
-  },
+const fallbackEnfoques = [
+  { title: "Enfoque de Derechos", desc: "Todos los programas y acciones de ASCEP se fundamentan en el reconocimiento de los adolescentes y jovenes como sujetos titulares de derechos, promoviendo su ejercicio pleno y exigibilidad." },
+  { title: "Enfoque Diferencial y Territorial", desc: "Reconocemos las particularidades de los territorios y las poblaciones, adaptando nuestras estrategias a las realidades locales, culturales y etnicas de los jovenes que acompanamos." },
+  { title: "Enfoque de Genero", desc: "Incorporamos una perspectiva de genero en todas nuestras acciones, reconociendo las desigualdades estructurales y promoviendo la equidad entre hombres y mujeres jovenes." },
+  { title: "Participacion Protagonica", desc: "Los jovenes no son solo beneficiarios de nuestras acciones, sino protagonistas activos en la construccion de politicas, programas y decisiones que afectan sus vidas." },
 ];
 
-const incidencia = [
+const fallbackIncidencia = [
   "Participacion en mesas tecnicas y espacios de concertacion con el ICBF y otras entidades gubernamentales.",
   "Articulacion con organizaciones de la sociedad civil para la incidencia en politicas publicas de ninez y adolescencia.",
   "Generacion de investigaciones y documentos tecnicos que sustentan las recomendaciones de politica publica.",
@@ -58,11 +47,36 @@ const incidencia = [
   "Seguimiento y monitoreo a la implementacion de la Ley 2479 de 2025 y otras normas relacionadas.",
 ];
 
-export default function MarcoPoliticoPage() {
+export default async function MarcoPoliticoPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const cms = await getProgramBySlug("marco-politico");
+
+  const pilares = cms?.pillars && cms.pillars.length > 0
+    ? cms.pillars.map((p: any) => ({
+        title: localize(p.title, locale) || "",
+        desc: localize(p.description, locale) || "",
+      }))
+    : fallbackPilares;
+
+  const enfoques = cms?.crossCutting && cms.crossCutting.length > 0
+    ? cms.crossCutting.map((e: any) => ({
+        title: localize(e.title, locale) || "",
+        desc: localize(e.description, locale) || "",
+      }))
+    : fallbackEnfoques;
+
+  const incidencia = cms?.incidenciaItems && cms.incidenciaItems.length > 0
+    ? cms.incidenciaItems.map((i: any) => localize(i, locale) || "")
+    : fallbackIncidencia;
+
   return (
     <>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_103351.webp")}
+        bgImage={sanityImage(cms?.heroImage) || assetPath("/images/eventos/20241112_103351.webp")}
         tag="Marco Politico"
         title="Marco"
         highlight="Politico"

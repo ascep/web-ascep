@@ -6,6 +6,7 @@ import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Heart, Users, Star, Briefcase, ArrowRight, CheckCircle } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Voluntariado - ASCEP",
@@ -24,6 +25,7 @@ export default async function VoluntariadoPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "voluntariado" });
+  const pageData = await getPageContent("voluntariado");
 
   const roles = [
     { title: t("rol1"), desc: t("rol1Desc"), icon: Heart, color: "text-brand-purple", bg: "bg-brand-purple/10" },
@@ -37,11 +39,11 @@ export default async function VoluntariadoPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_100049.webp")}
-        bgColor="bg-brand-purple"
-        tag="VOLUNTARIADO"
-        title={t("heroTitle")}
-        subtitle={t("heroSubtitle")}
+        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath("/images/eventos/20241112_100049.webp")}
+        bgColor={pageData?.hero?.bgColor || "bg-brand-purple"}
+        tag={localize(pageData?.hero?.tag, locale) || "VOLUNTARIADO"}
+        title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
+        subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
       <section className="bg-bg-surface py-20">

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
-import { ArrowUpRight, Home, Search, Users } from "lucide-react";
+import { ArrowUpRight, Home, Search, Users, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Incidencia y Participacion - ASCEP",
@@ -14,7 +15,11 @@ export const metadata: Metadata = {
   },
 };
 
-const objetivos = [
+const iconMap: Record<string, LucideIcon> = {
+  ArrowUpRight, Home, Search, Users,
+};
+
+const fallbackObjetivos = [
   {
     title: "Ampliar y mejorar las alternativas de cuidado familiar y comunitario",
     desc: "Extender y diversificar la cobertura de opciones de cuidado, evaluando la efectividad de los programas existentes y, si es necesario, reformandolos o creando nuevos para prevenir el ingreso de miles de NNAJ al proceso administrativo de restablecimiento de derechos.",
@@ -37,40 +42,50 @@ const objetivos = [
   },
 ];
 
-const lineas = [
-  {
-    title: "Autonomia Progresiva",
-    desc: "Trabajamos en el desarrollo e implementacion de programas y recursos que empoderen a las personas con experiencia en el cuidado y a los jovenes sin cuidado parental, brindandoles herramientas para alcanzar su independencia personal, economica y social.",
-    icon: ArrowUpRight,
-  },
-  {
-    title: "Cuidados Alternativos, Desinstitucionalizacion y Prevencion a la Separacion Familiar",
-    desc: "Abogamos por la implementacion y fortalecimiento de politicas que fomenten el cuidado basado en la familia como la principal alternativa para los ninos sin cuidado parental en Colombia, como recurso para evitar la desinstitucionalizacion.",
-    icon: Home,
-  },
-  {
-    title: "Investigacion y Diseno de Politicas Publicas",
-    desc: "Realizamos investigaciones para comprender mejor las necesidades y desafios de las personas con experiencia en el cuidado y los ninos sin cuidado parental en Colombia, para el diseno de politicas publicas mas efectivas y orientadas a garantizar los derechos de los jovenes en transicion y egresados de proteccion.",
-    icon: Search,
-  },
-  {
-    title: "Participacion Intersectorial",
-    desc: "Facilitar espacios de dialogo y colaboracion entre diferentes sectores y actores relevantes, como organizaciones de la sociedad civil, instituciones gubernamentales, academicos y jovenes, con el fin de promover la participacion activa y la construccion conjunta de soluciones.",
-    icon: Users,
-  },
+const fallbackLineas = [
+  { title: "Autonomia Progresiva", desc: "Trabajamos en el desarrollo e implementacion de programas y recursos que empoderen a las personas con experiencia en el cuidado y a los jovenes sin cuidado parental, brindandoles herramientas para alcanzar su independencia personal, economica y social.", icon: ArrowUpRight },
+  { title: "Cuidados Alternativos, Desinstitucionalizacion y Prevencion a la Separacion Familiar", desc: "Abogamos por la implementacion y fortalecimiento de politicas que fomenten el cuidado basado en la familia como la principal alternativa para los ninos sin cuidado parental en Colombia, como recurso para evitar la desinstitucionalizacion.", icon: Home },
+  { title: "Investigacion y Diseno de Politicas Publicas", desc: "Realizamos investigaciones para comprender mejor las necesidades y desafios de las personas con experiencia en el cuidado y los ninos sin cuidado parental en Colombia, para el diseno de politicas publicas mas efectivas y orientadas a garantizar los derechos de los jovenes en transicion y egresados de proteccion.", icon: Search },
+  { title: "Participacion Intersectorial", desc: "Facilitar espacios de dialogo y colaboracion entre diferentes sectores y actores relevantes, como organizaciones de la sociedad civil, instituciones gubernamentales, academicos y jovenes, con el fin de promover la participacion activa y la construccion conjunta de soluciones.", icon: Users },
 ];
 
-const resultados = [
+const fallbackResultados = [
   "Politicas publicas que transformen los cuidados alternativos y la atencion a ninos, ninas, adolescentes y jovenes en transicion.",
   "Jovenes lideres que transformen y ejerzan su ciudadania, fortaleciendo el proyecto de vida de sus pares.",
   "Instalacion y funcionamiento de una mesa intersectorial para la autonomia progresiva, que permita la colaboracion y coordinacion entre diferentes actores y sectores involucrados.",
 ];
 
-export default function IncidenciaPage() {
+export default async function IncidenciaPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const cms = await getProgramBySlug("incidencia");
+
+  const objetivos = cms?.objectives && cms.objectives.length > 0
+    ? cms.objectives.map((o: any) => ({
+        title: localize(o.title, locale) || "",
+        desc: localize(o.description, locale) || "",
+      }))
+    : fallbackObjetivos;
+
+  const lineas = cms?.actionLines && cms.actionLines.length > 0
+    ? cms.actionLines.map((l: any) => ({
+        title: localize(l.title, locale) || "",
+        desc: localize(l.description, locale) || "",
+        icon: (l.icon && iconMap[l.icon]) || ArrowUpRight,
+      }))
+    : fallbackLineas;
+
+  const resultados = cms?.results && cms.results.length > 0
+    ? cms.results.map((r: any) => localize(r, locale) || "")
+    : fallbackResultados;
+
   return (
     <>
       <PageHero
-        bgImage={assetPath("/images/programas/incidencia-scaled-1.webp")}
+        bgImage={sanityImage(cms?.heroImage) || assetPath("/images/programas/incidencia-scaled-1.webp")}
         tag="Programa"
         title="Incidencia y Participacion"
         subtitle="Fortalecemos la participacion ciudadana y la incidencia politica de los jovenes egresados."
@@ -88,7 +103,7 @@ export default function IncidenciaPage() {
           </div>
           <div className="grid gap-12 md:grid-cols-2 items-center">
             <div className="relative h-72 overflow-hidden rounded-[10px] md:h-96">
-              <Image src={assetPath("/images/programas/incidencia-scaled-1.webp")} alt="Incidencia y Participacion" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
+              <Image src={sanityImage(cms?.heroImage) || assetPath("/images/programas/incidencia-scaled-1.webp")} alt="Incidencia y Participacion" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
             <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
               <p>

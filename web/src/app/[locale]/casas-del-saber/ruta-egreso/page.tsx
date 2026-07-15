@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import { assetPath } from "@/lib/asset-path";
+import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Ruta de Egreso Progresivo - Casas del Saber - ASCEP",
@@ -75,14 +76,15 @@ export default async function RutaEgresoPage({
     },
   ];
 
+  const pageData = await getPageContent("casas-del-saber-ruta-egreso");
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/encuentro-2025/GIS06475.webp")}
-        tag={t("heroTag")}
-        title={t("heroTitle")}
-        highlight={t("heroHighlight")}
-        subtitle={t("heroSubtitle")}
+        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath("/images/encuentro-2025/GIS06475.webp")}
+        tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
+        title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
+        highlight={localize(pageData?.hero?.highlight, locale) || t("heroHighlight")}
+        subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
       <section className="bg-brand-teal/5 py-20">

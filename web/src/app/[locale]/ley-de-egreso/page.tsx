@@ -5,6 +5,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import ImageCarousel from "@/components/ImageCarousel";
 import { assetPath } from "@/lib/asset-path";
+import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
   title: "Ley Hijos del Estado - ASCEP",
@@ -42,16 +43,17 @@ export default async function LeyDeEgresoPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "leyEgreso" });
+  const pageData = await getPageContent("ley-egreso");
 
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_111016.webp")}
+        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath("/images/eventos/20241112_111016.webp")}
         bgColor="bg-brand-orange"
-        tag="LEY DE EGRESO"
-        title="Ley"
-        highlight="Hijos del Estado"
-        subtitle={t("subtitle")}
+        tag={localize(pageData?.hero?.tag, locale) || "LEY DE EGRESO"}
+        title={localize(pageData?.hero?.title, locale) || "Ley"}
+        highlight={localize(pageData?.hero?.highlight, locale) || "Hijos del Estado"}
+        subtitle={localize(pageData?.hero?.subtitle, locale) || t("subtitle")}
       />
 
       <section className="bg-bg-surface py-16">
