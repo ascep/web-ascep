@@ -42,18 +42,18 @@ export default function PageHero({
         <div className="max-w-3xl">
           {tag && (
             <motion.span
-              initial={{ opacity: 0, y: 20 }}
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.23, 1, 0.32, 1] }}
               className="mb-4 inline-block rounded-[10px] bg-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange"
             >
               {tag}
             </motion.span>
           )}
           <motion.h1
-            initial={{ opacity: 0, y: 60 }}
+            initial={prefersReducedMotion ? {} : { opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
             className="text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-5xl"
           >
             {title}
@@ -63,9 +63,9 @@ export default function PageHero({
           </motion.h1>
           {subtitle && (
             <motion.p
-              initial={{ opacity: 0, y: 40 }}
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ duration: 0.6, delay: 0.15, ease: [0.23, 1, 0.32, 1] }}
               className="mt-4 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg"
             >
               {subtitle}
@@ -73,9 +73,9 @@ export default function PageHero({
           )}
           {children && (
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ duration: 0.5, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
               className="mt-8 flex flex-wrap gap-3"
             >
               {children}

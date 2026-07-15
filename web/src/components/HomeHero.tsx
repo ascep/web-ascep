@@ -44,9 +44,9 @@ export default function HomeHero({
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex min-h-[85vh] flex-col items-center gap-10 py-20 lg:flex-row lg:py-0">
           <motion.div
-            initial={{ opacity: 0, x: -60 }}
+            initial={prefersReducedMotion ? {} : { opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
             className="flex-1 lg:max-w-xl"
           >
             <span className="mb-4 inline-block rounded-[10px] bg-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
@@ -64,9 +64,9 @@ export default function HomeHero({
             </div>
           </motion.div>
           <motion.div
-            initial={{ opacity: 0, x: 60 }}
+            initial={prefersReducedMotion ? {} : { opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.9, delay: 0.2, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.6, delay: prefersReducedMotion ? 0 : 0.15, ease: [0.23, 1, 0.32, 1] }}
             className="flex-1"
           >
             <div className="relative mx-auto max-w-lg">

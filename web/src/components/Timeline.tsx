@@ -38,10 +38,10 @@ export default function Timeline({ items }: TimelineProps) {
           return (
             <motion.div
               key={item.year}
-              initial={{ opacity: 0, x: isLeft ? -30 : 30 }}
+              initial={prefersReducedMotion ? {} : { opacity: 0, x: isLeft ? -20 : 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.6, delay: i * 0.12, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ duration: 0.5, delay: prefersReducedMotion ? 0 : i * 0.1, ease: [0.23, 1, 0.32, 1] }}
               className={`relative flex items-start pl-10 sm:pl-0 ${
                 isLeft ? "sm:flex-row" : "sm:flex-row-reverse"
               }`}
