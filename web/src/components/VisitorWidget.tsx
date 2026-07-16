@@ -24,30 +24,29 @@ export default function VisitorWidget() {
   const [total, setTotal] = useState(0);
   const [last, setLast] = useState<VisitInfo | null>(null);
   const [hover, setHover] = useState(false);
-  const [now, setNow] = useState(Date.now());
-
-  const sendVisit = useCallback(async () => {
-    if (!DENO_URL || sessionStorage.getItem("ascep_visited")) return;
-    sessionStorage.setItem("ascep_visited", "1");
-    try {
-      const res = await fetch(GEO_API);
-      const geo = await res.json();
-      await fetch(`${DENO_URL}/visit`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          city: geo.city?.name || "Desconocido",
-          country: geo.country?.name || "Desconocido",
-          flag: geo.country?.flag || "",
-        }),
-      });
-    } catch {
-      /* silent */
-    }
-  }, []);
 
   useEffect(() => {
     if (!DENO_URL) return;
+
+    const sendVisit = async () => {
+      if (sessionStorage.getItem("ascep_visited")) return;
+      sessionStorage.setItem("ascep_visited", "1");
+      let city = "Desconocido";
+      let country = "Desconocido";
+      let flag = "";
+      try {
+        const res = await fetch(GEO_API, { signal: AbortSignal.timeout(5000) });
+        const geo = await res.json();
+        city = geo.city?.name || city;
+        country = geo.country?.name || country;
+        flag = geo.country?.flag || flag;
+      } catch {}
+      await fetch(`${DENO_URL}/visit`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ city, country, flag }),
+      }).catch(() => {});
+    };
     sendVisit();
 
     fetch(`${DENO_URL}/stats`)
@@ -64,20 +63,13 @@ export default function VisitorWidget() {
         const { key, value } = JSON.parse(e.data);
         if (key === "lastVisit") setLast(value);
         if (key === "visits") setTotal(Number(value));
-      } catch {
-        /* silent */
-      }
+      } catch {}
     });
 
-    const tick = setInterval(() => setNow(Date.now()), 30000);
+    return () => es.close();
+  }, []);
 
-    return () => {
-      es.close();
-      clearInterval(tick);
-    };
-  }, [sendVisit]);
-
-  if (!DENO_URL || total === 0) return null;
+  if (!DENO_URL) return null;
 
   return (
     <div
