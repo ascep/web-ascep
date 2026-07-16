@@ -72,18 +72,18 @@ export default function VisitorWidget() {
 
   return (
     <div className="fixed bottom-4 left-4 z-40 select-none">
-      <div className="flex items-center gap-2 rounded-[10px] border border-border-subtle bg-bg-card/80 px-3 py-1.5 text-[11px] text-text-muted shadow-sm backdrop-blur">
-        <span className="text-[10px]">👁</span>
-        <span className="font-medium text-text-primary">{total.toLocaleString()}</span>
+      <div className="flex items-center gap-2 rounded-[10px] border border-border bg-bg-card px-3 py-1.5 text-[12px] shadow-md">
+        <span>👁</span>
+        <span className="font-semibold text-text-primary">{total.toLocaleString()}</span>
         {last ? (
           <>
-            <span className="opacity-30">|</span>
+            <span className="text-border">|</span>
             <span>{last.flag}</span>
-            <span className="hidden sm:inline">{last.city}, {last.country}</span>
-            <span className="opacity-50">• {timeAgo(last.timestamp)}</span>
+            <span className="hidden sm:inline text-text-secondary">{last.city}, {last.country}</span>
+            <span className="text-text-muted">• {timeAgo(last.timestamp)}</span>
           </>
         ) : (
-          <span className="opacity-50">visitantes</span>
+          <span className="text-text-muted">visitantes</span>
         )}
       </div>
     </div>
