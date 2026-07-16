@@ -4,6 +4,7 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { Users, Calendar, GraduationCap, Layers, Target } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
 import { getImpactStats, getGalleryAlbums } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 
@@ -35,20 +36,7 @@ const statColors = [
   { bg: "bg-brand-purple/10", icon: "text-brand-purple", num: "text-brand-purple" },
 ];
 
-const fallbackGaleria = [
-  assetPath("/images/encuentro-2025/GIS06448.webp"),
-  assetPath("/images/encuentro-2025/GIS06455.webp"),
-  assetPath("/images/encuentro-2025/GIS06462.webp"),
-  assetPath("/images/encuentro-2025/GIS06470.webp"),
-  assetPath("/images/equipo-shoot/GIS08514.webp"),
-  assetPath("/images/equipo-shoot/GIS08522.webp"),
-  assetPath("/images/equipo-shoot/GIS08531.webp"),
-  assetPath("/images/equipo-shoot/GIS08544.webp"),
-  assetPath("/images/eventos/20241112_095957.webp"),
-  assetPath("/images/eventos/20241112_100147.webp"),
-  assetPath("/images/eventos/20241112_102405.webp"),
-  assetPath("/images/eventos/20241112_115147.webp"),
-];
+const fallbackGaleria = fotos.impacto.gallery.map((src) => assetPath(src));
 
 export default async function ImpactoPage({
   params,
@@ -80,7 +68,7 @@ export default async function ImpactoPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/encuentro-2025/GIS06455.webp")}
+        bgImage={assetPath(fotos.impacto.hero)}
         tag={t("heroTag")}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}

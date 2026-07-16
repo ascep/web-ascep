@@ -4,6 +4,7 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { ArrowRight } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
 import { getPrograms, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -84,7 +85,7 @@ export default async function ProgramasPage({
   return (
     <>
       <PageHero
-        bgImage={assetPath("/images/encuentro-2025/GIS06470.webp")}
+        bgImage={assetPath(fotos.programas.hero)}
         tag="Programas"
         title="Nuestros Programas"
         subtitle="Disenados para acompanar a adolescentes y jovenes en su transicion hacia la vida adulta."

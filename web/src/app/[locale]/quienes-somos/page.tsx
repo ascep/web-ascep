@@ -7,6 +7,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { getTranslations } from "next-intl/server";
 import { Target, Eye, Heart } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
 import { imageUrl } from "@/lib/sanity/image";
 import { getTeamMembers, getMilestones } from "@/lib/sanity/fetch";
 
@@ -21,20 +22,19 @@ export const metadata: Metadata = {
 };
 
 const fallbackTeam = [
-  { name: "Maicol Londoño", role: "Director", src: assetPath("/images/equipo/maicol.png") },
-  { name: "Kevin Ortega", role: "Coordinador", src: assetPath("/images/equipo/phtos-ascep-kevin.png") },
-  { name: "Monica", role: "Equipo Psicosocial", src: assetPath("/images/equipo/phtos-ascep-monica.png") },
-  { name: "Jhon Eduard Angulo", role: "Equipo de Formacion", src: assetPath("/images/equipo/phtos-ascep-jhon.png") },
-  { name: "Ana", role: "Equipo ASCEP", src: assetPath("/images/equipo/phtos-ascep.png") },
+  { name: "Maicol Londoño", role: "Director", src: assetPath(fotos.quienesSomos.team.maicol) },
+  { name: "Kevin Ortega", role: "Coordinador", src: assetPath(fotos.quienesSomos.team.kevin) },
+  { name: "Monica", role: "Equipo Psicosocial", src: assetPath(fotos.quienesSomos.team.monica) },
+  { name: "Jhon Eduard Angulo", role: "Equipo de Formacion", src: assetPath(fotos.quienesSomos.team.jhon) },
+  { name: "Ana", role: "Equipo ASCEP", src: assetPath(fotos.quienesSomos.team.ana) },
 ];
 
-const fallbackMilestones = [
-  { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: assetPath("/images/eventos/20241112_092855.webp") },
-  { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: assetPath("/images/eventos/20241112_092951.webp") },
-  { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: assetPath("/images/eventos/20241112_095957.webp") },
-  { year: "2023", title: "Proyecto de Ley", description: "Impulsamos el proyecto de Ley de Egreso, construido colectivamente con egresados de todo el pais y respaldado por la senadora Lorena Rios.", image: assetPath("/images/eventos/20241112_100147.webp") },
-  { year: "2025", title: "Ley 2479 de 2025", description: "Se sanciona la Ley Hijos del Estado, creando el Programa Nacional de Acompanamiento Integral al Egresado del ICBF.", image: assetPath("/images/eventos/20241112_111016.webp") },
-];
+const fallbackMilestones = fotos.quienesSomos.timeline.map((item) => ({
+  year: item.year,
+  title: item.title,
+  description: item.description,
+  image: assetPath(item.image),
+}));
 
 const dimensions = [
   { title: "Autoaceptacion", desc: "Valoracion positiva de si mismo y de la propia historia." },
@@ -80,7 +80,7 @@ export default async function QuienesSomosPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/equipo-shoot/GIS08542.webp")}
+        bgImage={assetPath(fotos.quienesSomos.hero)}
         title={t("heroTitle")}
         highlight={t("heroHighlight")}
         subtitle={t("heroSubtitle")}

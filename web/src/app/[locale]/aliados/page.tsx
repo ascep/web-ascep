@@ -4,6 +4,7 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { Building2, Globe, Briefcase, GraduationCap, Heart, Radio } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
 import { getPartners } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 
@@ -17,12 +18,10 @@ export const metadata: Metadata = {
   },
 };
 
-const fallbackLogos = [
-  { src: assetPath("/images/aliados/colombia.svg"), alt: "Colombia" },
-  { src: assetPath("/images/aliados/empower-logo-blue.svg"), alt: "Empower" },
-  { src: assetPath("/images/aliados/gapi-icesi-logo.webp"), alt: "GAPI Icesi" },
-  { src: assetPath("/images/aliados/Vaki.png"), alt: "Vaki" },
-];
+const fallbackLogos = fotos.aliados.logos.map((item) => ({
+  ...item,
+  src: assetPath(item.src),
+}));
 
 export default async function AliadosPage({
   params,
@@ -54,7 +53,7 @@ export default async function AliadosPage({
   return (
     <div>
       <PageHero
-        bgImage={assetPath("/images/eventos/20241112_092855.webp")}
+        bgImage={assetPath(fotos.aliados.hero)}
         tag={t("heroTag")}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}

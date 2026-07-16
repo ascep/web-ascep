@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, Search } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
 import FlagIcon from "./FlagIcon";
 import ThemeToggle from "./ThemeToggle";
 import MobileMenu from "./MobileMenu";
@@ -234,7 +235,7 @@ export default function Header() {
                 <div className="flex gap-6">
                   <div className="w-2/5 shrink-0">
                     <Image
-                      src={assetPath("/images/encuentro-2025/GIS06446.webp")}
+                      src={assetPath(fotos.header.leyEgresoCard)}
                       alt="Ley de Egreso"
                       width={280}
                       height={200}
@@ -283,7 +284,7 @@ export default function Header() {
                 <div className="flex gap-6">
                   <div className="w-2/5 shrink-0">
                     <Image
-                      src={assetPath("/images/encuentro-2025/GIS06447.webp")}
+                      src={assetPath(fotos.header.comoAyudarCard)}
                       alt={t("comoAyudar")}
                       width={280}
                       height={200}

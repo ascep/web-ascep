@@ -4,6 +4,7 @@ import { motion, useReducedMotion } from "motion/react";
 import Image from "next/image";
 import { ChevronDown } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
 import { useTranslations } from "next-intl";
 
 type HomeHeroProps = {
@@ -34,7 +35,7 @@ export default function HomeHero({
           muted
           loop
           playsInline
-          poster={assetPath("/images/MG_1563.webp")}
+          poster={assetPath(fotos.home.heroPoster)}
           className="h-full w-full object-cover"
         >
           <source src={assetPath("/videos/FONDO-WEB-16-9.mp4")} type="video/mp4" />
@@ -73,7 +74,7 @@ export default function HomeHero({
               <div className="absolute -right-6 -top-6 h-48 w-48 rounded-2xl bg-brand-teal/20" />
               <div className="absolute -bottom-4 -left-4 h-32 w-32 rounded-2xl bg-brand-orange/20" />
               <Image
-                src={assetPath("/images/encuentro-2025/GIS06445.webp")}
+                src={assetPath(fotos.home.heroImage)}
                 alt="ASCEP team"
                 width={600}
                 height={450}
