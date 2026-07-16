@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 
 type VisitInfo = {
   city: string;
@@ -10,7 +10,11 @@ type VisitInfo = {
 };
 
 const DENO_URL = process.env.NEXT_PUBLIC_DENO_VISITORS_URL || "";
-const GEO_API = "https://geolocation.microlink.io/";
+const GEO_API = "https://ip-api.com/json/";
+
+function codeToFlag(code: string) {
+  return String.fromCodePoint(...code.toUpperCase().split("").map((c) => 0x1F1E6 + c.charCodeAt(0) - 65));
+}
 
 function timeAgo(ts: number) {
   const min = Math.floor((Date.now() - ts) / 60000);
@@ -36,9 +40,11 @@ export default function VisitorWidget() {
       try {
         const res = await fetch(GEO_API, { signal: AbortSignal.timeout(5000) });
         const geo = await res.json();
-        city = geo.city?.name || city;
-        country = geo.country?.name || country;
-        flag = geo.country?.flag || flag;
+        if (geo.status === "success") {
+          city = geo.city || city;
+          country = geo.country || country;
+          flag = codeToFlag(geo.countryCode || "");
+        }
       } catch {}
       await fetch(`${DENO_URL}/visit`, {
         method: "POST",
