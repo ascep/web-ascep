@@ -23,7 +23,6 @@ function timeAgo(ts: number) {
 export default function VisitorWidget() {
   const [total, setTotal] = useState(0);
   const [last, setLast] = useState<VisitInfo | null>(null);
-  const [hover, setHover] = useState(false);
 
   useEffect(() => {
     if (!DENO_URL) return;
@@ -72,38 +71,17 @@ export default function VisitorWidget() {
   if (!DENO_URL) return null;
 
   return (
-    <div
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-      className="fixed bottom-4 left-4 z-40 cursor-default select-none"
-    >
-      <div
-        className={`rounded-[10px] border border-border-subtle bg-bg-card/80 px-3 py-1.5 text-[11px] text-text-muted shadow-sm backdrop-blur transition-all duration-300 ${
-          hover ? "px-4" : ""
-        }`}
-        style={{ minWidth: hover ? 220 : 80 }}
-      >
-        {!hover ? (
-          <span className="flex items-center gap-1.5 whitespace-nowrap">
-            <span className="text-[10px]">👁</span>
-            {total.toLocaleString()}
-          </span>
-        ) : (
-          <div className="space-y-0.5 whitespace-nowrap">
-            <div className="flex items-center gap-1.5 font-medium text-text-primary">
-              <span className="text-[10px]">👁</span>
-              {total.toLocaleString()} visitas
-            </div>
-            {last && (
-              <div className="flex items-center gap-1 text-text-muted">
-                <span>{last.flag}</span>
-                <span>
-                  {last.city}, {last.country}
-                </span>
-                <span className="opacity-50">• {timeAgo(last.timestamp)}</span>
-              </div>
-            )}
-          </div>
+    <div className="fixed bottom-4 left-4 z-40 select-none">
+      <div className="flex items-center gap-2 rounded-[10px] border border-border-subtle bg-bg-card/80 px-3 py-1.5 text-[11px] text-text-muted shadow-sm backdrop-blur">
+        <span className="text-[10px]">👁</span>
+        <span className="font-medium text-text-primary">{total.toLocaleString()}</span>
+        {last && (
+          <>
+            <span className="opacity-30">|</span>
+            <span>{last.flag}</span>
+            <span className="hidden sm:inline">{last.city}, {last.country}</span>
+            <span className="opacity-50">• {timeAgo(last.timestamp)}</span>
+          </>
         )}
       </div>
     </div>
