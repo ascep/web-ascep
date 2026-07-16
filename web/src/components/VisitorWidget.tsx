@@ -75,13 +75,15 @@ export default function VisitorWidget() {
       <div className="flex items-center gap-2 rounded-[10px] border border-border-subtle bg-bg-card/80 px-3 py-1.5 text-[11px] text-text-muted shadow-sm backdrop-blur">
         <span className="text-[10px]">👁</span>
         <span className="font-medium text-text-primary">{total.toLocaleString()}</span>
-        {last && (
+        {last ? (
           <>
             <span className="opacity-30">|</span>
             <span>{last.flag}</span>
             <span className="hidden sm:inline">{last.city}, {last.country}</span>
             <span className="opacity-50">• {timeAgo(last.timestamp)}</span>
           </>
+        ) : (
+          <span className="opacity-50">visitantes</span>
         )}
       </div>
     </div>

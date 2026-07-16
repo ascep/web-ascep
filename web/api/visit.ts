@@ -1,4 +1,5 @@
 const db = await Deno.openKv()
+const BASE = 100
 let eventId = 0
 
 const corsHeaders = {
@@ -28,6 +29,7 @@ Deno.serve(async (req) => {
     await db.atomic()
       .set(["lastVisit"], entry)
       .sum(["visits"], 1n)
+      .set(["initialized"], true)
       .commit()
 
     return json({ ok: true })
@@ -39,7 +41,7 @@ Deno.serve(async (req) => {
       db.get(["visits"]),
     ])
     return json({
-      total: Number(visits.value ?? 0),
+      total: BASE + Number(visits.value ?? 0n),
       lastVisit: lastVisit.value ?? null,
     })
   }
@@ -50,7 +52,8 @@ Deno.serve(async (req) => {
         const watcher = db.watch([["lastVisit"], ["visits"]])
         for await (const [entry] of watcher) {
           if (entry.value != null) {
-            const data = `event: update\ndata: ${JSON.stringify({ key: entry.key[0], value: entry.value })}\nid: ${eventId++}\n\n`
+            const value = entry.key[0] === "visits" ? BASE + Number(entry.value) : entry.value
+            const data = `event: update\ndata: ${JSON.stringify({ key: entry.key[0], value })}\nid: ${eventId++}\n\n`
             controller.enqueue(new TextEncoder().encode(data))
           }
         }
