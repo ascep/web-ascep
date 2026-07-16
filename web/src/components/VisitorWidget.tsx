@@ -10,7 +10,7 @@ type VisitInfo = {
 };
 
 const DENO_URL = process.env.NEXT_PUBLIC_DENO_VISITORS_URL || "";
-const GEO_API = "https://ip-api.com/json/";
+const GEO_API = "https://ipapi.co/json/";
 
 function codeToFlag(code: string) {
   return String.fromCodePoint(...code.toUpperCase().split("").map((c) => 0x1F1E6 + c.charCodeAt(0) - 65));
@@ -40,10 +40,10 @@ export default function VisitorWidget() {
       try {
         const res = await fetch(GEO_API, { signal: AbortSignal.timeout(5000) });
         const geo = await res.json();
-        if (geo.status === "success") {
-          city = geo.city || city;
-          country = geo.country || country;
-          flag = codeToFlag(geo.countryCode || "");
+        if (geo?.city) {
+          city = geo.city;
+          country = geo.country_name || geo.country || country;
+          flag = codeToFlag(geo.country_code || "");
         }
       } catch {}
       await fetch(`${DENO_URL}/visit`, {
