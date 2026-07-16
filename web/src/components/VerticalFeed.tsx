@@ -176,7 +176,6 @@ export default function VerticalFeed({ playlistId }: { playlistId?: string }) {
   const [items, setItems] = useState<FeedItem[]>([]);
   const [loading, setLoading] = useState(true);
   const prefersReduced = useReducedMotion() ?? false;
-  const [visitors, setVisitors] = useState(0);
 
   useEffect(() => {
     const params = playlistId ? `?playlistId=${playlistId}` : "";
@@ -190,14 +189,6 @@ export default function VerticalFeed({ playlistId }: { playlistId?: string }) {
       setLoading(false);
     }).catch(() => setLoading(false));
   }, [playlistId]);
-
-  useEffect(() => {
-    fetch("/api/visitors").then((r) => r.json()).then((d) => setVisitors(d.count)).catch(() => {});
-    if (!sessionStorage.getItem("ascep_visited")) {
-      sessionStorage.setItem("ascep_visited", "1");
-      fetch("/api/visitors", { method: "POST" }).catch(() => {});
-    }
-  }, []);
 
   const goTo = useCallback((index: number) => {
     const clamped = Math.max(0, Math.min(index, items.length - 1));
@@ -227,19 +218,9 @@ export default function VerticalFeed({ playlistId }: { playlistId?: string }) {
       <div className="md:hidden" style={{ height: containerHeight }}>
         <SwipeFeed items={items} current={current} onGoTo={goTo}
           muted={muted} onToggleMute={() => setMuted((m) => !m)} prefersReduced={prefersReduced} />
-        {visitors > 0 && (
-          <div className="mt-2 text-center text-[10px] text-text-muted">
-            {visitors.toLocaleString()} personas han visitado esta pagina
-          </div>
-        )}
       </div>
 
       <div className="hidden md:block">
-        {visitors > 0 && (
-          <div className="mb-4 text-center text-xs text-text-muted">
-            {visitors.toLocaleString()} personas han visitado esta seccion
-          </div>
-        )}
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((item, i) => (
             <div key={item.videoId}

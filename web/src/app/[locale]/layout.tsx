@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import VisitorWidget from "@/components/VisitorWidget";
 import MobileTabBar from "@/components/MobileTabBar";
 
 const locales = ["es", "pt"];
@@ -33,6 +34,7 @@ export default async function LocaleLayout({
         <main className="flex-1 pb-24 md:pb-0">{children}</main>
         <MobileTabBar />
         <Footer />
+        <VisitorWidget />
         <WhatsAppButton />
       </ThemeProvider>
     </NextIntlClientProvider>
