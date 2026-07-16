@@ -6,6 +6,8 @@ import { ArrowRight } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { fotos } from "@/data/fotos";
 import { getPrograms, localize, sanityImage } from "@/lib/sanity/fetch";
+import { getTranslations } from "next-intl/server";
+import AnimatedSection from "@/components/AnimatedSection";
 
 export const metadata: Metadata = {
   title: "Programas - ASCEP",
@@ -17,50 +19,13 @@ export const metadata: Metadata = {
   },
 };
 
-const fallbackPrograms = [
-  {
-    title: "Incidencia y Participacion",
-    slug: "incidencia",
-    desc: "Desarrollamos acciones que involucran a actores clave y tomadores de decisiones en la transformacion de los cuidados alternativos.",
-    image: assetPath("/images/programas/incidencia-scaled-1.webp"),
-    label: "Liderazgo",
-  },
-  {
-    title: "Avanza Joven",
-    slug: "avanza-joven",
-    desc: "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida.",
-    image: assetPath("/images/programas/Avanza-1-scaled-1.webp"),
-    label: "Formacion",
-  },
-  {
-    title: "Fomento para el Empleo y Emprendimiento",
-    slug: "empleo",
-    desc: "Modelo piloto para promover capacidades laborales y fortalecer la empleabilidad de jovenes en proceso de egreso del sistema de proteccion.",
-    image: assetPath("/images/programas/LOGO-FOMENTO.png"),
-    label: "Insercion",
-  },
-  {
-    title: "Mi Cuerpo, Mi Sexualidad, Mi Decision",
-    slug: "mi-cuerpo",
-    desc: "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad.",
-    image: assetPath("/images/programas/logo-MCSD.png"),
-    label: "Bienestar",
-  },
-  {
-    title: "Marco Politico",
-    slug: "marco-politico",
-    desc: "Los fundamentos conceptuales, normativos y estrategicos que guian nuestra accion institucional.",
-    image: "",
-    label: "Incidencia",
-  },
-];
-
 const slugLabels: Record<string, string> = {
   incidencia: "Liderazgo",
   "avanza-joven": "Formacion",
   empleo: "Insercion",
   "mi-cuerpo": "Bienestar",
   "marco-politico": "Incidencia",
+  "casas-del-saber": "Programa",
 };
 
 export default async function ProgramasPage({
@@ -69,6 +34,7 @@ export default async function ProgramasPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "programas" });
 
   const cmsPrograms = await getPrograms();
 
@@ -79,58 +45,92 @@ export default async function ProgramasPage({
         desc: localize(p.shortDescription, locale) || "",
         image: sanityImage(p.heroImage) || (p.programLogo ? sanityImage(p.programLogo) : "") || "",
         label: slugLabels[p.slug?.current || ""] || "",
+        msgKey: p.slug?.current || "",
       }))
-    : fallbackPrograms;
+    : [
+        { title: t("incidenciaTitle"), slug: "incidencia", desc: t("incidenciaDesc"), image: assetPath("/images/programas/incidencia-scaled-1.webp"), label: t("pillLiderazgo"), msgKey: "incidencia" },
+        { title: t("avanzaTitle"), slug: "avanza-joven", desc: t("avanzaDesc"), image: assetPath("/images/programas/Avanza-1-scaled-1.webp"), label: t("pillFormacion"), msgKey: "avanza" },
+        { title: t("empleoTitle"), slug: "empleo", desc: t("empleoDesc"), image: assetPath("/images/programas/LOGO-FOMENTO.png"), label: t("pillInsercion"), msgKey: "empleo" },
+        { title: t("miCuerpoTitle"), slug: "mi-cuerpo", desc: t("miCuerpoDesc"), image: assetPath("/images/programas/logo-MCSD.png"), label: t("pillBienestar"), msgKey: "miCuerpo" },
+        { title: t("casasTitle"), slug: "casas-del-saber", desc: t("casasDesc"), image: "", label: t("pillPrograma"), msgKey: "casas" },
+      ];
 
   return (
     <>
       <PageHero
         bgImage={assetPath(fotos.programas.hero)}
-        tag="Programas"
-        title="Nuestros Programas"
-        subtitle="Disenados para acompanar a adolescentes y jovenes en su transicion hacia la vida adulta."
+        tag={t("badge")}
+        title={t("title")}
+        subtitle={t("desc")}
       />
 
       <section className="bg-brand-teal/5 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {programs.map((program) => (
-              <div key={program.slug} className="group overflow-hidden rounded-[10px] bg-white shadow-sm transition-all hover:shadow-lg hover:-translate-y-1">
-                <div className="relative h-52 overflow-hidden">
-                  {program.image && program.image.endsWith(".webp") ? (
-                    <Link href={`/${locale}/programas/${program.slug}`} className="relative block h-full">
-                      <Image src={program.image} alt={program.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                      <span className="absolute bottom-4 left-4 rounded-[10px] bg-brand-purple px-3 py-1 text-xs font-semibold text-white z-10">{program.label}</span>
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {programs.map((program, i) => (
+              <AnimatedSection key={program.slug} direction="up" delay={i * 0.1}>
+                <div className="group overflow-hidden rounded-[10px] bg-white shadow-sm transition-all hover:shadow-lg hover:-translate-y-1">
+                  <div className="relative h-52 overflow-hidden">
+                    {(() => {
+                      const href = program.slug === "casas-del-saber"
+                        ? `/${locale}/casas-del-saber`
+                        : `/${locale}/programas/${program.slug}`;
+                      return program.image && program.image.endsWith(".webp") ? (
+                        <Link href={href} className="relative block h-full">
+                          <Image src={program.image} alt={program.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                          <span className="absolute bottom-4 left-4 rounded-[10px] bg-brand-purple px-3 py-1 text-xs font-semibold text-white z-10">{program.label}</span>
+                        </Link>
+                      ) : program.image ? (
+                        <Link href={href} className="relative block h-full">
+                          <div className="flex h-full w-full items-center justify-center bg-brand-teal/5">
+                            <Image src={program.image} alt={program.title} width={160} height={100} className="h-auto max-h-32 w-auto max-w-[80%] object-contain transition-transform duration-500 group-hover:scale-105" />
+                          </div>
+                          <span className="absolute bottom-4 left-4 rounded-[10px] bg-brand-purple px-3 py-1 text-xs font-semibold text-white z-10">{program.label}</span>
+                        </Link>
+                      ) : (
+                        <Link href={href} className="flex h-full w-full items-center justify-center bg-brand-purple/10">
+                          <span className="text-5xl font-bold text-brand-purple/20">{program.title.charAt(0)}</span>
+                        </Link>
+                      );
+                    })()}
+                  </div>
+                  <div className="p-6">
+                    <h3 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">
+                      {program.title}
+                    </h3>
+                    <p className="mb-4 text-sm text-[var(--color-text-secondary)]">
+                      {program.desc}
+                    </p>
+                    <div className="mb-4 space-y-2">
+                      <p className="text-xs font-bold uppercase tracking-wider text-brand-purple">
+                        {t("resultadosTitle")}
+                      </p>
+                      <ul className="space-y-1">
+                        {[1, 2, 3].map((ri) => {
+                          try {
+                            const res = t(`${program.msgKey}Result${ri}`);
+                            return (
+                              <li key={ri} className="flex items-start gap-2 text-xs text-[var(--color-text-secondary)]">
+                                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-teal" />
+                                {res}
+                              </li>
+                            );
+                          } catch {
+                            return null;
+                          }
+                        })}
+                      </ul>
+                    </div>
+                    <Link
+                      href={program.slug === "casas-del-saber" ? `/${locale}/casas-del-saber` : `/${locale}/programas/${program.slug}`}
+                      className="inline-flex items-center gap-2 rounded-[10px] bg-brand-purple px-5 py-2.5 text-sm font-semibold text-white transition-all hover:shadow-md"
+                    >
+                      {t("leerMas")} <ArrowRight size={14} />
                     </Link>
-                  ) : program.image ? (
-                    <Link href={`/${locale}/programas/${program.slug}`} className="relative block h-full">
-                      <div className="flex h-full w-full items-center justify-center bg-brand-teal/5">
-                        <Image src={program.image} alt={program.title} width={160} height={100} className="h-auto max-h-32 w-auto max-w-[80%] object-contain transition-transform duration-500 group-hover:scale-105" />
-                      </div>
-                      <span className="absolute bottom-4 left-4 rounded-[10px] bg-brand-purple px-3 py-1 text-xs font-semibold text-white z-10">{program.label}</span>
-                    </Link>
-                  ) : (
-                    <Link href={`/${locale}/programas/${program.slug}`} className="flex h-full w-full items-center justify-center bg-brand-purple/10">
-                      <span className="text-5xl font-bold text-brand-purple/20">{program.title.charAt(0)}</span>
-                    </Link>
-                  )}
+                  </div>
                 </div>
-                <div className="p-6">
-                  <h3 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">
-                    {program.title}
-                  </h3>
-                  <p className="mb-4 text-sm text-[var(--color-text-secondary)]">
-                    {program.desc}
-                  </p>
-                  <Link
-                    href={`/${locale}/programas/${program.slug}`}
-                    className="inline-flex items-center gap-2 rounded-[10px] bg-brand-purple px-5 py-2.5 text-sm font-semibold text-white transition-all hover:shadow-md"
-                  >
-                    Leer mas <ArrowRight size={14} />
-                  </Link>
-                </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>

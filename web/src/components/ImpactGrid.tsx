@@ -60,9 +60,9 @@ function StatCard({
       whileHover={
         prefersReducedMotion
           ? {}
-          : { rotateX: 4, rotateY: -4, y: -8, scale: 1.02 }
+          : { y: -8, scale: 1.02 }
       }
-      className={`${colSpan} ${rowSpan} perspective-[1200px]`}
+      className={`${colSpan} ${rowSpan}`}
     >
       <div
         className="relative h-full rounded-[10px] border bg-[var(--color-bg-card)] p-6 transition-shadow duration-300"
@@ -143,9 +143,9 @@ export default function ImpactGrid({ stats }: ImpactGridProps) {
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.15, ease: [0.23, 1, 0.32, 1] }}
           whileHover={
-            prefersReducedMotion ? {} : { rotateX: 4, rotateY: -4, y: -8, scale: 1.02 }
+            prefersReducedMotion ? {} : { y: -8, scale: 1.02 }
           }
-          className="perspective-[1200px] sm:col-span-2 row-span-2"
+          className="sm:col-span-2 row-span-2"
         >
           <div
             className="relative h-full rounded-[10px] border bg-[var(--color-bg-card)] p-2 transition-shadow duration-300"

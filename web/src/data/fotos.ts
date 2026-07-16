@@ -59,6 +59,11 @@ export const fotos = {
   quienesSomos: {
     hero: "/images/equipo-shoot/GIS08542.webp",
     sectionImage: "/images/equipo-shoot/GIS08550.webp",
+    historiaImage: "/images/equipo-shoot/GIS08542.webp",
+    objetivoImage: "/images/encuentro-2025/GIS06448.webp",
+    poblacionImage: "/images/eventos/20241112_102357.webp",
+    poblacionParallax: "/images/IMG_0545.webp",
+    areasImage: "/images/equipo-shoot/GIS08550.webp",
     team: {
       maicol: "/images/equipo/maicol.png",
       kevin: "/images/equipo/phtos-ascep-kevin.png",
@@ -116,8 +121,16 @@ export const fotos = {
       },
     },
   },
+  comoLoHacemos: {
+    hero: "/images/encuentro-2025/GIS06448.webp",
+    estrategiasImage: "/images/encuentro-2025/GIS06452.webp",
+    lineasImage: "/images/equipo-shoot/GIS08531.webp",
+  },
   impacto: {
     hero: "/images/encuentro-2025/GIS06455.webp",
+    contextImage: "/images/encuentro-2025/GIS06455.webp",
+    contextParallax: "/images/DSC_0918.webp",
+    porQueImage: "/images/eventos/20241112_111009.webp",
     gallery: [
       "/images/encuentro-2025/GIS06448.webp",
       "/images/encuentro-2025/GIS06455.webp",

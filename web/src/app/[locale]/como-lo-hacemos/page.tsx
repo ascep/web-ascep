@@ -4,6 +4,7 @@ import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import { User, Home, Zap } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -79,7 +80,7 @@ export default async function ComoLoHacemosPage({
 
           <div className="relative mb-12 overflow-hidden rounded-[10px]">
             <Image
-              src={assetPath("/images/encuentro-2025/GIS06452.webp")}
+              src={assetPath(fotos.comoLoHacemos.estrategiasImage)}
               alt=""
               width={1200}
               height={400}
@@ -155,6 +156,79 @@ export default async function ComoLoHacemosPage({
           </div>
         </div>
       </section>
+
+      <section className="bg-bg-base py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+              {t("dimensionesTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              {t("dimensionesTitle")}
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
+              {t("dimensionesDesc")}
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { title: t("dim1Title"), desc: t("dim1Desc"), color: "border-brand-teal" },
+              { title: t("dim2Title"), desc: t("dim2Desc"), color: "border-brand-orange" },
+              { title: t("dim3Title"), desc: t("dim3Desc"), color: "border-brand-purple" },
+              { title: t("dim4Title"), desc: t("dim4Desc"), color: "border-brand-yellow" },
+              { title: t("dim5Title"), desc: t("dim5Desc"), color: "border-brand-teal" },
+              { title: t("dim6Title"), desc: t("dim6Desc"), color: "border-brand-orange" },
+            ].map((item) => (
+              <div key={item.title} className={`rounded-[10px] border-l-4 ${item.color} bg-white p-6 shadow-sm transition-all hover:shadow-md`}>
+                <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">{item.title}</h4>
+                <p className="text-sm text-[var(--color-text-muted)]">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+          </div>
+        </section>
+
+        <section className="bg-brand-teal/5 py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-12 text-center">
+              <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+                {t("lineasEstrategicasTag")}
+              </span>
+              <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+                {t("lineasEstrategicasTitle")} <span className="text-brand-purple">{t("lineasEstrategicasHighlight")}</span>
+              </h2>
+              <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
+                {t("lineasEstrategicasDesc")}
+              </p>
+            </div>
+            <div className="relative mb-10 overflow-hidden rounded-[10px]">
+              <Image
+                src={assetPath(fotos.comoLoHacemos.lineasImage)}
+                alt=""
+                width={1200}
+                height={300}
+                className="h-48 w-full object-cover"
+              />
+            </div>
+            <div className="grid gap-6">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <div key={n} className="rounded-[10px] border border-brand-teal/20 bg-bg-card p-6 transition-all hover:shadow-md">
+                  <h3 className="mb-3 text-lg font-bold text-brand-purple">
+                    {t(`le${n}Title`)}
+                  </h3>
+                  <ul className="space-y-2">
+                    {[1, 2, 3].map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-sm text-[var(--color-text-secondary)]">
+                        <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-teal" />
+                        {t(`le${n}Item${item}`)}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
       <section className="bg-brand-teal/5 py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -1,6 +1,7 @@
 'use client';
 
-import { Phone, Mail, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, Send, CheckCircle, AlertCircle } from "lucide-react";
+import { useState, type FormEvent } from "react";
 
 type HomeCTAProps = {
   tag: string;
@@ -29,6 +30,30 @@ export default function HomeCTA({
   formMessagePlaceholder,
   formSubmit,
 }: HomeCTAProps) {
+  const [name, setName] = useState("");
+  const [formEmail, setFormEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setStatus("loading");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email: formEmail, message }),
+      });
+      if (!res.ok) throw new Error("Error al enviar");
+      setStatus("success");
+      setName("");
+      setFormEmail("");
+      setMessage("");
+    } catch {
+      setStatus("error");
+    }
+  };
+
   return (
     <section className="relative overflow-hidden bg-brand-orange py-20">
       <div
@@ -102,13 +127,16 @@ export default function HomeCTA({
               <h3 className="mb-6 text-xl font-bold text-[var(--color-text-primary)]">
                 {formTitle}
               </h3>
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
                     {formNamePlaceholder}
                   </label>
                   <input
                     type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    required
                     placeholder={formNamePlaceholder}
                     className="w-full rounded-[10px] border border-[var(--color-border-subtle)] bg-[var(--color-bg-surface)] px-4 py-3 text-sm text-[var(--color-text-primary)] outline-none transition-all focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20"
                   />
@@ -119,6 +147,9 @@ export default function HomeCTA({
                   </label>
                   <input
                     type="email"
+                    value={formEmail}
+                    onChange={(e) => setFormEmail(e.target.value)}
+                    required
                     placeholder={formEmailPlaceholder}
                     className="w-full rounded-[10px] border border-[var(--color-border-subtle)] bg-[var(--color-bg-surface)] px-4 py-3 text-sm text-[var(--color-text-primary)] outline-none transition-all focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20"
                   />
@@ -129,16 +160,34 @@ export default function HomeCTA({
                   </label>
                   <textarea
                     rows={4}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    required
                     placeholder={formMessagePlaceholder}
                     className="w-full resize-none rounded-[10px] border border-[var(--color-border-subtle)] bg-[var(--color-bg-surface)] px-4 py-3 text-sm text-[var(--color-text-primary)] outline-none transition-all focus:border-brand-purple focus:ring-2 focus:ring-brand-purple/20"
                   />
                 </div>
                 <button
                   type="submit"
-                  className="w-full rounded-[10px] bg-brand-purple px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-purple-dark hover:shadow-lg"
+                  disabled={status === "loading"}
+                  className="flex w-full items-center justify-center gap-2 rounded-[10px] bg-brand-purple px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-purple-dark hover:shadow-lg disabled:opacity-60"
                 >
-                  {formSubmit}
+                  {status === "loading" ? "Enviando..." : (
+                    <>{formSubmit} <Send size={16} /></>
+                  )}
                 </button>
+                {status === "success" && (
+                  <div className="flex items-center gap-2 rounded-[10px] bg-green-50 p-3 text-sm font-medium text-green-700">
+                    <CheckCircle size={16} />
+                    Mensaje enviado con exito. Te responderemos pronto.
+                  </div>
+                )}
+                {status === "error" && (
+                  <div className="flex items-center gap-2 rounded-[10px] bg-red-50 p-3 text-sm font-medium text-red-700">
+                    <AlertCircle size={16} />
+                    Error al enviar. Intenta de nuevo o escribenos directamente.
+                  </div>
+                )}
               </form>
             </div>
           </div>

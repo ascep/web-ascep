@@ -4,6 +4,7 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Timeline from "@/components/Timeline";
 import AnimatedSection from "@/components/AnimatedSection";
+import ParallaxSection from "@/components/ParallaxSection";
 import { getTranslations } from "next-intl/server";
 import { Target, Eye, Heart } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
@@ -23,10 +24,10 @@ export const metadata: Metadata = {
 
 const fallbackTeam = [
   { name: "Maicol Londoño", role: "Director", src: assetPath(fotos.quienesSomos.team.maicol) },
-  { name: "Kevin Ortega", role: "Coordinador", src: assetPath(fotos.quienesSomos.team.kevin) },
+  { name: "Kevin Ortega", role: "Desarrollador y dise\u00F1ador", src: assetPath(fotos.quienesSomos.team.kevin) },
   { name: "Monica", role: "Equipo Psicosocial", src: assetPath(fotos.quienesSomos.team.monica) },
   { name: "Jhon Eduard Angulo", role: "Equipo de Formacion", src: assetPath(fotos.quienesSomos.team.jhon) },
-  { name: "Ana", role: "Equipo ASCEP", src: assetPath(fotos.quienesSomos.team.ana) },
+  { name: "Ana", role: "Comunicaci\u00F3n", src: assetPath(fotos.quienesSomos.team.ana) },
 ];
 
 const fallbackMilestones = fotos.quienesSomos.timeline.map((item) => ({
@@ -43,7 +44,13 @@ const dimensions = [
   { title: "Autonomia", desc: "Capacidad de sostener la propia individualidad y autodeterminacion personal." },
   { title: "Proposito en la Vida", desc: "Capacidad de tener metas claras y definir objetivos vitales." },
   { title: "Crecimiento Personal", desc: "Desarrollo de las potencialidades individuales para crecer como persona." },
-  { title: "enredete con ascep", desc: "Desarrollo de las potencialidades individuales para crecer como persona." },
+];
+
+const objetivosEstrategicos = [
+  { titleKey: "oe1Title", descKey: "oe1Desc" },
+  { titleKey: "oe2Title", descKey: "oe2Desc" },
+  { titleKey: "oe3Title", descKey: "oe3Desc" },
+  { titleKey: "oe4Title", descKey: "oe4Desc" },
 ];
 
 
@@ -92,7 +99,7 @@ export default async function QuienesSomosPage({
             <AnimatedSection direction="left" className="relative">
               <div className="absolute -left-4 -top-4 h-full w-full rounded-[10px] bg-brand-purple/10" />
               <Image
-                src={assetPath("/images/equipo-shoot/GIS08550.webp")}
+                src={assetPath(fotos.quienesSomos.historiaImage)}
                 alt="Equipo ASCEP"
                 width={600}
                 height={400}
@@ -173,6 +180,111 @@ export default async function QuienesSomosPage({
             </AnimatedSection>
           </div>
         </section>
+
+        <section className="mb-20">
+          <div className="mb-12 text-center">
+            <AnimatedSection direction="up">
+              <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+                {t("objetivoTag")}
+              </span>
+            </AnimatedSection>
+            <AnimatedSection direction="up" delay={0.1}>
+              <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+                {t("objetivoTitle")} <span className="text-brand-purple">{t("objetivoHighlight")}</span>
+              </h2>
+            </AnimatedSection>
+          </div>
+          <div className="grid items-center gap-8 lg:grid-cols-5">
+            <div className="lg:col-span-3">
+              <AnimatedSection direction="up" delay={0.15}>
+                <div className="rounded-[10px] border border-brand-teal/20 bg-bg-card p-8">
+                  <p className="text-lg leading-relaxed text-[var(--color-text-secondary)]">
+                    {t("objetivoDesc")}
+                  </p>
+                </div>
+              </AnimatedSection>
+            </div>
+            <div className="lg:col-span-2">
+              <AnimatedSection direction="right" delay={0.2}>
+                <Image
+                  src={assetPath(fotos.quienesSomos.objetivoImage)}
+                  alt=""
+                  width={600}
+                  height={400}
+                  className="w-full rounded-[10px] object-cover shadow-lg"
+                  style={{ aspectRatio: "4/3" }}
+                />
+              </AnimatedSection>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-20">
+          <div className="mb-12 text-center">
+            <AnimatedSection direction="up">
+              <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+                {t("objetivosEstrategicosTag")}
+              </span>
+            </AnimatedSection>
+            <AnimatedSection direction="up" delay={0.1}>
+              <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+                {t("objetivosEstrategicosTitle")} <span className="text-brand-purple">{t("objetivosEstrategicosHighlight")}</span>
+              </h2>
+            </AnimatedSection>
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2">
+            {objetivosEstrategicos.map((oe, i) => (
+              <AnimatedSection key={oe.titleKey} direction="up" delay={i * 0.1}>
+                <div className="rounded-[10px] border border-brand-teal/20 bg-bg-card p-6 transition-all hover:shadow-md">
+                  <h3 className="mb-2 text-lg font-bold text-brand-purple">
+                    {t(oe.titleKey)}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                    {t(oe.descKey)}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </section>
+
+        <ParallaxSection
+          bgImage={assetPath(fotos.quienesSomos.poblacionParallax)}
+          overlay="bg-black/70"
+          className="mb-20 py-16"
+        >
+          <div className="grid items-center gap-8 lg:grid-cols-5">
+            <div className="lg:col-span-3">
+              <AnimatedSection direction="up">
+                <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">
+                  {t("poblacionTag")}
+                </span>
+              </AnimatedSection>
+              <AnimatedSection direction="up" delay={0.1}>
+                <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
+                  {t("poblacionTitle")} <span className="text-brand-orange">{t("poblacionHighlight")}</span>
+                </h2>
+              </AnimatedSection>
+              <AnimatedSection direction="up" delay={0.15}>
+                <p className="text-lg leading-relaxed text-white/80">
+                  {t("poblacionDesc")}
+                </p>
+              </AnimatedSection>
+            </div>
+            <div className="lg:col-span-2">
+              <AnimatedSection direction="right" delay={0.2}>
+                <Image
+                  src={assetPath(fotos.quienesSomos.poblacionImage)}
+                  alt=""
+                  width={600}
+                  height={400}
+                  className="w-full rounded-[10px] object-cover shadow-lg"
+                  style={{ aspectRatio: "4/3" }}
+                />
+              </AnimatedSection>
+            </div>
+          </div>
+        </ParallaxSection>
 
         <section className="mb-20">
           <AnimatedSection direction="up" className="mb-12 text-center">
@@ -281,6 +393,50 @@ export default async function QuienesSomosPage({
                   </h3>
                   <p className="text-sm text-[var(--color-text-secondary)]">
                     {item.desc}
+                  </p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-20">
+          <AnimatedSection direction="up" className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+              {t("areasTrabajoTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              {t("areasTrabajoTitle")} <span className="text-brand-purple">{t("areasTrabajoHighlight")}</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-[var(--color-text-secondary)]">
+              {t("areasTrabajoDesc")}
+            </p>
+          </AnimatedSection>
+          <AnimatedSection direction="up" delay={0.1} className="mb-10 overflow-hidden rounded-[10px]">
+            <Image
+              src={assetPath(fotos.quienesSomos.areasImage)}
+              alt=""
+              width={1200}
+              height={300}
+              className="h-48 w-full object-cover"
+            />
+          </AnimatedSection>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { titleKey: "areaATitle", descKey: "areaADesc", color: "purple" },
+              { titleKey: "areaBTitle", descKey: "areaBDesc", color: "teal" },
+              { titleKey: "areaCTitle", descKey: "areaCDesc", color: "orange" },
+              { titleKey: "areaDTitle", descKey: "areaDDesc", color: "yellow" },
+              { titleKey: "areaETitle", descKey: "areaEDesc", color: "purple" },
+              { titleKey: "areaFTitle", descKey: "areaFDesc", color: "teal" },
+            ].map((area, i) => (
+              <AnimatedSection key={area.titleKey} direction="up" delay={i * 0.08}>
+                <div className="rounded-[10px] border border-brand-teal/20 bg-bg-card p-6 transition-all hover:shadow-md">
+                  <h3 className="mb-2 font-bold text-[var(--color-text-primary)]">
+                    {t(area.titleKey)}
+                  </h3>
+                  <p className="text-sm text-[var(--color-text-secondary)]">
+                    {t(area.descKey)}
                   </p>
                 </div>
               </AnimatedSection>

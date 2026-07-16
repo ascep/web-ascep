@@ -87,19 +87,21 @@ export default function HomeStats({
                       />
                       <div className="relative z-10">
                         <div
-                          className="mb-4 flex h-[74px] w-[74px] items-center justify-center rounded-full transition-all duration-500 group-hover:bg-white group-hover:text-[var(--color-text-primary)]"
-                          style={{ backgroundColor: `${stat.color}1A`, color: stat.color }}
+                          className="mb-4 flex h-[74px] w-[74px] items-center justify-center rounded-full transition-all duration-500 group-hover:bg-white"
+                          style={{ backgroundColor: `${stat.color}1A` }}
                         >
-                          <Icon size={32} />
+                          <Icon size={32} style={{ color: stat.color }} />
                         </div>
                         <h3
-                          className="mb-1 text-4xl font-extrabold transition-all duration-500 group-hover:text-white sm:text-5xl"
+                          className="mb-1 text-4xl font-extrabold transition-all duration-500 sm:text-5xl"
                           style={{ color: stat.color }}
                         >
-                          <CountUp
-                            end={parseInt(stat.value.replace(/[^0-9]/g, ""))}
-                            suffix={stat.value.includes("+") ? "+" : stat.value.includes("%") ? "%" : ""}
-                          />
+                          <span className="group-hover:text-white">
+                            <CountUp
+                              end={parseInt(stat.value.replace(/[^0-9]/g, ""))}
+                              suffix={stat.value.includes("+") ? "+" : stat.value.includes("%") ? "%" : ""}
+                            />
+                          </span>
                         </h3>
                         <p className="text-sm leading-relaxed opacity-70 transition-all duration-500 group-hover:text-white sm:text-base">
                           {stat.label}
