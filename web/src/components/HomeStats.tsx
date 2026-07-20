@@ -24,6 +24,7 @@ type HomeStatsProps = {
   description: string;
   cta: React.ReactNode;
   stats: StatItem[];
+  variant?: "light" | "dark";
 };
 
 export default function HomeStats({
@@ -32,8 +33,10 @@ export default function HomeStats({
   description,
   cta,
   stats,
+  variant = "light",
 }: HomeStatsProps) {
   const prefersReducedMotion = useReducedMotion();
+  const isDark = variant === "dark";
 
   return (
     <section className="relative py-20">
@@ -78,8 +81,10 @@ export default function HomeStats({
                     className="group"
                   >
                     <div
-                      className="relative overflow-hidden rounded-[10px] p-6 transition-all duration-500"
-                      style={{ backgroundColor: `${stat.color}0D` }}
+                      className={`relative overflow-hidden rounded-[10px] p-6 transition-all duration-500 ${
+                        isDark ? "glass-card" : ""
+                      }`}
+                      style={isDark ? {} : { backgroundColor: `${stat.color}0D` }}
                     >
                       <div
                         className="absolute inset-0 origin-bottom scale-y-[0.2] opacity-0 transition-all duration-500 group-hover:scale-y-100 group-hover:opacity-100"
@@ -87,10 +92,12 @@ export default function HomeStats({
                       />
                       <div className="relative z-10">
                         <div
-                          className="mb-4 flex h-[74px] w-[74px] items-center justify-center rounded-full transition-all duration-500 group-hover:bg-white"
-                          style={{ backgroundColor: `${stat.color}1A` }}
+                          className={`mb-4 flex h-[74px] w-[74px] items-center justify-center rounded-full transition-all duration-500 group-hover:bg-white ${
+                            isDark ? "bg-white/10" : ""
+                          }`}
+                          style={isDark ? {} : { backgroundColor: `${stat.color}1A` }}
                         >
-                          <Icon size={32} style={{ color: stat.color }} />
+                          <Icon size={32} style={{ color: isDark ? stat.color : stat.color }} />
                         </div>
                         <h3
                           className="mb-1 text-4xl font-extrabold transition-all duration-500 sm:text-5xl"
@@ -103,7 +110,9 @@ export default function HomeStats({
                             />
                           </span>
                         </h3>
-                        <p className="text-sm leading-relaxed opacity-70 transition-all duration-500 group-hover:text-white sm:text-base">
+                        <p className={`text-sm leading-relaxed transition-all duration-500 group-hover:text-white sm:text-base ${
+                          isDark ? "text-white/70" : "opacity-70"
+                        }`}>
                           {stat.label}
                         </p>
                       </div>

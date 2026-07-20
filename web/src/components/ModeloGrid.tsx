@@ -21,11 +21,16 @@ const dimensions = [
   { titleKey: "dim6Title", descKey: "dim6Desc", icon: TrendingUp, color: "#44BCC5" },
 ];
 
-export default function ModeloGrid() {
+type ModeloGridProps = {
+  variant?: "light" | "dark";
+};
+
+export default function ModeloGrid({ variant = "light" }: ModeloGridProps) {
+  const isDark = variant === "dark";
   const t = useTranslations("modelo");
   const locale = useLocale();
   return (
-    <section className="bg-[var(--color-bg-surface)] py-24">
+    <section className={`relative overflow-hidden py-24 ${isDark ? "section-dark bg-atmospheric-teal" : "bg-[var(--color-bg-surface)]"}`}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-14 lg:grid-cols-5">
           <div className="lg:col-span-2">
@@ -43,7 +48,7 @@ export default function ModeloGrid() {
             </p>
             <Link
               href={`/${locale}/quienes-somos`}
-              className="inline-flex items-center rounded-[10px] bg-brand-purple px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-purple-dark hover:shadow-lg"
+              className={`inline-flex items-center rounded-[10px] px-6 py-3 text-sm font-semibold text-white transition-all hover:shadow-lg ${isDark ? "bg-brand-orange hover:bg-brand-orange-dark" : "bg-brand-purple hover:bg-brand-purple-dark"}`}
             >
               {t("cta")}
             </Link>
@@ -60,14 +65,18 @@ export default function ModeloGrid() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.06, ease: [0.23, 1, 0.32, 1] }}
                     whileHover={{ y: -6 }}
-                    className="group rounded-[10px] border border-[var(--color-border-subtle)] bg-[var(--color-bg-card)] p-5 transition-all duration-300"
-                    style={{
+                    className={`group rounded-[10px] p-5 transition-all duration-300 ${
+                      isDark ? "glass-card" : "border border-[var(--color-border-subtle)] bg-[var(--color-bg-card)]"
+                    }`}
+                    style={isDark ? {} : {
                       boxShadow: "0 2px 12px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.02)",
                     }}
                   >
                     <div
-                      className="mb-4 flex h-10 w-10 items-center justify-center rounded-[10px] transition-transform duration-300 group-hover:scale-110"
-                      style={{ backgroundColor: `${dim.color}14` }}
+                      className={`mb-4 flex h-10 w-10 items-center justify-center rounded-[10px] transition-transform duration-300 group-hover:scale-110 ${
+                        isDark ? "bg-white/10" : ""
+                      }`}
+                      style={isDark ? {} : { backgroundColor: `${dim.color}14` }}
                     >
                       <Icon size={20} style={{ color: dim.color }} />
                     </div>

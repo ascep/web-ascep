@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import Image from "next/image";
+import DecoShapes from "@/components/DecoShapes";
 import AnimatedSection from "@/components/AnimatedSection";
 import HomeHero from "@/components/HomeHero";
 import HomeStats from "@/components/HomeStats";
@@ -166,7 +167,8 @@ export default async function HomePage({
         }
       />
 
-      <section className="relative overflow-hidden bg-brand-teal/5 py-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
@@ -216,7 +218,8 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-brand-orange/5 py-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
@@ -247,24 +250,29 @@ export default async function HomePage({
         </div>
       </section>
 
-      <HomeStats
-        tag={h("statsTag")}
-        title={h("statsTitle")}
-        description={h("statsDesc")}
-        stats={resolvedStats}
-        cta={
-          <Link
-            href={`/${locale}/impacto`}
-            className="inline-flex items-center rounded-[10px] bg-brand-purple px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-purple-dark hover:shadow-lg"
-          >
-            {g("verMasImpacto")}
-          </Link>
-        }
-      />
+      <section className="section-dark relative overflow-hidden bg-atmospheric-teal">
+        <DecoShapes variant="teal" />
+        <HomeStats
+          variant="dark"
+          tag={h("statsTag")}
+          title={h("statsTitle")}
+          description={h("statsDesc")}
+          stats={resolvedStats}
+          cta={
+            <Link
+              href={`/${locale}/impacto`}
+              className="inline-flex items-center rounded-[10px] bg-brand-orange px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-orange-dark hover:shadow-lg"
+            >
+              {g("verMasImpacto")}
+            </Link>
+          }
+        />
+      </section>
 
-      <section className="relative overflow-hidden bg-brand-orange/5 py-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="subtle" />
         <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-orange">
+          <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-accent">
             {h("trayectoriaTag")}
           </span>
           <h2 className="mb-12 text-center text-3xl font-bold text-[var(--color-text-primary)]">
@@ -274,7 +282,10 @@ export default async function HomePage({
         </AnimatedSection>
       </section>
 
-      <ModeloGrid />
+      <section className="relative overflow-hidden">
+        <DecoShapes variant="mixed" />
+        <ModeloGrid variant="dark" />
+      </section>
 
       <ProgramStack programs={resolvedPrograms} locale={locale} />
 
@@ -284,12 +295,13 @@ export default async function HomePage({
         testimonials={testimonials}
       />
 
-      <section className="relative overflow-hidden bg-brand-purple/5 py-24">
+      <section className="section-dark relative overflow-hidden bg-atmospheric-orange py-24">
+        <DecoShapes variant="orange" />
         <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-purple">
+          <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-accent">
             {h("galeriaTag")}
           </span>
-          <h2 className="mb-12 text-center text-3xl font-bold text-[var(--color-text-primary)]">
+          <h2 className="mb-12 text-center text-3xl font-bold text-white">
             {h("galeriaTitle")}
           </h2>
           <div className="grid gap-4 sm:grid-cols-3">
@@ -324,9 +336,10 @@ export default async function HomePage({
         </AnimatedSection>
       </section>
 
-      <section className="relative overflow-hidden bg-brand-teal/5 py-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
         <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-orange">
+          <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-accent">
             {h("aliadosTag")}
           </span>
           <h2 className="mb-10 text-center text-3xl font-bold text-[var(--color-text-primary)]">
@@ -337,18 +350,18 @@ export default async function HomePage({
       </section>
 
       <HomeCTA
-        tag={h("ctaTag")}
-        title={h("ctaTitle")}
-        description={h("ctaDesc")}
-        phone={h("ctaPhone")}
-        email={h("ctaEmail")}
-        location={h("ctaLocation")}
-        formTitle={h("ctaFormTitle")}
-        formNamePlaceholder={h("ctaFormName")}
-        formEmailPlaceholder={h("ctaFormEmail")}
-        formMessagePlaceholder={h("ctaFormMsg")}
-        formSubmit={h("ctaFormSubmit")}
-      />
+          tag={h("ctaTag")}
+          title={h("ctaTitle")}
+          description={h("ctaDesc")}
+          phone={h("ctaPhone")}
+          email={h("ctaEmail")}
+          location={h("ctaLocation")}
+          formTitle={h("ctaFormTitle")}
+          formNamePlaceholder={h("ctaFormName")}
+          formEmailPlaceholder={h("ctaFormEmail")}
+          formMessagePlaceholder={h("ctaFormMsg")}
+          formSubmit={h("ctaFormSubmit")}
+        />
     </div>
   );
 }

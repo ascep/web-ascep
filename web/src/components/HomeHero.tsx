@@ -25,7 +25,7 @@ export default function HomeHero({
   return (
     <Hero
       variant="home"
-      bgColor="bg-brand-purple"
+      bgColor="bg-atmospheric-teal"
       tag={tag}
       title={title}
       subtitle={subtitle}

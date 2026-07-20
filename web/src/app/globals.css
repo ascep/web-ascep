@@ -36,6 +36,11 @@
   --color-text-muted: #71717A;
   --color-border-subtle: #E4E4E7;
   --color-border-default: #D4D4D8;
+
+  --atmospheric-teal: radial-gradient(ellipse 80% 60% at 20% 30%, #019E9F15 0%, transparent 60%);
+  --atmospheric-orange: radial-gradient(ellipse 60% 50% at 80% 70%, #EC662010 0%, transparent 50%);
+  --atmospheric-yellow: radial-gradient(ellipse 50% 40% at 50% 20%, #F2CA1108 0%, transparent 50%);
+  --atmospheric-base: #0D1A1A;
 }
 
 .dark {
@@ -60,11 +65,76 @@
 .border-border-subtle { border-color: var(--color-border-subtle); }
 .border-border-default { border-color: var(--color-border-default); }
 
+.section-dark {
+  --color-text-primary: #F1F1F6;
+  --color-text-secondary: #B0B0C8;
+  --color-text-muted: #8080A0;
+  --color-border-subtle: rgba(255,255,255,0.08);
+  --color-border-default: rgba(255,255,255,0.12);
+}
+
+.bg-atmospheric {
+  background:
+    var(--atmospheric-teal),
+    var(--atmospheric-orange),
+    var(--atmospheric-base);
+}
+
+.bg-atmospheric-teal {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 30%, #019E9F18 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 70%, #44BCC508 0%, transparent 50%),
+    #0D1A1A;
+}
+
+.bg-atmospheric-orange {
+  background:
+    radial-gradient(ellipse 70% 50% at 30% 20%, #EC662015 0%, transparent 55%),
+    radial-gradient(ellipse 60% 40% at 70% 80%, #019E9F10 0%, transparent 50%),
+    #0D1010;
+}
+
+.bg-section-light {
+  background:
+    radial-gradient(ellipse 60% 40% at 0% 50%, #019E9F06 0%, transparent 60%),
+    radial-gradient(ellipse 50% 30% at 100% 50%, #EC662004 0%, transparent 50%),
+    var(--color-bg-base);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.10);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
 body {
   font-family: var(--font-sans);
   background-color: var(--color-bg-base);
   color: var(--color-text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@keyframes float-0 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(10px, -15px) rotate(5deg); }
+  66% { transform: translate(-5px, 10px) rotate(-3deg); }
+}
+
+@keyframes float-1 {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  33% { transform: translate(-12px, -8px) rotate(-4deg); }
+  66% { transform: translate(8px, 12px) rotate(6deg); }
+}
+
+@keyframes float-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(5px, -10px) scale(1.02); }
 }
 
 @media (prefers-reduced-motion: reduce) {
