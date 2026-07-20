@@ -28,6 +28,15 @@ const slugLabels: Record<string, string> = {
   "casas-del-saber": "Programa",
 };
 
+const slugToMsgKey: Record<string, string> = {
+  incidencia: "incidencia",
+  "avanza-joven": "avanza",
+  empleo: "empleo",
+  "mi-cuerpo": "miCuerpo",
+  "marco-politico": "marcoPolitico",
+  "casas-del-saber": "casas",
+};
+
 export default async function ProgramasPage({
   params,
 }: {
@@ -45,7 +54,7 @@ export default async function ProgramasPage({
         desc: localize(p.shortDescription, locale) || "",
         image: sanityImage(p.heroImage) || (p.programLogo ? sanityImage(p.programLogo) : "") || "",
         label: slugLabels[p.slug?.current || ""] || "",
-        msgKey: p.slug?.current || "",
+        msgKey: slugToMsgKey[p.slug?.current || ""] || p.slug?.current || "",
       }))
     : [
         { title: t("incidenciaTitle"), slug: "incidencia", desc: t("incidenciaDesc"), image: assetPath("/images/programas/incidencia-scaled-1.webp"), label: t("pillLiderazgo"), msgKey: "incidencia" },

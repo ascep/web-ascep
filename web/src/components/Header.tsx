@@ -4,7 +4,7 @@ import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { ChevronDown, Search } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { fotos } from "@/data/fotos";
@@ -18,31 +18,90 @@ const languages = [
   { code: "pt", label: "PT" },
 ] as const;
 
-const programsSubmenu = [
-  { key: "incidencia", href: "/programas/incidencia" },
-  { key: "avanzaJoven", href: "/programas/avanza-joven" },
-  { key: "empleo", href: "/programas/empleo" },
-  { key: "miCuerpo", href: "/programas/mi-cuerpo" },
-  { key: "marcoPolitico", href: "/programas/marco-politico" },
+type NavItem = {
+  key: string;
+  href: string;
+  children?: NavItem[];
+};
+
+type NavGroup = {
+  type: "link";
+  key: string;
+  href: string;
+  badge?: string;
+} | {
+  type: "dropdown";
+  key: string;
+  items: NavItem[];
+} | {
+  type: "megamenu";
+  key: string;
+  image: string;
+  cols: number;
+  items: NavItem[];
+};
+
+const navStructure: NavGroup[] = [
+  { type: "link", key: "inicio", href: "/" },
+  {
+    type: "dropdown",
+    key: "quienesSomos",
+    items: [
+      { key: "quienesSomos", href: "/quienes-somos" },
+      { key: "comoLoHacemos", href: "/como-lo-hacemos" },
+      { key: "impacto", href: "/impacto" },
+      { key: "aliados", href: "/aliados" },
+    ],
+  },
+  {
+    type: "dropdown",
+    key: "programas",
+    items: [
+      { key: "incidencia", href: "/programas/incidencia", children: [
+        { key: "marcoPolitico", href: "/programas/marco-politico" },
+      ]},
+      { key: "avanzaJoven", href: "/programas/avanza-joven" },
+      { key: "empleo", href: "/programas/empleo" },
+      { key: "miCuerpo", href: "/programas/mi-cuerpo" },
+      { key: "casasDelSaber", href: "/casas-del-saber", children: [
+        { key: "areas", href: "/casas-del-saber/areas" },
+        { key: "lineas", href: "/casas-del-saber/lineas" },
+        { key: "modalidades", href: "/casas-del-saber/modalidades" },
+        { key: "rutaEgreso", href: "/casas-del-saber/ruta-egreso" },
+      ]},
+    ],
+  },
+  {
+    type: "megamenu",
+    key: "leyEgreso",
+    image: fotos.header.leyEgresoCard,
+    cols: 2,
+    items: [
+      { key: "leyQueEs", href: "/ley-de-egreso#que-es" },
+      { key: "leyObjetivos", href: "/ley-de-egreso#objetivos" },
+      { key: "leyDirigida", href: "/ley-de-egreso#dirigida" },
+      { key: "leyCambio", href: "/ley-de-egreso#cambio" },
+      { key: "leyProceso", href: "/ley-de-egreso#proceso" },
+      { key: "leyParticipa", href: "/ley-de-egreso#participa" },
+    ],
+  },
+  {
+    type: "megamenu",
+    key: "comoAyudar",
+    image: fotos.header.comoAyudarCard,
+    cols: 1,
+    items: [
+      { key: "donacionMonetaria", href: "/donar" },
+      { key: "planPadrino", href: "/como-ayudar/plan-padrino" },
+      { key: "voluntariado", href: "/como-ayudar/voluntariado" },
+      { key: "participa", href: "/participa" },
+    ],
+  },
+  { type: "link", key: "enredateConAscep", href: "/como-ayudar/enredate-con-ascep", badge: "Nuevo" },
+  { type: "link", key: "contacto", href: "/contacto" },
 ];
 
-const casasSubmenu = [
-  { key: "areas", href: "/casas-del-saber/areas" },
-  { key: "lineas", href: "/casas-del-saber/lineas" },
-  { key: "modalidades", href: "/casas-del-saber/modalidades" },
-  { key: "rutaEgreso", href: "/casas-del-saber/ruta-egreso" },
-];
-
-const leySections = [
-  { key: "leyQueEs", href: "/ley-de-egreso#que-es" },
-  { key: "leyObjetivos", href: "/ley-de-egreso#objetivos" },
-  { key: "leyDirigida", href: "/ley-de-egreso#dirigida" },
-  { key: "leyCambio", href: "/ley-de-egreso#cambio" },
-  { key: "leyProceso", href: "/ley-de-egreso#proceso" },
-  { key: "leyParticipa", href: "/ley-de-egreso#participa" },
-];
-
-type DropdownState = "quienes" | "programas" | "ley" | "comoAyudar" | null;
+type DropdownState = string | null;
 
 export default function Header() {
   const t = useTranslations("nav");
@@ -50,15 +109,20 @@ export default function Header() {
   const pathname = usePathname();
   const currentPath = pathname.replace(/^\/(es|pt)/, "") || "/";
   const [openDropdown, setOpenDropdown] = useState<DropdownState>(null);
-  const [openCasas, setOpenCasas] = useState(false);
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const [langOpen, setLangOpen] = useState(false);
   const [showNuevo, setShowNuevo] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const langTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const clearTimer = useCallback(() => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+  }, []);
 
   const handleMouseEnter = (dropdown: DropdownState) => {
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    clearTimer();
     setOpenDropdown(dropdown);
   };
 
@@ -95,6 +159,10 @@ export default function Header() {
         e.preventDefault();
         setSearchOpen(true);
       }
+      if (e.key === "Escape") {
+        setOpenDropdown(null);
+        setLangOpen(false);
+      }
     };
     window.addEventListener("keydown", handler);
     return () => window.removeEventListener("keydown", handler);
@@ -109,6 +177,89 @@ export default function Header() {
 
   const currentLang = languages.find((l) => l.code === locale) || languages[0];
   const otherLangs = languages.filter((l) => l.code !== locale);
+
+  const renderSubmenu = (items: NavItem[]) => (
+    <div className="absolute left-0 top-full z-40 w-64 rounded-[10px] border border-border-subtle bg-bg-card p-2 shadow-lg">
+      {items.map((item) => (
+        item.children ? (
+          <div key={item.key}>
+            <div className="my-1 h-px bg-[var(--color-border-subtle)]" />
+            <div
+              className="relative"
+              onMouseEnter={() => setOpenSubmenu(item.key)}
+              onMouseLeave={() => setOpenSubmenu(null)}
+            >
+              <Link
+                href={`/${locale}${item.href}`}
+                className="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+              >
+                {t(item.key)} <ChevronDown size={14} className="-rotate-90" />
+              </Link>
+              {openSubmenu === item.key && (
+                <div className="absolute left-full top-0 z-40 w-56 rounded-[10px] border border-border-subtle bg-bg-card p-2 shadow-lg">
+                  {item.children.map((child) => (
+                    <Link
+                      key={child.key}
+                      href={`/${locale}${child.href}`}
+                      className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                    >
+                      {t(child.key)}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        ) : (
+          <Link
+            key={item.key}
+            href={`/${locale}${item.href}`}
+            className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+          >
+            {t(item.key)}
+          </Link>
+        )
+      ))}
+    </div>
+  );
+
+  const renderMegamenu = (group: NavGroup & { type: "megamenu" }) => (
+    <div className="absolute right-0 top-full z-40 w-[580px] rounded-[10px] border border-border-subtle bg-bg-card p-4 shadow-lg">
+      <div className="flex gap-6">
+        <div className="w-2/5 shrink-0">
+          <Image
+            src={assetPath(group.image)}
+            alt=""
+            width={280}
+            height={200}
+            className="mb-3 w-full rounded-[10px] object-cover"
+            style={{ aspectRatio: "7/5" }}
+          />
+          <Link href={`/${locale}/${group.key === "leyEgreso" ? "ley-de-egreso" : group.key}`}
+            className="block text-sm font-bold text-text-primary"
+          >
+            {t(group.key)}
+          </Link>
+          <p className="mt-1 text-xs text-text-muted">
+            {group.key === "leyEgreso" ? t("leyNumero") : t("apoyoTransforma")}
+          </p>
+        </div>
+        <div className="flex-1">
+          <div className={`grid ${group.cols === 2 ? "grid-cols-2" : "grid-cols-1"} gap-1`}>
+            {group.items.map((item) => (
+              <Link
+                key={item.key}
+                href={`/${locale}${item.href}`}
+                className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+              >
+                {t(item.key)}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <>
@@ -125,236 +276,87 @@ export default function Header() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
-          <Link
-            href={`/${locale}`}
-            className="whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-          >
-            {t("inicio")}
-          </Link>
-          {/* Quienes Somos dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => handleMouseEnter("quienes")}
-            onMouseLeave={handleMouseLeave}
-          >
-            <button className="flex items-center gap-1 whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
-              {t("quienesSomos")} <ChevronDown size={14} />
-            </button>
-            {openDropdown === "quienes" && (
-              <div className="absolute left-0 top-full z-40 w-56 rounded-[10px] border border-border-subtle bg-bg-card p-2 shadow-lg">
-                <Link
-                  href={`/${locale}/quienes-somos`}
-                  className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                >
-                  {t("quienesSomos")}
-                </Link>
-                <Link
-                  href={`/${locale}/como-lo-hacemos`}
-                  className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                >
-                  {t("comoLoHacemos")}
-                </Link>
-                <Link
-                  href={`/${locale}/impacto`}
-                  className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                >
-                  {t("impacto")}
-                </Link>
-                <Link
-                  href={`/${locale}/aliados`}
-                  className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                >
-                  {t("aliados")}
-                </Link>
-              </div>
-            )}
-          </div>
-
-          {/* Programas dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => handleMouseEnter("programas")}
-            onMouseLeave={handleMouseLeave}
-          >
-            <button className="flex items-center gap-1 whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
-              {t("programas")} <ChevronDown size={14} />
-            </button>
-            {openDropdown === "programas" && (
-              <div className="absolute left-0 top-full z-40 w-64 rounded-[10px] border border-border-subtle bg-bg-card p-2 shadow-lg">
-                {programsSubmenu.map((item) => (
+        <nav ref={dropdownRef} className="hidden items-center gap-1 md:flex" aria-label="Navegacion principal">
+          {navStructure.map((group) => {
+            if (group.type === "link") {
+              if (group.badge === "Nuevo" && !showNuevo) {
+                return (
                   <Link
-                    key={item.key}
-                    href={`/${locale}${item.href}`}
-                    className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                    key={group.key}
+                    href={`/${locale}${group.href}`}
+                    className="whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
                   >
-                    {t(item.key)}
+                    {t(group.key)}
                   </Link>
-                ))}
-                <div className="my-1 h-px bg-[var(--color-border-subtle)]" />
+                );
+              }
+              if (group.badge) {
+                return (
+                  <Link
+                    key={group.key}
+                    href={`/${locale}${group.href}`}
+                    className="relative flex flex-col items-center whitespace-nowrap rounded-[10px] px-3 pb-2 pt-4 text-sm font-semibold text-brand-accent transition-colors hover:bg-brand-accent/10"
+                  >
+                    <span className="absolute -top-0.5 left-6 rounded-full bg-brand-accent/10 px-1 py-0.5 text-[8px] font-bold uppercase tracking-wider text-brand-accent">
+                      {group.badge}
+                    </span>
+                    {t(group.key)}
+                  </Link>
+                );
+              }
+              return (
+                <Link
+                  key={group.key}
+                  href={`/${locale}${group.href}`}
+                  className="whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                >
+                  {t(group.key)}
+                </Link>
+              );
+            }
+
+            if (group.type === "dropdown") {
+              return (
                 <div
+                  key={group.key}
                   className="relative"
-                  onMouseEnter={() => setOpenCasas(true)}
-                  onMouseLeave={() => setOpenCasas(false)}
+                  onMouseEnter={() => handleMouseEnter(group.key)}
+                  onMouseLeave={handleMouseLeave}
                 >
-                  <Link
-                    href={`/${locale}/casas-del-saber`}
-                    className="flex items-center justify-between rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                  <button
+                    className="flex items-center gap-1 whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                    aria-expanded={openDropdown === group.key}
+                    aria-haspopup="true"
                   >
-                    {t("casasDelSaber")} <ChevronDown size={14} className="-rotate-90" />
-                  </Link>
-                  {openCasas && (
-                    <div className="absolute left-full top-0 z-40 w-56 rounded-[10px] border border-border-subtle bg-bg-card p-2 shadow-lg">
-                      {casasSubmenu.map((item) => (
-                        <Link
-                          key={item.key}
-                          href={`/${locale}${item.href}`}
-                          className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                        >
-                          {t(item.key)}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
+                    {t(group.key)} <ChevronDown size={14} />
+                  </button>
+                  {openDropdown === group.key && renderSubmenu(group.items)}
                 </div>
-              </div>
-            )}
-          </div>
+              );
+            }
 
-          {/* Ley de Egreso mega menu */}
-          <div
-            className="relative"
-            onMouseEnter={() => handleMouseEnter("ley")}
-            onMouseLeave={handleMouseLeave}
-          >
-            <button className="flex items-center gap-1 rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
-              {t("leyEgreso")} <ChevronDown size={14} />
-            </button>
-            {openDropdown === "ley" && (
-              <div className="absolute right-0 top-full z-40 w-[580px] rounded-[10px] border border-border-subtle bg-bg-card p-4 shadow-lg">
-                <div className="flex gap-6">
-                  <div className="w-2/5 shrink-0">
-                    <Image
-                      src={assetPath(fotos.header.leyEgresoCard)}
-                      alt="Ley de Egreso"
-                      width={280}
-                      height={200}
-                      className="mb-3 w-full rounded-[10px] object-cover"
-                      style={{ aspectRatio: "7/5" }}
-                    />
-                    <Link
-                      href={`/${locale}/ley-de-egreso`}
-                      className="block text-sm font-bold text-text-primary"
-                    >
-                      {t("leyEgreso")}
-                    </Link>
-                    <p className="mt-1 text-xs text-text-muted">
-                      {t("leyNumero")}
-                    </p>
-                  </div>
-                  <div className="flex-1">
-                    <div className="grid grid-cols-2 gap-1">
-                      {leySections.map((section) => (
-                        <Link
-                          key={section.key}
-                          href={`/${locale}${section.href}`}
-                          className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                        >
-                          {t(section.key)}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
+            if (group.type === "megamenu") {
+              return (
+                <div
+                  key={group.key}
+                  className="relative"
+                  onMouseEnter={() => handleMouseEnter(group.key)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <button
+                    className="flex items-center gap-1 rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                    aria-expanded={openDropdown === group.key}
+                    aria-haspopup="true"
+                  >
+                    {t(group.key)} <ChevronDown size={14} />
+                  </button>
+                  {openDropdown === group.key && renderMegamenu(group)}
                 </div>
-              </div>
-            )}
-          </div>
+              );
+            }
 
-          {/* Como Ayudar mega menu */}
-          <div
-            className="relative"
-            onMouseEnter={() => handleMouseEnter("comoAyudar")}
-            onMouseLeave={handleMouseLeave}
-          >
-            <button className="flex items-center gap-1 rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated">
-              {t("comoAyudar")} <ChevronDown size={14} />
-            </button>
-            {openDropdown === "comoAyudar" && (
-              <div className="absolute right-0 top-full z-40 w-[580px] rounded-[10px] border border-border-subtle bg-bg-card p-4 shadow-lg">
-                <div className="flex gap-6">
-                  <div className="w-2/5 shrink-0">
-                    <Image
-                      src={assetPath(fotos.header.comoAyudarCard)}
-                      alt={t("comoAyudar")}
-                      width={280}
-                      height={200}
-                      className="mb-3 w-full rounded-[10px] object-cover"
-                      style={{ aspectRatio: "7/5" }}
-                    />
-                    <p className="text-sm font-bold text-text-primary">
-                      {t("comoAyudar")}
-                    </p>
-                    <p className="mt-1 text-xs text-text-muted">
-                      {t("apoyoTransforma")}
-                    </p>
-                  </div>
-                  <div className="flex-1">
-                    <div className="grid grid-cols-1 gap-1">
-                      <Link
-                        href={`/${locale}/donar`}
-                        className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                      >
-                        {t("donacionMonetaria")}
-                      </Link>
-                      <Link
-                        href={`/${locale}/como-ayudar/plan-padrino`}
-                        className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                      >
-                        {t("planPadrino")}
-                      </Link>
-                      <Link
-                        href={`/${locale}/como-ayudar/voluntariado`}
-                        className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                      >
-                        {t("voluntariado")}
-                      </Link>
-                      <Link
-                        href={`/${locale}/participa`}
-                        className="rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                      >
-                        {t("participa")}
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {showNuevo ? (
-            <Link
-              href={`/${locale}/como-ayudar/enredate-con-ascep`}
-              className="relative flex flex-col items-center whitespace-nowrap rounded-[10px] px-3 pb-2 pt-4 text-sm font-semibold text-brand-orange transition-colors hover:bg-brand-orange/10"
-            >
-              <span className="absolute -top-0.5 left-6 rounded-full bg-brand-orange/10 px-1 py-0.5 text-[8px] font-bold uppercase tracking-wider text-brand-orange">
-                Nuevo
-              </span>
-              {t("enredateConAscep")}
-            </Link>
-          ) : (
-            <Link
-              href={`/${locale}/como-ayudar/enredate-con-ascep`}
-              className="whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-            >
-              {t("enredateConAscep")}
-            </Link>
-          )}
-          <Link
-            href={`/${locale}/contacto`}
-            className="whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-          >
-            {t("contacto")}
-          </Link>
+            return null;
+          })}
         </nav>
 
         <div className="hidden items-center gap-1 md:flex">
@@ -366,13 +368,17 @@ export default function Header() {
             <Search size={18} />
           </button>
           <ThemeToggle />
-          {/* Language dropdown */}
           <div
             className="relative"
             onMouseEnter={handleLangEnter}
             onMouseLeave={handleLangLeave}
           >
-            <button className="flex items-center gap-1.5 rounded-[10px] border border-border-default px-2.5 py-1.5 text-xs font-semibold uppercase text-text-primary transition-colors hover:border-brand-purple">
+            <button
+              className="flex items-center gap-1.5 rounded-[10px] border border-border-default px-2.5 py-1.5 text-xs font-semibold uppercase text-text-primary transition-colors hover:border-brand-primary"
+              aria-expanded={langOpen}
+              aria-haspopup="true"
+              aria-label="Idioma"
+            >
               <FlagIcon country={currentLang.code as "es" | "pt"} className="h-3.5 w-5" />
               <span>{currentLang.label}</span>
               <ChevronDown size={12} />
@@ -394,7 +400,7 @@ export default function Header() {
           </div>
           <Link
             href={`/${locale}/donar`}
-            className="inline-flex items-center rounded-[10px] bg-brand-orange px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-orange-dark"
+            className="inline-flex items-center rounded-[10px] bg-brand-accent px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-accent-dark"
           >
             {t("donarBtn")}
           </Link>
@@ -404,7 +410,6 @@ export default function Header() {
           <ThemeToggle />
         </div>
       </div>
-
     </header>
     <MobileMenu />
     <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />

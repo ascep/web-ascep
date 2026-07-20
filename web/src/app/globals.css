@@ -3,16 +3,22 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
+  --color-brand-primary: #019E9F;
+  --color-brand-primary-dark: #005C5D;
+  --color-brand-secondary: #44BCC5;
+  --color-brand-accent: #EC6620;
+  --color-brand-accent-dark: #C45118;
+  --color-brand-yellow: #F2CA11;
+  --color-brand-soft: #E8F4F4;
+  --color-brand-dark: #003F40;
+  /* backward compat -- se reemplazara gradualmente */
   --color-brand-blue: #019E9F;
   --color-brand-blue-dark: #005C5D;
-  /* brand-purple se mapea al mismo valor de brand-blue (#019E9F) por compatibilidad semantica en componentes existentes */
   --color-brand-purple: #019E9F;
-  --color-brand-teal: #44BCC5;
-  --color-brand-orange: #EC6620;
-  --color-brand-yellow: #F2CA11;
-  /* brand-purple-dark se mapea a Primary Blue Dark (#005C5D) */
   --color-brand-purple-dark: #005C5D;
+  --color-brand-teal: #44BCC5;
   --color-brand-teal-dark: #2E8A92;
+  --color-brand-orange: #EC6620;
   --color-brand-orange-dark: #C45118;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;

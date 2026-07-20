@@ -30,11 +30,9 @@ const languages = [
 ] as const;
 
 const programsSubmenu = [
-  { key: "incidencia", href: "/programas/incidencia" },
   { key: "avanzaJoven", href: "/programas/avanza-joven" },
   { key: "empleo", href: "/programas/empleo" },
   { key: "miCuerpo", href: "/programas/mi-cuerpo" },
-  { key: "marcoPolitico", href: "/programas/marco-politico" },
 ];
 
 const casasSubmenu = [
@@ -112,6 +110,7 @@ export default function MobileMenu() {
   const currentPath = pathname.replace(/^\/(es|pt)/, "") || "/";
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<Section>(null);
+  const [incidenciaOpen, setIncidenciaOpen] = useState(false);
   const [casasOpen, setCasasOpen] = useState(false);
   const [showNuevo, setShowNuevo] = useState(false);
 
@@ -147,11 +146,13 @@ export default function MobileMenu() {
   const close = () => {
     setOpen(false);
     setExpanded(null);
+    setIncidenciaOpen(false);
     setCasasOpen(false);
   };
 
   const toggle = (section: Section) => {
     setExpanded((prev) => (prev === section ? null : section));
+    setIncidenciaOpen(false);
     setCasasOpen(false);
   };
 
@@ -268,6 +269,49 @@ export default function MobileMenu() {
                     isOpen={expanded === "programas"}
                     onToggle={() => toggle("programas")}
                   >
+                    {/* Incidencia (with nested Marco Politico) */}
+                    <div>
+                      <button
+                        onClick={() => setIncidenciaOpen(!incidenciaOpen)}
+                        className="flex w-full items-center justify-between rounded-[10px] px-3 py-2.5 text-sm font-semibold text-text-primary hover:bg-bg-elevated min-h-[44px]"
+                      >
+                        {t("incidencia")}
+                        <ChevronDown
+                          size={14}
+                          className={`transition-transform ${
+                            incidenciaOpen ? "rotate-180" : ""
+                          }`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {incidenciaOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+                            className="overflow-hidden"
+                          >
+                            <div className="ml-3 space-y-0.5 pb-1">
+                              <Link
+                                href={`/${locale}/programas/incidencia`}
+                                onClick={close}
+                                className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-secondary hover:bg-bg-elevated min-h-[44px]"
+                              >
+                                {t("incidencia")}
+                              </Link>
+                              <Link
+                                href={`/${locale}/programas/marco-politico`}
+                                onClick={close}
+                                className="block rounded-[10px] px-3 py-2 text-sm font-semibold text-text-secondary hover:bg-bg-elevated min-h-[44px]"
+                              >
+                                {t("marcoPolitico")}
+                              </Link>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
                     {programsSubmenu.map((item) => (
                       <Link
                         key={item.key}
