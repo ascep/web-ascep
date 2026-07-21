@@ -1,8 +1,11 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { AnimatePresence, useReducedMotion, motion } from "motion/react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import CursorGlow from "@/components/CursorGlow";
+import DecoShapes from "@/components/DecoShapes";
+import AnimatedSection from "@/components/AnimatedSection";
 
 type Testimonio = {
   text: string;
@@ -44,33 +47,19 @@ export default function EnredateTestimonials({
   const dur = prefersReduced ? 0 : 0.5;
 
   return (
-    <section className="relative bg-gradient-to-br from-[#2D1B4E] via-[#4A2D7A] to-brand-purple py-20">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute -right-32 -top-32 h-96 w-96 rounded-full bg-brand-teal/30 blur-3xl" />
-        <div className="absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-brand-orange/20 blur-3xl" />
-      </div>
+    <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+      <DecoShapes variant="teal" />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-14 text-center">
-          <motion.span
-            initial={dur ? { opacity: 0, y: 20 } : undefined}
-            whileInView={dur ? { opacity: 1, y: 0 } : undefined}
-            viewport={{ once: true }}
-            transition={dur ? { duration: 0.5 } : undefined}
-            className="mb-3 inline-block rounded-full bg-white/20 px-5 py-2 text-sm font-bold text-white"
-          >
+        <AnimatedSection className="mb-14 text-center">
+          <span className="mb-3 inline-block rounded-full border border-white/30 px-5 py-2 text-sm font-bold text-white/80">
             {tag}
-          </motion.span>
-          <motion.h2
-            initial={dur ? { opacity: 0, y: 20 } : undefined}
-            whileInView={dur ? { opacity: 1, y: 0 } : undefined}
-            viewport={{ once: true }}
-            transition={dur ? { duration: 0.5, delay: 0.1 } : undefined}
-            className="text-3xl font-bold text-white sm:text-4xl"
-          >
+          </span>
+          <h2 className="text-3xl font-bold text-white sm:text-4xl">
             {title}
-          </motion.h2>
-        </div>
+          </h2>
+        </AnimatedSection>
 
         <div className="mx-auto max-w-4xl">
           <AnimatePresence mode="wait">
@@ -160,3 +149,4 @@ export default function EnredateTestimonials({
     </section>
   );
 }
+

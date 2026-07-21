@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
+import DecoShapes from "@/components/DecoShapes";
+import CursorGlow from "@/components/CursorGlow";
+import ImageParallax from "@/components/ImageParallax";
 import { ArrowRight } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { fotos } from "@/data/fotos";
@@ -57,10 +60,10 @@ export default async function ProgramasPage({
         msgKey: slugToMsgKey[p.slug?.current || ""] || p.slug?.current || "",
       }))
     : [
-        { title: t("incidenciaTitle"), slug: "incidencia", desc: t("incidenciaDesc"), image: assetPath("/images/programas/incidencia-scaled-1.webp"), label: t("pillLiderazgo"), msgKey: "incidencia" },
-        { title: t("avanzaTitle"), slug: "avanza-joven", desc: t("avanzaDesc"), image: assetPath("/images/programas/Avanza-1-scaled-1.webp"), label: t("pillFormacion"), msgKey: "avanza" },
-        { title: t("empleoTitle"), slug: "empleo", desc: t("empleoDesc"), image: assetPath("/images/programas/LOGO-FOMENTO.png"), label: t("pillInsercion"), msgKey: "empleo" },
-        { title: t("miCuerpoTitle"), slug: "mi-cuerpo", desc: t("miCuerpoDesc"), image: assetPath("/images/programas/logo-MCSD.png"), label: t("pillBienestar"), msgKey: "miCuerpo" },
+        { title: t("incidenciaTitle"), slug: "incidencia", desc: t("incidenciaDesc"), image: assetPath(fotos.programas.cards.incidencia.image), label: t("pillLiderazgo"), msgKey: "incidencia" },
+        { title: t("avanzaTitle"), slug: "avanza-joven", desc: t("avanzaDesc"), image: assetPath(fotos.programas.cards.avanzaJoven.image), label: t("pillFormacion"), msgKey: "avanza" },
+        { title: t("empleoTitle"), slug: "empleo", desc: t("empleoDesc"), image: assetPath(fotos.programas.cards.fomento.image), label: t("pillInsercion"), msgKey: "empleo" },
+        { title: t("miCuerpoTitle"), slug: "mi-cuerpo", desc: t("miCuerpoDesc"), image: assetPath(fotos.programas.cards.miCuerpo.image), label: t("pillBienestar"), msgKey: "miCuerpo" },
         { title: t("casasTitle"), slug: "casas-del-saber", desc: t("casasDesc"), image: "", label: t("pillPrograma"), msgKey: "casas" },
       ];
 
@@ -73,7 +76,9 @@ export default async function ProgramasPage({
         subtitle={t("desc")}
       />
 
-      <section className="bg-brand-teal/5 py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {programs.map((program, i) => (
@@ -86,7 +91,7 @@ export default async function ProgramasPage({
                         : `/${locale}/programas/${program.slug}`;
                       return program.image && program.image.endsWith(".webp") ? (
                         <Link href={href} className="relative block h-full">
-                          <Image src={program.image} alt={program.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
+                          <ImageParallax src={program.image} alt={program.title} fill containerClassName="h-full" className="object-cover transition-transform duration-500 group-hover:scale-105" intensity={0.12} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
                           <span className="absolute bottom-4 left-4 rounded-[10px] bg-brand-purple px-3 py-1 text-xs font-semibold text-white z-10">{program.label}</span>
                         </Link>
@@ -147,3 +152,5 @@ export default async function ProgramasPage({
     </>
   );
 }
+
+

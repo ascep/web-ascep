@@ -4,6 +4,9 @@ import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import Timeline from "@/components/Timeline";
 import AnimatedSection from "@/components/AnimatedSection";
+import DecoShapes from "@/components/DecoShapes";
+import CursorGlow from "@/components/CursorGlow";
+import ImageParallax from "@/components/ImageParallax";
 import ParallaxSection from "@/components/ParallaxSection";
 import { getTranslations } from "next-intl/server";
 import { Target, Eye, Heart } from "lucide-react";
@@ -53,7 +56,6 @@ const objetivosEstrategicos = [
   { titleKey: "oe4Title", descKey: "oe4Desc" },
 ];
 
-
 export default async function QuienesSomosPage({
   params,
 }: {
@@ -84,6 +86,7 @@ export default async function QuienesSomosPage({
         image: imageUrl(m.image) || fallbackMilestones[0].image,
       }))
     : fallbackMilestones;
+
   return (
     <div>
       <PageHero
@@ -93,19 +96,24 @@ export default async function QuienesSomosPage({
         subtitle={t("heroSubtitle")}
       />
 
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-        <section className="mb-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
-            <AnimatedSection direction="left" className="relative">
-              <div className="absolute -left-4 -top-4 h-full w-full rounded-[10px] bg-brand-purple/10" />
-              <Image
-                src={assetPath(fotos.quienesSomos.historiaImage)}
-                alt="Equipo ASCEP"
-                width={600}
-                height={400}
-                className="relative w-full rounded-[10px] object-cover shadow-lg"
-                style={{ aspectRatio: "3/2" }}
-              />
+            <AnimatedSection direction="left">
+              <div className="relative">
+                <div className="absolute -left-4 -top-4 h-full w-full rounded-[10px] bg-brand-purple/10" />
+                <ImageParallax
+                  src={assetPath(fotos.quienesSomos.historiaImage)}
+                  alt="Equipo ASCEP"
+                  width={600}
+                  height={400}
+                  containerClassName="relative"
+                  className="w-full rounded-[10px] object-cover shadow-lg"
+                  intensity={0.2}
+                  style={{ aspectRatio: "3/2" }}
+                />
+              </div>
             </AnimatedSection>
             <div>
               <AnimatedSection direction="right">
@@ -127,73 +135,58 @@ export default async function QuienesSomosPage({
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mb-20">
-          <div className="mb-12 text-center">
-            <AnimatedSection direction="up">
-              <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-                {t("propositoTag")}
-              </span>
-            </AnimatedSection>
-            <AnimatedSection direction="up" delay={0.1}>
-              <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-                {t("propositoTitle")} <span className="text-brand-purple">{t("propositoHighlight")}</span>
-              </h2>
-            </AnimatedSection>
-          </div>
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              {t("propositoTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t("propositoTitle")} <span className="text-brand-orange">{t("propositoHighlight")}</span>
+            </h2>
+          </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-3">
-            <AnimatedSection direction="up" className="rounded-[10px] border border-brand-teal/20 bg-bg-card p-8 transition-all hover:shadow-md">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-brand-teal/10">
-                <Target size={22} className="text-brand-teal" />
+            <AnimatedSection direction="up" className="glass-card rounded-[10px] p-8 transition-all hover:bg-white/15">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
+                <Target size={22} className="text-brand-secondary" />
               </div>
-              <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">
-                {t("misionTitle")}
-              </h3>
-              <p className="text-[var(--color-text-secondary)]">
-                {t("misionDesc")}
-              </p>
+              <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">{t("misionTitle")}</h3>
+              <p className="text-[var(--color-text-muted)]">{t("misionDesc")}</p>
             </AnimatedSection>
-
-            <AnimatedSection direction="up" delay={0.1} className="rounded-[10px] border border-brand-purple/20 bg-bg-card p-8 transition-all hover:shadow-md">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-brand-purple/10">
-                <Eye size={22} className="text-brand-purple" />
+            <AnimatedSection direction="up" delay={0.1} className="glass-card rounded-[10px] p-8 transition-all hover:bg-white/15">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
+                <Eye size={22} className="text-brand-secondary" />
               </div>
-              <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">
-                {t("visionTitle")}
-              </h3>
-              <p className="text-[var(--color-text-secondary)]">
-                {t("visionDesc")}
-              </p>
+              <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">{t("visionTitle")}</h3>
+              <p className="text-[var(--color-text-muted)]">{t("visionDesc")}</p>
             </AnimatedSection>
-
-            <AnimatedSection direction="up" delay={0.2} className="rounded-[10px] border border-brand-orange/20 bg-bg-card p-8 transition-all hover:shadow-md">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-brand-orange/10">
-                <Heart size={22} className="text-brand-orange" />
+            <AnimatedSection direction="up" delay={0.2} className="glass-card rounded-[10px] p-8 transition-all hover:bg-white/15">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
+                <Heart size={22} className="text-brand-secondary" />
               </div>
-              <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">
-                {t("propositoCardTitle")}
-              </h3>
-              <p className="text-[var(--color-text-secondary)]">
-                {t("propositoCardDesc")}
-              </p>
+              <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">{t("propositoCardTitle")}</h3>
+              <p className="text-[var(--color-text-muted)]">{t("propositoCardDesc")}</p>
             </AnimatedSection>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mb-20">
-          <div className="mb-12 text-center">
-            <AnimatedSection direction="up">
-              <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-                {t("objetivoTag")}
-              </span>
-            </AnimatedSection>
-            <AnimatedSection direction="up" delay={0.1}>
-              <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-                {t("objetivoTitle")} <span className="text-brand-purple">{t("objetivoHighlight")}</span>
-              </h2>
-            </AnimatedSection>
-          </div>
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="orange" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+              {t("objetivoTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              {t("objetivoTitle")} <span className="text-brand-purple">{t("objetivoHighlight")}</span>
+            </h2>
+          </AnimatedSection>
           <div className="grid items-center gap-8 lg:grid-cols-5">
             <div className="lg:col-span-3">
               <AnimatedSection direction="up" delay={0.15}>
@@ -204,55 +197,56 @@ export default async function QuienesSomosPage({
                 </div>
               </AnimatedSection>
             </div>
-            <div className="lg:col-span-2">
-              <AnimatedSection direction="right" delay={0.2}>
-                <Image
-                  src={assetPath(fotos.quienesSomos.objetivoImage)}
-                  alt=""
-                  width={600}
-                  height={400}
-                  className="w-full rounded-[10px] object-cover shadow-lg"
-                  style={{ aspectRatio: "4/3" }}
-                />
-              </AnimatedSection>
-            </div>
+            <AnimatedSection direction="right" delay={0.2} className="lg:col-span-2">
+              <ImageParallax
+                src={assetPath(fotos.quienesSomos.objetivoImage)}
+                alt=""
+                width={600}
+                height={400}
+                className="w-full rounded-[10px] object-cover shadow-lg"
+                intensity={0.2}
+                style={{ aspectRatio: "4/3" }}
+              />
+            </AnimatedSection>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mb-20">
-          <div className="mb-12 text-center">
-            <AnimatedSection direction="up">
-              <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-                {t("objetivosEstrategicosTag")}
-              </span>
-            </AnimatedSection>
-            <AnimatedSection direction="up" delay={0.1}>
-              <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-                {t("objetivosEstrategicosTitle")} <span className="text-brand-purple">{t("objetivosEstrategicosHighlight")}</span>
-              </h2>
-            </AnimatedSection>
-          </div>
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              {t("objetivosEstrategicosTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t("objetivosEstrategicosTitle")} <span className="text-brand-orange">{t("objetivosEstrategicosHighlight")}</span>
+            </h2>
+          </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2">
             {objetivosEstrategicos.map((oe, i) => (
               <AnimatedSection key={oe.titleKey} direction="up" delay={i * 0.1}>
-                <div className="rounded-[10px] border border-brand-teal/20 bg-bg-card p-6 transition-all hover:shadow-md">
-                  <h3 className="mb-2 text-lg font-bold text-brand-purple">
+                <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
+                  <h3 className="mb-2 text-lg font-bold text-brand-secondary">
                     {t(oe.titleKey)}
                   </h3>
-                  <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
+                  <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
                     {t(oe.descKey)}
                   </p>
                 </div>
               </AnimatedSection>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <ParallaxSection
-          bgImage={assetPath(fotos.quienesSomos.poblacionParallax)}
-          overlay="bg-black/70"
-          className="mb-20 py-16"
-        >
+      <ParallaxSection
+        bgImage={assetPath(fotos.quienesSomos.poblacionParallax)}
+        overlay="bg-black/70"
+        className="py-20"
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-5">
             <div className="lg:col-span-3">
               <AnimatedSection direction="up">
@@ -271,23 +265,25 @@ export default async function QuienesSomosPage({
                 </p>
               </AnimatedSection>
             </div>
-            <div className="lg:col-span-2">
-              <AnimatedSection direction="right" delay={0.2}>
-                <Image
-                  src={assetPath(fotos.quienesSomos.poblacionImage)}
-                  alt=""
-                  width={600}
-                  height={400}
-                  className="w-full rounded-[10px] object-cover shadow-lg"
-                  style={{ aspectRatio: "4/3" }}
-                />
-              </AnimatedSection>
-            </div>
+            <AnimatedSection direction="right" delay={0.2} className="lg:col-span-2">
+              <ImageParallax
+                src={assetPath(fotos.quienesSomos.poblacionImage)}
+                alt=""
+                width={600}
+                height={400}
+                className="w-full rounded-[10px] object-cover shadow-lg"
+                intensity={0.2}
+                style={{ aspectRatio: "4/3" }}
+              />
+            </AnimatedSection>
           </div>
-        </ParallaxSection>
+        </div>
+      </ParallaxSection>
 
-        <section className="mb-20">
-          <AnimatedSection direction="up" className="mb-12 text-center">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
               {t("trayectoriaTag")}
             </span>
@@ -296,23 +292,27 @@ export default async function QuienesSomosPage({
             </h2>
           </AnimatedSection>
           <Timeline items={milestones} />
-        </section>
+        </div>
+      </section>
 
-        <section className="mb-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <AnimatedSection direction="left">
-                <span className="mb-3 inline-block rounded-[10px] bg-brand-teal/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-teal">
+                <span className="mb-3 inline-block rounded-[10px] bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">
                   {t("equipoTag")}
                 </span>
               </AnimatedSection>
               <AnimatedSection direction="left" delay={0.1}>
-                <h2 className="mb-4 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-                  {t("equipoTitle")} <span className="text-brand-purple">{t("equipoHighlight")}</span>
+                <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
+                  {t("equipoTitle")} <span className="text-brand-orange">{t("equipoHighlight")}</span>
                 </h2>
               </AnimatedSection>
               <AnimatedSection direction="left" delay={0.2}>
-                <p className="text-base leading-relaxed text-[var(--color-text-secondary)]">
+                <p className="text-base leading-relaxed text-[var(--color-text-muted)]">
                   {t("equipoDesc")}
                 </p>
               </AnimatedSection>
@@ -321,7 +321,7 @@ export default async function QuienesSomosPage({
               <div className="grid gap-4 sm:grid-cols-2">
                 {team.slice(0, 4).map((member, i) => (
                   <AnimatedSection key={member.name} direction="up" delay={i * 0.08}>
-                    <div className="flex items-center gap-4 rounded-[10px] bg-white p-4 shadow-sm transition-all hover:shadow-md">
+                    <div className="glass-card flex items-center gap-4 rounded-[10px] p-4 transition-all hover:bg-white/15">
                       <div className="h-[100px] w-[100px] shrink-0 overflow-hidden rounded-[10px] sm:h-[130px] sm:w-[130px]">
                         <Image
                           src={member.src}
@@ -332,10 +332,10 @@ export default async function QuienesSomosPage({
                         />
                       </div>
                       <div className="min-w-0">
-                        <h4 className="text-lg font-bold text-brand-purple">
+                        <h4 className="text-lg font-bold text-brand-secondary">
                           {member.name}
                         </h4>
-                        <p className="mt-0.5 text-xs text-text-muted">
+                        <p className="mt-0.5 text-xs text-[var(--color-text-muted)]">
                           {member.role}
                         </p>
                       </div>
@@ -345,7 +345,7 @@ export default async function QuienesSomosPage({
               </div>
               {team.length > 4 && (
                 <AnimatedSection direction="up" delay={0.4} className="mt-4 flex justify-center sm:justify-start">
-                  <div className="flex w-full items-center gap-4 rounded-[10px] bg-white p-4 shadow-sm transition-all hover:shadow-md sm:w-[calc(50%-0.5rem)]">
+                  <div className="glass-card flex w-full items-center gap-4 rounded-[10px] p-4 transition-all hover:bg-white/15 sm:w-[calc(50%-0.5rem)]">
                     <div className="h-[100px] w-[100px] shrink-0 overflow-hidden rounded-[10px] sm:h-[130px] sm:w-[130px]">
                       <Image
                         src={team[4].src}
@@ -356,10 +356,10 @@ export default async function QuienesSomosPage({
                       />
                     </div>
                     <div className="min-w-0">
-                      <h4 className="text-lg font-bold text-brand-purple">
+                      <h4 className="text-lg font-bold text-brand-secondary">
                         {team[4].name}
                       </h4>
-                      <p className="mt-0.5 text-xs text-text-muted">
+                      <p className="mt-0.5 text-xs text-[var(--color-text-muted)]">
                         {team[4].role}
                       </p>
                     </div>
@@ -368,10 +368,13 @@ export default async function QuienesSomosPage({
               )}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mb-20">
-          <AnimatedSection direction="up" className="mb-12 text-center">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="orange" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
               {t("enfoqueTag")}
             </span>
@@ -379,7 +382,7 @@ export default async function QuienesSomosPage({
               {t("enfoqueTitle")} <span className="text-brand-purple">{t("enfoqueHighlight")}</span>
             </h2>
           </AnimatedSection>
-          <AnimatedSection direction="up" delay={0.1}>
+          <AnimatedSection delay={0.1}>
             <p className="mb-8 text-center text-lg leading-relaxed text-[var(--color-text-secondary)]">
               {t("enfoqueDesc")}
             </p>
@@ -398,54 +401,61 @@ export default async function QuienesSomosPage({
               </AnimatedSection>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="mb-20">
-          <AnimatedSection direction="up" className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("areasTrabajoTag")}
             </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              {t("areasTrabajoTitle")} <span className="text-brand-purple">{t("areasTrabajoHighlight")}</span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t("areasTrabajoTitle")} <span className="text-brand-orange">{t("areasTrabajoHighlight")}</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-[var(--color-text-secondary)]">
+            <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-white/70">
               {t("areasTrabajoDesc")}
             </p>
           </AnimatedSection>
-          <AnimatedSection direction="up" delay={0.1} className="mb-10 overflow-hidden rounded-[10px]">
-            <Image
+          <AnimatedSection className="mb-10 overflow-hidden rounded-[10px]">
+            <ImageParallax
               src={assetPath(fotos.quienesSomos.areasImage)}
               alt=""
               width={1200}
               height={300}
               className="h-48 w-full object-cover"
+              intensity={0.12}
             />
           </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { titleKey: "areaATitle", descKey: "areaADesc", color: "purple" },
-              { titleKey: "areaBTitle", descKey: "areaBDesc", color: "teal" },
-              { titleKey: "areaCTitle", descKey: "areaCDesc", color: "orange" },
-              { titleKey: "areaDTitle", descKey: "areaDDesc", color: "yellow" },
-              { titleKey: "areaETitle", descKey: "areaEDesc", color: "purple" },
-              { titleKey: "areaFTitle", descKey: "areaFDesc", color: "teal" },
+              { titleKey: "areaATitle", descKey: "areaADesc" },
+              { titleKey: "areaBTitle", descKey: "areaBDesc" },
+              { titleKey: "areaCTitle", descKey: "areaCDesc" },
+              { titleKey: "areaDTitle", descKey: "areaDDesc" },
+              { titleKey: "areaETitle", descKey: "areaEDesc" },
+              { titleKey: "areaFTitle", descKey: "areaFDesc" },
             ].map((area, i) => (
               <AnimatedSection key={area.titleKey} direction="up" delay={i * 0.08}>
-                <div className="rounded-[10px] border border-brand-teal/20 bg-bg-card p-6 transition-all hover:shadow-md">
+                <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
                   <h3 className="mb-2 font-bold text-[var(--color-text-primary)]">
                     {t(area.titleKey)}
                   </h3>
-                  <p className="text-sm text-[var(--color-text-secondary)]">
+                  <p className="text-sm text-[var(--color-text-muted)]">
                     {t(area.descKey)}
                   </p>
                 </div>
               </AnimatedSection>
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        <AnimatedSection direction="up">
-          <section className="rounded-[10px] bg-brand-purple p-10 text-center shadow-sm transition-all hover:shadow-md">
+      <section className="bg-brand-purple py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="rounded-[10px] bg-white/10 p-10 text-center backdrop-blur-sm">
             <h2 className="mb-4 text-3xl font-bold text-white">
               {t("ctaTitle")}
             </h2>
@@ -466,9 +476,10 @@ export default async function QuienesSomosPage({
                 {t("ctaBtnDonar")}
               </Link>
             </div>
-          </section>
-        </AnimatedSection>
-      </div>
+          </AnimatedSection>
+        </div>
+      </section>
     </div>
   );
 }
+

@@ -11,6 +11,8 @@
   --color-brand-yellow: #F2CA11;
   --color-brand-soft: #E8F4F4;
   --color-brand-dark: #003F40;
+  --color-purple-bg: #800080;
+  --color-purple-bg-dark: #4A004A;
   /* backward compat -- se reemplazara gradualmente */
   --color-brand-blue: #019E9F;
   --color-brand-blue-dark: #005C5D;
@@ -74,31 +76,39 @@
 }
 
 .bg-atmospheric {
-  background:
+  background-color: #0D1A1A;
+  background-image:
     var(--atmospheric-teal),
-    var(--atmospheric-orange),
-    var(--atmospheric-base);
+    var(--atmospheric-orange);
 }
 
 .bg-atmospheric-teal {
-  background:
+  background-color: #0D1A1A;
+  background-image:
     radial-gradient(ellipse 80% 60% at 20% 30%, #019E9F18 0%, transparent 60%),
-    radial-gradient(ellipse 60% 50% at 80% 70%, #44BCC508 0%, transparent 50%),
-    #0D1A1A;
+    radial-gradient(ellipse 60% 50% at 80% 70%, #44BCC508 0%, transparent 50%);
 }
 
 .bg-atmospheric-orange {
-  background:
+  background-color: #0D1010;
+  background-image:
     radial-gradient(ellipse 70% 50% at 30% 20%, #EC662015 0%, transparent 55%),
-    radial-gradient(ellipse 60% 40% at 70% 80%, #019E9F10 0%, transparent 50%),
-    #0D1010;
+    radial-gradient(ellipse 60% 40% at 70% 80%, #019E9F10 0%, transparent 50%);
+}
+
+.bg-atmospheric-purple {
+  background-color: #800080 !important;
+  background-image:
+    radial-gradient(ellipse 80% 60% at 15% 25%, #019E9F15 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 85% 75%, #EC66200C 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 50% 50%, #7C3AED08 0%, transparent 45%);
 }
 
 .bg-section-light {
-  background:
+  background-color: var(--color-bg-base);
+  background-image:
     radial-gradient(ellipse 60% 40% at 0% 50%, #019E9F06 0%, transparent 60%),
-    radial-gradient(ellipse 50% 30% at 100% 50%, #EC662004 0%, transparent 50%),
-    var(--color-bg-base);
+    radial-gradient(ellipse 50% 30% at 100% 50%, #EC662004 0%, transparent 50%);
 }
 
 .glass-card {
@@ -141,9 +151,9 @@ body {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: 0.15s !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0.15s !important;
     scroll-behavior: auto !important;
   }
 }

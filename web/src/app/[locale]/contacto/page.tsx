@@ -3,8 +3,13 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
+import AnimatedSection from "@/components/AnimatedSection";
+import DecoShapes from "@/components/DecoShapes";
+import CursorGlow from "@/components/CursorGlow";
+import ImageParallax from "@/components/ImageParallax";
 import { MapPin, Mail, Share2 } from "lucide-react";
-import { assetPath } from "@/lib/asset-path";
+import { assetPath } from "@/lib/asset-path"
+import { fotos } from "@/data/fotos";;
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -28,73 +33,89 @@ export default async function ContactoPage({
   return (
     <div>
       <PageHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath("/images/equipo-shoot/GIS08546.webp")}
+        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.contacto.hero)}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || ""}
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
-      <section className="bg-brand-teal/5 py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-2">
             <div>
-              <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-                {t("formTag")}
-              </span>
-              <h2 className="mb-8 text-3xl font-bold text-[var(--color-text-primary)]">
-                {t("formTitle")}
-              </h2>
-
-              <ContactForm />
+              <AnimatedSection direction="left">
+                <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                  {t("formTag")}
+                </span>
+              </AnimatedSection>
+              <AnimatedSection direction="left" delay={0.1}>
+                <h2 className="mb-8 text-3xl font-bold text-white">
+                  {t("formTitle")}
+                </h2>
+              </AnimatedSection>
+              <AnimatedSection direction="left" delay={0.15}>
+                <ContactForm />
+              </AnimatedSection>
             </div>
 
             <div>
-              <div className="relative mb-6 overflow-hidden rounded-[10px]">
-                <Image
-                  src={assetPath("/images/equipo-shoot/GIS08545.webp")}
-                  alt=""
-                  width={600}
-                  height={300}
-                  className="h-40 w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-brand-purple/60" />
-                <div className="absolute inset-0 flex items-center justify-center p-6">
-                  <p className="text-center text-lg font-semibold text-white">
-                    {t("bannerText")}
-                  </p>
+              <AnimatedSection direction="right">
+                <div className="relative mb-6 overflow-hidden rounded-[10px]">
+                  <ImageParallax
+                    src={assetPath(fotos.contacto.section)}
+                    alt=""
+                    width={600}
+                    height={300}
+                    className="h-40 w-full object-cover"
+                    intensity={0.12}
+                  />
+                  <div className="absolute inset-0 bg-brand-purple/60" />
+                  <div className="absolute inset-0 flex items-center justify-center p-6">
+                    <p className="text-center text-lg font-semibold text-white">
+                      {t("bannerText")}
+                    </p>
+                  </div>
                 </div>
-              </div>
+              </AnimatedSection>
               <div className="space-y-6">
-              <div className="rounded-[10px] bg-white p-8 text-center shadow-sm transition-all hover:shadow-md">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-brand-purple/10">
-                  <MapPin size={24} className="text-brand-purple" />
-                </div>
-                <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{t("ubicacionTitle")}</h4>
-                <p className="text-sm text-[var(--color-text-muted)]">{t("ubicacionValue")}</p>
-              </div>
+                <AnimatedSection direction="right" delay={0.05}>
+                  <div className="glass-card rounded-[10px] p-8 text-center transition-all hover:bg-white/15">
+                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-white/10">
+                      <MapPin size={24} className="text-brand-secondary" />
+                    </div>
+                    <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{t("ubicacionTitle")}</h4>
+                    <p className="text-sm text-[var(--color-text-muted)]">{t("ubicacionValue")}</p>
+                  </div>
+                </AnimatedSection>
 
-              <div className="rounded-[10px] bg-white p-8 text-center shadow-sm transition-all hover:shadow-md">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-brand-purple/10">
-                  <Mail size={24} className="text-brand-purple" />
-                </div>
-                <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{t("emailTitle")}</h4>
-                <a
-                  href={`mailto:${t("emailValue")}`}
-                  className="text-sm text-brand-purple transition-colors hover:text-brand-purple-dark hover:underline"
-                >
-                  {t("emailValue")}
-                </a>
-              </div>
+                <AnimatedSection direction="right" delay={0.1}>
+                  <div className="glass-card rounded-[10px] p-8 text-center transition-all hover:bg-white/15">
+                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-white/10">
+                      <Mail size={24} className="text-brand-secondary" />
+                    </div>
+                    <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{t("emailTitle")}</h4>
+                    <a
+                      href={`mailto:${t("emailValue")}`}
+                      className="text-sm text-brand-secondary transition-colors hover:text-brand-secondary-dark hover:underline"
+                    >
+                      {t("emailValue")}
+                    </a>
+                  </div>
+                </AnimatedSection>
 
-              <div className="rounded-[10px] bg-white p-8 text-center shadow-sm transition-all hover:shadow-md">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-brand-purple/10">
-                  <Share2 size={24} className="text-brand-purple" />
-                </div>
-                <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{t("redesTitle")}</h4>
-                <p className="text-sm text-[var(--color-text-muted)]">{t("redesDesc")}</p>
+                <AnimatedSection direction="right" delay={0.15}>
+                  <div className="glass-card rounded-[10px] p-8 text-center transition-all hover:bg-white/15">
+                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-white/10">
+                      <Share2 size={24} className="text-brand-secondary" />
+                    </div>
+                    <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{t("redesTitle")}</h4>
+                    <p className="text-sm text-[var(--color-text-muted)]">{t("redesDesc")}</p>
+                  </div>
+                </AnimatedSection>
               </div>
-            </div>
             </div>
           </div>
         </div>
@@ -102,3 +123,7 @@ export default async function ContactoPage({
     </div>
   );
 }
+
+
+
+

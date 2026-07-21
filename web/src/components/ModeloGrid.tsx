@@ -11,6 +11,7 @@ import {
   TrendingUp,
 } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
+import CursorGlow from "./CursorGlow";
 
 const dimensions = [
   { titleKey: "dim1Title", descKey: "dim1Desc", icon: Heart, color: "#019E9F" },
@@ -30,7 +31,8 @@ export default function ModeloGrid({ variant = "light" }: ModeloGridProps) {
   const t = useTranslations("modelo");
   const locale = useLocale();
   return (
-    <section className={`relative overflow-hidden py-24 ${isDark ? "section-dark bg-atmospheric-teal" : "bg-[var(--color-bg-surface)]"}`}>
+    <section className={`relative overflow-hidden py-24 ${isDark ? "section-dark bg-purple-bg" : "bg-[var(--color-bg-surface)]"}`}>
+      {isDark && <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid items-start gap-14 lg:grid-cols-5">
           <div className="lg:col-span-2">
@@ -96,3 +98,4 @@ export default function ModeloGrid({ variant = "light" }: ModeloGridProps) {
     </section>
   );
 }
+

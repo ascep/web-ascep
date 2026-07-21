@@ -9,6 +9,9 @@ import EnredateStats from "./EnredateStats";
 import EnredateTestimonials from "./EnredateTestimonials";
 import EnredateCTA from "./EnredateCTA";
 import PodcastSection from "./PodcastSection";
+import CursorGlow from "@/components/CursorGlow";
+import DecoShapes from "@/components/DecoShapes";
+import AnimatedSection from "@/components/AnimatedSection";
 
 export const metadata: Metadata = {
   title: "Enredate con ASCEP - ASCEP",
@@ -101,36 +104,40 @@ export default async function EnredatePage({
         badgeText={t("aboutImageBadge")}
       />
 
-      <section className="relative bg-bg-base py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full bg-brand-purple/10 px-4 py-1 text-sm font-semibold text-brand-purple">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("section1Tag")}
             </span>
-            <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t("section1Title")}
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
+            <p className="mx-auto mt-3 max-w-2xl text-[var(--color-text-muted)]">
               {t("section1Desc")}
             </p>
-          </div>
+          </AnimatedSection>
           <VideoGrid />
         </div>
       </section>
 
-      <section className="relative bg-bg-elevated py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full bg-brand-orange/10 px-4 py-1 text-sm font-semibold text-brand-orange">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("podcastTag")}
             </span>
-            <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t("podcastTitle")}
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-text-secondary">
+            <p className="mx-auto mt-3 max-w-2xl text-[var(--color-text-muted)]">
               {t("podcastDesc")}
             </p>
-          </div>
+          </AnimatedSection>
           <PodcastSection />
         </div>
       </section>
@@ -167,3 +174,4 @@ export default async function EnredatePage({
     </div>
   );
 }
+

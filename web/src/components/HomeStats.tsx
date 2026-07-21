@@ -101,7 +101,7 @@ export default function HomeStats({
                         </div>
                         <h3
                           className="mb-1 text-4xl font-extrabold transition-all duration-500 sm:text-5xl"
-                          style={{ color: stat.color }}
+                          style={{ color: isDark ? "#FFFFFF" : stat.color }}
                         >
                           <span className="group-hover:text-white">
                             <CountUp

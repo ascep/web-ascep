@@ -6,7 +6,8 @@ import { getClient } from "@/lib/sanity/client";
 import { noticiaBySlugQuery } from "@/lib/sanity/queries";
 import { imageUrl } from "@/lib/sanity/image";
 import PageHero from "@/components/PageHero";
-import { assetPath } from "@/lib/asset-path";
+import { assetPath } from "@/lib/asset-path"
+import { fotos } from "@/data/fotos";;
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -38,7 +39,7 @@ export default async function NoticiaPage({
   return (
     <div>
       <PageHero
-        bgImage={noticia.coverImage ? imageUrl(noticia.coverImage, 1920, 800) || assetPath("/images/eventos/20241112_103725.webp") : assetPath("/images/eventos/20241112_103725.webp")}
+        bgImage={noticia.coverImage ? imageUrl(noticia.coverImage, 1920, 800) || assetPath(fotos.noticias.hero) : assetPath(fotos.noticias.hero)}
         tag="Actualidad"
         title={noticia.title}
         subtitle={noticia.excerpt || ""}
@@ -88,3 +89,5 @@ export default async function NoticiaPage({
     </div>
   );
 }
+
+

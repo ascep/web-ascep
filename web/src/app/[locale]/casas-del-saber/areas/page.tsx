@@ -1,7 +1,11 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import { assetPath } from "@/lib/asset-path";
+import AnimatedSection from "@/components/AnimatedSection";
+import CursorGlow from "@/components/CursorGlow";
+import DecoShapes from "@/components/DecoShapes";
+import { assetPath } from "@/lib/asset-path"
+import { fotos } from "@/data/fotos";;
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -13,14 +17,6 @@ export const metadata: Metadata = {
       "Las cinco areas de intervencion del programa Casas del Saber: necesidades basicas, apoyo psicosocial, formacion, insercion laboral e incidencia.",
   },
 };
-
-const borderColors = [
-  "border-brand-purple/20",
-  "border-brand-teal/20",
-  "border-brand-orange/20",
-  "border-brand-orange/20",
-  "border-brand-purple/20",
-];
 
 export default async function AreasPage({
   params,
@@ -62,39 +58,40 @@ export default async function AreasPage({
   return (
     <div>
       <PageHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath("/images/encuentro-2025/GIS06448.webp")}
+        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.casasDelSaber.areas)}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || t("heroHighlight")}
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
-      <section className="bg-brand-teal/5 py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("sectionTag")}
             </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t("sectionTitle")}
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="space-y-6">
-            {areas.map((area) => (
-              <div
-                key={area.num}
-                className={`rounded-[10px] border ${borderColors[area.num - 1]} bg-bg-card p-6 transition-all hover:shadow-md`}
-              >
-                <div className="flex items-start gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] bg-brand-purple text-lg font-bold text-white">
-                    {area.num}
-                  </div>
-                  <div>
-                    <h3 className="mb-2 text-xl font-bold text-[var(--color-text-primary)]">{area.title}</h3>
-                    <p className="text-[var(--color-text-secondary)]">{area.desc}</p>
+            {areas.map((area, i) => (
+              <AnimatedSection key={area.num} direction="up" delay={i * 0.08}>
+                <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] bg-white/10 text-lg font-bold text-brand-secondary">
+                      {area.num}
+                    </div>
+                    <div>
+                      <h3 className="mb-2 text-xl font-bold text-[var(--color-text-primary)]">{area.title}</h3>
+                      <p className="text-[var(--color-text-muted)]">{area.desc}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -102,3 +99,6 @@ export default async function AreasPage({
     </div>
   );
 }
+
+
+

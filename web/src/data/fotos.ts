@@ -66,7 +66,7 @@ export const fotos = {
     areasImage: "/images/equipo-shoot/GIS08550.webp",
     team: {
       maicol: "/images/equipo/maicol.png",
-      kevin: "/images/equipo/phtos-ascep-kevin.png",
+      kevin: "/images/equipo/phtos-ascep-kevin.jpg",
       monica: "/images/equipo/phtos-ascep-monica.png",
       jhon: "/images/equipo/phtos-ascep-jhon.png",
       ana: "/images/equipo/phtos-ascep.png",
@@ -120,11 +120,19 @@ export const fotos = {
         label: "Bienestar",
       },
     },
+    marcoPolitico: {
+      hero: "/images/eventos/20241112_103351.webp",
+    },
   },
   comoLoHacemos: {
     hero: "/images/encuentro-2025/GIS06448.webp",
     estrategiasImage: "/images/encuentro-2025/GIS06452.webp",
     lineasImage: "/images/equipo-shoot/GIS08531.webp",
+    estrategiasGallery: [
+      "/images/encuentro-2025/GIS06453.webp",
+      "/images/equipo-shoot/GIS08543.webp",
+      "/images/equipo-shoot/GIS08540.webp",
+    ],
   },
   impacto: {
     hero: "/images/encuentro-2025/GIS06455.webp",
@@ -149,5 +157,68 @@ export const fotos = {
   header: {
     leyEgresoCard: "/images/encuentro-2025/GIS06446.webp",
     comoAyudarCard: "/images/encuentro-2025/GIS06447.webp",
+  },
+  casasDelSaber: {
+    hero: "/images/encuentro-2025/GIS06475.webp",
+    areas: "/images/encuentro-2025/GIS06448.webp",
+    modalidades: "/images/encuentro-2025/GIS06460.webp",
+    rutaEgreso: "/images/encuentro-2025/GIS06475.webp",
+  },
+  contacto: {
+    hero: "/images/equipo-shoot/GIS08546.webp",
+    section: "/images/equipo-shoot/GIS08545.webp",
+  },
+  donar: {
+    heroPoster: "/images/hero-poster.webp",
+    gallery: [
+      { src: "/images/encuentro-2025/GIS06460.webp", alt: "Jovenes en taller de habilidades" },
+      { src: "/images/encuentro-2025/GIS06450.webp", alt: "Acompanamiento psicosocial" },
+      { src: "/images/encuentro-2025/GIS06470.webp", alt: "Actividades grupales" },
+      { src: "/images/encuentro-2025/GIS06447.webp", alt: "Jornada educativa" },
+      { src: "/images/encuentro-2025/GIS06475.webp", alt: "Momentos de integracion" },
+    ],
+    gallerySecond: "/images/encuentro-2025/GIS06475.webp",
+  },
+  leyEgreso: {
+    hero: "/images/eventos/20241112_111016.webp",
+    gallery: [
+      "/images/ley-egreso/1.png",
+      "/images/ley-egreso/2.png",
+      "/images/ley-egreso/3.png",
+      "/images/ley-egreso/4.png",
+      "/images/ley-egreso/5.png",
+      "/images/ley-egreso/7.png",
+      "/images/ley-egreso/8.png",
+    ],
+    context: "/images/eventos/20241112_103406.webp",
+  },
+  noticias: {
+    hero: "/images/eventos/20241112_103725.webp",
+  },
+  participa: {
+    hero: "/images/eventos/20241112_103406.webp",
+    section: "/images/equipo-shoot/GIS08547.webp",
+  },
+  transparencia: {
+    hero: "/images/eventos/20241112_100147.webp",
+    section: "/images/eventos/20241112_103402.webp",
+  },
+  enredate: {
+    gallery: [
+      "/images/enredate/GIS04876.webp",
+      "/images/enredate/GIS04888.webp",
+      "/images/enredate/GIS04950.webp",
+    ],
+  },
+  planPadrino: {
+    hero: "/images/encuentro-2025/GIS06460.webp",
+    section: "/images/encuentro-2025/GIS06450.webp",
+  },
+  voluntariado: {
+    hero: "/images/eventos/20241112_100049.webp",
+    section: "/images/eventos/20241112_102515.webp",
+  },
+  empleo: {
+    hero: "/images/eventos/20241112_102515.webp",
   },
 } as const;

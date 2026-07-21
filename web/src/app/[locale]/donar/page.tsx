@@ -1,10 +1,17 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import DonationForm from "@/components/DonationForm";
 import FaqAccordion from "@/components/FaqAccordion";
+import AnimatedSection from "@/components/AnimatedSection";
+import CountUp from "@/components/CountUp";
+import DecoShapes from "@/components/DecoShapes";
+import CursorGlow from "@/components/CursorGlow";
+import ImageParallax from "@/components/ImageParallax";
 import { Heart, Users, Target, TrendingUp, Coffee, Sunrise, Star, Shield, Sparkles, type LucideIcon } from "lucide-react";
-import { assetPath } from "@/lib/asset-path";
+import { assetPath } from "@/lib/asset-path"
+import { fotos } from "@/data/fotos";;
 import { getImpactStats, getDonationTiers, getFaqByPage, getGalleryAlbums, localize } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 
@@ -23,11 +30,11 @@ const iconMap: Record<string, LucideIcon> = {
 };
 
 const fallbackGallery = [
-  { src: assetPath("/images/encuentro-2025/GIS06460.webp"), alt: "Jovenes en taller de habilidades" },
-  { src: assetPath("/images/encuentro-2025/GIS06450.webp"), alt: "Acompanamiento psicosocial" },
-  { src: assetPath("/images/encuentro-2025/GIS06470.webp"), alt: "Actividades grupales" },
-  { src: assetPath("/images/encuentro-2025/GIS06447.webp"), alt: "Jornada educativa" },
-  { src: assetPath("/images/encuentro-2025/GIS06475.webp"), alt: "Momentos de integracion" },
+  { src: assetPath(fotos.donar.gallery[0].src), alt: "Jovenes en taller de habilidades" },
+  { src: assetPath(fotos.donar.gallery[1].src), alt: "Acompanamiento psicosocial" },
+  { src: assetPath(fotos.donar.gallery[2].src), alt: "Actividades grupales" },
+  { src: assetPath(fotos.donar.gallery[3].src), alt: "Jornada educativa" },
+  { src: assetPath(fotos.donar.gallery[4].src), alt: "Momentos de integracion" },
 ];
 
 const fallbackTiers = [
@@ -113,7 +120,6 @@ export default async function DonarPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "donar" });
-  const g = await getTranslations({ locale, namespace: "generales" });
 
   const [cmsStats, cmsTiers, cmsFaq, cmsAlbums] = await Promise.all([
     getImpactStats(),
@@ -172,7 +178,7 @@ export default async function DonarPage({
           loop
           muted
           playsInline
-          poster={assetPath("/images/hero-poster.webp")}
+          poster={assetPath(fotos.donar.heroPoster)}
           className="absolute inset-0 h-full w-full object-cover opacity-30"
         >
           <source src={assetPath("/videos/FONDO-WEB-16-9.mp4")} type="video/mp4" />
@@ -191,100 +197,144 @@ export default async function DonarPage({
         </div>
       </section>
 
-      {/* Impact */}
-      <section className="bg-brand-teal/5 py-20">
+      {/* Impact stats */}
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-16 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("impactoTag")}
             </span>
-            <h2 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t("porque")}
             </h2>
-            <p className="mx-auto max-w-2xl text-text-secondary">
+            <p className="mx-auto mt-4 max-w-2xl text-white/70">
               {t("porqueDesc")}
             </p>
-          </div>
+          </AnimatedSection>
 
           <div className="mb-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat) => (
-              <div key={stat.label} className="rounded-[10px] border border-brand-purple/10 bg-white p-6 text-center shadow-sm">
-                <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] ${stat.bg}`}>
-                  <stat.icon size={22} className={stat.color} />
+            {stats.map((stat, i) => (
+              <AnimatedSection key={stat.label} direction="up" delay={i * 0.08}>
+                <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
+                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
+                    <stat.icon size={22} className="text-brand-secondary" />
+                  </div>
+                  <div className="text-2xl font-bold text-white">
+                    <CountUp end={parseInt(stat.value.replace(/[^0-9]/g, ""))} suffix={stat.value.includes("+") ? "+" : ""} />
+                  </div>
+                  <div className="mt-1 text-xs text-[var(--color-text-muted)]">{stat.label}</div>
                 </div>
-                <div className="text-2xl font-bold text-text-primary">{stat.value}</div>
-                <div className="mt-1 text-xs text-text-muted">{stat.label}</div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
+        </div>
+      </section>
 
-          {/* Creative impact */}
-          <div className="mb-16">
-            <h3 className="mb-8 text-center text-2xl font-bold text-text-primary">
+      {/* Donation tiers */}
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <h3 className="text-2xl font-bold text-[var(--color-text-primary)] sm:text-3xl">
               {t("pequenasAcciones")}
             </h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-              {tiers.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <div key={item.label} className="rounded-[10px] border border-brand-purple/10 bg-white p-5 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
+          </AnimatedSection>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+            {tiers.map((item, i) => {
+              const Icon = item.icon;
+              return (
+                <AnimatedSection key={item.label} direction="up" delay={i * 0.06}>
+                  <div className="rounded-[10px] border border-brand-purple/10 bg-white p-5 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md">
                     <div className={`mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-[8px] ${item.bg}`}>
                       <Icon size={18} className={item.color} />
                     </div>
-                    <div className="mb-1 text-lg font-bold text-text-primary">{item.label}</div>
-                    <p className="text-xs leading-relaxed text-text-secondary">{item.desc}</p>
+                    <div className="mb-1 text-lg font-bold text-[var(--color-text-primary)]">{item.label}</div>
+                    <p className="text-xs leading-relaxed text-[var(--color-text-secondary)]">{item.desc}</p>
                   </div>
-                );
-              })}
-            </div>
+                </AnimatedSection>
+              );
+            })}
           </div>
+        </div>
+      </section>
 
-          {/* Gallery */}
-          <div className="mb-16">
-            <h3 className="mb-8 text-center text-2xl font-bold text-text-primary">
+      {/* Gallery */}
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="orange" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("asiTrabajamos")}
-            </h3>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              <div className="sm:col-span-2 sm:row-span-2">
-                <Image
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t("porque")}
+            </h2>
+          </AnimatedSection>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <AnimatedSection direction="up" className="sm:col-span-2 sm:row-span-2">
+              <div className="group relative h-full min-h-[300px] overflow-hidden rounded-[10px]">
+                <ImageParallax
                   src={gallery[0]?.src || ""}
                   alt={gallery[0]?.alt || ""}
                   width={800}
                   height={600}
-                  className="h-full w-full rounded-[10px] object-cover"
+                  className="h-full w-full rounded-[10px] object-cover transition-transform duration-500 group-hover:scale-105"
+                  intensity={0.12}
                   style={{ minHeight: "300px" }}
                 />
+                <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
               </div>
-              {gallery.slice(1).map((img) => (
-                <Image
-                  key={img.src}
-                  src={img.src}
-                  alt={img.alt}
-                  width={400}
-                  height={300}
-                  className="h-full w-full rounded-[10px] object-cover"
-                  style={{ minHeight: "180px" }}
-                />
-              ))}
-            </div>
+            </AnimatedSection>
+            {gallery.slice(1).map((img, i) => (
+              <AnimatedSection key={img.src} direction="up" delay={i * 0.06}>
+                <div className="group relative h-full min-h-[180px] overflow-hidden rounded-[10px]">
+                  <ImageParallax
+                    src={img.src}
+                    alt={img.alt}
+                    width={400}
+                    height={300}
+                    className="h-full w-full rounded-[10px] object-cover transition-transform duration-500 group-hover:scale-105"
+                    intensity={0.1}
+                    style={{ minHeight: "180px" }}
+                  />
+                  <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
+                </div>
+              </AnimatedSection>
+            ))}
           </div>
+        </div>
+      </section>
 
-          {/* Form section */}
-          <div className="mb-8 grid gap-8 lg:grid-cols-5">
+      {/* Form + info */}
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="mixed" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+              {t("eligeDonacion")}
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              {t("eligeDonacion")}
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
+              {t("eligeDonacionDesc")}
+            </p>
+          </AnimatedSection>
+
+          <div className="grid gap-8 lg:grid-cols-5">
             <div className="lg:col-span-3">
-              <div className="rounded-[10px] bg-white p-8 shadow-sm">
-                <h3 className="mb-2 text-center text-xl font-bold text-text-primary">
-                  {t("eligeDonacion")}
-                </h3>
-                <p className="mb-6 text-center text-sm text-text-muted">
-                  {t("eligeDonacionDesc")}
-                </p>
-                <DonationForm />
-              </div>
+              <AnimatedSection direction="left">
+                <div className="rounded-[10px] border border-brand-purple/10 bg-white p-8 shadow-sm">
+                  <DonationForm />
+                </div>
+              </AnimatedSection>
             </div>
 
-            <div className="lg:col-span-2">
-              <div className="space-y-4">
+            <div className="space-y-4 lg:col-span-2">
+              <AnimatedSection direction="right">
                 <div className="rounded-[10px] bg-brand-purple p-6 text-white">
                   <h4 className="mb-4 text-lg font-bold">{t("donacionTransforma")}</h4>
                   <ul className="space-y-3 text-sm text-white/80">
@@ -306,49 +356,70 @@ export default async function DonarPage({
                     </li>
                   </ul>
                 </div>
+              </AnimatedSection>
 
+              <AnimatedSection direction="right" delay={0.1}>
                 <div className="rounded-[10px] border border-brand-purple/10 bg-white p-6 shadow-sm">
-                  <Image
-                    src={assetPath("/images/encuentro-2025/GIS06475.webp")}
+                  <ImageParallax
+                    src={assetPath(fotos.donar.gallerySecond)}
                     alt=""
                     width={400}
                     height={200}
                     className="mb-3 w-full rounded-[10px] object-cover"
+                    intensity={0.1}
                     style={{ aspectRatio: "16/9" }}
                   />
-                  <p className="text-sm leading-relaxed text-text-secondary">
+                  <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
                     {t("donacionSideDesc")}
                   </p>
                 </div>
+              </AnimatedSection>
 
+              <AnimatedSection direction="right" delay={0.15}>
                 <div className="rounded-[10px] border border-brand-purple/10 bg-white p-5 shadow-sm">
-                  <h5 className="mb-2 text-sm font-bold text-text-primary">{t("transparenciaLabel")}</h5>
-                  <p className="text-xs leading-relaxed text-text-muted">
+                  <h5 className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">{t("transparenciaLabel")}</h5>
+                  <p className="text-xs leading-relaxed text-[var(--color-text-muted)]">
                     {t("transparenciaSideDesc")}
                   </p>
                 </div>
-              </div>
+              </AnimatedSection>
             </div>
           </div>
 
-          <div className="rounded-[10px] bg-brand-purple p-8 text-center text-white">
-            <p className="mb-2 text-xl font-semibold">{t("gracias")}</p>
-            <p className="text-sm text-white/70">
-              {t("graciasDesc")}
-            </p>
-          </div>
+          <AnimatedSection delay={0.2} className="mt-8">
+            <div className="rounded-[10px] bg-brand-purple p-8 text-center text-white">
+              <p className="mb-2 text-xl font-semibold">{t("gracias")}</p>
+              <p className="text-sm text-white/70">
+                {t("graciasDesc")}
+              </p>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
 
-          {/* FAQ */}
-          <div className="mt-20">
-            <h3 className="mb-8 text-center text-2xl font-bold text-text-primary">
+      {/* FAQ */}
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              FAQ
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Preguntas frecuentes sobre donaciones
-            </h3>
-            <div className="mx-auto max-w-2xl">
+            </h2>
+          </AnimatedSection>
+          <div className="mx-auto max-w-3xl">
+            <AnimatedSection>
               <FaqAccordion items={faqItems} />
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
     </div>
   );
 }
+
+
+

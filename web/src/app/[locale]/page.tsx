@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import Image from "next/image";
 import DecoShapes from "@/components/DecoShapes";
 import AnimatedSection from "@/components/AnimatedSection";
 import HomeHero from "@/components/HomeHero";
@@ -11,6 +10,8 @@ import Timeline from "@/components/Timeline";
 import ModeloGrid from "@/components/ModeloGrid";
 import ProgramStack from "@/components/ProgramStack";
 import LogoLoop from "@/components/LogoLoop";
+import CursorGlow from "@/components/CursorGlow";
+import ImageParallax from "@/components/ImageParallax";
 import { assetPath } from "@/lib/asset-path";
 import { imageUrl } from "@/lib/sanity/image";
 import { fotos } from "@/data/fotos";
@@ -201,12 +202,14 @@ export default async function HomePage({
             <div className="relative pb-4 pr-4">
               <div className="relative inline-block w-full">
                 <div className="absolute -left-4 -top-4 h-full w-full rounded-[10px] bg-brand-purple/10" />
-                <Image
+                <ImageParallax
                   src={assetPath(fotos.home.aboutImage)}
                   alt="Equipo ASCEP"
                   width={600}
                   height={400}
-                  className="relative z-10 w-full rounded-[10px] shadow-xl"
+                  containerClassName="relative z-10"
+                  className="w-full rounded-[10px] shadow-xl"
+                  intensity={0.2}
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 z-20 flex h-28 w-28 flex-col items-center justify-center rounded-[10px] bg-brand-orange text-white shadow-lg">
@@ -237,12 +240,13 @@ export default async function HomePage({
               </p>
             </div>
             <div className="relative">
-              <Image
+              <ImageParallax
                 src={assetPath(fotos.home.retosImage)}
                 alt="Jovenes en taller"
                 width={600}
                 height={400}
                 className="w-full rounded-[10px] object-cover shadow-xl"
+                intensity={0.2}
                 style={{ aspectRatio: "3/2" }}
               />
             </div>
@@ -250,7 +254,8 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-atmospheric-teal">
+      <section className="section-dark relative overflow-hidden bg-purple-bg">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <HomeStats
           variant="dark"
@@ -295,7 +300,8 @@ export default async function HomePage({
         testimonials={testimonials}
       />
 
-      <section className="section-dark relative overflow-hidden bg-atmospheric-orange py-24">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-24">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="orange" />
         <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-accent">
@@ -307,12 +313,14 @@ export default async function HomePage({
           <div className="grid gap-4 sm:grid-cols-3">
             <AnimatedSection delay={0.05} className="sm:col-span-2 sm:row-span-2">
               <div className="group relative overflow-hidden rounded-[10px] h-full">
-                <Image
+                <ImageParallax
                   src={gallery[0].src}
                   alt={gallery[0].alt}
                   width={900}
                   height={600}
+                  containerClassName="h-full"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  intensity={0.15}
                   style={{ minHeight: "300px" }}
                 />
                 <div className="absolute inset-0 bg-black/40 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
@@ -321,12 +329,13 @@ export default async function HomePage({
             {gallery.slice(1).map((img, i) => (
               <AnimatedSection key={img.src} delay={0.1 + i * 0.08}>
                 <div className="group relative overflow-hidden rounded-[10px]">
-                  <Image
+                  <ImageParallax
                     src={img.src}
                     alt={img.alt}
                     width={500}
                     height={333}
                     className="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105 sm:h-44"
+                    intensity={0.12}
                   />
                   <div className="absolute inset-0 bg-black/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
@@ -365,3 +374,4 @@ export default async function HomePage({
     </div>
   );
 }
+

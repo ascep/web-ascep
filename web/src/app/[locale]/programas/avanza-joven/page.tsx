@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import PageHero from "@/components/PageHero";
+import AnimatedSection from "@/components/AnimatedSection";
+import DecoShapes from "@/components/DecoShapes";
+import CursorGlow from "@/components/CursorGlow";
+import ImageParallax from "@/components/ImageParallax";
 import { BookOpen, Users, DollarSign, Heart, Target, Star, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
 import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -82,107 +86,123 @@ export default async function AvanzaJovenPage({
   return (
     <>
       <PageHero
-        bgImage={sanityImage(cms?.heroImage) || assetPath("/images/programas/Avanza-1-scaled-1.webp")}
+        bgImage={sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.avanzaJoven.image)}
         tag="Programa"
         title="Avanza"
         highlight="Joven"
         subtitle="Un programa integral para jovenes en proceso de egreso del sistema de proteccion."
       />
 
-      <section className="bg-brand-teal/5 py-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
+          <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
               Informacion
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               Que es <span className="text-brand-purple">Avanza Joven</span>?
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="grid gap-12 md:grid-cols-2 items-center">
-            <div className="relative h-72 overflow-hidden rounded-[10px] md:h-96">
-              <Image src={sanityImage(cms?.heroImage) || assetPath("/images/programas/Avanza-1-scaled-1.webp")} alt="Avanza Joven" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-            </div>
-            <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
-              <p>
-                Avanza Joven, una iniciativa disenada especialmente para brindar apoyo y herramientas a adolescentes que viven institucionalizados. Este programa esta enfocado en potenciar el desarrollo de habilidades para la vida, permitiendoles enfrentar los desafios y alcanzar su maximo potencial mientras transitan por esta etapa crucial y se preparan para asumir su vida fuera de la institucionalidad.
-              </p>
-              <p>
-                Sabemos que vivir en un entorno institucional puede presentar desafios unicos y que enfrentarlos puede resultar abrumador. Sin embargo, creemos firmemente en el poder del crecimiento personal y en la capacidad de cada individuo para superar las dificultades. A traves de Avanza Joven, queremos ser un apoyo significativo en ese camino hacia la autonomia y la independencia, de manera progresiva.
-              </p>
-            </div>
+            <AnimatedSection direction="left">
+              <div className="relative h-72 overflow-hidden rounded-[10px] md:h-96">
+                <ImageParallax src={sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.avanzaJoven.image)} alt="Avanza Joven" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" intensity={0.2} />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={0.1}>
+              <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
+                <p>
+                  Avanza Joven, una iniciativa disenada especialmente para brindar apoyo y herramientas a adolescentes que viven institucionalizados. Este programa esta enfocado en potenciar el desarrollo de habilidades para la vida, permitiendoles enfrentar los desafios y alcanzar su maximo potencial mientras transitan por esta etapa crucial y se preparan para asumir su vida fuera de la institucionalidad.
+                </p>
+                <p>
+                  Sabemos que vivir en un entorno institucional puede presentar desafios unicos y que enfrentarlos puede resultar abrumador. Sin embargo, creemos firmemente en el poder del crecimiento personal y en la capacidad de cada individuo para superar las dificultades. A traves de Avanza Joven, queremos ser un apoyo significativo en ese camino hacia la autonomia y la independencia, de manera progresiva.
+                </p>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               Objetivo
             </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Objetivo <span className="text-brand-purple">General</span>
             </h2>
-          </div>
-          <div className="mx-auto max-w-4xl rounded-[10px] border border-brand-teal/20 bg-white p-6 shadow-sm transition-all hover:shadow-md">
-            <p className="text-lg leading-relaxed text-[var(--color-text-secondary)]">
-              Fomentar y desarrollar las habilidades, competencias y recursos necesarios en jovenes que se acercan al limite de edad y deben egresar del sistema de proteccion, para que puedan ejercer su transicion hacia la vida independiente y autonoma, de manera responsable y progresiva.
-            </p>
-          </div>
+          </AnimatedSection>
+          <AnimatedSection direction="up">
+            <div className="mx-auto max-w-4xl rounded-[10px] glass-card p-6 transition-all hover:bg-white/15">
+              <p className="text-lg leading-relaxed text-white/70">
+                Fomentar y desarrollar las habilidades, competencias y recursos necesarios en jovenes que se acercan al limite de edad y deben egresar del sistema de proteccion, para que puedan ejercer su transicion hacia la vida independiente y autonoma, de manera responsable y progresiva.
+              </p>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      <section className="bg-brand-teal/5 py-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
+          <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
               Objetivos
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               Objetivos <span className="text-brand-purple">Especificos</span>
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2">
             {objetivos.map((obj, i) => (
-              <div key={i} className="flex gap-4 rounded-[10px] bg-white p-6 shadow-sm transition-all hover:shadow-md">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-brand-purple/10 text-lg font-bold text-brand-purple">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h5 className="font-bold text-[var(--color-text-primary)]">{obj.title}</h5>
-                  <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{obj.desc}</p>
+              <AnimatedSection key={i} direction="up" delay={i * 0.06}>
+                <div className="flex gap-4 rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 transition-all hover:shadow-md">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-brand-purple/10 text-lg font-bold text-brand-purple">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h5 className="font-bold text-[var(--color-text-primary)]">{obj.title}</h5>
+                    <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{obj.desc}</p>
+                  </div>
                 </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               Modulos
             </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               <span className="text-brand-purple">Modulos</span> del Programa
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {modules.map((mod) => {
+            {modules.map((mod, i) => {
               const Icon = mod.icon;
               return (
-                <div key={mod.title} className="rounded-[10px] bg-white p-6 text-center shadow-sm transition-all hover:shadow-md">
-                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-brand-purple/10">
-                    <Icon size={22} className="text-brand-purple" />
+                <AnimatedSection key={mod.title} direction="up" delay={i * 0.06}>
+                  <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
+                      <Icon size={22} className="text-brand-secondary" />
+                    </div>
+                    <span className="mb-2 inline-block rounded-full bg-white/10 px-3 py-0.5 text-xs font-semibold text-white/80">
+                      {mod.code}
+                    </span>
+                    <h4 className="mb-1 font-bold text-white">{mod.title}</h4>
+                    <p className="text-sm text-[var(--color-text-muted)]">{mod.desc}</p>
                   </div>
-                  <span className="mb-2 inline-block rounded-full bg-brand-purple/10 px-3 py-0.5 text-xs font-semibold text-brand-purple">
-                    {mod.code}
-                  </span>
-                  <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">{mod.title}</h4>
-                  <p className="text-sm text-[var(--color-text-muted)]">{mod.desc}</p>
-                </div>
+                </AnimatedSection>
               );
             })}
           </div>
@@ -191,3 +211,6 @@ export default async function AvanzaJovenPage({
     </>
   );
 }
+
+
+

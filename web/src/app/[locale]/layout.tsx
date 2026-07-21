@@ -8,7 +8,7 @@ import ThemeProvider from "@/components/ThemeProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import VisitorWidget from "@/components/VisitorWidget";
 import MobileTabBar from "@/components/MobileTabBar";
-import SmoothScroll from "@/components/SmoothScroll";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const locales = ["es", "pt"];
 
@@ -30,15 +30,14 @@ export default async function LocaleLayout({
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       <ThemeProvider>
-        <SmoothScroll>
-          <TopBar />
-          <Header />
-          <main className="flex-1 pb-24 md:pb-0">{children}</main>
-          <MobileTabBar />
-          <Footer />
-          <VisitorWidget />
-          <WhatsAppButton />
-        </SmoothScroll>
+        <ScrollProgress />
+        <TopBar />
+        <Header />
+        <main className="flex-1 pb-24 md:pb-0">{children}</main>
+        <MobileTabBar />
+        <Footer />
+        <VisitorWidget />
+        <WhatsAppButton />
       </ThemeProvider>
     </NextIntlClientProvider>
   );

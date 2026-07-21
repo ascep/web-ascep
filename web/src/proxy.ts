@@ -275,6 +275,10 @@ export default function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
+  if (request.nextUrl.pathname.startsWith('/zprimeascep')) {
+    return NextResponse.next();
+  }
+
   return nextIntlMiddleware(request);
 }
 

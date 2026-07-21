@@ -1,11 +1,14 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
+import CursorGlow from "@/components/CursorGlow";
+import DecoShapes from "@/components/DecoShapes";
+import ImageParallax from "@/components/ImageParallax";
 import { Heart, CheckCircle, ArrowRight, Gift, Users, Shield, Target } from "lucide-react";
-import { assetPath } from "@/lib/asset-path";
+import { assetPath } from "@/lib/asset-path"
+import { fotos } from "@/data/fotos";;
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -38,7 +41,7 @@ export default async function PlanPadrinoPage({
   return (
     <div>
       <PageHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath("/images/encuentro-2025/GIS06460.webp")}
+        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.planPadrino.hero)}
         bgColor={pageData?.hero?.bgColor || "bg-brand-teal"}
         tag={localize(pageData?.hero?.tag, locale) || "PLAN PADRINO"}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
@@ -46,23 +49,25 @@ export default async function PlanPadrinoPage({
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
-      <section className="bg-bg-surface py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-20 grid items-center gap-10 lg:grid-cols-2">
             <div>
-              <span className="mb-3 inline-block rounded-full border border-brand-teal/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-teal">
+              <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
                 {t("queEs")}
               </span>
-              <h2 className="mb-6 text-3xl font-bold text-text-primary sm:text-4xl">
+              <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
                 {t("queEs")}
               </h2>
-              <p className="text-base leading-relaxed text-text-secondary">
+              <p className="text-base leading-relaxed text-[var(--color-text-muted)]">
                 {t("queEsDesc")}
               </p>
             </div>
             <div className="relative">
-              <Image
-                src={assetPath("/images/encuentro-2025/GIS06450.webp")}
+              <ImageParallax
+                src={assetPath(fotos.planPadrino.section)}
                 alt=""
                 width={600}
                 height={400}
@@ -75,29 +80,27 @@ export default async function PlanPadrinoPage({
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.1}>
-            <div className="mb-12 text-center">
-              <span className="mb-3 inline-block rounded-full border border-brand-teal/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-teal">
-                BENEFICIOS
-              </span>
-              <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
-                {t("beneficios")}
-              </h2>
-            </div>
+          <AnimatedSection className="mb-12 text-center" delay={0.1}>
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              BENEFICIOS
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t("beneficios")}
+            </h2>
           </AnimatedSection>
 
           <div className="mb-20 grid gap-6 sm:grid-cols-2">
             {beneficios.map((b, i) => {
               const Icon = b.icon;
               return (
-                <AnimatedSection key={i} delay={0.1 * i}>
-                  <div className="flex gap-5 rounded-[10px] border border-border-subtle bg-bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-md">
-                    <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] ${b.bg}`}>
-                      <Icon size={22} className={b.color} />
+                <AnimatedSection key={i} delay={0.1 * i} direction="up">
+                  <div className="glass-card flex gap-5 rounded-[10px] p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] bg-white/10">
+                      <Icon size={22} className="text-brand-secondary" />
                     </div>
                     <div>
-                      <h3 className="mb-1 font-bold text-text-primary">{t(b.titleKey)}</h3>
-                      <p className="text-sm text-text-muted">{t(b.descKey)}</p>
+                      <h3 className="mb-1 font-bold text-[var(--color-text-primary)]">{t(b.titleKey)}</h3>
+                      <p className="text-sm text-[var(--color-text-muted)]">{t(b.descKey)}</p>
                     </div>
                   </div>
                 </AnimatedSection>
@@ -105,27 +108,25 @@ export default async function PlanPadrinoPage({
             })}
           </div>
 
-          <AnimatedSection delay={0.2}>
-            <div className="mb-12 text-center">
-              <span className="mb-3 inline-block rounded-full border border-brand-teal/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-teal">
-                PROCESO
-              </span>
-              <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
-                {t("comoFunciona")}
-              </h2>
-            </div>
+          <AnimatedSection className="mb-12 text-center" delay={0.2}>
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              PROCESO
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t("comoFunciona")}
+            </h2>
           </AnimatedSection>
 
           <div className="mx-auto mb-20 max-w-3xl">
             {pasos.map((i) => (
-              <AnimatedSection key={i} delay={0.05 * i}>
-                <div className="relative flex items-start gap-5 border-l-2 border-brand-teal/30 pb-8 pl-8 last:pb-0">
-                  <div className="absolute -left-[1.15rem] flex h-9 w-9 items-center justify-center rounded-full bg-brand-teal text-sm font-bold text-white shadow-md">
+              <AnimatedSection key={i} delay={0.05 * i} direction="up">
+                <div className="relative flex items-start gap-5 border-l-2 border-white/20 pb-8 pl-8 last:pb-0">
+                  <div className="absolute -left-[1.15rem] flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-sm font-bold text-brand-secondary shadow-md">
                     {i}
                   </div>
                   <div>
-                    <h3 className="mb-1 font-bold text-text-primary">{t(`paso${i}`)}</h3>
-                    <p className="text-sm text-text-muted">{t(`paso${i}Desc`)}</p>
+                    <h3 className="mb-1 font-bold text-white">{t(`paso${i}`)}</h3>
+                    <p className="text-sm text-[var(--color-text-muted)]">{t(`paso${i}Desc`)}</p>
                   </div>
                 </div>
               </AnimatedSection>
@@ -150,3 +151,6 @@ export default async function PlanPadrinoPage({
     </div>
   );
 }
+
+
+

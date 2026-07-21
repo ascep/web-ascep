@@ -31,7 +31,7 @@ export default function PodcastSection() {
   if (loading) {
     return (
       <div className="flex h-48 items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-brand-blue border-t-transparent" />
+        <div className="h-8 w-8 animate-spin rounded-full border-2 border-white/30 border-t-white" />
       </div>
     );
   }
@@ -39,7 +39,7 @@ export default function PodcastSection() {
   if (videos.length === 0) {
     return (
       <div className="flex h-48 items-center justify-center">
-        <p className="text-text-muted">No hay podcasts disponibles</p>
+        <p className="text-white/50">No hay podcasts disponibles</p>
       </div>
     );
   }
@@ -49,7 +49,7 @@ export default function PodcastSection() {
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {paginated.map((video) => (
           <div key={video.videoId}
-            className="overflow-hidden rounded-[10px] border border-border-subtle bg-bg-card transition-shadow hover:shadow-lg"
+            className="glass-card overflow-hidden rounded-[10px] transition-all hover:bg-white/15"
           >
             <button onClick={() => setCurrentVideo(video)}
               className="group relative block aspect-video w-full text-left"
@@ -63,9 +63,9 @@ export default function PodcastSection() {
               </div>
             </button>
             <div className="p-4">
-              <h3 className="text-sm font-bold text-brand-blue line-clamp-2">{video.title}</h3>
+              <h3 className="text-sm font-bold text-white line-clamp-2">{video.title}</h3>
               {video.description && (
-                <p className="mt-1 text-xs text-text-secondary line-clamp-2">{video.description}</p>
+                <p className="mt-1 text-xs text-[var(--color-text-muted)] line-clamp-2">{video.description}</p>
               )}
             </div>
           </div>
@@ -75,13 +75,13 @@ export default function PodcastSection() {
       {totalPages > 1 && (
         <div className="mt-8 flex items-center justify-center gap-3">
           <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border-subtle text-text-secondary transition-colors hover:bg-bg-elevated disabled:opacity-30"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:bg-white/10 disabled:opacity-30"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
-          <span className="text-sm text-text-secondary">{page + 1} / {totalPages}</span>
+          <span className="text-sm text-white/60">{page + 1} / {totalPages}</span>
           <button onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))} disabled={page >= totalPages - 1}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-border-subtle text-text-secondary transition-colors hover:bg-bg-elevated disabled:opacity-30"
+            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:bg-white/10 disabled:opacity-30"
           >
             <ChevronRight className="h-5 w-5" />
           </button>

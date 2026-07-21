@@ -4,6 +4,8 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
+import CursorGlow from "@/components/CursorGlow";
+import DecoShapes from "@/components/DecoShapes";
 
 type Slide = {
   tag: string;
@@ -62,12 +64,9 @@ export default function EnredateHero({
   const dur = prefersReduced ? 0 : 0.6;
 
   return (
-    <section className="relative min-h-[85vh] overflow-hidden bg-gradient-to-br from-[#2D1B4E] via-[#4A2D7A] to-brand-purple">
-      <div className="absolute inset-0 opacity-15">
-        <div className="absolute -left-32 -top-32 h-96 w-96 rounded-full bg-brand-teal/40 blur-3xl" />
-        <div className="absolute -bottom-32 -right-32 h-96 w-96 rounded-full bg-brand-orange/20 blur-3xl" />
-        <div className="absolute left-1/3 top-1/4 h-64 w-64 rounded-full bg-brand-orange/10 blur-3xl" />
-      </div>
+    <section className="relative min-h-[85vh] overflow-hidden bg-purple-bg">
+      <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+      <DecoShapes variant="mixed" />
 
       <div className="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col items-center px-4 py-24 sm:px-6 lg:flex-row lg:px-8">
         <div className="flex-1 lg:pr-16">
@@ -79,7 +78,7 @@ export default function EnredateHero({
               exit={dur ? { opacity: 0, x: -60 } : undefined}
               transition={dur ? { duration: dur, ease: [0.23, 1, 0.32, 1] } : undefined}
             >
-              <span className="mb-4 inline-block rounded-full bg-brand-orange/20 px-5 py-2 text-sm font-bold text-brand-orange">
+              <span className="mb-4 inline-block rounded-full border border-brand-orange/30 px-5 py-2 text-sm font-bold text-brand-orange">
                 {slides[current].tag}
               </span>
               <h1 className="mb-6 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
@@ -222,3 +221,4 @@ export default function EnredateHero({
     </section>
   );
 }
+

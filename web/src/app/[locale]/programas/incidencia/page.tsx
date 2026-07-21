@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import PageHero from "@/components/PageHero";
+import AnimatedSection from "@/components/AnimatedSection";
+import DecoShapes from "@/components/DecoShapes";
+import CursorGlow from "@/components/CursorGlow";
+import ImageParallax from "@/components/ImageParallax";
 import { ArrowUpRight, Home, Search, Users, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
 import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -85,67 +89,77 @@ export default async function IncidenciaPage({
   return (
     <>
       <PageHero
-        bgImage={sanityImage(cms?.heroImage) || assetPath("/images/programas/incidencia-scaled-1.webp")}
+        bgImage={sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.incidencia.image)}
         tag="Programa"
         title="Incidencia y Participacion"
         subtitle="Fortalecemos la participacion ciudadana y la incidencia politica de los jovenes egresados."
       />
 
-      <section className="bg-brand-teal/5 py-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
+          <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
               Informacion
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               Que es <span className="text-brand-purple">Incidencia y Participacion</span>?
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="grid gap-12 md:grid-cols-2 items-center">
-            <div className="relative h-72 overflow-hidden rounded-[10px] md:h-96">
-              <Image src={sanityImage(cms?.heroImage) || assetPath("/images/programas/incidencia-scaled-1.webp")} alt="Incidencia y Participacion" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-            </div>
-            <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
-              <p>
-                El Programa de Incidencia y Participacion tiene como objetivo desarrollar acciones que involucren a los actores clave y tomadores de decisiones en la construccion de estrategias que contribuyan a la transformacion de los cuidados alternativos, la no separacion familiar y la autonomia progresiva. Ademas, se debe realizar investigaciones que proporcione insumos para garantizar acciones claras sobre los tres ejes mencionados anteriormente.
-              </p>
-              <p>
-                Como entidad de egresados, nos enfrentamos a desafios significativos en el fortalecimiento de los procesos de acompanamiento durante la transicion a la vida autonoma, la seleccion de equipos interdisciplinarios vinculados a los procesos de proteccion y el fortalecimiento de los cuidados alternativos en Colombia. Es precisamente por esta razon que, desde el ano 2019, hemos venido proponiendo el diseno y la promocion de un proyecto de ley que establezca un programa integral de acompanamiento para pre-egresados y garantice unos estandares minimos para aquellos que han egresado.
-              </p>
-            </div>
+            <AnimatedSection direction="left">
+              <div className="relative h-72 overflow-hidden rounded-[10px] md:h-96">
+                <ImageParallax src={sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.incidencia.image)} alt="Incidencia y Participacion" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" intensity={0.2} />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={0.1}>
+              <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
+                <p>
+                  El Programa de Incidencia y Participacion tiene como objetivo desarrollar acciones que involucren a los actores clave y tomadores de decisiones en la construccion de estrategias que contribuyan a la transformacion de los cuidados alternativos, la no separacion familiar y la autonomia progresiva. Ademas, se debe realizar investigaciones que proporcione insumos para garantizar acciones claras sobre los tres ejes mencionados anteriormente.
+                </p>
+                <p>
+                  Como entidad de egresados, nos enfrentamos a desafios significativos en el fortalecimiento de los procesos de acompanamiento durante la transicion a la vida autonoma, la seleccion de equipos interdisciplinarios vinculados a los procesos de proteccion y el fortalecimiento de los cuidados alternativos en Colombia. Es precisamente por esta razon que, desde el ano 2019, hemos venido proponiendo el diseno y la promocion de un proyecto de ley que establezca un programa integral de acompanamiento para pre-egresados y garantice unos estandares minimos para aquellos que han egresado.
+                </p>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               Objetivos
             </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Objetivos <span className="text-brand-purple">Especificos</span>
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="mx-auto grid max-w-4xl gap-4">
             {objetivos.map((obj, i) => (
-              <div key={i} className="flex gap-4 rounded-[10px] bg-white p-6 shadow-sm transition-all hover:shadow-md border border-brand-purple/10">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-brand-purple/10 text-lg font-bold text-brand-purple">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h5 className="font-bold text-[var(--color-text-primary)]">{obj.title}</h5>
-                  <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{obj.desc}</p>
+              <AnimatedSection key={i} direction="up" delay={i * 0.06}>
+                <div className="flex gap-4 rounded-[10px] glass-card p-6 transition-all hover:bg-white/15">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-white/10 text-lg font-bold text-white/80">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <h5 className="font-bold text-white">{obj.title}</h5>
+                    <p className="mt-1 text-sm text-white/70">{obj.desc}</p>
+                  </div>
                 </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-brand-teal/5 py-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
+          <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
               Lineas
             </span>
@@ -155,39 +169,45 @@ export default async function IncidenciaPage({
             <p className="mt-4 text-[var(--color-text-secondary)]">
               El programa se estructura en torno a las siguientes lineas de accion
             </p>
-          </div>
+          </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2">
-            {lineas.map((linea) => {
+            {lineas.map((linea, i) => {
               const Icon = linea.icon;
               return (
-                <div key={linea.title} className="rounded-[10px] bg-white p-6 text-center shadow-sm transition-all hover:shadow-md">
-                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-brand-purple/10">
-                    <Icon size={22} className="text-brand-purple" />
+                <AnimatedSection key={linea.title} direction="up" delay={i * 0.06}>
+                  <div className="rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 text-center transition-all hover:shadow-md">
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-brand-purple/10">
+                      <Icon size={22} className="text-brand-purple" />
+                    </div>
+                    <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">{linea.title}</h4>
+                    <p className="text-sm text-[var(--color-text-muted)]">{linea.desc}</p>
                   </div>
-                  <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">{linea.title}</h4>
-                  <p className="text-sm text-[var(--color-text-muted)]">{linea.desc}</p>
-                </div>
+                </AnimatedSection>
               );
             })}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               Resultados
             </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Resultados <span className="text-brand-purple">Esperados</span>
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-3">
             {resultados.map((r, i) => (
-              <div key={i} className="rounded-[10px] border border-brand-purple/20 bg-white p-6 shadow-sm transition-all hover:shadow-md">
-                <p className="text-[var(--color-text-secondary)]">{r}</p>
-              </div>
+              <AnimatedSection key={i} direction="up" delay={i * 0.06}>
+                <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
+                  <p className="text-white/70">{r}</p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -195,3 +215,6 @@ export default async function IncidenciaPage({
     </>
   );
 }
+
+
+

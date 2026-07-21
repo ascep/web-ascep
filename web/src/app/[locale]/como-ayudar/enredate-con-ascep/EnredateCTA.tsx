@@ -1,7 +1,9 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
 import { Phone, Mail, MapPin } from "lucide-react";
+import CursorGlow from "@/components/CursorGlow";
+import DecoShapes from "@/components/DecoShapes";
+import AnimatedSection from "@/components/AnimatedSection";
 
 type EnredateCTAProps = {
   tag: string;
@@ -24,26 +26,20 @@ export default function EnredateCTA({
   formMsg,
   formSubmit,
 }: EnredateCTAProps) {
-  const prefersReduced = useReducedMotion();
-  const dur = prefersReduced ? 0 : 0.6;
-
   return (
-    <section className="relative bg-bg-base py-20">
+    <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+      <DecoShapes variant="mixed" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2">
-          <motion.div
-            initial={dur ? { opacity: 0, y: 30 } : undefined}
-            whileInView={dur ? { opacity: 1, y: 0 } : undefined}
-            viewport={{ once: true }}
-            transition={dur ? { duration: dur, ease: [0.23, 1, 0.32, 1] } : undefined}
-          >
-            <span className="mb-3 inline-block rounded-full bg-brand-orange/10 px-5 py-2 text-sm font-bold text-brand-orange">
+          <AnimatedSection direction="left">
+            <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-5 py-2 text-sm font-bold text-brand-orange">
               {tag}
             </span>
-            <h2 className="mb-4 text-3xl font-bold text-text-primary sm:text-4xl">
+            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
               {title}
             </h2>
-            <p className="mb-8 leading-relaxed text-text-secondary">
+            <p className="mb-8 leading-relaxed text-[var(--color-text-muted)]">
               {desc}
             </p>
 
@@ -53,35 +49,30 @@ export default function EnredateCTA({
                   <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-purple text-xs font-bold text-white">
                     {i + 1}
                   </span>
-                  <span className="text-text-secondary">{item}</span>
+                  <span className="text-white/80">{item}</span>
                 </li>
               ))}
             </ul>
 
             <div className="space-y-4">
-              <div className="flex items-center gap-3 text-text-secondary">
-                <Phone className="h-5 w-5 text-brand-purple" />
+              <div className="flex items-center gap-3 text-white/70">
+                <Phone className="h-5 w-5 text-brand-secondary" />
                 <span>+57 302 555 0107</span>
               </div>
-              <div className="flex items-center gap-3 text-text-secondary">
-                <Mail className="h-5 w-5 text-brand-purple" />
+              <div className="flex items-center gap-3 text-white/70">
+                <Mail className="h-5 w-5 text-brand-secondary" />
                 <span>enredate@ascep.org</span>
               </div>
-              <div className="flex items-center gap-3 text-text-secondary">
-                <MapPin className="h-5 w-5 text-brand-purple" />
+              <div className="flex items-center gap-3 text-white/70">
+                <MapPin className="h-5 w-5 text-brand-secondary" />
                 <span>Cali, Colombia</span>
               </div>
             </div>
-          </motion.div>
+          </AnimatedSection>
 
-          <motion.div
-            initial={dur ? { opacity: 0, y: 30 } : undefined}
-            whileInView={dur ? { opacity: 1, y: 0 } : undefined}
-            viewport={{ once: true }}
-            transition={dur ? { duration: dur, delay: 0.15, ease: [0.23, 1, 0.32, 1] } : undefined}
-          >
-            <div className="rounded-[10px] border border-border-subtle bg-bg-card p-8">
-              <h3 className="mb-6 text-xl font-bold text-text-primary">
+          <AnimatedSection direction="right" delay={0.15}>
+            <div className="glass-card rounded-[10px] p-8 transition-all hover:bg-white/10">
+              <h3 className="mb-6 text-xl font-bold text-white">
                 {tag}
               </h3>
               <form
@@ -89,32 +80,32 @@ export default function EnredateCTA({
                 className="space-y-5"
               >
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-text-secondary">
+                  <label className="mb-1 block text-sm font-medium text-white/70">
                     {formName}
                   </label>
                   <input
                     type="text"
-                    className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
+                    className="w-full rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-secondary/20"
                     placeholder={formName}
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-text-secondary">
+                  <label className="mb-1 block text-sm font-medium text-white/70">
                     {formEmail}
                   </label>
                   <input
                     type="email"
-                    className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
+                    className="w-full rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-secondary/20"
                     placeholder={formEmail}
                   />
                 </div>
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-text-secondary">
+                  <label className="mb-1 block text-sm font-medium text-white/70">
                     {formMsg}
                   </label>
                   <textarea
                     rows={4}
-                    className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-3 text-sm text-text-primary placeholder:text-text-muted focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
+                    className="w-full rounded-[10px] border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-secondary/20"
                     placeholder={formMsg}
                   />
                 </div>
@@ -126,9 +117,10 @@ export default function EnredateCTA({
                 </button>
               </form>
             </div>
-          </motion.div>
+          </AnimatedSection>
         </div>
       </div>
     </section>
   );
 }
+

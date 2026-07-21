@@ -2,6 +2,9 @@ import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
+import DecoShapes from "@/components/DecoShapes";
+import CursorGlow from "@/components/CursorGlow";
+import AnimatedSection from "@/components/AnimatedSection";
 import { Building2, Globe, Briefcase, GraduationCap, Heart, Radio } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { fotos } from "@/data/fotos";
@@ -59,16 +62,17 @@ export default async function AliadosPage({
         subtitle={t("heroSubtitle")}
       />
 
-      <section className="bg-brand-teal/5 py-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
+          <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
               {t("sectionTag")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               {t("sectionTitle")}
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {partnerLogos.map((logo) => (
               <div
@@ -88,28 +92,32 @@ export default async function AliadosPage({
         </div>
       </section>
 
-      <section className="bg-bg-base py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("sectoresTag")}
             </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t("sectoresTitle")}
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {sectors.map((item) => {
+            {sectors.map((item, i) => {
               const Icon = item.icon;
               return (
-                <div className="rounded-[10px] bg-white p-6 text-center shadow-sm transition-all hover:shadow-md" key={item.sector}>
-                  <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-brand-purple/10">
-                    <Icon size={22} className="text-brand-purple" />
+                <AnimatedSection key={item.sector} direction="up" delay={i * 0.08}>
+                  <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
+                      <Icon size={22} className="text-brand-secondary" />
+                    </div>
+                    <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">{item.sector}</h4>
+                    <p className="mb-2 text-sm text-[var(--color-text-muted)]">{item.desc}</p>
+                    <p className="text-xs font-medium uppercase tracking-wider text-[var(--color-text-muted)]">{item.aliados}</p>
                   </div>
-                  <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">{item.sector}</h4>
-                  <p className="mb-2 text-sm text-[var(--color-text-muted)]">{item.desc}</p>
-                  <p className="text-xs font-medium uppercase tracking-wider text-[var(--color-text-muted)]">{item.aliados}</p>
-                </div>
+                </AnimatedSection>
               );
             })}
           </div>
@@ -118,3 +126,4 @@ export default async function AliadosPage({
     </div>
   );
 }
+

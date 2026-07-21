@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
-import { assetPath } from "@/lib/asset-path";
+import AnimatedSection from "@/components/AnimatedSection";
+import DecoShapes from "@/components/DecoShapes";
+import CursorGlow from "@/components/CursorGlow";
+import ImageParallax from "@/components/ImageParallax";
+import { assetPath } from "@/lib/asset-path"
+import { fotos } from "@/data/fotos";;
 import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -76,96 +81,110 @@ export default async function MarcoPoliticoPage({
   return (
     <>
       <PageHero
-        bgImage={sanityImage(cms?.heroImage) || assetPath("/images/eventos/20241112_103351.webp")}
+        bgImage={sanityImage(cms?.heroImage) || assetPath(fotos.programas.marcoPolitico.hero)}
         tag="Marco Politico"
         title="Marco"
         highlight="Politico"
         subtitle="Conoce el marco legal y normativo que respalda nuestra labor."
       />
 
-      <section className="bg-brand-teal/5 py-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
+          <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
               Introduccion
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               <span className="text-brand-purple">Marco Politico</span> de ASCEP
             </h2>
-          </div>
-          <div className="mx-auto max-w-4xl space-y-6 text-base text-[var(--color-text-secondary)]">
-            <p>
-              El Marco Politico de ASCEP define los fundamentos conceptuales, normativos y estrategicos que guian nuestra accion institucional. Como organizacion liderada por egresados del sistema de proteccion estatal, nuestra incidencia se sustenta en un profundo conocimiento de las necesidades y desafios que enfrentan los jovenes en su transicion a la vida independiente.
-            </p>
-            <p>
-              Nuestro trabajo se enmarca en la Constitucion Politica de Colombia, los tratados internacionales de derechos humanos ratificados por el Estado colombiano, y el Codigo de Infancia y Adolescencia. A partir de este marco juridico, impulsamos transformaciones estructurales que garanticen el bienestar y la autonomia de las nuevas generaciones.
-            </p>
-          </div>
+          </AnimatedSection>
+          <AnimatedSection direction="up">
+            <div className="mx-auto max-w-4xl space-y-6 text-base text-[var(--color-text-secondary)]">
+              <p>
+                El Marco Politico de ASCEP define los fundamentos conceptuales, normativos y estrategicos que guian nuestra accion institucional. Como organizacion liderada por egresados del sistema de proteccion estatal, nuestra incidencia se sustenta en un profundo conocimiento de las necesidades y desafios que enfrentan los jovenes en su transicion a la vida independiente.
+              </p>
+              <p>
+                Nuestro trabajo se enmarca en la Constitucion Politica de Colombia, los tratados internacionales de derechos humanos ratificados por el Estado colombiano, y el Codigo de Infancia y Adolescencia. A partir de este marco juridico, impulsamos transformaciones estructurales que garanticen el bienestar y la autonomia de las nuevas generaciones.
+              </p>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               Pilares
             </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Pilares <span className="text-brand-purple">Normativos</span>
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2">
-            {pilares.map((pilar) => (
-              <div key={pilar.title} className="rounded-[10px] border border-brand-purple/20 bg-white p-6 shadow-sm transition-all hover:shadow-md">
-                <h3 className="mb-2 font-bold text-[var(--color-text-primary)]">{pilar.title}</h3>
-                <p className="text-sm text-[var(--color-text-secondary)]">{pilar.desc}</p>
-              </div>
+            {pilares.map((pilar, i) => (
+              <AnimatedSection key={pilar.title} direction="up" delay={i * 0.06}>
+                <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
+                  <h3 className="mb-2 font-bold text-white">{pilar.title}</h3>
+                  <p className="text-sm text-white/70">{pilar.desc}</p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-brand-teal/5 py-20">
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
+          <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
               Enfoques
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
               Enfoques <span className="text-brand-purple">Transversales</span>
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2">
-            {enfoques.map((enf) => (
-              <div key={enf.title} className="rounded-[10px] border border-brand-teal/20 bg-white p-6 shadow-sm transition-all hover:shadow-md">
-                <h3 className="mb-2 font-bold text-[var(--color-text-primary)]">{enf.title}</h3>
-                <p className="text-sm text-[var(--color-text-secondary)]">{enf.desc}</p>
-              </div>
+            {enfoques.map((enf, i) => (
+              <AnimatedSection key={enf.title} direction="up" delay={i * 0.06}>
+                <div className="rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 transition-all hover:shadow-md">
+                  <h3 className="mb-2 font-bold text-[var(--color-text-primary)]">{enf.title}</h3>
+                  <p className="text-sm text-[var(--color-text-secondary)]">{enf.desc}</p>
+                </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               Incidencia
             </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
               Ejes de <span className="text-brand-purple">Incidencia</span>
             </h2>
-          </div>
+          </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {incidencia.map((item, i) => (
-              <div key={i} className="flex gap-4 rounded-[10px] bg-white p-6 shadow-sm transition-all hover:shadow-md">
-                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-brand-purple/10 text-lg font-bold text-brand-purple">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <p className="text-sm text-[var(--color-text-secondary)]">{item}</p>
+              <AnimatedSection key={i} direction="up" delay={i * 0.06}>
+                <div className="flex gap-4 rounded-[10px] glass-card p-6 transition-all hover:bg-white/15">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-white/10 text-lg font-bold text-white/80">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div>
+                    <p className="text-sm text-white/70">{item}</p>
+                  </div>
                 </div>
-              </div>
+              </AnimatedSection>
             ))}
           </div>
         </div>
@@ -173,3 +192,6 @@ export default async function MarcoPoliticoPage({
     </>
   );
 }
+
+
+

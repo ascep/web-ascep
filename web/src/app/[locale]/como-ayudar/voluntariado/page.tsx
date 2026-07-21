@@ -1,11 +1,14 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
+import CursorGlow from "@/components/CursorGlow";
+import DecoShapes from "@/components/DecoShapes";
+import ImageParallax from "@/components/ImageParallax";
 import { Heart, Users, Star, Briefcase, ArrowRight, CheckCircle } from "lucide-react";
-import { assetPath } from "@/lib/asset-path";
+import { assetPath } from "@/lib/asset-path"
+import { fotos } from "@/data/fotos";;
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -39,7 +42,7 @@ export default async function VoluntariadoPage({
   return (
     <div>
       <PageHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath("/images/eventos/20241112_100049.webp")}
+        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.voluntariado.hero)}
         bgColor={pageData?.hero?.bgColor || "bg-brand-purple"}
         tag={localize(pageData?.hero?.tag, locale) || "VOLUNTARIADO"}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
@@ -47,23 +50,25 @@ export default async function VoluntariadoPage({
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
-      <section className="bg-bg-surface py-20">
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-20 grid items-center gap-10 lg:grid-cols-2">
             <div>
-              <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+              <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
                 {t("porque")}
               </span>
-              <h2 className="mb-6 text-3xl font-bold text-text-primary sm:text-4xl">
+              <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
                 {t("porque")}
               </h2>
-              <p className="text-base leading-relaxed text-text-secondary">
+              <p className="text-base leading-relaxed text-[var(--color-text-muted)]">
                 {t("porqueDesc")}
               </p>
             </div>
             <div className="relative">
-              <Image
-                src={assetPath("/images/eventos/20241112_102515.webp")}
+              <ImageParallax
+                src={assetPath(fotos.voluntariado.section)}
                 alt=""
                 width={600}
                 height={400}
@@ -76,29 +81,27 @@ export default async function VoluntariadoPage({
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.1}>
-            <div className="mb-12 text-center">
-              <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-                ROLES
-              </span>
-              <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
-                {t("roles")}
-              </h2>
-            </div>
+          <AnimatedSection className="mb-12 text-center" delay={0.1}>
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              ROLES
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t("roles")}
+            </h2>
           </AnimatedSection>
 
           <div className="mb-20 grid gap-6 sm:grid-cols-2">
             {roles.map((rol, i) => {
               const Icon = rol.icon;
               return (
-                <AnimatedSection key={i} delay={0.1 * i}>
-                  <div className="flex gap-5 rounded-[10px] border border-border-subtle bg-bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-md">
-                    <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] ${rol.bg}`}>
-                      <Icon size={22} className={rol.color} />
+                <AnimatedSection key={i} delay={0.1 * i} direction="up">
+                  <div className="glass-card flex gap-5 rounded-[10px] p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] bg-white/10">
+                      <Icon size={22} className="text-brand-secondary" />
                     </div>
                     <div>
-                      <h3 className="mb-1 font-bold text-text-primary">{rol.title}</h3>
-                      <p className="text-sm text-text-muted">{rol.desc}</p>
+                      <h3 className="mb-1 font-bold text-[var(--color-text-primary)]">{rol.title}</h3>
+                      <p className="text-sm text-[var(--color-text-muted)]">{rol.desc}</p>
                     </div>
                   </div>
                 </AnimatedSection>
@@ -106,23 +109,21 @@ export default async function VoluntariadoPage({
             })}
           </div>
 
-          <AnimatedSection delay={0.2}>
-            <div className="mb-12 text-center">
-              <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-                REQUISITOS
-              </span>
-              <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
-                {t("requisitos")}
-              </h2>
-            </div>
+          <AnimatedSection className="mb-12 text-center" delay={0.2}>
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              REQUISITOS
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t("requisitos")}
+            </h2>
           </AnimatedSection>
 
           <div className="mx-auto mb-20 max-w-2xl">
             {requisitos.map((i) => (
-              <AnimatedSection key={i} delay={0.05 * i}>
-                <div className="flex items-start gap-3 border-b border-border-subtle py-4 last:border-0">
-                  <CheckCircle size={18} className="mt-0.5 shrink-0 text-brand-purple" />
-                  <p className="text-sm text-text-secondary">{t(`requisito${i}`)}</p>
+              <AnimatedSection key={i} delay={0.05 * i} direction="up">
+                <div className="flex items-start gap-3 border-b border-white/10 py-4 last:border-0">
+                  <CheckCircle size={18} className="mt-0.5 shrink-0 text-brand-secondary" />
+                  <p className="text-sm text-[var(--color-text-muted)]">{t(`requisito${i}`)}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -146,3 +147,6 @@ export default async function VoluntariadoPage({
     </div>
   );
 }
+
+
+
