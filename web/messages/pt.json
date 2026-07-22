@@ -421,7 +421,9 @@
     "teamKevinRole": "Coordenador",
     "teamMonicaRole": "Equipe Psicossocial",
     "teamJhonRole": "Equipe de Formacao",
-    "teamAnaRole": "Equipe ASCEP"
+    "teamAnaRole": "Equipe ASCEP",
+    "aliadosTag": "Quem nos apoia",
+    "aliadosTitle": "Parceiros estrategicos"
   },
   "impacto": {
     "heroTag": "NOSSO IMPACTO",

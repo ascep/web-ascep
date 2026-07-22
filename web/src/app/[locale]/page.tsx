@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { CSSProperties } from "react";
 import Link from "next/link";
 import DecoShapes from "@/components/DecoShapes";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -169,10 +168,7 @@ export default async function HomePage({
         }
       />
 
-      <section
-        className="relative overflow-hidden bg-section-light py-20 section-bg-image"
-        style={{ "--section-bg-image": `url(${assetPath(fotos.home.aboutImage)})` } as CSSProperties}
-      >
+      <section className="relative overflow-hidden bg-section-light py-20">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -225,10 +221,7 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section
-        className="relative overflow-hidden bg-section-light py-20 section-bg-image"
-        style={{ "--section-bg-image": `url(${assetPath(fotos.home.retosImage)})` } as CSSProperties}
-      >
+      <section className="relative overflow-hidden bg-section-light py-20">
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">

@@ -420,7 +420,9 @@
     "teamKevinRole": "Coordinator",
     "teamMonicaRole": "Psychosocial Team",
     "teamJhonRole": "Training Team",
-    "teamAnaRole": "ASCEP Team"
+    "teamAnaRole": "ASCEP Team",
+    "aliadosTag": "Who supports us",
+    "aliadosTitle": "Strategic partners"
   },
   "impacto": {
     "heroTag": "IMPACT",

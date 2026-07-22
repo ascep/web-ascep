@@ -14,6 +14,7 @@ import { getTranslations } from "next-intl/server";
 import { Target, Eye, Heart } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { fotos } from "@/data/fotos";
+import LogoRing from "@/components/LogoRing";
 import { imageUrl } from "@/lib/sanity/image";
 import { getTeamMembers, getMilestones } from "@/lib/sanity/fetch";
 
@@ -40,6 +41,11 @@ const fallbackMilestones = fotos.quienesSomos.timeline.map((item) => ({
   title: item.title,
   description: item.description,
   image: assetPath(item.image),
+}));
+
+const fallbackAliados = fotos.home.aliados.map((item) => ({
+  ...item,
+  src: assetPath(item.src),
 }));
 
 const dimensions = [
@@ -405,6 +411,21 @@ export default async function QuienesSomosPage({
               </AnimatedSection>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+              {t("aliadosTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              {t("aliadosTitle")}
+            </h2>
+          </AnimatedSection>
+          <LogoRing logos={fallbackAliados} />
         </div>
       </section>
 
