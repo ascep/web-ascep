@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
@@ -8,6 +9,7 @@ import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import ParallaxSection from "@/components/ParallaxSection";
+import TeamFan from "@/components/TeamFan";
 import { getTranslations } from "next-intl/server";
 import { Target, Eye, Heart } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
@@ -28,9 +30,9 @@ export const metadata: Metadata = {
 const fallbackTeam = [
   { name: "Maicol Londoño", role: "Director", src: assetPath(fotos.quienesSomos.team.maicol) },
   { name: "Kevin Ortega", role: "Desarrollador y dise\u00F1ador", src: assetPath(fotos.quienesSomos.team.kevin) },
-  { name: "Monica", role: "Equipo Psicosocial", src: assetPath(fotos.quienesSomos.team.monica) },
-  { name: "Jhon Eduard Angulo", role: "Equipo de Formacion", src: assetPath(fotos.quienesSomos.team.jhon) },
-  { name: "Ana", role: "Comunicaci\u00F3n", src: assetPath(fotos.quienesSomos.team.ana) },
+  { name: "Monica", role: "Coor. operativa y pedagogica", src: assetPath(fotos.quienesSomos.team.monica) },
+  { name: "Jhon Eduard Angulo", role: "Director de proyectos", src: assetPath(fotos.quienesSomos.team.jhon) },
+  { name: "Ana", role: "Aux. Comunicaciones", src: assetPath(fotos.quienesSomos.team.ana) },
 ];
 
 const fallbackMilestones = fotos.quienesSomos.timeline.map((item) => ({
@@ -138,7 +140,12 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section
+        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        style={{
+          "--section-bg-image": `url(${assetPath(fotos.quienesSomos.sectionImage)})`,
+        } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -212,7 +219,12 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section
+        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        style={{
+          "--section-bg-image": `url(${assetPath(fotos.quienesSomos.objetivoImage)})`,
+        } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -295,80 +307,23 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="relative overflow-hidden bg-purple-bg py-20">
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-5">
-              <AnimatedSection direction="left">
-                <span className="mb-3 inline-block rounded-[10px] bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">
-                  {t("equipoTag")}
-                </span>
-              </AnimatedSection>
-              <AnimatedSection direction="left" delay={0.1}>
-                <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
-                  {t("equipoTitle")} <span className="text-brand-orange">{t("equipoHighlight")}</span>
-                </h2>
-              </AnimatedSection>
-              <AnimatedSection direction="left" delay={0.2}>
-                <p className="text-base leading-relaxed text-[var(--color-text-muted)]">
-                  {t("equipoDesc")}
-                </p>
-              </AnimatedSection>
-            </div>
-            <div className="lg:col-span-7">
-              <div className="grid gap-4 sm:grid-cols-2">
-                {team.slice(0, 4).map((member, i) => (
-                  <AnimatedSection key={member.name} direction="up" delay={i * 0.08}>
-                    <div className="glass-card flex items-center gap-4 rounded-[10px] p-4 transition-all hover:bg-white/15">
-                      <div className="h-[100px] w-[100px] shrink-0 overflow-hidden rounded-[10px] sm:h-[130px] sm:w-[130px]">
-                        <Image
-                          src={member.src}
-                          alt={member.name}
-                          width={130}
-                          height={130}
-                          className="h-full w-full object-cover"
-                        />
-                      </div>
-                      <div className="min-w-0">
-                        <h4 className="text-lg font-bold text-brand-secondary">
-                          {member.name}
-                        </h4>
-                        <p className="mt-0.5 text-xs text-[var(--color-text-muted)]">
-                          {member.role}
-                        </p>
-                      </div>
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-              {team.length > 4 && (
-                <AnimatedSection direction="up" delay={0.4} className="mt-4 flex justify-center sm:justify-start">
-                  <div className="glass-card flex w-full items-center gap-4 rounded-[10px] p-4 transition-all hover:bg-white/15 sm:w-[calc(50%-0.5rem)]">
-                    <div className="h-[100px] w-[100px] shrink-0 overflow-hidden rounded-[10px] sm:h-[130px] sm:w-[130px]">
-                      <Image
-                        src={team[4].src}
-                        alt={team[4].name}
-                        width={130}
-                        height={130}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div className="min-w-0">
-                      <h4 className="text-lg font-bold text-brand-secondary">
-                        {team[4].name}
-                      </h4>
-                      <p className="mt-0.5 text-xs text-[var(--color-text-muted)]">
-                        {team[4].role}
-                      </p>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              )}
-            </div>
-          </div>
+          <AnimatedSection className="mb-8 text-center">
+            <span className="mb-3 inline-block rounded-[10px] bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">
+              {t("equipoTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t("equipoTitle")} <span className="text-brand-orange">{t("equipoHighlight")}</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-xl text-base text-[var(--color-text-muted)]">
+              {t("equipoDesc")}
+            </p>
+          </AnimatedSection>
         </div>
+        <TeamFan members={team} />
       </section>
 
       <section className="relative overflow-hidden bg-section-light py-20">

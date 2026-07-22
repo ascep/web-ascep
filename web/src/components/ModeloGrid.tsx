@@ -66,8 +66,8 @@ export default function ModeloGrid({ variant = "light" }: ModeloGridProps) {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: i * 0.06, ease: [0.23, 1, 0.32, 1] }}
-                    whileHover={{ y: -6 }}
-                    className={`group rounded-[10px] p-5 transition-all duration-300 ${
+                    whileHover={{ y: -6, rotateX: -3, rotateY: 3 }}
+                    className={`group perspective-[1200px] rounded-[10px] p-5 transition-all duration-300 ${
                       isDark ? "glass-card" : "border border-[var(--color-border-subtle)] bg-[var(--color-bg-card)]"
                     }`}
                     style={isDark ? {} : {

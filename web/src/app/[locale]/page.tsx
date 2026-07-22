@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import DecoShapes from "@/components/DecoShapes";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -8,8 +9,8 @@ import HomeTestimonials from "@/components/HomeTestimonials";
 import HomeCTA from "@/components/HomeCTA";
 import Timeline from "@/components/Timeline";
 import ModeloGrid from "@/components/ModeloGrid";
-import ProgramStack from "@/components/ProgramStack";
-import LogoLoop from "@/components/LogoLoop";
+import ProgramCarousel from "@/components/ProgramCarousel";
+import LogoRing from "@/components/LogoRing";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import { assetPath } from "@/lib/asset-path";
@@ -168,7 +169,10 @@ export default async function HomePage({
         }
       />
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section
+        className="relative overflow-hidden bg-section-light py-20 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.home.aboutImage)})` } as CSSProperties}
+      >
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -221,7 +225,10 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section
+        className="relative overflow-hidden bg-section-light py-20 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.home.retosImage)})` } as CSSProperties}
+      >
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -292,7 +299,7 @@ export default async function HomePage({
         <ModeloGrid variant="dark" />
       </section>
 
-      <ProgramStack programs={resolvedPrograms} locale={locale} />
+      <ProgramCarousel programs={resolvedPrograms} locale={locale} />
 
       <HomeTestimonials
         tag={h("testimonialsTag")}
@@ -354,7 +361,7 @@ export default async function HomePage({
           <h2 className="mb-10 text-center text-3xl font-bold text-[var(--color-text-primary)]">
             {h("aliadosTitle")}
           </h2>
-          <LogoLoop logos={resolvedAliados} />
+          <LogoRing logos={resolvedAliados} />
         </AnimatedSection>
       </section>
 

@@ -111,6 +111,29 @@
     radial-gradient(ellipse 50% 30% at 100% 50%, #EC662004 0%, transparent 50%);
 }
 
+.section-bg-image {
+  position: relative;
+}
+
+.section-bg-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--section-bg-image);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.18;
+  filter: grayscale(0.2) saturate(0.95);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.section-bg-image > * {
+  position: relative;
+  z-index: 1;
+}
+
 .glass-card {
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(12px);

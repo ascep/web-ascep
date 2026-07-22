@@ -11,20 +11,20 @@
 export const fotos = {
   home: {
     heroPoster: "/images/_MG_1563.webp",
-    heroImage: "/images/encuentro-2025/GIS06445.webp",
-    aboutImage: "/images/equipo-shoot/GIS08548.webp",
+    heroImage: "/images/encuentro-2025/GIS06445.JPG",
+    aboutImage: "/images/equipo-shoot/GIS08548.JPG",
     retosImage: "/images/eventos/20241112_102357.webp",
     gallery: [
-      { src: "/images/eventos/20241112_092951.webp", alt: "Taller con jovenes" },
+      { src: "/images/eventos/20241112_092951.jpg", alt: "Taller con jovenes" },
       { src: "/images/eventos/20241112_100049.webp", alt: "Actividad grupal" },
       { src: "/images/eventos/20241112_102515.webp", alt: "Sesion de trabajo" },
       { src: "/images/encuentro-2025/GIS06449.webp", alt: "Encuentro ASCEP 2025" },
     ],
     timeline: [
-      { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: "/images/eventos/20241112_092855.webp" },
-      { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: "/images/eventos/20241112_092951.webp" },
-      { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: "/images/eventos/20241112_095957.webp" },
-      { year: "2023", title: "Proyecto de Ley", description: "Impulsamos el proyecto de Ley de Egreso, construido colectivamente con egresados de todo el pais y respaldado por la senadora Lorena Rios.", image: "/images/eventos/20241112_100147.webp" },
+      { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: "/images/eventos/20241112_092855.jpg" },
+      { year: "2020", title: "Primeras alianzas", description: "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.", image: "/images/eventos/20241112_092951.jpg" },
+      { year: "2021", title: "Premio Civico", description: "Ganamos el primer lugar del Premio Civico por nuestro trabajo en liderazgo juvenil y procesos formativos con egresados del sistema de proteccion.", image: "/images/eventos/20241112_095957.jpg" },
+      { year: "2023", title: "Proyecto de Ley", description: "Impulsamos el proyecto de Ley de Egreso, construido colectivamente con egresados de todo el pais y respaldado por la senadora Lorena Rios.", image: "/images/eventos/20241112_100147.png" },
       { year: "2025", title: "Ley 2479 de 2025", description: "Se sanciona la Ley Hijos del Estado, creando el Programa Nacional de Acompanamiento Integral al Egresado del ICBF.", image: "/images/eventos/20241112_111016.webp" },
     ],
     programs: {
@@ -40,7 +40,7 @@ export const fotos = {
       },
       fomento: {
         logo: "/images/programas/LOGO-FOMENTO1.png",
-        image: "/images/eventos/GIS08397.webp",
+        image: "/images/eventos/GIS08397.png",
         color: "#EC6620",
       },
       miCuerpo: {
@@ -57,10 +57,10 @@ export const fotos = {
     ],
   },
   quienesSomos: {
-    hero: "/images/equipo-shoot/GIS08542.webp",
+    hero: "/images/equipo-shoot/GIS08542.JPG",
     sectionImage: "/images/equipo-shoot/GIS08550.webp",
-    historiaImage: "/images/equipo-shoot/GIS08542.webp",
-    objetivoImage: "/images/encuentro-2025/GIS06448.webp",
+    historiaImage: "/images/equipo-shoot/GIS08542.JPG",
+    objetivoImage: "/images/encuentro-2025/GIS06448.JPG",
     poblacionImage: "/images/eventos/20241112_102357.webp",
     poblacionParallax: "/images/IMG_0545.webp",
     areasImage: "/images/equipo-shoot/GIS08550.webp",
@@ -70,6 +70,7 @@ export const fotos = {
       monica: "/images/equipo/phtos-ascep-monica.png",
       jhon: "/images/equipo/phtos-ascep-jhon.png",
       ana: "/images/equipo/phtos-ascep.png",
+      mafe: "/images/equipo/phtos-ascep-mafe.png",
     },
     timeline: [
       { year: "2019", title: "Nacimiento de ASCEP", description: "Un grupo de egresados del sistema de proteccion estatal se organiza para construir un proyecto colectivo que transforme la forma en que el Estado aborda el egreso.", image: "/images/eventos/20241112_092855.webp" },
