@@ -45,14 +45,14 @@ export default function HomeTestimonials({
       </div>
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 text-center">
-          <span className="mb-3 inline-block rounded-[10px] bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
+          <span className="mb-3 inline-block rounded-[10px] bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
             {tag}
           </span>
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
             {(() => {
               const words = title.split(" ");
               const last = words.pop();
-              return <>{words.join(" ")} <span className="text-brand-orange">{last}</span></>;
+              return <>{words.join(" ")} <span className="text-white/80">{last}</span></>;
             })()}
           </h2>
         </div>
@@ -69,7 +69,7 @@ export default function HomeTestimonials({
             >
               <div className="mb-6 flex justify-center">
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10">
-                  <Quote className="h-7 w-7 text-brand-orange" />
+                  <Quote className="h-7 w-7 text-white" />
                 </div>
               </div>
               <p className="mx-auto mb-8 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">

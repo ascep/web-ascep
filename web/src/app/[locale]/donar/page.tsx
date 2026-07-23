@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import DonationForm from "@/components/DonationForm";
@@ -198,7 +199,10 @@ export default async function DonarPage({
       </section>
 
       {/* Impact stats */}
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section
+        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.donar.gallery[0].src)})` } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -219,7 +223,7 @@ export default async function DonarPage({
               <AnimatedSection key={stat.label} direction="up" delay={i * 0.08}>
                 <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
                   <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
-                    <stat.icon size={22} className="text-brand-secondary" />
+                    <stat.icon size={22} className="text-white" />
                   </div>
                   <div className="text-2xl font-bold text-white">
                     <CountUp end={parseInt(stat.value.replace(/[^0-9]/g, ""))} suffix={stat.value.includes("+") ? "+" : ""} />
@@ -261,7 +265,10 @@ export default async function DonarPage({
       </section>
 
       {/* Gallery */}
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section
+        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.donar.gallery[2].src)})` } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -398,7 +405,10 @@ export default async function DonarPage({
       </section>
 
       {/* FAQ */}
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section
+        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.donar.gallerySecond)})` } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

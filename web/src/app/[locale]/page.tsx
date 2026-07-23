@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import DecoShapes from "@/components/DecoShapes";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -254,7 +255,10 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg">
+      <section
+        className="section-dark relative overflow-hidden bg-purple-bg section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.home.heroImage)})` } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <HomeStats
@@ -300,11 +304,14 @@ export default async function HomePage({
         testimonials={testimonials}
       />
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-24">
+      <section
+        className="section-dark relative overflow-hidden bg-purple-bg py-24 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.home.gallery[0].src)})` } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="orange" />
         <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-accent">
+          <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-white/80">
             {h("galeriaTag")}
           </span>
           <h2 className="mb-12 text-center text-3xl font-bold text-white">

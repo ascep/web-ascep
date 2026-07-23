@@ -11,7 +11,10 @@ import EnredateCTA from "./EnredateCTA";
 import PodcastSection from "./PodcastSection";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
+import type { CSSProperties } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
+import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
 
 export const metadata: Metadata = {
   title: "Enredate con ASCEP - ASCEP",
@@ -104,7 +107,7 @@ export default async function EnredatePage({
         badgeText={t("aboutImageBadge")}
       />
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.enredate.gallery[0])})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -123,7 +126,7 @@ export default async function EnredatePage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.enredate.gallery[0])})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

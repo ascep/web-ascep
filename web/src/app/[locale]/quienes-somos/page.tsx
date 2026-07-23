@@ -160,7 +160,7 @@ export default async function QuienesSomosPage({
               {t("propositoTag")}
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("propositoTitle")} <span className="text-brand-orange">{t("propositoHighlight")}</span>
+              {t("propositoTitle")} <span className="text-white/80">{t("propositoHighlight")}</span>
             </h2>
           </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-3">
@@ -239,14 +239,14 @@ export default async function QuienesSomosPage({
               {t("objetivosEstrategicosTag")}
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("objetivosEstrategicosTitle")} <span className="text-brand-orange">{t("objetivosEstrategicosHighlight")}</span>
+              {t("objetivosEstrategicosTitle")} <span className="text-white/80">{t("objetivosEstrategicosHighlight")}</span>
             </h2>
           </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2">
             {objetivosEstrategicos.map((oe, i) => (
               <AnimatedSection key={oe.titleKey} direction="up" delay={i * 0.1}>
                 <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
-                  <h3 className="mb-2 text-lg font-bold text-brand-secondary">
+                  <h3 className="mb-2 text-lg font-bold text-white">
                     {t(oe.titleKey)}
                   </h3>
                   <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
@@ -313,18 +313,21 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-purple-bg py-20">
+      <section
+        className="relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.quienesSomos.team.kevin)})` } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-8 text-center">
-            <span className="mb-3 inline-block rounded-[10px] bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-secondary">
+            <span className="mb-3 inline-block rounded-[10px] bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("equipoTag")}
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("equipoTitle")} <span className="text-brand-orange">{t("equipoHighlight")}</span>
+              {t("equipoTitle")} <span className="text-white/80">{t("equipoHighlight")}</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base text-[var(--color-text-muted)]">
+            <p className="mx-auto mt-4 max-w-xl text-base text-white/70">
               {t("equipoDesc")}
             </p>
           </AnimatedSection>
@@ -365,7 +368,10 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section
+        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.quienesSomos.areasImage)})` } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -374,7 +380,7 @@ export default async function QuienesSomosPage({
               {t("areasTrabajoTag")}
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("areasTrabajoTitle")} <span className="text-brand-orange">{t("areasTrabajoHighlight")}</span>
+              {t("areasTrabajoTitle")} <span className="text-white/80">{t("areasTrabajoHighlight")}</span>
             </h2>
             <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-white/70">
               {t("areasTrabajoDesc")}
@@ -429,7 +435,10 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
-      <section className="bg-brand-purple py-20">
+      <section
+        className="bg-brand-purple py-20 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.quienesSomos.hero)})` } as CSSProperties}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="rounded-[10px] bg-white/10 p-10 text-center backdrop-blur-sm">
             <h2 className="mb-4 text-3xl font-bold text-white">

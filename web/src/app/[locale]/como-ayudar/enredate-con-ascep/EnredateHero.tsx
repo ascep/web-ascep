@@ -78,7 +78,7 @@ export default function EnredateHero({
               exit={dur ? { opacity: 0, x: -60 } : undefined}
               transition={dur ? { duration: dur, ease: [0.23, 1, 0.32, 1] } : undefined}
             >
-              <span className="mb-4 inline-block rounded-full border border-brand-orange/30 px-5 py-2 text-sm font-bold text-brand-orange">
+              <span className="mb-4 inline-block rounded-full border border-brand-orange/30 px-5 py-2 text-sm font-bold text-white/80">
                 {slides[current].tag}
               </span>
               <h1 className="mb-6 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">

@@ -33,7 +33,7 @@ export default function EnredateCTA({
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2">
           <AnimatedSection direction="left">
-            <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-5 py-2 text-sm font-bold text-brand-orange">
+            <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-5 py-2 text-sm font-bold text-white/80">
               {tag}
             </span>
             <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">

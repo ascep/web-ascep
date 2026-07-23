@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
@@ -131,7 +132,7 @@ export default async function ImpactoPage({
                 <AnimatedSection key={i} direction="up" delay={i * 0.06}>
                   <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
                     <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-[10px] bg-white/10">
-                      <Icon size={24} className="text-brand-secondary" />
+                      <Icon size={24} className="text-white" />
                     </div>
                     <div className="text-3xl font-bold text-white">
                       <CountUp
@@ -193,7 +194,10 @@ export default async function ImpactoPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section
+        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.impacto.contextImage)})` } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -202,7 +206,7 @@ export default async function ImpactoPage({
               {t("resultadosTag")}
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("resultadosTitle")} <span className="text-brand-orange">{t("resultadosHighlight")}</span>
+              {t("resultadosTitle")} <span className="text-white/80">{t("resultadosHighlight")}</span>
             </h2>
           </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2">
@@ -249,7 +253,10 @@ export default async function ImpactoPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section
+        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.impacto.gallery[0])})` } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -258,7 +265,7 @@ export default async function ImpactoPage({
               {t("galeriaTag")}
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("galeriaTitle")} <span className="text-brand-orange">{t("galeriaHighlight")}</span>
+              {t("galeriaTitle")} <span className="text-white/80">{t("galeriaHighlight")}</span>
             </h2>
           </AnimatedSection>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
@@ -281,7 +288,10 @@ export default async function ImpactoPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-brand-purple py-20">
+      <section
+        className="relative overflow-hidden bg-brand-purple py-20 section-bg-image"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.impacto.porQueImage)})` } as CSSProperties}
+      >
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.1),transparent_50%)]" />
         <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
           <AnimatedSection>

@@ -6,6 +6,7 @@ import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import AnimatedSection from "@/components/AnimatedSection";
+import type { CSSProperties } from "react";
 import { User, Home, Zap } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { fotos } from "@/data/fotos";
@@ -117,7 +118,7 @@ export default async function ComoLoHacemosPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.lineasImage)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -204,7 +205,7 @@ export default async function ComoLoHacemosPage({
           </div>
         </section>
 
-        <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.estrategiasImage)})` } as CSSProperties}>
           <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
           <DecoShapes variant="teal" />
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -213,7 +214,7 @@ export default async function ComoLoHacemosPage({
                 {t("lineasEstrategicasTag")}
               </span>
               <h2 className="text-3xl font-bold text-white sm:text-4xl">
-                {t("lineasEstrategicasTitle")} <span className="text-brand-orange">{t("lineasEstrategicasHighlight")}</span>
+                {t("lineasEstrategicasTitle")} <span className="text-white/80">{t("lineasEstrategicasHighlight")}</span>
               </h2>
               <p className="mx-auto mt-4 max-w-2xl text-white/70">
                 {t("lineasEstrategicasDesc")}
@@ -233,7 +234,7 @@ export default async function ComoLoHacemosPage({
               {[1, 2, 3, 4, 5].map((n, i) => (
                 <AnimatedSection key={n} direction="up" delay={i * 0.06}>
                   <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
-                    <h3 className="mb-3 text-lg font-bold text-brand-secondary">
+                    <h3 className="mb-3 text-lg font-bold text-white">
                       {t(`le${n}Title`)}
                     </h3>
                     <ul className="space-y-2">

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -108,7 +109,7 @@ export default async function EmpleoPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.empleo.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -117,7 +118,7 @@ export default async function EmpleoPage({
               Objetivo
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Objetivo <span className="text-brand-orange">General</span>
+              Objetivo <span className="text-white/80">General</span>
             </h2>
           </AnimatedSection>
           <AnimatedSection direction="up">
@@ -158,7 +159,7 @@ export default async function EmpleoPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.empleo.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -167,7 +168,7 @@ export default async function EmpleoPage({
               Componentes
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Componentes del <span className="text-brand-orange">Programa</span>
+              Componentes del <span className="text-white/80">Programa</span>
             </h2>
           </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -210,7 +211,7 @@ export default async function EmpleoPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.empleo.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -219,7 +220,7 @@ export default async function EmpleoPage({
               Resultados
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Resultados <span className="text-brand-orange">Esperados</span>
+              Resultados <span className="text-white/80">Esperados</span>
             </h2>
           </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

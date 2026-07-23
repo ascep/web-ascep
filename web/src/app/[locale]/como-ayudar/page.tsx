@@ -6,6 +6,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import { Heart, Users, Briefcase, ArrowRight } from "lucide-react";
+import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path"
 import { fotos } from "@/data/fotos";;
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
@@ -35,21 +36,21 @@ export default async function ComoAyudarPage({
       desc: t("donacionMonetariaDesc"),
       href: `/${locale}/donar`,
       icon: Heart,
-      color: "text-brand-secondary",
+      color: "text-white",
     },
     {
       title: t("planPadrino"),
       desc: t("planPadrinoDesc"),
       href: `/${locale}/como-ayudar/plan-padrino`,
       icon: Users,
-      color: "text-brand-secondary",
+      color: "text-white",
     },
     {
       title: t("voluntariado"),
       desc: t("voluntariadoDesc"),
       href: `/${locale}/como-ayudar/voluntariado`,
       icon: Briefcase,
-      color: "text-brand-secondary",
+      color: "text-white",
     },
   ];
 
@@ -63,7 +64,7 @@ export default async function ComoAyudarPage({
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -85,7 +86,7 @@ export default async function ComoAyudarPage({
                       </div>
                       <h3 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{way.title}</h3>
                       <p className="mb-4 text-sm text-[var(--color-text-muted)]">{way.desc}</p>
-                      <ArrowRight size={18} className="mt-auto text-brand-secondary" />
+                      <ArrowRight size={18} className="mt-auto text-white" />
                     </div>
                   </Link>
                 </AnimatedSection>

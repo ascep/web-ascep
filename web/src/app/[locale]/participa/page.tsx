@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -40,7 +41,7 @@ export default async function ParticipaPage({
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.participa.section)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

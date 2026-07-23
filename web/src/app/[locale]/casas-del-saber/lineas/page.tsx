@@ -3,7 +3,10 @@ import type { Metadata } from "next";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
+import type { CSSProperties } from "react";
 import { BookOpen, Monitor, Palette, Heart } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
 
 export const metadata: Metadata = {
   title: "Lineas Tematicas - Casas del Saber - ASCEP",
@@ -68,7 +71,7 @@ export default async function LineasPage({
             {t("heroTag")}
           </span>
           <h1 className="text-4xl font-bold text-white sm:text-5xl">
-            {t("heroTitle")} <span className="text-brand-orange">{t("heroHighlight")}</span>
+            {t("heroTitle")} <span className="text-white/80">{t("heroHighlight")}</span>
           </h1>
           <p className="mt-4 max-w-2xl text-lg text-white/80">
             {t("heroSubtitle")}
@@ -76,7 +79,7 @@ export default async function LineasPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.areas)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

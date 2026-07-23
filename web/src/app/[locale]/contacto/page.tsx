@@ -7,6 +7,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
+import type { CSSProperties } from "react";
 import { MapPin, Mail, Share2 } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
 import { fotos } from "@/data/fotos";;
@@ -40,7 +41,7 @@ export default async function ContactoPage({
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.contacto.section)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -99,7 +100,7 @@ export default async function ContactoPage({
                     <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{t("emailTitle")}</h4>
                     <a
                       href={`mailto:${t("emailValue")}`}
-                      className="text-sm text-brand-secondary transition-colors hover:text-brand-secondary-dark hover:underline"
+                      className="text-sm text-white transition-colors hover:text-brand-secondary-dark hover:underline"
                     >
                       {t("emailValue")}
                     </a>

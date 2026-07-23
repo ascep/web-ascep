@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
@@ -92,7 +93,7 @@ export default async function AliadosPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.aliados.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -111,7 +112,7 @@ export default async function AliadosPage({
                 <AnimatedSection key={item.sector} direction="up" delay={i * 0.08}>
                   <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
                     <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
-                      <Icon size={22} className="text-brand-secondary" />
+                      <Icon size={22} className="text-white" />
                     </div>
                     <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">{item.sector}</h4>
                     <p className="mb-2 text-sm text-[var(--color-text-muted)]">{item.desc}</p>

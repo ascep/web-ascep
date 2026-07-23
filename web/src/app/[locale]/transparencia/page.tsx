@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
@@ -145,7 +146,7 @@ export default async function TransparenciaPage({
         subtitle={t("heroSubtitle")}
       />
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.transparencia.section)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -61,7 +62,7 @@ export default async function LeyDeEgresoPage({
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("subtitle")}
       />
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.leyEgreso.context)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
@@ -162,7 +163,7 @@ export default async function LeyDeEgresoPage({
         </div>
       </div>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.leyEgreso.context)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -239,7 +240,7 @@ export default async function LeyDeEgresoPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.leyEgreso.context)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -309,7 +310,7 @@ export default async function LeyDeEgresoPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.leyEgreso.context)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
@@ -333,7 +334,7 @@ export default async function LeyDeEgresoPage({
               {papelASCEPItems.map((key) => (
                 <AnimatedSection key={key} direction="up">
                   <div className="glass-card rounded-[10px] p-5 text-center transition-all hover:bg-white/15">
-                    <div className="px-3 py-1 text-sm font-semibold text-brand-secondary">
+                    <div className="px-3 py-1 text-sm font-semibold text-white">
                       {t(key)}
                     </div>
                   </div>

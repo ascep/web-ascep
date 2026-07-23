@@ -6,6 +6,7 @@ import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Home, BookOpen, Compass } from "lucide-react";
+import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path";
 import { fotos } from "@/data/fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
@@ -50,7 +51,7 @@ export default async function CasasDelSaberPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -121,7 +122,7 @@ export default async function CasasDelSaberPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -144,7 +145,7 @@ export default async function CasasDelSaberPage({
             ].map((item, i) => (
               <AnimatedSection key={item.role} direction="up" delay={i * 0.06}>
                 <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
-                  <h3 className="mb-2 font-bold text-brand-secondary">{item.role}</h3>
+                  <h3 className="mb-2 font-bold text-white">{item.role}</h3>
                   <p className="text-sm text-[var(--color-text-muted)]">{item.desc}</p>
                 </div>
               </AnimatedSection>

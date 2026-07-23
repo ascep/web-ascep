@@ -7,6 +7,7 @@ import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
 import ImageParallax from "@/components/ImageParallax";
 import { Heart, CheckCircle, ArrowRight, Gift, Users, Shield, Target } from "lucide-react";
+import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path"
 import { fotos } from "@/data/fotos";;
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
@@ -49,7 +50,7 @@ export default async function PlanPadrinoPage({
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.planPadrino.section)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

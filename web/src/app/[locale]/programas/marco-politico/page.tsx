@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -112,7 +113,7 @@ export default async function MarcoPoliticoPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.marcoPolitico.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -121,7 +122,7 @@ export default async function MarcoPoliticoPage({
               Pilares
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Pilares <span className="text-brand-purple">Normativos</span>
+              Pilares <span className="text-white/80">Normativos</span>
             </h2>
           </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2">
@@ -161,7 +162,7 @@ export default async function MarcoPoliticoPage({
         </div>
       </section>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.marcoPolitico.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -170,7 +171,7 @@ export default async function MarcoPoliticoPage({
               Incidencia
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Ejes de <span className="text-brand-purple">Incidencia</span>
+              Ejes de <span className="text-white/80">Incidencia</span>
             </h2>
           </AnimatedSection>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -76,7 +77,7 @@ export default async function ProgramasPage({
         subtitle={t("desc")}
       />
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -117,7 +118,7 @@ export default async function ProgramasPage({
                       {program.desc}
                     </p>
                     <div className="mb-4 space-y-2">
-                      <p className="text-xs font-bold uppercase tracking-wider text-brand-purple">
+                      <p className="text-xs font-bold uppercase tracking-wider text-white/80">
                         {t("resultadosTitle")}
                       </p>
                       <ul className="space-y-1">

@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -52,7 +53,7 @@ export default async function NoticiasPage({
         subtitle={t("subtitle")}
       />
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.noticias.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -91,7 +92,7 @@ export default async function NoticiasPage({
                       )}
                     </div>
                     <div className="p-4">
-                      <span className="mb-2 inline-block rounded-full bg-white/10 px-2 py-0.5 text-xs font-medium text-brand-secondary">
+                      <span className="mb-2 inline-block rounded-full bg-white/10 px-2 py-0.5 text-xs font-medium text-white/80">
                         {t(noticia.category) || noticia.category}
                       </span>
                       <h3 className="mb-2 text-base font-bold text-[var(--color-text-primary)] line-clamp-2">

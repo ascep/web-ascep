@@ -40,12 +40,12 @@ export const fotos = {
       },
       fomento: {
         logo: "/images/programas/LOGO-FOMENTO1.png",
-        image: "/images/eventos/GIS08397.png",
+        image: "/images/eventos/GIS08397.JPG",
         color: "#EC6620",
       },
       miCuerpo: {
         logo: "/images/programas/logo-MCSD.png",
-        image: "/images/eventos/20241112_111009.webp",
+        image: "/images/eventos/20241112_111009.JPG",
         color: "#EC6620",
       },
     },
@@ -156,8 +156,8 @@ export const fotos = {
     ],
   },
   header: {
-    leyEgresoCard: "/images/encuentro-2025/GIS06446.webp",
-    comoAyudarCard: "/images/encuentro-2025/GIS06447.webp",
+    leyEgresoCard: "/images/encuentro-2025/GIS06446.JPG",
+    comoAyudarCard: "/images/encuentro-2025/GIS06447.JPG",
   },
   casasDelSaber: {
     hero: "/images/encuentro-2025/GIS06475.webp",
