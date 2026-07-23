@@ -298,24 +298,25 @@ export default function PadProfilePage({
   return (
     <div className="min-h-screen bg-[var(--color-bg-base)]">
       <section className="relative">
-        {/* Cover Photo */}
-        <div className="h-64 w-full overflow-hidden md:h-80">
+        {/* Cover Photo with gradient overlay */}
+        <div className="relative h-72 w-full overflow-hidden md:h-96">
           {profile.coverPhoto ? (
             <div
-              className="h-full w-full bg-cover bg-center"
+              className="absolute inset-0 bg-cover bg-center"
               style={{ backgroundImage: `url(${imageUrl(profile.coverPhoto, 1920, 600) || ""})` }}
             />
           ) : (
-            <div className="h-full w-full bg-gradient-to-br from-brand-primary to-brand-primary-dark" />
+            <div className="absolute inset-0 bg-gradient-to-br from-brand-primary to-brand-primary-dark" />
           )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
         </div>
 
         {/* Profile Header */}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative -mt-16 flex flex-col items-end gap-4 md:-mt-24 md:flex-row md:items-center">
+          <div className="relative -mt-20 flex flex-col items-center gap-4 md:-mt-28 md:flex-row md:items-end">
             {/* Avatar */}
             <div className="relative">
-              <div className="h-32 w-32 overflow-hidden rounded-full border-4 border-white bg-white shadow-xl md:h-48 md:w-48">
+              <div className="h-36 w-36 overflow-hidden rounded-full border-4 border-white bg-white shadow-2xl md:h-48 md:w-48">
                 {profile.photo ? (
                   <img
                     src={imageUrl(profile.photo, 400, 400) || ""}
@@ -323,18 +324,18 @@ export default function PadProfilePage({
                     className="h-full w-full object-cover"
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-brand-soft text-4xl font-bold text-brand-primary">
+                  <div className="flex h-full w-full items-center justify-center bg-brand-soft text-5xl font-bold text-brand-primary">
                     {name.charAt(0)}
                   </div>
                 )}
               </div>
-              <div className="absolute bottom-2 right-2 rounded-full border-2 border-white bg-brand-primary p-1 text-white">
+              <div className="absolute bottom-2 right-2 rounded-full border-2 border-white bg-brand-primary p-1 text-white shadow-lg">
                 <CheckCircle size={20} />
               </div>
             </div>
 
             {/* Name + Bio */}
-            <div className="flex-1 pb-4 text-center md:text-left">
+            <div className="flex-1 pb-2 text-center md:text-left">
               <h1 className="text-3xl font-extrabold text-brand-primary md:text-5xl">{name}</h1>
               <p className="mt-2 max-w-xl text-base leading-relaxed text-[var(--color-text-secondary)] md:text-lg">
                 {shortBio}
@@ -342,7 +343,7 @@ export default function PadProfilePage({
             </div>
 
             {/* Action Buttons */}
-            <div className="hidden gap-3 pb-4 md:flex">
+            <div className="flex gap-3 pb-4">
               <Link
                 href={`/${locale}/contacto`}
                 className="rounded-[10px] bg-brand-orange px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-orange-dark active:scale-95"
@@ -351,7 +352,7 @@ export default function PadProfilePage({
               </Link>
               <Link
                 href={`/${locale}/contacto`}
-                className="rounded-[10px] bg-brand-teal/10 px-6 py-3 text-sm font-bold text-brand-primary transition-all hover:bg-brand-teal/20"
+                className="rounded-[10px] border-2 border-brand-primary/20 bg-white px-6 py-3 text-sm font-bold text-brand-primary transition-all hover:bg-brand-primary/5"
               >
                 {t("sendMessage") || "Enviar Mensaje"}
               </Link>
@@ -359,28 +360,28 @@ export default function PadProfilePage({
           </div>
 
           {/* Quick Stats */}
-          <div className="mt-8 flex gap-8 overflow-x-auto border-t-2 border-brand-orange/20 py-4">
+          <div className="mt-8 flex gap-8 overflow-x-auto rounded-[10px] border border-[var(--color-border-subtle)] bg-white p-4 shadow-sm">
             {profile.impactPercentage != null && (
-              <div className="min-w-fit text-center">
-                <span className="block text-lg font-bold text-brand-primary">{profile.impactPercentage}%</span>
+              <div className="min-w-fit flex-1 text-center">
+                <span className="block text-xl font-extrabold text-brand-primary">{profile.impactPercentage}%</span>
                 <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
                   {t("currentImpact") || "Impacto Actual"}
                 </span>
               </div>
             )}
             {profile.storiesCount != null && (
-              <div className="min-w-fit text-center">
-                <span className="block text-lg font-bold text-brand-orange">{profile.storiesCount}</span>
+              <div className="min-w-fit flex-1 text-center">
+                <span className="block text-xl font-extrabold text-brand-orange">{profile.storiesCount}</span>
                 <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
-                  {t("storiesShared") || "Historias Compartidas"}
+                  {t("storiesShared") || "Historias"}
                 </span>
               </div>
             )}
             {profile.yearsInProgram != null && (
-              <div className="min-w-fit text-center">
-                <span className="block text-lg font-bold text-brand-primary">{profile.yearsInProgram} {t("years") || "Anos"}</span>
+              <div className="min-w-fit flex-1 text-center">
+                <span className="block text-xl font-extrabold text-brand-primary">{profile.yearsInProgram}</span>
                 <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
-                  {t("inProgram") || "En el Programa"}
+                  {t("years") || "Anos"}
                 </span>
               </div>
             )}

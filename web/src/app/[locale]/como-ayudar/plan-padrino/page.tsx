@@ -1,11 +1,10 @@
 import { getTranslations } from "next-intl/server";
 import type { Metadata } from "next";
 import Link from "next/link";
-import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
-import { ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, UserPlus, DollarSign, FileText, Heart, ArrowDown } from "lucide-react";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path";
 import { fotos } from "@/data/fotos";
@@ -18,7 +17,12 @@ export const metadata: Metadata = {
     "Conviertete en padrino o madrina de un joven en proceso de egreso del sistema de proteccion y acompanalo en su transicion a la vida independiente.",
 };
 
-const pasos = [1, 2, 3, 4];
+const steps = [
+  { icon: UserPlus, titleKey: "paso1", descKey: "paso1Desc", color: "text-brand-primary", bg: "bg-brand-primary/15" },
+  { icon: DollarSign, titleKey: "paso2", descKey: "paso2Desc", color: "text-brand-orange", bg: "bg-brand-orange/15" },
+  { icon: FileText, titleKey: "paso3", descKey: "paso3Desc", color: "text-brand-teal", bg: "bg-brand-teal/15" },
+  { icon: Heart, titleKey: "paso4", descKey: "paso4Desc", color: "text-brand-yellow", bg: "bg-brand-yellow/15" },
+];
 
 export default async function PlanPadrinoPage({
   params,
@@ -29,20 +33,57 @@ export default async function PlanPadrinoPage({
   const t = await getTranslations({ locale, namespace: "planPadrino" });
   const pageData = await getPageContent("plan-padrino");
   const profiles = await getPadrinos();
+  const heroImg = sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.planPadrino.hero);
 
   return (
     <div>
-      <PageHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.planPadrino.hero)}
-        bgColor={pageData?.hero?.bgColor || "bg-brand-teal"}
-        tag={localize(pageData?.hero?.tag, locale) || "PLAN PADRINO"}
-        title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
-        highlight={localize(pageData?.hero?.highlight, locale) || ""}
-        subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
-      />
+      {/* Hero */}
+      <section className="relative flex min-h-[80vh] items-center overflow-hidden sm:min-h-[85vh]">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{ backgroundImage: `url(${heroImg})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+        <CursorGlow color="rgba(1, 158, 159, 0.04)" size={600} opacity={0.3} />
+
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <AnimatedSection delay={0.1}>
+            <span className="mb-4 inline-block rounded-full border border-white/30 bg-white/10 px-5 py-2 text-xs font-bold uppercase tracking-[0.25em] text-white/90 backdrop-blur-sm">
+              PLAN PADRINO
+            </span>
+          </AnimatedSection>
+          <AnimatedSection delay={0.2}>
+            <h1 className="mt-4 text-4xl font-extrabold leading-[1.1] text-white sm:text-5xl lg:text-6xl">
+              {t("heroTitle")}
+            </h1>
+          </AnimatedSection>
+          <AnimatedSection delay={0.3}>
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75 sm:text-xl">
+              {t("heroSubtitle")}
+            </p>
+          </AnimatedSection>
+          <AnimatedSection delay={0.4}>
+            <div className="mt-8 flex flex-wrap gap-4">
+              <a
+                href="#perfiles"
+                className="inline-flex items-center gap-2 rounded-[10px] bg-brand-orange px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-orange-dark active:scale-95"
+              >
+                {t("browseProfiles")} <ArrowDown size={16} />
+              </a>
+              <Link
+                href={`/${locale}/contacto`}
+                className="inline-flex items-center gap-2 rounded-[10px] border-2 border-white/30 bg-white/10 px-6 py-3 text-sm font-bold text-white backdrop-blur-sm transition-all hover:bg-white/20"
+              >
+                {t("ctaBtn")} <ArrowRight size={16} />
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
 
       {/* Profiles Grid */}
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.planPadrino.section)})` } as CSSProperties}>
+      <section id="perfiles" className="section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.planPadrino.section)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -51,10 +92,10 @@ export default async function PlanPadrinoPage({
               PERFILES
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("browseProfiles") || "Conoce a quienes necesitan tu apoyo"}
+              {t("browseProfiles")}
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-base text-[var(--color-text-muted)]">
-              {t("browseProfilesDesc") || "Cada joven tiene una historia unica de superacion. Conoce sus procesos y acompaña su camino hacia la autonomia."}
+              {t("browseProfilesDesc")}
             </p>
           </AnimatedSection>
 
@@ -66,9 +107,10 @@ export default async function PlanPadrinoPage({
             </div>
           ) : (
             <AnimatedSection delay={0.2}>
-              <div className="rounded-[10px] border-2 border-dashed border-white/20 p-12 text-center">
-                <p className="text-lg text-white/60">
-                  {t("noProfilesYet") || "Proximamente compartiremos las historias de los jovenes que necesitan tu apoyo."}
+              <div className="mx-auto max-w-md rounded-[10px] border-2 border-dashed border-white/20 p-12 text-center">
+                <Heart size={40} className="mx-auto mb-4 text-white/30" />
+                <p className="text-lg text-white/50">
+                  {t("noProfilesYet")}
                 </p>
               </div>
             </AnimatedSection>
@@ -76,7 +118,7 @@ export default async function PlanPadrinoPage({
         </div>
       </section>
 
-      {/* Como funciona */}
+      {/* Como funciona - Cards */}
       <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
         <CursorGlow color="rgba(236, 102, 32, 0.04)" size={500} opacity={0.4} />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -89,20 +131,21 @@ export default async function PlanPadrinoPage({
             </h2>
           </AnimatedSection>
 
-          <div className="mx-auto mb-16 max-w-3xl">
-            {pasos.map((i) => (
-              <AnimatedSection key={i} delay={0.05 * i} direction="up">
-                <div className="relative flex items-start gap-5 border-l-2 border-white/20 pb-8 pl-8 last:pb-0">
-                  <div className="absolute -left-[1.15rem] flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-sm font-bold text-brand-secondary shadow-md">
-                    {i}
+          <div className="mb-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {steps.map((step, i) => {
+              const Icon = step.icon;
+              return (
+                <AnimatedSection key={i} delay={0.1 * i} direction="up">
+                  <div className="glass-card group flex h-full flex-col items-center rounded-[10px] p-6 text-center transition-all hover:-translate-y-1 hover:bg-white/15">
+                    <div className={`mb-4 flex h-14 w-14 items-center justify-center rounded-full ${step.bg} transition-transform group-hover:scale-110`}>
+                      <Icon size={24} className={step.color} />
+                    </div>
+                    <h3 className="mb-2 text-base font-bold text-white">{t(step.titleKey)}</h3>
+                    <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">{t(step.descKey)}</p>
                   </div>
-                  <div>
-                    <h3 className="mb-1 font-bold text-white">{t(`paso${i}`)}</h3>
-                    <p className="text-sm text-[var(--color-text-muted)]">{t(`paso${i}Desc`)}</p>
-                  </div>
-                </div>
-              </AnimatedSection>
-            ))}
+                </AnimatedSection>
+              );
+            })}
           </div>
 
           <AnimatedSection delay={0.25}>
