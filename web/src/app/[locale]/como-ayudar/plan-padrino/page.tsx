@@ -5,29 +5,18 @@ import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
-import ImageParallax from "@/components/ImageParallax";
-import { Heart, CheckCircle, ArrowRight, Gift, Users, Shield, Target } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import type { CSSProperties } from "react";
-import { assetPath } from "@/lib/asset-path"
-import { fotos } from "@/data/fotos";;
-import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
+import { assetPath } from "@/lib/asset-path";
+import { fotos } from "@/data/fotos";
+import { getPageContent, getPadrinos, localize, sanityImage } from "@/lib/sanity/fetch";
+import PadProfileCard from "@/components/PadProfileCard";
 
 export const metadata: Metadata = {
   title: "Plan Padrino - ASCEP",
   description:
     "Conviertete en padrino o madrina de un joven en proceso de egreso del sistema de proteccion y acompanalo en su transicion a la vida independiente.",
-  openGraph: {
-    description:
-      "Conviertete en padrino o madrina de un joven en proceso de egreso del sistema de proteccion y acompanalo en su transicion a la vida independiente.",
-  },
 };
-
-const beneficios = [
-  { icon: Heart, titleKey: "beneficio1", descKey: "beneficio1Desc", color: "text-brand-teal", bg: "bg-brand-teal/10" },
-  { icon: Users, titleKey: "beneficio2", descKey: "beneficio2Desc", color: "text-brand-orange", bg: "bg-brand-orange/10" },
-  { icon: Shield, titleKey: "beneficio3", descKey: "beneficio3Desc", color: "text-brand-purple", bg: "bg-brand-purple/10" },
-  { icon: Target, titleKey: "beneficio4", descKey: "beneficio4Desc", color: "text-brand-teal", bg: "bg-brand-teal/10" },
-];
 
 const pasos = [1, 2, 3, 4];
 
@@ -39,6 +28,8 @@ export default async function PlanPadrinoPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "planPadrino" });
   const pageData = await getPageContent("plan-padrino");
+  const profiles = await getPadrinos();
+
   return (
     <div>
       <PageHero
@@ -50,66 +41,46 @@ export default async function PlanPadrinoPage({
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.planPadrino.section)})` } as CSSProperties}>
+      {/* Profiles Grid */}
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.planPadrino.section)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-20 grid items-center gap-10 lg:grid-cols-2">
-            <div>
-              <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-                {t("queEs")}
-              </span>
-              <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
-                {t("queEs")}
-              </h2>
-              <p className="text-base leading-relaxed text-[var(--color-text-muted)]">
-                {t("queEsDesc")}
-              </p>
-            </div>
-            <div className="relative">
-              <ImageParallax
-                src={assetPath(fotos.planPadrino.section)}
-                alt=""
-                width={600}
-                height={400}
-                className="w-full rounded-[10px] object-cover shadow-lg"
-                style={{ aspectRatio: "3/2" }}
-              />
-              <div className="absolute -bottom-4 -left-4 flex h-20 w-20 items-center justify-center rounded-[10px] bg-brand-teal text-white shadow-lg">
-                <Gift size={28} />
-              </div>
-            </div>
-          </AnimatedSection>
-
           <AnimatedSection className="mb-12 text-center" delay={0.1}>
             <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              BENEFICIOS
+              PERFILES
             </span>
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("beneficios")}
+              {t("browseProfiles") || "Conoce a quienes necesitan tu apoyo"}
             </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base text-[var(--color-text-muted)]">
+              {t("browseProfilesDesc") || "Cada joven tiene una historia unica de superacion. Conoce sus procesos y acompaña su camino hacia la autonomia."}
+            </p>
           </AnimatedSection>
 
-          <div className="mb-20 grid gap-6 sm:grid-cols-2">
-            {beneficios.map((b, i) => {
-              const Icon = b.icon;
-              return (
-                <AnimatedSection key={i} delay={0.1 * i} direction="up">
-                  <div className="glass-card flex gap-5 rounded-[10px] p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] bg-white/10">
-                      <Icon size={22} className="text-brand-secondary" />
-                    </div>
-                    <div>
-                      <h3 className="mb-1 font-bold text-[var(--color-text-primary)]">{t(b.titleKey)}</h3>
-                      <p className="text-sm text-[var(--color-text-muted)]">{t(b.descKey)}</p>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              );
-            })}
-          </div>
+          {profiles.length > 0 ? (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {profiles.map((profile, i) => (
+                <PadProfileCard key={profile._id} profile={profile} index={i} />
+              ))}
+            </div>
+          ) : (
+            <AnimatedSection delay={0.2}>
+              <div className="rounded-[10px] border-2 border-dashed border-white/20 p-12 text-center">
+                <p className="text-lg text-white/60">
+                  {t("noProfilesYet") || "Proximamente compartiremos las historias de los jovenes que necesitan tu apoyo."}
+                </p>
+              </div>
+            </AnimatedSection>
+          )}
+        </div>
+      </section>
 
-          <AnimatedSection className="mb-12 text-center" delay={0.2}>
+      {/* Como funciona */}
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(236, 102, 32, 0.04)" size={500} opacity={0.4} />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center" delay={0.1}>
             <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               PROCESO
             </span>
@@ -118,7 +89,7 @@ export default async function PlanPadrinoPage({
             </h2>
           </AnimatedSection>
 
-          <div className="mx-auto mb-20 max-w-3xl">
+          <div className="mx-auto mb-16 max-w-3xl">
             {pasos.map((i) => (
               <AnimatedSection key={i} delay={0.05 * i} direction="up">
                 <div className="relative flex items-start gap-5 border-l-2 border-white/20 pb-8 pl-8 last:pb-0">
@@ -152,6 +123,3 @@ export default async function PlanPadrinoPage({
     </div>
   );
 }
-
-
-

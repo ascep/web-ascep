@@ -78,7 +78,27 @@
     "paso4Desc": "Your constant support provides the young person with the stability needed to build their life project with confidence.",
     "ctaTitle": "Want to become a sponsor?",
     "ctaDesc": "Write to us and we will tell you all the details to start this beautiful work.",
-    "ctaBtn": "Write to us"
+    "ctaBtn": "Write to us",
+    "browseProfiles": "Meet the young people who need your support",
+    "browseProfilesDesc": "Each young person has a unique story of overcoming. Learn about their journey and support their path to independence.",
+    "noProfilesYet": "Soon we will share the stories of the young people who need your support."
+  },
+  "padrinoProfile": {
+    "donateNow": "Donate Now",
+    "sendMessage": "Send Message",
+    "currentImpact": "Current Impact",
+    "storiesShared": "Stories Shared",
+    "years": "Years",
+    "inProgram": "In the Program",
+    "currentNeeds": "Current Needs",
+    "supportGoal": "Support General Goal",
+    "yourMonthlyImpact": "Your monthly impact",
+    "progressStories": "Progress Stories",
+    "noPostsYet": "We will soon share progress stories.",
+    "otherYouth": "Other Young People Who Need Your Support",
+    "backToList": "Back to profiles",
+    "backToProcess": "Back to process",
+    "backToImpact": "Back to impact"
   },
   "voluntariado": {
     "heroTitle": "Volunteer",

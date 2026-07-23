@@ -13,6 +13,7 @@ import impactStat from "./documents/impactStat";
 import testimonial from "./documents/testimonial";
 import donationTier from "./documents/donationTier";
 import faqSection from "./documents/faqSection";
+import padrinoProfile from "./documents/padrinoProfile";
 
 // Object types
 import blockContent from "./blockContent";
@@ -40,6 +41,7 @@ export const schemaTypes = [
   testimonial,
   donationTier,
   faqSection,
+  padrinoProfile,
 
   // Objects
   blockContent,

@@ -290,3 +290,57 @@ export const faqByPageQuery = groq`*[_type == "faqSection" && page == $page][0] 
     answer
   }
 }`;
+
+// ============================================================
+// PADRINO PROFILES
+// ============================================================
+
+export const padrinosQuery = groq`*[_type == "padrinoProfile" && active == true] | order(order asc) {
+  _id,
+  name,
+  slug,
+  age,
+  city,
+  photo,
+  shortBio,
+  order
+}`;
+
+export const padrinoBySlugQuery = groq`*[_type == "padrinoProfile" && slug.current == $slug && active == true][0] {
+  _id,
+  name,
+  slug,
+  age,
+  city,
+  photo,
+  coverPhoto,
+  shortBio,
+  fullBio,
+  impactPercentage,
+  storiesCount,
+  yearsInProgram,
+  needs,
+  impactMessage,
+  impactStatLabel,
+  impactStatValue,
+  impactStatDescription,
+  progressPosts[] | order(date desc) {
+    _key,
+    date,
+    author,
+    authorRole,
+    title,
+    description,
+    type,
+    media[] {
+      _key,
+      mediaType,
+      image,
+      videoUrl,
+      thumbnail
+    },
+    tags
+  },
+  galleryPhotos,
+  order
+}`;

@@ -78,7 +78,27 @@
     "paso4Desc": "Tu apoyo constante le brinda al joven la estabilidad necesaria para construir su proyecto de vida con confianza.",
     "ctaTitle": "Quieres ser padrino?",
     "ctaDesc": "Escribenos y te contaremos todos los detalles para que inicies esta hermosa labor.",
-    "ctaBtn": "Escribenos"
+    "ctaBtn": "Escribenos",
+    "browseProfiles": "Conoce a quienes necesitan tu apoyo",
+    "browseProfilesDesc": "Cada joven tiene una historia unica de superacion. Conoce sus procesos y acompana su camino hacia la autonomia.",
+    "noProfilesYet": "Proximamente compartiremos las historias de los jovenes que necesitan tu apoyo."
+  },
+  "padrinoProfile": {
+    "donateNow": "Donar Ahora",
+    "sendMessage": "Enviar Mensaje",
+    "currentImpact": "Impacto Actual",
+    "storiesShared": "Historias Compartidas",
+    "years": "Anos",
+    "inProgram": "En el Programa",
+    "currentNeeds": "Necesidades Actuales",
+    "supportGoal": "Apoyar Meta General",
+    "yourMonthlyImpact": "Tu impacto mensual",
+    "progressStories": "Historias de Progreso",
+    "noPostsYet": "Proximamente compartiremos historias de progreso.",
+    "otherYouth": "Otros Jovenes que Necesitan tu Apoyo",
+    "backToList": "Volver a perfiles",
+    "backToProcess": "Volver a procesos",
+    "backToImpact": "Volver a impacto"
   },
   "voluntariado": {
     "heroTitle": "Voluntariado",

@@ -24,6 +24,8 @@ import {
   galleryAlbumsQuery,
   programasQuery,
   programaBySlugQuery,
+  padrinosQuery,
+  padrinoBySlugQuery,
 } from "./queries";
 
 export type SiteSettings = {
@@ -269,6 +271,69 @@ export async function getPrograms(): Promise<Programa[]> {
 
 export async function getProgramBySlug(slug: string): Promise<ProgramaDetail | null> {
   return sanityFetch<ProgramaDetail>(programaBySlugQuery, { slug });
+}
+
+export type PadrinoNeed = {
+  _key?: string;
+  title?: { es?: string; en?: string; pt?: string };
+  description?: { es?: string; en?: string; pt?: string };
+  priority?: "high" | "medium" | "low" | "achieved";
+  progress?: number;
+  targetAmount?: string;
+  currentAmount?: string;
+};
+
+export type ProgressMedia = {
+  _key?: string;
+  mediaType?: "image" | "video";
+  image?: SanityImage;
+  videoUrl?: string;
+  thumbnail?: SanityImage;
+};
+
+export type ProgressPost = {
+  _key?: string;
+  date?: string;
+  author?: { es?: string; en?: string; pt?: string };
+  authorRole?: { es?: string; en?: string; pt?: string };
+  title?: { es?: string; en?: string; pt?: string };
+  description?: any;
+  type?: "story" | "milestone" | "update";
+  media?: ProgressMedia[];
+  tags?: string[];
+};
+
+export type PadrinoProfile = {
+  _id: string;
+  name?: { es?: string; en?: string; pt?: string };
+  slug?: { current: string };
+  age?: number;
+  city?: { es?: string; en?: string; pt?: string };
+  photo?: SanityImage;
+  coverPhoto?: SanityImage;
+  shortBio?: { es?: string; en?: string; pt?: string };
+  fullBio?: any;
+  impactPercentage?: number;
+  storiesCount?: number;
+  yearsInProgram?: number;
+  needs?: PadrinoNeed[];
+  impactMessage?: { es?: string; en?: string; pt?: string };
+  impactStatLabel?: { es?: string; en?: string; pt?: string };
+  impactStatValue?: string;
+  impactStatDescription?: { es?: string; en?: string; pt?: string };
+  progressPosts?: ProgressPost[];
+  galleryPhotos?: SanityImage[];
+  order?: number;
+  active?: boolean;
+};
+
+export async function getPadrinos(): Promise<PadrinoProfile[]> {
+  const data = await sanityFetch<PadrinoProfile[]>(padrinosQuery);
+  return data ?? [];
+}
+
+export async function getPadrinoBySlug(slug: string): Promise<PadrinoProfile | null> {
+  return sanityFetch<PadrinoProfile>(padrinoBySlugQuery, { slug });
 }
 
 export { localize, sanityImage };
