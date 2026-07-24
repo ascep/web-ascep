@@ -74,8 +74,8 @@ export default function PadProfileCard({
           <div>
             <h4 className={`font-bold ${accentColor}`}>{name}</h4>
             {age && (
-              <span className="text-xs font-bold text-[var(--color-text-muted)]">
-                {age} {locale === "en" ? "years" : locale === "pt" ? "anos" : "anos"}
+              <span className="text-xs text-[var(--color-text-muted)]">
+                {age} {locale === "en" ? (age === 1 ? "year" : "years") : locale === "pt" ? (age === 1 ? "ano" : "anos") : (age === 1 ? "ano" : "anos")}
                 {city && ` - ${city}`}
               </span>
             )}

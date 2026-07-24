@@ -57,36 +57,38 @@ async function main() {
   console.log("========================================\n");
 
   // 1. Subir imagenes placeholder
+  // NOTA: Estas son imagenes de ejemplo. Para un perfil mas
+  // personal, sube fotos individuales de retrato a Sanity Studio (/studio).
   console.log("--- Subiendo imagenes ---\n");
 
   const profilePhoto = await uploadImage(
-    "encuentro-2025/GIS06446.webp",
+    "encuentro-2025/GIS06452.webp",
     "Foto de perfil de Yaritza Valegas"
   );
 
   const coverPhoto = await uploadImage(
-    "encuentro-2025/GIS06450.webp",
+    "encuentro-2025/GIS06455.webp",
     "Foto de portada de Yaritza Valegas"
   );
 
   const postImg1 = await uploadImage(
-    "encuentro-2025/GIS06447.webp",
+    "encuentro-2025/GIS06460.webp",
     "Yaritza en taller de manicure"
   );
 
   const postImg2 = await uploadImage(
-    "encuentro-2025/GIS06448.webp",
+    "encuentro-2025/GIS06462.webp",
     "Proyecto de manicure de Yaritza"
   );
 
   const galleryImg1 = await uploadImage(
-    "encuentro-2025/GIS06445.webp",
-    "Trabajo de manicure"
+    "casas-del-saber/GIS04876.webp",
+    "Casa del Saber - espacio de formacion"
   );
 
   const galleryImg2 = await uploadImage(
-    "encuentro-2025/GIS06449.webp",
-    "Yaritza en formacion"
+    "casas-del-saber/GIS04881.webp",
+    "Casa del Saber - actividades"
   );
 
   // 2. Crear/actualizar el perfil

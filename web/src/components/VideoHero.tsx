@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Rain from "./Rain";
+import { assetPath } from "@/lib/asset-path";
 
 type VideoHeroProps = {
   title: string;
@@ -19,7 +20,7 @@ export default function VideoHero({ title, subtitle, cta, videoSrc }: VideoHeroP
         loop
         playsInline
         className="absolute inset-0 h-full w-full object-cover"
-        poster="/logos/03 logo ascep principal horizontal.png"
+        poster={assetPath("/logos/03 logo ascep principal horizontal.png")}
       >
         <source src={videoSrc} type="video/mp4" />
       </video>

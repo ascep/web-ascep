@@ -2,21 +2,17 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { usePathname } from "next/navigation";
 import { useTranslations, useLocale } from "next-intl";
 import { PortableText } from "@portabletext/react";
 import {
   Heart,
-  Share2,
   Play,
   CheckCircle,
   GraduationCap,
   TrendingUp,
   Target,
   ArrowLeft,
-  X,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 import { imageUrl } from "@/lib/sanity/image";
 import type { PadrinoProfile, ProgressPost, PadrinoNeed } from "@/lib/sanity/fetch";
@@ -44,6 +40,12 @@ function getYouTubeEmbed(url: string): string | null {
   return match ? `https://www.youtube.com/embed/${match[1]}` : null;
 }
 
+function yearLabel(n: number, locale: string): string {
+  if (locale === "en") return n === 1 ? "Year" : "Years";
+  if (locale === "pt") return n === 1 ? "Ano" : "Anos";
+  return n === 1 ? "Ano" : "Anos";
+}
+
 const priorityConfig: Record<string, { label: string; color: string; bg: string; border: string }> = {
   high: { label: "Prioridad Alta", color: "text-brand-orange", bg: "bg-brand-orange/10", border: "border-brand-orange" },
   medium: { label: "Prioridad Media", color: "text-brand-yellow", bg: "bg-brand-yellow/10", border: "border-brand-yellow" },
@@ -57,12 +59,12 @@ function NeedCard({ need, locale }: { need: PadrinoNeed; locale: string }) {
   const progress = need.progress ?? (isAchieved ? 100 : 0);
 
   return (
-    <div className={`rounded-[10px] border-b-4 ${isAchieved ? "border-brand-primary bg-white" : `${priority.border} bg-white`} p-4`}>
-      <div className="mb-2 flex items-start justify-between">
+    <div className={`rounded-[10px] border-2 ${isAchieved ? "border-brand-primary bg-white" : `${priority.border} bg-white`} p-4`}>
+      <div className="mb-2 flex items-start justify-between gap-2">
         <span className="font-bold text-[var(--color-text-primary)]">
           {localize(need.title, locale)}
         </span>
-        <span className={`whitespace-nowrap rounded px-2 py-0.5 text-xs font-bold ${priority.bg} ${priority.color}`}>
+        <span className={`shrink-0 whitespace-nowrap rounded px-2 py-0.5 text-xs font-bold ${priority.bg} ${priority.color}`}>
           {isAchieved ? (
             <span className="flex items-center gap-1"><CheckCircle size={12} /> Logrado</span>
           ) : priority.label}
@@ -105,9 +107,9 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
   const isMilestone = post.type === "milestone";
 
   return (
-    <div className="overflow-hidden rounded-[10px] border-2 border-[var(--color-border-subtle)] bg-white transition-all hover:border-brand-teal">
+    <div className="overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] bg-white shadow-sm transition-all hover:border-brand-teal/40 hover:shadow-md">
       {author && (
-        <div className="flex items-center gap-3 p-4">
+        <div className="flex items-center gap-3 border-b border-[var(--color-border-subtle)] p-4">
           <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-primary text-sm font-bold text-white">
             {author.split(" ").map((w: string) => w[0]).join("").slice(0, 2)}
           </div>
@@ -125,7 +127,7 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
         </div>
       )}
 
-      <div className="px-4 pb-4">
+      <div className="p-4">
         {isMilestone ? (
           <div className="flex items-start gap-4">
             <div className="shrink-0 rounded-[10px] bg-brand-teal/10 p-3 text-brand-primary">
@@ -146,12 +148,10 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
         ) : (
           <>
             {title && (
-              <p className="mb-3 text-base leading-relaxed text-[var(--color-text-secondary)]">
-                {title}
-              </p>
+              <h3 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">{title}</h3>
             )}
             {post.description && (
-              <div className="mb-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">
+              <div className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
                 <PortableText value={post.description} />
               </div>
             )}
@@ -204,7 +204,7 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
                     <img
                       src={imageUrl(m.image, 800, 600) || ""}
                       alt={typeof m.image?.alt === "string" ? m.image.alt : ""}
-                      className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                      className="aspect-video w-full object-cover"
                     />
                   </div>
                 );
@@ -217,7 +217,7 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
         {tags.length > 0 && (
           <div className="mt-4 flex flex-wrap gap-2">
             {tags.map((tag, i) => (
-              <span key={i} className="rounded-full bg-[var(--color-bg-elevated)] px-3 py-1 text-xs font-bold text-[var(--color-text-muted)]">
+              <span key={i} className="rounded-full bg-brand-soft px-3 py-1 text-xs font-bold text-brand-primary">
                 #{tag}
               </span>
             ))}
@@ -228,47 +228,64 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
   );
 }
 
-function BentoGallery({ photos, locale }: { photos: any[]; locale: string }) {
+function BentoGallery({ photos }: { photos: any[] }) {
   if (!photos || photos.length === 0) return null;
+
+  if (photos.length === 1) {
+    return (
+      <div className="overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] shadow-sm">
+        <img
+          src={imageUrl(photos[0], 1200, 800) || ""}
+          alt={photos[0]?.alt || ""}
+          className="h-64 w-full object-cover md:h-96"
+        />
+      </div>
+    );
+  }
+
+  if (photos.length === 2) {
+    return (
+      <div className="grid gap-2 md:grid-cols-2 md:h-80">
+        {photos.map((photo, i) => (
+          <div key={i} className="overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] shadow-sm">
+            <img
+              src={imageUrl(photo, 800, 600) || ""}
+              alt={photo?.alt || ""}
+              className="h-48 w-full object-cover md:h-full"
+            />
+          </div>
+        ))}
+      </div>
+    );
+  }
 
   return (
     <div className="grid h-64 grid-cols-4 gap-2 md:h-96">
-      {photos[0] && (
-        <div className="col-span-2 row-span-2 overflow-hidden rounded-[10px] border-2 border-white shadow-sm">
+      <div className="col-span-2 row-span-2 overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] shadow-sm">
+        <img
+          src={imageUrl(photos[0], 800, 800) || ""}
+          alt={photos[0]?.alt || ""}
+          className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+        />
+      </div>
+      {photos.slice(1, 3).map((photo, i) => (
+        <div key={i} className="col-span-2 overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] shadow-sm">
           <img
-            src={imageUrl(photos[0], 800, 800) || ""}
-            alt={photos[0]?.alt || ""}
+            src={imageUrl(photo, 600, 400) || ""}
+            alt={photo?.alt || ""}
             className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
           />
         </div>
-      )}
-      {photos[1] && (
-        <div className="col-span-2 overflow-hidden rounded-[10px] border-2 border-white shadow-sm">
+      ))}
+      {photos.slice(3, 5).map((photo, i) => (
+        <div key={i} className="col-span-1 overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] shadow-sm">
           <img
-            src={imageUrl(photos[1], 600, 400) || ""}
-            alt={photos[1]?.alt || ""}
+            src={imageUrl(photo, 400, 400) || ""}
+            alt={photo?.alt || ""}
             className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
           />
         </div>
-      )}
-      {photos[2] && (
-        <div className="col-span-1 overflow-hidden rounded-[10px] border-2 border-white shadow-sm">
-          <img
-            src={imageUrl(photos[2], 400, 400) || ""}
-            alt={photos[2]?.alt || ""}
-            className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-          />
-        </div>
-      )}
-      {photos[3] && (
-        <div className="col-span-1 overflow-hidden rounded-[10px] border-2 border-white shadow-sm">
-          <img
-            src={imageUrl(photos[3], 400, 400) || ""}
-            alt={photos[3]?.alt || ""}
-            className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-          />
-        </div>
-      )}
+      ))}
     </div>
   );
 }
@@ -283,40 +300,40 @@ export default function PadProfilePage({
   otherProfiles?: PadrinoProfile[];
 }) {
   const t = useTranslations("padrinoProfile");
+  const pathname = usePathname();
+  const profileUrl = typeof window !== "undefined" ? window.location.href : `https://ascep.org${pathname}`;
   const name = localize(profile.name, locale) || "";
   const shortBio = localize(profile.shortBio, locale) || "";
-  const city = localize(profile.city, locale) || "";
   const impactMessage = localize(profile.impactMessage, locale) || "";
-  const impactStatLabel = localize(profile.impactStatLabel, locale) || "";
-  const impactStatValue = profile.impactStatValue || "";
   const impactStatDescription = localize(profile.impactStatDescription, locale) || "";
   const posts = profile.progressPosts || [];
   const needs = profile.needs || [];
   const gallery = profile.galleryPhotos || [];
-  const [showLightbox, setShowLightbox] = useState<number | null>(null);
+  const contactSubject = `Quiero apadrinar a ${name}`;
+  const contactMessage = `Hola, estoy interesado en apadrinar a ${name}. Me gustaría saber más sobre cómo puedo apoyar su proceso.`;
 
   return (
     <div className="min-h-screen bg-[var(--color-bg-base)]">
       <section className="relative">
-        {/* Cover Photo with gradient overlay */}
-        <div className="relative h-72 w-full overflow-hidden md:h-96">
+        {/* Cover Photo */}
+        <div className="relative h-56 w-full overflow-hidden md:h-72">
           {profile.coverPhoto ? (
             <div
               className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${imageUrl(profile.coverPhoto, 1920, 600) || ""})` }}
+              style={{ backgroundImage: `url(${imageUrl(profile.coverPhoto, 1920, 960) || ""})` }}
             />
           ) : (
             <div className="absolute inset-0 bg-gradient-to-br from-brand-primary to-brand-primary-dark" />
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
         </div>
 
-        {/* Profile Header */}
+        {/* Profile Header - below cover */}
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="relative -mt-20 flex flex-col items-center gap-4 md:-mt-28 md:flex-row md:items-end">
+          <div className="relative -mt-12 flex flex-col items-center gap-4 md:-mt-16 md:flex-row md:items-end">
             {/* Avatar */}
-            <div className="relative">
-              <div className="h-36 w-36 overflow-hidden rounded-full border-4 border-white bg-white shadow-2xl md:h-48 md:w-48">
+            <div className="relative shrink-0">
+              <div className="h-28 w-28 overflow-hidden rounded-full border-4 border-white bg-white shadow-xl md:h-36 md:w-36">
                 {profile.photo ? (
                   <img
                     src={imageUrl(profile.photo, 400, 400) || ""}
@@ -329,15 +346,15 @@ export default function PadProfilePage({
                   </div>
                 )}
               </div>
-              <div className="absolute bottom-2 right-2 rounded-full border-2 border-white bg-brand-primary p-1 text-white shadow-lg">
-                <CheckCircle size={20} />
+              <div className="absolute bottom-1 right-1 rounded-full border-2 border-white bg-brand-primary p-1 text-white">
+                <CheckCircle size={16} />
               </div>
             </div>
 
             {/* Name + Bio */}
             <div className="flex-1 pb-2 text-center md:text-left">
-              <h1 className="text-3xl font-extrabold text-brand-primary md:text-5xl">{name}</h1>
-              <p className="mt-2 max-w-xl text-base leading-relaxed text-[var(--color-text-secondary)] md:text-lg">
+              <h1 className="text-3xl font-extrabold text-brand-primary md:text-4xl">{name}</h1>
+              <p className="mt-2 max-w-xl text-sm leading-relaxed text-[var(--color-text-secondary)] md:text-base">
                 {shortBio}
               </p>
             </div>
@@ -345,14 +362,14 @@ export default function PadProfilePage({
             {/* Action Buttons */}
             <div className="flex gap-3 pb-4">
               <Link
-                href={`/${locale}/contacto`}
-                className="rounded-[10px] bg-brand-orange px-6 py-3 text-sm font-bold text-white transition-all hover:bg-brand-orange-dark active:scale-95"
+                href={`/${locale}/contacto?nombre=${encodeURIComponent(name)}&asunto=${encodeURIComponent(contactSubject)}&mensaje=${encodeURIComponent(contactMessage)}`}
+                className="rounded-[10px] bg-brand-orange px-5 py-2.5 text-sm font-bold text-white transition-all hover:bg-brand-orange-dark active:scale-95"
               >
                 {t("donateNow") || "Donar Ahora"}
               </Link>
               <Link
-                href={`/${locale}/contacto`}
-                className="rounded-[10px] border-2 border-brand-primary/20 bg-white px-6 py-3 text-sm font-bold text-brand-primary transition-all hover:bg-brand-primary/5"
+                href={`/${locale}/contacto?nombre=${encodeURIComponent(name)}&asunto=${encodeURIComponent(contactSubject)}&mensaje=${encodeURIComponent(contactMessage)}`}
+                className="rounded-[10px] border-2 border-brand-primary/20 bg-white px-5 py-2.5 text-sm font-bold text-brand-primary transition-all hover:bg-brand-primary/5"
               >
                 {t("sendMessage") || "Enviar Mensaje"}
               </Link>
@@ -360,28 +377,28 @@ export default function PadProfilePage({
           </div>
 
           {/* Quick Stats */}
-          <div className="mt-8 flex gap-8 overflow-x-auto rounded-[10px] border border-[var(--color-border-subtle)] bg-white p-4 shadow-sm">
+          <div className="mt-4 mb-8 flex gap-6 overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] bg-white shadow-sm">
             {profile.impactPercentage != null && (
-              <div className="min-w-fit flex-1 text-center">
+              <div className="flex-1 border-r border-[var(--color-border-subtle)] py-4 text-center">
                 <span className="block text-xl font-extrabold text-brand-primary">{profile.impactPercentage}%</span>
-                <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
-                  {t("currentImpact") || "Impacto Actual"}
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
+                  {t("currentImpact") || "Impacto"}
                 </span>
               </div>
             )}
             {profile.storiesCount != null && (
-              <div className="min-w-fit flex-1 text-center">
+              <div className="flex-1 border-r border-[var(--color-border-subtle)] py-4 text-center">
                 <span className="block text-xl font-extrabold text-brand-orange">{profile.storiesCount}</span>
-                <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
                   {t("storiesShared") || "Historias"}
                 </span>
               </div>
             )}
             {profile.yearsInProgram != null && (
-              <div className="min-w-fit flex-1 text-center">
+              <div className="flex-1 py-4 text-center">
                 <span className="block text-xl font-extrabold text-brand-primary">{profile.yearsInProgram}</span>
-                <span className="text-xs font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
-                  {t("years") || "Anos"}
+                <span className="text-[10px] font-bold uppercase tracking-widest text-[var(--color-text-muted)]">
+                  {yearLabel(profile.yearsInProgram, locale)}
                 </span>
               </div>
             )}
@@ -389,11 +406,11 @@ export default function PadProfilePage({
         </div>
       </section>
 
-      {/* Main Content Columns */}
-      <section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-12">
-          {/* Left Column: Needs + Impact */}
-          <div className="space-y-6 md:col-span-4">
+      {/* Main Content */}
+      <section className="mx-auto max-w-7xl px-4 pb-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+          {/* Left Column: Needs + Impact + Share */}
+          <div className="space-y-6 lg:col-span-4">
             {/* Needs Card */}
             <div className="rounded-[10px] border-2 border-brand-primary/20 bg-brand-soft p-5">
               <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-brand-primary">
@@ -401,12 +418,16 @@ export default function PadProfilePage({
                 {t("currentNeeds") || "Necesidades Actuales"}
               </h3>
               <div className="space-y-3">
-                {needs.map((need) => (
-                  <NeedCard key={need._key} need={need} locale={locale} />
-                ))}
+                {needs.length > 0 ? (
+                  needs.map((need) => (
+                    <NeedCard key={need._key} need={need} locale={locale} />
+                  ))
+                ) : (
+                  <p className="text-sm text-[var(--color-text-muted)]">Sin necesidades registradas.</p>
+                )}
               </div>
               <Link
-                href={`/${locale}/contacto`}
+                href={`/${locale}/contacto?nombre=${encodeURIComponent(name)}&asunto=${encodeURIComponent(contactSubject)}&mensaje=${encodeURIComponent(contactMessage)}`}
                 className="mt-4 block w-full rounded-[10px] bg-brand-primary py-3 text-center text-sm font-bold text-white transition-colors hover:bg-brand-primary-dark"
               >
                 {t("supportGoal") || "Apoyar Meta General"}
@@ -423,7 +444,7 @@ export default function PadProfilePage({
                     <TrendingUp size={24} className="text-white" />
                   </div>
                   <div>
-                    {impactStatValue && <p className="font-bold">{impactStatValue}</p>}
+                    {profile.impactStatValue && <p className="font-bold">{profile.impactStatValue}</p>}
                     {impactStatDescription && (
                       <p className="text-xs text-white/70">{impactStatDescription}</p>
                     )}
@@ -431,10 +452,65 @@ export default function PadProfilePage({
                 </div>
               </div>
             )}
+
+            {/* Share Card */}
+            <div className="rounded-[10px] border border-[var(--color-border-subtle)] bg-white p-5 shadow-sm">
+              <h4 className="mb-3 text-sm font-bold text-[var(--color-text-primary)]">
+                {locale === "en" ? "Share this profile" : locale === "pt" ? "Compartilhe este perfil" : "Compartir este perfil"}
+              </h4>
+              <div className="flex gap-2">
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(`Conoce a ${name} en ASCEP: ${profileUrl}`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-[10px] bg-green-500/10 py-2.5 text-xs font-bold text-green-600 transition-colors hover:bg-green-500/20"
+                >
+                  WhatsApp
+                </a>
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(profileUrl)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex flex-1 items-center justify-center gap-2 rounded-[10px] bg-blue-500/10 py-2.5 text-xs font-bold text-blue-600 transition-colors hover:bg-blue-500/20"
+                >
+                  Facebook
+                </a>
+                <button
+                  onClick={() => {
+                    if (typeof navigator !== "undefined" && navigator.clipboard) {
+                      navigator.clipboard.writeText(profileUrl);
+                    }
+                  }}
+                  className="flex flex-1 items-center justify-center gap-2 rounded-[10px] bg-[var(--color-bg-elevated)] py-2.5 text-xs font-bold text-[var(--color-text-muted)] transition-colors hover:bg-[var(--color-border-subtle)]"
+                >
+                  {locale === "en" ? "Copy" : locale === "pt" ? "Copiar" : "Copiar"}
+                </button>
+              </div>
+            </div>
+
+            {/* About ASCEP Card */}
+            <div className="rounded-[10px] border border-[var(--color-border-subtle)] bg-white p-5 shadow-sm">
+              <h4 className="mb-2 text-sm font-bold text-[var(--color-text-primary)]">
+                {locale === "en" ? "About ASCEP" : locale === "pt" ? "Sobre a ASCEP" : "Sobre ASCEP"}
+              </h4>
+              <p className="mb-3 text-xs leading-relaxed text-[var(--color-text-muted)]">
+                {locale === "en"
+                  ? "ASCEP accompanies young people leaving the child protection system in their transition to independent life."
+                  : locale === "pt"
+                    ? "A ASCEP acompanha jovens que saem do sistema de protecao infantil em sua transicao para a vida independente."
+                    : "ASCEP acompania a jovenes en proceso de egreso del sistema de proteccion en su transicion a la vida independiente."}
+              </p>
+              <Link
+                href={`/${locale}/quienes-somos`}
+                className="text-xs font-bold text-brand-primary hover:text-brand-primary-dark"
+              >
+                {locale === "en" ? "Learn more" : locale === "pt" ? "Saiba mais" : "Conocer mas"} &rarr;
+              </Link>
+            </div>
           </div>
 
           {/* Right Column: Progress Feed */}
-          <div className="space-y-6 md:col-span-8">
+          <div className="space-y-6 lg:col-span-8">
             <h2 className="flex items-center gap-3 text-xl font-bold text-brand-primary">
               <GraduationCap size={28} />
               {t("progressStories") || "Historias de Progreso"}
@@ -451,7 +527,7 @@ export default function PadProfilePage({
             )}
 
             {/* Bento Photo Gallery */}
-            {gallery.length > 0 && <BentoGallery photos={gallery} locale={locale} />}
+            {gallery.length > 0 && <BentoGallery photos={gallery} />}
           </div>
         </div>
       </section>
@@ -482,7 +558,7 @@ function OtherProfileCard({ profile, locale }: { profile: PadrinoProfile; locale
   return (
     <Link
       href={`/${locale}/como-ayudar/plan-padrino/${profile.slug?.current}`}
-      className="flex flex-col rounded-[10px] border-2 border-brand-primary/10 bg-white p-5 shadow-sm transition-all hover:shadow-md"
+      className="flex flex-col rounded-[10px] border border-[var(--color-border-subtle)] bg-white p-5 shadow-sm transition-all hover:border-brand-teal/40 hover:shadow-md"
     >
       <div className="mb-3 flex items-center gap-3">
         <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-brand-primary bg-white">
@@ -500,7 +576,7 @@ function OtherProfileCard({ profile, locale }: { profile: PadrinoProfile; locale
         </div>
         <div>
           <h4 className="font-bold text-brand-primary">{name}</h4>
-          {age && <span className="text-xs font-bold text-[var(--color-text-muted)]">{age} {locale === "en" ? "years" : locale === "pt" ? "anos" : "anos"}</span>}
+          {age && <span className="text-xs text-[var(--color-text-muted)]">{age} {yearLabel(age, locale)}</span>}
         </div>
       </div>
       <p className="mb-4 flex-grow text-sm leading-relaxed text-[var(--color-text-secondary)]">

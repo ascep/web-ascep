@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronLeft, ChevronRight, Play } from "lucide-react";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
@@ -131,8 +132,8 @@ export default function EnredateHero({
                 <button onClick={() => setShowOverlay(true)}
                   className="group relative block w-full overflow-hidden rounded-[10px] border border-white/10 transition-shadow hover:shadow-2xl"
                 >
-                  <img src={slideVideo.thumbnail} alt={slideVideo.title}
-                    className="aspect-video w-full object-cover" />
+                  <Image src={slideVideo.thumbnail} alt={slideVideo.title}
+                    width={640} height={360} className="aspect-video w-full object-cover" />
                   <div className="absolute inset-0 flex items-center justify-center bg-black/20 transition-colors group-hover:bg-black/30">
                     <div className="flex h-16 w-16 items-center justify-center rounded-full bg-white/20 backdrop-blur transition-transform group-hover:scale-110">
                       <Play className="ml-1 h-7 w-7 text-white" fill="white" />

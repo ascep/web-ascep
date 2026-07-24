@@ -4,6 +4,8 @@ export function imageUrl(source: any, width = 600, height = 338): string | null 
   if (!projectId || !source?.asset?._ref) return null;
 
   const ref = source.asset._ref;
-  const [, id, format] = ref.split("-");
-  return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}-${width}x${height}.${format}`;
+  const parts = ref.split("-");
+  const format = parts[parts.length - 1];
+  const id = parts.slice(1, parts.length - 1).join("-");
+  return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}.${format}?w=${width}&h=${height}&fit=crop&auto=format`;
 }

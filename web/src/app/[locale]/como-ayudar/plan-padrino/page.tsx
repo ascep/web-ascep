@@ -4,7 +4,8 @@ import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
-import { ArrowRight, CheckCircle, UserPlus, DollarSign, FileText, Heart, ArrowDown } from "lucide-react";
+import ImageParallax from "@/components/ImageParallax";
+import { ArrowRight, CheckCircle, UserPlus, DollarSign, FileText, Heart, ArrowDown, Gift, Settings } from "lucide-react";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path";
 import { fotos } from "@/data/fotos";
@@ -34,6 +35,7 @@ export default async function PlanPadrinoPage({
   const pageData = await getPageContent("plan-padrino");
   const profiles = await getPadrinos();
   const heroImg = sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.planPadrino.hero);
+  const sectionImg = assetPath(fotos.planPadrino.section);
 
   return (
     <div>
@@ -43,9 +45,8 @@ export default async function PlanPadrinoPage({
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${heroImg})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-        <CursorGlow color="rgba(1, 158, 159, 0.04)" size={600} opacity={0.3} />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
 
         <div className="relative z-10 mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <AnimatedSection delay={0.1}>
@@ -54,12 +55,12 @@ export default async function PlanPadrinoPage({
             </span>
           </AnimatedSection>
           <AnimatedSection delay={0.2}>
-            <h1 className="mt-4 text-4xl font-extrabold leading-[1.1] text-white sm:text-5xl lg:text-6xl">
+            <h1 className="mt-4 max-w-2xl text-4xl font-extrabold leading-[1.1] text-white sm:text-5xl lg:text-6xl">
               {t("heroTitle")}
             </h1>
           </AnimatedSection>
           <AnimatedSection delay={0.3}>
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75 sm:text-xl">
+            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl">
               {t("heroSubtitle")}
             </p>
           </AnimatedSection>
@@ -82,10 +83,44 @@ export default async function PlanPadrinoPage({
         </div>
       </section>
 
-      {/* Profiles Grid */}
-      <section id="perfiles" className="section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.planPadrino.section)})` } as CSSProperties}>
+      {/* Que es el Plan Padrino */}
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${sectionImg})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="grid items-center gap-10 lg:grid-cols-2" delay={0.1}>
+            <div>
+              <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                {t("queEs")}
+              </span>
+              <h2 className="mb-6 text-3xl font-bold text-white sm:text-4xl">
+                {t("queEs")}
+              </h2>
+              <p className="text-base leading-relaxed text-white/70">
+                {t("queEsDesc")}
+              </p>
+            </div>
+            <div className="relative">
+              <ImageParallax
+                src={sectionImg}
+                alt=""
+                width={600}
+                height={400}
+                className="w-full rounded-[10px] object-cover shadow-lg"
+                style={{ aspectRatio: "3/2" }}
+              />
+              <div className="absolute -bottom-4 -left-4 flex h-20 w-20 items-center justify-center rounded-[10px] bg-brand-teal text-white shadow-lg">
+                <Gift size={28} />
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Profiles Grid */}
+      <section id="perfiles" className="section-dark relative overflow-hidden bg-purple-bg py-20">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="subtle" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center" delay={0.1}>
             <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
@@ -94,7 +129,7 @@ export default async function PlanPadrinoPage({
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t("browseProfiles")}
             </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-base text-[var(--color-text-muted)]">
+            <p className="mx-auto mt-4 max-w-2xl text-base text-white/60">
               {t("browseProfilesDesc")}
             </p>
           </AnimatedSection>
@@ -141,7 +176,7 @@ export default async function PlanPadrinoPage({
                       <Icon size={24} className={step.color} />
                     </div>
                     <h3 className="mb-2 text-base font-bold text-white">{t(step.titleKey)}</h3>
-                    <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">{t(step.descKey)}</p>
+                    <p className="text-sm leading-relaxed text-white/60">{t(step.descKey)}</p>
                   </div>
                 </AnimatedSection>
               );
@@ -154,10 +189,31 @@ export default async function PlanPadrinoPage({
               <h2 className="mb-4 text-2xl font-bold">{t("ctaTitle")}</h2>
               <p className="mb-8 text-white/80">{t("ctaDesc")}</p>
               <Link
-                href={`/${locale}/contacto`}
+                href={`/${locale}/contacto?nombre=&asunto=Quiero+ser+padrino+o+madrina`}
                 className="inline-flex items-center gap-2 rounded-[10px] bg-white px-6 py-3 text-sm font-semibold text-brand-teal transition-all hover:bg-white/90"
               >
                 {t("ctaBtn")} <ArrowRight size={16} />
+              </Link>
+            </div>
+          </AnimatedSection>
+
+          {/* Admin Quick Links */}
+          <AnimatedSection delay={0.3}>
+            <div className="mt-12 flex flex-wrap items-center justify-center gap-4 text-sm">
+              <span className="text-white/40">
+                <Settings size={14} className="mr-1 inline" />
+              </span>
+              <Link
+                href="/studio"
+                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium text-white/50 backdrop-blur-sm transition-all hover:border-white/30 hover:bg-white/10 hover:text-white/80"
+              >
+                Sanity Studio
+              </Link>
+              <Link
+                href="/zprimeascep"
+                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium text-white/50 backdrop-blur-sm transition-all hover:border-white/30 hover:text-white/80"
+              >
+                Dashboard zprime
               </Link>
             </div>
           </AnimatedSection>

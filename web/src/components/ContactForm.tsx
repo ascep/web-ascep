@@ -1,13 +1,27 @@
 'use client';
 
-import { useState, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { useTranslations } from "next-intl";
+import { useSearchParams } from "next/navigation";
 import { Loader, CheckCircle, AlertCircle } from "lucide-react";
 
 export default function ContactForm() {
   const t = useTranslations("contacto");
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
+  const [nombre, setNombre] = useState("");
+  const [asunto, setAsunto] = useState("");
+  const [mensaje, setMensaje] = useState("");
+
+  useEffect(() => {
+    const n = searchParams.get("nombre");
+    const a = searchParams.get("asunto");
+    const m = searchParams.get("mensaje");
+    if (n) setNombre(n);
+    if (a) setAsunto(a);
+    if (m) setMensaje(m);
+  }, [searchParams]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -53,6 +67,8 @@ export default function ContactForm() {
           id="nombre"
           name="nombre"
           required
+          value={nombre}
+          onChange={(e) => setNombre(e.target.value)}
           className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-2 text-sm transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
         />
       </div>
@@ -76,6 +92,8 @@ export default function ContactForm() {
           type="text"
           id="asunto"
           name="asunto"
+          value={asunto}
+          onChange={(e) => setAsunto(e.target.value)}
           className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-2 text-sm transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
         />
       </div>
@@ -88,6 +106,8 @@ export default function ContactForm() {
           name="mensaje"
           rows={5}
           required
+          value={mensaje}
+          onChange={(e) => setMensaje(e.target.value)}
           className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-2 text-sm transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
         />
       </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState, useCallback, useEffect } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion, AnimatePresence } from "motion/react";
 import { Volume2, VolumeX, Play, X, Share2, Link as LinkIcon, MessageCircle, ChevronLeft, ChevronRight } from "lucide-react";
 import CommentsPanel from "./Comments";
@@ -229,8 +230,8 @@ export default function VerticalFeed({ playlistId }: { playlistId?: string }) {
               <button onClick={() => setFullscreenIndex(i)}
                 className="group relative block aspect-video w-full text-left"
               >
-                <img src={item.thumbnail} alt={item.title} className="h-full w-full object-cover"
-                  loading="lazy" />
+                <Image src={item.thumbnail} alt={item.title} width={320} height={180} className="h-full w-full object-cover"
+                  />
                 <div className="absolute inset-0 bg-black/20 transition-opacity group-hover:bg-black/10" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur transition-transform group-hover:scale-110">
