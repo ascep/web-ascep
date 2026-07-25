@@ -6,14 +6,15 @@ type FlatEntry = {
   key: string;
   path: string;
   section: string;
+  usedCount: number;
 };
 
 const sectionLabels: Record<string, string> = {
   home: "Home",
-  quienesSomos: "Quiénes Somos",
+  quienesSomos: "Quienes Somos",
   aliados: "Aliados",
   programas: "Programas",
-  comoLoHacemos: "Cómo lo Hacemos",
+  comoLoHacemos: "Como lo Hacemos",
   impacto: "Impacto",
   header: "Header",
   casasDelSaber: "Casas del Saber",
@@ -23,7 +24,7 @@ const sectionLabels: Record<string, string> = {
   noticias: "Noticias",
   participa: "Participa",
   transparencia: "Transparencia",
-  enredate: "Enrédate con ASCEP",
+  enredate: "Enredate con ASCEP",
   planPadrino: "Plan Padrino",
   voluntariado: "Voluntariado",
   empleo: "Empleo",
@@ -71,7 +72,7 @@ export default function FotosDashboard() {
             type="password"
             value={pwInput}
             onChange={(e) => setPwInput(e.target.value)}
-            placeholder="Contraseña"
+            placeholder="Contrasena"
             autoFocus
             className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-black focus:outline-none"
           />
@@ -97,7 +98,11 @@ function DashboardInner() {
   const [error, setError] = useState("");
   const [uploading, setUploading] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState("");
-  const [dimensions, setDimensions] = useState<Record<string, string>>({});
+  const [previewEntry, setPreviewEntry] = useState<FlatEntry | null>(null);
+  const [previewFile, setPreviewFile] = useState<File | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string>("");
+  const [cacheBusters, setCacheBusters] = useState<Record<string, number>>({});
+  const [filter, setFilter] = useState("");
 
   const getPw = () => sessionStorage.getItem("zprime_pw") || "";
 
@@ -132,49 +137,76 @@ function DashboardInner() {
     return acc;
   }, {});
 
-  const handleChange = async (entry: FlatEntry) => {
+  const filteredEntries = filter
+    ? entries.filter(
+        (e) =>
+          e.key.toLowerCase().includes(filter.toLowerCase()) ||
+          e.path.toLowerCase().includes(filter.toLowerCase())
+      )
+    : null;
+
+  const openPreview = (entry: FlatEntry) => {
     const input = document.createElement("input");
     input.type = "file";
     input.accept = "image/*";
-    input.onchange = async () => {
+    input.onchange = () => {
       const file = input.files?.[0];
       if (!file) return;
-      setUploading(entry.key);
-      setSuccessMsg("");
-      try {
-        const fd = new FormData();
-        fd.append("file", file);
-        fd.append("path", entry.path);
-        const res = await fetch("/api/fotos", {
-          method: "POST",
-          headers: { "x-zprime-pw": getPw() },
-          body: fd,
-        });
-        if (res.status === 401) {
-          sessionStorage.removeItem("zprime_auth");
-          sessionStorage.removeItem("zprime_pw");
-          window.location.reload();
-          return;
-        }
-        const data = await res.json();
-        if (data.success) {
-          setSuccessMsg(`Actualizada: ${entry.key} → ${data.newPath}`);
-          fetchFotos();
-        } else {
-          setError(data.error || "Error al actualizar");
-        }
-      } catch {
-        setError("Error de red");
-      } finally {
-        setUploading(null);
-      }
+      setPreviewEntry(entry);
+      setPreviewFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
     };
     input.click();
   };
 
-  const handleImgLoad = (key: string, e: React.SyntheticEvent<HTMLImageElement>) => {
-    const img = e.currentTarget;
-    setDimensions((prev) => ({ ...prev, [key]: `${img.naturalWidth}×${img.naturalHeight}` }));
+  const confirmUpload = async () => {
+    if (!previewEntry || !previewFile) return;
+    setUploading(previewEntry.key);
+    setSuccessMsg("");
+    setError("");
+    try {
+      const fd = new FormData();
+      fd.append("file", previewFile);
+      fd.append("path", previewEntry.path);
+      const res = await fetch("/api/fotos", {
+        method: "POST",
+        headers: { "x-zprime-pw": getPw() },
+        body: fd,
+      });
+      if (res.status === 401) {
+        sessionStorage.removeItem("zprime_auth");
+        sessionStorage.removeItem("zprime_pw");
+        window.location.reload();
+        return;
+      }
+      const data = await res.json();
+      if (data.success) {
+        const countMsg = data.replacedCount > 1
+          ? ` (${data.replacedCount} ocurrencias actualizadas)`
+          : "";
+        setSuccessMsg(`OK: ${previewEntry.key} -> ${data.newPath}${countMsg}`);
+        setCacheBusters((prev) => ({
+          ...prev,
+          [previewEntry.key]: Date.now(),
+        }));
+        setPreviewEntry(null);
+        setPreviewFile(null);
+        setPreviewUrl("");
+        fetchFotos();
+      } else {
+        setError(data.error || "Error al actualizar");
+      }
+    } catch {
+      setError("Error de red");
+    } finally {
+      setUploading(null);
+    }
+  };
+
+  const cancelPreview = () => {
+    setPreviewEntry(null);
+    setPreviewFile(null);
+    setPreviewUrl("");
   };
 
   if (loading) return <div className="p-8 text-center text-lg">Cargando fotos...</div>;
@@ -187,7 +219,7 @@ function DashboardInner() {
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Gestor de Fotos</h1>
-          <p className="mt-1 text-gray-500">{entries.length} imágenes en total</p>
+          <p className="mt-1 text-gray-500">{entries.length} imagenes en total</p>
         </div>
         <div className="flex gap-2">
           <button
@@ -209,6 +241,16 @@ function DashboardInner() {
         </div>
       </div>
 
+      <div className="mb-6">
+        <input
+          type="text"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          placeholder="Buscar por nombre o ruta..."
+          className="w-full rounded-lg border border-gray-300 px-4 py-2 text-sm focus:border-black focus:outline-none"
+        />
+      </div>
+
       {successMsg && (
         <div className="mb-6 rounded-lg border border-green-300 bg-green-50 p-4 text-sm text-green-800">
           {successMsg}
@@ -221,53 +263,177 @@ function DashboardInner() {
         </div>
       )}
 
-      {[...sectionOrder, ...otherSections].map((section) => (
-        <div key={section} className="mb-10">
+      {filteredEntries ? (
+        <div className="mb-10">
           <h2 className="mb-4 text-xl font-semibold text-gray-800">
-            {sectionLabels[section] || section}
+            Resultados ({filteredEntries.length})
           </h2>
           <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-            {grouped[section].map((entry, i) => (
-              <div
+            {filteredEntries.map((entry, i) => (
+              <PhotoCard
                 key={`${entry.key}-${i}`}
-                className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md"
-              >
-                <div className="aspect-[4/3] overflow-hidden bg-gray-100">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={entry.path}
-                    alt={entry.key}
-                    className="h-full w-full object-cover transition group-hover:scale-105"
-                    onLoad={(e) => handleImgLoad(entry.key, e)}
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src =
-                        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23ddd' width='100' height='100'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='%23999' font-size='12'%3Eerror%3C/text%3E%3C/svg%3E";
-                    }}
-                  />
-                </div>
-                <div className="p-3">
-                  <p className="truncate text-xs font-medium text-gray-700" title={entry.key}>
-                    {entry.key}
-                  </p>
-                  <p className="truncate text-xs text-gray-400" title={entry.path}>
-                    {entry.path.split("/").pop()}
-                  </p>
-                  {dimensions[entry.key] && (
-                    <p className="text-xs text-gray-400">{dimensions[entry.key]}</p>
-                  )}
-                  <button
-                    onClick={() => handleChange(entry)}
-                    disabled={uploading === entry.key}
-                    className="mt-2 w-full rounded-lg bg-black px-3 py-1.5 text-xs font-medium text-white transition hover:bg-gray-800 disabled:opacity-50"
-                  >
-                    {uploading === entry.key ? "Subiendo..." : "Cambiar foto"}
-                  </button>
-                </div>
-              </div>
+                entry={entry}
+                cacheBuster={cacheBusters[entry.key]}
+                isUploading={uploading === entry.key}
+                onPreview={openPreview}
+              />
             ))}
           </div>
         </div>
-      ))}
+      ) : (
+        [...sectionOrder, ...otherSections].map((section) => (
+          <div key={section} className="mb-10">
+            <h2 className="mb-4 text-xl font-semibold text-gray-800">
+              {sectionLabels[section] || section}
+            </h2>
+            <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+              {grouped[section].map((entry, i) => (
+                <PhotoCard
+                  key={`${entry.key}-${i}`}
+                  entry={entry}
+                  cacheBuster={cacheBusters[entry.key]}
+                  isUploading={uploading === entry.key}
+                  onPreview={openPreview}
+                />
+              ))}
+            </div>
+          </div>
+        ))
+      )}
+
+      {previewEntry && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+          <div className="w-full max-w-lg rounded-2xl bg-white p-6 shadow-2xl">
+            <h3 className="mb-1 text-lg font-bold">Cambiar foto</h3>
+            <p className="mb-4 text-sm text-gray-500" title={previewEntry.key}>
+              {previewEntry.key}
+            </p>
+
+            <div className="mb-4 grid grid-cols-2 gap-4">
+              <div>
+                <p className="mb-1 text-xs font-medium text-gray-400 uppercase">Actual</p>
+                <div className="aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
+                  <img
+                    src={previewEntry.path}
+                    alt="Actual"
+                    className="h-full w-full object-cover"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src =
+                        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23ddd' width='100' height='100'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='%23999' font-size='12'%3Enot found%3C/text%3E%3C/svg%3E";
+                    }}
+                  />
+                </div>
+              </div>
+              <div>
+                <p className="mb-1 text-xs font-medium text-gray-400 uppercase">Nueva</p>
+                <div className="aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
+                  {previewUrl && (
+                    <img
+                      src={previewUrl}
+                      alt="Nueva"
+                      className="h-full w-full object-cover"
+                    />
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {previewFile && (
+              <div className="mb-4 rounded-lg bg-gray-50 p-3 text-xs text-gray-600">
+                <p><span className="font-medium">Archivo:</span> {previewFile.name}</p>
+                <p><span className="font-medium">Tamano:</span> {(previewFile.size / 1024).toFixed(0)} KB</p>
+                <p><span className="font-medium">Tipo:</span> {previewFile.type}</p>
+                {previewEntry.usedCount > 1 && (
+                  <p className="mt-1 text-amber-600 font-medium">
+                    Esta imagen se usa en {previewEntry.usedCount} lugares. Todas las ocurrencias se actualizaran.
+                  </p>
+                )}
+              </div>
+            )}
+
+            <div className="flex gap-2">
+              <button
+                onClick={cancelPreview}
+                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 text-sm transition hover:bg-gray-100"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={confirmUpload}
+                disabled={uploading !== null}
+                className="flex-1 rounded-lg bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-gray-800 disabled:opacity-50"
+              >
+                {uploading ? "Subiendo..." : "Confirmar cambio"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function PhotoCard({
+  entry,
+  cacheBuster,
+  isUploading,
+  onPreview,
+}: {
+  entry: FlatEntry;
+  cacheBuster?: number;
+  isUploading: boolean;
+  onPreview: (entry: FlatEntry) => void;
+}) {
+  const [imgError, setImgError] = useState(false);
+  const imgSrc = cacheBuster ? `${entry.path}?t=${cacheBuster}` : entry.path;
+
+  return (
+    <div className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
+      <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+        {imgError ? (
+          <div className="flex h-full w-full items-center justify-center text-xs text-gray-400">
+            No encontrada
+          </div>
+        ) : (
+          <img
+            src={imgSrc}
+            alt={entry.key}
+            className="h-full w-full object-cover transition group-hover:scale-105"
+            onError={() => setImgError(true)}
+          />
+        )}
+      </div>
+      <div className="p-3">
+        <p className="truncate text-xs font-medium text-gray-700" title={entry.key}>
+          {entry.key}
+        </p>
+        <p className="truncate text-xs text-gray-400" title={entry.path}>
+          {entry.path.split("/").pop()}
+        </p>
+        {entry.usedCount > 1 && (
+          <p className="mt-0.5 text-xs text-amber-500">
+            x{entry.usedCount} usos
+          </p>
+        )}
+        <div className="mt-2 flex gap-1">
+          <button
+            onClick={() => onPreview(entry)}
+            disabled={isUploading}
+            className="flex-1 rounded-lg bg-black px-3 py-1.5 text-xs font-medium text-white transition hover:bg-gray-800 disabled:opacity-50"
+          >
+            {isUploading ? "Subiendo..." : "Cambiar"}
+          </button>
+          <a
+            href={entry.path}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-lg border border-gray-300 px-2 py-1.5 text-xs text-gray-600 transition hover:bg-gray-100"
+            title="Ver imagen en nueva pestana"
+          >
+            Ver
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

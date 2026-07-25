@@ -6,7 +6,11 @@ type FlatEntry = {
   key: string;
   path: string;
   section: string;
+  usedCount: number;
 };
+
+const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif", "image/svg+xml"]);
+const MAX_SIZE = 10 * 1024 * 1024;
 
 function checkAuth(request: Request): boolean {
   const pw = request.headers.get("x-zprime-pw") || "";
@@ -15,31 +19,34 @@ function checkAuth(request: Request): boolean {
   return pw === expected;
 }
 
-function flatten(obj: Record<string, unknown>, prefix = ""): FlatEntry[] {
+function flatten(obj: Record<string, unknown>, prefix = "", allPaths: string[] = []): FlatEntry[] {
   const result: FlatEntry[] = [];
   for (const [k, v] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}.${k}` : k;
     if (typeof v === "string" && v.startsWith("/images/")) {
+      allPaths.push(v);
       const section = fullKey.split(".")[0];
-      result.push({ key: fullKey, path: v, section });
+      result.push({ key: fullKey, path: v, section, usedCount: 0 });
     } else if (Array.isArray(v)) {
       v.forEach((item, i) => {
         const arrKey = `${fullKey}[${i}]`;
         if (typeof item === "string" && item.startsWith("/images/")) {
+          allPaths.push(item);
           const section = fullKey.split(".")[0];
-          result.push({ key: arrKey, path: item, section });
+          result.push({ key: arrKey, path: item, section, usedCount: 0 });
         } else if (typeof item === "object" && item !== null) {
           for (const [ik, iv] of Object.entries(item as Record<string, unknown>)) {
             const entryKey = `${arrKey}.${ik}`;
             if (typeof iv === "string" && iv.startsWith("/images/")) {
+              allPaths.push(iv);
               const section = fullKey.split(".")[0];
-              result.push({ key: entryKey, path: iv, section });
+              result.push({ key: entryKey, path: iv, section, usedCount: 0 });
             }
           }
         }
       });
     } else if (typeof v === "object" && v !== null) {
-      result.push(...flatten(v as Record<string, unknown>, fullKey));
+      result.push(...flatten(v as Record<string, unknown>, fullKey, allPaths));
     }
   }
   return result;
@@ -59,13 +66,20 @@ export async function GET(request: Request) {
     }
 
     let code = match[1];
-    // Strip block comments
     code = code.replace(/\/\*[\s\S]*?\*\//g, "");
-    // Strip line comments
     code = code.replace(/\/\/.*$/gm, "");
 
     const fotosObj = new Function(`return ${code}`)() as Record<string, unknown>;
-    const entries = flatten(fotosObj);
+    const allPaths: string[] = [];
+    const entries = flatten(fotosObj, "", allPaths);
+
+    const pathCounts: Record<string, number> = {};
+    for (const p of allPaths) {
+      pathCounts[p] = (pathCounts[p] || 0) + 1;
+    }
+    for (const entry of entries) {
+      entry.usedCount = pathCounts[entry.path] || 1;
+    }
 
     return NextResponse.json({ entries });
   } catch (err) {
@@ -86,6 +100,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "file and path required" }, { status: 400 });
     }
 
+    if (!ALLOWED_TYPES.has(file.type)) {
+      return NextResponse.json({ error: `Tipo no permitido: ${file.type}. Use JPG, PNG, WebP, GIF, AVIF o SVG.` }, { status: 400 });
+    }
+
+    if (file.size > MAX_SIZE) {
+      return NextResponse.json({ error: `Archivo muy grande: ${(file.size / 1024 / 1024).toFixed(1)}MB. Maximo 10MB.` }, { status: 400 });
+    }
+
     const ext = path.extname(file.name) || ".webp";
     const filename = `${path.basename(targetPath).replace(/\.[^.]+$/, "")}${ext}`;
     const publicDir = path.join(process.cwd(), "public");
@@ -103,16 +125,23 @@ export async function POST(request: Request) {
     const content = await fs.readFile(fotosPath, "utf-8");
 
     const escapedOldPath = targetPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const regex = new RegExp(`(["'])${escapedOldPath}\\1`);
+    const regex = new RegExp(`(["'])${escapedOldPath}\\1`, "g");
+    const matches = content.match(regex);
 
-    if (!regex.test(content)) {
+    if (!matches || matches.length === 0) {
       return NextResponse.json({ error: `Path not found in fotos.ts: ${targetPath}` }, { status: 404 });
     }
 
+    const replacementCount = matches.length;
     const updated = content.replace(regex, `"${newRelativePath}"`);
     await fs.writeFile(fotosPath, updated, "utf-8");
 
-    return NextResponse.json({ success: true, oldPath: targetPath, newPath: newRelativePath });
+    return NextResponse.json({
+      success: true,
+      oldPath: targetPath,
+      newPath: newRelativePath,
+      replacedCount: replacementCount,
+    });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
   }
