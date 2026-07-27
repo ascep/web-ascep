@@ -13,7 +13,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import CountUp from "@/components/CountUp";
 import { Users, Calendar, GraduationCap, Layers, Target, AlertTriangle, Heart, ArrowRight } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
-import { fotos } from "@/data/fotos";
+import { getFotos } from "@/lib/get-fotos";
 import { getImpactStats, getGalleryAlbums } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 
@@ -41,8 +41,6 @@ const iconMap: Record<string, React.ElementType> = {
   Users, Calendar, GraduationCap, Layers, Target,
 };
 
-const fallbackGaleria = fotos.impacto.gallery.map((src) => assetPath(src));
-
 const riesgos = ["riesgo1", "riesgo2", "riesgo3", "riesgo4", "riesgo5"];
 
 export default async function ImpactoPage({
@@ -52,6 +50,10 @@ export default async function ImpactoPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "impacto" });
+
+  const fotos = getFotos();
+
+  const fallbackGaleria = fotos.impacto.gallery.map((src) => assetPath(src));
 
   const [cmsStats, cmsAlbums] = await Promise.all([
     getImpactStats(),

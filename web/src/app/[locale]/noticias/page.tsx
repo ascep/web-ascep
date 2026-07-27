@@ -7,7 +7,7 @@ import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import { Newspaper } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
-import { fotos } from "@/data/fotos";;
+import { getFotos } from "@/lib/get-fotos";
 import { getClient } from "@/lib/sanity/client";
 import { noticiasQuery } from "@/lib/sanity/queries";
 import { imageUrl } from "@/lib/sanity/image";
@@ -38,6 +38,7 @@ export default async function NoticiasPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const fotos = getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "noticias" });
   const noticias = await getNoticias();

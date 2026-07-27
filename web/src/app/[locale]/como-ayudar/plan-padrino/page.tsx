@@ -8,7 +8,7 @@ import ImageParallax from "@/components/ImageParallax";
 import { ArrowRight, CheckCircle, UserPlus, DollarSign, FileText, Heart, ArrowDown, Gift, Settings } from "lucide-react";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path";
-import { fotos } from "@/data/fotos";
+import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, getPadrinos, localize, sanityImage } from "@/lib/sanity/fetch";
 import PadProfileCard from "@/components/PadProfileCard";
 
@@ -30,6 +30,7 @@ export default async function PlanPadrinoPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const fotos = getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "planPadrino" });
   const pageData = await getPageContent("plan-padrino");

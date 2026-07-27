@@ -9,7 +9,7 @@ import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import { FileText, DollarSign, BarChart3, FileBadge, Scale, FileCheck, Download } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
-import { fotos } from "@/data/fotos";;
+import { getFotos } from "@/lib/get-fotos";
 import { getDocuments } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 
@@ -105,6 +105,7 @@ export default async function TransparenciaPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const fotos = getFotos();
   const t = await getTranslations({ locale, namespace: "transparencia" });
 
   const cmsDocs = await getDocuments();

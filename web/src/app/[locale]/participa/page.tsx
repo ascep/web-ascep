@@ -10,7 +10,7 @@ import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import { Users, HeartHandshake, Handshake, DollarSign } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
-import { fotos } from "@/data/fotos";;
+import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -28,6 +28,7 @@ export default async function ParticipaPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const fotos = getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "participa" });
   const pageData = await getPageContent("participa");

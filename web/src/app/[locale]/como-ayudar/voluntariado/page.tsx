@@ -9,7 +9,7 @@ import ImageParallax from "@/components/ImageParallax";
 import { Heart, Users, Star, Briefcase, ArrowRight, CheckCircle } from "lucide-react";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path"
-import { fotos } from "@/data/fotos";;
+import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -27,6 +27,7 @@ export default async function VoluntariadoPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const fotos = getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "voluntariado" });
   const pageData = await getPageContent("voluntariado");

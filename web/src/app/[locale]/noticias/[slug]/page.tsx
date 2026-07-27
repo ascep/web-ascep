@@ -7,7 +7,7 @@ import { noticiaBySlugQuery } from "@/lib/sanity/queries";
 import { imageUrl } from "@/lib/sanity/image";
 import PageHero from "@/components/PageHero";
 import { assetPath } from "@/lib/asset-path"
-import { fotos } from "@/data/fotos";;
+import { getFotos } from "@/lib/get-fotos";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -28,6 +28,7 @@ export default async function NoticiaPage({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
+  const fotos = getFotos();
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: "noticias" });
   const noticia = await getNoticia(slug);

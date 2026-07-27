@@ -12,7 +12,7 @@ import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import { Heart, Users, Target, TrendingUp, Coffee, Sunrise, Star, Shield, Sparkles, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
-import { fotos } from "@/data/fotos";;
+import { getFotos } from "@/lib/get-fotos";
 import { getImpactStats, getDonationTiers, getFaqByPage, getGalleryAlbums, localize } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 
@@ -29,14 +29,6 @@ export const metadata: Metadata = {
 const iconMap: Record<string, LucideIcon> = {
   Heart, Users, Target, TrendingUp, Coffee, Sunrise, Star, Shield, Sparkles,
 };
-
-const fallbackGallery = [
-  { src: assetPath(fotos.donar.gallery[0].src), alt: "Jovenes en taller de habilidades" },
-  { src: assetPath(fotos.donar.gallery[1].src), alt: "Acompanamiento psicosocial" },
-  { src: assetPath(fotos.donar.gallery[2].src), alt: "Actividades grupales" },
-  { src: assetPath(fotos.donar.gallery[3].src), alt: "Jornada educativa" },
-  { src: assetPath(fotos.donar.gallery[4].src), alt: "Momentos de integracion" },
-];
 
 const fallbackTiers = [
   {
@@ -119,8 +111,17 @@ export default async function DonarPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const fotos = getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "donar" });
+
+  const fallbackGallery = [
+    { src: assetPath(fotos.donar.gallery[0].src), alt: "Jovenes en taller de habilidades" },
+    { src: assetPath(fotos.donar.gallery[1].src), alt: "Acompanamiento psicosocial" },
+    { src: assetPath(fotos.donar.gallery[2].src), alt: "Actividades grupales" },
+    { src: assetPath(fotos.donar.gallery[3].src), alt: "Jornada educativa" },
+    { src: assetPath(fotos.donar.gallery[4].src), alt: "Momentos de integracion" },
+  ];
 
   const [cmsStats, cmsTiers, cmsFaq, cmsAlbums] = await Promise.all([
     getImpactStats(),

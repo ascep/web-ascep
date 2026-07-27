@@ -6,7 +6,7 @@ import { ArrowLeft } from "lucide-react";
 import { getPadrinoBySlug, getPadrinos, localize } from "@/lib/sanity/fetch";
 import PadProfilePage from "@/components/PadProfilePage";
 import { assetPath } from "@/lib/asset-path";
-import { fotos } from "@/data/fotos";
+
 
 export const dynamic = "force-dynamic";
 

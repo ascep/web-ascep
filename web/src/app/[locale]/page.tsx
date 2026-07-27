@@ -16,7 +16,7 @@ import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import { assetPath } from "@/lib/asset-path";
 import { imageUrl } from "@/lib/sanity/image";
-import { fotos } from "@/data/fotos";
+import { getFotos } from "@/lib/get-fotos";
 import {
   getMilestones,
   getPartners,
@@ -24,58 +24,6 @@ import {
   getImpactStats,
   getTestimonials,
 } from "@/lib/sanity/fetch";
-
-const gallery = fotos.home.gallery.map((item) => ({
-  ...item,
-  src: assetPath(item.src),
-}));
-
-const fallbackMilestones = fotos.home.timeline.map((item) => ({
-  year: item.year,
-  title: item.title,
-  description: item.description,
-  image: assetPath(item.image),
-}));
-
-const fallbackPrograms = [
-  {
-    title: "Incidencia y Participacion",
-    desc: "Desarrollamos acciones que involucran a actores clave y tomadores de decisiones en la transformacion de los cuidados alternativos.",
-    ...fotos.home.programs.incidencia,
-    slug: "incidencia",
-    image: assetPath(fotos.home.programs.incidencia.image),
-    logo: assetPath(fotos.home.programs.incidencia.logo),
-  },
-  {
-    title: "Avanza Joven",
-    desc: "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida.",
-    ...fotos.home.programs.avanzaJoven,
-    slug: "avanza-joven",
-    image: assetPath(fotos.home.programs.avanzaJoven.image),
-    logo: assetPath(fotos.home.programs.avanzaJoven.logo),
-  },
-  {
-    title: "Fomento para el Empleo y Emprendimiento",
-    desc: "Modelo piloto para promover capacidades laborales y fortalecer la empleabilidad de jovenes en proceso de egreso del sistema de proteccion.",
-    ...fotos.home.programs.fomento,
-    slug: "empleo",
-    image: assetPath(fotos.home.programs.fomento.image),
-    logo: assetPath(fotos.home.programs.fomento.logo),
-  },
-  {
-    title: "Mi Cuerpo, Mi Sexualidad, Mi Decision",
-    desc: "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad.",
-    ...fotos.home.programs.miCuerpo,
-    slug: "mi-cuerpo",
-    image: assetPath(fotos.home.programs.miCuerpo.image),
-    logo: assetPath(fotos.home.programs.miCuerpo.logo),
-  },
-];
-
-const fallbackAliados = fotos.home.aliados.map((item) => ({
-  ...item,
-  src: assetPath(item.src),
-}));
 
 const fallbackStats = [
   { value: "71148", label: "NNA protegidos por el ICBF", icon: "Users", color: "#019E9F" },
@@ -105,6 +53,60 @@ export default async function HomePage({
     getImpactStats(),
     getTestimonials("home"),
   ]);
+
+  const fotos = getFotos();
+
+  const gallery = fotos.home.gallery.map((item) => ({
+    ...item,
+    src: assetPath(item.src),
+  }));
+
+  const fallbackMilestones = fotos.home.timeline.map((item) => ({
+    year: item.year,
+    title: item.title,
+    description: item.description,
+    image: assetPath(item.image),
+  }));
+
+  const fallbackPrograms = [
+    {
+      title: "Incidencia y Participacion",
+      desc: "Desarrollamos acciones que involucran a actores clave y tomadores de decisiones en la transformacion de los cuidados alternativos.",
+      ...fotos.home.programs.incidencia,
+      slug: "incidencia",
+      image: assetPath(fotos.home.programs.incidencia.image),
+      logo: assetPath(fotos.home.programs.incidencia.logo),
+    },
+    {
+      title: "Avanza Joven",
+      desc: "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida.",
+      ...fotos.home.programs.avanzaJoven,
+      slug: "avanza-joven",
+      image: assetPath(fotos.home.programs.avanzaJoven.image),
+      logo: assetPath(fotos.home.programs.avanzaJoven.logo),
+    },
+    {
+      title: "Fomento para el Empleo y Emprendimiento",
+      desc: "Modelo piloto para promover capacidades laborales y fortalecer la empleabilidad de jovenes en proceso de egreso del sistema de proteccion.",
+      ...fotos.home.programs.fomento,
+      slug: "empleo",
+      image: assetPath(fotos.home.programs.fomento.image),
+      logo: assetPath(fotos.home.programs.fomento.logo),
+    },
+    {
+      title: "Mi Cuerpo, Mi Sexualidad, Mi Decision",
+      desc: "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad.",
+      ...fotos.home.programs.miCuerpo,
+      slug: "mi-cuerpo",
+      image: assetPath(fotos.home.programs.miCuerpo.image),
+      logo: assetPath(fotos.home.programs.miCuerpo.logo),
+    },
+  ];
+
+  const fallbackAliados = fotos.home.aliados.map((item) => ({
+    ...item,
+    src: assetPath(item.src),
+  }));
 
   const resolvedMilestones = cmsMilestones.length > 0
     ? cmsMilestones.map((m) => ({
@@ -152,6 +154,8 @@ export default async function HomePage({
         tag={h("heroTag")}
         title={h("heroTitle")}
         subtitle={h("heroSubtitle")}
+        heroPoster={fotos.home.heroPoster}
+        heroImage={fotos.home.heroImage}
         cta={
           <Link
             href={`/${locale}/programas`}

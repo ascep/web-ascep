@@ -52,24 +52,24 @@ function flatten(obj: Record<string, unknown>, prefix = "", allPaths: string[] =
   return result;
 }
 
+function setNestedValue(obj: Record<string, unknown>, keyPath: string, value: unknown) {
+  const parts = keyPath.replace(/\[(\d+)\]/g, ".$1").split(".");
+  let current: Record<string, unknown> = obj;
+  for (let i = 0; i < parts.length - 1; i++) {
+    current = current[parts[i]] as Record<string, unknown>;
+  }
+  current[parts[parts.length - 1]] = value;
+}
+
 export async function GET(request: Request) {
   if (!checkAuth(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   try {
-    const fotosPath = path.join(process.cwd(), "src", "data", "fotos.ts");
+    const fotosPath = path.join(process.cwd(), "src", "data", "fotos.json");
     const content = await fs.readFile(fotosPath, "utf-8");
+    const fotosObj = JSON.parse(content) as Record<string, unknown>;
 
-    const match = content.match(/export const fotos = ({[\s\S]*}) as const;/);
-    if (!match) {
-      return NextResponse.json({ error: "Could not parse fotos.ts" }, { status: 500 });
-    }
-
-    let code = match[1];
-    code = code.replace(/\/\*[\s\S]*?\*\//g, "");
-    code = code.replace(/\/\/.*$/gm, "");
-
-    const fotosObj = new Function(`return ${code}`)() as Record<string, unknown>;
     const allPaths: string[] = [];
     const entries = flatten(fotosObj, "", allPaths);
 
@@ -121,20 +121,21 @@ export async function POST(request: Request) {
 
     const newRelativePath = `/images/${subdir ? subdir + "/" : ""}${filename}`;
 
-    const fotosPath = path.join(process.cwd(), "src", "data", "fotos.ts");
-    const content = await fs.readFile(fotosPath, "utf-8");
+    const fotosJsonPath = path.join(process.cwd(), "src", "data", "fotos.json");
+    const content = await fs.readFile(fotosJsonPath, "utf-8");
+    const fotosObj = JSON.parse(content) as Record<string, unknown>;
 
     const escapedOldPath = targetPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regex = new RegExp(`(["'])${escapedOldPath}\\1`, "g");
     const matches = content.match(regex);
 
     if (!matches || matches.length === 0) {
-      return NextResponse.json({ error: `Path not found in fotos.ts: ${targetPath}` }, { status: 404 });
+      return NextResponse.json({ error: `Path not found in fotos.json: ${targetPath}` }, { status: 404 });
     }
 
     const replacementCount = matches.length;
     const updated = content.replace(regex, `"${newRelativePath}"`);
-    await fs.writeFile(fotosPath, updated, "utf-8");
+    await fs.writeFile(fotosJsonPath, updated, "utf-8");
 
     return NextResponse.json({
       success: true,

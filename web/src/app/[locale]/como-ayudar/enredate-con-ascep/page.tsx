@@ -14,7 +14,7 @@ import DecoShapes from "@/components/DecoShapes";
 import type { CSSProperties } from "react";
 import AnimatedSection from "@/components/AnimatedSection";
 import { assetPath } from "@/lib/asset-path";
-import { fotos } from "@/data/fotos";
+import { getFotos } from "@/lib/get-fotos";
 
 export const metadata: Metadata = {
   title: "Enredate con ASCEP - ASCEP",
@@ -31,6 +31,7 @@ export default async function EnredatePage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const fotos = getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "enredateConAscep" });
 
@@ -105,6 +106,7 @@ export default async function EnredatePage({
         ctaLabel={t("aboutCta")}
         ctaHref="como-ayudar/plan-padrino"
         badgeText={t("aboutImageBadge")}
+        galleryImages={fotos.enredate.gallery}
       />
 
       <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.enredate.gallery[0])})` } as CSSProperties}>

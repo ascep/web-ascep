@@ -8,7 +8,7 @@ import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import { ArrowRight } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
-import { fotos } from "@/data/fotos";
+import { getFotos } from "@/lib/get-fotos";
 import { getPrograms, localize, sanityImage } from "@/lib/sanity/fetch";
 import { getTranslations } from "next-intl/server";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -46,6 +46,7 @@ export default async function ProgramasPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const fotos = getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "programas" });
 

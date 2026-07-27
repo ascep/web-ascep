@@ -1,6 +1,5 @@
 "use client";
 import { assetPath } from "@/lib/asset-path";
-import { fotos } from "@/data/fotos";
 
 import { useState } from "react";
 import { AnimatePresence, useReducedMotion, motion } from "motion/react";
@@ -19,13 +18,8 @@ type EnredateAboutProps = {
   ctaLabel: string;
   ctaHref: string;
   badgeText: string;
+  galleryImages: readonly string[];
 };
-
-const images = [
-  assetPath(fotos.enredate.gallery[0]),
-  assetPath(fotos.enredate.gallery[1]),
-  assetPath(fotos.enredate.gallery[2]),
-];
 
 export default function EnredateAbout({
   locale,
@@ -36,10 +30,12 @@ export default function EnredateAbout({
   ctaLabel,
   ctaHref,
   badgeText,
+  galleryImages,
 }: EnredateAboutProps) {
   const prefersReduced = useReducedMotion();
   const dur = prefersReduced ? 0 : 0.6;
   const [imgIndex, setImgIndex] = useState(0);
+  const images = galleryImages.map((src) => assetPath(src));
   const total = images.length;
 
   return (

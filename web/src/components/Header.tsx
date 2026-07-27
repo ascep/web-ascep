@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect, useCallback } from "react";
 import { ChevronDown, Search } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
-import { fotos } from "@/data/fotos";
 import FlagIcon from "./FlagIcon";
 import ThemeToggle from "./ThemeToggle";
 import MobileMenu from "./MobileMenu";
@@ -41,7 +40,12 @@ type NavGroup = {
   items: NavItem[];
 };
 
-const navStructure: NavGroup[] = [
+type HeaderProps = {
+  leyEgresoCard: string;
+  comoAyudarCard: string;
+};
+
+const getNavStructure = (leyEgresoImage: string, comoAyudarImage: string): NavGroup[] => [
   { type: "link", key: "inicio", href: "/" },
   {
     type: "dropdown",
@@ -74,7 +78,7 @@ const navStructure: NavGroup[] = [
   {
     type: "megamenu",
     key: "leyEgreso",
-    image: fotos.header.leyEgresoCard,
+    image: leyEgresoImage,
     cols: 2,
     items: [
       { key: "leyQueEs", href: "/ley-de-egreso#que-es" },
@@ -88,7 +92,7 @@ const navStructure: NavGroup[] = [
   {
     type: "megamenu",
     key: "comoAyudar",
-    image: fotos.header.comoAyudarCard,
+    image: comoAyudarImage,
     cols: 1,
     items: [
       { key: "donacionMonetaria", href: "/donar" },
@@ -103,7 +107,7 @@ const navStructure: NavGroup[] = [
 
 type DropdownState = string | null;
 
-export default function Header() {
+export default function Header({ leyEgresoCard, comoAyudarCard }: HeaderProps) {
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
@@ -175,6 +179,7 @@ export default function Header() {
     };
   }, []);
 
+  const navStructure = getNavStructure(leyEgresoCard, comoAyudarCard);
   const currentLang = languages.find((l) => l.code === locale) || languages[0];
   const otherLangs = languages.filter((l) => l.code !== locale);
 

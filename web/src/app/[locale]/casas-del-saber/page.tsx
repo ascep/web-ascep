@@ -8,7 +8,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { Home, BookOpen, Compass } from "lucide-react";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path";
-import { fotos } from "@/data/fotos";
+import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export const metadata: Metadata = {
@@ -26,6 +26,7 @@ export default async function CasasDelSaberPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const fotos = getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "casasDelSaber" });
   const pageData = await getPageContent("casas-del-saber");

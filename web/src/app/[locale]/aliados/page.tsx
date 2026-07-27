@@ -8,7 +8,7 @@ import CursorGlow from "@/components/CursorGlow";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Building2, Globe, Briefcase, GraduationCap, Heart, Radio } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
-import { fotos } from "@/data/fotos";
+import { getFotos } from "@/lib/get-fotos";
 import { getPartners } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 
@@ -22,11 +22,6 @@ export const metadata: Metadata = {
   },
 };
 
-const fallbackLogos = fotos.aliados.logos.map((item) => ({
-  ...item,
-  src: assetPath(item.src),
-}));
-
 export default async function AliadosPage({
   params,
 }: {
@@ -35,6 +30,13 @@ export default async function AliadosPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "aliados" });
   const g = await getTranslations({ locale, namespace: "generales" });
+
+  const fotos = getFotos();
+
+  const fallbackLogos = fotos.aliados.logos.map((item) => ({
+    ...item,
+    src: assetPath(item.src),
+  }));
 
   const cmsPartners = await getPartners();
   const cmsLogos = cmsPartners.length > 0

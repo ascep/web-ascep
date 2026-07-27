@@ -6,7 +6,7 @@ import DecoShapes from "@/components/DecoShapes";
 import type { CSSProperties } from "react";
 import { BookOpen, Monitor, Palette, Heart } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
-import { fotos } from "@/data/fotos";
+import { getFotos } from "@/lib/get-fotos";
 
 export const metadata: Metadata = {
   title: "Lineas Tematicas - Casas del Saber - ASCEP",
@@ -23,6 +23,7 @@ export default async function LineasPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
+  const fotos = getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "casasDelSaberLineas" });
 

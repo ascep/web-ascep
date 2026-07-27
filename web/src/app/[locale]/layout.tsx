@@ -9,6 +9,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import VisitorWidget from "@/components/VisitorWidget";
 import MobileTabBar from "@/components/MobileTabBar";
 import ScrollProgress from "@/components/ScrollProgress";
+import { getFotos } from "@/lib/get-fotos";
 
 const locales = ["es", "pt"];
 
@@ -25,6 +26,7 @@ export default async function LocaleLayout({
     notFound();
   }
 
+  const fotos = getFotos();
   const messages = await getMessages();
 
   return (
@@ -32,7 +34,7 @@ export default async function LocaleLayout({
       <ThemeProvider>
         <ScrollProgress />
         <TopBar />
-        <Header />
+        <Header leyEgresoCard={fotos.header.leyEgresoCard} comoAyudarCard={fotos.header.comoAyudarCard} />
         <main className="flex-1 pb-24 md:pb-0">{children}</main>
         <MobileTabBar />
         <Footer />

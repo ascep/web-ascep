@@ -13,7 +13,7 @@ import TeamFan from "@/components/TeamFan";
 import { getTranslations } from "next-intl/server";
 import { Target, Eye, Heart } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
-import { fotos } from "@/data/fotos";
+import { getFotos } from "@/lib/get-fotos";
 import LogoRing from "@/components/LogoRing";
 import { imageUrl } from "@/lib/sanity/image";
 import { getTeamMembers, getMilestones } from "@/lib/sanity/fetch";
@@ -27,26 +27,6 @@ export const metadata: Metadata = {
       "Conoce la historia, mision, vision y equipo de ASCEP. Somos egresados del sistema de proteccion estatal unidos para transformar la ninez en Colombia.",
   },
 };
-
-const fallbackTeam = [
-  { name: "Maicol Londoño", role: "Director", src: assetPath(fotos.quienesSomos.team.maicol) },
-  { name: "Kevin Ortega", role: "Desarrollador y dise\u00F1ador", src: assetPath(fotos.quienesSomos.team.kevin) },
-  { name: "Monica", role: "Coor. operativa y pedagogica", src: assetPath(fotos.quienesSomos.team.monica) },
-  { name: "Jhon Eduard Angulo", role: "Director de proyectos", src: assetPath(fotos.quienesSomos.team.jhon) },
-  { name: "Ana", role: "Aux. Comunicaciones", src: assetPath(fotos.quienesSomos.team.ana) },
-];
-
-const fallbackMilestones = fotos.quienesSomos.timeline.map((item) => ({
-  year: item.year,
-  title: item.title,
-  description: item.description,
-  image: assetPath(item.image),
-}));
-
-const fallbackAliados = fotos.home.aliados.map((item) => ({
-  ...item,
-  src: assetPath(item.src),
-}));
 
 const dimensions = [
   { title: "Autoaceptacion", desc: "Valoracion positiva de si mismo y de la propia historia." },
@@ -76,6 +56,28 @@ export default async function QuienesSomosPage({
     getTeamMembers(),
     getMilestones(),
   ]);
+
+  const fotos = getFotos();
+
+  const fallbackTeam = [
+    { name: "Maicol Londoño", role: "Director", src: assetPath(fotos.quienesSomos.team.maicol) },
+    { name: "Kevin Ortega", role: "Desarrollador y dise\u00F1ador", src: assetPath(fotos.quienesSomos.team.kevin) },
+    { name: "Monica", role: "Coor. operativa y pedagogica", src: assetPath(fotos.quienesSomos.team.monica) },
+    { name: "Jhon Eduard Angulo", role: "Director de proyectos", src: assetPath(fotos.quienesSomos.team.jhon) },
+    { name: "Ana", role: "Aux. Comunicaciones", src: assetPath(fotos.quienesSomos.team.ana) },
+  ];
+
+  const fallbackMilestones = fotos.quienesSomos.timeline.map((item) => ({
+    year: item.year,
+    title: item.title,
+    description: item.description,
+    image: assetPath(item.image),
+  }));
+
+  const fallbackAliados = fotos.home.aliados.map((item) => ({
+    ...item,
+    src: assetPath(item.src),
+  }));
 
   const cmsMapped = cmsTeam.length > 0
     ? cmsTeam.map((m) => ({
