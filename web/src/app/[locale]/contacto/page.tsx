@@ -28,7 +28,7 @@ export default async function ContactoPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const fotos = getFotos();
+  const fotos = await getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "contacto" });
   const pageData = await getPageContent("contacto");

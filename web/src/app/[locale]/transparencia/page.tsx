@@ -105,7 +105,7 @@ export default async function TransparenciaPage({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  const fotos = getFotos();
+  const fotos = await getFotos();
   const t = await getTranslations({ locale, namespace: "transparencia" });
 
   const cmsDocs = await getDocuments();

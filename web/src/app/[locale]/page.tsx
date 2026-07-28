@@ -54,7 +54,7 @@ export default async function HomePage({
     getTestimonials("home"),
   ]);
 
-  const fotos = getFotos();
+  const fotos = await getFotos();
 
   const gallery = fotos.home.gallery.map((item) => ({
     ...item,

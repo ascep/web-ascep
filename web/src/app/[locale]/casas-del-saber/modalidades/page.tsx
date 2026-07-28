@@ -25,7 +25,7 @@ export default async function ModalidadesPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const fotos = getFotos();
+  const fotos = await getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "casasDelSaberModalidades" });
   const pageData = await getPageContent("casas-del-saber-modalidades");

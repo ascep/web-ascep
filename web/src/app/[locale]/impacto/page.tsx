@@ -51,7 +51,7 @@ export default async function ImpactoPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "impacto" });
 
-  const fotos = getFotos();
+  const fotos = await getFotos();
 
   const fallbackGaleria = fotos.impacto.gallery.map((src) => assetPath(src));
 

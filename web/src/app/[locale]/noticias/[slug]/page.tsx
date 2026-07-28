@@ -28,7 +28,7 @@ export default async function NoticiaPage({
 }: {
   params: Promise<{ locale: string; slug: string }>;
 }) {
-  const fotos = getFotos();
+  const fotos = await getFotos();
   const { locale, slug } = await params;
   const t = await getTranslations({ locale, namespace: "noticias" });
   const noticia = await getNoticia(slug);

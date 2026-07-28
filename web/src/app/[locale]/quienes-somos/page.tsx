@@ -57,7 +57,7 @@ export default async function QuienesSomosPage({
     getMilestones(),
   ]);
 
-  const fotos = getFotos();
+  const fotos = await getFotos();
 
   const fallbackTeam = [
     { name: "Maicol Londoño", role: "Director", src: assetPath(fotos.quienesSomos.team.maicol) },

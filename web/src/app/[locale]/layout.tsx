@@ -26,7 +26,7 @@ export default async function LocaleLayout({
     notFound();
   }
 
-  const fotos = getFotos();
+  const fotos = await getFotos();
   const messages = await getMessages();
 
   return (

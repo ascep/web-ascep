@@ -27,7 +27,7 @@ export default async function VoluntariadoPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const fotos = getFotos();
+  const fotos = await getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "voluntariado" });
   const pageData = await getPageContent("voluntariado");

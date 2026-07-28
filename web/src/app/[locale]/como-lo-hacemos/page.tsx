@@ -27,7 +27,7 @@ export default async function ComoLoHacemosPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const fotos = getFotos();
+  const fotos = await getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "comoLoHacemos" });
   const pageData = await getPageContent("como-lo-hacemos");

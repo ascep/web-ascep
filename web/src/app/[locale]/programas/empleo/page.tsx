@@ -52,7 +52,7 @@ export default async function EmpleoPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const fotos = getFotos();
+  const fotos = await getFotos();
   const { locale } = await params;
   const cms = await getProgramBySlug("empleo");
 

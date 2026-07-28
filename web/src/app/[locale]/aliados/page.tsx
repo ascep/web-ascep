@@ -31,7 +31,7 @@ export default async function AliadosPage({
   const t = await getTranslations({ locale, namespace: "aliados" });
   const g = await getTranslations({ locale, namespace: "generales" });
 
-  const fotos = getFotos();
+  const fotos = await getFotos();
 
   const fallbackLogos = fotos.aliados.logos.map((item) => ({
     ...item,

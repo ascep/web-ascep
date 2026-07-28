@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
+import { put, get } from "@vercel/blob";
 
 type FlatEntry = {
   key: string;
@@ -11,6 +12,7 @@ type FlatEntry = {
 
 const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif", "image/svg+xml"]);
 const MAX_SIZE = 10 * 1024 * 1024;
+const BLOB_KEY = "fotos-data.json";
 
 function checkAuth(request: Request): boolean {
   const pw = request.headers.get("x-zprime-pw") || "";
@@ -52,13 +54,32 @@ function flatten(obj: Record<string, unknown>, prefix = "", allPaths: string[] =
   return result;
 }
 
-function setNestedValue(obj: Record<string, unknown>, keyPath: string, value: unknown) {
-  const parts = keyPath.replace(/\[(\d+)\]/g, ".$1").split(".");
-  let current: Record<string, unknown> = obj;
-  for (let i = 0; i < parts.length - 1; i++) {
-    current = current[parts[i]] as Record<string, unknown>;
+async function readFotosData(): Promise<string> {
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    try {
+      const result = await get(BLOB_KEY, { access: "public" });
+      if (result?.blob) {
+        const res = await fetch(result.blob.url);
+        if (res.ok) return await res.text();
+      }
+    } catch {}
   }
-  current[parts[parts.length - 1]] = value;
+  const fotosPath = path.join(process.cwd(), "src", "data", "fotos.json");
+  return await fs.readFile(fotosPath, "utf-8");
+}
+
+async function writeFotosData(content: string) {
+  if (process.env.BLOB_READ_WRITE_TOKEN) {
+    await put(BLOB_KEY, content, {
+      access: "public",
+      contentType: "application/json",
+      addRandomSuffix: false,
+    });
+  }
+  try {
+    const fotosPath = path.join(process.cwd(), "src", "data", "fotos.json");
+    await fs.writeFile(fotosPath, content, "utf-8");
+  } catch {}
 }
 
 export async function GET(request: Request) {
@@ -66,8 +87,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   try {
-    const fotosPath = path.join(process.cwd(), "src", "data", "fotos.json");
-    const content = await fs.readFile(fotosPath, "utf-8");
+    const content = await readFotosData();
     const fotosObj = JSON.parse(content) as Record<string, unknown>;
 
     const allPaths: string[] = [];
@@ -121,21 +141,19 @@ export async function POST(request: Request) {
 
     const newRelativePath = `/images/${subdir ? subdir + "/" : ""}${filename}`;
 
-    const fotosJsonPath = path.join(process.cwd(), "src", "data", "fotos.json");
-    const content = await fs.readFile(fotosJsonPath, "utf-8");
-    const fotosObj = JSON.parse(content) as Record<string, unknown>;
+    const content = await readFotosData();
 
     const escapedOldPath = targetPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regex = new RegExp(`(["'])${escapedOldPath}\\1`, "g");
     const matches = content.match(regex);
 
     if (!matches || matches.length === 0) {
-      return NextResponse.json({ error: `Path not found in fotos.json: ${targetPath}` }, { status: 404 });
+      return NextResponse.json({ error: `Path not found: ${targetPath}` }, { status: 404 });
     }
 
     const replacementCount = matches.length;
     const updated = content.replace(regex, `"${newRelativePath}"`);
-    await fs.writeFile(fotosJsonPath, updated, "utf-8");
+    await writeFotosData(updated);
 
     return NextResponse.json({
       success: true,

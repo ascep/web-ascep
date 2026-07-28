@@ -65,7 +65,7 @@ export default async function AvanzaJovenPage({
 }: {
   params: Promise<{ locale: string }>;
 }) {
-  const fotos = getFotos();
+  const fotos = await getFotos();
   const { locale } = await params;
   const cms = await getProgramBySlug("avanza-joven");
 
