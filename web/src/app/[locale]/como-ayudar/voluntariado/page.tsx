@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -12,15 +11,17 @@ import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Voluntariado - ASCEP",
-  description:
-    "Tu tiempo y talento pueden transformar la vida de un joven egresado del sistema de proteccion. Conoce los roles de voluntariado en ASCEP.",
-  openGraph: {
-    description:
-      "Tu tiempo y talento pueden transformar la vida de un joven egresado del sistema de proteccion. Conoce los roles de voluntariado en ASCEP.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("voluntariado.title"),
+    description: t("voluntariado.description"),
+    openGraph: {
+      description: t("voluntariado.description"),
+    },
+  };
+}
 
 export default async function VoluntariadoPage({
   params,

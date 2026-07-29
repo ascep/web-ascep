@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
@@ -9,15 +8,17 @@ import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Ruta de Egreso Progresivo - Casas del Saber - ASCEP",
-  description:
-    "El egreso no es un evento, es un proceso. Conoce las tres fases de la ruta de egreso progresivo: acogida, formacion y consolidacion.",
-  openGraph: {
-    description:
-      "El egreso no es un evento, es un proceso. Conoce las tres fases de la ruta de egreso progresivo: acogida, formacion y consolidacion.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("rutasDelSaber.title"),
+    description: t("rutasDelSaber.description"),
+    openGraph: {
+      description: t("rutasDelSaber.description"),
+    },
+  };
+}
 
 export default async function RutaEgresoPage({
   params,

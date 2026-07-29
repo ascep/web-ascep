@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
@@ -10,15 +10,17 @@ import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Mi Cuerpo, Mi Sexualidad, Mi Decision - ASCEP",
-  description:
-    "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad de jovenes en el sistema de proteccion.",
-  openGraph: {
-    description:
-      "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad de jovenes en el sistema de proteccion.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("miCuerpo.title"),
+    description: t("miCuerpo.description"),
+    openGraph: {
+      description: t("miCuerpo.description"),
+    },
+  };
+}
 
 const iconMap: Record<string, LucideIcon> = {
   Heart, MapPin, Scale, Shield, AlertTriangle, Handshake, Users, Star, Brain,

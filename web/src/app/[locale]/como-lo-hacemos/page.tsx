@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import DecoShapes from "@/components/DecoShapes";
@@ -12,15 +11,17 @@ import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Como lo Hacemos - ASCEP",
-  description:
-    "Conoce la metodologia y el enfoque de ASCEP: conexion, formacion, programas e incidencia para transformar el sistema de proteccion estatal.",
-  openGraph: {
-    description:
-      "Conoce la metodologia y el enfoque de ASCEP: conexion, formacion, programas e incidencia para transformar el sistema de proteccion estatal.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("comoLoHacemos.title"),
+    description: t("comoLoHacemos.description"),
+    openGraph: {
+      description: t("comoLoHacemos.description"),
+    },
+  };
+}
 
 export default async function ComoLoHacemosPage({
   params,

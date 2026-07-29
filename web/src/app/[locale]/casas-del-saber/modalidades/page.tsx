@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
@@ -10,15 +9,17 @@ import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Modalidades - Casas del Saber - ASCEP",
-  description:
-    "Dos modalidades de participacion en las Casas del Saber: con servicio habitacional para residentes y sin servicio habitacional para externos.",
-  openGraph: {
-    description:
-      "Dos modalidades de participacion en las Casas del Saber: con servicio habitacional para residentes y sin servicio habitacional para externos.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("casasDelSaberModalidades.title"),
+    description: t("casasDelSaberModalidades.description"),
+    openGraph: {
+      description: t("casasDelSaberModalidades.description"),
+    },
+  };
+}
 
 export default async function ModalidadesPage({
   params,

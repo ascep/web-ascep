@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import EnredateHero from "./EnredateHero";
 import EnredatePilares from "./EnredatePilares";
 import EnredateAbout from "./EnredateAbout";
@@ -16,15 +15,17 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 
-export const metadata: Metadata = {
-  title: "Enredate con ASCEP - ASCEP",
-  description:
-    "Un espacio donde jovenes egresados del sistema de proteccion se encuentran, comparten experiencias y construyen redes de apoyo mutuo.",
-  openGraph: {
-    description:
-      "Un espacio donde jovenes egresados del sistema de proteccion se encuentran, comparten experiencias y construyen redes de apoyo mutuo.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("enredateConAscep.title"),
+    description: t("enredateConAscep.description"),
+    openGraph: {
+      description: t("enredateConAscep.description"),
+    },
+  };
+}
 
 export default async function EnredatePage({
   params,

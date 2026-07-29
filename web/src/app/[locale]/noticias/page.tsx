@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
-import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
@@ -13,15 +12,17 @@ import { noticiasQuery } from "@/lib/sanity/queries";
 import { imageUrl } from "@/lib/sanity/image";
 import Link from "next/link";
 
-export const metadata: Metadata = {
-  title: "Noticias - ASCEP",
-  description:
-    "Mantente informado sobre las actividades, logros y novedades de ASCEP en la transformacion del sistema de cuidados alternativos en Colombia.",
-  openGraph: {
-    description:
-      "Mantente informado sobre las actividades, logros y novedades de ASCEP en la transformacion del sistema de cuidados alternativos en Colombia.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("noticias.title"),
+    description: t("noticias.description"),
+    openGraph: {
+      description: t("noticias.description"),
+    },
+  };
+}
 
 async function getNoticias() {
   const client = getClient();

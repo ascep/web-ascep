@@ -801,5 +801,111 @@
     "marcoPoliticoResult1": "Propostas de reforma normativa apresentadas perante instâncias legislativas.",
     "marcoPoliticoResult2": "Articulação com atores políticos e governamentais para a incidência.",
     "marcoPoliticoResult3": "Documentos técnicos que sustentam a agenda de transformação do sistema."
+  },
+  "metadata": {
+    "home": {
+      "title": "ASCEP - Transformando o Cuidado Alternativo na Colombia",
+      "description": "A ASCEP transforma o cuidado alternativo na Colombia. Conheca nossos programas, impacto e como voce pode ajudar jovens em processo de saida do sistema de protecao."
+    },
+    "aliados": {
+      "title": "Aliados - ASCEP",
+      "description": "Conheca os aliados estrategicos da ASCEP que tornam possivel a transformacao do cuidado alternativo na Colombia."
+    },
+    "casasDelSaber": {
+      "title": "Casas do Saber e da Transformacao - ASCEP",
+      "description": "Programa integral de acompanhamento para jovens em processo de saida do sistema de protecao estatal mediante um modelo pedagogico, habitacional e autossustentavel."
+    },
+    "casasDelSaberAreas": {
+      "title": "Areas de Intervencao - Casas do Saber - ASCEP",
+      "description": "Conheca as areas de intervencao do programa Casas do Saber e da Transformacao da ASCEP."
+    },
+    "casasDelSaberLineas": {
+      "title": "Linhas Tematicas - Casas do Saber - ASCEP",
+      "description": "Explore as linhas tematicas de formacao do programa Casas do Saber e da Transformacao da ASCEP."
+    },
+    "casasDelSaberModalidades": {
+      "title": "Modalidades - Casas do Saber - ASCEP",
+      "description": "Conheca as modalidades de acompanhamento do programa Casas do Saber e da Transformacao da ASCEP."
+    },
+    "rutasDelSaber": {
+      "title": "Rota de Saida Progressiva - Casas do Saber - ASCEP",
+      "description": "Rota de Saida Progressiva do programa Casas do Saber para jovens em transicao a vida independente."
+    },
+    "comoAyudar": {
+      "title": "Como Ajudar - ASCEP",
+      "description": "Descubra as formas de apoiar a missao da ASCEP: doacoes, voluntariado, plano padrinho e mais."
+    },
+    "enredateConAscep": {
+      "title": "Conecte-se com a ASCEP - ASCEP",
+      "description": "Junte-se a rede de apoio da ASCEP e faca parte da transformacao do cuidado alternativo na Colombia."
+    },
+    "planPadrino": {
+      "title": "Plano Padrinho - ASCEP",
+      "description": "Torne-se padrinho de um jovem em processo de saida do sistema de protecao e transforme seu futuro."
+    },
+    "voluntariado": {
+      "title": "Voluntariado - ASCEP",
+      "description": "Seja voluntario da ASCEP e contribua para a transformacao do cuidado alternativo na Colombia."
+    },
+    "comoLoHacemos": {
+      "title": "Como Fazemos - ASCEP",
+      "description": "Conheca o modelo de intervencao da ASCEP baseado em incidencia, programas integrais e articulacao interinstitucional."
+    },
+    "contacto": {
+      "title": "Contato - ASCEP",
+      "description": "Entre em contato com a ASCEP. Estamos em Cali, Colombia. Escreva ou ligue para mais informacoes."
+    },
+    "donar": {
+      "title": "Doar - ASCEP",
+      "description": "Faca uma doacao a ASCEP e apoie a transformacao do cuidado alternativo na Colombia. COP e USD."
+    },
+    "impacto": {
+      "title": "Impacto - ASCEP",
+      "description": "Conheca o impacto da ASCEP na transformacao do cuidado alternativo para jovens na Colombia."
+    },
+    "leyDeEgreso": {
+      "title": "Lei de Saida Progressiva - ASCEP",
+      "description": "Conheca a Lei de Saida Progressiva e seu impacto nos jovens que crescem sob protecao do Estado na Colombia."
+    },
+    "noticias": {
+      "title": "Noticias - ASCEP",
+      "description": "Ultimas noticias e atualizacoes da ASCEP sobre cuidado alternativo e direitos de criancas e jovens na Colombia."
+    },
+    "participa": {
+      "title": "Participe - ASCEP",
+      "description": "Participe das atividades e eventos da ASCEP para a transformacao do cuidado alternativo na Colombia."
+    },
+    "programas": {
+      "title": "Programas - ASCEP",
+      "description": "Conheca os programas da ASCEP: Avanca Jovem, Emprego, Incidencia, Meu Corpo e Marco Politico."
+    },
+    "avanzaJoven": {
+      "title": "Avanca Jovem - ASCEP",
+      "description": "Programa desenhado para fornecer apoio e ferramentas a adolescentes institucionalizados."
+    },
+    "empleo": {
+      "title": "Fomento ao Emprego e Empreendedorismo - ASCEP",
+      "description": "Modelo piloto para promover capacidades laborais e fortalecer a empregabilidade de jovens em processo de saida."
+    },
+    "incidencia": {
+      "title": "Incidencia e Participacao - ASCEP",
+      "description": "Acoes que envolvem atores-chave e tomadores de decisoes na transformacao dos cuidados alternativos."
+    },
+    "programasMarcoPolitico": {
+      "title": "Marco Politico - ASCEP",
+      "description": "Analise e propostas para a transformacao do marco normativo do sistema de protecao estatal na Colombia."
+    },
+    "miCuerpo": {
+      "title": "Meu Corpo, Minha Sexualidade, Minha Decisao - ASCEP",
+      "description": "Programa para proporcionar condicoes para o exercicio livre, autonomo e informado da sexualidade."
+    },
+    "quienesSomos": {
+      "title": "Quem Somos - ASCEP",
+      "description": "Conheca a missao, visao e equipe da ASCEP, dedicados a transformacao do cuidado alternativo na Colombia."
+    },
+    "transparencia": {
+      "title": "Transparencia - ASCEP",
+      "description": "Informacoes de transparencia e prestacao de contas da ASCEP como organizacao."
+    }
   }
 }

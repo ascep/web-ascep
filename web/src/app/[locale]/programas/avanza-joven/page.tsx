@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
@@ -10,15 +10,17 @@ import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Avanza Joven - ASCEP",
-  description:
-    "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida y la autonomia.",
-  openGraph: {
-    description:
-      "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida y la autonomia.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("avanzaJoven.title"),
+    description: t("avanzaJoven.description"),
+    openGraph: {
+      description: t("avanzaJoven.description"),
+    },
+  };
+}
 
 const iconMap: Record<string, LucideIcon> = {
   BookOpen, Users, DollarSign, Heart, Target, Star,

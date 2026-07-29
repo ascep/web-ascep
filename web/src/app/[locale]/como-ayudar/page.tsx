@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -11,15 +10,17 @@ import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Como Ayudar - ASCEP",
-  description:
-    "Descubre las formas de apoyar a ASCEP: donacion monetaria, plan padrino y voluntariado. Tu apoyo transforma la vida de jovenes egresados.",
-  openGraph: {
-    description:
-      "Descubre las formas de apoyar a ASCEP: donacion monetaria, plan padrino y voluntariado. Tu apoyo transforma la vida de jovenes egresados.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("comoAyudar.title"),
+    description: t("comoAyudar.description"),
+    openGraph: {
+      description: t("comoAyudar.description"),
+    },
+  };
+}
 
 export default async function ComoAyudarPage({
   params,

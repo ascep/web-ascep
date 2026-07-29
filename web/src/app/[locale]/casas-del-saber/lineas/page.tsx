@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
@@ -8,15 +7,17 @@ import { BookOpen, Monitor, Palette, Heart } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 
-export const metadata: Metadata = {
-  title: "Lineas Tematicas - Casas del Saber - ASCEP",
-  description:
-    "Cuatro lineas tematicas de formacion en las Casas del Saber: ciencias del conocimiento, tecnologia, arte y cultura, desarrollo humano y liderazgo.",
-  openGraph: {
-    description:
-      "Cuatro lineas tematicas de formacion en las Casas del Saber: ciencias del conocimiento, tecnologia, arte y cultura, desarrollo humano y liderazgo.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("casasDelSaberLineas.title"),
+    description: t("casasDelSaberLineas.description"),
+    openGraph: {
+      description: t("casasDelSaberLineas.description"),
+    },
+  };
+}
 
 export default async function LineasPage({
   params,

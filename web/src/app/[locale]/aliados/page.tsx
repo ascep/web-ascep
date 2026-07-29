@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
-import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import DecoShapes from "@/components/DecoShapes";
@@ -12,15 +11,17 @@ import { getFotos } from "@/lib/get-fotos";
 import { getPartners } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 
-export const metadata: Metadata = {
-  title: "Aliados - ASCEP",
-  description:
-    "Conoce los aliados estrategicos de ASCEP: organizaciones, empresas e instituciones que confian en nuestra labor por la ninez y juventud colombiana.",
-  openGraph: {
-    description:
-      "Conoce los aliados estrategicos de ASCEP: organizaciones, empresas e instituciones que confian en nuestra labor por la ninez y juventud colombiana.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("aliados.title"),
+    description: t("aliados.description"),
+    openGraph: {
+      description: t("aliados.description"),
+    },
+  };
+}
 
 export default async function AliadosPage({
   params,

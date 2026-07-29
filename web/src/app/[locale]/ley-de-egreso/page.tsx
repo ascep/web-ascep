@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
@@ -13,15 +12,17 @@ import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Ley Hijos del Estado - ASCEP",
-  description:
-    "Ley 2479 de 2025: crea el Programa Nacional de Acompanamiento Integral al Egresado del ICBF. Un paso hacia la autonomia de los jovenes en proteccion.",
-  openGraph: {
-    description:
-      "Ley 2479 de 2025: crea el Programa Nacional de Acompanamiento Integral al Egresado del ICBF. Un paso hacia la autonomia de los jovenes en proteccion.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("leyDeEgreso.title"),
+    description: t("leyDeEgreso.description"),
+    openGraph: {
+      description: t("leyDeEgreso.description"),
+    },
+  };
+}
 
 const objectives = [
   "obj1",

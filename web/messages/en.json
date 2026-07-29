@@ -663,5 +663,111 @@
     "marcoPoliticoResult1": "Regulatory reform proposals submitted to legislative bodies.",
     "marcoPoliticoResult2": "Coordination with political and governmental actors for advocacy.",
     "marcoPoliticoResult3": "Technical documents supporting the system transformation agenda."
+  },
+  "metadata": {
+    "home": {
+      "title": "ASCEP - Transforming Alternative Care in Colombia",
+      "description": "ASCEP transforms alternative care in Colombia. Learn about our programs, impact, and how you can help youth transitioning out of the protection system."
+    },
+    "aliados": {
+      "title": "Partners - ASCEP",
+      "description": "Meet ASCEP's strategic partners who make the transformation of alternative care in Colombia possible."
+    },
+    "casasDelSaber": {
+      "title": "Houses of Knowledge and Transformation - ASCEP",
+      "description": "Comprehensive support program for youth transitioning out of the state protection system through a pedagogical, residential, and self-sustaining model."
+    },
+    "casasDelSaberAreas": {
+      "title": "Intervention Areas - Houses of Knowledge - ASCEP",
+      "description": "Explore the intervention areas of the Houses of Knowledge and Transformation program by ASCEP."
+    },
+    "casasDelSaberLineas": {
+      "title": "Thematic Lines - Houses of Knowledge - ASCEP",
+      "description": "Explore the thematic training lines of the Houses of Knowledge and Transformation program by ASCEP."
+    },
+    "casasDelSaberModalidades": {
+      "title": "Modalities - Houses of Knowledge - ASCEP",
+      "description": "Learn about the support modalities of the Houses of Knowledge and Transformation program by ASCEP."
+    },
+    "rutasDelSaber": {
+      "title": "Progressive Graduation Route - Houses of Knowledge - ASCEP",
+      "description": "Progressive Graduation Route of the Houses of Knowledge program for youth transitioning to independent life."
+    },
+    "comoAyudar": {
+      "title": "How to Help - ASCEP",
+      "description": "Discover ways to support ASCEP's mission: donations, volunteering, sponsorship program, and more."
+    },
+    "enredateConAscep": {
+      "title": "Connect with ASCEP - ASCEP",
+      "description": "Join the ASCEP support network and be part of transforming alternative care in Colombia."
+    },
+    "planPadrino": {
+      "title": "Sponsorship Program - ASCEP",
+      "description": "Become a sponsor for a youth transitioning out of the protection system and transform their future."
+    },
+    "voluntariado": {
+      "title": "Volunteering - ASCEP",
+      "description": "Volunteer with ASCEP and contribute to transforming alternative care in Colombia."
+    },
+    "comoLoHacemos": {
+      "title": "How We Do It - ASCEP",
+      "description": "Learn about ASCEP's intervention model based on advocacy, comprehensive programs, and inter-institutional coordination."
+    },
+    "contacto": {
+      "title": "Contact - ASCEP",
+      "description": "Get in touch with ASCEP. We are based in Cali, Colombia. Write or call us for more information."
+    },
+    "donar": {
+      "title": "Donate - ASCEP",
+      "description": "Make a donation to ASCEP and support transforming alternative care in Colombia. COP and USD accepted."
+    },
+    "impacto": {
+      "title": "Impact - ASCEP",
+      "description": "Learn about ASCEP's impact in transforming alternative care for youth in Colombia."
+    },
+    "leyDeEgreso": {
+      "title": "Graduation Law - ASCEP",
+      "description": "Learn about the Progressive Graduation Law and its impact on youth growing up under State protection in Colombia."
+    },
+    "noticias": {
+      "title": "News - ASCEP",
+      "description": "Latest news and updates from ASCEP on alternative care and children's rights in Colombia."
+    },
+    "participa": {
+      "title": "Get Involved - ASCEP",
+      "description": "Participate in ASCEP's activities and events for transforming alternative care in Colombia."
+    },
+    "programas": {
+      "title": "Programs - ASCEP",
+      "description": "Learn about ASCEP's programs: Avanza Joven, Employment, Advocacy, My Body, and Policy Framework."
+    },
+    "avanzaJoven": {
+      "title": "Avanza Joven - ASCEP",
+      "description": "Program designed to provide support and tools to institutionalized adolescents."
+    },
+    "empleo": {
+      "title": "Employment and Entrepreneurship - ASCEP",
+      "description": "Pilot model to promote job skills and strengthen employability for youth transitioning out of care."
+    },
+    "incidencia": {
+      "title": "Advocacy and Participation - ASCEP",
+      "description": "Actions involving key stakeholders and decision-makers in transforming alternative care."
+    },
+    "programasMarcoPolitico": {
+      "title": "Policy Framework - ASCEP",
+      "description": "Analysis and proposals for transforming the regulatory framework of the state protection system in Colombia."
+    },
+    "miCuerpo": {
+      "title": "My Body, My Sexuality, My Decision - ASCEP",
+      "description": "Program to provide conditions for the free, autonomous, and informed exercise of sexuality and community development."
+    },
+    "quienesSomos": {
+      "title": "About Us - ASCEP",
+      "description": "Learn about the mission, vision, and team of ASCEP, dedicated to transforming alternative care in Colombia."
+    },
+    "transparencia": {
+      "title": "Transparency - ASCEP",
+      "description": "Transparency and accountability information for ASCEP as an organization."
+    }
   }
 }

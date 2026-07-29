@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
@@ -13,15 +12,17 @@ import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Participa - ASCEP",
-  description:
-    "Hay muchas maneras de sumarte a nuestra causa: como joven, voluntario, aliado o donante. Tu participacion transforma vidas.",
-  openGraph: {
-    description:
-      "Hay muchas maneras de sumarte a nuestra causa: como joven, voluntario, aliado o donante. Tu participacion transforma vidas.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("participa.title"),
+    description: t("participa.description"),
+    openGraph: {
+      description: t("participa.description"),
+    },
+  };
+}
 
 export default async function ParticipaPage({
   params,

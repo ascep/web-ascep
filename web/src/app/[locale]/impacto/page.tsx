@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -17,15 +16,17 @@ import { getFotos } from "@/lib/get-fotos";
 import { getImpactStats, getGalleryAlbums } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 
-export const metadata: Metadata = {
-  title: "Impacto - ASCEP",
-  description:
-    "Conoce el impacto de ASCEP en cifras: jovenes acompanados, programas activos, resultados esperados y metas para la transformacion del sistema de proteccion.",
-  openGraph: {
-    description:
-      "Conoce el impacto de ASCEP en cifras: jovenes acompanados, programas activos, resultados esperados y metas para la transformacion del sistema de proteccion.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("impacto.title"),
+    description: t("impacto.description"),
+    openGraph: {
+      description: t("impacto.description"),
+    },
+  };
+}
 
 const fallbackStats = [
   { end: 71148, suffix: "", label: "NNA en PARD protegidos por el ICBF", icon: "Users" },

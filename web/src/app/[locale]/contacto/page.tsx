@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import ContactForm from "@/components/ContactForm";
@@ -13,15 +12,17 @@ import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Contacto - ASCEP",
-  description:
-    "Contacta a ASCEP para conocer nuestros programas, sumarte como aliado o recibir informacion sobre nuestro trabajo con jovenes egresados.",
-  openGraph: {
-    description:
-      "Contacta a ASCEP para conocer nuestros programas, sumarte como aliado o recibir informacion sobre nuestro trabajo con jovenes egresados.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("contacto.title"),
+    description: t("contacto.description"),
+    openGraph: {
+      description: t("contacto.description"),
+    },
+  };
+}
 
 export default async function ContactoPage({
   params,

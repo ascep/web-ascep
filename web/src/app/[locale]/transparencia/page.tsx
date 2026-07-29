@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
-import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -13,15 +12,17 @@ import { getFotos } from "@/lib/get-fotos";
 import { getDocuments } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 
-export const metadata: Metadata = {
-  title: "Transparencia - ASCEP",
-  description:
-    "Documentos legales, informes financieros, politicas institucionales y todo el marco normativo que rige la actuacion de ASCEP.",
-  openGraph: {
-    description:
-      "Documentos legales, informes financieros, politicas institucionales y todo el marco normativo que rige la actuacion de ASCEP.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("transparencia.title"),
+    description: t("transparencia.description"),
+    openGraph: {
+      description: t("transparencia.description"),
+    },
+  };
+}
 
 const categoryConfig: Record<string, { icon: React.ElementType; iconBg: string; iconColor: string }> = {
   institucionales: { icon: FileText, iconBg: "bg-brand-purple/10", iconColor: "text-brand-purple" },

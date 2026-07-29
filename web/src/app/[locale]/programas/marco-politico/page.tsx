@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import type { Metadata } from "next";
+import { getTranslations } from "next-intl/server";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
@@ -9,15 +9,17 @@ import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Marco Politico - ASCEP",
-  description:
-    "Conoce el marco politico y legal de ASCEP: derechos humanos de la ninez, Convencion sobre los Derechos del Nino y proteccion estatal.",
-  openGraph: {
-    description:
-      "Conoce el marco politico y legal de ASCEP: derechos humanos de la ninez, Convencion sobre los Derechos del Nino y proteccion estatal.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("programasMarcoPolitico.title"),
+    description: t("programasMarcoPolitico.description"),
+    openGraph: {
+      description: t("programasMarcoPolitico.description"),
+    },
+  };
+}
 
 const fallbackPilares = [
   {

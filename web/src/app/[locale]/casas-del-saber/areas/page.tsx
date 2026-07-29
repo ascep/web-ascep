@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
@@ -9,15 +8,17 @@ import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Areas de Intervencion - Casas del Saber - ASCEP",
-  description:
-    "Las cinco areas de intervencion del programa Casas del Saber: necesidades basicas, apoyo psicosocial, formacion, insercion laboral e incidencia.",
-  openGraph: {
-    description:
-      "Las cinco areas de intervencion del programa Casas del Saber: necesidades basicas, apoyo psicosocial, formacion, insercion laboral e incidencia.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("casasDelSaberAreas.title"),
+    description: t("casasDelSaberAreas.description"),
+    openGraph: {
+      description: t("casasDelSaberAreas.description"),
+    },
+  };
+}
 
 export default async function AreasPage({
   params,

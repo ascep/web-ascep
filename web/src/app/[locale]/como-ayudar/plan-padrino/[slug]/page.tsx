@@ -7,7 +7,6 @@ import { getPadrinoBySlug, getPadrinos, localize } from "@/lib/sanity/fetch";
 import PadProfilePage from "@/components/PadProfilePage";
 import { assetPath } from "@/lib/asset-path";
 
-
 export const dynamic = "force-dynamic";
 
 export async function generateMetadata({

@@ -25,6 +25,15 @@ import {
   getTestimonials,
 } from "@/lib/sanity/fetch";
 
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("home.title"),
+    description: t("home.description"),
+  };
+}
+
 const fallbackStats = [
   { value: "71148", label: "NNA protegidos por el ICBF", icon: "Users", color: "#019E9F" },
   { value: "13000+", label: "Jovenes egresados", icon: "GraduationCap", color: "#44BCC5" },

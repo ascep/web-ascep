@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import Link from "next/link";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
@@ -12,11 +11,14 @@ import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, getPadrinos, localize, sanityImage } from "@/lib/sanity/fetch";
 import PadProfileCard from "@/components/PadProfileCard";
 
-export const metadata: Metadata = {
-  title: "Plan Padrino - ASCEP",
-  description:
-    "Conviertete en padrino o madrina de un joven en proceso de egreso del sistema de proteccion y acompanalo en su transicion a la vida independiente.",
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("planPadrino.title"),
+    description: t("planPadrino.description"),
+  };
+}
 
 const steps = [
   { icon: UserPlus, titleKey: "paso1", descKey: "paso1Desc", color: "text-brand-primary", bg: "bg-brand-primary/15" },

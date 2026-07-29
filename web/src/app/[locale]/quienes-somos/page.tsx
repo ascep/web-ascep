@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+;
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,15 +18,17 @@ import LogoRing from "@/components/LogoRing";
 import { imageUrl } from "@/lib/sanity/image";
 import { getTeamMembers, getMilestones } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Quienes Somos - ASCEP",
-  description:
-    "Conoce la historia, mision, vision y equipo de ASCEP. Somos egresados del sistema de proteccion estatal unidos para transformar la ninez en Colombia.",
-  openGraph: {
-    description:
-      "Conoce la historia, mision, vision y equipo de ASCEP. Somos egresados del sistema de proteccion estatal unidos para transformar la ninez en Colombia.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("quienesSomos.title"),
+    description: t("quienesSomos.description"),
+    openGraph: {
+      description: t("quienesSomos.description"),
+    },
+  };
+}
 
 const dimensions = [
   { title: "Autoaceptacion", desc: "Valoracion positiva de si mismo y de la propia historia." },

@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import DecoShapes from "@/components/DecoShapes";
@@ -11,15 +10,17 @@ import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
-export const metadata: Metadata = {
-  title: "Casas del Saber y la Transformacion - ASCEP",
-  description:
-    "Un espacio de acompanamiento integral para jovenes en proceso de egreso del sistema de proteccion estatal, con modalidad habitacional y externa.",
-  openGraph: {
-    description:
-      "Un espacio de acompanamiento integral para jovenes en proceso de egreso del sistema de proteccion estatal, con modalidad habitacional y externa.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("casasDelSaber.title"),
+    description: t("casasDelSaber.description"),
+    openGraph: {
+      description: t("casasDelSaber.description"),
+    },
+  };
+}
 
 export default async function CasasDelSaberPage({
   params,

@@ -1,5 +1,4 @@
 import type { CSSProperties } from "react";
-import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import PageHero from "@/components/PageHero";
@@ -13,15 +12,17 @@ import { getPrograms, localize, sanityImage } from "@/lib/sanity/fetch";
 import { getTranslations } from "next-intl/server";
 import AnimatedSection from "@/components/AnimatedSection";
 
-export const metadata: Metadata = {
-  title: "Programas - ASCEP",
-  description:
-    "Descubre los programas de ASCEP disenados para acompanar a jovenes en su transicion a la vida adulta: incidencia, avanza joven, empleo y formacion.",
-  openGraph: {
-    description:
-      "Descubre los programas de ASCEP disenados para acompanar a jovenes en su transicion a la vida adulta: incidencia, avanza joven, empleo y formacion.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("programas.title"),
+    description: t("programas.description"),
+    openGraph: {
+      description: t("programas.description"),
+    },
+  };
+}
 
 const slugLabels: Record<string, string> = {
   incidencia: "Liderazgo",

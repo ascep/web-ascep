@@ -900,5 +900,111 @@
     "marcoPoliticoResult1": "Propuestas de reforma normativa presentadas ante instancias legislativas.",
     "marcoPoliticoResult2": "Articulacion con actores politicos y gubernamentales para la incidencia.",
     "marcoPoliticoResult3": "Documentos tecnicos que sustentan la agenda de transformacion del sistema."
+  },
+  "metadata": {
+    "home": {
+      "title": "ASCEP - Transformando el Cuidado Alternativo en Colombia",
+      "description": "ASCEP transforma el cuidado alternativo en Colombia. Conoce nuestros programas, impacto y como puedes ayudar a jovenes en proceso de egreso del sistema de proteccion."
+    },
+    "aliados": {
+      "title": "Aliados - ASCEP",
+      "description": "Conoce los aliados estrategicos de ASCEP que hacen posible la transformacion del cuidado alternativo en Colombia."
+    },
+    "casasDelSaber": {
+      "title": "Casas del Saber y la Transformacion - ASCEP",
+      "description": "Programa integral de acompanamiento para jovenes en proceso de egreso del sistema de proteccion estatal mediante un modelo pedagogico, habitacional y autosostenible."
+    },
+    "casasDelSaberAreas": {
+      "title": "Areas de Intervencion - Casas del Saber - ASCEP",
+      "description": "Conoce las areas de intervencion del programa Casas del Saber y la Transformacion de ASCEP."
+    },
+    "casasDelSaberLineas": {
+      "title": "Lineas Tematicas - Casas del Saber - ASCEP",
+      "description": "Explora las lineas tematicas de formacion del programa Casas del Saber y la Transformacion de ASCEP."
+    },
+    "casasDelSaberModalidades": {
+      "title": "Modalidades - Casas del Saber - ASCEP",
+      "description": "Conoce las modalidades de acompanamiento del programa Casas del Saber y la Transformacion de ASCEP."
+    },
+    "rutasDelSaber": {
+      "title": "Ruta de Egreso Progresivo - Casas del Saber - ASCEP",
+      "description": "Ruta de Egreso Progresivo del programa Casas del Saber y la Transformacion para jovenes en transicion a la vida independiente."
+    },
+    "comoAyudar": {
+      "title": "Como Ayudar - ASCEP",
+      "description": "Descubre las formas de apoyar la mision de ASCEP: donaciones, voluntariado, plan padrino y mas."
+    },
+    "enredateConAscep": {
+      "title": "Enredate con ASCEP - ASCEP",
+      "description": "Unete a la red de apoyo de ASCEP y se parte de la transformacion del cuidado alternativo en Colombia."
+    },
+    "planPadrino": {
+      "title": "Plan Padrino - ASCEP",
+      "description": "Conviertete en padrino de un joven en proceso de egreso del sistema de proteccion y transforma su futuro."
+    },
+    "voluntariado": {
+      "title": "Voluntariado - ASCEP",
+      "description": "Se voluntario de ASCEP y contribuye a la transformacion del cuidado alternativo en Colombia."
+    },
+    "comoLoHacemos": {
+      "title": "Como lo Hacemos - ASCEP",
+      "description": "Conoce el modelo de intervencion de ASCEP basado en incidencia, programas integrales y articulacion interinstitucional."
+    },
+    "contacto": {
+      "title": "Contacto - ASCEP",
+      "description": "Comunicate con ASCEP. Estamos en Cali, Colombia. Escríbenos o llamanos para mas informacion."
+    },
+    "donar": {
+      "title": "Donar - ASCEP",
+      "description": "Haz una donacion a ASCEP y apoya la transformacion del cuidado alternativo en Colombia. COP y USD."
+    },
+    "impacto": {
+      "title": "Impacto - ASCEP",
+      "description": "Conoce el impacto de ASCEP en la transformacion del cuidado alternativo para jovenes en Colombia."
+    },
+    "leyDeEgreso": {
+      "title": "Ley Hijos del Estado - ASCEP",
+      "description": "Conoce la Ley de Egreso Progresivo y su impacto en los jovenes que crecen bajo proteccion del Estado en Colombia."
+    },
+    "noticias": {
+      "title": "Noticias - ASCEP",
+      "description": "Ultimas noticias y actualizaciones de ASCEP sobre cuidado alternativo y derechos de NNAJ en Colombia."
+    },
+    "participa": {
+      "title": "Participa - ASCEP",
+      "description": "Participa en las actividades y eventos de ASCEP para la transformacion del cuidado alternativo en Colombia."
+    },
+    "programas": {
+      "title": "Programas - ASCEP",
+      "description": "Conoce los programas de ASCEP: Avanza Joven, Empleo, Incidencia, Mi Cuerpo y Marco Politico."
+    },
+    "avanzaJoven": {
+      "title": "Avanza Joven - ASCEP",
+      "description": "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados."
+    },
+    "empleo": {
+      "title": "Fomento para el Empleo y Emprendimiento - ASCEP",
+      "description": "Modelo piloto para promover capacidades laborales y fortalecer la empleabilidad de jovenes en proceso de egreso."
+    },
+    "incidencia": {
+      "title": "Incidencia y Participacion - ASCEP",
+      "description": "Acciones que involucran a actores clave y tomadores de decisiones en la transformacion de los cuidados alternativos."
+    },
+    "programasMarcoPolitico": {
+      "title": "Marco Politico - ASCEP",
+      "description": "Analisis y propuestas para la transformacion del marco normativo del sistema de proteccion estatal en Colombia."
+    },
+    "miCuerpo": {
+      "title": "Mi Cuerpo, Mi Sexualidad, Mi Decision - ASCEP",
+      "description": "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad."
+    },
+    "quienesSomos": {
+      "title": "Quienes Somos - ASCEP",
+      "description": "Conoce la mision, vision y equipo de ASCEP, dedicados a la transformacion del cuidado alternativo en Colombia."
+    },
+    "transparencia": {
+      "title": "Transparencia - ASCEP",
+      "description": "Informacion de transparencia y rendicion de cuentas de ASCEP como organizacion."
+    }
   }
 }

@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PortableText } from "@portabletext/react";
 import { getClient } from "@/lib/sanity/client";
@@ -12,6 +11,19 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
 export const dynamic = "force-dynamic";
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
+  const { locale, slug } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  const noticia = await getNoticia(slug);
+  if (!noticia) {
+    return { title: t("noticias.title"), description: t("noticias.description") };
+  }
+  return {
+    title: `${noticia.title} - ASCEP`,
+    description: noticia.excerpt || t("noticias.description"),
+  };
+}
 
 async function getNoticia(slug: string) {
   const client = getClient();

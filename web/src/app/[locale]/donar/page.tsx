@@ -1,5 +1,4 @@
 import { getTranslations } from "next-intl/server";
-import type { Metadata } from "next";
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -16,15 +15,17 @@ import { getFotos } from "@/lib/get-fotos";
 import { getImpactStats, getDonationTiers, getFaqByPage, getGalleryAlbums, localize } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 
-export const metadata: Metadata = {
-  title: "Donar - ASCEP",
-  description:
-    "Tu donacion transforma vidas. Apoya a jovenes egresados del sistema de proteccion estatal con programas de formacion, apoyo psicosocial y oportunidades laborales.",
-  openGraph: {
-    description:
-      "Tu donacion transforma vidas. Apoya a jovenes egresados del sistema de proteccion estatal con programas de formacion, apoyo psicosocial y oportunidades laborales.",
-  },
-};
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "metadata" });
+  return {
+    title: t("donar.title"),
+    description: t("donar.description"),
+    openGraph: {
+      description: t("donar.description"),
+    },
+  };
+}
 
 const iconMap: Record<string, LucideIcon> = {
   Heart, Users, Target, TrendingUp, Coffee, Sunrise, Star, Shield, Sparkles,
