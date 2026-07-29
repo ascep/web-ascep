@@ -221,7 +221,7 @@ ${badge}
 }
 
 const nextIntlMiddleware = createNextIntlMiddleware({
-  locales: ["es", "pt"],
+  locales: ["es", "en", "pt"],
   defaultLocale: "es",
   localePrefix: "always",
 });
