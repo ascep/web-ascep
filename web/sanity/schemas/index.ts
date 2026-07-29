@@ -14,6 +14,7 @@ import testimonial from "./documents/testimonial";
 import donationTier from "./documents/donationTier";
 import faqSection from "./documents/faqSection";
 import padrinoProfile from "./documents/padrinoProfile";
+import fotoOverrides from "./documents/fotoOverrides";
 
 // Object types
 import blockContent from "./blockContent";
@@ -42,6 +43,7 @@ export const schemaTypes = [
   donationTier,
   faqSection,
   padrinoProfile,
+  fotoOverrides,
 
   // Objects
   blockContent,

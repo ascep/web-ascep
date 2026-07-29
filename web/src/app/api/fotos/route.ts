@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import { promises as fs } from "fs";
 import path from "path";
-import { put, get } from "@vercel/blob";
+import { getServerClient } from "@/lib/sanity/client";
+import { fotoOverridesQuery } from "@/lib/sanity/queries";
 
 type FlatEntry = {
   key: string;
@@ -12,7 +13,6 @@ type FlatEntry = {
 
 const ALLOWED_TYPES = new Set(["image/jpeg", "image/png", "image/webp", "image/gif", "image/avif", "image/svg+xml"]);
 const MAX_SIZE = 10 * 1024 * 1024;
-const BLOB_KEY = "fotos-data.json";
 
 function checkAuth(request: Request): boolean {
   const pw = request.headers.get("x-zprime-pw") || "";
@@ -54,40 +54,13 @@ function flatten(obj: Record<string, unknown>, prefix = "", allPaths: string[] =
   return result;
 }
 
-async function readFotosData(): Promise<string> {
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
-    try {
-      const result = await get(BLOB_KEY, { access: "public" });
-      if (result?.blob) {
-        const res = await fetch(result.blob.url);
-        if (res.ok) return await res.text();
-      }
-    } catch {}
-  }
-  const fotosPath = path.join(process.cwd(), "src", "data", "fotos.json");
-  return await fs.readFile(fotosPath, "utf-8");
-}
-
-async function writeFotosData(content: string) {
-  if (process.env.BLOB_READ_WRITE_TOKEN) {
-    await put(BLOB_KEY, content, {
-      access: "public",
-      contentType: "application/json",
-      addRandomSuffix: false,
-    });
-  }
-  try {
-    const fotosPath = path.join(process.cwd(), "src", "data", "fotos.json");
-    await fs.writeFile(fotosPath, content, "utf-8");
-  } catch {}
-}
-
 export async function GET(request: Request) {
   if (!checkAuth(request)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   try {
-    const content = await readFotosData();
+    const fotosPath = path.join(process.cwd(), "src", "data", "fotos.json");
+    const content = await fs.readFile(fotosPath, "utf-8");
     const fotosObj = JSON.parse(content) as Record<string, unknown>;
 
     const allPaths: string[] = [];
@@ -141,7 +114,8 @@ export async function POST(request: Request) {
 
     const newRelativePath = `/images/${subdir ? subdir + "/" : ""}${filename}`;
 
-    const content = await readFotosData();
+    const fotosJsonPath = path.join(process.cwd(), "src", "data", "fotos.json");
+    const content = await fs.readFile(fotosJsonPath, "utf-8");
 
     const escapedOldPath = targetPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
     const regex = new RegExp(`(["'])${escapedOldPath}\\1`, "g");
@@ -153,7 +127,32 @@ export async function POST(request: Request) {
 
     const replacementCount = matches.length;
     const updated = content.replace(regex, `"${newRelativePath}"`);
-    await writeFotosData(updated);
+    await fs.writeFile(fotosJsonPath, updated, "utf-8");
+
+    try {
+      const client = getServerClient();
+      if (client) {
+        const existing = await client.fetch<{ _id: string; overrides?: Array<{ targetPath: string; newPath: string }> } | null>(fotoOverridesQuery);
+        const newOverride = { targetPath, newPath: newRelativePath };
+
+        if (existing?._id) {
+          const existingOverrides = existing.overrides ?? [];
+          const idx = existingOverrides.findIndex((o) => o.targetPath === targetPath);
+          if (idx >= 0) {
+            existingOverrides[idx] = newOverride;
+          } else {
+            existingOverrides.push(newOverride);
+          }
+          await client.patch(existing._id).set({ overrides: existingOverrides }).commit();
+        } else {
+          await client.create({
+            _type: "fotoOverrides",
+            title: "Overrides de fotos",
+            overrides: [newOverride],
+          });
+        }
+      }
+    } catch {}
 
     return NextResponse.json({
       success: true,

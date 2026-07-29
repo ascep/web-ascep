@@ -344,3 +344,11 @@ export const padrinoBySlugQuery = groq`*[_type == "padrinoProfile" && slug.curre
   galleryPhotos,
   order
 }`;
+
+// ============================================================
+// FOTO OVERRIDES
+// ============================================================
+
+export const fotoOverridesQuery = groq`*[_type == "fotoOverrides"][0] {
+  overrides
+}`;

@@ -26,6 +26,7 @@ import {
   programaBySlugQuery,
   padrinosQuery,
   padrinoBySlugQuery,
+  fotoOverridesQuery,
 } from "./queries";
 
 export type SiteSettings = {
@@ -337,3 +338,17 @@ export async function getPadrinoBySlug(slug: string): Promise<PadrinoProfile | n
 }
 
 export { localize, sanityImage };
+
+export type FotoOverride = {
+  targetPath: string;
+  newPath: string;
+};
+
+export type FotoOverridesDoc = {
+  overrides?: FotoOverride[];
+};
+
+export async function getFotoOverrides(): Promise<FotoOverride[]> {
+  const data = await sanityFetch<FotoOverridesDoc>(fotoOverridesQuery);
+  return data?.overrides ?? [];
+}
