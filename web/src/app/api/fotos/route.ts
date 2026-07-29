@@ -103,37 +103,34 @@ export async function POST(request: Request) {
 
     const ext = path.extname(file.name) || ".webp";
     const filename = `${path.basename(targetPath).replace(/\.[^.]+$/, "")}${ext}`;
+    const buffer = Buffer.from(await file.arrayBuffer());
+
     const publicDir = path.join(process.cwd(), "public");
     const subdir = path.dirname(targetPath).replace("/images/", "");
     const saveDir = path.join(publicDir, "images", subdir);
-    await fs.mkdir(saveDir, { recursive: true });
     const savePath = path.join(saveDir, filename);
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    await fs.writeFile(savePath, buffer);
+    try {
+      await fs.mkdir(saveDir, { recursive: true });
+      await fs.writeFile(savePath, buffer);
+    } catch {}
 
     const newRelativePath = `/images/${subdir ? subdir + "/" : ""}${filename}`;
 
-    const fotosJsonPath = path.join(process.cwd(), "src", "data", "fotos.json");
-    const content = await fs.readFile(fotosJsonPath, "utf-8");
-
-    const escapedOldPath = targetPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-    const regex = new RegExp(`(["'])${escapedOldPath}\\1`, "g");
-    const matches = content.match(regex);
-
-    if (!matches || matches.length === 0) {
-      return NextResponse.json({ error: `Path not found: ${targetPath}` }, { status: 404 });
-    }
-
-    const replacementCount = matches.length;
-    const updated = content.replace(regex, `"${newRelativePath}"`);
-    await fs.writeFile(fotosJsonPath, updated, "utf-8");
+    let newPath = newRelativePath;
+    let sanityAssetUrl = "";
 
     try {
       const client = getServerClient();
       if (client) {
+        const asset = await client.assets.upload("image", buffer, {
+          filename,
+          contentType: file.type,
+        });
+        sanityAssetUrl = asset.url;
+
         const existing = await client.fetch<{ _id: string; overrides?: Array<{ targetPath: string; newPath: string }> } | null>(fotoOverridesQuery);
-        const newOverride = { targetPath, newPath: newRelativePath };
+        const newOverride = { targetPath, newPath: sanityAssetUrl };
 
         if (existing?._id) {
           const existingOverrides = existing.overrides ?? [];
@@ -151,14 +148,25 @@ export async function POST(request: Request) {
             overrides: [newOverride],
           });
         }
+
+        newPath = sanityAssetUrl;
       }
+    } catch {}
+
+    const fotosJsonPath = path.join(process.cwd(), "src", "data", "fotos.json");
+    try {
+      const content = await fs.readFile(fotosJsonPath, "utf-8");
+      const escapedOldPath = targetPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const regex = new RegExp(`(["'])${escapedOldPath}\\1`, "g");
+      const updated = content.replace(regex, `"${newPath}"`);
+      await fs.writeFile(fotosJsonPath, updated, "utf-8");
     } catch {}
 
     return NextResponse.json({
       success: true,
       oldPath: targetPath,
-      newPath: newRelativePath,
-      replacedCount: replacementCount,
+      newPath,
+      sanityUrl: sanityAssetUrl || undefined,
     });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
