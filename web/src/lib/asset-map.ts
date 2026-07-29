@@ -15,6 +15,5 @@ const assetMap: Record<string, string> = {
   "/documents/Presentacion.pdf": "https://rxt2dhtgckbkb1oj.public.blob.vercel-storage.com/documents/Presentacion-BmyC9TpuzLV2vCJWvumFOXBFn467tF.pdf",
   "/documents/8.Certificado_antecedentes_judiciales.pdf": "https://rxt2dhtgckbkb1oj.public.blob.vercel-storage.com/documents/8.Certificado_antecedentes_judiciales-Zw1OPMQtFJRGx2NyeEaOCcOinsCn5a.pdf",
   "/documents/DOCUMENTO BASE ASOCIACIÓN.docx.pdf": "https://rxt2dhtgckbkb1oj.public.blob.vercel-storage.com/documents/DOCUMENTO%20BASE%20ASOCIACI%C3%93N.docx.pdf",
-  "/videos/FONDO-WEB-16-9.mp4": "https://rxt2dhtgckbkb1oj.public.blob.vercel-storage.com/videos/FONDO-WEB-16-9.mp4",
 };
 export default assetMap;

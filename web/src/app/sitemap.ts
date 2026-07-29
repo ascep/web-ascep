@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const locales = ["es", "pt"] as const;
+const locales = ["es", "en", "pt"] as const;
 
 const routes = [
   "",

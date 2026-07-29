@@ -10,7 +10,7 @@
       { "src": "/images/eventos/2024/20241112_100049.webp", "alt": "Actividad grupal" },
       { "src": "/images/eventos/encuentro-2025/GIS06450.webp", "alt": "Acompanamiento psicosocial" },
       { "src": "/images/eventos/2024/20241112_102515.webp", "alt": "Sesion de trabajo" },
-      { "src": "/images/eventos/encuentro-2025/GIS06447.webp", "alt": "Jornada educativa" },
+      { "src": "https://cdn.sanity.io/images/7vvy9nrc/production/e2535b2894d56a4fa16b7c284004deb65fc01814-6000x3376.webp", "alt": "Jornada educativa" },
       { "src": "/images/eventos/encuentro-2025/GIS06449.webp", "alt": "Encuentro ASCEP 2025" },
       { "src": "/images/eventos/encuentro-2025/GIS06475.webp", "alt": "Momentos de integracion" }
     ],
@@ -151,7 +151,7 @@
   },
   "header": {
     "leyEgresoCard": "/images/eventos/encuentro-2025/GIS06446.png",
-    "comoAyudarCard": "/images/eventos/encuentro-2025/GIS06447.webp"
+    "comoAyudarCard": "https://cdn.sanity.io/images/7vvy9nrc/production/e2535b2894d56a4fa16b7c284004deb65fc01814-6000x3376.webp"
   },
   "casasDelSaber": {
     "hero": "/images/eventos/encuentro-2025/GIS06475.webp",
@@ -169,7 +169,7 @@
       { "src": "/images/eventos/encuentro-2025/GIS06460.webp", "alt": "Jovenes en taller de habilidades" },
       { "src": "/images/eventos/encuentro-2025/GIS06450.webp", "alt": "Acompanamiento psicosocial" },
       { "src": "/images/eventos/encuentro-2025/GIS06470.webp", "alt": "Actividades grupales" },
-      { "src": "/images/eventos/encuentro-2025/GIS06447.webp", "alt": "Jornada educativa" },
+      { "src": "https://cdn.sanity.io/images/7vvy9nrc/production/e2535b2894d56a4fa16b7c284004deb65fc01814-6000x3376.webp", "alt": "Jornada educativa" },
       { "src": "/images/eventos/encuentro-2025/GIS06475.webp", "alt": "Momentos de integracion" }
     ],
     "gallerySecond": "/images/eventos/encuentro-2025/GIS06475.webp"

@@ -11,7 +11,7 @@ import MobileTabBar from "@/components/MobileTabBar";
 import ScrollProgress from "@/components/ScrollProgress";
 import { getFotos } from "@/lib/get-fotos";
 
-const locales = ["es", "pt"];
+const locales = ["es", "en", "pt"];
 
 export default async function LocaleLayout({
   children,
