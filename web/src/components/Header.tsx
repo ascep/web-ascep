@@ -9,11 +9,13 @@ import { ChevronDown, Search } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import FlagIcon from "./FlagIcon";
 import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "./ThemeProvider";
 import MobileMenu from "./MobileMenu";
 import SearchDialog from "./SearchDialog";
 
 const languages = [
   { code: "es", label: "ES" },
+  { code: "en", label: "EN" },
   { code: "pt", label: "PT" },
 ] as const;
 
@@ -110,8 +112,9 @@ type DropdownState = string | null;
 export default function Header({ leyEgresoCard, comoAyudarCard }: HeaderProps) {
   const t = useTranslations("nav");
   const locale = useLocale();
+  const { theme } = useTheme();
   const pathname = usePathname();
-  const currentPath = pathname.replace(/^\/(es|pt)/, "") || "/";
+  const currentPath = pathname.replace(/^\/(es|en|pt)/, "") || "/";
   const [openDropdown, setOpenDropdown] = useState<DropdownState>(null);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const [langOpen, setLangOpen] = useState(false);
@@ -272,7 +275,7 @@ export default function Header({ leyEgresoCard, comoAyudarCard }: HeaderProps) {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href={`/${locale}`} className="flex items-center gap-2">
           <Image
-            src={assetPath("/logos/10 logo ascep horizontal azul.png")}
+            src={assetPath(theme === "dark" ? "/logos/12 logo ascep blanco sin slogan.png" : "/logos/10 logo ascep horizontal azul.png")}
             alt="ASCEP"
             width={144}
             height={48}
@@ -384,7 +387,7 @@ export default function Header({ leyEgresoCard, comoAyudarCard }: HeaderProps) {
               aria-haspopup="true"
               aria-label="Idioma"
             >
-              <FlagIcon country={currentLang.code as "es" | "pt"} className="h-3.5 w-5" />
+              <FlagIcon country={currentLang.code as "es" | "en" | "pt"} className="h-3.5 w-5" />
               <span>{currentLang.label}</span>
               <ChevronDown size={12} />
             </button>
@@ -396,7 +399,7 @@ export default function Header({ leyEgresoCard, comoAyudarCard }: HeaderProps) {
                     href={`/${lang.code}${currentPath}`}
                     className="flex items-center gap-2 rounded-[10px] px-3 py-1.5 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
                   >
-                    <FlagIcon country={lang.code as "es" | "pt"} className="h-3.5 w-5" />
+                    <FlagIcon country={lang.code as "es" | "en" | "pt"} className="h-3.5 w-5" />
                     <span>{lang.label}</span>
                   </Link>
                 ))}

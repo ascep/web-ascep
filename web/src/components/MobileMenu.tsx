@@ -23,9 +23,11 @@ import { motion, AnimatePresence } from "motion/react";
 import { assetPath } from "@/lib/asset-path";
 import FlagIcon from "./FlagIcon";
 import ThemeToggle from "./ThemeToggle";
+import { useTheme } from "./ThemeProvider";
 
 const languages = [
   { code: "es", label: "ES" },
+  { code: "en", label: "EN" },
   { code: "pt", label: "PT" },
 ] as const;
 
@@ -107,7 +109,8 @@ export default function MobileMenu() {
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
-  const currentPath = pathname.replace(/^\/(es|pt)/, "") || "/";
+  const { theme } = useTheme();
+  const currentPath = pathname.replace(/^\/(es|en|pt)/, "") || "/";
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<Section>(null);
   const [incidenciaOpen, setIncidenciaOpen] = useState(false);
@@ -172,7 +175,7 @@ export default function MobileMenu() {
               <div className="flex items-center justify-between border-b border-border-subtle px-4 py-3">
                 <Link href={`/${locale}`} onClick={close}>
                   <Image
-                    src={assetPath("/logos/10 logo ascep horizontal azul.png")}
+                    src={assetPath(theme === "dark" ? "/logos/12 logo ascep blanco sin slogan.png" : "/logos/10 logo ascep horizontal azul.png")}
                     alt="ASCEP"
                     width={120}
                     height={40}
@@ -485,7 +488,7 @@ export default function MobileMenu() {
                         }`}
                       >
                         <FlagIcon
-                          country={lang.code as "es" | "pt"}
+                          country={lang.code as "es" | "en" | "pt"}
                           className="h-3 w-5"
                         />
                         <span>{lang.label}</span>
