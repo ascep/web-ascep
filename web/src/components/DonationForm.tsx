@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Coffee, Sunrise, Heart, Star, Rocket, CreditCard, Landmark, Loader } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 
 interface Tier {
   cop: number;
@@ -15,6 +15,7 @@ const DONATARIO_URL = "https://donatario.com/recaudo/8cec07d1-f20c-4e30-adb1-5f4
 
 export default function DonationForm() {
   const t = useTranslations("donationForm");
+  const locale = useLocale();
   const [currency, setCurrency] = useState<"COP" | "USD">("COP");
   const [selectedTier, setSelectedTier] = useState<number | null>(null);
   const [custom, setCustom] = useState("");
@@ -90,6 +91,7 @@ export default function DonationForm() {
           name,
           email,
           message,
+          locale,
         }),
       });
 

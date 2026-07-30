@@ -3,6 +3,14 @@ import Stripe from "stripe";
 
 const STRIPE_SECRET_KEY = process.env.STRIPE_SECRET_KEY;
 
+function getBaseUrl(req: Request) {
+  const origin = req.headers.get("origin");
+  if (origin) return origin;
+  const host = req.headers.get("host");
+  if (host) return `https://${host}`;
+  return process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+}
+
 export async function POST(req: Request) {
   try {
     if (!STRIPE_SECRET_KEY) {
@@ -12,7 +20,8 @@ export async function POST(req: Request) {
       );
     }
 
-    const { amount, currency, name, email, message } = await req.json();
+    const { amount, currency, name, email, message, locale } = await req.json();
+    const baseUrl = getBaseUrl(req);
 
     if (!amount || amount < 1) {
       return NextResponse.json({ error: "Monto minimo: $1 USD" }, { status: 400 });
@@ -42,8 +51,8 @@ export async function POST(req: Request) {
         donor_name: name || "Donante",
         message: message || "",
       },
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/donar?success=true`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/donar?success=false`,
+      success_url: `${baseUrl}/${locale || "es"}/donar?success=true`,
+      cancel_url: `${baseUrl}/${locale || "es"}/donar?success=false`,
     });
 
     return NextResponse.json({ url: session.url });
