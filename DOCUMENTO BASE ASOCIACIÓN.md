@@ -1,0 +1,1044 @@
+# **DOCUMENTO BASE** 
+
+# **ASOCIACIÓN COLOMBIANA DE EGRESO DE PROTECCIÓN ESTATAL PRESENTACIÓN** 
+
+_“Ingresé a Bosconia en el 2011 por situación de vida en calle y problemas familiares; fue difícil, primero me rehabilite en el Calvario, pero ahora que estoy afuera, siento que volví a vivir lo mismo que antes” Cristian David Caicedo, 22 años, Cali – Colombia._ 
+
+El Instituto Colombiano de Bienestar Familiar, **ICBF,** es la institución que trabaja por la prevención y protección integral de la primera infancia, la niñez, la adolescencia y el bienestar de las familias en Colombia, brindando atención especialmente a aquellos en condiciones de amenaza, inobservancia o vulneración de sus derechos. 
+
+En nuestro país el ICBF, es el máximo órgano regulatorio responsable de los niños, niñas y adolescentes, de aquí en adelante **NNA** , quienes por diversas situaciones han visto sus derechos vulnerados, razón por la cual ingresan a una medida de restablecimiento de derechos **,** que para tal fin ha diseñado procesos, modalidades y lineamientos conforme al marco legal constitucional colombiano, el Código de Infancia y Adolescencia, recientemente modificada,  mediante la Ley 1878 de 2018, del 9 de enero de los corrientes,  y las convenciones internacionales para la protección de la niñez. 
+
+Dentro del ICBF, las modalidades son las formas en las que se presta el servicio de protección integral, se caracterizan por el grupo poblacional de atención previamente definido, por las condiciones técnicas específicas requeridas para desarrollar el proceso de atención y cumplir con el objetivo de la medida de restablecimiento de derechos decretada a favor del NNA en función de su interés superior.  A través de la medida de restablecimiento de derechos de los niños, niñas y adolescentes que ingresaron al ICBF con un Proceso Administrativo de Restablecimiento de Derechos – **PARD,** se pretende que NNA restauren su dignidad e integridad para realizar un ejercicio y goce efectivo de los derechos que les han sido vulnerados; si esa condición no se ha alcanzado, el Estado será responsable hasta tanto no se logren garantizar estos derechos. 
+
+El Sistema de Protección se define como las acciones institucionales que promueven el restablecimiento de los derechos de NNA, cuando estos han sido vulnerados, amenazados o inobservados basados en el cumplimento de los principios del interés superior y prevalencia de sus derechos. En tal sentido a fin de garantizar a los adolescentes el derecho a la educación formal hasta los 18 años, también se les ofrece algunos cursos de educación no formal, todo esto 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+> 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+enmarcado dentro de los programa de Proyecto de Vida y de Preparación para la Vida Laboral y Productiva, en algunas ocasiones a los jóvenes y adolescentes de excelente rendimiento académico el Estado o las organizaciones les financian algún tipo de carrera técnica o profesional, razón por la cual pueden permanecer con la medida hasta máximo los 25 años de edad, en los servicios de protección. De allí que solo “algunos” logren ingresar a instituciones de educación técnica o profesional; para los demás en cambio no existe una política clara que les permita acceder a una institución de formación superior, oportunidad vital para su tránsito a la vida autónoma independiente. 
+
+Ahora bien, quienes han estado bajo el cuidado que el gobierno les ha brindado, reconocen que ha sido la mejor opción sobre alguna otra alternativa; sin embargo, para otros, su tiempo bajo el mismo ha sido causal de un sinnúmero de inconvenientes y frustraciones. En este sentido,  la mayoría de las dificultades experimentadas por la población aplican en general al sistema de protección en sí, bien sea en ambiente familiar o institucional. 
+
+_“Mi papá me dijo que somos 11 hermanos, de los cuales solo conozco a 4, los otros 7 no sé en qué mundo están, si están en Cali o si están en Venezuela algunos, no los conozco Y el que conozco pues es drogadicto, ahora está desintoxicando su cuerpo en un lugar, la relación es buena, ojalá se recupere pronto. Como les dije, desde que se murió mi mamá, mi hermano se hundió en las drogas, el lo tomo muy personal, o sea le dolió mucho y eso hizo que el dentrara a las drogas como pa´olvidarse, mi mamá murió cuando yo tenía 7 años, yo vivía con ella, era el único, mi papá apareció me llevo con él al Calvario, ahí viví con él, pero la relación era extraña, paso el tiempo y le cogí cariño, pero usted sabe, la mamá es la mamá y no hay papá que valga”_ 
+
+_Jefferson Jiménez, 25 años, Cali – Colombia_ 
+
+La vida en protección genera un alto nivel de inestabilidad para los niños por ser traslados a distintas instituciones o modalidades de cuidado, la inestabilidad contribuye a resultados pobres de educación y de desarrollo personal. De igual manera, los problemas emocionales y de relación social contribuyen a problemas de comportamiento y dificultades en la escuela. El aislamiento es específicamente producto de ser internado, y contribuye a la carencia de habilidades sociales que, a su turno, se convierten en dificultades que estos jóvenes enfrentan en su cotidiano vivir como: la inserción al mundo laboral, sus ingresos son menores a los de otros jóvenes, dependen del sistema de 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+prestaciones sociales  y tienen dificultades para adaptarse al mundo externo, entre otras situaciones. 
+
+Adicionalmente, Stein (2008)<sup>1</sup> afirma que una consecuencia de los desplazamientos en protección es que les dificulta a los jóvenes echar raíces en un sitio, cuando egresan de protección,  la cultura institucional se preocupa principalmente por el cuidado físico del niño y con el establecimiento de rutinas, pero la falta de interacción necesaria para el desarrollo cognitivo y del lenguaje puede producir problemas graves (Johnson, Browne, & Hamilton-Giachritsis, 2005)<sup>2</sup> . Generalmente, los niños internados tienen oportunidades limitadas para establecer relaciones de apego, especialmente donde la proporción entre niños - cuidadores es alta y existe alta rotación de los miembros de personal. 
+
+Posiblemente el efecto más profundo de la institucionalización es que los NNA llegan a ser aislados de la sociedad y esto les afecta de múltiples maneras. En este sentido, las oportunidades que alcanza este grupo son influenciadas negativamente por la actuación del Estado y la única forma de compensación, sería la de brindar los mecanismos suficientes para que los jóvenes que fueron institucionalizados, logren condiciones en igualdad como las de cualquier otro miembro en esta sociedad. Ejemplo de ello es que muchas veces, la ubicación de un niño o niña en una institución no toma en cuenta la ubicación geográfica de sus origines, y puede llegar a ser internado lejos de la familia, o inclusive de su cultura (el caso de los niños indígenas). Los resultados de educación para los jóvenes en protección reflejan constantemente falta de atención personalizada y las bajas expectativas que tienen no solo los niños, sino también los cuidadores. <mark>La experiencia muestra que los niños, niñas y adolescentes que no logran un proceso de adopción y son declarados en situación de adoptabilidad, alojan múltiples expectativas sobre su futuro mientras están en el sistema de protección del ICBF y al salir de él. Al igual que cualquier otra persona, tienen derecho a que el Estado, en su representación legal (padre o madre), les brinde el apoyo necesario para afianzar sus fortalezas y habilidades a nivel personal, afectivo, social, relacional, cultural, académico, profesional y laboral, para así tener una vida estable y satisfactoria.</mark> 
+
+1 
+
+2 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+La infancia y adolescencia que crecen en centros de protección tienen poca comunicación con el mundo exterior, lo que los hace carentes de habilidades sociales para la vida. Al no contar con una red social o familiar, les resulta más difícil su inclusión social y la transición a la vida adulta. Entre los problemas que deben afrontar los jóvenes al egresar del sistema de protección estatal se destacan la falta de habilidades sociales y laborales, baja autoestima, deficiencia escolar y educativa, déficit en habilidades comunicativas y de gestión, entre otras. Además, tienen poca capacidad para resolver conflictos. La condición en la que egresan esta población los hace más propensos a ser reclutados por grupos delincuenciales al margen de la ley. También tienen una mayor probabilidad de acceder al consumo de sustancias psicoactivas y altas tasas de embarazos a temprana edad. 
+
+Al llegar a la mayoría de edad, estos jóvenes son más vulnerables debido a que durante su proceso de protección han adquirido pocas herramientas para fortalecer sus habilidades para la vida. Además, requieren acompañamiento durante la transición de la vida institucionalizada a la vida independiente, ya que esta población tan vulnerable realmente no “existe” en Colombia, una vez egresados de las instituciones de protección, los jóvenes no reciben ninguna consideración especial por la ley. 
+
+En Colombia, la situación de los niños, niñas, adolescentes y jóvenes (NNAJ) en el sistema de protección estatal presenta desafíos significativos, especialmente en los procesos de adopción y en la transición hacia la vida independiente tras egresar de los centros de protección. 
+
+Según cifras oficiales del ICBF, alrededor de 71.148 niños, niñas y adolescentes se encuentran en procesos administrativos en todo el país. De estos, 29.705 son hombres, 39.936 mujeres y 19 sin información. 
+
+# **Adopción y Desafíos Actuales** 
+
+Actualmente, se estima que 12,576 menores se encuentran en declaratoria de adoptabilidad; 6,302 de ellos son menores de 18 años y 6,258 mayores de 18 años. Sin embargo, en los últimos cuatro años (2021-2024), solo 3,025 NNAJ 
+
+han sido adoptados, lo que evidencia una considerable reducción en el número 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+> 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+de familias dispuestas a adoptar. Un factor clave en este fenómeno es la rigidez de los requisitos para la adopción, como la restricción que limita el proceso hasta el sexto grado de consanguinidad. Esta limitación ha llevado a los defensores de familia a demorar los procesos, generando una espera prolongada para las familias interesadas. 
+
+Es crucial que el Estado mejore la flexibilidad en los procesos de adopción, revisando y posiblemente ajustando el requisito del sexto grado de consanguinidad. Esto no solo agilizaría los procedimientos, sino que también ampliaría las oportunidades para que más niños, niñas y adolescentes encuentren un hogar. Además, es esencial garantizar la participación activa de los NNAJ en el proceso de adopción. Los profesionales en trabajo social y psicología deben desempeñar un papel fundamental, creando canales, mecanismos e instrumentos que permitan a los menores expresarse y participar activamente. Esto fortalecería la integridad del proceso y aseguraría que las decisiones se tomen considerando el bienestar de los NNAJ. 
+
+# **ESTADISTICA DE INGRESO A PARD EN UNA LINEA DE TIEMPO DE 12 AÑOS** 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+NINOS, NINAS Y ADOLESCENTES QUE HAN INGRESADO A PARD 2013 - 2024 
+
+
+
+<!-- Start of picture text -->
+>a§ nN- °wd o- ooo oao -So o© °w nn“~<br>4 Lr = = “2 CA ses se “ =<br>° ° oO + ° ° rr. 7<br>2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024<br><!-- End of picture text -->
+
+
+
+<!-- Start of picture text -->
+Fuente: Sistema de Informacién Misional - SIM con corte 31 de enero de 2024<br><!-- End of picture text -->
+
+Note: Informacidén preliminar sujeta a cambios por actualizacién 
+
+10 PRINCIPALES MOTIVOS DE INGRESO RELEVANTE 
+
+
+
+<!-- Start of picture text -->
+Omisién o negligencia PC<br>Violencia Sexual (Actos, acoso, acceso, entre otros) i. $50<br>Falta absoluta o temporal de responsables fF > 491<br>Alta permanencia en calle i > 233<br>Violencia fisica |) 2 130<br>Conductas Sexuales entre Menores de 14 anos |] 96<br>Violencia Psicolégica |) » s°<br>Reunificacién Familiar R >) 48<br>Trabajo Infantil B > 28<br>Abandono a > 22<br>Otros motivos |] ) 96<br><!-- End of picture text -->
+
+Fuente: Sistema de Informacién Misional - SIM con corte 31 de enero de 2024 
+
+Note: Informacién preliminar sujeta a cambios por actualizacién. 
+
+implica una pérdida de la inversión social realizada por el Estado colombiano. Por lo tanto, es imperativo que el Estado implemente políticas y estrategias de seguimiento para estos jóvenes, quienes a menudo se convierten en un grupo excluido y con menores oportunidades de alcanzar sus metas y desarrollarse plenamente en la sociedad. 
+
+# **Transición a la Vida Independiente** 
+
+La adolescencia es una etapa de transición entre la niñez y la adultez, un momento decisivo en el que los jóvenes buscan autonomía y la capacidad de manejar su vida de manera independiente. En este periodo, las necesidades prioritarias se centran en aprender a organizar y administrar su vida, así como en construir una identidad sólida, tanto para sí mismos como frente a la sociedad. Es fundamental que las instituciones que acompañan esta etapa promuevan espacios que favorezcan la movilidad del adolescente dentro y fuera de ellas, delegando funciones y responsabilidades que fortalezcan su autonomía y capacidad de toma de decisiones. 
+
+Sin embargo, en Colombia la realidad para los adolescentes y jóvenes que egresan del sistema de protección estatal está marcada por múltiples vulnerabilidades y barreras estructurales. Tras cumplir la mayoría de edad, estos jóvenes deben enfrentar de forma abrupta la vida adulta sin un acompañamiento suficiente, lo que se traduce en problemáticas críticas como: 
+
+- Pobreza y exclusión social: La falta de ingresos estables y oportunidades sostenibles limita sus posibilidades de cubrir necesidades básicas y proyectar un futuro seguro. 
+
+- Inestabilidad en la vivienda: Muchos egresados no cuentan con un lugar fijo donde vivir, enfrentándose a situaciones de hacinamiento, alquileres precarios o incluso a la falta total de techo. 
+
+- Déficits educativos y laborales: Las brechas en el acceso a la educación superior o técnica, así como las barreras para conseguir empleo formal y digno, impiden que puedan generar medios de vida sostenibles. 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+- Fragilidad en la salud mental: La ausencia de redes de apoyo emocional y la exposición a experiencias traumáticas incrementan los riesgos de depresión, ansiedad y otros trastornos que afectan su bienestar integral. 
+
+- Falta de redes de apoyo social: Al salir del sistema, muchos jóvenes se encuentran solos, sin familia ni comunidad que los respalde, lo que incrementa su vulnerabilidad. 
+
+Ante este panorama, surge la Asociación Colombiana de Egreso de Protección Estatal (ASCEP) como respuesta concreta a estas necesidades. Nuestra organización trabaja para resolver una problemática estructural: la falta de un acompañamiento integral y sostenido para los jóvenes que egresan del sistema de protección, permitiendo que puedan desarrollar plenamente sus capacidades y llevar una vida autónoma y digna. Es por eso que desde el 2019 impulsamos un proyecto de ley para mejorar la vida de todos y todas las personas jóvenes que egresan de protección sin acompañamiento y apoyos concretos, en 2025 ese sueño se hizo realidad y se logro aprobar la ley 2479 hijos del estado que busca crear el programa de acompañamiento integral al egresado con fortalecimiento de la oferta estatal y consolidación de redes de apoyo. 
+
+ASCEP proporciona un espacio seguro de encuentro, aprendizaje y fortalecimiento de capacidades, donde los jóvenes pueden: 
+
+- Construir y ampliar sus redes de apoyo social y profesional. 
+
+- Desarrollar habilidades para la vida, la empleabilidad y la autogestión. 
+
+- Acceder a oportunidades de formación, orientación y mentoría. 
+
+- Participar en procesos de incidencia política y social para que sus voces sean escuchadas en la formulación de políticas públicas. 
+
+Nuestro modelo de intervención busca romper el ciclo de vulnerabilidad que enfrentan los egresados, trabajando en tres frentes principales: 
+
+1. Fortalecimiento personal y habilidades para la vida: Programas de desarrollo socioemocional, liderazgo y autogestión. 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+2. Oportunidades educativas y laborales: Puentes con instituciones académicas y empresas para facilitar el acceso a educación superior, técnica y empleo formal. 
+
+3. Incidencia y defensa de derechos: Participación activa en mesas de trabajo, proyectos de ley y espacios internacionales para garantizar que las políticas respondan a las necesidades reales de esta población. 
+
+Con esta estrategia, no solo atendemos necesidades inmediatas como el acceso a formación o empleo, sino que también trabajamos para cambiar las condiciones estructurales que generan exclusión. Creemos firmemente que la autonomía no se alcanza solo con independencia económica, sino también con el desarrollo de una identidad fortalecida, resiliencia emocional y la capacidad de participar plenamente en la vida social y política del país. 
+
+La labor de ASCEP se traduce en un impacto tangible: jóvenes que antes estaban solos logran construir una red de apoyo sólida; personas que enfrentaban barreras para acceder a la educación hoy se encuentran estudiando; egresados que carecían de oportunidades laborales consiguen empleo digno; y, sobre todo, una generación que toma liderazgo para transformar la realidad de quienes vienen detrás. 
+
+En síntesis, el problema que resolvemos es la ausencia de un acompañamiento integral y efectivo para los jóvenes que dejan el cuidado del Estado en Colombia. Nuestro trabajo se enfoca en cerrar las brechas que perpetúan la exclusión social y económica, garantizando que esta población tenga acceso a oportunidades, redes y herramientas para llevar una vida plena y autónoma. 
+
+# **NUESTRA HISTORIA** 
+
+**Entre 2015 y 2017, tres jóvenes egresados del sistema de protección estatal en Colombia —Yhon Eduar Angulo, Maicol Londoño y Henrry Quiñones— convirtieron su experiencia en una causa.** 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+Decidieron fundar una iniciativa para acompañar a quienes, como ellos, enfrentaban solos el tránsito de la institucionalización a la vida adulta, una etapa crítica y desatendida. 
+
+**Su propósito: que ningún joven egresado del sistema tenga que enfrentar la vida sin apoyo.** 
+
+Desde la empatía y la experiencia vivida, denunciaron la falta de preparación del Estado y la ausencia de redes que les permitan integrarse plenamente a la sociedad.  Su acción busca construir caminos de autonomía, dignidad y oportunidades para una población históricamente excluida. 
+
+Somos una organización que ha superado la curva de aprendizaje y ahora está en una etapa de crecimiento y posicionamiento de su incidencia en las diferentes líneas programáticas. Nuestro liderazgo nos ha permitido ser referentes a nivel nacional y en la región de Latam. Esto ha permitido que nos inviten a diferentes escenarios de incidencia y toma de decisiones que aporten a la transformación de los sistemas de cuidados para la infancia, adolescencia y juventud con experiencia vivida en sistemas de cuidado institucional. Somos una nueva voz para la transformación de los sistemas de cuidado en Colombia y el acompañamiento de adolescentes y jóvenes en su transición a la vida autónoma e independiente. 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+
+
+<!-- Start of picture text -->
+Me red ° 7<br>—,S Momentos clave —Pat<br>Desde hace ajios, la Ascep ha venido trabajando para promover espacios de participacion<br>e incidencia juvenil, convocando a diferentes actores clave en la construccion, promocion<br>e implementacién de estrategias que contribuyen a mejorar las condiciones de vida de las<br>personas jévenes.<br>cs 20 1 3 @ Elaporte a la creacién de la red latinoamericana<br>COM de egresados de protecci6n.<br>S<br>@ El proceso de constitucién fue un momento clave que nos<br>20 | 7 celens e brarfid a el inicio ser pacientes, de la organizaci6n. a hacer las cosas bien y luego ~ Ue) Z<br>@ Ganadores del primer lugar del premio civico por una >= Gas<br>ciudad mejor a la innovacién social. st<br>/ Oga0D ® 1.° foro sobre egreso de proteccién en Colombia. ey<br>\ @ Cumbre de jévenes lideres en Bruselas (Parlamento Europeo) ‘<br>AN “No one left behind”.<br>@ Data World Forum Dubai<br>en © Foro de alto impacto politico (Naciones Unidas -New York) Vigaa ~s,<br>20 1 9 @ Uniendo fuerzas para ponerle fin a la institucionalizacién de NN en / \<br>all ‘<br>América Latina y el Caribe (Panama). \ y H<br>@ IV Congreso de la Red Latinoamericana de egresados de proteccién pf<br>camino a la Autonomia - México. pF<br>2<br>&<br>a<br>2021 @ 2.° foro sobre egreso de proteccién “Conozcamos sus historias” =<br>@ Sjal proyecto de ley 232-081 = Y<br>—<br>2022 @ 3.° foro sobre egreso de proteccion @ ee@<br>“el futuro de los hijos del Estado” Pun<br>@ Encuentro del Consejo de lideres del cuidado (Nairobi)<br>Or" Y 2023 @@ debateproyectoparticipacién comision de ley en 081 elaccidental desarrollo hijos del infancia e Estado implementacién y adolescencia Cor) oO28) @<br>de la campafia voces que inspiran QQID<br>re) @ @ Reunién de articulacién y memorando de entendimiento conelICBF = _S*<br>: 2024 para fortalecer capacidades y proyecto de vida a adolescentes y jévenes. o=—<br>(i @ Participacién(comisién accidental en la formalizacion de infancia de y adolescencia) alianza interinstitucional de la =v<br>2025 @ programaAprobacién de de acompajiamiento la Ley 2479 hijos al del egresado Estado de “creacion del ICBF” Mfyy, \\)<br>@ Participacién en el lanzamiento de la carta de la campafia global As 4<br>infantil en el marco de la Asamblea de las Naciones Unidas. ad<br><!-- End of picture text -->
+
+# **MISIÓN** 
+
+Desarrollar y fortalecer capacidades que potencien el ser y faciliten la transición de adolescentes y jóvenes del sistema de protección hacia una vida autónoma, digna y plena, promoviendo su desarrollo integral y el acceso efectivo a oportunidades laborales, educativas, de salud mental y vivienda, incidiendo en políticas públicas, prácticas institucionales y dinámicas comunitarias para garantizar el ejercicio de sus derechos, fortalecer redes de apoyo y capacidades familiares, y contribuir a la prevención de la pérdida del cuidado parental. 
+
+# **VISIÓN** 
+
+Para el 2030, consolidarnos como un actor articulador clave en Colombia para la transformación de los modelos de cuidados alternativos, orientando prácticas basadas en familia y autonomía progresiva en jóvenes, incidiendo en políticas públicas que aseguren egresos dignos del sistema de protección. 
+
+# **OBJETIVO GENERAL** 
+
+Impulsar estrategias que mejoren integralmente la calidad de vida de adolescentes y jóvenes en transición o egresados del sistema de protección, promoviendo su autonomía, empoderamiento, acceso a derechos y participación activa en la sociedad. 
+
+# **OBJETIVOS ESTRATÉGICOS** 
+
+# **1. Participación y Redes Juveniles** 
+
+- Fortalecer las capacidades de liderazgo, incidencia y organización colectiva de jóvenes con experiencia en el sistema de cuidados. 
+
+- Impulsar redes juveniles a nivel local, regional y nacional como plataformas de acción, apoyo y movilización. 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+# **2. Incidencia Política y Social** 
+
+- Promover reformas estructurales en el sistema de cuidados alternativos para mejorar los procesos de egreso. 
+
+- Defender derechos mediante acciones de incidencia, movilización de recursos y asesoría legal gratuita. 
+
+- Impulsar el reconocimiento de los egresados como grupo con derechos específicos y necesidades diferenciadas. 
+
+# **3. Programación Técnica y Acompañamiento** 
+
+- Apoyar el desarrollo de programas y políticas públicas basadas en buenas prácticas, centradas en el bienestar de los egresados. 
+
+- Proponer estándares para la vida independiente y servicios de apoyo que garanticen una transición digna y sostenible. 
+
+- Formación y vinculación laboral 
+
+# **4. Supervisión, Evaluación e Investigación** 
+
+- Monitorear el impacto de programas desarrollados por y para egresados. 
+
+- Generar evidencia técnica y empírica para orientar decisiones de política pública y cooperación internacional. 
+
+- Evaluar y adaptar continuamente las acciones institucionales para asegurar el impacto y la pertinencia. 
+
+# **CULTURA ORGANIZACIONAL** 
+
+# **PROPOSITO** 
+
+Impulsamos la autonomía y el liderazgo de adolescentes y jóvenes con experiencia en protección estatal, reconociéndolos como sujetos de derechos y protagonistas de cambio. A través de modelos de intervención familiar y de acompañamiento integral, promovemos su inclusión social y lideramos reformas al sistema de cuidados alternativos. 
+
+|**Elemento Clave**|**¿Está**<br>**presente?**|**Comentario estratégico**|
+|---|---|---|
+|Beneficiarios|✔|Claramente enfocado en adolescentesy|
+
+
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+
+
+<!-- Start of picture text -->
+<=<br>a<br><!-- End of picture text -->
+
+
+
+<!-- Start of picture text -->
+=<br>~<br><!-- End of picture text -->
+
+
+
+<!-- Start of picture text -->
+———— @ ————S$<br><!-- End of picture text -->
+
+Creemos en el valor y la capacidad de nuestros miembros fundadores y equipo, considerandolos nuestro mayor activo. Fomentamos el trabajo en equipo como una fuerza clave para alcanzar nuestras metas, promoviendo la buena comunicacién y armonia laboral. B Trabajamosconstruyendo conrelaciones transparenciabasadas y dialogoen la confianza bidireccional,y el respeto, esenciales para la convivencia con la diversidad de nuestros beneficiarios, aliados y donantes. obligaciones con eficiencia, disciplina y solidaridad. Creemos en C Nos comprometemos con la organizacién, cumpliendo nuestras la igualdad de oportunidades sin importar género, etnia, creencias 0 posicion social, valorando la diversidad como una riqueza fundamental para construir sociedad. Se LIBERTAD Y RESPONSABILIDAD: uu Defendemos el derecho de las personas a ejercer su libertad dentro del marco de lo licito, siempre que no atente contra otros o los principios organizacionales, manteniendo un equilibrio entre derechos y responsabilidades. aSree ne aces JN **U** NTOSESTROSCONSTRUIMOS VALORES, NUESTRAUN MEJOR FUERZA.FUTURO. wo heSait alee bape 
+
+
+
+<!-- Start of picture text -->
+@ Q @<br>ans JUNTA DIRECTIVA<br>SYS _ PSICOSOCIAL ae DIRECTOREJECUTIVO --- Fs CONTADURIA<br>of JURIDICAASESORIA os<br>COORDINACION COOREINAEION COORDINACION soettetatas<br>DE JUVENTUDES ADMINISTRATIVE DE COMUNICACION aN pe ag ha<br>Y FINANCIERA PARTICIPACION<br>COORDINACION<br>OPERATIVA Y<br>PEDAGOGICA<br>“Sy COORDINACIONESTRATEGICAS Y D G E STION ALIANZASDE PROYECTOS<br>@ NIVELESTRATEGICO @ NIVELCOORDINADOR @®@ NIVEL DE APOYO<br><!-- End of picture text -->
+
+Sin embargo, consideramos que hay aspectos de cómo el Estado proporciona esta protección y cuidado que deben ser evaluados de manera objetiva y corregidos de manera eficiente, especialmente en lo que respecta a la preparación para la vida autónoma e independiente y el acompañamiento una vez cesa el apoyo Estatal. 
+
+Desde nuestra experiencia personal, así como la recopilación de documentación y vivencias a lo largo de varios años, hemos impacto positivamente  las prácticas relacionadas con el cuidado de las infancias institucionalizadas. De esta manera, los jóvenes que están a punto de egresar y las generaciones futuras, contarán con herramientas y habilidades reales que les facilitarán asumir con confianza y alegría su nueva condición de jóvenes adultos, independientes y autónomos. 
+
+Desde el 2019 venimos trabajando articuladamente con actores políticos en el diseño y difusión de un proyecto que aporte condiciones y garantías reales a miles de jóvenes que anualmente salen de los centros de protección, en su acompañamiento y fortalecimiento de capacidades que les permita construir un proyecto de vida autónomo y sostenible. 
+
+En ese sentido, buscamos que cada joven desarrolle las competencias y habilidades esenciales para integrarse plenamente en la sociedad y construir un proyecto de vida autónomo, responsable y con conciencia social. Para lograrlo, implementamos un modelo de intervención centrado en la autonomía y la responsabilidad, donde la pertenencia y la asunción de las propias acciones y consecuencias son pilares fundamentales del crecimiento personal. 
+
+# **A. Nos centramos en el ser (la persona)** 
+
+Nuestra metodología reconoce que los jóvenes son protagonistas de su proyecto de vida. Para ello, promovemos: 
+
+- Escucha activa y mediación desde la coordinación de programas. 
+
+- Acceso a herramientas y orientación para fortalecer su autonomía. 
+
+- Tres pilares clave: un referente, un espacio y algo para hacer. 
+
+Todas nuestras actividades y formaciones responden a sus intereses y necesidades, garantizando un impacto significativo. 
+
+# **B. Fomentamos la inserción a la educación no formal y formal** 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+Muchos jóvenes enfrentan dificultades para adaptarse al entorno educativo, lo 
+
+que puede llevarlos al abandono escolar. Para evitarlo, ofrecemos: 
+
+- Acompañamiento vocacional para la elección de carrera. 
+
+- Asesoramiento educativo durante y después del tránsito a la autonomía. 
+
+- Gestión de becas y convenios para facilitar el acceso a educación técnica, tecnológica y superior. 
+
+# **C. Promovemos el acceso a la salud y formación en derechos sexuales y reproductivos** 
+
+Fomentamos el acceso digno a la salud y el bienestar mediante: 
+
+- Asesoramiento y formación para jóvenes en salud sexual y reproductiva. 
+
+- Orientación sobre programas estatales que protegen sus derechos. 
+
+- Acompañamiento en salud integral, apoyo psicológico y orientación preventiva. 
+
+# **D. Promovemos la Formación para el empleo** 
+
+Creemos en el poder del empleo como motor de cambio, un empleo digno es garante de  autonomía e independencia, estabilidad y reconocimiento social por lo que ofrecemos: 
+
+- Formación en competencias laborales. 
+
+- Acceso a experiencias vocacionales en empresas. 
+
+- Gestión de pasantías y vinculación laboral. 
+
+# **E. Promovemos la incidencia y participación juvenil** 
+
+Impulsamos la voz de los jóvenes en espacios de incidencia y participación, 
+
+promoviendo: 
+
+- Formación en liderazgo y agencia. 
+
+- Intercambio de experiencias entre egresados, tomadores de decisiones y operadores del ICBF. 
+
+- Participación en reformas de cuidados alternativos. 
+
+# **F. Adaptabilidad y flexibilidad en los procesos** 
+
+Reconocemos que cada joven tiene su propio ritmo, por lo que: 
+
+- Evitamos presiones innecesarias. 
+
+- Brindamos acompañamiento según su trayectoria de vida. 
+
+- Nos adaptamos a los cambios sociales y económicos. 
+
+> 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+Es asi como la ASCEP, trabaja constantemente en la mejora de las condiciones de preparación para el egreso, facilitando herramientas que permitan una transición exitosa hacia la autonomía e independencia. A través de alianzas estratégicas, promovemos programas que capacitan, orientan y empoderan a los jóvenes para un futuro sólido y seguro. 
+
+# **¿POR QUÉ LO HACEMOS?** 
+
+Los niños, niñas y adolescentes que crecen en un centro de protección tienen una interacción limitada con el exterior, lo que dificulta el desarrollo de sus habilidades sociales y su preparación para la vida adulta. La falta de una familia o una red de apoyo externa agrava su proceso de inclusión social y su transición a la vida autónoma e independiente. 
+
+Cuanto mayor es el tiempo de institucionalización, mayor es el impacto negativo en su desarrollo, lo que se refleja en dificultades para gestionar emociones, resolver conflictos y comunicarse de manera asertiva. Esto genera inseguridad, baja autoestima y temor al rechazo, afectando su capacidad para desenvolverse en sociedad. 
+
+Sin una preparación adecuada para la vida independiente, estos jóvenes enfrentan altos niveles de vulnerabilidad y están en riesgo de: 
+
+- Ser reclutados por grupos delincuenciales al margen de la ley. 
+
+- Acceder al consumo de sustancias psicoactivas de manera temprana y recurrente. 
+
+- Vivir situaciones de explotación laboral y de trata. 
+
+- Experimentar embarazos no planificados. 
+
+- Recurrir a la prostitución como medio de subsistencia. 
+
+Por todas estas razones, trabajamos para ayúdales a transformar su realidad, brindándoles herramientas y oportunidades que les permitan construir un futuro digno y autónomo. 
+
+# **LÍNEAS ESTRATÉGICAS** 
+
+# **1. Autonomía y Proyecto de Vida** 
+
+- Desarrollo de competencias personales, socioemocionales y laborales. 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+> 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+- Programas de mentoría y acompañamiento para la transición a la vida adulta. 
+
+- Creación de rutas de empleabilidad y educación para jóvenes egresados del sistema de protección. 
+
+# **2. Fortalecimiento Familiar y Entornos Protectores** 
+
+- Modelos de cuidado alternativo basados en la familia y la comunidad. 
+
+- Estrategias de reunificación familiar y fortalecimiento de vínculos afectivos. 
+
+- Sensibilización y capacitación para familias acogedoras y redes de apoyo. 
+
+# **3. Incidencia en Políticas Públicas** 
+
+- Articulación con actores gubernamentales y del sector social para mejorar el egreso del sistema de protección. 
+
+- Propuestas de reforma y desarrollo normativo en pro de los derechos de adolescentes y jóvenes sin cuidados parentales. 
+
+- Construcción de evidencia y estudios para sustentar nuevas políticas de protección. 
+
+# **4. Sostenibilidad y Expansión Organizacional** 
+
+- Desarrollo de modelos de negocio e iniciativas productivas que generen autonomía financiera para los jóvenes. 
+
+- Alianzas estratégicas con el sector privado y organismos internacionales. 
+
+- Expansión territorial de programas de acompañamiento en la transición y cuidado alternativo. 
+
+# **5. Bienestar Integral y Salud Mental** 
+
+- Acceso a servicios psicosociales y de salud mental adaptados a las necesidades de la población. 
+
+- Estrategias de prevención de riesgos psicosociales y promoción de bienestar emocional. 
+
+- Espacios de participación y construcción de identidad para fortalecer la resiliencia juvenil. 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+
+
+<!-- Start of picture text -->
+.\ ESTAMOS COMPROMETIDOS CON LOS ><br>> OBJETIVOS DE DESARROLLO SOSTENIBLE <=<br>—S>=2=— —_ —_— —— —_ @e. re<br>e@ © e@ 4 4 \ } LT .<br>4 Fin de la Hambre Educaci6on Igualdad ,<br>pobreza Cero de calidad de Género :<br>: a ae I;<br>s \ !i@ i s ay, <=<br>‘1 a . GS, wW<br>e 438 || eNe | Saas<br>. © & ‘| @éa | ) ota | “Gap<br>DatighaldadesReduccién de Alianzas para | | | Trabajodecente | ! FoeJ USUCIS<br>ce Gane— los ODS ' y crecimientoeconémico |\ c grasttes<br>Estamos comprometidosy alineados con el cumplimiento de los<br>Objetivos de Desarrollo Sostenible para contribuir al cierre de brechas sociales.<br><!-- End of picture text -->
+
+- Apoyamos a operadores y centros de protección en el diseño de estrategias para el fortalecimiento del proyecto de vida de adolescentes y jóvenes. 
+
+# **3. Diseño y Ejecución de Programas** 
+
+- Diseñamos y ejecutamos programas y proyectos que respondan a las necesidades específicas de los adolescentes y jóvenes que viven bajo protección estatal y están próximos a egresar. 
+
+- Generamos estrategias de articulación con el Instituto Colombiano de Bienestar Familiar y operadores de protección para mejorar los procesos de preparación para el egreso. 
+
+# **4. Incidencia y Transformación del Sistema** 
+
+- Impulsamos la transformación de los cuidados alternativos en Colombia y Latinoamérica, a través de la incidencia sociopolítica y la investigación. 
+
+- Contribuimos con insumos y propuestas para influir en las políticas públicas relacionadas con el sistema de protección estatal, participando activamente en debates tanto a nivel nacional como internacional. 
+
+# **ENFOQUE METODOLÒGICO Y DIMENSIONES DE TRABAJO** 
+
+Nuestro modelo está enfocado al fortalecimiento del ser, como base para que los jóvenes que egresan del sistema de protección puedan gestionar su proyecto de vida y a su vez superar las barreras que enfrentan en la autonomía progresiva. En ese sentido, en la Ascep hemos decidido enfocarnos transversalmente a todos nuestros procesos, en las seis dimensiones descritas por la psicóloga Carol Ryff en su modelo de bienestar psicológico, que ha sido considerado uno de los más importantes y significativos en este campo. Estas dimensiones representan un estado de satisfacción del individuo consigo mismo y su entorno, basado en propósitos en la vida, la forma de asumirlos y el disfrute fundamentado en la confianza en sí mismo y la relación con los demás. Las dimensiones son: control del desarrollo personal, crecimiento personal, compromiso con una meta, desarrollo armónico, autorrealización y relaciones positivas con los demás. Consideramos que este modelo puede ser una base sólida para fortalecer el proyecto de vida y relacional de adolescentes y jóvenes institucionalizados, en tránsito a la vida autónoma y egresados de protección ¡, 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+enfocándonos en la autonomía y en la psicología positiva del individuo en sus relaciones con los demás, con el objetivo de fomentar la intimidad, el apoyo, la cooperación y el avance vital en su contexto. 
+
+Las dimensiones planteadas por Ryff (1995) son: 
+
+1. **La autoaceptación:** relación apropiada consigo mismo siendo consciente de las capacidades y limitaciones. Evalúa la valoración positiva de sí mismo y de la propia historia. 
+
+2. **Relaciones positivas:** implica la creencia de que se tienen relaciones de confianza, cálidas, de empatía y de intimidad con otros. Evalúa la capacidad de establecer y mantener relaciones sociales de calidad y confianza con otros. 
+
+3. **Dominio del entorno:** se vincula a la habilidad personal para elegir o crear entornos favorables para sí mismos dirigiendo efectivamente la propia vida. Evalúa la percepción de control del medio. 
+
+4. **Autonomía:** reconocimiento de que personas con altos niveles de autonomía puedan resistir mejor la presión social y autorregular mejor su comportamiento. Evalúa la capacidad de la persona de sostener su propia individualidad en diferentes contextos sociales y su sentido de autodeterminación personal. 
+
+5. **Propósito en la vida:** capacidad de la persona para tener metas claras y ser capaz de definir sus objetivos vitales. Evalúa la capacidad que se tiene respecto a lo que se quiere en la vida. 
+
+6. **Crecimiento personal:** el reconocimiento de que el funcionamiento positivo óptimo requiere el desarrollo de las potencialidades individuales para crecer como persona y llevar al máximo sus capacidades. 
+
+# **POBLACIÒN OBJETO** 
+
+Adolescentes y jóvenes entre 14 y 28 años, que se encuentran bajo protección estatal o que han egresado, en proceso educativo básica o superior, que requieren de acompañamiento y apoyo en generación de capacidades y fortalecer habilidades para la vida, psicosociales,  preparación y vinculación para el trabajo. 
+
+# **LINEAS PROGRAMATICAS** 
+
+Actualmente, los jóvenes que transitan hacia la vida adulta desde los centros de protección del Estado (Bienestar Familiar) enfrentan múltiples desafíos, 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+> 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+especialmente aquellos en situación de vulnerabilidad y sin una red de apoyo sólida al egresar. Por ello, desde la ASCEP se han diseñado programas orientados a generar capacidades y fortalecer habilidades que les permitan alcanzar sus metas y construir un proyecto de vida exitoso. 
+
+Estos programas se basan en un plan de apoyo integral para adolescentes y jóvenes, articulado con diversos actores, como los centros de protección, el ICBF, la academia, empresas y otros aliados estratégicos. Este esfuerzo conjunto busca promover el desarrollo de los jóvenes y posicionar el egreso como un tema prioritario en la agenda política y social. La intervención se organiza en torno a cuatro ejes principales: 
+
+1. **Incidencia y participación** 
+
+2. **Avanza joven** 
+
+3. **Fomento para el empleo y emprendimiento** 
+
+4. **Mi cuerpo, mi sexualidad, mi decisión** 
+
+5. **Casas del saber y la transformación** 
+
+# **PROGRAMA DE INCIDENCIA Y PARTICIPACIÓN** 
+
+El Programa de Incidencia y Participación tiene como objetivo desarrollar acciones que involucren a los actores clave y tomadores de decisiones en la construcción de estrategias que contribuyan a la transformación de los cuidados alternativos, la no separación familiar y la autonomía progresiva. Además, se deben realizar investigaciones que proporcionen insumos para garantizar acciones claras sobre los tres ejes mencionados anteriormente. 
+
+Como entidad de egresados, nos enfrentamos a desafíos significativos en el fortalecimiento de los procesos de acompañamiento durante la transición a la vida autónoma, la selección de equipos interdisciplinarios vinculados a los procesos de protección y el fortalecimiento de los cuidados alternativos en Colombia. Es precisamente por esta razón que, desde el año 2019, hemos venido proponiendo el diseño y la promoción de un proyecto de ley que establezca un programa integral de acompañamiento para pre-egresados y garantice unos estándares mínimos para aquellos que han egresado. 
+
+# **OBJETIVOS ESPECIFICOS** 
+
+**1. Ampliar y mejorar las alternativas de cuidado familiar y comunitario** , Extender y diversificar la cobertura de opciones de cuidado, evaluando la 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+efectividad de los programas existentes y, si es necesario, reformándolos o creando nuevos para prevenir el ingreso de miles de NNAJ al proceso administrativo de restablecimiento de derechos. 
+
+**2. Fomentar la participación protagónica de los adolescentes jóvenes en la toma de decisiones** , Impulsar la participación activa de los jóvenes en su vida cotidiana dentro y fuera de los dispositivos de cuidado, así como en el diseño e implementación de políticas públicas que los afectan, permitiéndoles amplificando sus voces ejerciendo su ciudadanía y contribuir a la transformación de sus realidades y la construcción de su proyecto de vida. 
+
+**3. Generar y difundir información sobre el proceso de egreso de protección** , Desarrollar un sistema de gestión de la información y hacer pública la información relacionada con las trayectorias de vida de los jóvenes tras su egreso, con el fin de facilitar la toma de decisiones basadas en evidencia, fortaleciendo el conocimiento y las capacidades de las autoridades y operadores de programas. 
+
+**4. Fortalecer la colaboración interinstitucional,** Consolidar espacios de trabajo conjunto entre el ICBF, operadores, jóvenes, y diversos actores sociales, incluyendo el sector privado, investigadores, y organizaciones de la sociedad civil, para mejorar los sistemas de cuidado y apoyar a los activistas y organizaciones juveniles que trabajan en su transformación. 
+
+**5. Planificar el egreso como un proceso integral** , Tratar el egreso de NNAJ como un proceso planificado dentro de un plan de restitución de derechos que involucre tanto al joven como a su entorno familiar y comunitario, ampliando la visión más allá de la empleabilidad y la educación, e incluyendo iniciativas que potencien la autonomía y los derechos de los jóvenes. 
+
+# **LÍNEAS DE ACCIÓN** 
+
+El programa se estructura en torno a las siguientes líneas de acción: 
+
+**1. Autonomía progresiva:** Trabajamos en el desarrollo e implementación de programas y recursos que empoderen a las personas con experiencia en el cuidado y a los jóvenes sin cuidado parental, brindándoles 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+herramientas para alcanzar su independencia personal, económica y social. 
+
+**2. Cuidados alternativos, desinstitucionalización y prevención a la separación familiar:** Abogamos por la implementación y fortalecimiento de políticas que fomenten el cuidado basado en la familia como la principal alternativa para los niños sin cuidado parental en Colombia, como recurso para evitar la desinstitucionalización. 
+
+**3. Investigación y diseño de políticas públicas:** Realizamos investigaciones para comprender mejor las necesidades y desafíos de las personas con experiencia en el cuidado y los niños sin cuidado parental en Colombia, para  el diseño de políticas públicas más efectivas y orientadas a garantizar los derechos de los jóvenes en transición y egresados de protección. 
+
+**4. Participación intersectorial:** Facilitar espacios de diálogo y colaboración entre diferentes sectores y actores relevantes, como organizaciones de la sociedad civil, instituciones gubernamentales, académicos y jóvenes, con el fin de promover la participación activa y la construcción conjunta de soluciones. 
+
+# **RESULTADOS ESPERADOS** 
+
+Como resultados del programa, se espera lograr: 
+
+1. Políticas públicas que transformen los cuidados alternativos y la atención a niños, niñas, adolescentes y jóvenes en transición. 
+
+2. Jóvenes líderes que transformen y ejerzan su ciudadanía, fortaleciendo el proyecto de vida de sus pares. 
+
+3. Instalación y funcionamiento de una mesa intersectorial para la autonomía progresiva, que permita la colaboración y coordinación entre diferentes actores y sectores involucrados. 
+
+# **Impacto del programa** 
+
+# **PROGRAMA AVANZA JOVEN: CAMINO HACIA LA AUTONOMIA** 
+
+Avanza Joven, una iniciativa diseñada especialmente para brindar apoyo y herramientas a adolescentes que viven institucionalizados. Este programa está 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+enfocado en potenciar el desarrollo de habilidades para la vida, permitiéndoles enfrentar los desafíos y alcanzar su máximo potencial mientras transitan por esta etapa crucial y se preparan para asumir su vida fuera de la institucionalidad. Sabemos que vivir en un entorno institucional puede presentar desafíos únicos y que enfrentarlos puede resultar abrumador. Sin embargo, creemos firmemente en el poder del crecimiento personal y en la capacidad de cada individuo para superar las dificultades. A través de Avanza Joven, queremos ser un apoyo significativo en ese camino hacia la autonomía y la independencia, de manera progresiva. 
+
+# **OBJETIVO GENERAL DE PROGRAMA** 
+
+Fomentar y desarrollar las habilidades, competencias y recursos necesarios en jóvenes que se acercan al límite de edad y deben egresar del sistema de protección, para que puedan ejercer su transición hacia la vida independiente y autónoma, de manera responsable y progresiva. 
+
+# **OBJETIVOS ESPECIFICOS** 
+
+**1** . Fortalecer las habilidades comunicativas de los jóvenes participantes, desarrollando la escucha activa, la empatía, la expresión oral y escrita, la capacidad de argumentación y persuasión, y la resolución de conflictos, para que puedan comunicarse de manera efectiva en diferentes contextos y relaciones interpersonales, lo que les permitirá mejorar sus habilidades sociales, profesionales y personales, y contribuirá a su desarrollo integral como individuos. 2. Proporcionar a los jóvenes el conocimiento y comprensión de sus derechos y deberes como ciudadanos, la Constitución y las rutas de atención, mediante la formación en derechos y deberes civiles, políticos, sociales, culturales y económicos, el acceso a información actualizada sobre las instituciones y normativas vigentes, la orientación en la utilización de recursos y servicios públicos y privados, el fomento de actitudes de participación, el compromiso ciudadano, para que puedan ejercer plenamente su ciudadanía y contribuir al desarrollo de una sociedad más justa y equitativa. 
+
+3. Proporcionar a los jóvenes participantes la educación financiera necesaria para desarrollar habilidades y conocimientos en la gestión de sus finanzas personales, incluyendo la comprensión de conceptos financieros básicos, la elaboración de presupuestos y la planificación de gastos, el acceso a opciones 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+de ahorro y crédito responsable, la prevención del endeudamiento y el conocimiento de los derechos y responsabilidades financieras. 
+
+4. Brindar a los jóvenes información basada en la ciencia sobre autocuidado, desarrollo físico, salud mental y emocional, hábitos y alimentación saludables, mediante lecturas, ejercicios, actividades y prácticas concretas, para contribuir en su desarrollo equilibrado e integral. 
+
+5. Proporcionar a los adolescentes herramientas para identificar y diferenciar entre sueños, metas y objetivos realistas y realizables, a través de actividades formativas y orientación personalizada, con el fin de fortalecer su capacidad de planificación y construcción de un proyecto de vida sólido. 
+
+6. Desarrollar habilidades de liderazgo en los jóvenes, brindándoles las herramientas necesarias para que puedan influir de manera positiva en su entorno, promover el cambio social y contribuir al bienestar de sus comunidades, al tiempo que fortalecen su propio sentido de pertenencia, a través de actividades interactivas, talleres y oportunidades prácticas que les permitirán adquirir y fortalecer estas habilidades. 
+
+# **MÒDULOS** 
+
+- **Módulo 1:** “En voz alta” – Comunicación asertiva 
+
+- **Módulo 2:** “Ciudadanos Triple A” – Derechos y deberes ciudadanos / conocimiento de la ciudad, servicios y oportunidades. 
+
+- **Módulo 3:** “ Finanza Joven” – Educación básica financiera: Presupuesto personal. 
+
+- **Módulo 4:** “Vital Joven” – Capacitación en autocuidado, nutrición y buenas prácticas para el desarrollo físico, emocional y mental. Autoconocimiento y manejo de emociones. 
+
+- **Módulo 5:** “Jóvenes Aptos” – Proyecto de vida 
+
+- **Módulo 6:** “Jóvenes agentes de cambio” – Liderazgo y participación comunitaria. 
+
+# **Impacto de programa** 
+
+# **PROGRAMA FOMENTO PARA EL EMPLEO Y EMPRENDIMIENTO** 
+
+El programa busca desarrollar un modelo piloto, verificable y posteriormente replicable para promover capacidades y habilidades laborales y fortalecer la 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+capacidad de empleabilidad y de vinculación al mercado laboral de los y las adolescentes y jóvenes en proceso de egreso o egresados del sistema de protección estatal colombiano- ICBF- a través de un proceso de formación que reconozca sus necesidades especiales y desventajas frente a la población juvenil general y les permitan superar los déficits sociales, educativos y actitudinales, producto de largos años de institucionalización, aislamiento social y separación familiar. 
+
+# **OBJETIVO GENERAL DEL PROGRAMA** 
+
+Generar estrategias de formación y vinculación laboral en adolescentes y jóvenes sin cuidados parentales que están en la última instancia del sistema de protección estatal y egresados, que les permita encontrar un empleo digno para el desarrollo de su proyecto de vida y la inserción socio laboral, contribuyendo asi al cierre de brechas en el empleo juvenil. 
+
+# **ESPECIFICOS** 
+
+- Promover espacios de inserción social, capacidades y competencias aptas para la inserción laboral en adolescentes y jóvenes. 
+
+- Impulsar la aplicación de talleres experimentales que permitan a los/as jóvenes conocer las ofertas laborales y su contenido a través del ejercicio práctico del área de conocimiento, talleres aplicados por las entidades competentes. 
+
+- Vincular laboralmente a los jóvenes pre-egresados que se encuentran en la última instancia de egreso de protección y de aquellos que ya egresaron. 
+
+- Disminuir el fracaso que experimentan los jóvenes por motivos de escasa educación para desarrollarse en un determinado trabajo u oficio. 
+
+# **COMPONENTES DEL PROGRAMA** 
+
+Espacio para la formación y búsqueda de empleo con apoyo profesional, 
+
+intermediación laboral, entrenamiento en competencias y habilidades personales 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+> 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+para el empleo. Acceso a experiencias vocacionales en empresa, como primera toma de contacto con el mercado laboral, y entrada al circuito de ofertas conseguidas a través de la gestión del equipo técnico. 
+
+- Identificación de jóvenes con pocas oportunidades de desarrollo. 
+
+- Identificación de las debilidades y fortalezas en los participantes. 
+
+- Evaluación de los intereses de los participantes. 
+
+- Orientación, información y planificación de la búsqueda laboral. 
+
+- Itinerario de formación. 
+
+- Intermediación laboral para las prácticas en empresas. 
+
+- Vinculación laboral. 
+
+# **METAS DEL COMPONENTE** 
+
+# **ESTRATEGIA** 
+
+Garantizar la inclusión laboral de los jóvenes, articulando esfuerzos con el sector empresarial, de manera que sea un trabajo en conjunto donde la empresa suministra una persona que acompaña al joven en su actividad laboral dentro de la compañía, nosotros suministramos un representante y en el proceso de evaluación ambas partes determinan las debilidades y fortalezas del/la joven. 
+
+# **RESULTADOS ESPERADOS.** 
+
+- Jóvenes con experiencia laboral. 
+
+- Jóvenes con habilidades laborales fortalecidas. 
+
+- Jóvenes con estabilidad económica. 
+
+- Jóvenes que contribuyen al desarrollo social. 
+
+# **Impacto del programa** 
+
+
+
+# **PROGRAMA MI CUERPO, MI SEXUALIDAD, MI DECISIÓN** 
+
+# **Descripción del Programa** 
+
+El programa está diseñado para proveer a los  adolescentes y jóvenes que viven bajo protección del Estado las condiciones que permitan el ejercicio libre, 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+> 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+autónomo e informado de la sexualidad y el desarrollo en comunidad desde el punto de vista social, económico, cultural y político. 
+
+# **Objetivo del programa** 
+
+Prevenir, promover, generar y desarrollar  acciones que permitan las condiciones para el ejercicio pleno y autónomo de los derechos sexuales y reproductivos de los niños, niñas, adolescentes y jóvenes  que viven bajo protección del Estado con enfoque de género diferencial, contribuyendo a la preparación para la vida adulta independiente. 
+
+# **<u>Específicos:</u>** 
+
+- Desarrollar procesos formativos en los centros de protección. 
+
+- Capacitar al personal para que pueda desarrollar estrategias de Promoción de los DRSyR en los centros. 
+
+- Integrar los grupos de trabajo a otros grupos, colectivos y redes externas a ICBF y los centros de protección. 
+
+# **Componentes del programa** 
+
+1. Promoción de los derechos sexuales y reproductivos. 
+
+2. Ruta atención integral en Salud Sexual y Reproductiva. 
+
+3. Enfoque y equidad de género. 
+
+4. Abordaje de las violencias basadas en género y violencias sexuales. 
+
+5. Prevención de  ITSVIH/SIDA. 
+
+6. Educación en Consentimiento y Relaciones Saludables. 
+
+7. Educación sobre Diversidad Sexual y Afectiva. 
+
+8. Promoción de la Autonomía y Toma de Decisiones 
+
+9. Acceso a Servicios de Salud Mental 
+
+# **Impacto del programa** 
+
+# **PROGRAMA CASAS DEL SABER Y LA TRANSFORMACIÒN** 
+
+> 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+La creación de un **Programa Integral de Acompañamiento al Egresado** es fundamental para garantizar el ejercicio pleno de derechos, facilitar la inclusión social, laboral, y potenciar las capacidades humanas, permitiendo la construcción de proyectos de vida sostenibles. Los jóvenes que egresan del sistema de protección y que no logran ser ubicados en un medio familiar requieren un apoyo especial del Estado, el cual ha desempeñado un rol paternal en su desarrollo. Por ello, es imprescindible establecer un programa que asegure su inclusión social, el desarrollo de sus capacidades y la prevención de nuevas vulneraciones a sus derechos. 
+
+# **CARACTERIZACIÓN DE LA POBLACIÓN A LA QUE VA ORIENTADO EL PROGRAMA** 
+
+# **Población Objeto del Programa:** 
+
+El programa se centra en los jóvenes que, debido a su situación de vulnerabilidad antes mencionada, necesitan acompañamiento integral al egresar del sistema de protección del Instituto Colombiano de Bienestar Familiar (ICBF). en consecuencia, estos son los grupos específicos: 
+
+- Jóvenes que alcanzaron la mayoría de edad bajo protección del ICBF sin haber sido ubicados en un medio familiar, hasta los 28 años. 
+
+- Adolescentes y jóvenes próximos a egresar del sistema de protección, declarados en adoptabilidad, pero no ubicados en un medio familiar. 
+
+- Personas mayores de 18 años con discapacidad y dependencia funcional que requieren apoyos extensos o generalizados y permanecen bajo protección del ICBF. 
+
+# **IDENTIDAD DEL PROGRAMA** 
+
+Casas del Saber es el programa integral de ASCEP diseñado para acompañar a jóvenes en proceso de egreso y egresados del sistema de protección estatal en su transición hacia la vida adulta independiente. No es un programa de vivienda con servicios adicionales ni un proyecto de empleabilidad con alojamiento: es un modelo pedagógico, habitacional y autosostenible que opera de forma simultánea en dos dimensiones complementarias e inseparables. 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+**Programa de Acompañamiento Comunidad Formativa de Cuatro Integral Líneas** Las cuatro líneas temáticas: Todos los participantes independientemente de su Ciencias del Conocimiento, modalidad de vinculación acceden a Tecnología e Innovación, Arte y cinco áreas de intervención Cultura, Desarrollo Humano y articuladas entre sí. Este es el Liderazgo. son el eje de identidad, formación y desarrollo productivo núcleo operativo del programa: el conjunto de servicios, del programa. Cada línea es una comunidad de práctica con acompañamientos y procesos que propósito propio. hacen posible la transformación. 
+
+# **MODALIDADES DE PARTICIPACIÓN** 
+
+El programa reconoce dos modalidades de vinculación. Ambas son Casas del Saber. La vivienda es un servicio complementario para quienes más lo necesitan, no la identidad del programa. 
+
+|**MODALIDAD**|**DESCRIPCIÓN Y ALCANCE**|
+|---|---|
+|**Con servicio**<br>**habitacional**<br>(Residentes)|Para jóvenes sin red de apoyo ni condiciones<br>habitacionales estables. Acceden a una casa<br>física compartida máximo 8 personas por vivienda<br>como espacio seguro, pedagógico y comunitario.<br>Reciben todas las cinco áreas de intervención del<br>programa y participan en una o más de las cuatro<br>líneas temáticas.<br>•  Capacidad habitacional: 8 jóvenes por casa<br>•  Incluye: vivienda, alimentación (gestionada<br>autónomamente), acompañamiento integral y<br>formación en líneas temáticas<br>•  Duración: hasta 24 meses, con egreso<br>progresivo y planificado|
+
+
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+Para jóvenes con condiciones habitacionales básicas resueltas que requieren acompañamiento en su proceso de egreso y construcción de autonomía. Acceden a todas las áreas de intervención —excepto vivienda— y participan **Sin servicio** activamente en las líneas temáticas. **habitacional** •  No requieren residir en la casa (Externos) • Incluye: acompañamiento psicosocial, socioeducativo, inserción laboral, coordinación y formación en líneas temáticas •  Capacidad por línea temática: hasta 12 participantes entre residentes y externos 
+
+# **PROPÓSITO TRANSFORMADOR** 
+
+# **TRANSFORMAMOS PROYECTOS DE VIDA** 
+
+_Mediante un modelo pedagógico, habitacional y autosostenible, orientado a fortalecer las capacidades de jóvenes con experiencia de vida en el sistema de protección estatal, a través de procesos formativos integrales en investigación, tecnología, arte y desarrollo humano, articulados con cinco áreas de intervención que garantizan un acompañamiento integral, continuo y con enfoque de derechos._ 
+
+# **OBJETIVOS DEL PROGRAMA** 
+
+# **Objetivo General** 
+
+Acompañar de manera integral a jóvenes en proceso de egreso y egresados del sistema de protección estatal en su transición hacia la vida adulta independiente, mediante un modelo pedagógico, habitacional y autosostenible que articula cinco áreas de intervención con cuatro líneas de formación temática, fortaleciendo su autonomía, bienestar emocional y 
+
+> Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+capacidad de liderazgo para la construcción de proyectos de vida sólidos, sostenibles y con sentido. 
+
+# **Objetivos Específicos** 
+
+|**CÓDIGO**|**ENUNCIADO**|
+|---|---|
+|**OE1 → Área 3**<br>**+ Líneas**<br>**Temáticas**<br>**OE2 → Área 3**<br>**(Plan de**<br>**Egreso) +**<br>**Transversal**|Fortalecer la autonomía y la toma de decisiones de cada<br>joven mediante itinerarios personalizados que integren sus<br>intereses, talentos y condiciones de vida con las rutas<br>formativas, educativas y laborales del programa, priorizando<br>su participación activa en la construcción de su propio<br>proyecto de vida.<br>Planificar el egreso como un proceso progresivo, integral y<br>con enfoque de derechos, que involucra al joven, su red de<br>apoyo y su comunidad, y que trasciende la empleabilidad<br>para incluir dimensiones de autonomía, liderazgo,<br>ciudadanía y bienestar sostenible a lo largo de tres fases:<br>acogida, formación activa y consolidación.|
+|**OE3 → Área 4**<br>**+ Líneas**<br>**Temáticas**|Facilitar la inserción socio-laboral de los jóvenes a través de<br>sus líneas temáticas de formación, articulando el desarrollo<br>de capacidades con oportunidades reales en el mercado<br>laboral, la economía creativa, el sector digital o el ámbito<br>social, según el perfil y proyecto de vida de cada joven.|
+|**OE4 → Área 2**<br>**+ Área 5**|Construir y fortalecer redes de apoyo, entornos protectores<br>y vínculos significativos que amplíen las posibilidades de|
+
+
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+inserción social y bienestar integral, articulando actores institucionales, comunitarios y del sector privado en torno a cada trayectoria individual. Brindar acompañamiento psicosocial continuo y diferenciado que permita a los jóvenes cerrar ciclos, **OE5 → Área 2** construir su identidad, fortalecer su bienestar emocional y consolidar proyectos de vida basados en la responsabilidad, la independencia y el compromiso comunitario. Generar, desde cada línea temática, proyectos colectivos de creación de valor que contribuyan a la autosostenibilidad del **OE6 → Área 4 + Transversal** modelo y al desarrollo de competencias productivas **a líneas** transferibles, convirtiendo el aprendizaje en producto y el producto en fuente de ingreso y autonomía. 
+
+# **MODELO DE INTERVENCIÓN: LAS CINCO ÁREAS** 
+
+Las cinco áreas constituyen la base operativa del programa y aplican a todos los jóvenes vinculados, independientemente de su modalidad o línea temática. Son el cómo del acompañamiento. 
+
+|**#**|**ÁREA**|**DESCRIPCIÓN OPERATIVA**|**ALINEA CON**<br>**RYFF**|
+|---|---|---|---|
+|**1**|**Cobertura**<br>**de**<br>**Necesidade**<br>**s Básicas**|Garantizar las condiciones mínimas de<br>bienestar vivienda, alimentación, salud<br>y emergencias para que el joven pueda<br>enfocarse en su proceso formativo y de<br>inserción. La vivienda aplica<br>exclusivamente a la Modalidad 1.|<br>_Autoaceptaci_<br>_ón_<br><br>_Relaciones_<br>_positivas_<br><br>_Dominio del_<br>_entorno_|
+|**2**|**Acompaña**<br>**miento**<br>**Psicosocial**<br>**Integral y**<br>**Continuo**|Brindar acompañamiento emocional<br>sostenido a través de evaluación<br>psicosocial, psicoterapia individual y|<br>_Autoaceptaci_<br>_ón_<br><br>_Relaciones_<br>_positivas_<br><br>_Crecimiento_|
+
+
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+|||grupal, espacios colectivos de cuidado<br><br>||
+|---|---|---|---|
+|||y<br>un<br>plan<br>psicoemocional<br>personalizado con enfoque en trauma,<br>autocuidado y resiliencia.|_personal_|
+|**3**|**Acompaña**<br>**miento**<br>**Socioeduca**<br>**tivo**|Fortalecer la autonomía educativa, el<br>proyecto de vida y el plan de egreso<br>progresivo<br>mediante<br>tutorías<br>integrales, la Escuela de Vida<br>Independiente, guía vocacional,<br>regularización documental y la<br>construcción participativa del itinerario<br>de desarrollo de cada joven.|<br>_Autonomía_<br>_Autoaceptaci_<br>_ón_<br><br>_Crecimiento_<br>_personal_|
+|**4**|**Inserción**<br>**Socio-**<br>**Laboral**|Facilitar la incorporación al mundo del<br>trabajo a través de talleres de empleo,<br>evaluación vocacional, alianzas con el<br>sector privado, prácticas laborales y<br>acceso a certificaciones técnicas.<br>Cada línea temática define el sector y<br>el eje productivo de inserción.|<br>_Dominio del_<br>_entorno_<br><br>_Propósito en_<br>_la vida_<br><br>_Autonomía_|
+|**5**|**Coordinaci**<br>**ón de**<br>**Recursos e**<br>**Incidencia**|Articular esfuerzos interinstitucionales<br>con ICBF, sector educativo, salud y<br>cooperación internacional. Incluye<br>mapa de aliados, acompañamiento<br>jurídico-administrativo y monitoreo<br>individualizado de cada trayectoria con<br>sistema de alertas.|<br>_Dominio del_<br>_entorno_<br>_Propósito en_<br>_la vida_|
+
+
+
+# **MODELO FORMATIVO: LAS CUATRO LÍNEAS TEMÁTICAS** 
+
+Las cuatro líneas temáticas son el eje de identidad y formación del programa. Son comunidades de práctica donde los jóvenes aprenden haciendo, construyen proyectos colectivos y desarrollan capacidades para la vida y el trabajo en sectores específicos. Cada línea tiene un propósito propio, un eje productivo que 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+> 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+aporta a la autosostenibilidad del modelo y una expresión diferenciada en cada una de las cinco áreas de intervención. 
+
+# LÍNEA 1 
+
+# **Ciencias del Conocimiento** 
+
+Responsable: Líder 1   |   Hasta 12 participantes por línea (residentes y externos) 
+
+|**Propósito**<br>Formar investigadores comunitarios<br>capaces de leer, documentar y<br>transformar su entorno social.|**Eje productivo**<br>**(autosostenibilidad)**<br>Investigación aplicada,<br>sistematización de experiencias y<br>consultoría de datos<br>comunitarios.|
+|---|---|
+|**Alineación con Bienestar**<br>**Psicológico (Ryff):**_Dominio del_<br>_entorno · Propósito en la vida ·_<br>_Autonomía_||
+
+
+
+|**ÁREA DE**<br>**INTERVENCI**<br>**ÓN**|**EXPRESIÓN EN LA LÍNEA DE CIENCIAS DEL**<br>**CONOCIMIENTO**|
+|---|---|
+|**Área 1 —**<br>**Necesidades**<br>**Básicas**|•  Base universal del programa. La casa física (modalidad<br>habitacional) garantiza condiciones de bienestar que<br>permiten al joven enfocarse en su proceso formativo e<br>investigativo.|
+|**Área 2 —**<br>**Psicosocial**|•  La identidad como investigador/a comunitario se trabaja<br>como fuente de propósito y autoeficacia.<br>•  La curiosidad intelectual y el pensamiento crítico se<br>abordan como recursos de resiliencia.<br>•  Grupos de reflexión sobre conocimiento, contexto y<br>poder desde la propia experiencia de vida.|
+|**Área 3 —**<br>**Socioeducati**<br>**vo**|•  Metodología de investigación comunitaria, lectura crítica<br>y análisis de datos.<br>•  Sistematización de experiencias propias y del entorno|
+
+
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+||como práctica formativa central.<br>•  Desarrollo de un proyecto investigativo propio como eje<br>de la ruta formativa.<br>•  Preparación para acceso a educación superior técnica,<br>tecnológica o universitaria.|
+|---|---|
+|**Área 4 —**<br>**Inserción**<br>**Laboral**|•  Ruta laboral hacia el sector académico, análisis de datos,<br>gestión pública basada en evidencia y consultoría social.<br>•  Eje productivo autosostenible: investigación aplicada y<br>producción de conocimiento como servicio.<br>•<br>Vinculación con oportunidades de empleo en<br>sistematización, análisis y ciencias sociales.|
+|**Área 5 —**<br>**Coordinació**<br>**n**|•  Alianzas con universidades, centros de investigación y<br>ONG investigadoras.<br>•<br>Articulación con organismos de cooperación<br>internacional con enfoque en investigación social aplicada.|
+
+
+
+LÍNEA 2 **Tecnología e Innovación** Responsable: Líder 2   |   Hasta 12 participantes por línea (residentes y externos) 
+
+# **Propósito** 
+
+Desarrollar creatividad tecnológica e innovación orientada a la solución de problemas reales con impacto social. 
+
+**Eje productivo (autosostenibilidad)** Desarrollo de soluciones digitales, apps y productos tecnológicos para organizaciones y comunidades. 
+
+**Alineación con Bienestar Psicológico (Ryff):** _Autonomía · Crecimiento personal · Dominio del entorno_ 
+
+**ÁREA DE EXPRESIÓN EN LA LÍNEA DE TECNOLOGÍA E INTERVENCIÓN INNOVACIÓN Área 1 —** • Base universal del programa. Se priorizan 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+|**Necesidades**<br>**Básicas**|herramientas tecnológicas y conectividad como parte<br>del acompañamiento básico.|
+|---|---|
+|**Área 2 —**<br>**Psicosocial**|•  La autoeficacia digital se trabaja como fuente de<br>autonomía y confianza personal.<br>•  La creatividad tecnológica como herramienta de<br>transformación del entorno.<br>•  La comunidad de práctica tecnológica funciona como<br>red de apoyo emocional entre pares.|
+|**Área 3 —**<br>**Socioeducativo**|•  Formación en TIC, programación, diseño digital y<br>pensamiento computacional.<br>•  Desarrollo de proyectos de innovación tecnológica<br>con impacto social medible.<br>•  Acceso a certificaciones técnicas y digitales<br>reconocidas por el mercado laboral.|
+|**Área 4 —**<br>**Inserción**<br>**Laboral**|•  Empleabilidad en economía digital, startups, trabajo<br>remoto y plataformas freelance.<br>•<br>Eje productivo autosostenible: desarrollo de<br>soluciones digitales para organizaciones y<br>comunidades.<br>•  Conexión con empresas tech, cooperativas digitales y<br>programas de aceleración.|
+|**Área 5 —**<br>**Coordinación**|•  Alianzas con SENA digital, empresas de tecnología,<br>parques tecnológicos y aceleradoras.<br>•  Articulación con plataformas de formación online y<br>programas de emprendimiento digital.|
+
+
+
+# LÍNEA 3 **Arte y Cultura** 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+Responsable: Líder 3   |   Hasta 12 participantes por línea (residentes y externos) 
+
+# **Propósito** 
+
+**Propósito Eje productivo** Fomentar la identidad, la expresión **(autosostenibilidad)** artística y el desarrollo de proyectos Producción y comercialización creativos con valor cultural y artística, gestión cultural y económico. servicios creativos con valor de mercado. 
+
+**Alineación con Bienestar Psicológico (Ryff):** _Autoaceptación · Relaciones positivas · Crecimiento personal_ 
+
+|**ÁREA DE**<br>**INTERVENCIÓN**|**EXPRESIÓN EN LA LÍNEA DE ARTE Y CULTURA**|
+|---|---|
+|**Área 1 —**<br>**Necesidades**<br>**Básicas**|•  Base universal del programa. Se garantiza acceso a<br>materiales y espacios para la práctica artística<br>sostenida.|
+|**Área 2 —**<br>**Psicosocial**|•  La expresión artística se trabaja como herramienta<br>terapéutica y de construcción de identidad.<br>•  El arte como medio de procesamiento emocional y<br>resignificación de la historia de vida.<br>•  La narrativa propia —visual, sonora o escrita— como<br>recurso de resiliencia y autoconocimiento.|
+|**Área 3 —**<br>**Socioeducativo**|•  Formación en disciplinas artísticas: artes visuales,<br>música, teatro, escritura creativa y danza.<br>•  Gestión de proyectos culturales: planeación,<br>ejecución, circulación y difusión.<br>•  Patrimonio, identidad y memoria como ejes de<br>formación con sentido colectivo.|
+|**Área 4 —**<br>**Inserción**<br>**Laboral**|•  Economía creativa, gestión cultural y producción<br>artística con valor de mercado.<br>•  Eje productivo autosostenible: producción de obras,|
+
+
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+||servicios creativos y eventos culturales.<br>•  Rutas hacia industrias creativas, medios de<br>comunicación y el sector cultural.|
+|---|---|
+|**Área 5 —**<br>**Coordinación**|•  Alianzas con casas de cultura, Ministerio de Cultura<br>e industrias creativas locales.<br>•  Articulación con colectivos artísticos, festivales,<br>plataformas de economía naranja y gestores<br>culturales.|
+
+
+
+LÍNEA 4 **Desarrollo Humano y Liderazgo** Responsable: Líder 4   |   Hasta 12 participantes por línea (residentes y externos) 
+
+**Propósito Eje productivo** Promover el bienestar emocional, el **(autosostenibilidad)** proyecto de vida y el liderazgo Facilitación de talleres, consultoría comunitario como ejes de en desarrollo organizacional y transformación social. acompañamiento psicosocial comunitario. 
+
+**Alineación con Bienestar Psicológico (Ryff):** _Propósito en la vida · Autoaceptación · Relaciones positivas_ 
+
+|**ÁREA DE**<br>**INTERVENCIÓN**|**EXPRESIÓN EN LA LÍNEA DE DESARROLLO**<br>**HUMANO Y LIDERAZGO**|
+|---|---|
+|**Área 1 —**<br>**Necesidades**<br>**Básicas**|•  Base universal del programa. El bienestar integral se<br>entiende como condición estructural para el ejercicio del<br>liderazgo.|
+|**Área 2 —**<br>**Psicosocial**|•  Esta línea es el corazón psicoemocional del modelo:<br>profundiza y refuerza el Área 2 para todos los jóvenes.|
+||•  Las seis dimensiones del bienestar psicológico de|
+
+
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+||Ryff se trabajan de forma explícita y personalizada.<br>•  Proyecto de vida, bienestar emocional e identidad de<br>liderazgo como ejes del trabajo psicosocial.<br>|
+|---|---|
+|**Área 3 —**<br>**Socioeducativo**|•<br>Formación en habilidades socioemocionales,<br>ciudadanía activa y liderazgo comunitario.<br>•  Facilitación pedagógica y acompañamiento social<br>como saberes aplicados y transferibles.<br>•  Diseño y gestión de iniciativas comunitarias con<br>impacto medible en el entorno.|
+|**Área 4 —**<br>**Inserción**<br>**Laboral**|•  Sector social, ONG, movimientos juveniles y<br>organizaciones comunitarias como mercado laboral.<br>•  Eje productivo autosostenible: facilitación de talleres<br>y consultoría en desarrollo organizacional.<br>•  El liderazgo como competencia con valor real en el<br>sector solidario y la cooperación internacional.|
+|**Área 5 —**<br>**Coordinación**|•  Alianzas con organizaciones de sociedad civil,<br>fundaciones y redes de derechos humanos.<br>•  Articulación con movimientos juveniles, entidades de<br>cooperación y plataformas de voluntariado estratégico.|
+
+
+
+# **7. MATRIZ DE ARTICULACIÓN: ÁREAS × LÍNEAS TEMÁTICAS** 
+
+La siguiente matriz sintetiza la articulación completa del modelo. Cada celda muestra el foco específico que adopta cada área de intervención según la línea temática en la que participa el joven. Esta matriz es la herramienta de lectura rápida del modelo: lo que está desarrollado en detalle en la Sección 6 se condensa aquí para orientar la planificación operativa del equipo. 
+
+|**ÁREA /**<br>|**Ciencias del**|**Tecnología e**|**Arte y**|**Desarrollo**|
+|---|---|---|---|---|
+|**LÍNEA**|**Conocimiento**|**Innovación**|**Cultura**|**Humano y**|
+
+
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+|||||**Liderazgo**|
+|---|---|---|---|---|
+||Base universal.|Base|Base|Base|
+||Condiciones|universal.|universal.|universal.|
+|**Á1 —**|para el proceso|Acceso<br>a|Materiales y|Bienestar|
+|**Necesid**<br>**ades**<br>**Básicas**|investigativo.|conectividad<br>y<br>herramientas<br>digitales.|espacios para<br>práctica<br>artística.|como<br>condición del<br>liderazgo.|
+|**Á2 —**|Identidad<br>investigadora|Autoeficacia<br>digital,|Arte<br>como<br>herramienta|Núcleo del<br>modelo: Ryff,|
+|<br>**Psicoso**<br>**cial**|como propósito<br>y resiliencia.|creatividad y<br>comunidad de<br>práctica.|terapéutica e<br>identidad.|proyecto de<br>vida,<br>liderazgo.|
+||Investigación|TIC,|Disciplinas|Habilidades|
+||comunitaria,|programación|artísticas,|socioemocion|
+|**Á3 —**<br>**Socioed**<br>**ucativo**|datos, proyecto<br>propio.|,<br>diseño,<br>innovación,<br>certificacione<br>s.|gestión<br>cultural,<br>patrimonio.|ales,<br>ciudadanía,<br>facilitación.|
+||Sector|Economía|Economía|Sector social,|
+||académico,|digital,|creativa,|ONG. Eje:|
+|**Á4 —**<br>**Inserció**<br>**n**<br>**Laboral**|datos,<br>consultoría. Eje:<br>conocimiento<br>como servicio.|startups. Eje:<br>soluciones<br>digitales.|gestión<br>cultural. Eje:<br>producción<br>artística.|facilitación y<br>consultoría.|
+||Universidades,|SENA digital,|Casas<br>de|Sociedad|
+|**Á5**|centros<br>de|empresas|cultura,|civil,|
+|**—**<br>**Coordin**<br>**ación**|investigación,<br>cooperación.|tech,<br>aceleradoras.|MinCultura,<br>industrias<br>creativas.|cooperación,<br>movimientos<br>juveniles.|
+
+
+
+# **ESTRUCTURA OPERATIVA** 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+# **Capacidad y roles** 
+
+|**ROL /**<br>**CAPACIDA**<br>**D**|**DESCRIPCIÓN**|
+|---|---|
+||Máximo 8 jóvenes por casa física. Espacio comunitario con|
+|**Servicio**<br>**habitacional**|zonas comunes equipadas. Gestión autónoma de la<br>convivencia bajo acompañamiento del equipo. Aplica solo a<br>Modalidad 1.|
+|**Líneas**<br>**temáticas**|Hasta 12 participantes por línea (residentes + externos). Los<br>residentes pueden participar en más de una línea. La línea es<br>una comunidad de práctica abierta, no un aula cerrada.|
+|**Líderes**<br>**temáticos**|Un líder especializado por línea (4 en total). Responsables del<br>propósito formativo, los proyectos productivos y la articulación<br>con aliados del sector correspondiente.|
+|**Equipo**<br>**psicosocial**|Psicólogo/a y trabajador/a social que transversalizan el Área 2<br>en todas las líneas. Garantes del plan psicoemocional<br>individual y del seguimiento trimestral.|
+|**Tutores/**<br>**Mentores**|Red de mentores externos vinculados por línea temática para<br>acompañamiento en inserción laboral, proyectos y exploración<br>vocacional.|
+|**Coordinació**<br>**n general**|Coordinador/a del programa responsable de la articulación<br>interinstitucional, el monitoreo de trayectorias y la gestión<br>estratégica de recursos.|
+
+
+
+# **RUTA DE EGRESO PROGRESIVO (OE2)** 
+
+El egreso no es un evento, es un proceso. Casas del Saber concibe la transición hacia la vida adulta independiente como una ruta en tres fases que involucra al joven, su red de apoyo y su comunidad. Esta ruta opera de manera transversal 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 
+
+> 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+> 3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+
+en todas las áreas, especialmente en el Área 3 (Socioeducativo), y marca el ritmo de la intervención integral. 
+
+|**FASE**|**PERÍODO**<br>**Y**<br>**NOMBRE**|**COMPONENTES CLAVE**|
+|---|---|---|
+||**Meses 1 – 6**|Evaluación psicosocial inicial. Construcción del itinerario individual.|
+|**FASE**<br>**1**|**_Acogida y_**<br>**_Diagnóstico_**|Vinculación a la línea temática. Regularización documental.<br>Establecimiento de metas de corto plazo. Mapeo de la red de<br>apoyo.|
+||**Meses 7 – 18**|Desarrollo activo en la línea temática. Formación en la Escuela de|
+|**FASE**<br>**2**|**_Formación y_**<br>**_Consolidaci_**<br>**_ón_**|Vida Independiente. Prácticas laborales y primer acercamiento al<br>mercado. Fortalecimiento de redes. Seguimiento psicoemocional<br>trimestral. Construcción del proyecto productivo.|
+||**Meses 19 –**|Plan de egreso personalizado. Consolidación del proyecto laboral|
+|**FASE**|**24**|o emprendimiento. Transferencia progresiva de responsabilidades.|
+|**3**|**_Egreso y_**<br>**_Seguimiento_**|Cierre de ciclo terapéutico. Integración a redes de egresados.<br>Seguimiento post-egreso a los 3, 6 y 12 meses.|
+
+
+
+**Nota metodológica** : Este documento constituye el marco estratégico articulado de Casas del Saber. Los TDR del programa (Términos de Referencia) contienen los protocolos operativos, criterios de selección, indicadores y formatos de seguimiento de cada área. Ambos documentos deben leerse de manera complementaria **.** 
+
+Stein, M. (2008). Young people leaving care. National Childrens Bureau Higlight, 240, 1- 4. Recuperado de http://www.york.ac.uk/inst/spru/research/pdf/ YPLeavingCare.pdf. 2 Jekielek, S. y Brown, B. (2005). The transition to adulthood: characteristics of young adults ages 18 to 24 in America. Washington: The Annie E. Casey Foundation – Population Reference Bureau – Child Trends. Recuperado de http://www.prb.org/pdf05/transitio ntoadulthood.pdf. 
+
+3 Estado mundial de la infancia 2011. La adolescencia Una época de oportunidades, Fondo de las Naciones Unidas para la Infancia (UNICEF). Febrero de 2011. 
+

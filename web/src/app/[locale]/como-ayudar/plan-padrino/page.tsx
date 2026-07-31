@@ -4,7 +4,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
 import ImageParallax from "@/components/ImageParallax";
-import { ArrowRight, CheckCircle, UserPlus, DollarSign, FileText, Heart, ArrowDown, Gift, Settings } from "lucide-react";
+import { ArrowRight, CheckCircle, UserPlus, DollarSign, FileText, Heart, ArrowDown, Gift } from "lucide-react";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
@@ -200,26 +200,7 @@ export default async function PlanPadrinoPage({
             </div>
           </AnimatedSection>
 
-          {/* Admin Quick Links */}
-          <AnimatedSection delay={0.3}>
-            <div className="mt-12 flex flex-wrap items-center justify-center gap-4 text-sm">
-              <span className="text-white/40">
-                <Settings size={14} className="mr-1 inline" />
-              </span>
-              <Link
-                href="/studio"
-                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium text-white/50 backdrop-blur-sm transition-all hover:border-white/30 hover:bg-white/10 hover:text-white/80"
-              >
-                Sanity Studio
-              </Link>
-              <Link
-                href="/zprimeascep"
-                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium text-white/50 backdrop-blur-sm transition-all hover:border-white/30 hover:text-white/80"
-              >
-                Dashboard zprime
-              </Link>
-            </div>
-          </AnimatedSection>
+
         </div>
       </section>
     </div>

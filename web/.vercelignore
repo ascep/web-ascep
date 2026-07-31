@@ -1,5 +1,18 @@
-node_modules/
-.next/
-.vercel/
-FOTOS CASAS DEL SABER/
-_archived-videos/
+# Large videos not used by the site
+public/videos/20241112_100031.mp4
+public/videos/20241112_102610.mp4
+public/videos/WhatsApp-Video-2024-11-12-at-11.09.43-AM.mp4
+
+# Large PDFs not referenced in static fallback docs
+public/documents/Campana-voces-que-inspiran-.pdf
+public/documents/hoja-interior.pdf
+public/documents/BF_Caja_herramientas_Familias_en_Plural.pdf
+public/documents/REVISTA-ADOLESCENCIA.pdf
+public/documents/INFORME-INTEGRADO-ASCEP-2018.pdf
+public/documents/SISTEMATIZACION-PFLET-3.0.pdf
+public/documents/Cartilla-Proyecto-Formativo-LET-ve-sep-20-2018.pdf
+public/documents/INFOR-compressed.pdf
+public/documents/Manual-Familias.pdf
+
+# Large MKV not used by the site
+*.mkv
