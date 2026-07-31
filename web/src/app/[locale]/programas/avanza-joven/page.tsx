@@ -1,10 +1,10 @@
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
-import ImageParallax from "@/components/ImageParallax";
 import CtaBanner from "@/components/CtaBanner";
 import ProgramGallerySection from "@/components/ProgramGallerySection";
 import ProgramVideosSection from "@/components/ProgramVideosSection";
@@ -12,7 +12,7 @@ import { BookOpen, Users, DollarSign, Heart, Target, Star, BookMarked, type Luci
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { existsSync } from "fs";
-import { readdir } from "fs/promises";
+import { readdir, stat } from "fs/promises";
 import { join } from "path";
 import { getProgramBySlug, getDocumentsByCategory, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
 import { fileUrl, imageUrl } from "@/lib/sanity/image";
@@ -84,9 +84,21 @@ const localRevistas = [
 async function getAvanzaGallery(): Promise<string[]> {
   try {
     const dir = join(process.cwd(), "public", "images", "avanza-joven");
-    const files = await readdir(dir);
-    return files
-      .filter((f) => f.endsWith(".webp"))
+    const files = await readdir(dir, { withFileTypes: true });
+    const entries = await Promise.all(
+      files
+        .filter((f) => f.isFile() && f.name.endsWith(".webp"))
+        .map(async (f) => {
+          try {
+            const s = await stat(join(dir, f.name));
+            return s.size > 0 ? f.name : null;
+          } catch {
+            return null;
+          }
+        }),
+    );
+    return entries
+      .filter((n): n is string => n !== null)
       .sort()
       .map((f) => assetPath(`/images/avanza-joven/${f}`));
   } catch {
@@ -118,6 +130,9 @@ export default async function AvanzaJovenPage({
     : localRevistas;
 
   const avanzaGallery = await getAvanzaGallery();
+  const avanzaPhotos = avanzaGallery.length >= 4
+    ? avanzaGallery.slice(0, 4)
+    : fotos.home.gallery.slice(0, 4).map((img) => img.src);
 
   const videoTabs = [
     { id: "avanza-joven", label: t("videoTabAvanza") },
@@ -164,8 +179,18 @@ export default async function AvanzaJovenPage({
           </AnimatedSection>
           <div className="grid gap-12 md:grid-cols-2 items-center">
             <AnimatedSection direction="left">
-              <div className="relative h-72 overflow-hidden rounded-[10px] md:h-96">
-                <ImageParallax src={sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.avanzaJoven.image)} alt="Avanza Joven" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" intensity={0.2} />
+              <div className="grid grid-cols-2 gap-3">
+                {avanzaPhotos.map((src) => (
+                  <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-[10px]">
+                    <Image
+                      src={src}
+                      alt="Avanza Joven"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                    />
+                  </div>
+                ))}
               </div>
             </AnimatedSection>
             <AnimatedSection direction="right" delay={0.1}>
