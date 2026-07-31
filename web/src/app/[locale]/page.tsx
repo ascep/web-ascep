@@ -10,7 +10,8 @@ import HomeCTA from "@/components/HomeCTA";
 import Timeline from "@/components/Timeline";
 import ModeloGrid from "@/components/ModeloGrid";
 import ProgramCarousel from "@/components/ProgramCarousel";
-import LogoRing from "@/components/LogoRing";
+import LogoLoop from "@/components/LogoLoop";
+import ImpactMapSvg from "@/components/ImpactMapSvg";
 import GallerySection from "@/components/GallerySection";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
@@ -284,6 +285,7 @@ export default async function HomePage({
           title={h("statsTitle")}
           description={h("statsDesc")}
           stats={resolvedStats}
+          map={<ImpactMapSvg />}
           cta={
             <Link
               href={`/${locale}/impacto`}
@@ -337,7 +339,7 @@ export default async function HomePage({
           <h2 className="mb-10 text-center text-3xl font-bold text-[var(--color-text-primary)]">
             {h("aliadosTitle")}
           </h2>
-          <LogoRing logos={resolvedAliados} />
+          <LogoLoop logos={resolvedAliados} />
         </AnimatedSection>
       </section>
 

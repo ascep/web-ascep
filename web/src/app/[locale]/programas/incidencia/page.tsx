@@ -5,10 +5,13 @@ import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
+import ProgramGallerySection from "@/components/ProgramGallerySection";
+import ProgramVideosSection from "@/components/ProgramVideosSection";
 import { ArrowUpRight, Home, Search, Users, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
+import { getProgramBySlug, getDocumentsByCategory, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
+import { fileUrl } from "@/lib/sanity/image";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -69,7 +72,27 @@ export default async function IncidenciaPage({
 }) {
   const fotos = await getFotos();
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "programas" });
   const cms = await getProgramBySlug("incidencia");
+
+  const [revistas, videos] = await Promise.all([
+    getDocumentsByCategory("revistas"),
+    getVideos(locale),
+  ]);
+
+  const revistasList = revistas.length > 0
+    ? revistas.map((r) => ({
+        title: localize(r.title, locale) || "Revista",
+        href: r.externalUrl || fileUrl(r.file) || "#",
+      }))
+    : [];
+
+  const galeriaImages = fotos.impacto.gallery.slice(0, 8).map((src) => assetPath(src));
+
+  const videoTabs = [
+    { id: "testimonios", label: t("videoTabTestimonios") },
+    { id: "eventos", label: t("videoTabEventos") },
+  ];
 
   const objetivos = cms?.objectives && cms.objectives.length > 0
     ? cms.objectives.map((o: any) => ({
@@ -216,6 +239,20 @@ export default async function IncidenciaPage({
           </div>
         </div>
       </section>
+
+      <ProgramGallerySection
+        images={galeriaImages}
+        overlayLabel="Incidencia y Participacion"
+        magazines={revistasList}
+        locale={locale}
+      />
+
+      <ProgramVideosSection
+        videos={videos}
+        tabs={videoTabs}
+        bgImage={assetPath(fotos.programas.cards.incidencia.image)}
+        locale={locale}
+      />
     </>
   );
 }

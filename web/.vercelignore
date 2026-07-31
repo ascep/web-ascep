@@ -1,7 +1,19 @@
-# Large videos not used by the site
+# Local videos (served via YouTube/Sanity CMS now); keep only hero fallback
 public/videos/20241112_100031.mp4
+public/videos/20241112_102554.mp4
 public/videos/20241112_102610.mp4
 public/videos/WhatsApp-Video-2024-11-12-at-11.09.43-AM.mp4
+public/videos/WhatsApp-Video-2024-11-12-at-11.09.45-AM.mp4
+public/videos/video avanza joven/
+public/videos/video avanza joven/**
+
+# Build artifacts and deps (not uploaded)
+.next/
+node_modules/
+out/
+
+# Raw source photos (JPGs, not optimized for web)
+public/images/avanza joven fotos/
 
 # Large PDFs not referenced in static fallback docs
 public/documents/Campana-voces-que-inspiran-.pdf

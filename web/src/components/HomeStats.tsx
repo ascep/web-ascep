@@ -24,6 +24,7 @@ type HomeStatsProps = {
   description: string;
   cta: React.ReactNode;
   stats: StatItem[];
+  map?: React.ReactNode;
   variant?: "light" | "dark";
 };
 
@@ -33,6 +34,7 @@ export default function HomeStats({
   description,
   cta,
   stats,
+  map,
   variant = "light",
 }: HomeStatsProps) {
   const prefersReducedMotion = useReducedMotion();
@@ -41,28 +43,37 @@ export default function HomeStats({
   return (
     <section className="relative py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-10 lg:grid-cols-12">
-          <div className="lg:col-span-4">
-            <div className="lg:pt-10">
-              <div>
-                <span className="mb-3 inline-block rounded-[10px] bg-brand-purple/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-text-primary">
-                  {tag}
-                </span>
-                <h2 className="mb-4 text-3xl font-bold leading-tight text-[var(--color-text-primary)]">
-                  {(() => {
-                    const words = title.split(" ");
-                    const last = words.pop();
-                    return <>{words.join(" ")} <span className="text-text-primary">{last}</span></>;
-                  })()}
-                </h2>
-                <p className="mb-6 text-base leading-relaxed text-[var(--color-text-secondary)]">
-                  {description}
-                </p>
-                {cta}
+        <div className="mb-12 max-w-2xl">
+          <span className="mb-3 inline-block rounded-[10px] bg-brand-purple/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-text-primary">
+            {tag}
+          </span>
+          <h2 className="mb-4 text-3xl font-bold leading-tight text-[var(--color-text-primary)]">
+            {(() => {
+              const words = title.split(" ");
+              const last = words.pop();
+              return <>{words.join(" ")} <span className="text-text-primary">{last}</span></>;
+            })()}
+          </h2>
+          <p className="text-base leading-relaxed text-[var(--color-text-secondary)]">
+            {description}
+          </p>
+        </div>
+
+        <div className="grid items-center gap-10 lg:grid-cols-12">
+          {map ? (
+            <motion.div
+              className="lg:col-span-5"
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
+            >
+              <div className="mx-auto aspect-[627.92/909.79] w-full max-w-[420px] lg:max-w-none">
+                {map}
               </div>
-            </div>
-          </div>
-          <div className="lg:col-span-8">
+            </motion.div>
+          ) : null}
+          <div className={map ? "lg:col-span-7" : "lg:col-span-12"}>
             <div className="grid gap-6 sm:grid-cols-2">
               {stats.map((stat, i) => {
                 const Icon = iconMap[stat.icon] || Users;
@@ -92,15 +103,15 @@ export default function HomeStats({
                       />
                       <div className="relative z-10">
                         <div
-                          className={`mb-4 flex h-[74px] w-[74px] items-center justify-center rounded-full transition-all duration-500 group-hover:bg-white ${
+                          className={`mb-3 flex h-12 w-12 items-center justify-center rounded-full transition-all duration-500 group-hover:bg-white ${
                             isDark ? "bg-white/10" : ""
                           }`}
                           style={isDark ? {} : { backgroundColor: `${stat.color}1A` }}
                         >
-                          <Icon size={32} style={{ color: isDark ? stat.color : stat.color }} />
+                          <Icon size={22} style={{ color: stat.color }} />
                         </div>
                         <h3
-                          className="mb-1 text-4xl font-extrabold transition-all duration-500 sm:text-5xl"
+                          className="mb-1 text-2xl font-extrabold transition-all duration-500 sm:text-3xl"
                           style={{ color: isDark ? "#FFFFFF" : stat.color }}
                         >
                           <span className="group-hover:text-white">
@@ -123,6 +134,8 @@ export default function HomeStats({
             </div>
           </div>
         </div>
+
+        {cta ? <div className="mt-12 flex justify-center">{cta}</div> : null}
       </div>
     </section>
   );

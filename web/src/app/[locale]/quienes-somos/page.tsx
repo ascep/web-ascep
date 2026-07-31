@@ -14,7 +14,7 @@ import { getTranslations } from "next-intl/server";
 import { Target, Eye, Heart } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import LogoRing from "@/components/LogoRing";
+import LogoLoop from "@/components/LogoLoop";
 import { imageUrl } from "@/lib/sanity/image";
 import { getTeamMembers, getMilestones } from "@/lib/sanity/fetch";
 
@@ -80,6 +80,8 @@ export default async function QuienesSomosPage({
     ...item,
     src: assetPath(item.src),
   }));
+
+  const areasGallery = fotos.impacto.gallery.slice(0, 6);
 
   const cmsMapped = cmsTeam.length > 0
     ? cmsTeam.map((m) => ({
@@ -390,16 +392,30 @@ export default async function QuienesSomosPage({
               {t("areasTrabajoDesc")}
             </p>
           </AnimatedSection>
-          <AnimatedSection className="mb-10 overflow-hidden rounded-[10px]">
-            <ImageParallax
-              src={assetPath(fotos.quienesSomos.areasImage)}
-              alt=""
-              width={1200}
-              height={300}
-              className="h-48 w-full object-cover"
-              intensity={0.12}
-            />
-          </AnimatedSection>
+          <div className="mb-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {areasGallery.map((src, i) => (
+              <AnimatedSection
+                key={src}
+                direction="up"
+                delay={i * 0.06}
+                className={i === 0 ? "sm:col-span-2 sm:row-span-2" : ""}
+              >
+                <div className={`group relative w-full overflow-hidden rounded-[10px] ${
+                  i === 0 ? "h-56 sm:h-full" : "h-56"
+                }`}>
+                  <ImageParallax
+                    src={assetPath(src)}
+                    alt=""
+                    width={600}
+                    height={400}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    intensity={0.1}
+                  />
+                  <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {[
               { titleKey: "areaATitle", descKey: "areaADesc" },
@@ -435,7 +451,7 @@ export default async function QuienesSomosPage({
               {t("aliadosTitle")}
             </h2>
           </AnimatedSection>
-          <LogoRing logos={fallbackAliados} />
+          <LogoLoop logos={fallbackAliados} />
         </div>
       </section>
 
