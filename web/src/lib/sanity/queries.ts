@@ -138,6 +138,7 @@ export const documentsQuery = groq`*[_type == "documentEntry"] | order(category 
   category,
   description,
   file,
+  previewImage,
   externalUrl,
   order
 }`;
@@ -148,6 +149,7 @@ export const documentsByCategoryQuery = groq`*[_type == "documentEntry" && categ
   category,
   description,
   file,
+  previewImage,
   externalUrl,
   order
 }`;

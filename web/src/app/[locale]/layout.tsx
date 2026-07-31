@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import BotpressChat from "@/components/BotpressChat";
 import VisitorWidget from "@/components/VisitorWidget";
 import MobileTabBar from "@/components/MobileTabBar";
 import ScrollProgress from "@/components/ScrollProgress";
@@ -40,6 +41,7 @@ export default async function LocaleLayout({
         <Footer />
         <VisitorWidget />
         <WhatsAppButton />
+        <BotpressChat />
       </ThemeProvider>
     </NextIntlClientProvider>
   );

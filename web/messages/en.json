@@ -152,7 +152,8 @@
     "btnContacto": "Contact us",
     "gracias": "Thank you for believing in our cause",
     "heroTag": "DONATE",
-    "heroSubtitle2": "Your support makes a real difference in the lives of young people leaving the protection system.",
+    "heroTitle": "Your generosity transforms lives",
+    "heroSubtitle": "Your support makes a real difference in the lives of young people leaving the protection system.",
     "impactoTag": "IMPACT",
     "pequenasAcciones": "Small actions, big changes",
     "impactoCard1Label": "Training",
@@ -691,7 +692,17 @@
     "cifra3": "12,576",
     "cifra3Label": "Children and teens eligible for adoption",
     "cifra4": "3,025",
-    "cifra4Label": "Children and teens adopted"
+    "cifra4Label": "Children and teens adopted",
+    "revistasTag": "Publications",
+    "revistasTitle": "Avanza Joven <span>magazines</span>",
+    "revistasDesc": "Issues produced by the youth of the Avanza Joven program.",
+    "revistasVer": "Read magazine",
+    "videosTag": "Videos",
+    "videosTitle": "Program <span>moments</span>",
+    "videosDesc": "Testimonies and experiences of youth transitioning out of the protection system.",
+    "videoTabAvanza": "Avanza Joven",
+    "videoTabTestimonios": "Testimonies",
+    "videoTabEventos": "Events"
   },
   "metadata": {
     "home": {

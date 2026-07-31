@@ -829,7 +829,17 @@
     "cifra3": "12.576",
     "cifra3Label": "Criancas e adolescentes em adotabilidade",
     "cifra4": "3.025",
-    "cifra4Label": "Criancas e adolescentes adotados"
+    "cifra4Label": "Criancas e adolescentes adotados",
+    "revistasTag": "Publicacoes",
+    "revistasTitle": "Revistas <span>Avanza Joven</span>",
+    "revistasDesc": "Edicoes realizadas pelos jovens do programa Avanza Joven.",
+    "revistasVer": "Ver revista",
+    "videosTag": "Videos",
+    "videosTitle": "Momentos <span>do programa</span>",
+    "videosDesc": "Depoimentos e experiencias de jovens em transicao e egressos do sistema de protecao.",
+    "videoTabAvanza": "Avanza Joven",
+    "videoTabTestimonios": "Depoimentos",
+    "videoTabEventos": "Eventos"
   },
   "metadata": {
     "home": {

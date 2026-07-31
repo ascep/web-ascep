@@ -24,6 +24,7 @@ type HeroProps = {
   badge?: { text: string; label: string };
   videoSrc?: string;
   videoPoster?: string;
+  youtubeId?: string;
   showScrollIndicator?: boolean;
 };
 
@@ -42,6 +43,7 @@ export default function Hero({
   badge,
   videoSrc,
   videoPoster,
+  youtubeId,
   showScrollIndicator = false,
 }: HeroProps) {
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -73,7 +75,16 @@ export default function Hero({
         </div>
       )}
 
-      {isHome && videoSrc ? (
+      {isHome && youtubeId ? (
+        <div className="absolute inset-0 opacity-20">
+          <iframe
+            src={`https://www.youtube-nocookie.com/embed/${youtubeId}?autoplay=1&mute=1&loop=1&playlist=${youtubeId}&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1`}
+            title="ASCEP"
+            className="pointer-events-none h-full w-full"
+            allow="autoplay; encrypted-media; picture-in-picture"
+          />
+        </div>
+      ) : isHome && videoSrc ? (
         <div className="absolute inset-0 opacity-20">
           <video
             autoPlay

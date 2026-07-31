@@ -6,10 +6,15 @@ import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import CtaBanner from "@/components/CtaBanner";
+import VideoGallery from "@/components/VideoGallery";
 import { BookOpen, Users, DollarSign, Heart, Target, Star, BookMarked, FileText, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
+import { existsSync } from "fs";
+import { readdir } from "fs/promises";
+import { join } from "path";
+import { getProgramBySlug, getDocumentsByCategory, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
+import { fileUrl } from "@/lib/sanity/image";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -63,6 +68,31 @@ const fallbackModules = [
   { code: "Modulo 6", title: "Jovenes Agentes de Cambio", desc: "Liderazgo y participacion comunitaria.", icon: Star },
 ];
 
+const localRevistas = [
+  "Ana P", "Ana Sofia", "Claudia Celina", "Dayana", "Eliana", "Gisell",
+  "Ingrid T", "Karen J", "Kata", "Laura", "Mabel", "Maria Camila",
+  "Mercy", "Milena", "Nicol", "Sahary", "Saray", "Sofia",
+  "Tati", "Tina", "Yeri", "Yerli",
+]
+  .filter((name) => existsSync(join(process.cwd(), "public", "documents", "avenza joven pdf", "revistas", `${name}.pdf`)))
+  .map((name) => ({
+    title: `Revista ${name}`,
+    href: assetPath(`/documents/avenza joven pdf/revistas/${name}.pdf`),
+  }));
+
+async function getAvanzaGallery(): Promise<string[]> {
+  try {
+    const dir = join(process.cwd(), "public", "images", "avanza-joven");
+    const files = await readdir(dir);
+    return files
+      .filter((f) => f.endsWith(".webp"))
+      .sort()
+      .map((f) => assetPath(`/images/avanza-joven/${f}`));
+  } catch {
+    return [];
+  }
+}
+
 export default async function AvanzaJovenPage({
   params,
 }: {
@@ -72,6 +102,26 @@ export default async function AvanzaJovenPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "programas" });
   const cms = await getProgramBySlug("avanza-joven");
+
+  const [revistas, videos] = await Promise.all([
+    getDocumentsByCategory("revistas"),
+    getVideos(locale),
+  ]);
+
+  const revistasList = revistas.length > 0
+    ? revistas.map((r) => ({
+        title: localize(r.title, locale) || "Revista",
+        href: r.externalUrl || fileUrl(r.file) || "#",
+      }))
+    : localRevistas;
+
+  const avanzaGallery = await getAvanzaGallery();
+
+  const videoTabs = [
+    { id: "avanza-joven", label: t("videoTabAvanza") },
+    { id: "testimonios", label: t("videoTabTestimonios") },
+    { id: "eventos", label: t("videoTabEventos") },
+  ];
 
   const objetivos: { title: string; desc: string }[] = cms?.objectives && cms.objectives.length > 0
     ? cms.objectives.map((o: any) => ({
@@ -274,19 +324,19 @@ export default async function AvanzaJovenPage({
             </p>
           </AnimatedSection>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {fotos.home.gallery.slice(0, 8).map((img, i) => (
-              <AnimatedSection key={i} direction="up" delay={i * 0.06}>
+            {(avanzaGallery.length > 0 ? avanzaGallery : fotos.home.gallery.slice(0, 8).map((img) => img.src)).slice(0, 8).map((src, i) => (
+              <AnimatedSection key={`${src}-${i}`} direction="up" delay={i * 0.06}>
                 <div className={`group relative overflow-hidden rounded-[10px] ${i === 0 ? "sm:col-span-2 sm:row-span-2" : ""}`}>
                   <ImageParallax
-                    src={img.src}
-                    alt={img.alt}
+                    src={src}
+                    alt="Avanza Joven"
                     width={800}
                     height={600}
                     className="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     intensity={0.1}
                   />
                   <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                    <p className="p-4 text-sm font-semibold text-white">{img.alt}</p>
+                    <p className="p-4 text-sm font-semibold text-white">Avanza Joven</p>
                   </div>
                 </div>
               </AnimatedSection>
@@ -295,41 +345,54 @@ export default async function AvanzaJovenPage({
 
           <AnimatedSection className="mt-14 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
-              Recursos
+              {t("revistasTag")}
             </span>
             <h3 className="mb-8 text-2xl font-bold text-[var(--color-text-primary)] sm:text-3xl">
-              Cartillas y <span className="text-brand-orange">materiales</span>
+              {t.rich("revistasTitle", { span: (c) => <span className="text-brand-orange">{c}</span> })}
             </h3>
-            <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
-              {[
-                {
-                  title: "Cartilla Proyecto Formativo LET",
-                  desc: "Linea de Egreso Transitorio: guia de formacion para jovenes en transicion a la vida independiente.",
-                  href: assetPath("/documents/Cartilla-Proyecto-Formativo-LET-ve-sep-20-2018.pdf"),
-                },
-                {
-                  title: "Sistematizacion PFLET 3.0",
-                  desc: "Aprendizajes y experiencias del Proyecto Formativo de Linea de Egreso Transitorio.",
-                  href: assetPath("/documents/SISTEMATIZACION-PFLET-3.0.pdf"),
-                },
-              ].map((doc, i) => (
-                <AnimatedSection key={doc.title} direction="up" delay={i * 0.1}>
+            <p className="mx-auto mb-8 max-w-2xl text-[var(--color-text-secondary)]">
+              {t("revistasDesc")}
+            </p>
+            <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {revistasList.map((doc, i) => (
+                <AnimatedSection key={doc.title} direction="up" delay={i * 0.04}>
                   <a
                     href={doc.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex h-full flex-col items-start gap-3 rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 text-left transition-all hover:-translate-y-1 hover:shadow-md"
+                    className="group flex h-full items-center gap-3 rounded-[10px] border border-brand-purple/20 bg-bg-card p-4 text-left transition-all hover:-translate-y-1 hover:shadow-md"
                   >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-[10px] bg-brand-orange/10">
-                      <FileText size={24} className="text-brand-orange" />
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] bg-brand-orange/10">
+                      <FileText size={22} className="text-brand-orange" />
                     </div>
-                    <h4 className="font-bold text-[var(--color-text-primary)]">{doc.title}</h4>
-                    <p className="text-sm text-[var(--color-text-secondary)]">{doc.desc}</p>
+                    <div className="min-w-0">
+                      <h4 className="truncate font-bold text-[var(--color-text-primary)]">{doc.title}</h4>
+                      <p className="text-xs text-[var(--color-text-secondary)]">{t("revistasVer")}</p>
+                    </div>
                   </a>
                 </AnimatedSection>
               ))}
             </div>
           </AnimatedSection>
+        </div>
+      </section>
+
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.cards.avanzaJoven.image)})` } as CSSProperties}>
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              {t("videosTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t.rich("videosTitle", { span: (c) => <span className="text-white/80">{c}</span> })}
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-white/70">
+              {t("videosDesc")}
+            </p>
+          </AnimatedSection>
+          <VideoGallery videos={videos} tabs={videoTabs} />
         </div>
       </section>
 

@@ -23,6 +23,7 @@ export default defineType({
           { title: "Registros", value: "registros" },
           { title: "Legales", value: "legales" },
           { title: "Cartillas", value: "cartillas" },
+          { title: "Revistas", value: "revistas" },
         ],
       },
       validation: (rule) => rule.required(),
@@ -38,6 +39,12 @@ export default defineType({
       type: "file",
       options: { accept: ".pdf" },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: "previewImage",
+      title: "Imagen de portada",
+      type: "imageWithAlt",
+      description: "Miniatura de la primera pagina. Se muestra como vista previa del documento.",
     }),
     defineField({
       name: "externalUrl",

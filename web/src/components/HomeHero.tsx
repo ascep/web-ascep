@@ -12,6 +12,7 @@ type HomeHeroProps = {
   secondary?: React.ReactNode;
   heroPoster: string;
   heroImage: string;
+  youtubeId?: string | null;
 };
 
 export default function HomeHero({
@@ -22,6 +23,7 @@ export default function HomeHero({
   secondary,
   heroPoster,
   heroImage,
+  youtubeId,
 }: HomeHeroProps) {
   const t = useTranslations("home");
 
@@ -36,6 +38,7 @@ export default function HomeHero({
       heroImageAlt="ASCEP team"
       badge={{ text: "2019", label: t("heroBadge") }}
       videoSrc={assetPath("/videos/FONDO-WEB-16-9.mp4")}
+      youtubeId={youtubeId || undefined}
       videoPoster={assetPath(heroPoster)}
       showScrollIndicator
     >

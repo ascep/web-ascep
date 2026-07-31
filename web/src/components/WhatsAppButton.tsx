@@ -19,7 +19,7 @@ export default function WhatsAppButton() {
       href="https://wa.me/573025550107"
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-4 right-4 z-50 hidden h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl md:flex"
+      className="fixed bottom-4 left-4 z-50 hidden h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition-all hover:scale-110 hover:shadow-xl md:flex"
       aria-label={t("ariaLabel")}
     >
       <svg viewBox="0 0 24 24" fill="white" width="28" height="28">

@@ -62,6 +62,8 @@ export default defineType({
       options: {
         list: [
           { title: "Hero (fondo de pagina)", value: "hero" },
+          { title: "Avanza Joven", value: "avanza-joven" },
+          { title: "Testimonios", value: "testimonios" },
           { title: "Eventos", value: "eventos" },
           { title: "Enredate", value: "enredate" },
         ],

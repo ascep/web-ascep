@@ -23,6 +23,7 @@ import {
   getFeaturedPartners,
   getImpactStats,
   getTestimonials,
+  getVideosByCategory,
 } from "@/lib/sanity/fetch";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -56,11 +57,12 @@ export default async function HomePage({
   const h = await getTranslations({ locale, namespace: "home" });
   const g = await getTranslations({ locale, namespace: "generales" });
 
-  const [cmsMilestones, cmsPartners, cmsStats, cmsTestimonials] = await Promise.all([
+  const [cmsMilestones, cmsPartners, cmsStats, cmsTestimonials, cmsHeroVideos] = await Promise.all([
     getMilestones(),
     getFeaturedPartners(),
     getImpactStats(),
     getTestimonials("home"),
+    getVideosByCategory("hero", locale),
   ]);
 
   const fotos = await getFotos();
@@ -165,6 +167,7 @@ export default async function HomePage({
         subtitle={h("heroSubtitle")}
         heroPoster={fotos.home.heroPoster}
         heroImage={fotos.home.heroImage}
+        youtubeId={cmsHeroVideos[0]?.youtubeId ?? null}
         cta={
           <Link
             href={`/${locale}/programas`}

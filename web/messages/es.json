@@ -928,7 +928,17 @@
     "cifra3": "12.576",
     "cifra3Label": "NNA en adoptabilidad",
     "cifra4": "3.025",
-    "cifra4Label": "NNA adoptados"
+    "cifra4Label": "NNA adoptados",
+    "revistasTag": "Publicaciones",
+    "revistasTitle": "Revistas <span>Avanza Joven</span>",
+    "revistasDesc": "Ediciones realizadas por los jovenes del programa Avanza Joven.",
+    "revistasVer": "Ver revista",
+    "videosTag": "Videos",
+    "videosTitle": "Momentos <span>del programa</span>",
+    "videosDesc": "Testimonios y experiencias de los jovenes en transito y egresados del sistema de proteccion.",
+    "videoTabAvanza": "Avanza Joven",
+    "videoTabTestimonios": "Testimonios",
+    "videoTabEventos": "Eventos"
   },
   "metadata": {
     "home": {

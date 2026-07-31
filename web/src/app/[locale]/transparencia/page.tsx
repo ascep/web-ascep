@@ -9,8 +9,8 @@ import ImageParallax from "@/components/ImageParallax";
 import { FileText, DollarSign, BarChart3, FileBadge, Scale, FileCheck, Download } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
-import { getDocuments } from "@/lib/sanity/fetch";
-import { imageUrl } from "@/lib/sanity/image";
+import { getDocuments, sanityImage } from "@/lib/sanity/fetch";
+import { fileUrl } from "@/lib/sanity/image";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -24,14 +24,21 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const categoryConfig: Record<string, { icon: React.ElementType; iconBg: string; iconColor: string }> = {
-  institucionales: { icon: FileText, iconBg: "bg-brand-purple/10", iconColor: "text-brand-purple" },
-  financieros: { icon: DollarSign, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange" },
-  informes: { icon: BarChart3, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange" },
-  registros: { icon: FileBadge, iconBg: "bg-brand-purple/10", iconColor: "text-brand-purple" },
-  legales: { icon: Scale, iconBg: "bg-brand-teal/10", iconColor: "text-brand-teal" },
-  cartillas: { icon: FileCheck, iconBg: "bg-brand-teal/10", iconColor: "text-brand-teal" },
+const categoryConfig: Record<string, { icon: React.ElementType; iconBg: string; iconColor: string; title: string; desc: string }> = {
+  institucionales: { icon: FileText, iconBg: "bg-brand-purple/10", iconColor: "text-brand-purple", title: "Institucional", desc: "Conoce nuestra historia, mision y el marco estrategico de la organizacion." },
+  financieros: { icon: DollarSign, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange", title: "Estados Financieros", desc: "Informacion financiera y rendicion de cuentas de la organizacion." },
+  informes: { icon: BarChart3, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange", title: "Informes de Gestion", desc: "Reportes anuales de actividades y logros alcanzados." },
+  registros: { icon: FileBadge, iconBg: "bg-brand-purple/10", iconColor: "text-brand-purple", title: "Registro y Politicas", desc: "Registros oficiales y politicas institucionales de la asociacion." },
+  legales: { icon: Scale, iconBg: "bg-brand-teal/10", iconColor: "text-brand-teal", title: "Marco Legal", desc: "Documentos legales, estatutos y regimen de la organizacion." },
+  cartillas: { icon: FileCheck, iconBg: "bg-brand-teal/10", iconColor: "text-brand-teal", title: "Cartillas y Materiales", desc: "Materiales pedagogicos y herramientas de formacion." },
+  revistas: { icon: FileText, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange", title: "Revistas", desc: "Publicaciones periodicas de la organizacion." },
 };
+
+function pdfThumbPath(pdfPath: string): string {
+  const base = pdfPath.split("/").pop()?.replace(/\.pdf$/i, "") || "";
+  const slug = base.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  return `/images/pdf-previews/${slug}.jpg`;
+}
 
 const fallbackDocuments = [
   {
@@ -123,11 +130,12 @@ export default async function TransparenciaPage({
         return Object.entries(grouped).map(([, group]) => {
           const config = group.config;
           return {
-            title: group.entries[0].title?.es || "",
-            desc: group.entries[0].description?.es || "",
+            title: config.title,
+            desc: config.desc,
             files: group.entries.map((d) => ({
               name: d.title?.es || "Documento",
-              path: d.externalUrl || (d.file?.asset?._ref ? imageUrl(d.file) : "") || "#",
+              path: d.externalUrl || fileUrl(d.file) || "#",
+              preview: d.previewImage ? sanityImage(d.previewImage) : null,
             })),
             icon: config.icon,
             iconBg: config.iconBg,
@@ -135,7 +143,10 @@ export default async function TransparenciaPage({
           };
         });
       })()
-    : fallbackDocuments;
+    : fallbackDocuments.map((d) => ({
+        ...d,
+        files: d.files.map((f) => ({ ...f, preview: pdfThumbPath(f.path) })),
+      }));
 
   return (
     <div>
@@ -183,11 +194,19 @@ export default async function TransparenciaPage({
                       rel="noopener noreferrer"
                       className="group relative block h-[200px] overflow-hidden bg-zinc-100"
                     >
-                      <iframe
-                        src={assetPath(previewFile.path)}
-                        className="h-full w-full transition-transform duration-300 group-hover:scale-[1.02]"
-                        title={previewFile.name}
-                      />
+                      {previewFile.preview ? (
+                        <img
+                          src={previewFile.preview}
+                          alt={previewFile.name}
+                          className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+                        />
+                      ) : (
+                        <iframe
+                          src={assetPath(previewFile.path)}
+                          className="h-full w-full transition-transform duration-300 group-hover:scale-[1.02]"
+                          title={previewFile.name}
+                        />
+                      )}
                       <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/30">
                         <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                           <Download size={20} className="text-brand-purple" />

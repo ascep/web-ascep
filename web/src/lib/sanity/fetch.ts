@@ -1,5 +1,5 @@
 import { getClient } from "./client";
-import { imageUrl } from "./image";
+import { imageUrl, fileUrl } from "./image";
 
 interface SanityImage {
   asset?: {
@@ -17,6 +17,8 @@ import {
   featuredPartnersQuery,
   documentsQuery,
   documentsByCategoryQuery,
+  videosQuery,
+  videosByCategoryQuery,
   impactStatsQuery,
   testimonialsQuery,
   donationTiersQuery,
@@ -101,9 +103,53 @@ export type DocumentEntry = {
   category?: string;
   description?: { es?: string; en?: string; pt?: string };
   file?: any;
+  previewImage?: SanityImage;
   externalUrl?: string;
   order?: number;
 };
+
+export type VideoEntry = {
+  _id: string;
+  title?: { es?: string; en?: string; pt?: string };
+  description?: { es?: string; en?: string; pt?: string };
+  source?: "youtube" | "file";
+  youtubeUrl?: string;
+  videoFile?: any;
+  thumbnail?: SanityImage;
+  category?: string;
+  order?: number;
+};
+
+export type VideoEntryView = {
+  _id: string;
+  title: string;
+  description: string;
+  source: "youtube" | "file";
+  youtubeId: string | null;
+  videoUrl: string | null;
+  thumbnail: string | null;
+  category: string;
+  order: number;
+};
+
+function toVideoEntryView(v: VideoEntry, locale: string): VideoEntryView {
+  return {
+    _id: v._id,
+    title: localize(v.title, locale) || "",
+    description: localize(v.description, locale) || "",
+    source: v.source || "youtube",
+    youtubeId: v.source === "youtube" && v.youtubeUrl ? extractYouTubeId(v.youtubeUrl) : null,
+    videoUrl: v.source === "file" && v.videoFile?.asset?._ref ? fileUrl(v.videoFile) : null,
+    thumbnail: sanityImage(v.thumbnail),
+    category: v.category || "eventos",
+    order: v.order ?? 0,
+  };
+}
+
+export function extractYouTubeId(url: string): string | null {
+  const m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/);
+  return m ? m[1] : null;
+}
 
 export type ImpactStat = {
   _id: string;
@@ -213,6 +259,16 @@ export async function getDocuments(): Promise<DocumentEntry[]> {
 export async function getDocumentsByCategory(category: string): Promise<DocumentEntry[]> {
   const data = await sanityFetch<DocumentEntry[]>(documentsByCategoryQuery, { category });
   return data ?? [];
+}
+
+export async function getVideos(locale: string): Promise<VideoEntryView[]> {
+  const data = await sanityFetch<VideoEntry[]>(videosQuery);
+  return (data ?? []).map((v) => toVideoEntryView(v, locale));
+}
+
+export async function getVideosByCategory(category: string, locale: string): Promise<VideoEntryView[]> {
+  const data = await sanityFetch<VideoEntry[]>(videosByCategoryQuery, { category });
+  return (data ?? []).map((v) => toVideoEntryView(v, locale));
 }
 
 export async function getImpactStats(): Promise<ImpactStat[]> {
