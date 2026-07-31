@@ -34,8 +34,8 @@ export default function ImageCarousel({
   }, [next, interval, images.length]);
 
   return (
-    <div className={`relative mx-auto w-full max-w-5xl overflow-hidden rounded-[10px] ${className}`}>
-      <div className="relative aspect-[16/9] w-full">
+    <div className={`relative mx-auto w-full max-w-2xl overflow-hidden rounded-[10px] ${className}`}>
+      <div className="relative aspect-[4/5] w-full">
         <AnimatePresence mode="wait">
           <motion.div
             key={active}

@@ -841,7 +841,9 @@
     "leyCta": "Conozca la Ley"
   },
   "whatsapp": {
-    "ariaLabel": "Contactar por WhatsApp"
+    "ariaLabel": "Contactar por WhatsApp",
+    "cardTitle": "WhatsApp",
+    "cardDesc": "Escríbenos y te responderemos a la brevedad."
   },
   "donationForm": {
     "tier1Label": "Dona un café",

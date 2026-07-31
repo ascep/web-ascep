@@ -7,7 +7,7 @@ import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import type { CSSProperties } from "react";
-import { MapPin, Mail, Share2 } from "lucide-react";
+import { MapPin, Mail, MessageCircle, Share2 } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
@@ -32,6 +32,7 @@ export default async function ContactoPage({
   const fotos = await getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "contacto" });
+  const tw = await getTranslations({ locale, namespace: "whatsapp" });
   const pageData = await getPageContent("contacto");
   return (
     <div>
@@ -110,6 +111,25 @@ export default async function ContactoPage({
                 </AnimatedSection>
 
                 <AnimatedSection direction="right" delay={0.15}>
+                  <a
+                    href="https://wa.me/573025550107"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={tw("ariaLabel")}
+                    className="glass-card block rounded-[10px] p-8 text-center transition-all hover:bg-white/15"
+                  >
+                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-white/10">
+                      <MessageCircle size={24} className="text-brand-secondary" />
+                    </div>
+                    <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{tw("cardTitle")}</h4>
+                    <p className="text-sm text-[var(--color-text-muted)]">{tw("cardDesc")}</p>
+                    <p className="mt-1 text-sm font-semibold text-white transition-colors hover:text-brand-secondary-dark hover:underline">
+                      +57 302 555 0107
+                    </p>
+                  </a>
+                </AnimatedSection>
+
+                <AnimatedSection direction="right" delay={0.2}>
                   <div className="glass-card rounded-[10px] p-8 text-center transition-all hover:bg-white/15">
                     <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-white/10">
                       <Share2 size={24} className="text-brand-secondary" />

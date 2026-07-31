@@ -3,10 +3,11 @@
 .vercel
 .vercelignore
 .opencode
-videos
-podcast
-logos
-scripts
+# Anchored so nested web/public/{logos,videos} are NOT excluded
+/videos/
+/podcast/
+/logos/
+/scripts/
 *.mkv
 *.docx
 *.md

@@ -742,7 +742,9 @@
     "leyCta": "Conheça a Lei"
   },
   "whatsapp": {
-    "ariaLabel": "Fale conosco pelo WhatsApp"
+    "ariaLabel": "Fale conosco pelo WhatsApp",
+    "cardTitle": "WhatsApp",
+    "cardDesc": "Escreva para nós e responderemos em breve."
   },
   "donationForm": {
     "tier1Label": "Doe um café",

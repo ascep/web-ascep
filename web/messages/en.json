@@ -605,7 +605,9 @@
     "leyCta": "Learn About the Law"
   },
   "whatsapp": {
-    "ariaLabel": "Contact us on WhatsApp"
+    "ariaLabel": "Contact us on WhatsApp",
+    "cardTitle": "WhatsApp",
+    "cardDesc": "Message us and we'll get back to you shortly."
   },
   "donationForm": {
     "tier1Label": "Buy a Coffee",

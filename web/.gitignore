@@ -14,7 +14,15 @@ next-env.d.ts
 
 # Large assets (deploy separately)
 public/documents/
-public/videos/
+
+# Large legacy videos (keep FONDO-WEB-16-9.mp4 hero fallback)
+public/videos/20241112_100031.mp4
+public/videos/20241112_102554.mp4
+public/videos/20241112_102610.mp4
+public/videos/WhatsApp-Video-2024-11-12-at-11.09.43-AM.mp4
+public/videos/WhatsApp-Video-2024-11-12-at-11.09.45-AM.mp4
+public/videos/video avanza joven/
+public/videos/video avanza joven/**
 
 # Source photo folders (raw JPGs, not optimized for web)
 FOTOS CASAS DEL SABER/

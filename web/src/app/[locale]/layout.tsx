@@ -5,9 +5,7 @@ import TopBar from "@/components/TopBar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ThemeProvider from "@/components/ThemeProvider";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import BotpressChat from "@/components/BotpressChat";
-import VisitorWidget from "@/components/VisitorWidget";
 import MobileTabBar from "@/components/MobileTabBar";
 import ScrollProgress from "@/components/ScrollProgress";
 import { getFotos } from "@/lib/get-fotos";
@@ -39,8 +37,6 @@ export default async function LocaleLayout({
         <main className="flex-1 pb-24 md:pb-0">{children}</main>
         <MobileTabBar />
         <Footer />
-        <VisitorWidget />
-        <WhatsAppButton />
         <BotpressChat />
       </ThemeProvider>
     </NextIntlClientProvider>
