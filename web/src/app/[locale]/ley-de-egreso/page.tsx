@@ -107,7 +107,7 @@ export default async function LeyDeEgresoPage({
             </AnimatedSection>
             <AnimatedSection>
               <div className="rounded-[10px] border border-brand-orange/20 bg-bg-card p-8 shadow-sm">
-                <p className="text-lg leading-relaxed text-[var(--color-text-secondary)]">
+                <p className="break-words text-lg leading-relaxed text-[var(--color-text-secondary)]">
                   {t("queEsDesc")}
                 </p>
               </div>

@@ -104,21 +104,21 @@ export default function Hero({
             initial={{ opacity: 0, x: isHome ? -40 : 0, y: isHome ? 0 : 40 }}
             animate={{ opacity: 1, x: 0, y: 0 }}
             transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
-            className={isHome ? "flex-1 lg:max-w-xl" : "max-w-3xl"}
+            className={isHome ? "flex-1 lg:max-w-xl" : "mx-auto max-w-3xl text-center"}
           >
             {tag && (
               <span className="mb-4 inline-block rounded-[10px] bg-white/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
                 {tag}
               </span>
             )}
-            <h1 className="text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-5xl">
+            <h1 className="break-words text-3xl font-bold leading-[1.15] tracking-tight text-white sm:text-4xl lg:text-5xl">
               {title}
               {highlight && (
                 <span className="text-brand-accent"> {highlight}</span>
               )}
             </h1>
             {subtitle && (
-              <p className={`mt-4 max-w-lg text-base leading-relaxed text-white/70 sm:text-lg ${isHome ? "mb-8" : ""}`}>
+              <p className={`mx-auto mt-4 max-w-lg break-words text-base leading-relaxed text-white/70 sm:text-lg ${isHome ? "mb-8" : ""}`}>
                 {subtitle}
               </p>
             )}

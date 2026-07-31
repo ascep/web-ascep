@@ -72,7 +72,7 @@ export default function HomeCTA({
               {(() => {
                 const words = title.split(" ");
                 const last = words.pop();
-                return <>{words.join(" ")} <span className="text-brand-orange">{last}</span></>;
+                return <>{words.join(" ")} <span className="text-yellow-200">{last}</span></>;
               })()}
             </h2>
             <p className="mb-8 text-base leading-relaxed text-white/80">
