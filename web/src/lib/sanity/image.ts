@@ -15,6 +15,7 @@ export function fileUrl(source: any): string | null {
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
   if (!projectId || !source?.asset?._ref) return null;
   const ref = String(source.asset._ref);
-  const id = ref.replace(/^file-/, "");
-  return `https://cdn.sanity.io/files/${projectId}/${dataset}/${id}`;
+  const m = ref.match(/^file-([a-f0-9]+)-([a-z0-9]+)$/i);
+  if (!m) return null;
+  return `https://cdn.sanity.io/files/${projectId}/${dataset}/${m[1]}.${m[2]}`;
 }

@@ -1,10 +1,11 @@
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import AnimatedSection from "@/components/AnimatedSection";
 import ImageParallax from "@/components/ImageParallax";
 import DecoShapes from "@/components/DecoShapes";
 import { FileText } from "lucide-react";
 
-type Magazine = { title: string; href: string };
+type Magazine = { title: string; href: string; cover?: string };
 
 type ProgramGallerySectionProps = {
   images: string[];
@@ -81,12 +82,24 @@ export default async function ProgramGallerySection({
                     href={doc.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="group flex h-full items-center gap-3 rounded-[10px] border border-brand-purple/20 bg-bg-card p-4 text-left transition-all hover:-translate-y-1 hover:shadow-md"
+                    className="group flex h-full items-center gap-3 rounded-[10px] border border-brand-orange/20 bg-bg-card p-3 text-left transition-all hover:-translate-y-1 hover:shadow-md"
                   >
-                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] bg-brand-orange/10">
-                      <FileText size={22} className="text-brand-orange" />
-                    </div>
-                    <div className="min-w-0">
+                    {doc.cover ? (
+                      <div className="relative h-16 w-12 shrink-0 overflow-hidden rounded-[6px]">
+                        <Image
+                          src={doc.cover}
+                          alt=""
+                          fill
+                          sizes="48px"
+                          className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] bg-brand-orange/10">
+                        <FileText size={22} className="text-brand-orange" />
+                      </div>
+                    )}
+                    <div className="min-w-0 flex-1">
                       <h4 className="truncate font-bold text-[var(--color-text-primary)]">{doc.title}</h4>
                       <p className="text-xs text-[var(--color-text-secondary)]">{t("revistasVer")}</p>
                     </div>

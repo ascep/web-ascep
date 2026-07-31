@@ -11,7 +11,7 @@ import { BookOpen, Briefcase, Building, Search, Compass, Route, type LucideIcon 
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getProgramBySlug, getDocumentsByCategory, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
-import { fileUrl } from "@/lib/sanity/image";
+import { fileUrl, imageUrl } from "@/lib/sanity/image";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -71,6 +71,7 @@ export default async function EmpleoPage({
     ? revistas.map((r) => ({
         title: localize(r.title, locale) || "Revista",
         href: r.externalUrl || fileUrl(r.file) || "#",
+        cover: imageUrl(r.previewImage, 240, 320) || undefined,
       }))
     : [];
 
