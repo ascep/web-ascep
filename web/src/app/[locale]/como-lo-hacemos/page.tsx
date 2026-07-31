@@ -10,6 +10,7 @@ import { User, Home, Zap } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
+import CtaBanner from "@/components/CtaBanner";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -286,6 +287,13 @@ export default async function ComoLoHacemosPage({
           </div>
         </div>
       </section>
+
+      <CtaBanner
+        title={t("ctaTitle")}
+        description={t("ctaDesc")}
+        href="/como-ayudar"
+        buttonLabel={t("ctaBtn")}
+      />
     </div>
   );
 }

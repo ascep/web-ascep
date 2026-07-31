@@ -81,14 +81,14 @@ export default async function AliadosPage({
             {partnerLogos.map((logo) => (
               <div
                 key={logo.alt}
-                className="flex items-center justify-center rounded-[10px] bg-bg-card p-8 transition-all hover:-translate-y-1 hover:shadow-md"
+                className="flex items-center justify-center rounded-[10px] border border-[var(--color-border)] p-8 transition-all hover:border-brand-primary/30"
               >
                 <Image
                   src={logo.src}
                   alt={logo.alt}
                   width={140}
                   height={60}
-                  className="h-14 w-auto object-contain"
+                  className="h-14 w-auto object-contain opacity-50 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
                 />
               </div>
             ))}

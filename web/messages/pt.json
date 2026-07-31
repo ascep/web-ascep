@@ -51,7 +51,16 @@
     "voluntariadoDesc": "Doe seu tempo e talento. Como voluntario, voce pode participar de mentorias, oficinas, formacoes e projetos que transformam vidas.",
     "ctaTitle": "Quer saber mais?",
     "ctaDesc": "Escreva para nos e te contaremos como voce pode se somar a nossa causa.",
-    "ctaBtn": "Fale Conosco"
+    "ctaBtn": "Fale Conosco",
+    "impactTag": "Seu apoio transforma",
+    "impactTitle": "Seu apoio gera mudancas reais",
+    "impactDesc": "Cada contribuicao, nao importa o tamanho, vira oportunidades concretas para jovens que egresam do sistema de protecao.",
+    "stat1": "13.000+",
+    "stat1Label": "Jovens egressos do sistema",
+    "stat2": "71.148",
+    "stat2Label": "Criancas e adolescentes em processos administrativos",
+    "stat3": "6",
+    "stat3Label": "Modulos de formacao do Avanza Joven"
   },
   "planPadrino": {
     "heroTitle": "Plano Padrinho",
@@ -673,7 +682,10 @@
     "enfoqueCard3Title": "Algo para Fazer",
     "enfoqueCard3Desc": "Oportunidades de acao e desenvolvimento pessoal",
     "galeriaTag": "Galeria",
-    "galeriaTitle": "Nosso trabalho em acao"
+    "galeriaTitle": "Nosso trabalho em acao",
+    "ctaTitle": "Quer se juntar a nossa causa?",
+    "ctaDesc": "Conhea nossas linhas de trabalho e como apoiar a transformacao dos cuidados alternativos.",
+    "ctaBtn": "Saber mais"
   },
   "aliados": {
     "heroTag": "Aliados Estrategicos",
@@ -800,7 +812,24 @@
     "marcoPoliticoObj": "Contribuir para a construção de um marco político e normativo que garanta os direitos das crianças e jovens em processo de saída do sistema de proteção.",
     "marcoPoliticoResult1": "Propostas de reforma normativa apresentadas perante instâncias legislativas.",
     "marcoPoliticoResult2": "Articulação com atores políticos e governamentais para a incidência.",
-    "marcoPoliticoResult3": "Documentos técnicos que sustentam a agenda de transformação do sistema."
+    "marcoPoliticoResult3": "Documentos técnicos que sustentam a agenda de transformação do sistema.",
+    "avanzaCtaTitle": "Acompanhe um jovem no caminho para a autonomia",
+    "avanzaCtaDesc": "Seu apoio ajuda mais jovens a desenvolver habilidades de vida e transitar para a vida independente com ferramentas reais.",
+    "avanzaCtaBtn": "Quero apoiar",
+    "miCuerpoCtaTitle": "Promovamos juntos o exercicio pleno dos direitos",
+    "miCuerpoCtaDesc": "Acompanhe-nos a levar processos formativos em direitos sexuais e reprodutivos aos centros de protecao.",
+    "miCuerpoCtaBtn": "Quero participar",
+    "resultadosTitle2": "Resultados esperados",
+    "estadisticasTag": "Numeros",
+    "estadisticasTitle": "Numeros que nos movem",
+    "cifra1": "13.000+",
+    "cifra1Label": "Jovens egressos do sistema de protecao na Colombia",
+    "cifra2": "71.148",
+    "cifra2Label": "Criancas e adolescentes em processos administrativos (PARD)",
+    "cifra3": "12.576",
+    "cifra3Label": "Criancas e adolescentes em adotabilidade",
+    "cifra4": "3.025",
+    "cifra4Label": "Criancas e adolescentes adotados"
   },
   "metadata": {
     "home": {

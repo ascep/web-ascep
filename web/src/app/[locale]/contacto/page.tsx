@@ -123,6 +123,35 @@ export default async function ContactoPage({
           </div>
         </div>
       </section>
+
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+              {t("ubicacionTitle")}
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              Donde <span className="text-brand-purple">Encontrarnos</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
+              {t("ubicacionValue")}
+            </p>
+          </AnimatedSection>
+          <AnimatedSection direction="up">
+            <div className="relative h-[400px] overflow-hidden rounded-[10px] border border-brand-purple/20 shadow-sm">
+              <iframe
+                title="Ubicacion ASCEP"
+                src="https://www.google.com/maps?q=Cali,Colombia&output=embed"
+                className="absolute inset-0 h-full w-full border-0"
+                loading="lazy"
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
     </div>
   );
 }

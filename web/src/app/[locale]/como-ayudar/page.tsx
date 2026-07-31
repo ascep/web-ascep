@@ -103,6 +103,37 @@ export default async function ComoAyudarPage({
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
+              {t("impactTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              {t("impactTitle")}
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
+              {t("impactDesc")}
+            </p>
+          </AnimatedSection>
+          <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-3">
+            {[
+              { value: t("stat1"), label: t("stat1Label") },
+              { value: t("stat2"), label: t("stat2Label") },
+              { value: t("stat3"), label: t("stat3Label") },
+            ].map((stat, i) => (
+              <AnimatedSection key={stat.label} direction="up" delay={i * 0.1}>
+                <div className="rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 text-center transition-all hover:shadow-md">
+                  <p className="text-3xl font-extrabold text-brand-orange">{stat.value}</p>
+                  <p className="mt-2 text-sm text-[var(--color-text-secondary)]">{stat.label}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
               NIVELES DE APOYO
             </span>
             <h3 className="text-2xl font-bold text-[var(--color-text-primary)] sm:text-3xl">

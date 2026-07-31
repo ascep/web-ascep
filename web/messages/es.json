@@ -51,7 +51,16 @@
     "voluntariadoDesc": "Dona tu tiempo y talento. Como voluntario puedes participar en mentorias, talleres, formaciones y proyectos que transforman vidas.",
     "ctaTitle": "Quieres saber mas?",
     "ctaDesc": "Escribenos y te contaremos como puedes sumarte a nuestra causa.",
-    "ctaBtn": "Contactanos"
+    "ctaBtn": "Contactanos",
+    "impactTag": "Tu apoyo transforma",
+    "impactTitle": "Tu apoyo genera cambios reales",
+    "impactDesc": "Cada aporte, sin importar su tamano, se convierte en oportunidades concretas para jovenes que egresan del sistema de proteccion.",
+    "stat1": "13.000+",
+    "stat1Label": "Jovenes egresados del sistema",
+    "stat2": "71.148",
+    "stat2Label": "NNA en procesos administrativos",
+    "stat3": "6",
+    "stat3Label": "Modulos de formacion de Avanza Joven"
   },
   "planPadrino": {
     "heroTitle": "Plan Padrino",
@@ -772,7 +781,10 @@
     "le5Item2": "Estrategias de prevención de riesgos psicosociales y promoción de bienestar emocional.",
     "le5Item3": "Espacios de participación para fortalecer la resiliencia juvenil.",
     "galeriaTag": "Galería",
-    "galeriaTitle": "Nuestro trabajo en acción"
+    "galeriaTitle": "Nuestro trabajo en acción",
+    "ctaTitle": "Quieres sumarte a nuestra causa?",
+    "ctaDesc": "Conoce nuestras lineas de trabajo y descubre como puedes apoyar la transformacion del sistema de cuidados alternativos.",
+    "ctaBtn": "Conocer mas"
   },
   "aliados": {
     "heroTag": "Aliados Estratégicos",
@@ -899,7 +911,24 @@
     "marcoPoliticoObj": "Contribuir a la construccion de un marco politico y normativo que garantice los derechos de los NNAJ en proceso de egreso del sistema de proteccion.",
     "marcoPoliticoResult1": "Propuestas de reforma normativa presentadas ante instancias legislativas.",
     "marcoPoliticoResult2": "Articulacion con actores politicos y gubernamentales para la incidencia.",
-    "marcoPoliticoResult3": "Documentos tecnicos que sustentan la agenda de transformacion del sistema."
+    "marcoPoliticoResult3": "Documentos tecnicos que sustentan la agenda de transformacion del sistema.",
+    "avanzaCtaTitle": "Acompana a un joven en su camino a la autonomia",
+    "avanzaCtaDesc": "Tu apoyo hace posible que mas jovenes desarrollen habilidades para la vida y transiten hacia la vida independiente con herramientas reales.",
+    "avanzaCtaBtn": "Quiero apoyar",
+    "miCuerpoCtaTitle": "Promovamos juntos el ejercicio pleno de los derechos",
+    "miCuerpoCtaDesc": "Acompananos a llevar procesos formativos en derechos sexuales y reproductivos a los centros de proteccion.",
+    "miCuerpoCtaBtn": "Quiero participar",
+    "resultadosTitle2": "Resultados esperados",
+    "estadisticasTag": "Cifras",
+    "estadisticasTitle": "Cifras que nos impulsan",
+    "cifra1": "13.000+",
+    "cifra1Label": "Jovenes egresados del sistema de proteccion en Colombia",
+    "cifra2": "71.148",
+    "cifra2Label": "NNA en procesos administrativos de restablecimiento de derechos",
+    "cifra3": "12.576",
+    "cifra3Label": "NNA en adoptabilidad",
+    "cifra4": "3.025",
+    "cifra4Label": "NNA adoptados"
   },
   "metadata": {
     "home": {

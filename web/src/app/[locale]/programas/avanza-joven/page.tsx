@@ -5,7 +5,8 @@ import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
-import { BookOpen, Users, DollarSign, Heart, Target, Star, type LucideIcon } from "lucide-react";
+import CtaBanner from "@/components/CtaBanner";
+import { BookOpen, Users, DollarSign, Heart, Target, Star, BookMarked, FileText, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getProgramBySlug, localize, sanityImage } from "@/lib/sanity/fetch";
@@ -69,6 +70,7 @@ export default async function AvanzaJovenPage({
 }) {
   const fotos = await getFotos();
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "programas" });
   const cms = await getProgramBySlug("avanza-joven");
 
   const objetivos: { title: string; desc: string }[] = cms?.objectives && cms.objectives.length > 0
@@ -147,6 +149,50 @@ export default async function AvanzaJovenPage({
               </p>
             </div>
           </AnimatedSection>
+
+          <div className="mt-12 grid gap-6 sm:grid-cols-3">
+            {[
+              { value: "6", label: "Modulos formativos para la vida" },
+              { value: "13.000+", label: "Jovenes egresados del sistema en Colombia" },
+              { value: "2019", label: "Impulsando esta iniciativa" },
+            ].map((stat, i) => (
+              <AnimatedSection key={stat.label} direction="up" delay={i * 0.1}>
+                <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
+                  <p className="text-3xl font-extrabold text-brand-secondary">{stat.value}</p>
+                  <p className="mt-2 text-sm text-[var(--color-text-muted)]">{stat.label}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+              {t("resultadosTitle2")}
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              Resultados <span className="text-brand-purple">Esperados</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
+              Lo que buscamos lograr con cada joven que participa en Avanza Joven.
+            </p>
+          </AnimatedSection>
+          <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-3">
+            {[1, 2, 3].map((ri, i) => (
+              <AnimatedSection key={ri} direction="up" delay={i * 0.08}>
+                <div className="flex h-full flex-col items-center rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 text-center transition-all hover:shadow-md">
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-purple/10">
+                    <BookMarked size={22} className="text-brand-purple" />
+                  </div>
+                  <p className="text-sm text-[var(--color-text-secondary)]">{t(`avanzaResult${ri}`)}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -212,6 +258,87 @@ export default async function AvanzaJovenPage({
           </div>
         </div>
       </section>
+
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="orange" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+              Galeria
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              El programa <span className="text-brand-purple">en accion</span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
+              Momentos reales de los talleres y encuentros con jovenes en transito y egresados del sistema de proteccion.
+            </p>
+          </AnimatedSection>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {fotos.home.gallery.slice(0, 8).map((img, i) => (
+              <AnimatedSection key={i} direction="up" delay={i * 0.06}>
+                <div className={`group relative overflow-hidden rounded-[10px] ${i === 0 ? "sm:col-span-2 sm:row-span-2" : ""}`}>
+                  <ImageParallax
+                    src={img.src}
+                    alt={img.alt}
+                    width={800}
+                    height={600}
+                    className="h-52 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    intensity={0.1}
+                  />
+                  <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                    <p className="p-4 text-sm font-semibold text-white">{img.alt}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection className="mt-14 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
+              Recursos
+            </span>
+            <h3 className="mb-8 text-2xl font-bold text-[var(--color-text-primary)] sm:text-3xl">
+              Cartillas y <span className="text-brand-orange">materiales</span>
+            </h3>
+            <div className="mx-auto grid max-w-3xl gap-6 sm:grid-cols-2">
+              {[
+                {
+                  title: "Cartilla Proyecto Formativo LET",
+                  desc: "Linea de Egreso Transitorio: guia de formacion para jovenes en transicion a la vida independiente.",
+                  href: assetPath("/documents/Cartilla-Proyecto-Formativo-LET-ve-sep-20-2018.pdf"),
+                },
+                {
+                  title: "Sistematizacion PFLET 3.0",
+                  desc: "Aprendizajes y experiencias del Proyecto Formativo de Linea de Egreso Transitorio.",
+                  href: assetPath("/documents/SISTEMATIZACION-PFLET-3.0.pdf"),
+                },
+              ].map((doc, i) => (
+                <AnimatedSection key={doc.title} direction="up" delay={i * 0.1}>
+                  <a
+                    href={doc.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex h-full flex-col items-start gap-3 rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 text-left transition-all hover:-translate-y-1 hover:shadow-md"
+                  >
+                    <div className="flex h-12 w-12 items-center justify-center rounded-[10px] bg-brand-orange/10">
+                      <FileText size={24} className="text-brand-orange" />
+                    </div>
+                    <h4 className="font-bold text-[var(--color-text-primary)]">{doc.title}</h4>
+                    <p className="text-sm text-[var(--color-text-secondary)]">{doc.desc}</p>
+                  </a>
+                </AnimatedSection>
+              ))}
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <CtaBanner
+        title={t("avanzaCtaTitle")}
+        description={t("avanzaCtaDesc")}
+        href="/como-ayudar"
+        buttonLabel={t("avanzaCtaBtn")}
+      />
     </>
   );
 }

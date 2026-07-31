@@ -79,6 +79,30 @@ export default async function ProgramasPage({
         subtitle={t("desc")}
       />
 
+      <section className="relative overflow-hidden bg-section-light py-16">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-10 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
+              {t("estadisticasTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              {t("estadisticasTitle")}
+            </h2>
+          </AnimatedSection>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {[1, 2, 3, 4].map((n, i) => (
+              <AnimatedSection key={n} direction="up" delay={i * 0.08}>
+                <div className="h-full rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 text-center transition-all hover:shadow-md">
+                  <p className="text-3xl font-extrabold text-brand-purple">{t(`cifra${n}`)}</p>
+                  <p className="mt-2 text-sm text-[var(--color-text-secondary)]">{t(`cifra${n}Label`)}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />

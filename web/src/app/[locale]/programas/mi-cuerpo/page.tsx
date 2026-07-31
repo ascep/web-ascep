@@ -5,6 +5,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
+import CtaBanner from "@/components/CtaBanner";
 import { Heart, MapPin, Scale, Shield, AlertTriangle, Handshake, Users, Star, Brain, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
@@ -51,6 +52,7 @@ export default async function MiCuerpoPage({
 }) {
   const fotos = await getFotos();
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "programas" });
   const cms = await getProgramBySlug("mi-cuerpo");
 
   const components = cms?.components && cms.components.length > 0
@@ -169,6 +171,40 @@ export default async function MiCuerpoPage({
           </div>
         </div>
       </section>
+
+      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.cards.miCuerpo.image)})` } as CSSProperties}>
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              {t("resultadosTitle2")}
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              Resultados <span className="text-white/80">Esperados</span>
+            </h2>
+          </AnimatedSection>
+          <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-3">
+            {[1, 2, 3].map((ri, i) => (
+              <AnimatedSection key={ri} direction="up" delay={i * 0.08}>
+                <div className="glass-card flex h-full flex-col items-center rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/10">
+                    <Star size={22} className="text-brand-secondary" />
+                  </div>
+                  <p className="text-sm text-[var(--color-text-muted)]">{t(`miCuerpoResult${ri}`)}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <CtaBanner
+        title={t("miCuerpoCtaTitle")}
+        description={t("miCuerpoCtaDesc")}
+        href="/como-ayudar"
+        buttonLabel={t("miCuerpoCtaBtn")}
+      />
     </>
   );
 }

@@ -51,7 +51,16 @@
     "voluntariadoDesc": "Donate your time and talent. As a volunteer you can participate in mentorships, workshops, training, and projects that transform lives.",
     "ctaTitle": "Want to know more?",
     "ctaDesc": "Write to us and we will tell you how you can join our cause.",
-    "ctaBtn": "Contact us"
+    "ctaBtn": "Contact us",
+    "impactTag": "Your support transforms",
+    "impactTitle": "Your support creates real change",
+    "impactDesc": "Every contribution, no matter the size, becomes concrete opportunities for young people leaving the protection system.",
+    "stat1": "13,000+",
+    "stat1Label": "Young people who left the system",
+    "stat2": "71,148",
+    "stat2Label": "Children and teens in administrative processes",
+    "stat3": "6",
+    "stat3Label": "Avanza Joven training modules"
   },
   "planPadrino": {
     "heroTitle": "Sponsorship Plan",
@@ -551,7 +560,10 @@
     "procesoTag": "OUR PROCESS",
     "procesoTitle": "Our Process",
     "equipoTag": "OUR TEAM",
-    "equipoTitle": "Our Team"
+    "equipoTitle": "Our Team",
+    "ctaTitle": "Want to join our cause?",
+    "ctaDesc": "Learn about our lines of work and how you can support the transformation of alternative care.",
+    "ctaBtn": "Learn more"
   },
   "aliados": {
     "heroTag": "PARTNERS",
@@ -662,7 +674,24 @@
     "marcoPoliticoObj": "Contribute to building a political and regulatory framework that guarantees the rights of children and youth transitioning out of the protection system.",
     "marcoPoliticoResult1": "Regulatory reform proposals submitted to legislative bodies.",
     "marcoPoliticoResult2": "Coordination with political and governmental actors for advocacy.",
-    "marcoPoliticoResult3": "Technical documents supporting the system transformation agenda."
+    "marcoPoliticoResult3": "Technical documents supporting the system transformation agenda.",
+    "avanzaCtaTitle": "Accompany a young person on the path to autonomy",
+    "avanzaCtaDesc": "Your support helps more young people develop life skills and transition to independent living with real tools.",
+    "avanzaCtaBtn": "I want to help",
+    "miCuerpoCtaTitle": "Lets promote the full exercise of rights together",
+    "miCuerpoCtaDesc": "Join us in bringing sexual and reproductive rights training to protection centers.",
+    "miCuerpoCtaBtn": "I want to participate",
+    "resultadosTitle2": "Expected results",
+    "estadisticasTag": "Numbers",
+    "estadisticasTitle": "Numbers that drive us",
+    "cifra1": "13,000+",
+    "cifra1Label": "Young people who left the protection system in Colombia",
+    "cifra2": "71,148",
+    "cifra2Label": "Children and teens in administrative proceedings (PARD)",
+    "cifra3": "12,576",
+    "cifra3Label": "Children and teens eligible for adoption",
+    "cifra4": "3,025",
+    "cifra4Label": "Children and teens adopted"
   },
   "metadata": {
     "home": {
