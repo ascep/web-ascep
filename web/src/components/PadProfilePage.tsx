@@ -194,6 +194,7 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
                             alt=""
                             width={800}
                             height={450}
+                            sizes="(max-width: 768px) 100vw, 50vw"
                             className="h-full w-full object-cover opacity-70"
                           />
                         ) : (
@@ -222,6 +223,7 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
                       alt={typeof m.image?.alt === "string" ? m.image.alt : ""}
                       width={800}
                       height={600}
+                      sizes="(max-width: 768px) 100vw, 50vw"
                       className="aspect-video w-full object-cover"
                     />
                   </div>
@@ -257,6 +259,8 @@ function BentoGallery({ photos }: { photos: Array<SanityAssetLike> }) {
           alt={typeof photos[0]?.alt === "string" ? photos[0].alt : ""}
           width={1200}
           height={800}
+          priority
+          sizes="(max-width: 768px) 100vw, 75vw"
           className="h-64 w-full object-cover md:h-96"
         />
       </div>
@@ -273,6 +277,7 @@ function BentoGallery({ photos }: { photos: Array<SanityAssetLike> }) {
               alt={typeof photo?.alt === "string" ? photo.alt : ""}
               width={800}
               height={600}
+              sizes="(max-width: 768px) 100vw, 50vw"
               className="h-48 w-full object-cover md:h-full"
             />
           </div>
@@ -289,6 +294,7 @@ function BentoGallery({ photos }: { photos: Array<SanityAssetLike> }) {
           alt={typeof photos[0]?.alt === "string" ? photos[0].alt : ""}
           width={800}
           height={800}
+          sizes="(max-width: 768px) 100vw, 66vw"
           className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
         />
       </div>
@@ -299,6 +305,7 @@ function BentoGallery({ photos }: { photos: Array<SanityAssetLike> }) {
             alt={typeof photo?.alt === "string" ? photo.alt : ""}
             width={600}
             height={400}
+            sizes="(max-width: 768px) 100vw, 33vw"
             className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
           />
         </div>
@@ -310,6 +317,7 @@ function BentoGallery({ photos }: { photos: Array<SanityAssetLike> }) {
             alt={typeof photo?.alt === "string" ? photo.alt : ""}
             width={400}
             height={400}
+            sizes="(max-width: 768px) 50vw, 20vw"
             className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
           />
         </div>
@@ -368,6 +376,7 @@ export default function PadProfilePage({
                     alt={name}
                     width={400}
                     height={400}
+                    sizes="(max-width: 768px) 112px, 144px"
                     className="h-full w-full object-cover"
                   />
                 ) : (
@@ -598,6 +607,7 @@ function OtherProfileCard({ profile, locale }: { profile: PadrinoProfile; locale
               alt={name}
               width={200}
               height={200}
+              sizes="56px"
               className="h-full w-full object-cover"
             />
           ) : (

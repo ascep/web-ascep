@@ -37,6 +37,10 @@ _archived-videos/
 .env.production
 .env.development
 
+# Local working notes (not part of the app)
+errores.md
+plan-correccion.md
+
 # IDE
 .vscode/
 .idea/

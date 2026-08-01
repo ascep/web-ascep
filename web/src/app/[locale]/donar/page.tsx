@@ -7,6 +7,7 @@ import CountUp from "@/components/CountUp";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
+import BackgroundVideo from "@/components/BackgroundVideo";
 import { Heart, Users, Target, TrendingUp, Coffee, Sunrise, Star, Shield, Sparkles, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
@@ -188,16 +189,11 @@ export default async function DonarPage({
     <div>
       {/* Video hero */}
       <section className="relative flex min-h-[70vh] items-center overflow-hidden">
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
+        <BackgroundVideo
+          src={assetPath("/videos/FONDO-WEB-16-9.mp4")}
           poster={assetPath(fotos.donar.heroPoster)}
-          className="absolute inset-0 h-full w-full object-cover opacity-30"
-        >
-          <source src={assetPath("/videos/FONDO-WEB-16-9.mp4")} type="video/mp4" />
-        </video>
+          className="opacity-30"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-brand-purple/60 via-brand-purple/40 to-brand-purple/90" />
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <span className="mb-4 inline-block rounded-full border border-white/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">

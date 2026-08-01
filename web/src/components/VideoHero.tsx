@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import Rain from "./Rain";
+import BackgroundVideo from "./BackgroundVideo";
 import { assetPath } from "@/lib/asset-path";
 
 type VideoHeroProps = {
@@ -14,16 +15,10 @@ type VideoHeroProps = {
 export default function VideoHero({ title, subtitle, cta, videoSrc }: VideoHeroProps) {
   return (
     <section className="relative flex min-h-[85vh] items-center overflow-hidden">
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 h-full w-full object-cover"
+      <BackgroundVideo
+        src={videoSrc}
         poster={assetPath("/logos/03 logo ascep principal horizontal.png")}
-      >
-        <source src={videoSrc} type="video/mp4" />
-      </video>
+      />
       <Rain opacity={0.08} count={60} speed={0.6} />
       <div className="absolute inset-0 bg-gradient-to-br from-brand-purple/70 to-black/70" />
       <div className="relative mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">

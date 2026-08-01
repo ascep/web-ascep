@@ -68,6 +68,7 @@ export default function PadProfileCard({
                 alt={name}
                 width={200}
                 height={200}
+                sizes="56px"
                 className="h-full w-full object-cover"
               />
             ) : (
