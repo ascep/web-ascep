@@ -262,7 +262,11 @@
     "leyTitle": "Law 2479 of 2025: Sons and Daughters of the State",
     "leyExcerpt": "Learn about the law that creates the National Comprehensive Support Program for young people leaving the ICBF protection system.",
     "leyTag": "Graduation Law",
-    "leerMas": "Read more"
+    "leerMas": "Read more",
+    "compartir": "Share",
+    "lecturaMin": "{count} min read",
+    "breadcrumbInicio": "Home",
+    "breadcrumbNoticias": "News"
   },
   "leyPost": {
     "badge": "Law 2479 of 2025",

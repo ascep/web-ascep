@@ -18,6 +18,7 @@ import NewsCarousel, { type NewsItem } from "@/components/NewsCarousel";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import { assetPath } from "@/lib/asset-path";
+import { categoryColor } from "@/lib/category-colors";
 import { imageUrl } from "@/lib/sanity/image";
 import { getFotos } from "@/lib/get-fotos";
 import {
@@ -164,13 +165,6 @@ export default async function HomePage({
         role: h(t.roleKey),
       }));
 
-  const newsColors: Record<string, string> = {
-    programas: "#007374",
-    incidencia: "#C45118",
-    eventos: "#44BCC5",
-    ley: "#4A154B",
-  };
-
   const newsItems: NewsItem[] = [
     {
       id: "ley-hijos-del-estado",
@@ -193,7 +187,7 @@ export default async function HomePage({
           tag: n.category ? nt(n.category) || n.category : "",
           title: n.title || "",
           excerpt: n.excerpt || "",
-          color: newsColors[n.category || ""] || "#007374",
+          color: categoryColor(n.category || ""),
         } as NewsItem;
       }),
   ];

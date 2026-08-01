@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import { Check, Link2 } from "lucide-react";
 import { useTranslations } from "next-intl";
 
@@ -14,11 +15,17 @@ const WHATSAPP_PATH =
 type PostShareProps = {
   title: string;
   className?: string;
+  accent?: string;
+  shareLabel?: string;
 };
 
-export default function PostShare({ title, className = "" }: PostShareProps) {
+export default function PostShare({ title, className = "", accent, shareLabel }: PostShareProps) {
   const t = useTranslations("leyPost");
   const [copied, setCopied] = useState(false);
+
+  const hoverCls = accent ? "hover:bg-[var(--share-accent)]" : "hover:bg-ley-cyan";
+  const copyHoverCls = accent ? "hover:bg-[var(--share-accent)]" : "hover:bg-ley-orange";
+  const labelCls = accent ? "text-white/70" : "text-purple-300";
 
   const share = (platform: "x" | "linkedin" | "whatsapp") => {
     const url = encodeURIComponent(typeof window !== "undefined" ? window.location.href : "");
@@ -49,12 +56,15 @@ export default function PostShare({ title, className = "" }: PostShareProps) {
   const iconClass = "h-4 w-4";
 
   return (
-    <div className={`flex items-center gap-2 ${className}`}>
-      <span className="mr-1 hidden text-xs text-purple-300 md:inline">{t("compartir")}</span>
+    <div
+      className={`flex items-center gap-2 ${className}`}
+      style={accent ? ({ "--share-accent": accent } as CSSProperties) : undefined}
+    >
+      <span className={`mr-1 hidden text-xs md:inline ${labelCls}`}>{shareLabel ?? t("compartir")}</span>
       <button
         onClick={() => share("x")}
         aria-label="X"
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-ley-cyan"
+        className={`flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${hoverCls}`}
       >
         <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass} aria-hidden="true">
           <path d={X_PATH} />
@@ -63,7 +73,7 @@ export default function PostShare({ title, className = "" }: PostShareProps) {
       <button
         onClick={() => share("linkedin")}
         aria-label="LinkedIn"
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-ley-cyan"
+        className={`flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${hoverCls}`}
       >
         <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass} aria-hidden="true">
           <path d={LINKEDIN_PATH} />
@@ -72,7 +82,7 @@ export default function PostShare({ title, className = "" }: PostShareProps) {
       <button
         onClick={() => share("whatsapp")}
         aria-label="WhatsApp"
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-ley-cyan"
+        className={`flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${hoverCls}`}
       >
         <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass} aria-hidden="true">
           <path d={WHATSAPP_PATH} />
@@ -80,8 +90,8 @@ export default function PostShare({ title, className = "" }: PostShareProps) {
       </button>
       <button
         onClick={copy}
-        aria-label={t("compartir")}
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-ley-orange"
+        aria-label={shareLabel ?? t("compartir")}
+        className={`flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${copyHoverCls}`}
       >
         {copied ? <Check className={iconClass} /> : <Link2 className={iconClass} />}
       </button>

@@ -262,7 +262,11 @@
     "leyTitle": "Ley 2479 de 2025: Hijos e Hijas del Estado",
     "leyExcerpt": "Conoce la norma que crea el Programa Nacional de Acompañamiento Integral para los jovenes que egresan del sistema de proteccion del ICBF.",
     "leyTag": "Ley de Egreso",
-    "leerMas": "Leer mas"
+    "leerMas": "Leer mas",
+    "compartir": "Compartir",
+    "lecturaMin": "{count} min de lectura",
+    "breadcrumbInicio": "Inicio",
+    "breadcrumbNoticias": "Noticias"
   },
   "leyPost": {
     "badge": "Ley 2479 de 2025",
