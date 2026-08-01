@@ -5,7 +5,8 @@ type SanityAssetSource = {
   };
 };
 
-export function imageUrl(source: SanityAssetSource | null | undefined, width = 600, height = 338): string | null {
+export function imageUrl(source: SanityAssetSource | string | null | undefined, width = 600, height = 338): string | null {
+  if (typeof source === "string") return source || null;
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
   if (!projectId || !source?.asset?._ref) return null;

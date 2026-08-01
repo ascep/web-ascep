@@ -1,5 +1,6 @@
 import { getClient } from "./client";
 import { imageUrl, fileUrl } from "./image";
+import { applyPadrinoPhotoOverrides } from "@/data/padrino-photos";
 
 interface SanityImage {
   asset?: {
@@ -391,11 +392,12 @@ export type PadrinoProfile = {
 
 export async function getPadrinos(): Promise<PadrinoProfile[]> {
   const data = await sanityFetch<PadrinoProfile[]>(padrinosQuery);
-  return data ?? [];
+  return (data ?? []).map(applyPadrinoPhotoOverrides);
 }
 
 export async function getPadrinoBySlug(slug: string): Promise<PadrinoProfile | null> {
-  return sanityFetch<PadrinoProfile>(padrinoBySlugQuery, { slug });
+  const profile = await sanityFetch<PadrinoProfile>(padrinoBySlugQuery, { slug });
+  return profile ? applyPadrinoPhotoOverrides(profile) : null;
 }
 
 export { localize, sanityImage };
