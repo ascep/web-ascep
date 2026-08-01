@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { Loader, CheckCircle, AlertCircle } from "lucide-react";
@@ -10,18 +10,9 @@ export default function ContactForm() {
   const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
-  const [nombre, setNombre] = useState("");
-  const [asunto, setAsunto] = useState("");
-  const [mensaje, setMensaje] = useState("");
-
-  useEffect(() => {
-    const n = searchParams.get("nombre");
-    const a = searchParams.get("asunto");
-    const m = searchParams.get("mensaje");
-    if (n) setNombre(n);
-    if (a) setAsunto(a);
-    if (m) setMensaje(m);
-  }, [searchParams]);
+  const [nombre, setNombre] = useState(() => searchParams.get("nombre") ?? "");
+  const [asunto, setAsunto] = useState(() => searchParams.get("asunto") ?? "");
+  const [mensaje, setMensaje] = useState(() => searchParams.get("mensaje") ?? "");
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

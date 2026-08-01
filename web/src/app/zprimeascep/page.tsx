@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable @next/next/no-img-element -- Admin interno: rutas dinamicas (blob: de createObjectURL, placeholders data:) que next/image no puede optimizar */
+
 import { useEffect, useState, useCallback, FormEvent } from "react";
 
 type FlatEntry = {
@@ -31,14 +33,13 @@ const sectionLabels: Record<string, string> = {
 };
 
 export default function FotosDashboard() {
-  const [authed, setAuthed] = useState(false);
+  const [authed, setAuthed] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return sessionStorage.getItem("zprime_auth") === "1";
+  });
   const [pwInput, setPwInput] = useState("");
   const [pwError, setPwError] = useState("");
   const [pwLoading, setPwLoading] = useState(false);
-
-  useEffect(() => {
-    if (sessionStorage.getItem("zprime_auth") === "1") setAuthed(true);
-  }, []);
 
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault();
@@ -108,7 +109,6 @@ function DashboardInner() {
 
   const fetchFotos = useCallback(async () => {
     try {
-      setLoading(true);
       const res = await fetch("/api/fotos", {
         headers: { "x-zprime-pw": getPw() },
       });
@@ -129,7 +129,10 @@ function DashboardInner() {
   }, []);
 
   useEffect(() => {
-    fetchFotos();
+    const t = window.setTimeout(() => {
+      void fetchFotos();
+    }, 0);
+    return () => window.clearTimeout(t);
   }, [fetchFotos]);
 
   const grouped = entries.reduce<Record<string, FlatEntry[]>>((acc, e) => {
@@ -192,6 +195,7 @@ function DashboardInner() {
         setPreviewEntry(null);
         setPreviewFile(null);
         setPreviewUrl("");
+        setLoading(true);
         fetchFotos();
       } else {
         setError(data.error || "Error al actualizar");
@@ -233,7 +237,10 @@ function DashboardInner() {
             Salir
           </button>
           <button
-            onClick={fetchFotos}
+            onClick={() => {
+              setLoading(true);
+              fetchFotos();
+            }}
             className="rounded-lg border border-gray-300 px-4 py-2 text-sm transition hover:bg-gray-100"
           >
             Recargar

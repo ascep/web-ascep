@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
@@ -195,10 +196,12 @@ export default async function TransparenciaPage({
                       className="group relative block h-[200px] overflow-hidden bg-zinc-100"
                     >
                       {previewFile.preview ? (
-                        <img
+                        <Image
                           src={previewFile.preview}
                           alt={previewFile.name}
-                          className="h-full w-full object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+                          fill
+                          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                          className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
                         />
                       ) : (
                         <iframe

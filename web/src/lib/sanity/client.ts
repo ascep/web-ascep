@@ -1,3 +1,5 @@
+import { createClient } from "next-sanity";
+
 let _client: import("next-sanity").SanityClient | null = null;
 let _serverClient: import("next-sanity").SanityClient | null = null;
 
@@ -12,7 +14,6 @@ function getConfig() {
 
 export function getClient() {
   if (!_client) {
-    const { createClient } = require("next-sanity");
     const config = getConfig();
     if (!config.projectId) return null;
     _client = createClient(config);
@@ -22,7 +23,6 @@ export function getClient() {
 
 export function getServerClient() {
   if (!_serverClient) {
-    const { createClient } = require("next-sanity");
     const config = getConfig();
     if (!config.projectId) return null;
     _serverClient = createClient({

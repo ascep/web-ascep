@@ -58,7 +58,7 @@ export default defineType({
   ],
   preview: {
     select: { title: "label", subtitle: "monthlyCop" },
-    prepare({ title, subtitle }: any) {
+    prepare({ title, subtitle }) {
       return { title: title?.es || "...", subtitle: subtitle ? `$${subtitle.toLocaleString()} COP/mes` : "" };
     },
   },

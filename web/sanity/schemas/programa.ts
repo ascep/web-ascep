@@ -64,7 +64,7 @@ export default defineType({
           ],
           preview: {
             select: { title: "title" },
-            prepare({ title }: any) {
+            prepare({ title }) {
               return { title: title?.es || "Objetivo" };
             },
           },
@@ -85,7 +85,7 @@ export default defineType({
           ],
           preview: {
             select: { title: "title" },
-            prepare({ title }: any) {
+            prepare({ title }) {
               return { title: title?.es || "Componente" };
             },
           },
@@ -116,7 +116,7 @@ export default defineType({
           ],
           preview: {
             select: { title: "title", subtitle: "code" },
-            prepare({ title, subtitle }: any) {
+            prepare({ title, subtitle }) {
               return { title: `${subtitle || ""} - ${title?.es || "Modulo"}` };
             },
           },
@@ -138,7 +138,7 @@ export default defineType({
           ],
           preview: {
             select: { title: "title" },
-            prepare({ title }: any) {
+            prepare({ title }) {
               return { title: title?.es || "Linea de accion" };
             },
           },
@@ -159,7 +159,7 @@ export default defineType({
           ],
           preview: {
             select: { title: "title" },
-            prepare({ title }: any) {
+            prepare({ title }) {
               return { title: title?.es || "Pilar" };
             },
           },
@@ -180,7 +180,7 @@ export default defineType({
           ],
           preview: {
             select: { title: "title" },
-            prepare({ title }: any) {
+            prepare({ title }) {
               return { title: title?.es || "Enfoque" };
             },
           },
@@ -227,7 +227,7 @@ export default defineType({
   ],
   preview: {
     select: { title: "title", media: "heroImage" },
-    prepare({ title, media }: any) {
+    prepare({ title, media }) {
       return { title: title?.es || "...", media };
     },
   },

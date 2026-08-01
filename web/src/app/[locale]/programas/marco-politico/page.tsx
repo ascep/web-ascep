@@ -4,7 +4,6 @@ import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
-import ImageParallax from "@/components/ImageParallax";
 import ProgramVideosSection from "@/components/ProgramVideosSection";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
@@ -74,21 +73,21 @@ export default async function MarcoPoliticoPage({
   ];
 
   const pilares = cms?.pillars && cms.pillars.length > 0
-    ? cms.pillars.map((p: any) => ({
+    ? cms.pillars.map((p) => ({
         title: localize(p.title, locale) || "",
         desc: localize(p.description, locale) || "",
       }))
     : fallbackPilares;
 
   const enfoques = cms?.crossCutting && cms.crossCutting.length > 0
-    ? cms.crossCutting.map((e: any) => ({
+    ? cms.crossCutting.map((e) => ({
         title: localize(e.title, locale) || "",
         desc: localize(e.description, locale) || "",
       }))
     : fallbackEnfoques;
 
   const incidencia = cms?.incidenciaItems && cms.incidenciaItems.length > 0
-    ? cms.incidenciaItems.map((i: any) => localize(i, locale) || "")
+    ? cms.incidenciaItems.map((i) => localize(i, locale) || "")
     : fallbackIncidencia;
 
   return (

@@ -30,7 +30,6 @@ export default async function AliadosPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "aliados" });
-  const g = await getTranslations({ locale, namespace: "generales" });
 
   const fotos = await getFotos();
 

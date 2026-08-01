@@ -1,6 +1,32 @@
 'use client';
 
-import { useEffect, useState, useCallback } from "react";
+import { useCallback, useEffect, useState, useSyncExternalStore } from "react";
+
+function subscribeReducedMotion(onStoreChange: () => void) {
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mq.addEventListener("change", onStoreChange);
+  return () => mq.removeEventListener("change", onStoreChange);
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
+
+function subscribeTouch() {
+  return () => {};
+}
+
+function getTouchSnapshot() {
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+}
+
+function getTouchServerSnapshot() {
+  return false;
+}
 
 type CursorGlowProps = {
   className?: string;
@@ -16,14 +42,16 @@ export default function CursorGlow({
   opacity = 0.6,
 }: CursorGlowProps) {
   const [pos, setPos] = useState({ x: 0, y: 0 });
-  const [reducedMotion, setReducedMotion] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
-  }, []);
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot
+  );
+  const isTouch = useSyncExternalStore(
+    subscribeTouch,
+    getTouchSnapshot,
+    getTouchServerSnapshot
+  );
 
   const handle = useCallback((e: MouseEvent) => {
     setPos({ x: e.clientX, y: e.clientY });

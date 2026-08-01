@@ -66,7 +66,7 @@ export default defineType({
   ],
   preview: {
     select: { title: "title", subtitle: "category" },
-    prepare({ title, subtitle }: any) {
+    prepare({ title, subtitle }) {
       return { title: title?.es || "...", subtitle };
     },
   },

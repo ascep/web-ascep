@@ -12,8 +12,6 @@ import {
   BookOpen,
   FileText,
   Heart,
-  Shield,
-  Mail,
   Home,
   Building2,
   MessageCircle,
@@ -115,21 +113,22 @@ export default function MobileMenu() {
   const [expanded, setExpanded] = useState<Section>(null);
   const [incidenciaOpen, setIncidenciaOpen] = useState(false);
   const [casasOpen, setCasasOpen] = useState(false);
-  const [showNuevo, setShowNuevo] = useState(false);
-
-  useEffect(() => {
-    const val = localStorage.getItem("ascep_nuevo");
+  const [showNuevo] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    const val = window.localStorage.getItem("ascep_nuevo");
     if (!val) {
-      localStorage.setItem("ascep_nuevo", "1");
-      setShowNuevo(true);
-    } else {
-      const count = parseInt(val, 10);
-      if (count < 2) {
-        localStorage.setItem("ascep_nuevo", String(count + 1));
-        setShowNuevo(true);
-      }
+      window.localStorage.setItem("ascep_nuevo", "1");
+      return true;
     }
-  }, []);
+
+    const count = Number.parseInt(val, 10);
+    if (count < 2) {
+      window.localStorage.setItem("ascep_nuevo", String(count + 1));
+      return true;
+    }
+
+    return false;
+  });
 
   useEffect(() => {
     const handler = () => setOpen(true);

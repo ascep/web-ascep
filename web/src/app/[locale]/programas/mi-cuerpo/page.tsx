@@ -64,7 +64,7 @@ export default async function MiCuerpoPage({
   ];
 
   const components = cms?.components && cms.components.length > 0
-    ? cms.components.map((c: any) => ({
+    ? cms.components.map((c) => ({
         title: localize(c.title, locale) || "",
         desc: localize(c.description, locale) || "",
         icon: (c.icon && iconMap[c.icon]) || Heart,
@@ -72,7 +72,7 @@ export default async function MiCuerpoPage({
     : fallbackComponents;
 
   const objetivosSecundarios = cms?.secondaryObjectives && cms.secondaryObjectives.length > 0
-    ? cms.secondaryObjectives.map((o: any) => localize(o, locale) || "")
+    ? cms.secondaryObjectives.map((o) => localize(o, locale) || "")
     : fallbackSecundarios;
 
   return (

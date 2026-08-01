@@ -129,7 +129,7 @@ export default defineType({
           ],
           preview: {
             select: { title: "title.es", subtitle: "priority" },
-            prepare({ title, subtitle }: any) {
+            prepare({ title, subtitle }) {
               return { title: title || "...", subtitle };
             },
           },
@@ -245,24 +245,24 @@ export default defineType({
                       name: "image",
                       title: "Imagen",
                       type: "imageWithAlt",
-                      hidden: ({ parent }: any) => parent?.mediaType === "video",
+                      hidden: ({ parent }) => parent?.mediaType === "video",
                     }),
                     defineField({
                       name: "videoUrl",
                       title: "URL del video (YouTube)",
                       type: "url",
-                      hidden: ({ parent }: any) => parent?.mediaType === "image",
+                      hidden: ({ parent }) => parent?.mediaType === "image",
                     }),
                     defineField({
                       name: "thumbnail",
                       title: "Miniatura del video",
                       type: "imageWithAlt",
-                      hidden: ({ parent }: any) => parent?.mediaType === "image",
+                      hidden: ({ parent }) => parent?.mediaType === "image",
                     }),
                   ],
                   preview: {
                     select: { mediaType: "mediaType", image: "image" },
-                    prepare({ mediaType, image }: any) {
+                    prepare({ mediaType, image }) {
                       return {
                         title: mediaType === "video" ? "Video" : "Imagen",
                         media: image,
@@ -282,7 +282,7 @@ export default defineType({
           ],
           preview: {
             select: { title: "title.es", subtitle: "date" },
-            prepare({ title, subtitle }: any) {
+            prepare({ title, subtitle }) {
               return {
                 title: title || "...",
                 subtitle: subtitle ? new Date(subtitle).toLocaleDateString("es") : "",
@@ -318,7 +318,7 @@ export default defineType({
   ],
   preview: {
     select: { title: "name", subtitle: "shortBio", media: "photo" },
-    prepare({ title, subtitle, media }: any) {
+    prepare({ title, subtitle, media }) {
       return {
         title: title?.es || "...",
         subtitle: subtitle?.es || "",

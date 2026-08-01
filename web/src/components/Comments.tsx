@@ -21,7 +21,6 @@ export default function CommentsPanel({
   const [comments, setComments] = useState<Comment[]>([]);
   const [name, setName] = useState("");
   const [text, setText] = useState("");
-  const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
 
   useEffect(() => {

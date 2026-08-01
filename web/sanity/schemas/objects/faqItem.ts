@@ -20,7 +20,7 @@ export default defineType({
   ],
   preview: {
     select: { question: "question" },
-    prepare({ question }: any) {
+    prepare({ question }) {
       return { title: question?.es || "FAQ" };
     },
   },

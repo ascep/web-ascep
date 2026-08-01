@@ -1,19 +1,35 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Coffee, Sunrise, Heart, Star, Rocket, CreditCard, Landmark, Loader } from "lucide-react";
+import { Coffee, Sunrise, Heart, Star, Rocket, CreditCard, Landmark, Loader, type LucideIcon } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 
-interface Tier {
+interface TierOption {
   cop: number;
   usd: number;
-  labelKey: string;
-  icon: typeof Coffee;
+  label: string;
+  icon?: string;
 }
 
 const DONATARIO_URL = "https://donatario.com/recaudo/8cec07d1-f20c-4e30-adb1-5f4eedd9de2a";
 
-export default function DonationForm() {
+const defaultTierOptions: TierOption[] = [
+  { cop: 5000, usd: 1, label: "Café ASCEP", icon: "Coffee" },
+  { cop: 20000, usd: 5, label: "Amanecer con esperanza", icon: "Sunrise" },
+  { cop: 50000, usd: 12, label: "Estrella guía", icon: "Heart" },
+  { cop: 100000, usd: 25, label: "Escudo de oportunidades", icon: "Star" },
+  { cop: 200000, usd: 50, label: "Futuro brillante", icon: "Rocket" },
+];
+
+const iconMap: Record<string, LucideIcon> = {
+  Coffee,
+  Sunrise,
+  Heart,
+  Star,
+  Rocket,
+};
+
+export default function DonationForm({ tiers = defaultTierOptions }: { tiers?: TierOption[] }) {
   const t = useTranslations("donationForm");
   const locale = useLocale();
   const [currency, setCurrency] = useState<"COP" | "USD">("COP");
@@ -25,39 +41,22 @@ export default function DonationForm() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const method = params.get("method");
-    if (method === "mp" || method === "stripe") {
-      const tier = 50000;
-      setSelectedTier(tier);
-      setCustom("");
-      setCurrency(method === "stripe" ? "USD" : "COP");
-    }
+    const t = window.setTimeout(() => {
+      const params = new URLSearchParams(window.location.search);
+      const method = params.get("method");
+      if (method === "mp" || method === "stripe") {
+        setSelectedTier(50000);
+        setCustom("");
+        setCurrency(method === "stripe" ? "USD" : "COP");
+      }
+    }, 0);
+    return () => window.clearTimeout(t);
   }, []);
-
-  const [fxRate, setFxRate] = useState<number | null>(null);
-
-  useEffect(() => {
-    fetch("https://api.frankfurter.app/latest?from=COP&to=USD")
-      .then((r) => r.json())
-      .then((data) => setFxRate(data.rates.USD))
-      .catch(() => setFxRate(0.00021));
-  }, []);
-
-  const toUsd = (cop: number) => Math.round(cop * (fxRate ?? 0.00021));
-
-  const TIERS: Tier[] = [
-    { cop: 5000, usd: toUsd(5000), labelKey: "tier1Label", icon: Coffee },
-    { cop: 20000, usd: toUsd(20000), labelKey: "tier2Label", icon: Sunrise },
-    { cop: 50000, usd: toUsd(50000), labelKey: "tier3Label", icon: Heart },
-    { cop: 100000, usd: toUsd(100000), labelKey: "tier4Label", icon: Star },
-    { cop: 200000, usd: toUsd(200000), labelKey: "tier5Label", icon: Rocket },
-  ];
 
   const symbol = "$";
 
   const getAmount = (): number | "" => {
-    const tier = TIERS.find((item) => item.cop === selectedTier);
+    const tier = tiers.find((item) => item.cop === selectedTier);
     if (tier) return currency === "COP" ? tier.cop : tier.usd;
     if (custom) {
       const parsed = parseInt(custom.replace(/[^0-9]/g, ""));
@@ -130,13 +129,13 @@ export default function DonationForm() {
 
       {/* Creative tiers */}
       <div className="mb-6 grid gap-3">
-        {TIERS.map((tier) => {
+        {tiers.map((tier) => {
           const val = currency === "COP" ? tier.cop : tier.usd;
           const active = selectedTier === tier.cop;
-          const Icon = tier.icon;
+          const Icon = iconMap[tier.icon || "Heart"] || Heart;
           return (
             <button
-              key={tier.cop}
+              key={`${tier.cop}-${tier.label}`}
               onClick={() => handleTierClick(tier.cop)}
               className={`flex items-center gap-4 rounded-[10px] border-2 p-4 text-left transition-all ${
                 active
@@ -148,7 +147,7 @@ export default function DonationForm() {
                 <Icon size={18} className={active ? "text-white" : "text-brand-purple"} />
               </div>
               <div className="flex-1">
-                <div className={`text-sm font-bold ${active ? "text-white" : "text-text-primary"}`}>{t(tier.labelKey)}</div>
+                <div className={`text-sm font-bold ${active ? "text-white" : "text-text-primary"}`}>{tier.label}</div>
                 <div className={`text-xs ${active ? "text-white/70" : "text-text-muted"}`}>{symbol}{val.toLocaleString()} {currency}</div>
               </div>
               <div className={`h-5 w-5 rounded-full border-2 ${active ? "border-white bg-white" : "border-brand-purple/30"}`}>

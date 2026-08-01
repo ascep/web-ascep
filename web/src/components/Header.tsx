@@ -118,7 +118,20 @@ export default function Header({ leyEgresoCard, comoAyudarCard }: HeaderProps) {
   const [openDropdown, setOpenDropdown] = useState<DropdownState>(null);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
   const [langOpen, setLangOpen] = useState(false);
-  const [showNuevo, setShowNuevo] = useState(false);
+  const [showNuevo] = useState<boolean>(() => {
+    if (typeof window === "undefined") return false;
+    const val = localStorage.getItem("ascep_nuevo");
+    if (!val) {
+      localStorage.setItem("ascep_nuevo", "1");
+      return true;
+    }
+    const count = parseInt(val, 10);
+    if (count < 2) {
+      localStorage.setItem("ascep_nuevo", String(count + 1));
+      return true;
+    }
+    return false;
+  });
   const [searchOpen, setSearchOpen] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const langTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -145,20 +158,6 @@ export default function Header({ leyEgresoCard, comoAyudarCard }: HeaderProps) {
   const handleLangLeave = () => {
     langTimeoutRef.current = setTimeout(() => setLangOpen(false), 200);
   };
-
-  useEffect(() => {
-    const val = localStorage.getItem("ascep_nuevo");
-    if (!val) {
-      localStorage.setItem("ascep_nuevo", "1");
-      setShowNuevo(true);
-    } else {
-      const count = parseInt(val, 10);
-      if (count < 2) {
-        localStorage.setItem("ascep_nuevo", String(count + 1));
-        setShowNuevo(true);
-      }
-    }
-  }, []);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {

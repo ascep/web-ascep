@@ -1,7 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import DonationForm from "@/components/DonationForm";
 import FaqAccordion from "@/components/FaqAccordion";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -154,6 +152,20 @@ export default async function DonarPage({
         return { icon: Icon, label, desc, color: c.color, bg: c.bg };
       })
     : fallbackTiers;
+
+  const donationFormTiers = cmsTiers.length > 0
+    ? cmsTiers.map((t) => ({
+        cop: t.monthlyCop ?? 0,
+        usd: t.monthlyUsd ?? Math.max(1, Math.round((t.monthlyCop ?? 0) * 0.00021)),
+        label: localize(t.label, locale) || `$${t.monthlyCop?.toLocaleString(locale)}`,
+        icon: t.icon || "Heart",
+      }))
+    : fallbackTiers.map((t, index) => ({
+        cop: [5000, 20000, 50000, 100000, 200000][index] ?? 5000,
+        usd: [1, 5, 12, 25, 50][index] ?? 1,
+        label: t.label,
+        icon: t.icon ? t.icon.displayName || "Heart" : "Heart",
+      }));
 
   const cmsGallery = cmsAlbums.length > 0
     ? cmsAlbums.flatMap((a) =>
@@ -337,7 +349,7 @@ export default async function DonarPage({
             <div className="lg:col-span-3">
               <AnimatedSection direction="left">
                 <div className="rounded-[10px] border border-brand-purple/10 bg-white p-8 shadow-sm">
-                  <DonationForm />
+                  <DonationForm tiers={donationFormTiers} />
                 </div>
               </AnimatedSection>
             </div>

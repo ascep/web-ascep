@@ -20,7 +20,6 @@ import { imageUrl } from "@/lib/sanity/image";
 import { getFotos } from "@/lib/get-fotos";
 import {
   getMilestones,
-  getPartners,
   getFeaturedPartners,
   getImpactStats,
   getTestimonials,

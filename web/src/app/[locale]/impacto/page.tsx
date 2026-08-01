@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import MapaAlcanceASCEP from "@/components/MapaAlcanceASCEP";

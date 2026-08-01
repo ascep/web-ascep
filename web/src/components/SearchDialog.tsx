@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Search, X, ArrowUpDown } from "lucide-react";
+import { Search, ArrowUpDown } from "lucide-react";
 import { useRouter, usePathname } from "next/navigation";
 import Fuse from "fuse.js";
 
@@ -68,16 +68,16 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
     : pages.slice(0, 5);
 
   useEffect(() => {
-    if (open) {
-      setTimeout(() => inputRef.current?.focus(), 100);
+    if (!open) return;
+
+    const timeout = window.setTimeout(() => {
+      inputRef.current?.focus();
       setQuery("");
       setSelectedIndex(0);
-    }
-  }, [open]);
+    }, 100);
 
-  useEffect(() => {
-    setSelectedIndex(0);
-  }, [query]);
+    return () => window.clearTimeout(timeout);
+  }, [open]);
 
   const navigate = useCallback((href: string) => {
     router.push(`/${locale}${href}`);
@@ -110,7 +110,10 @@ export default function SearchDialog({ open, onClose }: SearchDialogProps) {
             ref={inputRef}
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={(e) => {
+              setQuery(e.target.value);
+              setSelectedIndex(0);
+            }}
             onKeyDown={handleKeyDown}
             placeholder="Buscar paginas..."
             className="w-full bg-transparent text-base text-text-primary outline-none placeholder:text-[var(--color-text-tertiary)]"

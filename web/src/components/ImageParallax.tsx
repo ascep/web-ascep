@@ -1,8 +1,34 @@
 'use client';
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useSyncExternalStore } from "react";
 import { motion, useSpring } from "motion/react";
 import Image from "next/image";
+
+function subscribeReducedMotion(onStoreChange: () => void) {
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mq.addEventListener("change", onStoreChange);
+  return () => mq.removeEventListener("change", onStoreChange);
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
+
+function subscribeTouch() {
+  return () => {};
+}
+
+function getTouchSnapshot() {
+  return "ontouchstart" in window || navigator.maxTouchPoints > 0;
+}
+
+function getTouchServerSnapshot() {
+  return false;
+}
 
 type ImageParallaxProps = {
   src: string;
@@ -32,17 +58,19 @@ export default function ImageParallax({
   style,
 }: ImageParallaxProps) {
   const ref = useRef<HTMLDivElement>(null);
-  const [reducedMotion, setReducedMotion] = useState(false);
-  const [isTouch, setIsTouch] = useState(false);
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot
+  );
+  const isTouch = useSyncExternalStore(
+    subscribeTouch,
+    getTouchSnapshot,
+    getTouchServerSnapshot
+  );
 
   const x = useSpring(0, { stiffness: 120, damping: 20 });
   const y = useSpring(0, { stiffness: 120, damping: 20 });
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    setIsTouch("ontouchstart" in window || navigator.maxTouchPoints > 0);
-  }, []);
 
   useEffect(() => {
     if (reducedMotion || isTouch) return;

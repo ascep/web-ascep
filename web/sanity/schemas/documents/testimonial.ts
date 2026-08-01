@@ -55,7 +55,7 @@ export default defineType({
   ],
   preview: {
     select: { title: "author", subtitle: "quote", media: "avatar" },
-    prepare({ title, subtitle, media }: any) {
+    prepare({ title, subtitle, media }) {
       return { title: title?.es || "...", subtitle: subtitle?.es?.slice(0, 60) || "", media };
     },
   },

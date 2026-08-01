@@ -62,7 +62,7 @@ export default defineType({
   ],
   preview: {
     select: { title: "title", subtitle: "category", media: "coverImage", images: "images" },
-    prepare({ title, subtitle, media, images }: any) {
+    prepare({ title, subtitle, media, images }) {
       return {
         title: title?.es || "...",
         subtitle: `${subtitle || ""} - ${images?.length || 0} imagenes`,

@@ -1,13 +1,11 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
 import ImageCarousel from "@/components/ImageCarousel";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
-import ImageParallax from "@/components/ImageParallax";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
@@ -36,25 +34,6 @@ const implItems = ["impl1", "impl2", "impl3", "impl4", "impl5"] as const;
 const papelEgresadosItems = ["pe1", "pe2", "pe3", "pe4", "pe5"] as const;
 
 const papelASCEPItems = ["pa1", "pa2", "pa3", "pa4", "pa5", "pa6"] as const;
-
-const sectionIcons: Record<string, string> = {
-  queEs: "⚖️",
-  objetivos: "🎯",
-  dirigida: "👥",
-  cambio: "🔄",
-  implementacion: "🏛️",
-  papelEgresados: "⭐",
-  papelASCEP: "💜",
-  proceso: "📜",
-  participa: "🤝",
-};
-
-type KeyItem = {
-  key: string;
-  title: string;
-  desc?: string;
-  icon?: string;
-};
 
 export default async function LeyDeEgresoPage({
   params,
@@ -136,7 +115,7 @@ export default async function LeyDeEgresoPage({
                   </div>
                   <div className="rounded-[10px] border-l-4 border-l-brand-secondary bg-bg-card p-6 shadow-sm">
                     <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">
-                      "Hijos e Hijas del Estado"
+                      “Hijos e Hijas del Estado”
                     </h4>
                     <p className="text-sm text-[var(--color-text-muted)]">
                       Nombre con el que se conoce esta ley que protege a los jovenes egresados del sistema de proteccion estatal

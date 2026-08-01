@@ -1,14 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useLocale } from "next-intl";
 import { motion } from "motion/react";
 import { imageUrl } from "@/lib/sanity/image";
 import type { PadrinoProfile } from "@/lib/sanity/fetch";
 
-function localize(obj: any, locale: string): string | undefined {
+type LocalizedText = { es?: string; en?: string; pt?: string } | null | undefined;
+
+function localize(obj: LocalizedText, locale: string): string | undefined {
   if (!obj) return undefined;
-  return obj[locale] ?? obj.es;
+  return obj[locale as keyof typeof obj] ?? obj.es;
 }
 
 const borderColors = [
@@ -60,9 +63,11 @@ export default function PadProfileCard({
         <div className="mb-3 flex items-center gap-3">
           <div className={`h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 ${borderColor} bg-white`}>
             {profile.photo ? (
-              <img
+              <Image
                 src={imageUrl(profile.photo, 200, 200) || ""}
                 alt={name}
+                width={200}
+                height={200}
                 className="h-full w-full object-cover"
               />
             ) : (

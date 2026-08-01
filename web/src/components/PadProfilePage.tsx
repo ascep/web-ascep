@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useTranslations, useLocale } from "next-intl";
+import { useTranslations } from "next-intl";
 import { PortableText } from "@portabletext/react";
+import type { PortableTextBlock } from "@portabletext/types";
 import {
   Heart,
   Play,
@@ -12,14 +14,23 @@ import {
   GraduationCap,
   TrendingUp,
   Target,
-  ArrowLeft,
 } from "lucide-react";
 import { imageUrl } from "@/lib/sanity/image";
 import type { PadrinoProfile, ProgressPost, PadrinoNeed } from "@/lib/sanity/fetch";
 
-function localize(obj: any, locale: string): string | undefined {
+type LocalizedText = { es?: string; en?: string; pt?: string } | null | undefined;
+
+type SanityAssetLike = {
+  asset?: {
+    _ref?: string;
+    _type?: string;
+  };
+  alt?: string | { es?: string; en?: string; pt?: string };
+};
+
+function localize(obj: LocalizedText, locale: string): string | undefined {
   if (!obj) return undefined;
-  return obj[locale] ?? obj.es;
+  return obj[locale as keyof typeof obj] ?? obj.es;
 }
 
 function formatDate(dateStr: string, locale: string): string {
@@ -104,6 +115,9 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
   const authorRole = localize(post.authorRole, locale);
   const tags = post.tags || [];
   const media = post.media || [];
+  const descriptionBlocks = Array.isArray(post.description)
+    ? (post.description as PortableTextBlock[])
+    : [];
   const isMilestone = post.type === "milestone";
 
   return (
@@ -138,9 +152,9 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
                 {locale === "en" ? "Academic Milestone" : locale === "pt" ? "Marco Academico" : "Hito Academico"}
               </span>
               <h3 className="mt-1 text-lg font-bold text-[var(--color-text-primary)]">{title}</h3>
-              {post.description && (
+              {descriptionBlocks.length > 0 && (
                 <div className="mt-2 text-sm leading-relaxed text-[var(--color-text-secondary)]">
-                  <PortableText value={post.description} />
+                  <PortableText value={descriptionBlocks} />
                 </div>
               )}
             </div>
@@ -150,9 +164,9 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
             {title && (
               <h3 className="mb-2 text-base font-bold text-[var(--color-text-primary)]">{title}</h3>
             )}
-            {post.description && (
+            {descriptionBlocks.length > 0 && (
               <div className="text-sm leading-relaxed text-[var(--color-text-secondary)]">
-                <PortableText value={post.description} />
+                <PortableText value={descriptionBlocks} />
               </div>
             )}
           </>
@@ -175,9 +189,11 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
                     ) : (
                       <>
                         {m.thumbnail ? (
-                          <img
+                          <Image
                             src={imageUrl(m.thumbnail, 800, 450) || ""}
                             alt=""
+                            width={800}
+                            height={450}
                             className="h-full w-full object-cover opacity-70"
                           />
                         ) : (
@@ -201,9 +217,11 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
               if (m.image) {
                 return (
                   <div key={m._key} className="overflow-hidden rounded-[10px]">
-                    <img
+                    <Image
                       src={imageUrl(m.image, 800, 600) || ""}
                       alt={typeof m.image?.alt === "string" ? m.image.alt : ""}
+                      width={800}
+                      height={600}
                       className="aspect-video w-full object-cover"
                     />
                   </div>
@@ -228,15 +246,17 @@ function ProgressPostCard({ post, locale }: { post: ProgressPost; locale: string
   );
 }
 
-function BentoGallery({ photos }: { photos: any[] }) {
+function BentoGallery({ photos }: { photos: Array<SanityAssetLike> }) {
   if (!photos || photos.length === 0) return null;
 
   if (photos.length === 1) {
     return (
       <div className="overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] shadow-sm">
-        <img
+        <Image
           src={imageUrl(photos[0], 1200, 800) || ""}
-          alt={photos[0]?.alt || ""}
+          alt={typeof photos[0]?.alt === "string" ? photos[0].alt : ""}
+          width={1200}
+          height={800}
           className="h-64 w-full object-cover md:h-96"
         />
       </div>
@@ -248,9 +268,11 @@ function BentoGallery({ photos }: { photos: any[] }) {
       <div className="grid gap-2 md:grid-cols-2 md:h-80">
         {photos.map((photo, i) => (
           <div key={i} className="overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] shadow-sm">
-            <img
+            <Image
               src={imageUrl(photo, 800, 600) || ""}
-              alt={photo?.alt || ""}
+              alt={typeof photo?.alt === "string" ? photo.alt : ""}
+              width={800}
+              height={600}
               className="h-48 w-full object-cover md:h-full"
             />
           </div>
@@ -262,26 +284,32 @@ function BentoGallery({ photos }: { photos: any[] }) {
   return (
     <div className="grid h-64 grid-cols-4 gap-2 md:h-96">
       <div className="col-span-2 row-span-2 overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] shadow-sm">
-        <img
+        <Image
           src={imageUrl(photos[0], 800, 800) || ""}
-          alt={photos[0]?.alt || ""}
+          alt={typeof photos[0]?.alt === "string" ? photos[0].alt : ""}
+          width={800}
+          height={800}
           className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
         />
       </div>
       {photos.slice(1, 3).map((photo, i) => (
         <div key={i} className="col-span-2 overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] shadow-sm">
-          <img
+          <Image
             src={imageUrl(photo, 600, 400) || ""}
-            alt={photo?.alt || ""}
+            alt={typeof photo?.alt === "string" ? photo.alt : ""}
+            width={600}
+            height={400}
             className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
           />
         </div>
       ))}
       {photos.slice(3, 5).map((photo, i) => (
         <div key={i} className="col-span-1 overflow-hidden rounded-[10px] border border-[var(--color-border-subtle)] shadow-sm">
-          <img
+          <Image
             src={imageUrl(photo, 400, 400) || ""}
-            alt={photo?.alt || ""}
+            alt={typeof photo?.alt === "string" ? photo.alt : ""}
+            width={400}
+            height={400}
             className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
           />
         </div>
@@ -335,9 +363,11 @@ export default function PadProfilePage({
             <div className="relative shrink-0">
               <div className="h-28 w-28 overflow-hidden rounded-full border-4 border-white bg-white shadow-xl md:h-36 md:w-36">
                 {profile.photo ? (
-                  <img
+                  <Image
                     src={imageUrl(profile.photo, 400, 400) || ""}
                     alt={name}
+                    width={400}
+                    height={400}
                     className="h-full w-full object-cover"
                   />
                 ) : (
@@ -563,9 +593,11 @@ function OtherProfileCard({ profile, locale }: { profile: PadrinoProfile; locale
       <div className="mb-3 flex items-center gap-3">
         <div className="h-14 w-14 shrink-0 overflow-hidden rounded-full border-2 border-brand-primary bg-white">
           {profile.photo ? (
-            <img
+            <Image
               src={imageUrl(profile.photo, 200, 200) || ""}
               alt={name}
+              width={200}
+              height={200}
               className="h-full w-full object-cover"
             />
           ) : (

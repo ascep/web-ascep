@@ -8,6 +8,9 @@ interface SanityImage {
   };
   alt?: { es?: string; en?: string; pt?: string };
 }
+
+type LocalizedText = { es?: string; en?: string; pt?: string };
+type SanityAssetLike = { asset?: { _ref?: string; _type?: string } } | null | undefined;
 import {
   siteSettingsQuery,
   pageContentQuery,
@@ -99,10 +102,10 @@ export type Partner = {
 
 export type DocumentEntry = {
   _id: string;
-  title?: { es?: string; en?: string; pt?: string };
+  title?: LocalizedText;
   category?: string;
-  description?: { es?: string; en?: string; pt?: string };
-  file?: any;
+  description?: LocalizedText;
+  file?: SanityAssetLike;
   previewImage?: SanityImage;
   externalUrl?: string;
   order?: number;
@@ -110,11 +113,11 @@ export type DocumentEntry = {
 
 export type VideoEntry = {
   _id: string;
-  title?: { es?: string; en?: string; pt?: string };
-  description?: { es?: string; en?: string; pt?: string };
+  title?: LocalizedText;
+  description?: LocalizedText;
   source?: "youtube" | "file";
   youtubeUrl?: string;
-  videoFile?: any;
+  videoFile?: SanityAssetLike;
   thumbnail?: SanityImage;
   category?: string;
   order?: number;
@@ -203,11 +206,13 @@ export type GalleryAlbum = {
   order?: number;
 };
 
-async function sanityFetch<T>(query: string, params?: Record<string, string | number | boolean>): Promise<T | null> {
+type SanityFetchParams = Record<string, string | number | boolean> | undefined;
+
+async function sanityFetch<T>(query: string, params?: SanityFetchParams): Promise<T | null> {
   const client = getClient();
   if (!client) return null;
   try {
-    return await client.fetch<T>(query, params as any);
+    return await client.fetch<T>(query, params as never);
   } catch {
     return null;
   }
@@ -307,18 +312,18 @@ export type Programa = {
 };
 
 export type ProgramaDetail = Programa & {
-  introText?: any;
-  objectives?: Array<{ title?: any; description?: any }>;
-  components?: Array<{ title?: any; description?: any; icon?: string }>;
+  introText?: unknown;
+  objectives?: Array<{ title?: LocalizedText; description?: LocalizedText }>;
+  components?: Array<{ title?: LocalizedText; description?: LocalizedText; icon?: string }>;
   results?: Array<{ es?: string; en?: string; pt?: string }>;
-  modules?: Array<{ code?: string; title?: any; description?: any; icon?: string }>;
-  actionLines?: Array<{ title?: any; description?: any; icon?: string }>;
-  pillars?: Array<{ title?: any; description?: any }>;
-  crossCutting?: Array<{ title?: any; description?: any }>;
+  modules?: Array<{ code?: string; title?: LocalizedText; description?: LocalizedText; icon?: string }>;
+  actionLines?: Array<{ title?: LocalizedText; description?: LocalizedText; icon?: string }>;
+  pillars?: Array<{ title?: LocalizedText; description?: LocalizedText }>;
+  crossCutting?: Array<{ title?: LocalizedText; description?: LocalizedText }>;
   incidenciaItems?: Array<{ es?: string; en?: string; pt?: string }>;
   secondaryObjectives?: Array<{ es?: string; en?: string; pt?: string }>;
   gallery?: SanityImage[];
-  seo?: any;
+  seo?: unknown;
 };
 
 export async function getPrograms(): Promise<Programa[]> {
@@ -351,10 +356,10 @@ export type ProgressMedia = {
 export type ProgressPost = {
   _key?: string;
   date?: string;
-  author?: { es?: string; en?: string; pt?: string };
-  authorRole?: { es?: string; en?: string; pt?: string };
-  title?: { es?: string; en?: string; pt?: string };
-  description?: any;
+  author?: LocalizedText;
+  authorRole?: LocalizedText;
+  title?: LocalizedText;
+  description?: unknown;
   type?: "story" | "milestone" | "update";
   media?: ProgressMedia[];
   tags?: string[];
@@ -362,22 +367,22 @@ export type ProgressPost = {
 
 export type PadrinoProfile = {
   _id: string;
-  name?: { es?: string; en?: string; pt?: string };
+  name?: LocalizedText;
   slug?: { current: string };
   age?: number;
-  city?: { es?: string; en?: string; pt?: string };
+  city?: LocalizedText;
   photo?: SanityImage;
   coverPhoto?: SanityImage;
-  shortBio?: { es?: string; en?: string; pt?: string };
-  fullBio?: any;
+  shortBio?: LocalizedText;
+  fullBio?: unknown;
   impactPercentage?: number;
   storiesCount?: number;
   yearsInProgram?: number;
   needs?: PadrinoNeed[];
-  impactMessage?: { es?: string; en?: string; pt?: string };
-  impactStatLabel?: { es?: string; en?: string; pt?: string };
+  impactMessage?: LocalizedText;
+  impactStatLabel?: LocalizedText;
   impactStatValue?: string;
-  impactStatDescription?: { es?: string; en?: string; pt?: string };
+  impactStatDescription?: LocalizedText;
   progressPosts?: ProgressPost[];
   galleryPhotos?: SanityImage[];
   order?: number;

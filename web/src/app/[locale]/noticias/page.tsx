@@ -24,7 +24,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-async function getNoticias() {
+type Noticia = {
+  _id: string;
+  slug: { current: string };
+  title?: string;
+  excerpt?: string;
+  category?: string;
+  publishedAt?: string;
+  coverImage?: { asset?: { _ref?: string; _type?: string } };
+};
+
+async function getNoticias(): Promise<Noticia[]> {
   const client = getClient();
   if (!client) return [];
   try {
@@ -73,7 +83,7 @@ export default async function NoticiasPage({
 
           {noticias.length > 0 ? (
             <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {noticias.map((noticia: any, i: number) => (
+              {noticias.map((noticia, i) => (
                 <AnimatedSection key={noticia._id} direction="up" delay={i * 0.06}>
                   <Link
                     href={`/${locale}/noticias/${noticia.slug.current}`}
@@ -95,7 +105,7 @@ export default async function NoticiasPage({
                     </div>
                     <div className="p-4">
                       <span className="mb-2 inline-block rounded-full bg-white/10 px-2 py-0.5 text-xs font-medium text-white/80">
-                        {t(noticia.category) || noticia.category}
+                        {noticia.category ? t(noticia.category) || noticia.category : ""}
                       </span>
                       <h3 className="mb-2 text-base font-bold text-[var(--color-text-primary)] line-clamp-2">
                         {noticia.title}

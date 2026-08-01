@@ -81,14 +81,14 @@ export default async function IncidenciaPage({
   ];
 
   const objetivos = cms?.objectives && cms.objectives.length > 0
-    ? cms.objectives.map((o: any) => ({
+    ? cms.objectives.map((o) => ({
         title: localize(o.title, locale) || "",
         desc: localize(o.description, locale) || "",
       }))
     : fallbackObjetivos;
 
   const lineas = cms?.actionLines && cms.actionLines.length > 0
-    ? cms.actionLines.map((l: any) => ({
+    ? cms.actionLines.map((l) => ({
         title: localize(l.title, locale) || "",
         desc: localize(l.description, locale) || "",
         icon: (l.icon && iconMap[l.icon]) || ArrowUpRight,
@@ -96,7 +96,7 @@ export default async function IncidenciaPage({
     : fallbackLineas;
 
   const resultados = cms?.results && cms.results.length > 0
-    ? cms.results.map((r: any) => localize(r, locale) || "")
+    ? cms.results.map((r) => localize(r, locale) || "")
     : fallbackResultados;
 
   return (

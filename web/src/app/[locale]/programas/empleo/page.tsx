@@ -68,11 +68,11 @@ export default async function EmpleoPage({
   ];
 
   const objetivos = cms?.objectives && cms.objectives.length > 0
-    ? cms.objectives.map((o: any) => localize(o.description, locale) || "")
+    ? cms.objectives.map((o) => localize(o.description, locale) || "")
     : fallbackObjetivos;
 
   const componentes = cms?.components && cms.components.length > 0
-    ? cms.components.map((c: any) => ({
+    ? cms.components.map((c) => ({
         title: localize(c.title, locale) || "",
         desc: localize(c.description, locale) || "",
         icon: (c.icon && iconMap[c.icon]) || BookOpen,
@@ -80,7 +80,7 @@ export default async function EmpleoPage({
     : fallbackComponentes;
 
   const resultados = cms?.results && cms.results.length > 0
-    ? cms.results.map((r: any) => localize(r, locale) || "")
+    ? cms.results.map((r) => localize(r, locale) || "")
     : fallbackResultados;
 
   return (

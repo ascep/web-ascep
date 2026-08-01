@@ -68,7 +68,7 @@ export default defineType({
       media: "coverImage",
       subtitle: "category",
     },
-    prepare({ title, media, subtitle }: any) {
+    prepare({ title, media, subtitle }) {
       return { title: title?.es || "...", media, subtitle };
     },
   },

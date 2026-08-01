@@ -141,14 +141,14 @@ export default async function AvanzaJovenPage({
   ];
 
   const objetivos: { title: string; desc: string }[] = cms?.objectives && cms.objectives.length > 0
-    ? cms.objectives.map((o: any) => ({
+    ? cms.objectives.map((o) => ({
         title: localize(o.title, locale) || "",
         desc: localize(o.description, locale) || "",
       }))
     : fallbackObjetivos;
 
   const modules: { code: string; title: string; desc: string; icon: LucideIcon }[] = cms?.modules && cms.modules.length > 0
-    ? cms.modules.map((m: any) => ({
+    ? cms.modules.map((m) => ({
         code: m.code || "",
         title: localize(m.title, locale) || "",
         desc: localize(m.description, locale) || "",

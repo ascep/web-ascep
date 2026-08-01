@@ -2,10 +2,24 @@
 
 import { motion } from "motion/react";
 import { ChevronDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Aurora from "./Aurora";
 import ImageParallax from "./ImageParallax";
 import CursorGlow from "./CursorGlow";
+
+function subscribeReducedMotion(onStoreChange: () => void) {
+  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+  mq.addEventListener("change", onStoreChange);
+  return () => mq.removeEventListener("change", onStoreChange);
+}
+
+function getReducedMotionSnapshot() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
+function getReducedMotionServerSnapshot() {
+  return false;
+}
 
 type HeroVariant = "home" | "page" | "section";
 
@@ -46,16 +60,12 @@ export default function Hero({
   youtubeId,
   showScrollIndicator = false,
 }: HeroProps) {
-  const [reducedMotion, setReducedMotion] = useState(false);
+  const reducedMotion = useSyncExternalStore(
+    subscribeReducedMotion,
+    getReducedMotionSnapshot,
+    getReducedMotionServerSnapshot
+  );
   const isHome = variant === "home";
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mq.matches);
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mq.addEventListener("change", handler);
-    return () => mq.removeEventListener("change", handler);
-  }, []);
 
   return (
     <section className={`relative flex min-h-[80vh] items-center overflow-hidden sm:min-h-[85vh] ${bgColor}`}>

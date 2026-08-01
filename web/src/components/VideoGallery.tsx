@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import { X, Play, Video } from "lucide-react";
 import type { VideoEntryView } from "@/lib/sanity/fetch";
 
@@ -78,11 +79,12 @@ export default function VideoGallery({ videos, tabs, fallbackCount = 0 }: VideoG
             >
               <div className="relative aspect-video w-full overflow-hidden bg-zinc-200">
                 {video.thumbnail ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
+                  <Image
                     src={video.thumbnail}
                     alt={video.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    fill
+                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                 ) : (
                   <div className="flex h-full w-full items-center justify-center bg-brand-purple/10">
@@ -141,7 +143,7 @@ export default function VideoGallery({ videos, tabs, fallbackCount = 0 }: VideoG
                   allowFullScreen
                 />
               ) : playing.videoUrl ? (
-                // eslint-disable-next-line jsx-a11y/media-has-caption
+                 
                 <video src={playing.videoUrl} controls autoPlay className="h-full w-full" />
               ) : null}
             </div>

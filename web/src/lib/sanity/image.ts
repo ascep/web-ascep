@@ -1,4 +1,11 @@
-export function imageUrl(source: any, width = 600, height = 338): string | null {
+type SanityAssetSource = {
+  asset?: {
+    _ref?: string;
+    _type?: string;
+  };
+};
+
+export function imageUrl(source: SanityAssetSource | null | undefined, width = 600, height = 338): string | null {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
   if (!projectId || !source?.asset?._ref) return null;
@@ -10,7 +17,7 @@ export function imageUrl(source: any, width = 600, height = 338): string | null 
   return `https://cdn.sanity.io/images/${projectId}/${dataset}/${id}.${format}?w=${width}&h=${height}&fit=crop&auto=format`;
 }
 
-export function fileUrl(source: any): string | null {
+export function fileUrl(source: SanityAssetSource | null | undefined): string | null {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
   const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
   if (!projectId || !source?.asset?._ref) return null;

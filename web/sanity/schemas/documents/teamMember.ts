@@ -41,7 +41,7 @@ export default defineType({
   ],
   preview: {
     select: { title: "name", subtitle: "role", media: "photo" },
-    prepare({ title, subtitle, media }: any) {
+    prepare({ title, subtitle, media }) {
       return { title: title?.es || "...", subtitle: subtitle?.es || "", media };
     },
   },

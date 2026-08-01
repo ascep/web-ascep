@@ -1,22 +1,21 @@
 "use client";
 
-import { useState, useEffect, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { NextStudio } from "next-sanity/studio";
 import config from "@/../sanity.config";
 import { Lock, LogIn } from "lucide-react";
 
 export default function StudioAuthGate() {
-  const [authed, setAuthed] = useState<boolean | null>(null);
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
+  const [authed, setAuthed] = useState<boolean | null>(() => {
+    if (typeof document === "undefined") return null;
     const hasSession = document.cookie
       .split("; ")
       .find((row) => row.startsWith("studio_session="));
-    setAuthed(!!hasSession);
-  }, []);
+    return !!hasSession;
+  });
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();

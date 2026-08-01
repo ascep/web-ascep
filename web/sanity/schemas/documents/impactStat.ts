@@ -53,7 +53,7 @@ export default defineType({
   ],
   preview: {
     select: { title: "label", subtitle: "value", suffix: "suffix" },
-    prepare({ title, subtitle, suffix }: any) {
+    prepare({ title, subtitle, suffix }) {
       return { title: title?.es || "...", subtitle: `${subtitle || 0}${suffix || ""}` };
     },
   },

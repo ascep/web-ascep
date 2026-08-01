@@ -33,10 +33,10 @@ export default defineType({
       name: "youtubeUrl",
       title: "URL de YouTube",
       type: "url",
-      hidden: ({ parent }: any) => parent?.source !== "youtube",
+      hidden: ({ parent }) => parent?.source !== "youtube",
       validation: (rule) =>
         rule.custom((value, context) => {
-          if ((context.parent as any)?.source === "youtube" && !value) {
+          if ((context.parent as { source?: string })?.source === "youtube" && !value) {
             return "Requerido para videos de YouTube";
           }
           return true;
@@ -47,7 +47,7 @@ export default defineType({
       title: "Archivo de video (MP4)",
       type: "file",
       options: { accept: "video/mp4" },
-      hidden: ({ parent }: any) => parent?.source !== "file",
+      hidden: ({ parent }) => parent?.source !== "file",
     }),
     defineField({
       name: "thumbnail",
@@ -83,7 +83,7 @@ export default defineType({
   ],
   preview: {
     select: { title: "title", subtitle: "category", media: "thumbnail" },
-    prepare({ title, subtitle, media }: any) {
+    prepare({ title, subtitle, media }) {
       return { title: title?.es || "...", subtitle, media };
     },
   },

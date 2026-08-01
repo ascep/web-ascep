@@ -1,11 +1,5 @@
 import { defineField, defineType } from "sanity";
 
-const supportedLanguages = [
-  { id: "es", title: "Espanol", isDefault: true },
-  { id: "en", title: "English" },
-  { id: "pt", title: "Portugues" },
-];
-
 export default defineType({
   name: "seo",
   title: "SEO",
@@ -31,7 +25,8 @@ export default defineType({
     }),
   ],
   preview: {
-    prepare({ title }: any) {
+    select: { title: "title" },
+    prepare({ title }) {
       return { title: title?.es || "SEO" };
     },
   },

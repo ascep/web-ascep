@@ -8,7 +8,7 @@ import { ArrowRight, CheckCircle, UserPlus, DollarSign, FileText, Heart, ArrowDo
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { getPageContent, getPadrinos, localize, sanityImage } from "@/lib/sanity/fetch";
+import { getPageContent, getPadrinos, sanityImage } from "@/lib/sanity/fetch";
 import PadProfileCard from "@/components/PadProfileCard";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
