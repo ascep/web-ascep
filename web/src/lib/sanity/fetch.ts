@@ -1,3 +1,4 @@
+import type { PortableTextBlock } from "@portabletext/types";
 import { getClient } from "./client";
 import { imageUrl, fileUrl } from "./image";
 import { applyPadrinoPhotoOverrides } from "@/data/padrino-photos";
@@ -12,6 +13,14 @@ interface SanityImage {
 
 type LocalizedText = { es?: string; en?: string; pt?: string };
 type SanityAssetLike = { asset?: { _ref?: string; _type?: string } } | null | undefined;
+type SeoMetadata = {
+  title?: LocalizedText;
+  description?: LocalizedText;
+  ogImage?: SanityImage;
+};
+
+type PortableTextSection = PortableTextBlock[];
+
 import {
   siteSettingsQuery,
   pageContentQuery,
@@ -59,11 +68,7 @@ export type SiteSettings = {
 
 export type PageContent = {
   page: string;
-  seo: {
-    title?: { es?: string; en?: string; pt?: string };
-    description?: { es?: string; en?: string; pt?: string };
-    ogImage?: SanityImage;
-  };
+  seo: SeoMetadata;
   hero?: {
     tag?: { es?: string; en?: string; pt?: string };
     title?: { es?: string; en?: string; pt?: string };
@@ -313,7 +318,7 @@ export type Programa = {
 };
 
 export type ProgramaDetail = Programa & {
-  introText?: unknown;
+  introText?: PortableTextSection;
   objectives?: Array<{ title?: LocalizedText; description?: LocalizedText }>;
   components?: Array<{ title?: LocalizedText; description?: LocalizedText; icon?: string }>;
   results?: Array<{ es?: string; en?: string; pt?: string }>;
@@ -324,7 +329,7 @@ export type ProgramaDetail = Programa & {
   incidenciaItems?: Array<{ es?: string; en?: string; pt?: string }>;
   secondaryObjectives?: Array<{ es?: string; en?: string; pt?: string }>;
   gallery?: SanityImage[];
-  seo?: unknown;
+  seo?: SeoMetadata;
 };
 
 export async function getPrograms(): Promise<Programa[]> {
@@ -360,7 +365,7 @@ export type ProgressPost = {
   author?: LocalizedText;
   authorRole?: LocalizedText;
   title?: LocalizedText;
-  description?: unknown;
+  description?: PortableTextSection;
   type?: "story" | "milestone" | "update";
   media?: ProgressMedia[];
   tags?: string[];
@@ -375,7 +380,7 @@ export type PadrinoProfile = {
   photo?: SanityImage;
   coverPhoto?: SanityImage;
   shortBio?: LocalizedText;
-  fullBio?: unknown;
+  fullBio?: PortableTextSection;
   impactPercentage?: number;
   storiesCount?: number;
   yearsInProgram?: number;

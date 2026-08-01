@@ -110,10 +110,10 @@ function SwipeFeed({ items, current, onGoTo, muted, onToggleMute, prefersReduced
           >
             {renderSlideContent()}
 
-            <div className="absolute right-3 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-1.5">
+            <div className="absolute right-3 top-1/2 z-10 flex -translate-y-1/2 flex-col items-center gap-1.5">
               {items.map((_, i) => (
                 <button key={i} onClick={() => onGoTo(i)}
-                  className={`h-2 rounded-full transition-all min-w-[6px] ${i === current ? "w-4 bg-white" : "w-2 bg-white/40 hover:bg-white/60"}`}
+                  className={`min-h-6 min-w-6 rounded-full p-2 transition-all ${i === current ? "bg-white" : "bg-white/40 hover:bg-white/60"}`}
                   aria-label={`Ir al item ${i + 1}`}
                 />
               ))}
@@ -230,7 +230,7 @@ export default function VerticalFeed({ playlistId }: { playlistId?: string }) {
               <button onClick={() => setFullscreenIndex(i)}
                 className="group relative block aspect-video w-full text-left"
               >
-                <Image src={item.thumbnail} alt={item.title} width={320} height={180} className="h-full w-full object-cover"
+                <Image src={item.thumbnail} alt={item.title} width={320} height={180} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover"
                   />
                 <div className="absolute inset-0 bg-black/20 transition-opacity group-hover:bg-black/10" />
                 <div className="absolute inset-0 flex items-center justify-center">

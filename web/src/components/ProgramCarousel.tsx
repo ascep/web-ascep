@@ -181,14 +181,14 @@ export default function ProgramCarousel({ programs, locale }: ProgramCarouselPro
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2">
               {programs.map((p, i) => (
                 <button
                   key={p.slug}
                   onClick={() => { setIsPaused(true); setActive(i); }}
                   aria-label={`Go to ${p.title}`}
-                  className={`h-2 rounded-full transition-all ${
-                    i === active ? "w-8 bg-white" : "w-2 bg-white/30"
+                  className={`min-h-6 min-w-6 rounded-full p-2 transition-all ${
+                    i === active ? "bg-white" : "bg-white/30"
                   }`}
                 />
               ))}

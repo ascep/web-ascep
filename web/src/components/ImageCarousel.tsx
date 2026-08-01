@@ -49,6 +49,7 @@ export default function ImageCarousel({
               src={images[active].src}
               alt={images[active].alt ?? ""}
               fill
+              sizes="(min-width: 672px) 672px, 100vw"
               className="object-cover"
               priority={active === 0}
             />
@@ -72,14 +73,14 @@ export default function ImageCarousel({
           >
             <ChevronRight className="h-5 w-5" />
           </button>
-          <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-2">
+          <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2">
             {images.map((_, i) => (
               <button
                 key={i}
                 onClick={() => setActive(i)}
                 aria-label={`Go to image ${i + 1}`}
-                className={`h-2 rounded-full transition-all ${
-                  i === active ? "w-8 bg-white" : "w-2 bg-white/50 hover:bg-white/70"
+                className={`min-h-6 min-w-6 rounded-full p-2 transition-all ${
+                  i === active ? "bg-white" : "bg-white/50 hover:bg-white/70"
                 }`}
               />
             ))}

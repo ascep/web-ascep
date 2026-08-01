@@ -55,7 +55,7 @@ export default function PodcastSection() {
             <button onClick={() => setCurrentVideo(video)}
               className="group relative block aspect-video w-full text-left"
             >
-              <Image src={video.thumbnail} alt={video.title} width={320} height={180} className="h-full w-full object-cover" />
+              <Image src={video.thumbnail} alt={video.title} width={320} height={180} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" className="h-full w-full object-cover" />
               <div className="absolute inset-0 bg-black/20 transition-opacity group-hover:bg-black/10" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/20 backdrop-blur transition-transform group-hover:scale-110">

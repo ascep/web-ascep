@@ -133,6 +133,7 @@ export default function GalleryLightbox({
                 alt={current.alt}
                 width={1200}
                 height={800}
+                sizes="(max-width: 640px) 100vw, 85vw"
                 className="max-h-[80vh] w-auto object-contain"
                 priority
               />

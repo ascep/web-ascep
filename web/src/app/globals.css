@@ -3,25 +3,25 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  --color-brand-primary: #019E9F;
+  --color-brand-primary: #007374;
   --color-brand-primary-dark: #005C5D;
   --color-brand-secondary: #44BCC5;
-  --color-brand-accent: #EC6620;
-  --color-brand-accent-dark: #C45118;
+  --color-brand-accent: #C45118;
+  --color-brand-accent-dark: #9F3F11;
   --color-brand-yellow: #F2CA11;
   --color-brand-soft: #E8F4F4;
   --color-brand-dark: #003F40;
   --color-purple-bg: #800080;
   --color-purple-bg-dark: #4A004A;
   /* backward compat -- se reemplazara gradualmente */
-  --color-brand-blue: #019E9F;
+  --color-brand-blue: #007374;
   --color-brand-blue-dark: #005C5D;
-  --color-brand-purple: #019E9F;
+  --color-brand-purple: #007374;
   --color-brand-purple-dark: #005C5D;
   --color-brand-teal: #44BCC5;
   --color-brand-teal-dark: #2E8A92;
-  --color-brand-orange: #EC6620;
-  --color-brand-orange-dark: #C45118;
+  --color-brand-orange: #C45118;
+  --color-brand-orange-dark: #9F3F11;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -153,6 +153,16 @@ body {
   overflow-wrap: break-word;
   word-break: break-word;
   transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible {
+  outline: 3px solid #C45118;
+  outline-offset: 2px;
 }
 
 @keyframes float-0 {

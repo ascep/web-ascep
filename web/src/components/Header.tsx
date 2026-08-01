@@ -239,6 +239,7 @@ export default function Header({ leyEgresoCard, comoAyudarCard }: HeaderProps) {
             alt=""
             width={280}
             height={200}
+            sizes="280px"
             className="mb-3 w-full rounded-[10px] object-cover"
             style={{ aspectRatio: "7/5" }}
           />

@@ -17,20 +17,45 @@ function getReducedMotionServerSnapshot() {
   return false;
 }
 
+function subscribeDesktop(onStoreChange: () => void) {
+  const mq = window.matchMedia("(min-width: 768px)");
+  mq.addEventListener("change", onStoreChange);
+  return () => mq.removeEventListener("change", onStoreChange);
+}
+
+function getDesktopSnapshot() {
+  return window.matchMedia("(min-width: 768px)").matches;
+}
+
+function getDesktopServerSnapshot() {
+  return true;
+}
+
 type BackgroundVideoProps = {
   src: string;
   poster: string;
   className?: string;
+  disableOnMobile?: boolean;
 };
 
-export default function BackgroundVideo({ src, poster, className = "" }: BackgroundVideoProps) {
+export default function BackgroundVideo({
+  src,
+  poster,
+  className = "",
+  disableOnMobile = false,
+}: BackgroundVideoProps) {
   const reducedMotion = useSyncExternalStore(
     subscribeReducedMotion,
     getReducedMotionSnapshot,
     getReducedMotionServerSnapshot
   );
+  const isDesktop = useSyncExternalStore(
+    subscribeDesktop,
+    getDesktopSnapshot,
+    getDesktopServerSnapshot
+  );
 
-  if (reducedMotion) {
+  if (reducedMotion || (disableOnMobile && !isDesktop)) {
     return <Image src={poster} alt="" fill sizes="100vw" priority className={`object-cover ${className}`} />;
   }
 

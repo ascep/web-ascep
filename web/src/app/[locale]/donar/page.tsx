@@ -193,6 +193,7 @@ export default async function DonarPage({
           src={assetPath("/videos/FONDO-WEB-16-9.mp4")}
           poster={assetPath(fotos.donar.heroPoster)}
           className="opacity-30"
+          disableOnMobile
         />
         <div className="absolute inset-0 bg-gradient-to-b from-brand-purple/60 via-brand-purple/40 to-brand-purple/90" />
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">

@@ -1,8 +1,7 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element -- Admin interno: rutas dinamicas (blob: de createObjectURL, placeholders data:) que next/image no puede optimizar */
-
 import { useEffect, useState, useCallback, FormEvent } from "react";
+import Image from "next/image";
 
 type FlatEntry = {
   key: string;
@@ -102,6 +101,7 @@ function DashboardInner() {
   const [previewEntry, setPreviewEntry] = useState<FlatEntry | null>(null);
   const [previewFile, setPreviewFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>("");
+  const [actualImgError, setActualImgError] = useState(false);
   const [cacheBusters, setCacheBusters] = useState<Record<string, number>>({});
   const [filter, setFilter] = useState("");
 
@@ -158,6 +158,7 @@ function DashboardInner() {
       setPreviewEntry(entry);
       setPreviewFile(file);
       setPreviewUrl(URL.createObjectURL(file));
+      setActualImgError(false);
     };
     input.click();
   };
@@ -319,26 +320,30 @@ function DashboardInner() {
             <div className="mb-4 grid grid-cols-2 gap-4">
               <div>
                 <p className="mb-1 text-xs font-medium text-gray-400 uppercase">Actual</p>
-                <div className="aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
-                  <img
-                    src={previewEntry.path}
-                    alt="Actual"
-                    className="h-full w-full object-cover"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src =
-                        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Crect fill='%23ddd' width='100' height='100'/%3E%3Ctext x='50' y='55' text-anchor='middle' fill='%23999' font-size='12'%3Enot found%3C/text%3E%3C/svg%3E";
-                    }}
-                  />
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
+                  {actualImgError ? (
+                    <div className="flex h-full w-full items-center justify-center text-xs text-gray-400">
+                      No encontrada
+                    </div>
+                  ) : (
+                    <Image
+                      src={previewEntry.path}
+                      alt="Actual"
+                      fill
+                      sizes="(max-width: 640px) 45vw, 230px"
+                      className="object-cover"
+                      onError={() => setActualImgError(true)}
+                    />
+                  )}
                 </div>
               </div>
               <div>
                 <p className="mb-1 text-xs font-medium text-gray-400 uppercase">Nueva</p>
-                <div className="aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-lg bg-gray-100">
                   {previewUrl && (
-                    <img
-                      src={previewUrl}
-                      alt="Nueva"
-                      className="h-full w-full object-cover"
+                    <div
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{ backgroundImage: `url(${previewUrl})` }}
                     />
                   )}
                 </div>
@@ -396,16 +401,18 @@ function PhotoCard({
 
   return (
     <div className="group relative overflow-hidden rounded-xl border border-gray-200 bg-white shadow-sm transition hover:shadow-md">
-      <div className="aspect-[4/3] overflow-hidden bg-gray-100">
+      <div className="relative aspect-[4/3] overflow-hidden bg-gray-100">
         {imgError ? (
           <div className="flex h-full w-full items-center justify-center text-xs text-gray-400">
             No encontrada
           </div>
         ) : (
-          <img
+          <Image
             src={imgSrc}
             alt={entry.key}
-            className="h-full w-full object-cover transition group-hover:scale-105"
+            fill
+            sizes="(min-width: 1280px) 25vw, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover transition group-hover:scale-105"
             onError={() => setImgError(true)}
           />
         )}

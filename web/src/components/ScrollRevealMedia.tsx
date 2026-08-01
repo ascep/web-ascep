@@ -57,6 +57,7 @@ function RevealSlide({
           alt={item.alt}
           width={500}
           height={375}
+          sizes="(min-width: 512px) 512px, 100vw"
           className="max-h-full w-full rounded-[10px] object-cover shadow-xl"
           style={{ aspectRatio: "4/3" }}
         />

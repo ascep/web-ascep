@@ -97,14 +97,14 @@ export default function HomeTestimonials({
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
-            <div className="flex gap-2">
+            <div className="flex items-center gap-2">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setActive(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
-                  className={`h-2 rounded-full transition-all ${
-                    i === active ? "w-8 bg-white" : "w-2 bg-white/30"
+                  className={`min-h-6 min-w-6 rounded-full p-2 transition-all ${
+                    i === active ? "bg-white" : "bg-white/30"
                   }`}
                 />
               ))}

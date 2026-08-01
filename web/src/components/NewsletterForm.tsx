@@ -46,12 +46,17 @@ export default function NewsletterForm() {
   return (
     <form onSubmit={handleSubmit} className="flex gap-2">
       <div className="relative flex-1">
+        <label htmlFor="newsletter-email" className="sr-only">
+          Correo electrónico
+        </label>
         <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--color-text-tertiary)]" />
         <input
+          id="newsletter-email"
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Tu correo electronico"
+          aria-label="Correo electrónico"
           required
           className="w-full rounded-[10px] border border-white/20 bg-white/10 px-9 py-2.5 text-sm text-white placeholder:text-white/50 outline-none transition-colors focus:border-white/40"
         />
