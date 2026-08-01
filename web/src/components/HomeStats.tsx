@@ -44,17 +44,23 @@ export default function HomeStats({
     <section className="relative py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-12 max-w-2xl">
-          <span className="mb-3 inline-block rounded-[10px] bg-brand-purple/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-text-primary">
+          <span className={`mb-3 inline-block rounded-[10px] px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] ${
+            isDark ? "bg-white/10 text-white/90 border border-white/20" : "bg-brand-purple/10 text-text-primary"
+          }`}>
             {tag}
           </span>
-          <h2 className="mb-4 text-3xl font-bold leading-tight text-[var(--color-text-primary)]">
+          <h2 className={`mb-4 text-3xl font-bold leading-tight ${
+            isDark ? "text-white" : "text-[var(--color-text-primary)]"
+          }`}>
             {(() => {
               const words = title.split(" ");
               const last = words.pop();
-              return <>{words.join(" ")} <span className="text-text-primary">{last}</span></>;
+              return <>{words.join(" ")} <span className={isDark ? "text-white/80" : "text-text-primary"}>{last}</span></>;
             })()}
           </h2>
-          <p className="text-base leading-relaxed text-[var(--color-text-secondary)]">
+          <p className={`text-base leading-relaxed ${
+            isDark ? "text-white/80" : "text-[var(--color-text-secondary)]"
+          }`}>
             {description}
           </p>
         </div>
@@ -122,7 +128,7 @@ export default function HomeStats({
                           </span>
                         </h3>
                         <p className={`text-sm leading-relaxed transition-all duration-500 group-hover:text-white sm:text-base ${
-                          isDark ? "text-white/70" : "opacity-70"
+                          isDark ? "text-white/80" : "opacity-70"
                         }`}>
                           {stat.label}
                         </p>

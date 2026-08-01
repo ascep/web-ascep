@@ -109,8 +109,8 @@ function DashboardInner() {
 
   const fetchFotos = useCallback(async () => {
     try {
-      const res = await fetch("/api/fotos", {
-        headers: { "x-zprime-pw": getPw() },
+      const res = await fetch(`/api/fotos?t=${Date.now()}`, {
+        headers: { "x-zprime-pw": getPw(), "Cache-Control": "no-cache" },
       });
       if (res.status === 401) {
         sessionStorage.removeItem("zprime_auth");
@@ -172,6 +172,7 @@ function DashboardInner() {
       const fd = new FormData();
       fd.append("file", previewFile);
       fd.append("path", previewEntry.path);
+      fd.append("key", previewEntry.key);
       const res = await fetch("/api/fotos", {
         method: "POST",
         headers: { "x-zprime-pw": getPw() },

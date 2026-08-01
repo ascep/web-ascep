@@ -120,11 +120,11 @@ export default async function HomePage({
   }));
 
   const resolvedMilestones = cmsMilestones.length > 0
-    ? cmsMilestones.map((m) => ({
-        year: m.year || "",
-        title: m.title?.es || "",
-        description: m.description?.es || "",
-        image: imageUrl(m.image) || assetPath(fotos.home.timeline[0].image),
+    ? cmsMilestones.map((m, idx) => ({
+        year: m.year || fallbackMilestones[idx]?.year || "",
+        title: m.title?.es || fallbackMilestones[idx]?.title || "",
+        description: m.description?.es || fallbackMilestones[idx]?.description || "",
+        image: (m.image ? imageUrl(m.image) : null) || fallbackMilestones[idx]?.image || assetPath(fotos.home.timeline[0]?.image || ""),
       }))
     : fallbackMilestones;
 

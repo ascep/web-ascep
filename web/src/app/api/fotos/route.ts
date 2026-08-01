@@ -3,6 +3,7 @@ import { promises as fs } from "fs";
 import path from "path";
 import { getServerClient } from "@/lib/sanity/client";
 import { fotoOverridesQuery } from "@/lib/sanity/queries";
+import { clearFotosCache } from "@/lib/get-fotos";
 
 type FlatEntry = {
   key: string;
@@ -21,28 +22,42 @@ function checkAuth(request: Request): boolean {
   return pw === expected;
 }
 
+function isImagePath(val: unknown): boolean {
+  if (typeof val !== "string") return false;
+  const clean = val.trim();
+  return (
+    clean.startsWith("/images/") ||
+    clean.startsWith("http://") ||
+    clean.startsWith("https://") ||
+    /\.(webp|png|jpg|jpeg|gif|svg|avif)(\?.*)?$/i.test(clean)
+  );
+}
+
 function flatten(obj: Record<string, unknown>, prefix = "", allPaths: string[] = []): FlatEntry[] {
   const result: FlatEntry[] = [];
   for (const [k, v] of Object.entries(obj)) {
     const fullKey = prefix ? `${prefix}.${k}` : k;
-    if (typeof v === "string" && v.startsWith("/images/")) {
-      allPaths.push(v);
+    if (isImagePath(v)) {
+      const pathStr = v as string;
+      allPaths.push(pathStr);
       const section = fullKey.split(".")[0];
-      result.push({ key: fullKey, path: v, section, usedCount: 0 });
+      result.push({ key: fullKey, path: pathStr, section, usedCount: 0 });
     } else if (Array.isArray(v)) {
       v.forEach((item, i) => {
         const arrKey = `${fullKey}[${i}]`;
-        if (typeof item === "string" && item.startsWith("/images/")) {
-          allPaths.push(item);
+        if (isImagePath(item)) {
+          const pathStr = item as string;
+          allPaths.push(pathStr);
           const section = fullKey.split(".")[0];
-          result.push({ key: arrKey, path: item, section, usedCount: 0 });
+          result.push({ key: arrKey, path: pathStr, section, usedCount: 0 });
         } else if (typeof item === "object" && item !== null) {
           for (const [ik, iv] of Object.entries(item as Record<string, unknown>)) {
             const entryKey = `${arrKey}.${ik}`;
-            if (typeof iv === "string" && iv.startsWith("/images/")) {
-              allPaths.push(iv);
+            if (isImagePath(iv)) {
+              const pathStr = iv as string;
+              allPaths.push(pathStr);
               const section = fullKey.split(".")[0];
-              result.push({ key: entryKey, path: iv, section, usedCount: 0 });
+              result.push({ key: entryKey, path: pathStr, section, usedCount: 0 });
             }
           }
         }
@@ -52,6 +67,23 @@ function flatten(obj: Record<string, unknown>, prefix = "", allPaths: string[] =
     }
   }
   return result;
+}
+
+function setNestedValue(obj: Record<string, unknown>, keyPath: string, value: string): boolean {
+  try {
+    const parts = keyPath.replace(/\[(\d+)\]/g, ".$1").split(".");
+    let curr: Record<string, unknown> = obj;
+    for (let i = 0; i < parts.length - 1; i++) {
+      const p = parts[i];
+      if (curr[p] === undefined || curr[p] === null) return false;
+      curr = curr[p] as Record<string, unknown>;
+    }
+    const lastKey = parts[parts.length - 1];
+    curr[lastKey] = value;
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export async function GET(request: Request) {
@@ -74,7 +106,7 @@ export async function GET(request: Request) {
       entry.usedCount = pathCounts[entry.path] || 1;
     }
 
-    return NextResponse.json({ entries });
+    return NextResponse.json({ entries }, { headers: { "Cache-Control": "no-store, max-age=0" } });
   } catch (err) {
     return NextResponse.json({ error: String(err) }, { status: 500 });
   }
@@ -88,6 +120,7 @@ export async function POST(request: Request) {
     const formData = await request.formData();
     const file = formData.get("file") as File | null;
     const targetPath = formData.get("path") as string | null;
+    const targetKey = formData.get("key") as string | null;
 
     if (!file || !targetPath) {
       return NextResponse.json({ error: "file and path required" }, { status: 400 });
@@ -102,11 +135,23 @@ export async function POST(request: Request) {
     }
 
     const ext = path.extname(file.name) || ".webp";
-    const filename = `${path.basename(targetPath).replace(/\.[^.]+$/, "")}${ext}`;
-    const buffer = Buffer.from(await file.arrayBuffer());
+    let filename = `upload_${Date.now()}${ext}`;
+    let subdir = "";
 
+    if (targetPath.startsWith("/images/")) {
+      subdir = path.dirname(targetPath).replace(/^\/images\/?/, "");
+      const base = path.basename(targetPath).replace(/\.[^.]+$/, "");
+      filename = `${base}${ext}`;
+    } else {
+      if (targetKey) {
+        const keyClean = targetKey.replace(/[^a-zA-Z0-9_-]/g, "_");
+        filename = `${keyClean}${ext}`;
+      }
+      subdir = "uploads";
+    }
+
+    const buffer = Buffer.from(await file.arrayBuffer());
     const publicDir = path.join(process.cwd(), "public");
-    const subdir = path.dirname(targetPath).replace("/images/", "");
     const saveDir = path.join(publicDir, "images", subdir);
     const savePath = path.join(saveDir, filename);
 
@@ -116,7 +161,6 @@ export async function POST(request: Request) {
     } catch {}
 
     const newRelativePath = `/images/${subdir ? subdir + "/" : ""}${filename}`;
-
     let newPath = newRelativePath;
     let sanityAssetUrl = "";
 
@@ -154,18 +198,40 @@ export async function POST(request: Request) {
     } catch {}
 
     const fotosJsonPath = path.join(process.cwd(), "src", "data", "fotos.json");
+    let replacedCount = 0;
     try {
       const content = await fs.readFile(fotosJsonPath, "utf-8");
+      let updatedContent = content;
+
       const escapedOldPath = targetPath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
       const regex = new RegExp(`(["'])${escapedOldPath}\\1`, "g");
-      const updated = content.replace(regex, `"${newPath}"`);
-      await fs.writeFile(fotosJsonPath, updated, "utf-8");
+      const matches = content.match(regex);
+      replacedCount = matches ? matches.length : 0;
+
+      if (replacedCount > 0) {
+        updatedContent = updatedContent.replace(regex, `"${newPath}"`);
+      }
+
+      if (targetKey) {
+        try {
+          const fotosObj = JSON.parse(updatedContent) as Record<string, unknown>;
+          if (setNestedValue(fotosObj, targetKey, newPath)) {
+            updatedContent = JSON.stringify(fotosObj, null, 2);
+            if (replacedCount === 0) replacedCount = 1;
+          }
+        } catch {}
+      }
+
+      await fs.writeFile(fotosJsonPath, updatedContent, "utf-8");
     } catch {}
+
+    clearFotosCache();
 
     return NextResponse.json({
       success: true,
       oldPath: targetPath,
       newPath,
+      replacedCount,
       sanityUrl: sanityAssetUrl || undefined,
     });
   } catch (err) {

@@ -68,11 +68,11 @@
 .border-border-default { border-color: var(--color-border-default); }
 
 .section-dark {
-  --color-text-primary: #F1F1F6;
-  --color-text-secondary: #B0B0C8;
-  --color-text-muted: #8080A0;
-  --color-border-subtle: rgba(255,255,255,0.08);
-  --color-border-default: rgba(255,255,255,0.12);
+  --color-text-primary: #F4F4F8;
+  --color-text-secondary: #C8C8E0;
+  --color-text-muted: #ABABC8;
+  --color-border-subtle: rgba(255,255,255,0.10);
+  --color-border-default: rgba(255,255,255,0.15);
 }
 
 .bg-atmospheric {

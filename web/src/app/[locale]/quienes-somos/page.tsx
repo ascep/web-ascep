@@ -1,4 +1,3 @@
-;
 import type { CSSProperties } from "react";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
@@ -52,79 +51,57 @@ export default async function QuienesSomosPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "quienesSomos" });
-
-  const [cmsTeam, cmsMilestones] = await Promise.all([
-    getTeamMembers(),
-    getMilestones(),
-  ]);
-
   const fotos = await getFotos();
-
-  const fallbackTeam = [
-    { name: "Maicol Londoño", role: "Director", src: assetPath(fotos.quienesSomos.team.maicol) },
-    { name: "Kevin Ortega", role: "Desarrollador y dise\u00F1ador", src: assetPath(fotos.quienesSomos.team.kevin) },
-    { name: "Monica", role: "Coor. operativa y pedagogica", src: assetPath(fotos.quienesSomos.team.monica) },
-    { name: "Jhon Eduard Angulo", role: "Director de proyectos", src: assetPath(fotos.quienesSomos.team.jhon) },
-    { name: "Ana", role: "Aux. Comunicaciones", src: assetPath(fotos.quienesSomos.team.ana) },
-  ];
-
-  const fallbackMilestones = fotos.quienesSomos.timeline.map((item) => ({
-    year: item.year,
-    title: item.title,
-    description: item.description,
-    image: assetPath(item.image),
-  }));
+  const cmsTeam = await getTeamMembers();
+  const cmsMilestones = await getMilestones();
 
   const fallbackAliados = fotos.home.aliados.map((item) => ({
     ...item,
     src: assetPath(item.src),
   }));
 
-  const areasGallery = fotos.impacto.gallery.slice(0, 6);
-
-  const cmsMapped = cmsTeam.length > 0
+  const team = cmsTeam.length > 0
     ? cmsTeam.map((m) => ({
-        name: m.name?.es || "",
-        role: m.role?.es || "",
-        src: imageUrl(m.photo) || "",
-      })).filter((m) => m.src)
-    : [];
-  const team = cmsMapped.length > 0 ? cmsMapped : fallbackTeam;
+        name: typeof m.name === "string" ? m.name : m.name?.es || "",
+        role: typeof m.role === "string" ? m.role : m.role?.es || "",
+        src: (m.photo ? imageUrl(m.photo) : null) || assetPath(fotos.quienesSomos.team.kevin),
+      }))
+    : [
+        { name: "Kevin", role: t("equipoKevinRole"), src: assetPath(fotos.quienesSomos.team.kevin) },
+      ];
 
   const milestones = cmsMilestones.length > 0
     ? cmsMilestones.map((m) => ({
         year: m.year || "",
         title: m.title?.es || "",
         description: m.description?.es || "",
-        image: imageUrl(m.image) || fallbackMilestones[0].image,
+        image: (m.image ? imageUrl(m.image) : null) || assetPath(fotos.home.timeline[0]?.image || ""),
       }))
-    : fallbackMilestones;
+    : [
+        { year: "2018", title: "Fundacion", description: "Inicio de actividades de la fundacion ASCEP.", image: assetPath(fotos.quienesSomos.historiaImage) },
+      ];
+
+  const areasGallery = [fotos.quienesSomos.historiaImage, fotos.quienesSomos.objetivoImage, fotos.quienesSomos.poblacionImage];
 
   return (
-    <div>
+    <div className="min-h-screen">
       <PageHero
         bgImage={assetPath(fotos.quienesSomos.hero)}
+        tag={t("heroTag")}
         title={t("heroTitle")}
-        highlight={t("heroHighlight")}
         subtitle={t("heroSubtitle")}
       />
 
-      <section className="relative overflow-hidden bg-section-light py-20">
-        <DecoShapes variant="teal" />
+      {/* Historia */}
+      <section className="relative overflow-hidden bg-surface py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
             <AnimatedSection direction="left">
-              <div className="relative">
-                <div className="absolute -left-4 -top-4 h-full w-full rounded-[10px] bg-brand-purple/10" />
+              <div className="relative overflow-hidden rounded-[10px] shadow-xl">
                 <ImageParallax
                   src={assetPath(fotos.quienesSomos.historiaImage)}
-                  alt="Equipo ASCEP"
-                  width={600}
-                  height={400}
-                  containerClassName="relative"
-                  className="w-full rounded-[10px] object-cover shadow-lg"
-                  intensity={0.2}
-                  style={{ aspectRatio: "3/2" }}
+                  alt={t("historiaTitle")}
+                  className="aspect-[4/3] w-full object-cover"
                 />
               </div>
             </AnimatedSection>
@@ -151,6 +128,7 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
+      {/* Proposito / Mision / Vision */}
       <section
         className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
         style={{
@@ -173,27 +151,28 @@ export default async function QuienesSomosPage({
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
                 <Target size={22} className="text-brand-secondary" />
               </div>
-              <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">{t("misionTitle")}</h3>
-              <p className="text-[var(--color-text-muted)]">{t("misionDesc")}</p>
+              <h3 className="mb-2 text-2xl font-bold text-white">{t("misionTitle")}</h3>
+              <p className="text-white/75">{t("misionDesc")}</p>
             </AnimatedSection>
             <AnimatedSection direction="up" delay={0.1} className="glass-card rounded-[10px] p-8 transition-all hover:bg-white/15">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
                 <Eye size={22} className="text-brand-secondary" />
               </div>
-              <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">{t("visionTitle")}</h3>
-              <p className="text-[var(--color-text-muted)]">{t("visionDesc")}</p>
+              <h3 className="mb-2 text-2xl font-bold text-white">{t("visionTitle")}</h3>
+              <p className="text-white/75">{t("visionDesc")}</p>
             </AnimatedSection>
             <AnimatedSection direction="up" delay={0.2} className="glass-card rounded-[10px] p-8 transition-all hover:bg-white/15">
               <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
                 <Heart size={22} className="text-brand-secondary" />
               </div>
-              <h3 className="mb-2 text-2xl font-bold text-[var(--color-text-primary)]">{t("propositoCardTitle")}</h3>
-              <p className="text-[var(--color-text-muted)]">{t("propositoCardDesc")}</p>
+              <h3 className="mb-2 text-2xl font-bold text-white">{t("propositoCardTitle")}</h3>
+              <p className="text-white/75">{t("propositoCardDesc")}</p>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
+      {/* Objetivo General */}
       <section className="relative overflow-hidden bg-section-light py-20">
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -230,6 +209,7 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
+      {/* Objetivos Estrategicos */}
       <section
         className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
         style={{
@@ -254,7 +234,7 @@ export default async function QuienesSomosPage({
                   <h3 className="mb-2 text-lg font-bold text-white">
                     {t(oe.titleKey)}
                   </h3>
-                  <p className="text-sm leading-relaxed text-[var(--color-text-muted)]">
+                  <p className="text-sm leading-relaxed text-white/75">
                     {t(oe.descKey)}
                   </p>
                 </div>
@@ -264,6 +244,7 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
+      {/* Poblacion objetivo */}
       <ParallaxSection
         bgImage={assetPath(fotos.quienesSomos.poblacionParallax)}
         overlay="bg-black/70"
@@ -303,6 +284,7 @@ export default async function QuienesSomosPage({
         </div>
       </ParallaxSection>
 
+      {/* Trayectoria */}
       <section className="relative overflow-hidden bg-section-light py-20">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -318,8 +300,9 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
+      {/* Equipo */}
       <section
-        className="relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
         style={{ "--section-bg-image": `url(${assetPath(fotos.quienesSomos.team.kevin)})` } as CSSProperties}
       >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
@@ -332,7 +315,7 @@ export default async function QuienesSomosPage({
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t("equipoTitle")} <span className="text-white/80">{t("equipoHighlight")}</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base text-white/70">
+            <p className="mx-auto mt-4 max-w-xl text-base text-white/80">
               {t("equipoDesc")}
             </p>
           </AnimatedSection>
@@ -340,6 +323,7 @@ export default async function QuienesSomosPage({
         <TeamFan members={team} />
       </section>
 
+      {/* Enfoque / Dimensiones */}
       <section className="relative overflow-hidden bg-section-light py-20">
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -373,6 +357,7 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
+      {/* Areas de trabajo */}
       <section
         className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
         style={{ "--section-bg-image": `url(${assetPath(fotos.quienesSomos.areasImage)})` } as CSSProperties}
@@ -387,12 +372,12 @@ export default async function QuienesSomosPage({
             <h2 className="text-3xl font-bold text-white sm:text-4xl">
               {t("areasTrabajoTitle")} <span className="text-white/80">{t("areasTrabajoHighlight")}</span>
             </h2>
-            <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-white/70">
+            <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-white/80">
               {t("areasTrabajoDesc")}
             </p>
           </AnimatedSection>
           <div className="mb-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {areasGallery.map((src, i) => (
+            {areasGallery.map((src: string, i: number) => (
               <AnimatedSection
                 key={src}
                 direction="up"
@@ -426,10 +411,10 @@ export default async function QuienesSomosPage({
             ].map((area, i) => (
               <AnimatedSection key={area.titleKey} direction="up" delay={i * 0.08}>
                 <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
-                  <h3 className="mb-2 font-bold text-[var(--color-text-primary)]">
+                  <h3 className="mb-2 font-bold text-white">
                     {t(area.titleKey)}
                   </h3>
-                  <p className="text-sm text-[var(--color-text-muted)]">
+                  <p className="text-sm text-white/75">
                     {t(area.descKey)}
                   </p>
                 </div>
@@ -439,6 +424,7 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
+      {/* Aliados */}
       <section className="relative overflow-hidden bg-section-light py-20">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -454,6 +440,7 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
+      {/* CTA final */}
       <section
         className="bg-brand-purple py-20 section-bg-image"
         style={{ "--section-bg-image": `url(${assetPath(fotos.quienesSomos.hero)})` } as CSSProperties}
@@ -486,4 +473,3 @@ export default async function QuienesSomosPage({
     </div>
   );
 }
-

@@ -30,6 +30,11 @@ function loadFromDisk(): Fotos | null {
   }
 }
 
+export function clearFotosCache(): void {
+  _cache = null;
+  _cacheTime = 0;
+}
+
 export async function getFotos(): Promise<Fotos> {
   const now = Date.now();
   if (_cache && now - _cacheTime < CACHE_TTL) return _cache;
@@ -50,3 +55,4 @@ export async function getFotos(): Promise<Fotos> {
   _cacheTime = now;
   return base;
 }
+

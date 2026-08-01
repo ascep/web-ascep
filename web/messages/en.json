@@ -411,6 +411,7 @@
     "dim6Desc": "Development of individual potential to grow as a person."
   },
   "quienesSomos": {
+    "heroTag": "WHO WE ARE",
     "heroTitle": "Who We",
     "heroHighlight": "Are",
     "heroSubtitle": "We are a group of graduates of the Colombian State Protection System who, based on our own experience, have come together to contribute to the transformation and improvement of how the State approaches the care and protection of children, adolescents, and young people in the country.",
@@ -448,6 +449,7 @@
     "ctaBtnDonar": "Donate",
     "teamMaicolRole": "Director",
     "teamKevinRole": "Coordinator",
+    "equipoKevinRole": "Coordinator",
     "teamMonicaRole": "Psychosocial Team",
     "teamJhonRole": "Training Team",
     "teamAnaRole": "ASCEP Team",

@@ -411,6 +411,7 @@
     "dim6Desc": "Desenvolvimento das potencialidades individuais para crescer como pessoa."
   },
   "quienesSomos": {
+    "heroTag": "QUEM SOMOS",
     "heroTitle": "Quem",
     "heroHighlight": "Somos",
     "heroSubtitle": "Somos um grupo de pessoas egressas do Sistema de Protecao Estatal do Brasil que, a partir da nossa propria experiencia, nos unimos para contribuir com a transformacao e melhoria da forma como o Estado aborda o cuidado e a protecao de criancas, adolescentes e jovens no pais.",
@@ -448,6 +449,7 @@
     "ctaBtnDonar": "Doar",
     "teamMaicolRole": "Diretor",
     "teamKevinRole": "Coordenador",
+    "equipoKevinRole": "Coordenador",
     "teamMonicaRole": "Equipe Psicossocial",
     "teamJhonRole": "Equipe de Formacao",
     "teamAnaRole": "Equipe ASCEP",

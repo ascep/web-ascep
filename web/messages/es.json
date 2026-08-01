@@ -411,6 +411,7 @@
     "dim6Desc": "Desarrollo de las potencialidades individuales para crecer como persona."
   },
   "quienesSomos": {
+    "heroTag": "QUIENES SOMOS",
     "heroTitle": "Quienes",
     "heroHighlight": "Somos",
     "heroSubtitle": "Somos un grupo de personas egresadas del Sistema de Proteccion Estatal de Colombia que, a partir de nuestra propia experiencia, nos hemos unido para contribuir a la transformacion y mejora de la forma en que el Estado aborda el cuidado y proteccion de ninos, ninas, adolescentes y jovenes en el pais.",
@@ -483,6 +484,7 @@
     "ctaBtnDonar": "Donar",
     "teamMaicolRole": "Director",
     "teamKevinRole": "Coordinador",
+    "equipoKevinRole": "Coordinador",
     "teamMonicaRole": "Equipo Psicosocial",
     "teamJhonRole": "Equipo de Formacion",
     "teamAnaRole": "Equipo ASCEP",
