@@ -1,14 +1,42 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Home, BookOpen, Compass } from "lucide-react";
 import type { CSSProperties } from "react";
+import { readdir, stat } from "fs/promises";
+import { join } from "path";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
+
+async function getCasasDelSaberGallery(): Promise<string[]> {
+  try {
+    const dir = join(process.cwd(), "public", "images", "casas-del-saber");
+    const files = await readdir(dir, { withFileTypes: true });
+    const entries = await Promise.all(
+      files
+        .filter((f) => f.isFile() && f.name.endsWith(".webp"))
+        .map(async (f) => {
+          try {
+            const s = await stat(join(dir, f.name));
+            return s.size > 0 ? f.name : null;
+          } catch {
+            return null;
+          }
+        }),
+    );
+    return entries
+      .filter((n): n is string => n !== null)
+      .sort()
+      .map((f) => assetPath(`/images/casas-del-saber/${f}`));
+  } catch {
+    return [];
+  }
+}
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -31,6 +59,7 @@ export default async function CasasDelSaberPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "casasDelSaber" });
   const pageData = await getPageContent("casas-del-saber");
+  const casasGallery = await getCasasDelSaberGallery();
 
   return (
     <div>
@@ -155,6 +184,37 @@ export default async function CasasDelSaberPage({
           </div>
         </div>
       </section>
+
+      {casasGallery.length > 0 && (
+        <section className="relative overflow-hidden bg-section-light py-20">
+          <DecoShapes variant="orange" />
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <AnimatedSection className="mb-12 text-center">
+              <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+                {t("galeriaTag")}
+              </span>
+              <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+                {t("galeriaTitle")}
+              </h2>
+            </AnimatedSection>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+              {casasGallery.map((src, i) => (
+                <AnimatedSection key={src} direction="up" delay={i * 0.03}>
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-[10px]">
+                    <Image
+                      src={src}
+                      alt="Casas del Saber"
+                      fill
+                      className="object-cover transition-transform duration-500 hover:scale-105"
+                      sizes="(max-width: 768px) 50vw, 25vw"
+                    />
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
     </div>
   );
 }

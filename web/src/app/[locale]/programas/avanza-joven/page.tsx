@@ -169,7 +169,7 @@ export default async function AvanzaJovenPage({
       <section className="relative overflow-hidden bg-section-light py-20">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
+          <AnimatedSection className="mb-8 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
               Informacion
             </span>
@@ -177,33 +177,31 @@ export default async function AvanzaJovenPage({
               Que es <span className="text-brand-purple">Avanza Joven</span>?
             </h2>
           </AnimatedSection>
-          <div className="grid gap-12 md:grid-cols-2 items-center">
-            <AnimatedSection direction="left">
-              <div className="grid grid-cols-2 gap-3">
-                {avanzaPhotos.map((src) => (
-                  <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-[10px]">
-                    <Image
-                      src={src}
-                      alt="Avanza Joven"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 50vw, 25vw"
-                    />
-                  </div>
-                ))}
-              </div>
-            </AnimatedSection>
-            <AnimatedSection direction="right" delay={0.1}>
-              <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
-                <p>
-                  Avanza Joven, una iniciativa disenada especialmente para brindar apoyo y herramientas a adolescentes que viven institucionalizados. Este programa esta enfocado en potenciar el desarrollo de habilidades para la vida, permitiendoles enfrentar los desafios y alcanzar su maximo potencial mientras transitan por esta etapa crucial y se preparan para asumir su vida fuera de la institucionalidad.
-                </p>
-                <p>
-                  Sabemos que vivir en un entorno institucional puede presentar desafios unicos y que enfrentarlos puede resultar abrumador. Sin embargo, creemos firmemente en el poder del crecimiento personal y en la capacidad de cada individuo para superar las dificultades. A traves de Avanza Joven, queremos ser un apoyo significativo en ese camino hacia la autonomia y la independencia, de manera progresiva.
-                </p>
-              </div>
-            </AnimatedSection>
-          </div>
+          <AnimatedSection delay={0.1}>
+            <div className="mx-auto max-w-3xl space-y-6 text-center text-base text-[var(--color-text-secondary)]">
+              <p>
+                Avanza Joven, una iniciativa disenada especialmente para brindar apoyo y herramientas a adolescentes que viven institucionalizados. Este programa esta enfocado en potenciar el desarrollo de habilidades para la vida, permitiendoles enfrentar los desafios y alcanzar su maximo potencial mientras transitan por esta etapa crucial y se preparan para asumir su vida fuera de la institucionalidad.
+              </p>
+              <p>
+                Sabemos que vivir en un entorno institucional puede presentar desafios unicos y que enfrentarlos puede resultar abrumador. Sin embargo, creemos firmemente en el poder del crecimiento personal y en la capacidad de cada individuo para superar las dificultades. A traves de Avanza Joven, queremos ser un apoyo significativo en ese camino hacia la autonomia y la independencia, de manera progresiva.
+              </p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={0.15}>
+            <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4">
+              {avanzaPhotos.map((src) => (
+                <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-[10px]">
+                  <Image
+                    src={src}
+                    alt="Avanza Joven"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                  />
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 

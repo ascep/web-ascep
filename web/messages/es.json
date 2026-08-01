@@ -620,7 +620,9 @@
     "role5Title": "Tutores/Mentores",
     "role5Desc": "Red de mentores externos vinculados por línea temática.",
     "role6Title": "Coordinación general",
-    "role6Desc": "Coordinador/a del programa responsable de la articulación interinstitucional."
+    "role6Desc": "Coordinador/a del programa responsable de la articulación interinstitucional.",
+    "galeriaTag": "Galería",
+    "galeriaTitle": "Momentos en las Casas del Saber"
   },
   "casasDelSaberAreas": {
     "heroTag": "Intervención",

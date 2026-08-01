@@ -5,13 +5,11 @@ import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
-import ProgramGallerySection from "@/components/ProgramGallerySection";
 import ProgramVideosSection from "@/components/ProgramVideosSection";
 import { BookOpen, Briefcase, Building, Search, Compass, Route, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { getProgramBySlug, getDocumentsByCategory, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
-import { fileUrl, imageUrl } from "@/lib/sanity/image";
+import { getProgramBySlug, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -62,20 +60,7 @@ export default async function EmpleoPage({
   const t = await getTranslations({ locale, namespace: "programas" });
   const cms = await getProgramBySlug("empleo");
 
-  const [revistas, videos] = await Promise.all([
-    getDocumentsByCategory("revistas"),
-    getVideos(locale),
-  ]);
-
-  const revistasList = revistas.length > 0
-    ? revistas.map((r) => ({
-        title: localize(r.title, locale) || "Revista",
-        href: r.externalUrl || fileUrl(r.file) || "#",
-        cover: imageUrl(r.previewImage, 240, 320) || undefined,
-      }))
-    : [];
-
-  const galeriaImages = fotos.impacto.gallery.slice(0, 8).map((src) => assetPath(src));
+  const videos = await getVideos(locale);
 
   const videoTabs = [
     { id: "testimonios", label: t("videoTabTestimonios") },
@@ -261,13 +246,6 @@ export default async function EmpleoPage({
           </div>
         </div>
       </section>
-
-      <ProgramGallerySection
-        images={galeriaImages}
-        overlayLabel="Fomento para el Empleo"
-        magazines={revistasList}
-        locale={locale}
-      />
 
       <ProgramVideosSection
         videos={videos}

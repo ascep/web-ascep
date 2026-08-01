@@ -11,7 +11,7 @@ import Timeline from "@/components/Timeline";
 import ModeloGrid from "@/components/ModeloGrid";
 import ProgramCarousel from "@/components/ProgramCarousel";
 import LogoLoop from "@/components/LogoLoop";
-import ImpactMapSvg from "@/components/ImpactMapSvg";
+import MapaAlcanceASCEP from "@/components/MapaAlcanceASCEP";
 import GallerySection from "@/components/GallerySection";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
@@ -285,7 +285,7 @@ export default async function HomePage({
           title={h("statsTitle")}
           description={h("statsDesc")}
           stats={resolvedStats}
-          map={<ImpactMapSvg />}
+          map={<MapaAlcanceASCEP />}
           cta={
             <Link
               href={`/${locale}/impacto`}

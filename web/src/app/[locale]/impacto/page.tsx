@@ -3,7 +3,7 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import PageHero from "@/components/PageHero";
-import ImpactMapSvg from "@/components/ImpactMapSvg";
+import MapaAlcanceASCEP from "@/components/MapaAlcanceASCEP";
 import ParallaxSection from "@/components/ParallaxSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
@@ -248,8 +248,8 @@ export default async function ImpactoPage({
               </AnimatedSection>
             </div>
             <AnimatedSection direction="right" delay={0.2}>
-              <div className="mx-auto aspect-[627.92/909.79] w-full max-h-[560px] rounded-[10px] shadow-lg">
-                <ImpactMapSvg />
+              <div className="mx-auto aspect-[700/790] w-full max-w-[560px] overflow-hidden rounded-[10px] shadow-lg">
+                <MapaAlcanceASCEP />
               </div>
             </AnimatedSection>
           </div>

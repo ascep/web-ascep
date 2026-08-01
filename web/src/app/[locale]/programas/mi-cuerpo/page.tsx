@@ -6,13 +6,11 @@ import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import CtaBanner from "@/components/CtaBanner";
-import ProgramGallerySection from "@/components/ProgramGallerySection";
 import ProgramVideosSection from "@/components/ProgramVideosSection";
 import { Heart, MapPin, Scale, Shield, AlertTriangle, Handshake, Users, Star, Brain, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { getProgramBySlug, getDocumentsByCategory, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
-import { fileUrl, imageUrl } from "@/lib/sanity/image";
+import { getProgramBySlug, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -58,20 +56,7 @@ export default async function MiCuerpoPage({
   const t = await getTranslations({ locale, namespace: "programas" });
   const cms = await getProgramBySlug("mi-cuerpo");
 
-  const [revistas, videos] = await Promise.all([
-    getDocumentsByCategory("revistas"),
-    getVideos(locale),
-  ]);
-
-  const revistasList = revistas.length > 0
-    ? revistas.map((r) => ({
-        title: localize(r.title, locale) || "Revista",
-        href: r.externalUrl || fileUrl(r.file) || "#",
-        cover: imageUrl(r.previewImage, 240, 320) || undefined,
-      }))
-    : [];
-
-  const galeriaImages = fotos.impacto.gallery.slice(0, 8).map((src) => assetPath(src));
+  const videos = await getVideos(locale);
 
   const videoTabs = [
     { id: "testimonios", label: t("videoTabTestimonios") },
@@ -221,13 +206,6 @@ export default async function MiCuerpoPage({
           </div>
         </div>
       </section>
-
-      <ProgramGallerySection
-        images={galeriaImages}
-        overlayLabel="Mi Cuerpo, Mi Sexualidad, Mi Decision"
-        magazines={revistasList}
-        locale={locale}
-      />
 
       <ProgramVideosSection
         videos={videos}
