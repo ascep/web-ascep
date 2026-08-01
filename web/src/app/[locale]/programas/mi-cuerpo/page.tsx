@@ -6,11 +6,15 @@ import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import CtaBanner from "@/components/CtaBanner";
+import ProgramGallerySection from "@/components/ProgramGallerySection";
 import ProgramVideosSection from "@/components/ProgramVideosSection";
 import { Heart, MapPin, Scale, Shield, AlertTriangle, Handshake, Users, Star, Brain, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { getProgramBySlug, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
+import { existsSync } from "fs";
+import { join } from "path";
+import { getProgramBySlug, getDocumentsByCategory, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
+import { fileUrl, imageUrl } from "@/lib/sanity/image";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -46,6 +50,18 @@ const fallbackSecundarios = [
   "Integrar los grupos de trabajo a otros grupos, colectivos y redes externas a ICBF y los centros de proteccion.",
 ];
 
+const localRevistas = [
+  "Ana P", "Ana Sofia", "Claudia Celina", "Dayana", "Eliana", "Gisell",
+  "Ingrid T", "Karen J", "Kata", "Laura", "Mabel", "Maria Camila",
+  "Mercy", "Milena", "Nicol", "Sahary", "Saray", "Sofia",
+  "Tati", "Tina", "Yeri", "Yerli",
+]
+  .filter((name) => existsSync(join(process.cwd(), "public", "documents", "avenza joven pdf", "revistas", `${name}.pdf`)))
+  .map((name) => ({
+    title: `Revista ${name}`,
+    href: assetPath(`/documents/avenza joven pdf/revistas/${name}.pdf`),
+  }));
+
 export default async function MiCuerpoPage({
   params,
 }: {
@@ -56,7 +72,18 @@ export default async function MiCuerpoPage({
   const t = await getTranslations({ locale, namespace: "programas" });
   const cms = await getProgramBySlug("mi-cuerpo");
 
-  const videos = await getVideos(locale);
+  const [revistas, videos] = await Promise.all([
+    getDocumentsByCategory("revistas"),
+    getVideos(locale),
+  ]);
+
+  const revistasList = revistas.length > 0
+    ? revistas.map((r) => ({
+        title: localize(r.title, locale) || "Revista",
+        href: r.externalUrl || fileUrl(r.file) || "#",
+        cover: imageUrl(r.previewImage, 240, 320) || undefined,
+      }))
+    : localRevistas;
 
   const videoTabs = [
     { id: "testimonios", label: t("videoTabTestimonios") },
@@ -206,6 +233,13 @@ export default async function MiCuerpoPage({
           </div>
         </div>
       </section>
+
+      <ProgramGallerySection
+        images={fotos.impacto.gallery.slice(0, 8)}
+        overlayLabel="Mi Cuerpo, Mi Sexualidad, Mi Decision"
+        magazines={revistasList}
+        locale={locale}
+      />
 
       <ProgramVideosSection
         videos={videos}

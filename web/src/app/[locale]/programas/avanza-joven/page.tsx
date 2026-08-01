@@ -11,11 +11,9 @@ import ProgramVideosSection from "@/components/ProgramVideosSection";
 import { BookOpen, Users, DollarSign, Heart, Target, Star, BookMarked, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { existsSync } from "fs";
 import { readdir, stat } from "fs/promises";
 import { join } from "path";
-import { getProgramBySlug, getDocumentsByCategory, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
-import { fileUrl, imageUrl } from "@/lib/sanity/image";
+import { getProgramBySlug, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -69,18 +67,6 @@ const fallbackModules = [
   { code: "Modulo 6", title: "Jovenes Agentes de Cambio", desc: "Liderazgo y participacion comunitaria.", icon: Star },
 ];
 
-const localRevistas = [
-  "Ana P", "Ana Sofia", "Claudia Celina", "Dayana", "Eliana", "Gisell",
-  "Ingrid T", "Karen J", "Kata", "Laura", "Mabel", "Maria Camila",
-  "Mercy", "Milena", "Nicol", "Sahary", "Saray", "Sofia",
-  "Tati", "Tina", "Yeri", "Yerli",
-]
-  .filter((name) => existsSync(join(process.cwd(), "public", "documents", "avenza joven pdf", "revistas", `${name}.pdf`)))
-  .map((name) => ({
-    title: `Revista ${name}`,
-    href: assetPath(`/documents/avenza joven pdf/revistas/${name}.pdf`),
-  }));
-
 async function getAvanzaGallery(): Promise<string[]> {
   try {
     const dir = join(process.cwd(), "public", "images", "avanza-joven");
@@ -116,18 +102,7 @@ export default async function AvanzaJovenPage({
   const t = await getTranslations({ locale, namespace: "programas" });
   const cms = await getProgramBySlug("avanza-joven");
 
-  const [revistas, videos] = await Promise.all([
-    getDocumentsByCategory("revistas"),
-    getVideos(locale),
-  ]);
-
-  const revistasList = revistas.length > 0
-    ? revistas.map((r) => ({
-        title: localize(r.title, locale) || "Revista",
-        href: r.externalUrl || fileUrl(r.file) || "#",
-        cover: imageUrl(r.previewImage, 240, 320) || undefined,
-      }))
-    : localRevistas;
+  const videos = await getVideos(locale);
 
   const avanzaGallery = await getAvanzaGallery();
   const avanzaPhotos = avanzaGallery.length >= 4
@@ -337,7 +312,7 @@ export default async function AvanzaJovenPage({
       <ProgramGallerySection
         images={avanzaGallery.length > 0 ? avanzaGallery : fotos.home.gallery.map((img) => img.src)}
         overlayLabel="Avanza Joven"
-        magazines={revistasList}
+        magazines={[]}
         locale={locale}
       />
 
