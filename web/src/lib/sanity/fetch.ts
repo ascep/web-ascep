@@ -42,6 +42,7 @@ import {
   padrinosQuery,
   padrinoBySlugQuery,
   fotoOverridesQuery,
+  noticiasQuery,
 } from "./queries";
 
 export type SiteSettings = {
@@ -334,6 +335,21 @@ export type ProgramaDetail = Programa & {
 
 export async function getPrograms(): Promise<Programa[]> {
   const data = await sanityFetch<Programa[]>(programasQuery);
+  return data ?? [];
+}
+
+export type NoticiaEntry = {
+  _id: string;
+  slug?: { current?: string };
+  title?: string;
+  excerpt?: string;
+  category?: string;
+  publishedAt?: string;
+  coverImage?: SanityImage;
+};
+
+export async function getNoticias(): Promise<NoticiaEntry[]> {
+  const data = await sanityFetch<NoticiaEntry[]>(noticiasQuery);
   return data ?? [];
 }
 

@@ -4,11 +4,10 @@ import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
-import { Newspaper } from "lucide-react";
+import { Newspaper, ArrowRight } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
-import { getClient } from "@/lib/sanity/client";
-import { noticiasQuery } from "@/lib/sanity/queries";
+import { getNoticias, type NoticiaEntry } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
 import Link from "next/link";
 
@@ -24,25 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-type Noticia = {
-  _id: string;
-  slug: { current: string };
-  title?: string;
-  excerpt?: string;
-  category?: string;
-  publishedAt?: string;
-  coverImage?: { asset?: { _ref?: string; _type?: string } };
-};
-
-async function getNoticias(): Promise<Noticia[]> {
-  const client = getClient();
-  if (!client) return [];
-  try {
-    return await client.fetch(noticiasQuery);
-  } catch {
-    return [];
-  }
-}
+type NoticiaWithSlug = NoticiaEntry & { slug: { current: string } };
 
 export default async function NoticiasPage({
   params,
@@ -81,9 +62,37 @@ export default async function NoticiasPage({
             ))}
           </AnimatedSection>
 
-          {noticias.length > 0 ? (
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-              {noticias.map((noticia, i) => (
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <AnimatedSection className="sm:col-span-2 lg:col-span-3" direction="up">
+              <Link
+                href={`/${locale}/noticias/ley-hijos-del-estado`}
+                className="group relative block overflow-hidden rounded-[10px] bg-ley-purple text-white shadow-lg transition-all hover:shadow-xl"
+              >
+                <div
+                  className="absolute inset-0 bg-cover bg-center opacity-25 transition-transform duration-500 group-hover:scale-105"
+                  style={{ backgroundImage: `url(${assetPath(fotos.leyEgreso.hero)})` }}
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-ley-purple/60 to-ley-purple/90" />
+                <div className="relative flex flex-col gap-6 p-8 sm:flex-row sm:items-center sm:justify-between sm:p-10">
+                  <div className="max-w-2xl">
+                    <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-ley-orange px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
+                      {t("leyTag")}
+                    </span>
+                    <h3 className="mb-2 text-2xl font-bold leading-tight sm:text-3xl">
+                      {t("leyTitle")}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-purple-100">
+                      {t("leyExcerpt")}
+                    </p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-ley-yellow">
+                      {t("leerMas")}
+                      <ArrowRight size={16} />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            </AnimatedSection>
+            {noticias.filter((n): n is NoticiaWithSlug => Boolean(n.slug?.current)).map((noticia, i) => (
                 <AnimatedSection key={noticia._id} direction="up" delay={i * 0.06}>
                   <Link
                     href={`/${locale}/noticias/${noticia.slug.current}`}
@@ -129,17 +138,6 @@ export default async function NoticiasPage({
                 </AnimatedSection>
               ))}
             </div>
-          ) : (
-            <AnimatedSection>
-              <div className="rounded-[10px] border-2 border-dashed border-white/20 bg-white/5 p-16 text-center">
-                <Newspaper size={48} className="mx-auto mb-4 text-[var(--color-text-muted)]" />
-                <p className="mb-2 text-lg font-semibold text-[var(--color-text-muted)]">
-                  {t("proximamente")}
-                </p>
-                <p className="text-[var(--color-text-muted)]">{t("proximamenteDesc")}</p>
-              </div>
-            </AnimatedSection>
-          )}
         </div>
       </section>
     </div>

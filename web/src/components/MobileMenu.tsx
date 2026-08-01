@@ -10,11 +10,11 @@ import {
   ChevronDown,
   Users,
   BookOpen,
-  FileText,
   Heart,
   Home,
   Building2,
   MessageCircle,
+  Newspaper,
   Play,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -42,16 +42,7 @@ const casasSubmenu = [
   { key: "rutaEgreso", href: "/casas-del-saber/ruta-egreso" },
 ];
 
-const leySections = [
-  { key: "leyQueEs", href: "/ley-de-egreso#que-es" },
-  { key: "leyObjetivos", href: "/ley-de-egreso#objetivos" },
-  { key: "leyDirigida", href: "/ley-de-egreso#dirigida" },
-  { key: "leyCambio", href: "/ley-de-egreso#cambio" },
-  { key: "leyProceso", href: "/ley-de-egreso#proceso" },
-  { key: "leyParticipa", href: "/ley-de-egreso#participa" },
-];
-
-type Section = "quienes" | "programas" | "ley" | "comoAyudar" | null;
+type Section = "quienes" | "programas" | "comoAyudar" | null;
 
 function AccordionItem({
   icon: Icon,
@@ -365,31 +356,17 @@ export default function MobileMenu() {
                     </div>
                   </AccordionItem>
 
-                  {/* Ley de Egreso */}
-                  <AccordionItem
-                    icon={FileText}
-                    label={t("leyEgreso")}
-                    isOpen={expanded === "ley"}
-                    onToggle={() => toggle("ley")}
+                  {/* Noticias */}
+                  <Link
+                    href={`/${locale}/noticias`}
+                    onClick={close}
+                    className="flex items-center gap-3 rounded-[10px] border border-border-subtle bg-bg-card px-4 py-3 min-h-[48px]"
                   >
-                    <Link
-                      href={`/${locale}/ley-de-egreso`}
-                      onClick={close}
-                      className="block rounded-[10px] px-3 py-2.5 text-sm font-bold text-text-primary hover:bg-bg-elevated min-h-[44px]"
-                    >
-                      {t("leyEgreso")}
-                    </Link>
-                    {leySections.map((section) => (
-                      <Link
-                        key={section.key}
-                        href={`/${locale}${section.href}`}
-                        onClick={close}
-                        className="block rounded-[10px] px-3 py-2.5 text-sm font-semibold text-text-primary hover:bg-bg-elevated min-h-[44px]"
-                      >
-                        {t(section.key)}
-                      </Link>
-                    ))}
-                  </AccordionItem>
+                    <Newspaper size={20} className="shrink-0 text-brand-blue" />
+                    <span className="text-sm font-bold text-text-primary">
+                      {t("noticias")}
+                    </span>
+                  </Link>
 
                   {/* Enrédate con ASCEP */}
                   <Link

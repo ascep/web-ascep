@@ -73,7 +73,7 @@ export default function TopBar() {
             Transparencia
           </Link>
           <Link
-            href={`/${locale}/ley-de-egreso`}
+            href={`/${locale}/noticias/ley-hijos-del-estado`}
             className="rounded-[10px] bg-white px-4 py-1 text-xs font-semibold text-text-primary transition-colors hover:bg-zinc-100"
           >
             {t("leyCta")}

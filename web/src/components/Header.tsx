@@ -43,11 +43,10 @@ type NavGroup = {
 };
 
 type HeaderProps = {
-  leyEgresoCard: string;
   comoAyudarCard: string;
 };
 
-const getNavStructure = (leyEgresoImage: string, comoAyudarImage: string): NavGroup[] => [
+const getNavStructure = (comoAyudarImage: string): NavGroup[] => [
   { type: "link", key: "inicio", href: "/" },
   {
     type: "dropdown",
@@ -77,20 +76,7 @@ const getNavStructure = (leyEgresoImage: string, comoAyudarImage: string): NavGr
       ]},
     ],
   },
-  {
-    type: "megamenu",
-    key: "leyEgreso",
-    image: leyEgresoImage,
-    cols: 2,
-    items: [
-      { key: "leyQueEs", href: "/ley-de-egreso#que-es" },
-      { key: "leyObjetivos", href: "/ley-de-egreso#objetivos" },
-      { key: "leyDirigida", href: "/ley-de-egreso#dirigida" },
-      { key: "leyCambio", href: "/ley-de-egreso#cambio" },
-      { key: "leyProceso", href: "/ley-de-egreso#proceso" },
-      { key: "leyParticipa", href: "/ley-de-egreso#participa" },
-    ],
-  },
+  { type: "link", key: "noticias", href: "/noticias" },
   {
     type: "megamenu",
     key: "comoAyudar",
@@ -109,7 +95,7 @@ const getNavStructure = (leyEgresoImage: string, comoAyudarImage: string): NavGr
 
 type DropdownState = string | null;
 
-export default function Header({ leyEgresoCard, comoAyudarCard }: HeaderProps) {
+export default function Header({ comoAyudarCard }: HeaderProps) {
   const t = useTranslations("nav");
   const locale = useLocale();
   const { theme } = useTheme();
@@ -181,7 +167,7 @@ export default function Header({ leyEgresoCard, comoAyudarCard }: HeaderProps) {
     };
   }, []);
 
-  const navStructure = getNavStructure(leyEgresoCard, comoAyudarCard);
+  const navStructure = getNavStructure(comoAyudarCard);
   const currentLang = languages.find((l) => l.code === locale) || languages[0];
   const otherLangs = languages.filter((l) => l.code !== locale);
 
@@ -243,13 +229,13 @@ export default function Header({ leyEgresoCard, comoAyudarCard }: HeaderProps) {
             className="mb-3 w-full rounded-[10px] object-cover"
             style={{ aspectRatio: "7/5" }}
           />
-          <Link href={`/${locale}/${group.key === "leyEgreso" ? "ley-de-egreso" : group.key}`}
+          <Link href={`/${locale}/${group.key}`}
             className="block text-sm font-bold text-text-primary"
           >
             {t(group.key)}
           </Link>
           <p className="mt-1 text-xs text-text-muted">
-            {group.key === "leyEgreso" ? t("leyNumero") : t("apoyoTransforma")}
+            {t("apoyoTransforma")}
           </p>
         </div>
         <div className="flex-1">

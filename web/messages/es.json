@@ -258,7 +258,34 @@
     "incidencia": "Incidencia",
     "eventos": "Eventos",
     "ley": "Ley de Egreso",
-    "backToNoticias": "Volver a noticias"
+    "backToNoticias": "Volver a noticias",
+    "leyTitle": "Ley 2479 de 2025: Hijos e Hijas del Estado",
+    "leyExcerpt": "Conoce la norma que crea el Programa Nacional de Acompañamiento Integral para los jovenes que egresan del sistema de proteccion del ICBF.",
+    "leyTag": "Ley de Egreso",
+    "leerMas": "Leer mas"
+  },
+  "leyPost": {
+    "badge": "Ley 2479 de 2025",
+    "title": "Ley de Egreso 2479 de 2025:",
+    "titleHighlight": "Hijos e Hijas del Estado",
+    "slogan": "Egresar no es el final, es el punto de partida.",
+    "publishedBy": "Publicado por ASCEP",
+    "orgName": "Asociacion Colombiana de Egreso de Proteccion",
+    "vigencia": "Vigencia 2025 - 2026",
+    "readTime": "Lectura estimada: 7 min",
+    "breadcrumbInicio": "Inicio",
+    "breadcrumbNoticias": "Noticias",
+    "breadcrumbLey": "Ley 2479 de 2025",
+    "coverLabel": "Guia Estrategica y Kit Institucional",
+    "coverTitle": "Informar, Sensibilizar y Movilizar a la Sociedad",
+    "coverDesc": "Esta publicacion convierte la norma escrita en acciones reales y transforma la realidad de miles de jovenes que egresan del sistema de proteccion del ICBF.",
+    "enEsteArticulo": "En este articulo",
+    "datoClaveLabel": "Dato Clave",
+    "datoClave": "La Ley 2479 representa la primera normativa nacional en Colombia disenada especificamente por y para jovenes con experiencia en proteccion estatal.",
+    "contactarEquipo": "Contactar al equipo ASCEP",
+    "volverNoticias": "Volver a noticias",
+    "compartir": "Compartir",
+    "kitDesc": "ASCEP acompaña la Ley 2479 en cada territorio: informando, sensibilizando y movilizando a la sociedad."
   },
   "home": {
     "heroTag": "ASCEP",
@@ -306,7 +333,12 @@
     "galeriaTitle": "Nuestra labor en imágenes",
     "aliadosTag": "Quienes nos acompañan",
     "aliadosTitle": "Aliados estratégicos",
-    "heroBadge": "Trabajando por la niñez"
+    "heroBadge": "Trabajando por la niñez",
+    "noticiasTag": "Noticias",
+    "noticiasTitle": "Ultimas novedades",
+    "noticiasDesc": "Mantente al dia con las publicaciones y novedades de ASCEP.",
+    "verTodasNoticias": "Ver todas las noticias",
+    "noticiasLeerMas": "Leer mas"
   },
   "enredateConAscep": {
     "heroSlide1Tag": "Enredate con ASCEP",

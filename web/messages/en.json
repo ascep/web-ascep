@@ -258,7 +258,34 @@
     "incidencia": "Advocacy",
     "eventos": "Events",
     "ley": "Graduation Law",
-    "backToNoticias": "Back to news"
+    "backToNoticias": "Back to news",
+    "leyTitle": "Law 2479 of 2025: Sons and Daughters of the State",
+    "leyExcerpt": "Learn about the law that creates the National Comprehensive Support Program for young people leaving the ICBF protection system.",
+    "leyTag": "Graduation Law",
+    "leerMas": "Read more"
+  },
+  "leyPost": {
+    "badge": "Law 2479 of 2025",
+    "title": "Graduation Law 2479 of 2025:",
+    "titleHighlight": "Sons and Daughters of the State",
+    "slogan": "Graduating is not the end, it is the starting point.",
+    "publishedBy": "Published by ASCEP",
+    "orgName": "Colombian Association of State Care Leavers",
+    "vigencia": "In force 2025 - 2026",
+    "readTime": "Estimated reading: 7 min",
+    "breadcrumbInicio": "Home",
+    "breadcrumbNoticias": "News",
+    "breadcrumbLey": "Law 2479 of 2025",
+    "coverLabel": "Strategic Guide and Institutional Kit",
+    "coverTitle": "Inform, Raise Awareness and Mobilize Society",
+    "coverDesc": "This publication turns the written law into real actions and transforms the reality of thousands of young people leaving the ICBF protection system.",
+    "enEsteArticulo": "In this article",
+    "datoClaveLabel": "Key Fact",
+    "datoClave": "Law 2479 is the first national law in Colombia designed specifically by and for young people with experience in state protection.",
+    "contactarEquipo": "Contact the ASCEP team",
+    "volverNoticias": "Back to news",
+    "compartir": "Share",
+    "kitDesc": "ASCEP accompanies Law 2479 in every territory: informing, raising awareness and mobilizing society."
   },
   "home": {
     "heroTag": "ASCEP",
@@ -306,7 +333,12 @@
     "galeriaTitle": "Our work in images",
     "aliadosTag": "Those who accompany us",
     "aliadosTitle": "Strategic partners",
-    "heroBadge": "Working for children"
+    "heroBadge": "Working for children",
+    "noticiasTag": "News",
+    "noticiasTitle": "Latest updates",
+    "noticiasDesc": "Stay up to date with ASCEP's publications and news.",
+    "verTodasNoticias": "View all news",
+    "noticiasLeerMas": "Read more"
   },
   "enredateConAscep": {
     "heroSlide1Tag": "Connect with ASCEP",

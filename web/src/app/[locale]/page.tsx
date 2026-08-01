@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import DecoShapes from "@/components/DecoShapes";
 import AnimatedSection from "@/components/AnimatedSection";
 import HomeHero from "@/components/HomeHero";
@@ -13,6 +14,7 @@ import ProgramCarousel from "@/components/ProgramCarousel";
 import LogoLoop from "@/components/LogoLoop";
 import MapaAlcanceASCEP from "@/components/MapaAlcanceASCEP";
 import GallerySection from "@/components/GallerySection";
+import NewsCarousel, { type NewsItem } from "@/components/NewsCarousel";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import { assetPath } from "@/lib/asset-path";
@@ -24,6 +26,7 @@ import {
   getImpactStats,
   getTestimonials,
   getVideosByCategory,
+  getNoticias,
 } from "@/lib/sanity/fetch";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -56,13 +59,15 @@ export default async function HomePage({
   const { locale } = await params;
   const h = await getTranslations({ locale, namespace: "home" });
   const g = await getTranslations({ locale, namespace: "generales" });
+  const nt = await getTranslations({ locale, namespace: "noticias" });
 
-  const [cmsMilestones, cmsPartners, cmsStats, cmsTestimonials, cmsHeroVideos] = await Promise.all([
+  const [cmsMilestones, cmsPartners, cmsStats, cmsTestimonials, cmsHeroVideos, cmsNoticias] = await Promise.all([
     getMilestones(),
     getFeaturedPartners(),
     getImpactStats(),
     getTestimonials("home"),
     getVideosByCategory("hero", locale),
+    getNoticias(),
   ]);
 
   const fotos = await getFotos();
@@ -158,6 +163,40 @@ export default async function HomePage({
         author: h(t.authorKey),
         role: h(t.roleKey),
       }));
+
+  const newsColors: Record<string, string> = {
+    programas: "#007374",
+    incidencia: "#C45118",
+    eventos: "#44BCC5",
+    ley: "#4A154B",
+  };
+
+  const newsItems: NewsItem[] = [
+    {
+      id: "ley-hijos-del-estado",
+      href: `/${locale}/noticias/ley-hijos-del-estado`,
+      image: assetPath(fotos.leyEgreso.hero),
+      tag: nt("leyTag"),
+      title: nt("leyTitle"),
+      excerpt: nt("leyExcerpt"),
+      color: "#4A154B",
+    },
+    ...cmsNoticias
+      .filter((n) => Boolean(n.slug?.current))
+      .slice(0, 2)
+      .map((n) => {
+        const img = n.coverImage ? imageUrl(n.coverImage, 1600, 900) : null;
+        return {
+          id: n._id,
+          href: `/${locale}/noticias/${n.slug?.current}`,
+          image: img || assetPath(fotos.leyEgreso.hero),
+          tag: n.category ? nt(n.category) || n.category : "",
+          title: n.title || "",
+          excerpt: n.excerpt || "",
+          color: newsColors[n.category || ""] || "#007374",
+        } as NewsItem;
+      }),
+  ];
 
   return (
     <div>
@@ -321,6 +360,35 @@ export default async function HomePage({
         title={h("testimonialsTitle")}
         testimonials={testimonials}
       />
+
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
+        <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-10 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+              {h("noticiasTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              {h("noticiasTitle")}
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
+              {h("noticiasDesc")}
+            </p>
+          </div>
+
+          <NewsCarousel items={newsItems} locale={locale} />
+
+          <div className="mt-10 flex justify-center">
+            <Link
+              href={`/${locale}/noticias`}
+              className="inline-flex items-center gap-2 rounded-[10px] border border-brand-purple px-6 py-3 text-sm font-semibold text-brand-purple transition-all hover:bg-brand-purple/10"
+            >
+              {h("verTodasNoticias")}
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+        </AnimatedSection>
+      </section>
 
       <GallerySection
         tag={h("galeriaTag")}

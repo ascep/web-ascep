@@ -36,7 +36,7 @@ const pages: SearchItem[] = [
   { title: "Participa", description: "Involucrate con ASCEP", href: "/participa" },
   { title: "Contacto", description: "Ponte en contacto con nosotros", href: "/contacto" },
   { title: "Transparencia", description: "Informacion financiera y rendicion de cuentas", href: "/transparencia" },
-  { title: "Ley de Egreso", description: "Conoce la Ley 2479 de 2025", href: "/ley-de-egreso" },
+  { title: "Ley de Egreso", description: "Conoce la Ley 2479 de 2025", href: "/noticias/ley-hijos-del-estado" },
   { title: "Donar", description: "Realiza tu donacion", href: "/donar" },
   { title: "Aliados", description: "Nuestros aliados estrategicos", href: "/aliados" },
 ];
