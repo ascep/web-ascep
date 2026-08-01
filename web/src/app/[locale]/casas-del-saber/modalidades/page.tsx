@@ -40,6 +40,37 @@ export default async function ModalidadesPage({
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
       />
 
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+              {t("poblacionTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+              {t("poblacionTitle")}
+            </h2>
+            <p className="mx-auto mt-3 max-w-3xl text-[var(--color-text-muted)]">
+              {t("poblacionDesc")}
+            </p>
+          </AnimatedSection>
+          <div className="grid gap-4 md:grid-cols-3">
+            {[
+              t("poblacionItem1"),
+              t("poblacionItem2"),
+              t("poblacionItem3"),
+            ].map((item, i) => (
+              <AnimatedSection key={i} direction="up" delay={i * 0.1}>
+                <div className="flex h-full items-start gap-3 rounded-[10px] border border-[var(--color-border-subtle)] bg-bg-card p-6 shadow-sm">
+                  <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-brand-purple" />
+                  <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{item}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.modalidades)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
