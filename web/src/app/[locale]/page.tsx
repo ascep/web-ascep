@@ -4,7 +4,8 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import DecoShapes from "@/components/DecoShapes";
 import AnimatedSection from "@/components/AnimatedSection";
-import HomeHero from "@/components/HomeHero";
+import SliderHero from "@/components/SliderHero";
+import type { SliderSlide } from "@/components/SliderHero";
 import HomeStats from "@/components/HomeStats";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import HomeCTA from "@/components/HomeCTA";
@@ -26,7 +27,6 @@ import {
   getFeaturedPartners,
   getImpactStats,
   getTestimonials,
-  getVideosByCategory,
   getNoticias,
 } from "@/lib/sanity/fetch";
 
@@ -62,12 +62,11 @@ export default async function HomePage({
   const g = await getTranslations({ locale, namespace: "generales" });
   const nt = await getTranslations({ locale, namespace: "noticias" });
 
-  const [cmsMilestones, cmsPartners, cmsStats, cmsTestimonials, cmsHeroVideos, cmsNoticias] = await Promise.all([
+  const [cmsMilestones, cmsPartners, cmsStats, cmsTestimonials, cmsNoticias] = await Promise.all([
     getMilestones(),
     getFeaturedPartners(),
     getImpactStats(),
     getTestimonials("home"),
-    getVideosByCategory("hero", locale),
     getNoticias(),
   ]);
 
@@ -177,13 +176,14 @@ export default async function HomePage({
     },
     ...cmsNoticias
       .filter((n) => Boolean(n.slug?.current))
-      .slice(0, 2)
-      .map((n) => {
+      .slice(0, 5)
+      .map((n, i) => {
         const img = n.coverImage ? imageUrl(n.coverImage, 1600, 900) : null;
+        const fallback = assetPath(fotos.home.gallery[i % fotos.home.gallery.length].src);
         return {
           id: n._id,
           href: `/${locale}/noticias/${n.slug?.current}`,
-          image: img || assetPath(fotos.leyEgreso.hero),
+          image: img || fallback,
           tag: n.category ? nt(n.category) || n.category : "",
           title: n.title || "",
           excerpt: n.excerpt || "",
@@ -192,31 +192,40 @@ export default async function HomePage({
       }),
   ];
 
+  const heroSlides: SliderSlide[] = newsItems.map((item) => ({
+    image: item.image,
+    eyebrow: item.tag,
+    title: item.title,
+    description: item.excerpt,
+    cta: { label: nt("leerMas"), href: item.href },
+  }));
+
+  if (heroSlides.length < 6) {
+    const used = new Set(newsItems.map((n) => n.image));
+    for (const { src, alt } of fotos.home.gallery) {
+      if (heroSlides.length >= 6) break;
+      const image = assetPath(src);
+      if (used.has(image)) continue;
+      heroSlides.push({
+        image,
+        eyebrow: h("galeriaTag"),
+        title: alt,
+        description: h("noticiasDesc"),
+        cta: { label: nt("leerMas"), href: `/${locale}/impacto` },
+      });
+    }
+  }
+
   return (
     <div>
-      <HomeHero
-        tag={h("heroTag")}
-        title={h("heroTitle")}
-        subtitle={h("heroSubtitle")}
-        heroPoster={fotos.home.heroPoster}
-        heroImage={fotos.home.heroImage}
-        youtubeId={cmsHeroVideos[0]?.youtubeId ?? null}
-        cta={
-          <Link
-            href={`/${locale}/programas`}
-            className="inline-flex items-center rounded-[10px] bg-brand-orange px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-brand-orange-dark hover:shadow-lg hover:shadow-brand-orange/30"
-          >
-            {g("conoceNuestrosProgramas")}
-          </Link>
-        }
-        secondary={
-          <Link
-            href={`/${locale}/quienes-somos`}
-            className="inline-flex items-center rounded-[10px] border-2 border-white/30 px-6 py-2.5 text-sm font-semibold text-white transition-all hover:border-white hover:bg-white/10"
-          >
-            {g("conocenos")}
-          </Link>
-        }
+      <SliderHero
+        slides={heroSlides}
+        shadeColor="#019E9F"
+        className="min-h-[100svh]"
+        auto={6000}
+        ariaLabel={nt("sliderLabel")}
+        prevLabel={nt("sliderPrev")}
+        nextLabel={nt("sliderNext")}
       />
 
       <section className="relative overflow-hidden bg-section-light py-20">

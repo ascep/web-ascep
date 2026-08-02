@@ -9,11 +9,13 @@ import {
   Check,
   ChevronRight,
   Clock,
+  Download,
   FileText,
   Gavel,
   Handshake,
   HeartHandshake,
   Landmark,
+  MapPin,
   Megaphone,
   Newspaper,
   ShieldCheck,
@@ -22,6 +24,8 @@ import {
   Users,
 } from "lucide-react";
 import PostShare from "@/components/PostShare";
+import BackgroundVideo from "@/components/BackgroundVideo";
+import MapaAlcanceASCEP from "@/components/MapaAlcanceASCEP";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 
@@ -43,6 +47,7 @@ const toc = [
   { id: "dirigida", label: "dirigida" },
   { id: "establece", label: "establece" },
   { id: "implementacion", label: "implementacion" },
+  { id: "alcance", label: "alcance" },
   { id: "papel-egresados-ascep", label: "papelEgresados" },
   { id: "participa", label: "participa" },
 ] as const;
@@ -54,6 +59,8 @@ const establece = ["est1", "est2", "est3", "est4", "est5"] as const;
 const impl = ["impl1", "impl2", "impl3", "impl4", "impl5"] as const;
 const papelEgresados = ["pe1", "pe2", "pe3", "pe4", "pe5"] as const;
 const papelAscep = ["pa1", "pa2", "pa3", "pa4", "pa5", "pa6"] as const;
+const mapaPuntos = ["mapaPunto1", "mapaPunto2", "mapaPunto3", "mapaPunto4"] as const;
+const mapaStats = ["deptos", "egresados", "meses"] as const;
 
 function SectionHeading({ id, title }: { id: string; title: string }) {
   return (
@@ -79,21 +86,16 @@ export default async function LeyPostPage({
   return (
     <div>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-ley-purple text-white">
-        <div className="absolute inset-0">
-          <Image
-            src={assetPath(fotos.leyEgreso.hero)}
-            alt=""
-            fill
-            sizes="100vw"
-            priority
-            className="object-cover"
-            style={{ opacity: 0.18 }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-ley-purple/70 via-ley-purple/80 to-ley-purple" />
-        </div>
-
-        <div className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <section className="relative flex min-h-[100svh] items-center overflow-hidden">
+        <BackgroundVideo
+          src={assetPath("/videos/FONDO-WEB-16-9.mp4")}
+          poster={assetPath(fotos.leyEgreso.hero)}
+          className="opacity-40"
+          disableOnMobile
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-ley-purple/95 via-ley-purple/80 to-ley-purple/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent" />
+        <div className="relative z-10 mx-auto w-full max-w-5xl px-4 py-16 text-white sm:px-6 sm:py-20 lg:px-8">
           {/* Breadcrumb */}
           <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 overflow-x-auto whitespace-nowrap text-xs font-medium text-purple-200/90">
             <Link href={`/${locale}`} className="transition-colors hover:text-white">
@@ -119,7 +121,7 @@ export default async function LeyPostPage({
           </h1>
 
           {/* Slogan */}
-          <p className="mb-6 border-l-4 border-ley-yellow pl-4 py-1 text-lg font-light italic leading-relaxed text-purple-100 sm:text-2xl">
+          <p className="mb-6 text-lg font-light italic leading-relaxed text-purple-100 sm:text-2xl">
             &quot;{t("slogan")}&quot;
           </p>
 
@@ -156,22 +158,6 @@ export default async function LeyPostPage({
           {/* ARTICLE */}
           <article className="lg:col-span-8">
             <div className="rounded-2xl border border-border-subtle bg-bg-card p-6 shadow-sm sm:p-10">
-              {/* Cover banner */}
-              <div className="mb-8 overflow-hidden rounded-2xl bg-ley-purple text-white shadow-md">
-                <div className="flex flex-col items-center gap-5 p-7 sm:flex-row sm:p-8">
-                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-ley-yellow">
-                    <BookOpen size={30} />
-                  </div>
-                  <div className="space-y-2 text-center sm:text-left">
-                    <span className="inline-block rounded-md bg-ley-teal px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-white">
-                      {t("coverLabel")}
-                    </span>
-                    <h3 className="text-xl font-bold leading-snug sm:text-2xl">{t("coverTitle")}</h3>
-                    <p className="text-xs leading-relaxed text-purple-100 sm:text-sm">{t("coverDesc")}</p>
-                  </div>
-                </div>
-              </div>
-
               {/* S1 Proposito */}
               <div id="proposito">
                 <SectionHeading id="proposito" title={`1. ${le("queEs")}`} />
@@ -179,7 +165,7 @@ export default async function LeyPostPage({
                   {le("queEsDesc")}
                 </p>
 
-                <div className="my-6 space-y-3 rounded-2xl border-l-4 border-l-ley-orange bg-ley-yellow/10 p-6">
+                <div className="my-6 space-y-3 rounded-2xl bg-ley-yellow/10 p-6">
                   <h4 className="flex items-center gap-2 text-base font-extrabold text-text-primary">
                     <Target size={20} className="text-ley-orange" />
                     {le("objetivos")}
@@ -291,9 +277,53 @@ export default async function LeyPostPage({
                 </div>
               </div>
 
-              {/* S6 Rol */}
+              {/* S6 Alcance territorial */}
+              <div id="alcance" className="mt-12">
+                <SectionHeading id="alcance" title={`6. ${le("alcance")}`} />
+                <p className="mb-6 text-[1.05rem] leading-[1.8] text-text-secondary">
+                  {le("alcanceDesc")}
+                </p>
+
+                <div className="rounded-2xl border border-border-subtle bg-bg-surface p-4 shadow-sm sm:p-6">
+                  <MapaAlcanceASCEP
+                    baseColor="#4A154B"
+                    activeColor="#6C2B72"
+                    pinColor="#F7921E"
+                    labelColor="#4A154B"
+                    hideLegend
+                  />
+                </div>
+
+                <div className="mt-6 rounded-2xl bg-ley-purple p-6 text-white sm:p-8">
+                  <h3 className="mb-4 flex items-center gap-2 text-lg font-extrabold">
+                    <MapPin size={18} className="text-ley-yellow" />
+                    {t("mapaHeading")}
+                  </h3>
+                  <ul className="grid gap-x-6 gap-y-3 text-sm leading-relaxed text-purple-100 sm:grid-cols-2">
+                    {mapaPuntos.map((key) => (
+                      <li key={key} className="flex items-start gap-2.5">
+                        <Check size={16} className="mt-0.5 shrink-0 text-ley-teal" />
+                        <span>{t(key)}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
+                  {mapaStats.map((key) => (
+                    <div key={key} className="rounded-2xl border border-border-subtle bg-bg-surface p-5 text-center">
+                      <span className="block text-2xl font-black text-ley-purple sm:text-3xl">{t(`${key}Valor`)}</span>
+                      <span className="mt-1 block text-[10px] font-semibold uppercase tracking-wide text-text-muted">
+                        {t(`${key}Label`)}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* S7 Rol */}
               <div id="papel-egresados-ascep" className="mt-12">
-                <SectionHeading id="papel-egresados-ascep" title={`6. ${le("papelEgresados")}`} />
+                <SectionHeading id="papel-egresados-ascep" title={`7. ${le("papelEgresados")}`} />
                 <p className="mb-5 text-[1.05rem] leading-[1.8] text-text-secondary">
                   {le("papelEgresadosDesc")}
                 </p>
@@ -331,9 +361,9 @@ export default async function LeyPostPage({
                 </div>
               </div>
 
-              {/* S7 Proceso + Participa */}
+              {/* S8 Proceso + Participa */}
               <div id="participa" className="mt-12">
-                <SectionHeading id="participa" title={`7. ${le("proceso")} y ${le("participa")}`} />
+                <SectionHeading id="participa" title={`8. ${le("proceso")} y ${le("participa")}`} />
 
                 <div className="grid gap-5 sm:grid-cols-2">
                   <div className="rounded-2xl border border-border-subtle bg-bg-surface p-6">
@@ -365,6 +395,80 @@ export default async function LeyPostPage({
                     {le("cta")}
                     <ArrowRight size={16} />
                   </Link>
+                </div>
+              </div>
+
+              {/* Galeria */}
+              <div id="galeria" className="mt-12 scroll-mt-28">
+                <h2 className="mb-2 text-2xl font-extrabold text-ley-purple sm:text-[1.75rem]">
+                  {le("galeriaTag")}
+                </h2>
+                <p className="mb-6 text-[1.05rem] leading-[1.8] text-text-secondary">
+                  {le("galeriaDesc")}
+                </p>
+                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+                  {fotos.leyEgreso.gallery.map((src, i) => (
+                    <a
+                      key={src}
+                      href={assetPath(src)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative block overflow-hidden rounded-xl"
+                      aria-label={`${le("galeriaTag")} ${i + 1}`}
+                    >
+                      <div className="relative aspect-[4/3] w-full">
+                        <Image
+                          src={assetPath(src)}
+                          alt={`${le("galeriaTag")} ${i + 1}`}
+                          fill
+                          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
+                          className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        />
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              </div>
+
+              {/* Cover banner */}
+              <div className="mt-12 overflow-hidden rounded-2xl bg-ley-purple text-white shadow-md">
+                <div className="flex flex-col items-center gap-5 p-7 sm:flex-row sm:p-8">
+                  <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-ley-yellow">
+                    <BookOpen size={30} />
+                  </div>
+                  <div className="space-y-2 text-center sm:text-left">
+                    <span className="inline-block rounded-md bg-ley-teal px-2.5 py-0.5 text-[10px] font-extrabold uppercase tracking-wider text-white">
+                      {t("coverLabel")}
+                    </span>
+                    <h3 className="text-xl font-bold leading-snug sm:text-2xl">{t("coverTitle")}</h3>
+                    <p className="text-xs leading-relaxed text-purple-100 sm:text-sm">{t("coverDesc")}</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Recurso oficial */}
+              <div className="mt-6 rounded-2xl bg-ley-purple p-6 text-white shadow-sm sm:p-7">
+                <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-ley-orange px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white">
+                  <Download size={12} />
+                  {t("recursoTag")}
+                </span>
+                <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="min-w-0">
+                    <h3 className="text-lg font-bold leading-snug sm:text-xl">{t("recursoTitle")}</h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-purple-100 sm:text-sm">{t("recursoDesc")}</p>
+                    <p className="mt-3 text-[11px] font-semibold uppercase tracking-wide text-ley-yellow">
+                      {t("recursoChips")}
+                    </p>
+                  </div>
+                  <a
+                    href={assetPath("/documents/KIT%20DE%20COMUNICACION%20LEY%20DE%20EGRESO%202026.pptx.pdf")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-ley-purple transition-colors hover:bg-ley-yellow"
+                  >
+                    <Download size={16} />
+                    {t("recursoBtn")}
+                  </a>
                 </div>
               </div>
 

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
+import type { CSSProperties, MouseEvent } from "react";
 
 /**
  * Mapa de alcance nacional — ASCEP
@@ -21,8 +22,7 @@ const SVG_W = 700;
 
 const CALI = { x: MAP_OFFSET_X + 126.29, y: MAP_OFFSET_Y + 458.64 };
 
-const DEPARTMENTS = [
-  { name: "Caquetá", d: "M 272.83,552.50 L 272.90,554.33 L 282.20,565.27 L 285.39,571.22 L 286.45,576.21 L 290.07,579.63 L 302.50,589.12 L 304.19,588.55 L 313.81,581.53 L 313.12,576.28 L 316.81,574.76 L 324.30,574.95 L 331.61,580.26 L 333.67,579.44 L 337.17,583.61 L 343.79,595.82 L 353.41,598.79 L 355.85,600.88 L 358.47,602.65 L 358.03,605.88 L 361.16,607.01 L 361.53,611.31 L 364.84,611.50 L 366.09,617.45 L 369.28,618.02 L 372.96,622.64 L 376.58,623.71 L 378.77,626.43 L 385.64,627.63 L 389.45,625.86 L 393.39,630.92 L 395.57,631.74 L 394.70,632.94 L 384.33,635.35 L 380.52,633.64 L 372.59,638.19 L 370.96,643.13 L 372.27,646.60 L 368.28,648.57 L 356.53,648.19 L 354.35,651.35 L 350.23,652.49 L 348.16,658.30 L 345.79,659.89 L 345.17,665.64 L 341.36,668.04 L 335.42,663.68 L 330.05,669.31 L 327.30,670.13 L 319.49,663.36 L 312.75,666.27 L 308.75,663.49 L 304.25,662.04 L 300.76,665.58 L 295.82,666.59 L 289.39,660.58 L 281.58,661.72 L 277.39,661.09 L 276.90,657.99 L 271.96,656.28 L 263.59,655.08 L 255.53,652.30 L 249.91,646.79 L 247.48,648.06 L 240.67,644.83 L 237.54,640.22 L 233.05,638.57 L 227.86,640.91 L 219.55,632.88 L 221.68,632.00 L 220.87,626.56 L 217.87,624.09 L 212.37,623.84 L 209.94,622.07 L 206.25,622.26 L 202.75,610.05 L 194.44,610.30 L 192.45,605.88 L 193.88,604.04 L 191.32,598.92 L 187.20,595.57 L 182.89,597.08 L 176.96,594.43 L 171.96,590.00 L 165.77,592.03 L 158.78,587.03 L 154.66,580.58 L 149.10,580.77 L 145.66,578.18 L 139.10,576.72 L 137.98,571.66 L 143.04,565.72 L 144.79,553.70 L 147.10,554.84 L 151.66,554.02 L 158.34,547.19 L 161.21,546.87 L 166.96,543.58 L 170.83,538.20 L 173.02,532.89 L 177.14,526.69 L 181.77,525.37 L 184.76,516.64 L 188.64,514.24 L 189.82,511.77 L 197.69,502.28 L 196.94,495.83 L 200.88,494.69 L 209.62,483.50 L 210.62,486.09 L 214.50,484.95 L 216.62,488.18 L 221.24,487.42 L 222.99,496.46 L 225.43,498.93 L 220.74,504.43 L 221.18,509.81 L 217.62,516.20 L 217.56,518.92 L 222.30,520.31 L 225.18,525.81 L 222.62,527.83 L 226.86,534.60 L 226.74,540.48 L 231.48,542.57 L 239.04,543.52 L 244.91,547.19 L 250.10,548.45 L 255.78,551.11 L 262.72,552.69 L 268.77,551.17 L 272.83,552.50 Z" },
+const DEPARTMENTS = [  { name: "Caquetá", d: "M 272.83,552.50 L 272.90,554.33 L 282.20,565.27 L 285.39,571.22 L 286.45,576.21 L 290.07,579.63 L 302.50,589.12 L 304.19,588.55 L 313.81,581.53 L 313.12,576.28 L 316.81,574.76 L 324.30,574.95 L 331.61,580.26 L 333.67,579.44 L 337.17,583.61 L 343.79,595.82 L 353.41,598.79 L 355.85,600.88 L 358.47,602.65 L 358.03,605.88 L 361.16,607.01 L 361.53,611.31 L 364.84,611.50 L 366.09,617.45 L 369.28,618.02 L 372.96,622.64 L 376.58,623.71 L 378.77,626.43 L 385.64,627.63 L 389.45,625.86 L 393.39,630.92 L 395.57,631.74 L 394.70,632.94 L 384.33,635.35 L 380.52,633.64 L 372.59,638.19 L 370.96,643.13 L 372.27,646.60 L 368.28,648.57 L 356.53,648.19 L 354.35,651.35 L 350.23,652.49 L 348.16,658.30 L 345.79,659.89 L 345.17,665.64 L 341.36,668.04 L 335.42,663.68 L 330.05,669.31 L 327.30,670.13 L 319.49,663.36 L 312.75,666.27 L 308.75,663.49 L 304.25,662.04 L 300.76,665.58 L 295.82,666.59 L 289.39,660.58 L 281.58,661.72 L 277.39,661.09 L 276.90,657.99 L 271.96,656.28 L 263.59,655.08 L 255.53,652.30 L 249.91,646.79 L 247.48,648.06 L 240.67,644.83 L 237.54,640.22 L 233.05,638.57 L 227.86,640.91 L 219.55,632.88 L 221.68,632.00 L 220.87,626.56 L 217.87,624.09 L 212.37,623.84 L 209.94,622.07 L 206.25,622.26 L 202.75,610.05 L 194.44,610.30 L 192.45,605.88 L 193.88,604.04 L 191.32,598.92 L 187.20,595.57 L 182.89,597.08 L 176.96,594.43 L 171.96,590.00 L 165.77,592.03 L 158.78,587.03 L 154.66,580.58 L 149.10,580.77 L 145.66,578.18 L 139.10,576.72 L 137.98,571.66 L 143.04,565.72 L 144.79,553.70 L 147.10,554.84 L 151.66,554.02 L 158.34,547.19 L 161.21,546.87 L 166.96,543.58 L 170.83,538.20 L 173.02,532.89 L 177.14,526.69 L 181.77,525.37 L 184.76,516.64 L 188.64,514.24 L 189.82,511.77 L 197.69,502.28 L 196.94,495.83 L 200.88,494.69 L 209.62,483.50 L 210.62,486.09 L 214.50,484.95 L 216.62,488.18 L 221.24,487.42 L 222.99,496.46 L 225.43,498.93 L 220.74,504.43 L 221.18,509.81 L 217.62,516.20 L 217.56,518.92 L 222.30,520.31 L 225.18,525.81 L 222.62,527.83 L 226.86,534.60 L 226.74,540.48 L 231.48,542.57 L 239.04,543.52 L 244.91,547.19 L 250.10,548.45 L 255.78,551.11 L 262.72,552.69 L 268.77,551.17 L 272.83,552.50 Z" },
   { name: "Cauca", d: "M 150.60,470.28 L 148.79,471.55 L 149.72,479.14 L 152.35,481.41 L 151.97,484.70 L 158.72,489.06 L 162.46,490.08 L 163.34,493.49 L 166.27,496.02 L 161.59,504.24 L 162.46,508.04 L 160.40,510.95 L 154.47,507.03 L 151.72,512.21 L 146.97,513.29 L 145.97,517.71 L 147.22,521.26 L 142.79,522.58 L 137.98,518.22 L 133.79,518.98 L 131.73,526.13 L 125.17,525.56 L 123.36,527.20 L 123.49,532.70 L 121.55,534.03 L 123.43,539.53 L 131.30,543.39 L 134.54,546.36 L 133.98,549.72 L 140.91,548.89 L 144.79,553.70 L 143.04,565.72 L 137.98,571.66 L 139.10,576.72 L 145.66,578.18 L 149.10,580.77 L 144.97,582.22 L 142.54,584.82 L 132.98,584.75 L 131.86,585.76 L 125.67,581.84 L 124.74,580.01 L 125.86,573.31 L 123.55,568.18 L 122.74,562.62 L 117.87,561.10 L 108.25,564.70 L 106.44,566.10 L 106.06,559.08 L 110.87,552.37 L 105.69,546.55 L 90.20,550.16 L 85.57,548.70 L 88.07,539.85 L 92.01,535.17 L 85.45,530.17 L 86.70,527.20 L 85.95,521.38 L 78.95,518.09 L 77.52,522.77 L 74.14,522.39 L 64.96,525.87 L 59.78,523.72 L 59.15,519.42 L 55.59,511.71 L 55.03,500.01 L 56.09,497.98 L 62.09,495.45 L 64.84,492.54 L 68.15,484.95 L 67.15,481.66 L 73.71,473.38 L 77.02,470.66 L 80.45,468.70 L 84.70,474.52 L 86.26,472.81 L 90.45,476.16 L 97.25,472.24 L 105.56,475.85 L 107.06,471.42 L 112.06,471.10 L 118.87,476.61 L 125.55,476.29 L 128.30,472.68 L 130.17,465.03 L 135.92,467.37 L 141.73,467.56 L 143.66,470.09 L 150.60,470.28 Z" },
   { name: "Putumayo", d: "M 149.10,580.77 L 154.66,580.58 L 158.78,587.03 L 165.77,592.03 L 171.96,590.00 L 176.96,594.43 L 182.89,597.08 L 187.20,595.57 L 191.32,598.92 L 193.88,604.04 L 192.45,605.88 L 194.44,610.30 L 202.75,610.05 L 206.25,622.26 L 209.94,622.07 L 212.37,623.84 L 217.87,624.09 L 220.87,626.56 L 221.68,632.00 L 219.55,632.88 L 227.86,640.91 L 233.05,638.57 L 237.54,640.22 L 240.67,644.83 L 247.48,648.06 L 249.91,646.79 L 255.53,652.30 L 263.59,655.08 L 235.61,662.99 L 228.05,658.37 L 226.11,654.95 L 218.43,652.61 L 215.81,645.40 L 211.87,647.17 L 208.12,646.42 L 200.94,639.58 L 194.13,637.06 L 190.38,641.23 L 184.45,639.96 L 175.39,636.30 L 172.15,632.44 L 166.71,633.13 L 162.53,630.54 L 155.72,624.47 L 152.91,619.54 L 146.66,615.87 L 143.23,615.74 L 137.48,612.64 L 136.23,615.11 L 132.42,615.43 L 132.42,622.45 L 123.61,623.52 L 121.86,621.69 L 116.05,620.04 L 110.12,622.51 L 98.32,620.11 L 96.63,615.74 L 97.82,613.02 L 95.75,607.96 L 95.88,604.04 L 92.88,602.59 L 96.44,588.80 L 101.00,583.99 L 98.13,580.58 L 97.88,574.38 L 103.37,572.36 L 106.44,566.10 L 108.25,564.70 L 117.87,561.10 L 122.74,562.62 L 123.55,568.18 L 125.86,573.31 L 124.74,580.01 L 125.67,581.84 L 131.86,585.76 L 132.98,584.75 L 142.54,584.82 L 144.97,582.22 L 149.10,580.77 Z" },
   { name: "Valle del Cauca", d: "M 168.02,394.26 L 168.40,397.11 L 162.34,396.79 L 160.22,399.64 L 159.15,408.68 L 163.46,410.45 L 164.28,415.64 L 162.46,418.99 L 161.59,425.50 L 166.09,426.71 L 163.28,434.17 L 160.47,437.08 L 157.40,443.97 L 155.72,445.24 L 153.78,450.61 L 154.22,453.14 L 152.03,456.81 L 150.28,463.58 L 151.47,466.30 L 150.60,470.28 L 143.66,470.09 L 141.73,467.56 L 135.92,467.37 L 130.17,465.03 L 128.30,472.68 L 125.55,476.29 L 118.87,476.61 L 112.06,471.10 L 107.06,471.42 L 105.56,475.85 L 97.25,472.24 L 90.45,476.16 L 86.26,472.81 L 84.70,474.52 L 80.45,468.70 L 77.02,470.66 L 74.33,469.90 L 77.89,465.22 L 85.20,458.83 L 83.70,457.00 L 87.07,452.57 L 90.76,451.94 L 93.01,448.27 L 92.32,443.59 L 93.19,439.23 L 87.95,438.72 L 86.20,433.22 L 91.57,430.18 L 90.01,426.39 L 86.39,429.17 L 84.07,434.42 L 79.45,428.67 L 84.39,420.57 L 86.76,422.22 L 94.32,421.33 L 99.88,425.82 L 102.69,424.49 L 106.75,425.76 L 109.18,428.98 L 118.68,432.46 L 123.36,431.01 L 127.99,427.40 L 130.73,421.71 L 126.55,415.95 L 124.74,411.78 L 133.73,406.09 L 138.85,394.33 L 137.48,392.36 L 142.66,388.32 L 146.04,387.87 L 148.91,382.37 L 149.47,377.25 L 154.03,386.04 L 156.72,389.39 L 164.09,394.01 L 168.02,394.26 Z" },
@@ -56,13 +56,73 @@ const DEPARTMENTS = [
   { name: "Atlántico", d: "M 209.00,111.56 L 206.25,107.89 L 200.25,103.47 L 198.01,104.16 L 192.13,97.96 L 193.07,92.34 L 191.70,87.59 L 193.01,83.92 L 202.19,78.61 L 204.19,74.50 L 212.00,68.11 L 216.49,73.74 L 218.68,78.36 L 217.93,96.38 L 214.18,100.24 L 213.25,103.53 L 209.00,111.56 Z" }
 ];
 
-export default function MapaAlcanceASCEP() {
+type DeptInfo = {
+  capital: string;
+  dato?: string;
+};
+
+const DEPT_INFO: Record<string, DeptInfo> = {
+  "Caquetá": { capital: "Florencia" },
+  "Cauca": { capital: "Popayán" },
+  "Putumayo": { capital: "Mocoa" },
+  "Valle del Cauca": { capital: "Cali", dato: "4.594 procesos de restablecimiento sin actualizar en el SIM" },
+  "Guainía": { capital: "Inírida" },
+  "Vichada": { capital: "Puerto Carreño" },
+  "Casanare": { capital: "Yopal" },
+  "Amazonas": { capital: "Leticia" },
+  "Vaupés": { capital: "Mitú" },
+  "Guaviare": { capital: "San José del Guaviare" },
+  "Caldas": { capital: "Manizales" },
+  "Quindio": { capital: "Armenia" },
+  "Risaralda": { capital: "Pereira" },
+  "Antioquia": { capital: "Medellín", dato: "1.401 procesos de restablecimiento sin actualizar en el SIM" },
+  "Chocó": { capital: "Quibdó" },
+  "Nariño": { capital: "Pasto" },
+  "Córdoba": { capital: "Montería" },
+  "Bolívar": { capital: "Cartagena" },
+  "Cesar": { capital: "Valledupar" },
+  "La Guajira": { capital: "Riohacha" },
+  "Magdalena": { capital: "Santa Marta" },
+  "Sucre": { capital: "Sincelejo" },
+  "Arauca": { capital: "Arauca" },
+  "Boyacá": { capital: "Tunja" },
+  "Cundinamarca": { capital: "Bogotá D.C." },
+  "Norte de Santander": { capital: "Cúcuta" },
+  "Bogotá, D.C.": { capital: "Bogotá D.C.", dato: "7.963 procesos de restablecimiento sin actualizar en el SIM" },
+  "Meta": { capital: "Villavicencio" },
+  "Huila": { capital: "Neiva" },
+  "Santander": { capital: "Bucaramanga" },
+  "Tolima": { capital: "Ibagué" },
+  "Atlántico": { capital: "Barranquilla" },
+};
+
+interface MapaAlcanceASCEPProps {
+  baseColor?: string;
+  activeColor?: string;
+  pinColor?: string;
+  labelColor?: string;
+  legendTitle?: string;
+  legendDesc?: string;
+  hideLegend?: boolean;
+}
+
+export default function MapaAlcanceASCEP({
+  baseColor = "#019E9F",
+  activeColor = "#005C5D",
+  pinColor = "#EC6620",
+  labelColor = "#FFFFFF",
+  legendTitle = "Sede principal — Cali, Valle del Cauca",
+  legendDesc = "Territorio nacional — marco de incidencia y política pública de ASCEP",
+  hideLegend = false,
+}: MapaAlcanceASCEPProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [activeDept, setActiveDept] = useState<string | null>(null);
   const [caliOpen, setCaliOpen] = useState(false);
+  const [tip, setTip] = useState<{ dept: string; x: number; y: number; flip: boolean } | null>(null);
 
   const mapBottom = MAP_OFFSET_Y + 850;
-  const legendY = mapBottom + 40;
-  const svgH = legendY + 70;
+  const legendY = hideLegend ? mapBottom + 16 : mapBottom + 40;
+  const svgH = hideLegend ? mapBottom + 40 : legendY + 70;
 
   const tipX = CALI.x + 24;
   const tipY = CALI.y - 90;
@@ -71,16 +131,38 @@ export default function MapaAlcanceASCEP() {
 
   const toggleCali = () => setCaliOpen((v) => !v);
 
+  const handleDeptMove = (e: MouseEvent<SVGPathElement>, dept: string) => {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setTip({ dept, x, y, flip: x > rect.width - 260 });
+  };
+
+  const handleDeptLeave = () => {
+    setTip(null);
+    setActiveDept(null);
+  };
+
   return (
-    <div style={{ maxWidth: 700, margin: "0 auto", fontFamily: "var(--font-inter), Inter, sans-serif" }}>
+    <div
+      ref={containerRef}
+      style={{
+        position: "relative",
+        maxWidth: 700,
+        margin: "0 auto",
+        fontFamily: "var(--font-inter), Inter, sans-serif",
+        "--map-focus": activeColor,
+      } as CSSProperties}
+    >
       <svg
         viewBox={`0 0 ${SVG_W} ${svgH}`}
         xmlns="http://www.w3.org/2000/svg"
         role="img"
-        aria-labelledby="map-title map-desc"
+        aria-label="Mapa de alcance nacional de ASCEP"
+        aria-describedby="map-desc"
         style={{ width: "100%", height: "auto", display: "block", overflow: "visible" }}
       >
-        <title id="map-title">Mapa de alcance nacional de ASCEP</title>
         <desc id="map-desc">
           Mapa de Colombia con la sede de ASCEP marcada en Cali. Pasa el
           cursor sobre cada departamento o sobre el punto para ver el detalle.
@@ -92,7 +174,7 @@ export default function MapaAlcanceASCEP() {
           textAnchor="middle"
           fontWeight="800"
           fontSize="20"
-          fill="#FFFFFF"
+          fill={labelColor}
           style={{
             opacity: activeDept ? 1 : 0,
             transition: "opacity .15s ease",
@@ -108,12 +190,13 @@ export default function MapaAlcanceASCEP() {
               d={dept.d}
               transform={`translate(${MAP_OFFSET_X},${MAP_OFFSET_Y})`}
               onMouseEnter={() => setActiveDept(dept.name)}
-              onMouseLeave={() => setActiveDept(null)}
+              onMouseMove={(e) => handleDeptMove(e, dept.name)}
+              onMouseLeave={handleDeptLeave}
               onClick={() =>
                 setActiveDept((prev) => (prev === dept.name ? null : dept.name))
               }
               style={{
-                fill: activeDept === dept.name ? "#005C5D" : "#019E9F",
+                fill: activeDept === dept.name ? activeColor : baseColor,
                 stroke: "#FFFFFF",
                 strokeWidth: 1.1,
                 transition: "fill .15s ease",
@@ -143,7 +226,7 @@ export default function MapaAlcanceASCEP() {
             cx={CALI.x}
             cy={CALI.y}
             r="9"
-            fill="#EC6620"
+            fill={pinColor}
             opacity="0.35"
             style={{
               transformBox: "fill-box",
@@ -151,7 +234,7 @@ export default function MapaAlcanceASCEP() {
               animation: "ascep-ping 2.2s ease-out infinite",
             }}
           />
-          <circle cx={CALI.x} cy={CALI.y} r="9" fill="#EC6620" stroke="#FFFFFF" strokeWidth="2.5" />
+          <circle cx={CALI.x} cy={CALI.y} r="9" fill={pinColor} stroke="#FFFFFF" strokeWidth="2.5" />
 
           <g
             style={{
@@ -175,15 +258,41 @@ export default function MapaAlcanceASCEP() {
           </g>
         </g>
 
-        <circle cx="40" cy={legendY + 5} r="8" fill="#EC6620" />
-        <text x="60" y={legendY + 11} fontWeight="700" fontSize="17" fill="#FFFFFF">
-          Sede principal — Cali, Valle del Cauca
-        </text>
-        <rect x="32" y={legendY + 35} width="16" height="16" rx="3" fill="#019E9F" />
-        <text x="60" y={legendY + 48} fontWeight="700" fontSize="17" fill="#FFFFFF">
-          Territorio nacional — marco de incidencia y política pública de ASCEP
-        </text>
+        {!hideLegend && (
+          <>
+            <circle cx="40" cy={legendY + 5} r="8" fill={pinColor} />
+            <text x="60" y={legendY + 11} fontWeight="700" fontSize="17" fill={labelColor}>
+              {legendTitle}
+            </text>
+            <rect x="32" y={legendY + 35} width="16" height="16" rx="3" fill={baseColor} />
+            <text x="60" y={legendY + 48} fontWeight="700" fontSize="17" fill={labelColor}>
+              {legendDesc}
+            </text>
+          </>
+        )}
       </svg>
+
+      {tip && (
+        <div
+          role="tooltip"
+          className="map-floating-tip"
+          style={{
+            left: tip.x,
+            top: tip.y,
+            transform: tip.flip
+              ? "translate(calc(-100% - 16px), -50%)"
+              : "translate(16px, -50%)",
+          }}
+        >
+          <div className="map-floating-tip-name">{tip.dept}</div>
+          <div className="map-floating-tip-sub">
+            {DEPT_INFO[tip.dept]?.capital ?? ""}
+          </div>
+          {DEPT_INFO[tip.dept]?.dato && (
+            <div className="map-floating-tip-dato">{DEPT_INFO[tip.dept].dato}</div>
+          )}
+        </div>
+      )}
 
       <style>{`
         @keyframes ascep-ping {
@@ -194,7 +303,29 @@ export default function MapaAlcanceASCEP() {
         @media (prefers-reduced-motion: reduce) {
           .ascep-map-ping { animation: none; }
         }
-        .ascep-map-focus:focus-visible { outline: 2px solid #005C5D; outline-offset: 2px; }
+        .ascep-map-focus:focus-visible { outline: 2px solid var(--map-focus, #005C5D); outline-offset: 2px; }
+        .map-floating-tip {
+          position: absolute;
+          z-index: 40;
+          pointer-events: none;
+          max-width: 260px;
+          padding: 10px 14px;
+          border-radius: 12px;
+          background: var(--color-bg-card);
+          border: 1px solid var(--color-border-default);
+          box-shadow: 0 10px 28px rgba(0, 0, 0, 0.16);
+          font-size: 13px;
+          line-height: 1.4;
+        }
+        .map-floating-tip-name { font-weight: 800; color: var(--color-text-primary); }
+        .map-floating-tip-sub { font-size: 12px; color: var(--color-text-secondary); }
+        .map-floating-tip-dato {
+          margin-top: 5px;
+          padding-top: 5px;
+          border-top: 1px solid var(--color-border-subtle);
+          font-size: 11px;
+          color: var(--color-text-muted);
+        }
       `}</style>
     </div>
   );

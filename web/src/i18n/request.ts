@@ -36,7 +36,7 @@ function deepMerge<T>(base: JsonObject | undefined, override: JsonObject | undef
 
 export default getRequestConfig(async ({ requestLocale }) => {
   const locale = await requestLocale;
-  const resolved = locale || "es";
+  const resolved = locale && ["es", "en", "pt"].includes(locale) ? locale : "es";
 
   let messages: Record<string, unknown> = es as unknown as Record<string, unknown>;
   if (resolved !== "es") {
