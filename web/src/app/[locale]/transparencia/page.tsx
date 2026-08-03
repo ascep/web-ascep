@@ -89,6 +89,7 @@ export default async function TransparenciaPage({
   const seen = new Set<string>();
   const normalize = (s: string) =>
     s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+  const EXCLUDED_TITLES = new Set([normalize("Informe Integrado ASCEP 2018")]);
   for (const d of [...curated, ...filtered.map((c) => ({
     id: c._id,
     category: c.category || DEFAULT_DOC_CATEGORY,
@@ -98,6 +99,7 @@ export default async function TransparenciaPage({
     updatedAt: c._updatedAt,
   }))]) {
     const key = normalize(d.title);
+    if (EXCLUDED_TITLES.has(key)) continue;
     if (seen.has(key)) continue;
     seen.add(key);
     docs.push(d);

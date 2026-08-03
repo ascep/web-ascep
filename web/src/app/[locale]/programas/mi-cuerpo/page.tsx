@@ -72,18 +72,33 @@ export default async function MiCuerpoPage({
   const t = await getTranslations({ locale, namespace: "programas" });
   const cms = await getProgramBySlug("mi-cuerpo");
 
-  const [revistas, videos] = await Promise.all([
+  const [revistas, informes, videos] = await Promise.all([
     getDocumentsByCategory("revistas"),
+    getDocumentsByCategory("informes"),
     getVideos(locale),
   ]);
 
-  const revistasList = revistas.length > 0
-    ? revistas.map((r) => ({
-        title: localize(r.title, locale) || "Revista",
-        href: r.externalUrl || fileUrl(r.file) || "#",
-        cover: imageUrl(r.previewImage, 240, 320) || undefined,
-      }))
-    : localRevistas;
+  const informeIntegrado = informes.find((r) =>
+    /informe integrado/i.test(localize(r.title, locale) || localize(r.title, "es") || ""),
+  );
+  const informeItem = informeIntegrado
+    ? [{
+        title: localize(informeIntegrado.title, locale) || "Informe Integrado ASCEP 2018",
+        href: informeIntegrado.externalUrl || fileUrl(informeIntegrado.file) || "#",
+        cover: imageUrl(informeIntegrado.previewImage, 240, 320) || undefined,
+      }]
+    : [];
+
+  const revistasList = [
+    ...informeItem,
+    ...(revistas.length > 0
+      ? revistas.map((r) => ({
+          title: localize(r.title, locale) || "Revista",
+          href: r.externalUrl || fileUrl(r.file) || "#",
+          cover: imageUrl(r.previewImage, 240, 320) || undefined,
+        }))
+      : localRevistas),
+  ];
 
   const videoTabs = [
     { id: "testimonios", label: t("videoTabTestimonios") },
