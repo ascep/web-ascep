@@ -783,7 +783,18 @@
     "heroSubtitle": "En ASCEP creemos firmemente en la transparencia como pilar fundamental de nuestra gestión. Aquí encontrarás nuestros documentos legales, informes financieros, políticas institucionales y todo el marco normativo que rige nuestra actuación.",
     "bannerDesc": "En ASCEP creemos en la transparencia como pilar fundamental. Todos nuestros documentos están disponibles para consulta pública.",
     "documentoCount": "documento",
-    "documentosCount": "documentos"
+    "documentosCount": "documentos",
+    "docsTag": "Documentos oficiales",
+    "docsTitle": "Rendición de cuentas",
+    "docsDesc": "Todos los documentos legales, financieros, de gestión y de política institucional de ASCEP están disponibles para consulta pública.",
+    "catFinancieros": "Estados Financieros",
+    "catFinancierosDesc": "Información financiera y rendición de cuentas de la organización.",
+    "catInformes": "Informes de Gestión",
+    "catInformesDesc": "Reportes anuales de actividades y logros alcanzados.",
+    "catRegistros": "Registro y Políticas",
+    "catRegistrosDesc": "Registros oficiales y políticas institucionales de la asociación.",
+    "catLegales": "Marco Legal",
+    "catLegalesDesc": "Documentos legales, estatutos y régimen de la organización."
   },
   "contacto": {
     "heroTag": "Comunicate",

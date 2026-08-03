@@ -762,7 +762,18 @@
     "heroSubtitle": "We are committed to transparency and accountability in all our operations and the management of resources entrusted to us.",
     "bannerDesc": "We publish our financial reports, institutional documents, and organizational information for public access.",
     "documentoCount": "document",
-    "documentosCount": "documents"
+    "documentosCount": "documents",
+    "docsTag": "Official documents",
+    "docsTitle": "Accountability",
+    "docsDesc": "All of ASCEP's legal, financial, management, and institutional policy documents are available for public review.",
+    "catFinancieros": "Financial Statements",
+    "catFinancierosDesc": "Financial information and accountability of the organization.",
+    "catInformes": "Management Reports",
+    "catInformesDesc": "Annual reports of activities and achievements.",
+    "catRegistros": "Registration and Policies",
+    "catRegistrosDesc": "Official records and institutional policies of the association.",
+    "catLegales": "Legal Framework",
+    "catLegalesDesc": "Legal documents, bylaws, and the organization's regime."
   },
   "contacto": {
     "heroTag": "CONTACT",

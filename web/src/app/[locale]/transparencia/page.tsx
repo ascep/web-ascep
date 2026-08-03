@@ -1,16 +1,15 @@
 import { getTranslations } from "next-intl/server";
-import type { CSSProperties } from "react";
+import type { CSSProperties, ElementType } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import PageHero from "@/components/PageHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
-import { FileText, DollarSign, BarChart3, FileBadge, Scale, FileCheck, Download } from "lucide-react";
-import { assetPath } from "@/lib/asset-path"
+import { FileText, DollarSign, BarChart3, FileBadge, Scale, Download } from "lucide-react";
+import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { getDocuments, sanityImage } from "@/lib/sanity/fetch";
+import { getDocuments, type DocumentEntry } from "@/lib/sanity/fetch";
 import { fileUrl } from "@/lib/sanity/image";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -25,88 +24,42 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const categoryConfig: Record<string, { icon: React.ElementType; iconBg: string; iconColor: string; title: string; desc: string }> = {
-  institucionales: { icon: FileText, iconBg: "bg-brand-purple/10", iconColor: "text-brand-purple", title: "Institucional", desc: "Conoce nuestra historia, mision y el marco estrategico de la organizacion." },
-  financieros: { icon: DollarSign, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange", title: "Estados Financieros", desc: "Informacion financiera y rendicion de cuentas de la organizacion." },
-  informes: { icon: BarChart3, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange", title: "Informes de Gestion", desc: "Reportes anuales de actividades y logros alcanzados." },
-  registros: { icon: FileBadge, iconBg: "bg-brand-purple/10", iconColor: "text-brand-purple", title: "Registro y Politicas", desc: "Registros oficiales y politicas institucionales de la asociacion." },
-  legales: { icon: Scale, iconBg: "bg-brand-teal/10", iconColor: "text-brand-teal", title: "Marco Legal", desc: "Documentos legales, estatutos y regimen de la organizacion." },
-  cartillas: { icon: FileCheck, iconBg: "bg-brand-teal/10", iconColor: "text-brand-teal", title: "Cartillas y Materiales", desc: "Materiales pedagogicos y herramientas de formacion." },
-  revistas: { icon: FileText, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange", title: "Revistas", desc: "Publicaciones periodicas de la organizacion." },
+const CATEGORY_ORDER = ["financieros", "informes", "registros", "legales"] as const;
+
+const categoryMeta: Record<
+  string,
+  { icon: ElementType; iconBg: string; iconColor: string; titleKey: string; descKey: string }
+> = {
+  financieros: { icon: DollarSign, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange", titleKey: "catFinancieros", descKey: "catFinancierosDesc" },
+  informes: { icon: BarChart3, iconBg: "bg-brand-orange/10", iconColor: "text-brand-orange", titleKey: "catInformes", descKey: "catInformesDesc" },
+  registros: { icon: FileBadge, iconBg: "bg-brand-purple/10", iconColor: "text-brand-purple", titleKey: "catRegistros", descKey: "catRegistrosDesc" },
+  legales: { icon: Scale, iconBg: "bg-brand-teal/10", iconColor: "text-brand-teal", titleKey: "catLegales", descKey: "catLegalesDesc" },
 };
 
-function pdfThumbPath(pdfPath: string): string {
-  const base = pdfPath.split("/").pop()?.replace(/\.pdf$/i, "") || "";
-  const slug = base.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
-  return `/images/pdf-previews/${slug}.jpg`;
-}
+type FallbackFile = { name: string; path: string };
 
-const fallbackDocuments = [
-  {
-    title: "Nuestro Desafio",
-    desc: "Conoce los retos y desafios que enfrentamos como organizacion en la transformacion del sistema de proteccion estatal.",
-    files: [{ name: "Presentacion Institucional", path: "/documents/Presentacion.pdf" }],
-    icon: FileText,
-    iconBg: "bg-brand-purple/10",
-    iconColor: "text-brand-purple",
-  },
-  {
-    title: "Documento Base",
-    desc: "Marco estrategico de la Asociacion de Egresados del Sistema de Proteccion Estatal.",
-    files: [{ name: "Documento Base ASCEP", path: "/documents/DOCUMENTO BASE ASOCIACIÓN.docx.pdf" }],
-    icon: FileCheck,
-    iconBg: "bg-brand-teal/10",
-    iconColor: "text-brand-teal",
-  },
-  {
-    title: "Estados Financieros",
-    desc: "Informacion financiera y rendicion de cuentas de la organizacion.",
-    files: [
-      { name: "Estados Financieros 2023", path: "/documents/3.Estados_Financieros_2023_ASCEP.pdf" },
-      { name: "Estados Financieros 2024", path: "/documents/3.Estados-Financieros-2024_ASCEP_firmados.pdf" },
-    ],
-    icon: DollarSign,
-    iconBg: "bg-brand-orange/10",
-    iconColor: "text-brand-orange",
-  },
-  {
-    title: "Informes de Gestion",
-    desc: "Reportes anuales de actividades y logros alcanzados.",
-    files: [
-      { name: "Informe de Gestion 2023", path: "/documents/2.Informe_de_Gestion_2023.pdf" },
-      { name: "Informe de Gestion 2024", path: "/documents/2.Informe-de-Gestion-2024-ASCEP_Maicol-Londono.pdf" },
-    ],
-    icon: BarChart3,
-    iconBg: "bg-brand-orange/10",
-    iconColor: "text-brand-orange",
-  },
-  {
-    title: "Registro y Politicas",
-    desc: "Registros oficiales y politicas institucionales de la asociacion.",
-    files: [
-      { name: "Registro Web 2024", path: "/documents/1.Registro_Web_2024.pdf" },
-      { name: "Registro Web 2025", path: "/documents/1.Registro_WEB_2025.pdf" },
-    ],
-    icon: FileBadge,
-    iconBg: "bg-brand-purple/10",
-    iconColor: "text-brand-purple",
-  },
-  {
-    title: "Marco Legal",
-    desc: "Documentos legales, estatutos y regimen de la organizacion.",
-    files: [
-      { name: "RUT ASCEP", path: "/documents/4.RUT_ASCEP.pdf" },
-      { name: "Declaracion de Renta 2023", path: "/documents/5.Declaracion_Renta_2023.pdf" },
-      { name: "Certificado Requisitos", path: "/documents/6.Certificado_requisitos.pdf" },
-      { name: "Certificado Cargos Directivos", path: "/documents/7.Certificado_cargos_directivos-y-gerenciales.pdf" },
-      { name: "Certificado Antecedentes Judiciales", path: "/documents/8.Certificado_antecedentes_judiciales.pdf" },
-      { name: "Formato 2530-2531", path: "/documents/9.Formato_2530_2531.pdf" },
-    ],
-    icon: Scale,
-    iconBg: "bg-brand-teal/10",
-    iconColor: "text-brand-teal",
-  },
-];
+const fallbackDocuments: Record<string, FallbackFile[]> = {
+  financieros: [
+    { name: "Estados Financieros 2023", path: "/documents/3.Estados_Financieros_2023_ASCEP.pdf" },
+    { name: "Estados Financieros 2024", path: "/documents/3.Estados-Financieros-2024_ASCEP_firmados.pdf" },
+  ],
+  informes: [
+    { name: "Informe de Gestion 2023", path: "/documents/2.Informe_de_Gestion_2023.pdf" },
+    { name: "Informe de Gestion 2024", path: "/documents/2.Informe-de-Gestion-2024-ASCEP_Maicol-Londono.pdf" },
+  ],
+  registros: [
+    { name: "Registro Web 2024", path: "/documents/1.Registro_Web_2024.pdf" },
+    { name: "Registro Web 2025", path: "/documents/1.Registro_WEB_2025.pdf" },
+  ],
+  legales: [
+    { name: "RUT ASCEP", path: "/documents/4.RUT_ASCEP.pdf" },
+    { name: "Declaracion de Renta 2023", path: "/documents/5.Declaracion_Renta_2023.pdf" },
+    { name: "Certificado Requisitos", path: "/documents/6.Certificado_requisitos.pdf" },
+    { name: "Certificado Cargos Directivos", path: "/documents/7.Certificado_cargos_directivos-y-gerenciales.pdf" },
+    { name: "Certificado Antecedentes Judiciales", path: "/documents/8.Certificado_antecedentes_judiciales.pdf" },
+    { name: "Formato 2530-2531", path: "/documents/9.Formato_2530_2531.pdf" },
+  ],
+};
 
 export default async function TransparenciaPage({
   params,
@@ -118,36 +71,36 @@ export default async function TransparenciaPage({
   const t = await getTranslations({ locale, namespace: "transparencia" });
 
   const cmsDocs = await getDocuments();
-  const documents = cmsDocs.length > 0
-    ? (() => {
-        const grouped: Record<string, { entries: typeof cmsDocs; config: typeof categoryConfig[keyof typeof categoryConfig] }> = {};
-        for (const doc of cmsDocs) {
-          const cat = doc.category || "institucionales";
-          if (!grouped[cat]) {
-            grouped[cat] = { entries: [], config: categoryConfig[cat] || categoryConfig.institucionales };
-          }
-          grouped[cat].entries.push(doc);
-        }
-        return Object.entries(grouped).map(([, group]) => {
-          const config = group.config;
-          return {
-            title: config.title,
-            desc: config.desc,
-            files: group.entries.map((d) => ({
-              name: d.title?.es || "Documento",
-              path: d.externalUrl || fileUrl(d.file) || "#",
-              preview: d.previewImage ? sanityImage(d.previewImage) : null,
-            })),
-            icon: config.icon,
-            iconBg: config.iconBg,
-            iconColor: config.iconColor,
-          };
-        });
-      })()
-    : fallbackDocuments.map((d) => ({
-        ...d,
-        files: d.files.map((f) => ({ ...f, preview: pdfThumbPath(f.path) })),
-      }));
+  const grouped: Record<string, DocumentEntry[]> = {};
+  for (const doc of cmsDocs) {
+    const cat = doc.category || "institucionales";
+    if (!(CATEGORY_ORDER as readonly string[]).includes(cat)) continue;
+    (grouped[cat] ??= []).push(doc);
+  }
+
+  const hasCms = Object.keys(grouped).length > 0;
+
+  const categories = CATEGORY_ORDER.filter(
+    (cat) =>
+      hasCms ? (grouped[cat]?.length ?? 0) > 0 : (fallbackDocuments[cat]?.length ?? 0) > 0,
+  ).map((cat) => {
+    const meta = categoryMeta[cat];
+    const files = hasCms
+      ? grouped[cat].map((d) => ({
+          name: d.title?.es || "Documento",
+          path: d.externalUrl || fileUrl(d.file) || "#",
+        }))
+      : fallbackDocuments[cat];
+    return {
+      cat,
+      title: t(meta.titleKey),
+      desc: t(meta.descKey),
+      files,
+      icon: meta.icon,
+      iconBg: meta.iconBg,
+      iconColor: meta.iconColor,
+    };
+  });
 
   return (
     <div>
@@ -160,12 +113,15 @@ export default async function TransparenciaPage({
         subtitle={t("heroSubtitle")}
       />
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.transparencia.section)})` } as CSSProperties}>
+      <section
+        className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.transparencia.section)})` } as CSSProperties}
+      >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection direction="up">
-            <div className="relative mb-12 overflow-hidden rounded-[10px]">
+            <div className="relative overflow-hidden rounded-[10px]">
               <ImageParallax
                 src={assetPath(fotos.transparencia.section)}
                 alt=""
@@ -182,71 +138,67 @@ export default async function TransparenciaPage({
               </div>
             </div>
           </AnimatedSection>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {documents.map((doc, i) => {
+        </div>
+      </section>
+
+      <section className="bg-section-light py-20 sm:py-24">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection direction="up">
+            <div className="mx-auto mb-12 max-w-2xl text-center">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-purple">
+                {t("docsTag")}
+              </p>
+              <h2 className="text-3xl font-bold leading-tight text-text-primary sm:text-4xl">
+                {t("docsTitle")}
+              </h2>
+              <p className="mt-4 text-base leading-relaxed text-text-secondary sm:text-lg">
+                {t("docsDesc")}
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="space-y-8">
+            {categories.map((doc, i) => {
               const Icon = doc.icon;
-              const previewFile = doc.files[0];
               return (
-                <AnimatedSection key={doc.title} direction="up" delay={i * 0.06}>
-                  <div className="glass-card flex flex-col overflow-hidden rounded-[10px] transition-all hover:bg-white/15">
-                    <Link
-                      href={assetPath(previewFile.path)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative block h-[200px] overflow-hidden bg-zinc-100"
-                    >
-                      {previewFile.preview ? (
-                        <Image
-                          src={previewFile.preview}
-                          alt={previewFile.name}
-                          fill
-                          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                          className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
-                        />
-                      ) : (
-                        <iframe
-                          src={assetPath(previewFile.path)}
-                          className="h-full w-full transition-transform duration-300 group-hover:scale-[1.02]"
-                          title={previewFile.name}
-                        />
-                      )}
-                      <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/30">
-                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
-                          <Download size={20} className="text-brand-purple" />
+                <AnimatedSection key={doc.cat} direction="up" delay={i * 0.05}>
+                  <div className="rounded-[10px] border border-border-default bg-white/80 p-6 shadow-sm sm:p-8">
+                    <div className="mb-5 flex items-start gap-4">
+                      <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] ${doc.iconBg}`}>
+                        <Icon size={22} className={doc.iconColor} />
+                      </span>
+                      <div className="min-w-0">
+                        <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+                          <h3 className="text-xl font-bold text-text-primary">{doc.title}</h3>
+                          <span className="text-xs font-medium text-text-muted">
+                            {doc.files.length} {doc.files.length === 1 ? t("documentoCount") : t("documentosCount")}
+                          </span>
                         </div>
+                        <p className="mt-1 text-sm leading-relaxed text-text-muted">{doc.desc}</p>
                       </div>
-                    </Link>
-                    <div className="flex flex-1 flex-col p-5">
-                      <div className="mb-3 flex items-center gap-3">
-                        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] ${doc.iconBg}`}>
-                          <Icon size={18} className={doc.iconColor} />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-[var(--color-text-primary)]">{doc.title}</h4>
-                          <p className="text-xs text-[var(--color-text-muted)]">
-                            {doc.files.length} {doc.files.length === 1 ? "documento" : "documentos"}
-                          </p>
-                        </div>
-                      </div>
-                      <p className="mb-4 text-xs leading-relaxed text-[var(--color-text-muted)]">
-                        {doc.desc}
-                      </p>
-                      <ul className="mt-auto space-y-1.5">
-                        {doc.files.map((file) => (
-                          <li key={file.path}>
-                            <Link
-                              href={assetPath(file.path)}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="flex items-center justify-between gap-2 rounded-[8px] bg-white/10 px-3 py-2 text-xs font-medium text-[var(--color-text-primary)] transition-colors hover:bg-white/20"
-                            >
-                              <span className="truncate">{file.name}</span>
-                              <Download size={14} className="shrink-0 text-brand-secondary" />
-                            </Link>
-                          </li>
-                        ))}
-                      </ul>
                     </div>
+                    <ul className="space-y-3">
+                      {doc.files.map((file) => (
+                        <li key={file.path}>
+                          <Link
+                            href={assetPath(file.path)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="group flex items-center justify-between gap-4 rounded-[10px] border border-border-default bg-white px-4 py-3 transition-all hover:border-brand-teal hover:shadow-md"
+                          >
+                            <span className="flex min-w-0 items-center gap-3">
+                              <FileText size={18} className="shrink-0 text-brand-purple" />
+                              <span className="truncate text-sm font-medium text-text-primary transition-colors group-hover:text-brand-purple">
+                                {file.name}
+                              </span>
+                            </span>
+                            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-purple/10 text-brand-purple transition-colors group-hover:bg-brand-purple group-hover:text-white">
+                              <Download size={16} />
+                            </span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                 </AnimatedSection>
               );
@@ -257,6 +209,3 @@ export default async function TransparenciaPage({
     </div>
   );
 }
-
-
-
