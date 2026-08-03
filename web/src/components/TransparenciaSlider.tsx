@@ -5,11 +5,14 @@ import Link from "next/link";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { ChevronLeft, ChevronRight, Download } from "lucide-react";
 import type { TransparenciaDoc } from "@/types/transparencia";
-import { CATEGORY_META } from "@/lib/transparencia-meta";
 
 type TransparenciaSliderProps = {
   docs: TransparenciaDoc[];
-  categories: Record<string, string>;
+  recentTag: string;
+  heroTag: string;
+  heroTitle: string;
+  heroHighlight: string;
+  heroSubtitle: string;
   openDoc: string;
   updatedLabel: string;
   prevLabel: string;
@@ -19,7 +22,11 @@ type TransparenciaSliderProps = {
 
 export default function TransparenciaSlider({
   docs,
-  categories,
+  recentTag,
+  heroTag,
+  heroTitle,
+  heroHighlight,
+  heroSubtitle,
   openDoc,
   updatedLabel,
   prevLabel,
@@ -47,8 +54,6 @@ export default function TransparenciaSlider({
   if (docs.length === 0) return null;
 
   const doc = docs[active];
-  const meta = CATEGORY_META[doc.category] ?? CATEGORY_META.legales;
-  const Icon = meta.icon;
 
   return (
     <div
@@ -60,27 +65,23 @@ export default function TransparenciaSlider({
         <AnimatePresence mode="wait">
           <motion.div
             key={doc.id}
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -24 }}
-            transition={{ duration: prefersReducedMotion ? 0 : 0.5, ease: [0.23, 1, 0.32, 1] }}
-            className="grid items-center gap-8 lg:grid-cols-[minmax(0,340px)_1fr]"
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: prefersReducedMotion ? 0 : 0.4, ease: [0.23, 1, 0.32, 1] }}
+            className="grid items-center gap-8 lg:grid-cols-[240px_1fr] lg:gap-10"
           >
-            <div className="relative mx-auto aspect-[3/4] w-full max-w-[300px] overflow-hidden rounded-[10px] border border-white/20 bg-white/10 shadow-2xl lg:mx-0 lg:max-w-none">
-              <iframe src={doc.path} title={doc.title} className="h-full w-full" />
-            </div>
-            <div className="text-center lg:text-left">
-              <span
-                className={`mb-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold ${meta.iconBg} ${meta.iconColor}`}
-              >
-                <Icon size={12} />
-                {categories[doc.category] ?? doc.category}
-              </span>
-              <h3 className="text-2xl font-bold leading-tight text-white sm:text-3xl">
-                {doc.title}
-              </h3>
+            <div className="mx-auto flex w-full max-w-[240px] flex-col items-center">
+              <p className="mb-4 inline-flex items-center gap-1.5 rounded-full border border-brand-yellow/40 bg-brand-yellow/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.15em] text-brand-yellow">
+                <Download size={11} />
+                {recentTag}
+              </p>
+              <div className="aspect-[3/4] w-full overflow-hidden rounded-[10px] border border-white/20 bg-white/10 shadow-xl">
+                <iframe src={doc.path} title={doc.title} className="h-full w-full" />
+              </div>
+              <p className="mt-3 text-center text-sm font-semibold text-white">{doc.title}</p>
               {doc.updatedAt && (
-                <p className="mt-2 text-sm text-text-muted">
+                <p className="mt-1 text-xs text-text-muted">
                   {updatedLabel}: {new Date(doc.updatedAt).toLocaleDateString()}
                 </p>
               )}
@@ -88,11 +89,23 @@ export default function TransparenciaSlider({
                 href={doc.path}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-6 inline-flex items-center gap-2 rounded-[10px] bg-brand-yellow px-6 py-3 text-sm font-semibold text-brand-purple transition-all hover:shadow-lg hover:brightness-95"
+                className="mt-3 inline-flex items-center gap-2 rounded-[10px] bg-brand-yellow px-5 py-2.5 text-sm font-semibold text-brand-purple transition-all hover:shadow-lg hover:brightness-95"
               >
                 {openDoc}
-                <Download size={16} />
+                <Download size={15} />
               </Link>
+            </div>
+
+            <div className="text-center lg:text-left">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-[0.2em] text-brand-yellow">
+                {heroTag}
+              </p>
+              <h1 className="font-display text-2xl leading-tight font-semibold text-white sm:text-4xl">
+                {heroTitle} <span className="text-brand-yellow">{heroHighlight}</span>
+              </h1>
+              <p className="mt-3 text-sm leading-relaxed text-text-secondary sm:text-base">
+                {heroSubtitle}
+              </p>
             </div>
           </motion.div>
         </AnimatePresence>
@@ -104,7 +117,7 @@ export default function TransparenciaSlider({
             type="button"
             onClick={prev}
             aria-label={prevLabel}
-            className="absolute left-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition-all hover:bg-black/50"
+            className="absolute left-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition-all hover:bg-black/50"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -112,11 +125,11 @@ export default function TransparenciaSlider({
             type="button"
             onClick={next}
             aria-label={nextLabel}
-            className="absolute right-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition-all hover:bg-black/50"
+            className="absolute right-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition-all hover:bg-black/50"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
-          <div className="mt-8 flex items-center justify-center gap-2">
+          <div className="mt-7 flex items-center justify-center gap-1.5">
             {docs.map((d, i) => (
               <button
                 key={d.id}
@@ -124,10 +137,14 @@ export default function TransparenciaSlider({
                 onClick={() => setActive(i)}
                 aria-label={`${dotsLabel} ${i + 1}`}
                 aria-current={i === active}
-                className={`min-h-6 min-w-6 rounded-full p-2 transition-all ${
-                  i === active ? "bg-brand-yellow" : "bg-white/30 hover:bg-white/50"
-                }`}
-              />
+                className="flex min-h-5 min-w-5 items-center justify-center rounded-full p-1"
+              >
+                <span
+                  className={`block h-2 w-2 rounded-full transition-all ${
+                    i === active ? "bg-brand-yellow" : "bg-white/40 hover:bg-white/60"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </>

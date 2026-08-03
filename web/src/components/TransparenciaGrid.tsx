@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Download } from "lucide-react";
 import type { TransparenciaDoc } from "@/types/transparencia";
@@ -72,12 +73,22 @@ export default function TransparenciaGrid({
                   rel="noopener noreferrer"
                   className="group relative block h-56 overflow-hidden bg-zinc-100"
                 >
-                  <iframe
-                    src={doc.path}
-                    title={doc.title}
-                    loading="lazy"
-                    className="h-full w-full transition-transform duration-300 group-hover:scale-[1.02]"
-                  />
+                  {doc.preview ? (
+                    <Image
+                      src={doc.preview}
+                      alt={doc.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover object-top transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  ) : (
+                    <iframe
+                      src={doc.path}
+                      title={doc.title}
+                      loading="lazy"
+                      className="h-full w-full transition-transform duration-300 group-hover:scale-[1.02]"
+                    />
+                  )}
                   <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover:bg-black/25">
                     <span className="flex h-12 w-12 items-center justify-center rounded-full bg-white/90 opacity-0 shadow-lg transition-opacity group-hover:opacity-100">
                       <Download size={20} className="text-brand-purple" />

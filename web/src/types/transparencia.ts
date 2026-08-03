@@ -3,6 +3,7 @@ export type TransparenciaDoc = {
   category: string;
   title: string;
   path: string;
+  preview?: string | null;
   updatedAt?: string;
   priority?: number;
 };
