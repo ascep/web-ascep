@@ -61,7 +61,7 @@ export default function CaminoSection({
       className="section-dark section-bg-image bg-atmospheric-purple relative overflow-hidden py-20 sm:py-24"
       style={{
         "--section-bg-image": `url(${assetPath(bgImage)})`,
-        "--section-bg-position": "center calc(50% + 30px)",
+        "--section-bg-position": "center calc(50% + clamp(160px, 22vw, 280px))",
       } as CSSProperties}
     >
       <div
