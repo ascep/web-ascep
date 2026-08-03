@@ -1,13 +1,11 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import PageHero from "@/components/PageHero";
 import TimelineRoute, { type RouteItem } from "@/components/TimelineRoute";
 import StatsRings, { type RingStat } from "@/components/StatsRings";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
-import ParallaxSection from "@/components/ParallaxSection";
 import TeamFan from "@/components/TeamFan";
 import { getTranslations } from "next-intl/server";
 import {
@@ -22,6 +20,17 @@ import {
   Scale,
   Compass,
   Gavel,
+  Users,
+  SearchCheck,
+  Sparkles,
+  Home,
+  Sprout,
+  GraduationCap,
+  HeartPulse,
+  Briefcase,
+  Megaphone,
+  RefreshCw,
+  ArrowRight,
 } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
@@ -42,16 +51,49 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 const objetivosEstrategicos = [
-  { titleKey: "oe1Title", descKey: "oe1Desc" },
-  { titleKey: "oe2Title", descKey: "oe2Desc" },
-  { titleKey: "oe3Title", descKey: "oe3Desc" },
-  { titleKey: "oe4Title", descKey: "oe4Desc" },
+  {
+    titleKey: "oe1Title",
+    descKey: "oe1Desc",
+    icon: Users,
+    tileClass: "bg-brand-teal/15 text-brand-teal",
+  },
+  {
+    titleKey: "oe2Title",
+    descKey: "oe2Desc",
+    icon: Scale,
+    tileClass: "bg-brand-orange/15 text-brand-orange",
+  },
+  {
+    titleKey: "oe3Title",
+    descKey: "oe3Desc",
+    icon: Wrench,
+    tileClass: "bg-brand-yellow/15 text-brand-yellow",
+  },
+  {
+    titleKey: "oe4Title",
+    descKey: "oe4Desc",
+    icon: SearchCheck,
+    tileClass: "bg-white/15 text-white",
+  },
 ];
 
-const dimensionKeys = [1, 2, 3, 4, 5, 6].map((i) => ({
-  titleKey: `dimensionTitle${i}`,
-  descKey: `dimensionDesc${i}`,
-}));
+const dimensionKeys = [
+  { titleKey: "dimensionTitle1", descKey: "dimensionDesc1", icon: Sparkles, color: "text-brand-primary border-brand-primary/30" },
+  { titleKey: "dimensionTitle2", descKey: "dimensionDesc2", icon: Users, color: "text-brand-teal border-brand-teal/30" },
+  { titleKey: "dimensionTitle3", descKey: "dimensionDesc3", icon: Home, color: "text-brand-orange border-brand-orange/30" },
+  { titleKey: "dimensionTitle4", descKey: "dimensionDesc4", icon: Compass, color: "text-brand-primary-dark border-brand-primary-dark/30" },
+  { titleKey: "dimensionTitle5", descKey: "dimensionDesc5", icon: Target, color: "text-brand-accent-dark border-brand-accent-dark/30" },
+  { titleKey: "dimensionTitle6", descKey: "dimensionDesc6", icon: Sprout, color: "text-brand-teal-dark border-brand-teal-dark/30" },
+];
+
+const areas = [
+  { titleKey: "areaATitle", descKey: "areaADesc", icon: Heart, tileClass: "bg-brand-orange/15 text-brand-orange" },
+  { titleKey: "areaBTitle", descKey: "areaBDesc", icon: GraduationCap, tileClass: "bg-brand-teal/15 text-brand-teal" },
+  { titleKey: "areaCTitle", descKey: "areaCDesc", icon: HeartPulse, tileClass: "bg-brand-yellow/15 text-brand-yellow" },
+  { titleKey: "areaDTitle", descKey: "areaDDesc", icon: Briefcase, tileClass: "bg-brand-primary/15 text-brand-primary" },
+  { titleKey: "areaETitle", descKey: "areaEDesc", icon: Megaphone, tileClass: "bg-brand-secondary/15 text-brand-secondary" },
+  { titleKey: "areaFTitle", descKey: "areaFDesc", icon: RefreshCw, tileClass: "bg-white/15 text-white" },
+];
 
 const comoHacemos = [
   {
@@ -186,16 +228,73 @@ export default async function QuienesSomosPage({
 
   const ods = t.raw("ods") as string[];
 
-  const areasGallery = [fotos.quienesSomos.historiaImage, fotos.quienesSomos.objetivoImage, fotos.quienesSomos.poblacionImage];
-
   return (
     <div className="min-h-screen">
-      <PageHero
-        bgImage={assetPath(fotos.quienesSomos.hero)}
-        tag={t("heroTag")}
-        title={t("heroTitle")}
-        subtitle={t("heroSubtitle")}
-      />
+      {/* HERO */}
+      <section className="relative flex min-h-[85svh] items-center overflow-hidden bg-purple-bg">
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
+        <div className="relative mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center gap-12 lg:flex-row lg:items-center">
+            <div className="flex-1 lg:pr-16">
+              <AnimatedSection direction="up">
+                <span className="mb-4 inline-block rounded-full border border-brand-orange/30 px-5 py-2 text-sm font-bold text-white/80">
+                  {t("heroTag")}
+                </span>
+              </AnimatedSection>
+              <AnimatedSection direction="up" delay={0.1}>
+                <h1 className="mb-6 text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+                  {t("heroTitle")} <span className="text-brand-orange">{t("heroHighlight")}</span>
+                </h1>
+              </AnimatedSection>
+              <AnimatedSection direction="up" delay={0.2}>
+                <p className="mb-8 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
+                  {t("heroSubtitle")}
+                </p>
+              </AnimatedSection>
+              <div className="flex flex-wrap gap-4">
+                <Link
+                  href={`/${locale}/programas`}
+                  className="inline-flex items-center gap-2 rounded-[10px] bg-brand-orange px-7 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-orange/90 hover:shadow-lg"
+                >
+                  {t("heroCtaPrimary")}
+                  <ArrowRight size={16} />
+                </Link>
+                <Link
+                  href={`/${locale}/contacto`}
+                  className="inline-flex items-center rounded-[10px] border-2 border-white/30 px-7 py-3 text-sm font-semibold text-white transition-all hover:border-white/60 hover:bg-white/10"
+                >
+                  {t("heroCtaSecondary")}
+                </Link>
+              </div>
+            </div>
+            <AnimatedSection direction="right" delay={0.15} className="w-full flex-1">
+              <div className="relative mx-auto max-w-lg">
+                <div className="absolute -right-4 -top-4 h-32 w-32 rounded-full border-8 border-brand-teal/30" aria-hidden="true" />
+                <div className="absolute -bottom-4 -left-4 h-24 w-24 rounded-full border-8 border-brand-orange/20" aria-hidden="true" />
+                <ImageParallax
+                  src={assetPath(fotos.quienesSomos.hero)}
+                  alt={t("heroTitle")}
+                  width={640}
+                  height={480}
+                  className="w-full rounded-[10px] border border-white/10 object-cover shadow-2xl"
+                  style={{ aspectRatio: "4/3" }}
+                  priority
+                  intensity={0.2}
+                />
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0" aria-hidden="true">
+          <svg viewBox="0 0 1440 60" preserveAspectRatio="none" className="h-12 w-full sm:h-16">
+            <path
+              d="M0,30 C360,60 720,0 1080,30 C1260,45 1350,30 1440,30 L1440,60 L0,60 Z"
+              fill="var(--color-bg-surface)"
+            />
+          </svg>
+        </div>
+      </section>
 
       {/* Hitos de origen */}
       <section className="relative overflow-hidden bg-surface py-10">
@@ -447,10 +546,16 @@ export default async function QuienesSomosPage({
             </h2>
           </AnimatedSection>
           <AnimatedSection delay={0.1}>
-            <div className="mx-auto mb-16 max-w-3xl rounded-[10px] border border-white/10 bg-white/10 p-8 backdrop-blur-sm">
-              <p className="text-lg leading-relaxed text-white/85">
-                {t("objetivoDesc")}
-              </p>
+            <div className="relative mx-auto mb-16 max-w-3xl overflow-hidden rounded-[10px] border border-white/10 bg-white/10 p-8 backdrop-blur-sm">
+              <span className="absolute inset-y-0 left-0 w-1 bg-brand-yellow" aria-hidden="true" />
+              <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] bg-brand-yellow/15 text-brand-yellow">
+                  <Target size={22} />
+                </div>
+                <p className="text-lg leading-relaxed text-white/85">
+                  {t("objetivoDesc")}
+                </p>
+              </div>
             </div>
           </AnimatedSection>
           <AnimatedSection className="mb-12 text-center">
@@ -464,7 +569,10 @@ export default async function QuienesSomosPage({
           <div className="grid gap-6 sm:grid-cols-2">
             {objetivosEstrategicos.map((oe, i) => (
               <AnimatedSection key={oe.titleKey} direction="up" delay={i * 0.1}>
-                <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
+                <div className="h-full rounded-[10px] border border-white/10 bg-white/10 p-6 transition-all hover:bg-white/15">
+                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-[10px] ${oe.tileClass}`}>
+                    <oe.icon size={22} />
+                  </div>
                   <h4 className="mb-2 text-lg font-bold text-white">
                     {t(oe.titleKey)}
                   </h4>
@@ -479,44 +587,65 @@ export default async function QuienesSomosPage({
       </section>
 
       {/* Poblacion objetivo */}
-      <ParallaxSection
-        bgImage={assetPath(fotos.quienesSomos.poblacionParallax)}
-        overlay="bg-black/70"
-        className="py-20"
-      >
+      <section className="relative overflow-hidden bg-section-light py-20">
+        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-8 lg:grid-cols-5">
-            <div className="lg:col-span-3">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <div>
               <AnimatedSection direction="up">
-                <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">
+                <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
                   {t("poblacionTag")}
                 </span>
               </AnimatedSection>
               <AnimatedSection direction="up" delay={0.1}>
-                <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
+                <h2 className="mb-4 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
                   {t("poblacionTitle")} <span className="text-brand-orange">{t("poblacionHighlight")}</span>
                 </h2>
               </AnimatedSection>
               <AnimatedSection direction="up" delay={0.15}>
-                <p className="text-lg leading-relaxed text-white/80">
+                <p className="text-lg leading-relaxed text-[var(--color-text-secondary)]">
                   {t("poblacionDesc")}
                 </p>
               </AnimatedSection>
+              <AnimatedSection direction="up" delay={0.2}>
+                <ul className="mt-6 flex flex-wrap gap-2.5">
+                  {[1, 2, 3].map((i) => (
+                    <li
+                      key={i}
+                      className="rounded-full border border-brand-purple/30 bg-brand-purple/[0.06] px-4 py-1.5 text-[13px] font-semibold text-brand-purple-dark"
+                    >
+                      {t(`poblacionChip${i}`)}
+                    </li>
+                  ))}
+                </ul>
+              </AnimatedSection>
             </div>
-            <AnimatedSection direction="right" delay={0.2} className="lg:col-span-2">
-              <ImageParallax
-                src={assetPath(fotos.quienesSomos.poblacionImage)}
-                alt=""
-                width={600}
-                height={400}
-                className="w-full rounded-[10px] object-cover shadow-lg"
-                intensity={0.2}
-                style={{ aspectRatio: "4/3" }}
-              />
+            <AnimatedSection direction="right" delay={0.2}>
+              <div className="relative mx-auto max-w-md">
+                <div className="absolute -right-4 -top-4 h-28 w-28 rounded-full border-8 border-brand-orange/20" aria-hidden="true" />
+                <div className="absolute -bottom-4 -left-4 h-20 w-20 rounded-full border-8 border-brand-teal/25" aria-hidden="true" />
+                <ImageParallax
+                  src={assetPath(fotos.quienesSomos.poblacionImage)}
+                  alt=""
+                  width={600}
+                  height={450}
+                  className="w-full rounded-[10px] object-cover shadow-xl"
+                  intensity={0.2}
+                  style={{ aspectRatio: "4/3" }}
+                />
+                <div className="absolute -bottom-6 left-6 rounded-[10px] border border-border-subtle bg-bg-card p-5 shadow-xl">
+                  <p className="text-4xl font-extrabold tabular-nums text-brand-primary sm:text-5xl">
+                    {t("poblacionEdadValor")}
+                  </p>
+                  <p className="mt-1 text-xs font-bold uppercase tracking-[0.15em] text-brand-orange">
+                    {t("poblacionEdadLabel")}
+                  </p>
+                </div>
+              </div>
             </AnimatedSection>
           </div>
         </div>
-      </ParallaxSection>
+      </section>
 
       {/* Enfoque / Dimensiones */}
       <section className="relative overflow-hidden bg-section-light py-20">
@@ -535,10 +664,13 @@ export default async function QuienesSomosPage({
               {t("enfoqueDesc")}
             </p>
           </AnimatedSection>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {dimensionKeys.map((item, i) => (
               <AnimatedSection key={item.titleKey} direction="up" delay={i * 0.05}>
-                <div className="h-full rounded-[10px] border border-brand-teal/20 bg-bg-card p-6 transition-all hover:shadow-md">
+                <div className="h-full rounded-[10px] border border-border-subtle bg-bg-card p-6 transition-all hover:shadow-md">
+                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-full border ${item.color}`}>
+                    <item.icon size={20} strokeWidth={1.75} />
+                  </div>
                   <h3 className="mb-2 font-bold text-[var(--color-text-primary)]">
                     {t(item.titleKey)}
                   </h3>
@@ -571,45 +703,17 @@ export default async function QuienesSomosPage({
               {t("areasTrabajoDesc")}
             </p>
           </AnimatedSection>
-          <div className="mb-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {areasGallery.map((src: string, i: number) => (
-              <AnimatedSection
-                key={src}
-                direction="up"
-                delay={i * 0.06}
-                className={i === 0 ? "sm:col-span-2 sm:row-span-2" : ""}
-              >
-                <div className={`group relative w-full overflow-hidden rounded-[10px] ${
-                  i === 0 ? "h-56 sm:h-full" : "h-56"
-                }`}>
-                  <ImageParallax
-                    src={assetPath(src)}
-                    alt=""
-                    width={600}
-                    height={400}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    intensity={0.1}
-                  />
-                  <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              { titleKey: "areaATitle", descKey: "areaADesc" },
-              { titleKey: "areaBTitle", descKey: "areaBDesc" },
-              { titleKey: "areaCTitle", descKey: "areaCDesc" },
-              { titleKey: "areaDTitle", descKey: "areaDDesc" },
-              { titleKey: "areaETitle", descKey: "areaEDesc" },
-              { titleKey: "areaFTitle", descKey: "areaFDesc" },
-            ].map((area, i) => (
+            {areas.map((area, i) => (
               <AnimatedSection key={area.titleKey} direction="up" delay={i * 0.08}>
-                <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
+                <div className="h-full rounded-[10px] border border-white/10 bg-white/10 p-6 transition-all hover:bg-white/15">
+                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-[10px] ${area.tileClass}`}>
+                    <area.icon size={22} />
+                  </div>
                   <h3 className="mb-2 font-bold text-white">
                     {t(area.titleKey)}
                   </h3>
-                  <p className="text-sm text-white/75">
+                  <p className="text-sm leading-relaxed text-white/75">
                     {t(area.descKey)}
                   </p>
                 </div>

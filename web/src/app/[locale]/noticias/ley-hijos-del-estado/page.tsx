@@ -472,6 +472,29 @@ export default async function LeyPostPage({
                 </div>
               </div>
 
+              {/* Rally visual manual */}
+              <div className="mt-4 rounded-2xl bg-ley-purple p-6 text-white shadow-sm sm:p-7">
+                <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-ley-yellow px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-ley-purple">
+                  <Download size={12} />
+                  {t("recursoTag")}
+                </span>
+                <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="min-w-0">
+                    <h3 className="text-lg font-bold leading-snug sm:text-xl">{t("rallyTitle")}</h3>
+                    <p className="mt-1.5 text-xs leading-relaxed text-purple-100 sm:text-sm">{t("rallyDesc")}</p>
+                  </div>
+                  <a
+                    href={assetPath("/documents/Manual-visual-Rally-Ley-2479.pdf")}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-colors hover:bg-white"
+                  >
+                    <Download size={16} />
+                    {t("rallyBtn")}
+                  </a>
+                </div>
+              </div>
+
               {/* Article footer */}
               <div className="mt-10 flex flex-wrap items-center justify-between gap-4 border-t border-border-subtle pt-6">
                 <Link

@@ -9,6 +9,7 @@ import { noticiaBySlugQuery } from "@/lib/sanity/queries";
 import { imageUrl } from "@/lib/sanity/image";
 import { categoryColor } from "@/lib/category-colors";
 import PostShare from "@/components/PostShare";
+import AnimatedSection from "@/components/AnimatedSection";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 
@@ -80,7 +81,7 @@ export default async function NoticiaPage({
           className="absolute inset-0"
           style={{ background: "radial-gradient(ellipse at 25% 15%, rgba(255,255,255,0.10), transparent 60%)" }}
         />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <AnimatedSection className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="mb-8 flex flex-wrap items-center gap-1.5 text-sm text-white/70">
             <Link href={`/${locale}`} className="transition-colors hover:text-white">
               {t("breadcrumbInicio")}
@@ -139,11 +140,11 @@ export default async function NoticiaPage({
             <div className="h-px w-16 bg-white/30" />
             <PostShare title={noticia.title} accent="#ffffff" shareLabel={t("compartir")} />
           </div>
-        </div>
+        </AnimatedSection>
       </section>
 
       <section className="bg-bg-primary py-20">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
+        <AnimatedSection className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <Link
             href={`/${locale}/noticias`}
             className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-brand-teal hover:text-brand-teal/80"
@@ -171,7 +172,7 @@ export default async function NoticiaPage({
               {t("backToNoticias")}
             </Link>
           </div>
-        </div>
+        </AnimatedSection>
       </section>
     </div>
   );
