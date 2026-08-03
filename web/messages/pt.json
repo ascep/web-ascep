@@ -475,47 +475,251 @@
     "heroTag": "QUEM SOMOS",
     "heroTitle": "Quem",
     "heroHighlight": "Somos",
-    "heroSubtitle": "Somos um grupo de pessoas egressas do Sistema de Protecao Estatal do Brasil que, a partir da nossa propria experiencia, nos unimos para contribuir com a transformacao e melhoria da forma como o Estado aborda o cuidado e a protecao de criancas, adolescentes e jovens no pais.",
-    "historiaTag": "NOSSA HISTORIA",
+    "heroSubtitle": "Somos pessoas que cresceram sob os cuidados do Estado —em lares do ICBF— e que, ao atingir a maioridade, saem do sistema de proteção para enfrentar a vida adulta sem o apoio de uma família. A partir dessa experiência, nos unimos para transformar a forma como o Estado cuida e protege crianças e adolescentes na Colômbia.",
+    "historiaTag": "NOSSA HISTÓRIA",
     "historiaTitle": "Nossa",
-    "historiaHighlight": "Historia",
-    "historiaP1": "Somos um grupo de pessoas egressas do Sistema de Protecao Estatal do Brasil que, a partir da nossa propria experiencia, nos unimos para contribuir com a transformacao e melhoria da forma como o Estado, por meio de seus operadores, aborda o cuidado, a protecao e o restabelecimento de direitos de criancas, adolescentes e jovens no pais.",
-    "historiaP2": "Reconhecemos e agradecemos o apoio que o Estado tem proporcionado as nossas vidas, garantindo que pudessemos crescer afastados dos diferentes fatores que nos levaram a ingressar no sistema de protecao. No entanto, consideramos que ha aspectos de como o Estado proporciona essa protecao e cuidado que devem ser avaliados de forma objetiva e corrigidos de maneira eficiente, especialmente no que diz respeito a preparacao para a vida autonoma e independente e ao acompanhamento uma vez que cessa o apoio Estatal.",
-    "historiaP3": "Acreditamos firmemente que o egresso do sistema de protecao nao deve ser um evento solitario nem abrupto. Cada jovem merece uma transicao gradual e acompanhada para a vida adulta, com acesso a educacao, moradia, saude mental e oportunidades profissionais que lhe permitam construir seu projeto de vida com dignidade.",
-    "historiaP4": "Desde nossa fundacao em 2019, trabalhamos incansavelmente para visibilizar as realidades dos egressos, incidir em politicas publicas que garantam seus direitos e criar programas que fortaleçam as habilidades para a vida de quem esta proximo a egressar ou ja egressou do sistema.",
-    "historiaP5": "Hoje somos uma organizacao reconhecida a nivel nacional e internacional, com aliancas estrategicas que nos permitem amplificar nossa voz e estender nosso impacto. Mas acima de tudo, somos uma comunidade de jovens que se recusa a ser invisivel, que ergue a voz para dizer: existimos, resistimos e construimos um futuro melhor para as proximas geracoes.",
-    "propositoTag": "MISSAO, VISAO E PROPOSITO",
+    "historiaHighlight": "História",
+    "historiaP1": "Entre 2015 e 2017, três jovens egressos do sistema de proteção estatal da Colômbia —Jhon Eduar Angulo, Maicol Londoño e Henrry Quiñones— transformaram sua experiência em uma causa. Decidiram fundar uma iniciativa para acompanhar quem, como eles, enfrentava sozinho a transição da institucionalização para a vida adulta, uma etapa crítica e desatendida.",
+    "historiaP2": "Seu propósito: que nenhum jovem egresso do sistema tenha que enfrentar a vida sem apoio. A partir da empatia e da experiência vivida, denunciaram a falta de preparação do Estado e a ausência de redes que lhes permitam integrar-se plenamente à sociedade. Sua ação busca construir caminhos de autonomia, dignidade e oportunidades para uma população historicamente excluída.",
+    "historiaP3": "Somos uma organização que superou a curva de aprendizado e agora está em uma etapa de crescimento e posicionamento da sua incidência nas diferentes linhas programáticas. Nossa liderança nos permitiu ser referência nacional e na região da América Latina.",
+    "historiaP4": "Isso fez com que fôssemos convidados para diferentes espaços de incidência e tomada de decisão que contribuem para a transformação dos sistemas de cuidados para a infância, adolescência e juventude com experiência vivida em sistemas de cuidado institucional.",
+    "historiaP5": "Somos uma nova voz para a transformação dos sistemas de cuidado na Colômbia e para o acompanhamento de adolescentes e jovens na sua transição para a vida autônoma e independente.",
+    "propositoTag": "MISSÃO, VISÃO E PROPÓSITO",
     "propositoTitle": "Nosso",
-    "propositoHighlight": "Proposito",
-    "misionTitle": "Nossa Missao",
-    "misionDesc": "Buscamos que cada jovem desenvolva as competencias e habilidades essenciais para integrar-se plenamente na sociedade e construir um projeto de vida autonomo, responsavel e com consciencia social, fortalecendo as politicas publicas para a protecao da infancia e da juventude no Brasil.",
-    "visionTitle": "Nossa Visao",
-    "visionDesc": "Ser uma organizacao lider na transformacao do sistema de protecao estatal no Brasil e na America Latina, onde cada jovem egresso conte com as ferramentas, o apoio e as oportunidades necessarias para construir uma vida autonoma, digna e plena.",
-    "propositoCardTitle": "Nosso Proposito",
-    "propositoCardDesc": "Trabalhar incansavelmente para que nenhum jovem egresso do sistema de protecao enfrente sozinho sua transicao para a vida adulta, garantindo que cada um conte com as ferramentas, o acompanhamento e as oportunidades necessarias para construir um projeto de vida autonomo, digno e pleno.",
-    "trayectoriaTag": "TRAJETORIA",
+    "propositoHighlight": "Propósito",
+    "misionTitle": "Nossa Missão",
+    "misionDesc": "Desenvolver e fortalecer capacidades que potencializem o ser e facilitem a transição de adolescentes e jovens do sistema de proteção para uma vida autônoma, digna e plena, promovendo o seu desenvolvimento integral e o acesso efetivo a oportunidades laborais, educativas, de saúde mental e moradia, incidindo em políticas públicas, práticas institucionais e dinâmicas comunitárias para garantir o exercício dos seus direitos, fortalecer redes de apoio e capacidades familiares, e contribuir para a prevenção da perda do cuidado parental.",
+    "visionTitle": "Nossa Visão",
+    "visionDesc": "Até 2030, consolidar-nos como um ator articulador chave na Colômbia para a transformação dos modelos de cuidados alternativos, orientando práticas baseadas na família e na autonomia progressiva dos jovens, incidindo em políticas públicas que assegurem egresos dignos do sistema de proteção.",
+    "propositoCardTitle": "Nosso Propósito",
+    "propositoCardDesc": "Impulsionamos a autonomia e a liderança de adolescentes e jovens com experiência em proteção estatal, reconhecendo-os como sujeitos de direitos e protagonistas de mudança. Através de modelos de intervenção familiar e de acompanhamento integral, promovemos a sua inclusão social e lideramos reformas ao sistema de cuidados alternativos.",
+    "comoTag": "COMO FAZEMOS",
+    "comoTitle": "Como",
+    "comoHighlight": "Fazemos",
+    "comoDesc": "Nossa visão se materializa em três ações: conectamos os jovens com atores-chave do sistema de proteção, facilitamos espaços e ferramentas que fortalecem suas capacidades e impulsionamos a transformação dos cuidados alternativos na Colômbia e na região.",
+    "conectarTitle": "Conectar",
+    "conectarDesc": "Conectamos nossos beneficiários com atores-chave dentro do sistema de proteção para que as vozes dos pré-egressos e egressos sejam levadas em conta.",
+    "facilitarTitle": "Facilitar",
+    "facilitarDesc": "Facilitamos espaços e ferramentas que permitem aos pré-egressos e egressos fortalecer suas habilidades, e aos operadores inovar no seu modelo de atenção.",
+    "impulsarTitle": "Impulsionar",
+    "impulsarDesc": "Impulsionamos a transformação do sistema de proteção na Colômbia e na América Latina através da incidência sociopolítica e da pesquisa.",
+    "objetivoTag": "OBJETIVO",
+    "objetivoTitle": "Objetivo",
+    "objetivoHighlight": "Geral",
+    "objetivoDesc": "Impulsionar estratégias que melhorem integralmente a qualidade de vida de adolescentes e jovens em transição ou egressos do sistema de proteção, promovendo a sua autonomia, empoderamento, acesso a direitos e participação ativa na sociedade.",
+    "objetivosEstrategicosTag": "OBJETIVOS ESTRATÉGICOS",
+    "objetivosEstrategicosTitle": "Objetivos",
+    "objetivosEstrategicosHighlight": "Estratégicos",
+    "oe1Title": "Participação e Redes Juvenis",
+    "oe1Desc": "Fortalecer as capacidades de liderança, incidência e organização coletiva de jovens com experiência no sistema de cuidados. Impulsionar redes juvenis a nível local, regional e nacional como plataformas de ação, apoio e mobilização.",
+    "oe2Title": "Incidência Política e Social",
+    "oe2Desc": "Promover reformas estruturais no sistema de cuidados alternativos para melhorar os processos de egreso. Defender direitos mediante ações de incidência, mobilização de recursos e assessoria jurídica gratuita. Impulsionar o reconhecimento dos egressos como grupo com direitos específicos e necessidades diferenciadas.",
+    "oe3Title": "Programação Técnica e Acompanhamento",
+    "oe3Desc": "Apoiar o desenvolvimento de programas e políticas públicas baseadas em boas práticas, centradas no bem-estar dos egressos. Propor padrões para a vida independente e serviços de apoio que garantam uma transição digna e sustentável, incluindo a formação e a vinculação laboral.",
+    "oe4Title": "Supervisão, Avaliação e Pesquisa",
+    "oe4Desc": "Monitorar o impacto de programas desenvolvidos por e para egressos. Gerar evidência técnica e empírica para orientar decisões de política pública e cooperação internacional. Avaliar e adaptar continuamente as ações institucionais para assegurar o impacto e a pertinência.",
+    "trayectoriaTag": "TRAJETÓRIA",
     "trayectoriaTitle": "Nossa",
-    "trayectoriaHighlight": "Trajetoria",
+    "trayectoriaHighlight": "Trajetória",
     "equipoTag": "EQUIPE",
     "equipoTitle": "Nossa",
     "equipoHighlight": "Equipe",
-    "equipoDesc": "Somos um grupo de pessoas egressas do Sistema de Protecao Estatal que, a partir da nossa propria experiencia, trabalhamos para transformar a forma como o Estado aborda o cuidado da infancia e da juventude no Brasil.",
+    "equipoDesc": "Somos um grupo de pessoas egressas do Sistema de Proteção Estatal que, a partir da nossa própria experiência, trabalhamos para transformar a forma como o Estado aborda o cuidado da infância e da juventude na Colômbia.",
+    "teamMaicolRole": "Diretor",
+    "teamKevinRole": "Programador e Designer",
+    "teamMonicaRole": "Equipe Psicossocial",
+    "teamJhonRole": "Equipe de Formação",
+    "teamAnaRole": "Comunicação",
+    "teamMafeRole": "Equipe de Participação",
     "enfoqueTag": "ENFOQUE",
     "enfoqueTitle": "Enfoque",
-    "enfoqueHighlight": "Metodologico",
-    "enfoqueDesc": "Nosso modelo esta focado no fortalecimento do ser, como base para que os jovens que egressam do sistema de protecao possam gerenciar seu projeto de vida. Trabalhamos transversalmente as seis dimensoes do bem-estar psicologico de Carol Ryff:",
-    "ctaTitle": "Junte-se a nossa causa",
-    "ctaDesc": "Se voce compartilha nossa visao, convidamos voce a se juntar como aliado, voluntario ou doador.",
+    "enfoqueHighlight": "Metodológico",
+    "enfoqueDesc": "Nosso modelo está focado no fortalecimento do ser, como base para que os jovens que egresam do sistema de proteção possam gerenciar seu projeto de vida. Trabalhamos transversalmente as seis dimensões do bem-estar psicológico de Carol Ryff em todos os nossos processos.",
+    "dimensionTitle1": "Autoaceitação",
+    "dimensionDesc1": "Valoração positiva de si mesmo e da própria história.",
+    "dimensionTitle2": "Relações Positivas",
+    "dimensionDesc2": "Capacidade de estabelecer e manter relações sociais de qualidade e confiança.",
+    "dimensionTitle3": "Domínio do Entorno",
+    "dimensionDesc3": "Percepção de controle do meio e habilidade para criar entornos favoráveis.",
+    "dimensionTitle4": "Autonomia",
+    "dimensionDesc4": "Capacidade de sustentar a própria individualidade e autodeterminação pessoal.",
+    "dimensionTitle5": "Propósito na Vida",
+    "dimensionDesc5": "Capacidade de ter metas claras e definir objetivos vitais.",
+    "dimensionTitle6": "Crescimento Pessoal",
+    "dimensionDesc6": "Desenvolvimento das potencialidades individuais para crescer como pessoa.",
+    "areasTrabajoTag": "ÁREAS DE TRABALHO",
+    "areasTrabajoTitle": "Áreas de",
+    "areasTrabajoHighlight": "Trabalho",
+    "areasTrabajoDesc": "Nossa metodologia reconhece que os jovens são protagonistas do seu projeto de vida. Todas as nossas atividades e formações respondem aos seus interesses e necessidades, garantindo um impacto significativo.",
+    "areaATitle": "O Ser",
+    "areaADesc": "Nos concentramos na pessoa. Promovemos escuta ativa e mediação, acesso a ferramentas para fortalecer a autonomia, e três pilares-chave: um referente, um espaço e algo para fazer.",
+    "areaBTitle": "Inserção Educativa",
+    "areaBDesc": "Fomentamos a inserção na educação não formal e formal. Oferecemos acompanhamento vocacional, assessoria educativa durante e depois do trânsito para a autonomia, e gestão de bolsas e convênios.",
+    "areaCTitle": "Saúde e Direitos Sexuais",
+    "areaCDesc": "Promovemos o acesso à saúde e formação em direitos sexuais e reprodutivos. Oferecemos assessoria, orientação sobre programas estatais e apoio psicológico.",
+    "areaDTitle": "Formação para o Emprego",
+    "areaDDesc": "Acreditamos no emprego como motor de mudança. Oferecemos formação em competências laborais, acesso a experiências vocacionais em empresas, e gestão de estágios e vinculação laboral.",
+    "areaETitle": "Incidência e Participação",
+    "areaEDesc": "Impulsionamos a voz dos jovens em espaços de incidência. Promovemos formação em liderança, intercâmbio de experiências entre egressos e tomadores de decisão, e participação em reformas.",
+    "areaFTitle": "Adaptabilidade e Flexibilidade",
+    "areaFDesc": "Reconhecemos que cada jovem tem seu próprio ritmo. Evitamos pressões desnecessárias, oferecemos acompanhamento segundo sua trajetória de vida e nos adaptamos às mudanças sociais e econômicas.",
+    "poblacionTag": "POPULAÇÃO",
+    "poblacionTitle": "População",
+    "poblacionHighlight": "Objeto",
+    "poblacionDesc": "Adolescentes e jovens entre 14 e 28 anos, que se encontram sob proteção estatal ou que já egressaram, em processo de educação básica ou superior, que requerem acompanhamento e apoio na geração de capacidades e no fortalecimento de habilidades para a vida, psicossociais, preparação e vinculação para o trabalho.",
+    "ctaTitle": "Junte-se à nossa causa",
+    "ctaDesc": "Se você compartilha nossa visão, convidamos você a se juntar como aliado, voluntário ou doador.",
     "ctaBtn": "Fale Conosco",
     "ctaBtnDonar": "Doar",
-    "teamMaicolRole": "Diretor",
-    "teamKevinRole": "Coordenador",
-    "equipoKevinRole": "Coordenador",
-    "teamMonicaRole": "Equipe Psicossocial",
-    "teamJhonRole": "Equipe de Formacao",
-    "teamAnaRole": "Equipe ASCEP",
     "aliadosTag": "Quem nos apoia",
-    "aliadosTitle": "Parceiros estrategicos"
+    "aliadosTitle": "Parceiros estratégicos",
+    "hitoSingular": "marco",
+    "hitoPlural": "marcos",
+    "hitos": [
+      {
+        "value": "3",
+        "label": "Fundadores",
+        "detail": "jovens egressos da proteção"
+      },
+      {
+        "value": "2017",
+        "label": "Constituição formal",
+        "detail": "após dois anos de organização"
+      },
+      {
+        "value": "6 anos",
+        "label": "Impulsionando a lei",
+        "detail": "de 2019 a 2025, sem pausa"
+      },
+      {
+        "value": "Aprovada",
+        "label": "Lei 2479 de 2025",
+        "detail": "“Filhos do Estado”"
+      }
+    ],
+    "fundador1": "Jhon Eduar Angulo",
+    "fundador2": "Maicol Londoño",
+    "fundador3": "Henrry Quiñones",
+    "cifrasTag": "O CENÁRIO QUE ENFRENTAMOS",
+    "cifrasTitle": "A razão pela qual a ASCEP existe, em números",
+    "cifrasSource": "Fonte: ICBF — Sistema de Informação Missional (SIM), corte de 31 de janeiro de 2024.",
+    "cifrasStat1Label": "Crianças e adolescentes em processos administrativos (PARD) na Colômbia",
+    "cifrasStat1Breakdown": [
+      {
+        "label": "Mulheres",
+        "value": 39936
+      },
+      {
+        "label": "Homens",
+        "value": 29705
+      },
+      {
+        "label": "Sem informação",
+        "value": 19
+      }
+    ],
+    "cifrasStat2Label": "menores em declaração de adotabilidade",
+    "cifrasStat2Breakdown": [
+      {
+        "label": "Maiores de 18 anos",
+        "value": 6258
+      },
+      {
+        "label": "Menores de 18 anos",
+        "value": 6302
+      }
+    ],
+    "cifrasStat3Label": "Crianças e adolescentes adotados entre 2021 e 2024",
+    "cifrasStat3Note": "≈ 24% dos que estão em declaração de adotabilidade — a lacuna que sustenta a necessidade de um egresso acompanhado.",
+    "ley2479Tag": "CONQUISTA 2025",
+    "ley2479Title": "Lei 2479 de 2025 — “Filhos do Estado”",
+    "ley2479Desc": "Desde 2019, junto a atores políticos, impulsionamos um projeto de lei para garantir condições reais aos jovens que egressam da proteção. Em 2025 foi aprovada a Lei 2479, que cria o Programa de Acompanhamento Integral ao Egresso do ICBF: fortalecimento da oferta estatal e consolidação de redes de apoio para quem deixa o cuidado do ICBF.",
+    "ley2479Start": "2019 · protocolização",
+    "ley2479End": "2025 · lei aprovada",
+    "trayectoriaLead": "Toque em cada ano para ver os marcos que construíram o caminho até a Lei 2479 de 2025.",
+    "trayectoria": [
+      {
+        "year": "2013",
+        "items": [
+          "Contribuição para a criação da Rede Latino-Americana de Egressos da Proteção."
+        ]
+      },
+      {
+        "year": "2017",
+        "items": [
+          "Constituição formal da organização: o início de um processo sereno, rigoroso e bem feito.",
+          "Primeiro lugar no Prêmio Cívico por uma Cidade Melhor em Inovação Social.",
+          "1º Fórum sobre Egresso da Proteção na Colômbia.",
+          "Cúpula de Jovens Líderes em Bruxelas, Parlamento Europeu — “No one left behind”.",
+          "Data World Forum, Dubai.",
+          "Fórum político de alto impacto nas Nações Unidas, Nova York."
+        ]
+      },
+      {
+        "year": "2019",
+        "items": [
+          "“Unindo forças para acabar com a institucionalização de crianças e adolescentes na América Latina e no Caribe”, Panamá.",
+          "IV Congresso da Rede Latino-Americana de Egressos da Proteção — Caminho para a Autonomia, México."
+        ]
+      },
+      {
+        "year": "2021",
+        "items": [
+          "2º Fórum sobre Egresso da Proteção: “Conheçamos suas histórias”.",
+          "Protocolização do projeto de lei que anos depois daria origem à Lei 2479."
+        ]
+      },
+      {
+        "year": "2022",
+        "items": [
+          "3º Fórum sobre Egresso da Proteção: “O futuro dos filhos do Estado”.",
+          "Encontro do Conselho de Líderes do Cuidado, Nairóbi."
+        ]
+      },
+      {
+        "year": "2023",
+        "items": [
+          "Debate do projeto de lei na comissão acidental de infância e adolescência.",
+          "Desenvolvimento e implementação da campanha “Vozes que inspiram”."
+        ]
+      },
+      {
+        "year": "2024",
+        "items": [
+          "Memorando de entendimento com o ICBF para fortalecer capacidades e projeto de vida de adolescentes e jovens.",
+          "Participação na comissão acidental para formalizar uma aliança interinstitucional de infância e adolescência."
+        ]
+      },
+      {
+        "year": "2025",
+        "highlight": true,
+        "items": [
+          "Aprovação da Lei 2479 “Filhos do Estado”: cria o Programa de Acompanhamento Integral ao Egresso do ICBF.",
+          "Participação no lançamento da carta da campanha infantil global, no âmbito da Assembleia das Nações Unidas."
+        ]
+      }
+    ],
+    "valoresTag": "CULTURA ORGANIZACIONAL",
+    "valoresTitle": "Nossos valores",
+    "valor1Title": "Confiança e trabalho em equipe",
+    "valor1Text": "Acreditamos no valor e na capacidade de nossos membros fundadores e equipe, nosso maior ativo. O trabalho em equipe é a força-chave para alcançar nossas metas.",
+    "valor2Title": "Transparência e respeito",
+    "valor2Text": "Construímos relações baseadas na confiança bidirecional, no diálogo e no respeito, essenciais para a convivência com a diversidade de beneficiários, aliados e doadores.",
+    "valor3Title": "Compromisso e igualdade",
+    "valor3Text": "Cumprimos nossas obrigações com eficiência, disciplina e solidariedade. Acreditamos na igualdade de oportunidades independentemente de gênero, etnia, crenças ou posição social.",
+    "valor4Title": "Liberdade e responsabilidade",
+    "valor4Text": "Defendemos o direito das pessoas de exercer sua liberdade dentro do que é lícito, mantendo um equilíbrio entre direitos e responsabilidades.",
+    "odsLabel": "Comprometidos com os Objetivos de Desenvolvimento Sustentável",
+    "ods": [
+      "Erradicação da pobreza",
+      "Fome zero",
+      "Educação de qualidade",
+      "Igualdade de gênero",
+      "Trabalho decente e crescimento econômico",
+      "Redução das desigualdades",
+      "Parcerias para atingir os objetivos"
+    ],
+    "fundadoresTag": "Fundadores"
   },
   "impacto": {
     "heroTag": "NOSSO IMPACTO",

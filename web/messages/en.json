@@ -475,47 +475,251 @@
     "heroTag": "WHO WE ARE",
     "heroTitle": "Who We",
     "heroHighlight": "Are",
-    "heroSubtitle": "We are a group of graduates of the Colombian State Protection System who, based on our own experience, have come together to contribute to the transformation and improvement of how the State approaches the care and protection of children, adolescents, and young people in the country.",
+    "heroSubtitle": "We are people who grew up under the care of the State —in ICBF foster homes— and who, upon coming of age, leave the protection system to face adult life without a family to support us. From that experience, we have come together to transform the way the State cares for and protects children and adolescents in Colombia.",
     "historiaTag": "OUR STORY",
     "historiaTitle": "Our",
     "historiaHighlight": "Story",
-    "historiaP1": "We are a group of people who graduated from the Colombian State Protection System who, based on our own experience, have come together to contribute to the transformation and improvement of how the State, through its operators, addresses the care, protection and restoration of rights of children, adolescents and young people in the country.",
-    "historiaP2": "We recognize the support received from the State, but we also see the need to evaluate and improve certain aspects of the protection system to better serve young people transitioning to independence.",
-    "historiaP3": "Leaving the protection system is not a solitary journey. We have built a community where graduates support each other, share experiences, and grow together.",
-    "historiaP4": "Since 2019, we have been working tirelessly to transform how the State approaches the care and protection of children, adolescents, and young people in Colombia.",
-    "historiaP5": "Today, ASCEP is recognized nationally as a leading voice in the transformation of the protection system, advocating for the rights and well-being of young graduates.",
+    "historiaP1": "Between 2015 and 2017, three young graduates of the Colombian State protection system —Jhon Eduar Angulo, Maicol Londoño and Henrry Quiñones— turned their experience into a cause. They decided to found an initiative to support those who, like them, faced alone the transition from institutionalization to adult life, a critical and neglected stage.",
+    "historiaP2": "Their purpose: that no graduate of the system should have to face life without support. From empathy and lived experience, they denounced the State's lack of preparation and the absence of networks that would allow them to fully integrate into society. Their work seeks to build paths of autonomy, dignity and opportunity for a historically excluded population.",
+    "historiaP3": "We are an organization that has overcome the learning curve and is now in a stage of growth, strengthening its advocacy across different programmatic lines. Our leadership has made us a reference nationally and across Latin America.",
+    "historiaP4": "This has led us to be invited to different advocacy and decision-making spaces that contribute to transforming care systems for children, adolescents and young people with lived experience in institutional care.",
+    "historiaP5": "We are a new voice for the transformation of care systems in Colombia and for accompanying adolescents and young people in their transition to an autonomous and independent life.",
     "propositoTag": "MISSION, VISION AND PURPOSE",
     "propositoTitle": "Our",
     "propositoHighlight": "Purpose",
     "misionTitle": "Our Mission",
-    "misionDesc": "To accompany and strengthen young graduates of the Colombian State Protection System in their transition to autonomous adult life, through training programs, psychosocial support, and advocacy for public policies that guarantee their rights and well-being.",
+    "misionDesc": "To develop and strengthen capacities that enhance the individual and ease the transition of adolescents and young people from the protection system toward an autonomous, dignified and full life, promoting their integral development and effective access to labor, educational, mental health and housing opportunities, while advocating for public policies, institutional practices and community dynamics that guarantee the exercise of their rights, strengthen support networks and family capacities, and contribute to preventing the loss of parental care.",
     "visionTitle": "Our Vision",
-    "visionDesc": "A Colombia where every young person leaving the protection system has the tools, support networks, and opportunities needed to build their life project with autonomy and dignity.",
+    "visionDesc": "By 2030, to establish ourselves as a key articulating actor in Colombia for the transformation of alternative care models, promoting family-based practices and progressive autonomy for young people, and advocating for public policies that ensure dignified exits from the protection system.",
     "propositoCardTitle": "Our Purpose",
-    "propositoCardDesc": "To be the driving force behind a protection system that truly serves the comprehensive development of children, adolescents, and young people, ensuring they have real opportunities for a dignified life.",
+    "propositoCardDesc": "We promote the autonomy and leadership of adolescents and young people with experience in State protection, recognizing them as rights holders and protagonists of change. Through family intervention and comprehensive accompaniment models, we foster their social inclusion and lead reforms to the alternative care system.",
+    "comoTag": "HOW WE MAKE IT HAPPEN",
+    "comoTitle": "How We",
+    "comoHighlight": "Make It Happen",
+    "comoDesc": "Our vision comes to life through three actions: we connect young people with key actors in the protection system, facilitate spaces and tools that strengthen their capacities, and drive the transformation of alternative care in Colombia and the region.",
+    "conectarTitle": "Connect",
+    "conectarDesc": "We connect our beneficiaries with key actors within the protection system so the voices of pre-graduates and graduates are heard.",
+    "facilitarTitle": "Facilitate",
+    "facilitarDesc": "We facilitate spaces and tools that enable pre-graduates and graduates to strengthen their skills, and operators to innovate in their care model.",
+    "impulsarTitle": "Drive",
+    "impulsarDesc": "We drive the transformation of the protection system in Colombia and Latin America through sociopolitical advocacy and research.",
+    "objetivoTag": "OBJECTIVE",
+    "objetivoTitle": "Objective",
+    "objetivoHighlight": "General",
+    "objetivoDesc": "To promote strategies that comprehensively improve the quality of life of adolescents and young people in transition or graduates of the protection system, fostering their autonomy, empowerment, access to rights and active participation in society.",
+    "objetivosEstrategicosTag": "STRATEGIC OBJECTIVES",
+    "objetivosEstrategicosTitle": "Strategic",
+    "objetivosEstrategicosHighlight": "Objectives",
+    "oe1Title": "Youth Participation and Networks",
+    "oe1Desc": "Strengthen the leadership, advocacy and collective organization capacities of young people with experience in the care system. Promote youth networks at local, regional and national levels as platforms for action, support and mobilization.",
+    "oe2Title": "Political and Social Advocacy",
+    "oe2Desc": "Promote structural reforms in the alternative care system to improve exit processes. Defend rights through advocacy actions, resource mobilization and free legal counsel. Promote the recognition of graduates as a group with specific rights and differentiated needs.",
+    "oe3Title": "Technical Programming and Accompaniment",
+    "oe3Desc": "Support the development of programs and public policies based on good practices, centered on the well-being of graduates. Propose standards for independent living and support services that guarantee a dignified and sustainable transition, including vocational training and job placement.",
+    "oe4Title": "Supervision, Evaluation and Research",
+    "oe4Desc": "Monitor the impact of programs developed by and for graduates. Generate technical and empirical evidence to guide public policy and international cooperation decisions. Continuously evaluate and adapt institutional actions to ensure impact and relevance.",
     "trayectoriaTag": "TRAJECTORY",
     "trayectoriaTitle": "Our",
     "trayectoriaHighlight": "Trajectory",
     "equipoTag": "TEAM",
     "equipoTitle": "Our",
     "equipoHighlight": "Team",
-    "equipoDesc": "We are a team of graduates of the protection system, professionals, volunteers, and allies united by the conviction that every young person deserves a fair chance at life.",
+    "equipoDesc": "We are a group of people who graduated from the State Protection System who, from our own experience, work to transform how the State approaches the care of children and youth in Colombia.",
+    "teamMaicolRole": "Director",
+    "teamKevinRole": "Programmer and Designer",
+    "teamMonicaRole": "Psychosocial Team",
+    "teamJhonRole": "Training Team",
+    "teamAnaRole": "Communications",
+    "teamMafeRole": "Participation Team",
     "enfoqueTag": "APPROACH",
     "enfoqueTitle": "Methodological",
     "enfoqueHighlight": "Approach",
-    "enfoqueDesc": "Our methodological approach combines psychosocial support, training in life skills, political advocacy, and community building to address the comprehensive needs of young graduates.",
+    "enfoqueDesc": "Our model focuses on strengthening the self as the foundation for young people leaving the protection system to manage their life project. We work transversally on the six dimensions of Carol Ryff's psychological well-being across all our processes.",
+    "dimensionTitle1": "Self-Acceptance",
+    "dimensionDesc1": "Positive appraisal of oneself and one's own history.",
+    "dimensionTitle2": "Positive Relations",
+    "dimensionDesc2": "Ability to establish and maintain quality, trusting social relationships.",
+    "dimensionTitle3": "Environmental Mastery",
+    "dimensionDesc3": "Perception of control over one's environment and the ability to create favorable surroundings.",
+    "dimensionTitle4": "Autonomy",
+    "dimensionDesc4": "Ability to sustain one's own individuality and personal self-determination.",
+    "dimensionTitle5": "Purpose in Life",
+    "dimensionDesc5": "Ability to have clear goals and define vital objectives.",
+    "dimensionTitle6": "Personal Growth",
+    "dimensionDesc6": "Development of individual potential to grow as a person.",
+    "areasTrabajoTag": "WORK AREAS",
+    "areasTrabajoTitle": "Work",
+    "areasTrabajoHighlight": "Areas",
+    "areasTrabajoDesc": "Our methodology recognizes that young people are protagonists of their life project. All our activities and trainings respond to their interests and needs, ensuring meaningful impact.",
+    "areaATitle": "The Self",
+    "areaADesc": "We focus on the person. We promote active listening and mediation, access to tools that strengthen autonomy, and three key pillars: a reference figure, a space and something to do.",
+    "areaBTitle": "Educational Insertion",
+    "areaBDesc": "We foster insertion into non-formal and formal education. We offer vocational accompaniment, educational guidance during and after the transition to autonomy, and management of scholarships and agreements.",
+    "areaCTitle": "Health and Sexual Rights",
+    "areaCDesc": "We promote access to health and training in sexual and reproductive rights. We provide counseling, guidance on State programs and psychological support.",
+    "areaDTitle": "Employment Training",
+    "areaDDesc": "We believe in employment as an engine of change. We offer training in job skills, access to vocational experiences in companies, and management of internships and job placement.",
+    "areaETitle": "Advocacy and Participation",
+    "areaEDesc": "We amplify the voice of young people in advocacy spaces. We promote leadership training, exchange of experiences between graduates and decision makers, and participation in reforms.",
+    "areaFTitle": "Adaptability and Flexibility",
+    "areaFDesc": "We recognize that each young person has their own pace. We avoid unnecessary pressure, provide accompaniment according to their life trajectory and adapt to social and economic changes.",
+    "poblacionTag": "POPULATION",
+    "poblacionTitle": "Target",
+    "poblacionHighlight": "Population",
+    "poblacionDesc": "Adolescents and young people between 14 and 28 years old, under State protection or already graduated, in basic or higher education processes, who require accompaniment and support in building capacities and strengthening life skills, psychosocial skills, and job preparation and connection.",
     "ctaTitle": "Join our cause",
     "ctaDesc": "If you share our vision, we invite you to join as an ally, volunteer or donor.",
     "ctaBtn": "Contact us",
     "ctaBtnDonar": "Donate",
-    "teamMaicolRole": "Director",
-    "teamKevinRole": "Coordinator",
-    "equipoKevinRole": "Coordinator",
-    "teamMonicaRole": "Psychosocial Team",
-    "teamJhonRole": "Training Team",
-    "teamAnaRole": "ASCEP Team",
     "aliadosTag": "Who supports us",
-    "aliadosTitle": "Strategic partners"
+    "aliadosTitle": "Strategic partners",
+    "hitoSingular": "milestone",
+    "hitoPlural": "milestones",
+    "hitos": [
+      {
+        "value": "3",
+        "label": "Founders",
+        "detail": "young graduates of state protection"
+      },
+      {
+        "value": "2017",
+        "label": "Formal constitution",
+        "detail": "after two years of organizing"
+      },
+      {
+        "value": "6 years",
+        "label": "Driving the law",
+        "detail": "from 2019 to 2025, without pause"
+      },
+      {
+        "value": "Approved",
+        "label": "Law 2479 of 2025",
+        "detail": "“Children of the State”"
+      }
+    ],
+    "fundador1": "Jhon Eduar Angulo",
+    "fundador2": "Maicol Londoño",
+    "fundador3": "Henrry Quiñones",
+    "cifrasTag": "THE SCENARIO WE FACE",
+    "cifrasTitle": "Why ASCEP exists, in figures",
+    "cifrasSource": "Source: ICBF — Mission Information System (SIM), as of January 31, 2024.",
+    "cifrasStat1Label": "Children and adolescents in administrative processes (PARD) in Colombia",
+    "cifrasStat1Breakdown": [
+      {
+        "label": "Women",
+        "value": 39936
+      },
+      {
+        "label": "Men",
+        "value": 29705
+      },
+      {
+        "label": "No information",
+        "value": 19
+      }
+    ],
+    "cifrasStat2Label": "children and adolescents in declaration of adoptability",
+    "cifrasStat2Breakdown": [
+      {
+        "label": "Over 18 years old",
+        "value": 6258
+      },
+      {
+        "label": "Under 18 years old",
+        "value": 6302
+      }
+    ],
+    "cifrasStat3Label": "Children and adolescents adopted between 2021 and 2024",
+    "cifrasStat3Note": "≈ 24% of those in declaration of adoptability — the gap that sustains the need for accompanied graduation.",
+    "ley2479Tag": "2025 MILESTONE",
+    "ley2479Title": "Law 2479 of 2025 — “Children of the State”",
+    "ley2479Desc": "Since 2019, together with political actors, we have promoted a bill to guarantee real conditions for young people leaving protection. In 2025, Law 2479 was approved, creating the Comprehensive Support Program for ICBF Graduates: strengthening the state offer and consolidating support networks for those leaving the care of ICBF.",
+    "ley2479Start": "2019 · filing",
+    "ley2479End": "2025 · law approved",
+    "trayectoriaLead": "Tap each year to see the milestones that built the path toward Law 2479 of 2025.",
+    "trayectoria": [
+      {
+        "year": "2013",
+        "items": [
+          "Contribution to the creation of the Latin American Network of Protection Graduates."
+        ]
+      },
+      {
+        "year": "2017",
+        "items": [
+          "Formal constitution of the organization: the start of a steady, rigorous, well-done process.",
+          "First place at the Cívico Award for a Better City in Social Innovation.",
+          "1st Forum on Protection Graduation in Colombia.",
+          "Youth Leaders Summit in Brussels, European Parliament — “No one left behind”.",
+          "Data World Forum, Dubai.",
+          "High-impact political forum at the United Nations, New York."
+        ]
+      },
+      {
+        "year": "2019",
+        "items": [
+          "“Joining forces to end the institutionalization of children and adolescents in Latin America and the Caribbean”, Panama.",
+          "IV Congress of the Latin American Network of Protection Graduates — Road to Autonomy, Mexico."
+        ]
+      },
+      {
+        "year": "2021",
+        "items": [
+          "2nd Forum on Protection Graduation: “Let us know their stories”.",
+          "Filing of the bill that years later would give rise to Law 2479."
+        ]
+      },
+      {
+        "year": "2022",
+        "items": [
+          "3rd Forum on Protection Graduation: “The future of the children of the State”.",
+          "Meeting of the Care Leaders Council, Nairobi."
+        ]
+      },
+      {
+        "year": "2023",
+        "items": [
+          "Debate of the bill in the ad hoc committee on childhood and adolescence.",
+          "Development and implementation of the “Voices that inspire” campaign."
+        ]
+      },
+      {
+        "year": "2024",
+        "items": [
+          "Memorandum of understanding with ICBF to strengthen capacities and life projects of adolescents and young people.",
+          "Participation in the ad hoc committee to formalize an interinstitutional alliance on childhood and adolescence."
+        ]
+      },
+      {
+        "year": "2025",
+        "highlight": true,
+        "items": [
+          "Approval of Law 2479 “Children of the State”: it creates the Comprehensive Support Program for ICBF Graduates.",
+          "Participation in the launch of the global children's campaign letter, within the framework of the United Nations Assembly."
+        ]
+      }
+    ],
+    "valoresTag": "ORGANIZATIONAL CULTURE",
+    "valoresTitle": "Our values",
+    "valor1Title": "Trust and teamwork",
+    "valor1Text": "We believe in the value and ability of our founding members and team, our greatest asset. Teamwork is the key force to reach our goals.",
+    "valor2Title": "Transparency and respect",
+    "valor2Text": "We build relationships based on two-way trust, dialogue and respect, essential for living with the diversity of beneficiaries, allies and donors.",
+    "valor3Title": "Commitment and equality",
+    "valor3Text": "We fulfill our obligations with efficiency, discipline and solidarity. We believe in equal opportunity regardless of gender, ethnicity, beliefs or social position.",
+    "valor4Title": "Freedom and responsibility",
+    "valor4Text": "We defend people's right to exercise their freedom within the law, keeping a balance between rights and responsibilities.",
+    "odsLabel": "Committed to the Sustainable Development Goals",
+    "ods": [
+      "No poverty",
+      "Zero hunger",
+      "Quality education",
+      "Gender equality",
+      "Decent work and economic growth",
+      "Reduced inequalities",
+      "Partnerships for the goals"
+    ],
+    "fundadoresTag": "Founders"
   },
   "impacto": {
     "heroTag": "IMPACT",
