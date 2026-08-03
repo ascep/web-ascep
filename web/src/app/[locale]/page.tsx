@@ -6,6 +6,7 @@ import DecoShapes from "@/components/DecoShapes";
 import AnimatedSection from "@/components/AnimatedSection";
 import SliderHero from "@/components/SliderHero";
 import type { SliderSlide } from "@/components/SliderHero";
+import CaminoSection from "@/components/CaminoSection";
 import HomeStats from "@/components/HomeStats";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import HomeCTA from "@/components/HomeCTA";
@@ -222,6 +223,16 @@ export default async function HomePage({
         ariaLabel={nt("sliderLabel")}
         prevLabel={nt("sliderPrev")}
         nextLabel={nt("sliderNext")}
+      />
+
+      <CaminoSection
+        bgImage="/images/afiches/exp8-bg.webp"
+        tag={h("caminoTag")}
+        title={h("caminoTitle")}
+        subtitle={h("caminoSubtitle")}
+        stepLabel={h("caminoStep")}
+        prevLabel={h("caminoPrev")}
+        nextLabel={h("caminoNext")}
       />
 
       <section className="relative overflow-hidden bg-section-light py-20">
