@@ -24,14 +24,17 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-type FallbackFile = { name: string; path: string; updatedAt?: string };
+type FallbackFile = { name: string; path: string; updatedAt?: string; priority?: number };
 
 const fallbackDocuments: Record<string, FallbackFile[]> = {
   financieros: [
+    { name: "Estados Financieros 2025", path: "/documents/3.Estados-Financieros-2025_ASCEP.pdf", updatedAt: "2026-07-01", priority: 10 },
+    { name: "Estados Financieros 2022", path: "/documents/3.Estados-Financieros-2022_ASCEP.pdf", updatedAt: "2026-01-10", priority: 8 },
     { name: "Estados Financieros 2024", path: "/documents/3.Estados-Financieros-2024_ASCEP_firmados.pdf", updatedAt: "2025-03-01" },
     { name: "Estados Financieros 2023", path: "/documents/3.Estados_Financieros_2023_ASCEP.pdf", updatedAt: "2024-03-01" },
   ],
   informes: [
+    { name: "Informe de Gestion 2025", path: "/documents/2.Informe-de-Gestion-2025_ASCEP.pdf", updatedAt: "2026-04-01", priority: 9 },
     { name: "Informe de Gestion 2024", path: "/documents/2.Informe-de-Gestion-2024-ASCEP_Maicol-Londono.pdf", updatedAt: "2025-02-01" },
     { name: "Informe de Gestion 2023", path: "/documents/2.Informe_de_Gestion_2023.pdf", updatedAt: "2024-02-01" },
   ],
@@ -69,29 +72,39 @@ export default async function TransparenciaPage({
   const filtered = cmsDocs.filter((d) =>
     (TRANSPARENCIA_CATEGORIES as readonly string[]).includes(d.category || DEFAULT_DOC_CATEGORY),
   );
-  const hasCms = filtered.length > 0;
 
-  const docs: TransparenciaDoc[] = hasCms
-    ? filtered.map((d) => ({
-        id: d._id,
-        category: d.category || DEFAULT_DOC_CATEGORY,
-        title: d.title?.[locale as "es" | "en" | "pt"] || d.title?.es || "Documento",
-        path: assetPath(d.externalUrl || fileUrl(d.file) || "#"),
-        updatedAt: d._updatedAt,
-      }))
-    : TRANSPARENCIA_CATEGORIES.flatMap((cat) =>
-        (fallbackDocuments[cat] || []).map((f) => ({
-          id: `${cat}-${f.name}`,
-          category: cat,
-          title: f.name,
-          path: assetPath(f.path),
-          updatedAt: f.updatedAt,
-        })),
-      );
+  const curated = TRANSPARENCIA_CATEGORIES.flatMap((cat) =>
+    (fallbackDocuments[cat] || []).map((f) => ({
+      id: `${cat}-${f.name}`,
+      category: cat,
+      title: f.name,
+      path: assetPath(f.path),
+      updatedAt: f.updatedAt,
+      priority: f.priority,
+    })),
+  );
+
+  const docs: TransparenciaDoc[] = [];
+  const seen = new Set<string>();
+  const normalize = (s: string) =>
+    s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+  for (const d of [...curated, ...filtered.map((c) => ({
+    id: c._id,
+    category: c.category || DEFAULT_DOC_CATEGORY,
+    title: c.title?.[locale as "es" | "en" | "pt"] || c.title?.es || "Documento",
+    path: assetPath(c.externalUrl || fileUrl(c.file) || "#"),
+    updatedAt: c._updatedAt,
+  }))]) {
+    const key = normalize(d.title);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    docs.push(d);
+  }
 
   const recent = [...docs]
     .sort(
       (a, b) =>
+        (b.priority || 0) - (a.priority || 0) ||
         new Date(b.updatedAt || 0).getTime() - new Date(a.updatedAt || 0).getTime(),
     )
     .slice(0, 6);

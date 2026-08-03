@@ -28,3 +28,10 @@ public/documents/Manual-Familias.pdf
 
 # Large MKV not used by the site
 *.mkv
+
+# Raw AFICHES export (zip + psd/png originals), not served by the site
+public/images/AFICHES 7 AÑOS-20260803T152914Z-1-001/
+public/images/AFICHES 7 AÑOS-20260803T152914Z-1-001.zip
+
+# Temp Google Drive download of source PDFs (copied into documents/ with clean names)
+public/documents/drive-download-20260803T184318Z-1-001/

@@ -4,4 +4,5 @@ export type TransparenciaDoc = {
   title: string;
   path: string;
   updatedAt?: string;
+  priority?: number;
 };
