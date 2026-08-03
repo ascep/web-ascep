@@ -229,7 +229,6 @@ export default async function HomePage({
         bgImage="/images/afiches/exp8-bg.webp"
         tag={h("caminoTag")}
         title={h("caminoTitle")}
-        subtitle={h("caminoSubtitle")}
         stepLabel={h("caminoStep")}
         prevLabel={h("caminoPrev")}
         nextLabel={h("caminoNext")}

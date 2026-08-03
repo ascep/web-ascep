@@ -11,7 +11,6 @@ type CaminoSectionProps = {
   bgImage: string;
   tag: string;
   title: string;
-  subtitle: string;
   stepLabel: string;
   prevLabel: string;
   nextLabel: string;
@@ -39,7 +38,6 @@ export default function CaminoSection({
   bgImage,
   tag,
   title,
-  subtitle,
   stepLabel,
   prevLabel,
   nextLabel,
@@ -79,9 +77,6 @@ export default function CaminoSection({
           <h2 className="font-display text-3xl leading-tight font-semibold text-white sm:text-4xl">
             {title}
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-text-secondary sm:text-lg">
-            {subtitle}
-          </p>
         </div>
 
         <div className="mx-auto w-full max-w-sm">
