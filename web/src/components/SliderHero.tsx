@@ -91,7 +91,7 @@ export default function SliderHero({
             <li
               key={i}
               className="slider-hero-item"
-              style={full ? undefined : { backgroundImage: `url("${slide.image}")` }}
+              style={{ "--pos": pos, ...(full ? {} : { backgroundImage: `url("${slide.image}")` }) } as CSSProperties}
             >
               <div
                 className="slider-hero-bg"
@@ -146,6 +146,9 @@ export default function SliderHero({
           border-radius: 20px;
           box-shadow: 0 20px 30px rgba(255, 255, 255, 0.3) inset;
           transition: transform 0.1s, left 0.75s, top 0.75s, width 0.75s, height 0.75s;
+          --slider-base: 46%;
+          --slider-gap: 210px;
+          left: calc(var(--slider-base) + var(--slider-gap) * (var(--pos) - 2));
         }
         .slider-hero-item:nth-child(1),
         .slider-hero-item:nth-child(2) {
@@ -157,6 +160,9 @@ export default function SliderHero({
           border-radius: 0;
           box-shadow: none;
           opacity: 1;
+        }
+        .slider-hero-item:nth-child(n+6) {
+          opacity: 0;
         }
         .slider-hero-shade,
         .slider-hero-bg {
@@ -181,10 +187,6 @@ export default function SliderHero({
           background-position: center;
           filter: blur(16px) saturate(1.15);
         }
-        .slider-hero-item:nth-child(3) { left: 46%; }
-        .slider-hero-item:nth-child(4) { left: calc(46% + 210px); }
-        .slider-hero-item:nth-child(5) { left: calc(46% + 420px); }
-        .slider-hero-item:nth-child(6) { left: calc(46% + 630px); opacity: 0; }
         .slider-hero-item:only-child {
           left: 0;
           top: 0;
@@ -314,22 +316,14 @@ export default function SliderHero({
           .slider-hero-content { width: min(38vw, 380px); }
           .slider-hero-title { font-size: 1.6rem; }
           .slider-hero-desc { font-size: 0.85rem; }
-          .slider-hero-item { width: 160px; height: 270px; }
-          .slider-hero-item:nth-child(3) { left: 50%; }
-          .slider-hero-item:nth-child(4) { left: calc(50% + 170px); }
-          .slider-hero-item:nth-child(5) { left: calc(50% + 340px); }
-          .slider-hero-item:nth-child(6) { left: calc(50% + 510px); opacity: 0; }
+          .slider-hero-item { width: 160px; height: 270px; --slider-base: 50%; --slider-gap: 170px; }
         }
         @media (max-width: 649px) {
           .slider-hero-content { left: 1.25rem; width: min(65vw, 340px); }
           .slider-hero-title { font-size: 1.5rem; }
           .slider-hero-desc { margin: 0.75rem 0 1rem; font-size: 0.8rem; }
           .slider-hero-cta { padding: 0.6rem 1rem; font-size: 0.8rem; }
-          .slider-hero-item { width: 120px; height: 200px; }
-          .slider-hero-item:nth-child(3) { left: 68%; }
-          .slider-hero-item:nth-child(4) { left: calc(68% + 130px); }
-          .slider-hero-item:nth-child(5) { left: calc(68% + 260px); opacity: 0; }
-          .slider-hero-item:nth-child(6) { left: calc(68% + 390px); opacity: 0; }
+          .slider-hero-item { width: 120px; height: 200px; --slider-base: 68%; --slider-gap: 130px; }
         }
       `}</style>
     </div>

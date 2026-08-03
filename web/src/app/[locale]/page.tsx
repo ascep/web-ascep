@@ -200,20 +200,16 @@ export default async function HomePage({
     cta: { label: nt("leerMas"), href: item.href },
   }));
 
-  if (heroSlides.length < 6) {
-    const used = new Set(newsItems.map((n) => n.image));
-    for (const { src, alt } of fotos.home.gallery) {
-      if (heroSlides.length >= 6) break;
-      const image = assetPath(src);
-      if (used.has(image)) continue;
-      heroSlides.push({
-        image,
-        eyebrow: h("galeriaTag"),
-        title: alt,
-        description: h("noticiasDesc"),
-        cta: { label: nt("leerMas"), href: `/${locale}/impacto` },
-      });
-    }
+  for (const { src, alt } of fotos.home.gallery) {
+    const image = assetPath(src);
+    if (heroSlides.some((s) => s.image === image)) continue;
+    heroSlides.push({
+      image,
+      eyebrow: h("galeriaTag"),
+      title: alt,
+      description: h("noticiasDesc"),
+      cta: { label: nt("leerMas"), href: `/${locale}/impacto` },
+    });
   }
 
   return (
