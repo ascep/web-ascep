@@ -140,7 +140,9 @@ export const documentsQuery = groq`*[_type == "documentEntry"] | order(category 
   file,
   previewImage,
   externalUrl,
-  order
+  order,
+  _createdAt,
+  _updatedAt
 }`;
 
 export const documentsByCategoryQuery = groq`*[_type == "documentEntry" && category == $category] | order(order asc) {

@@ -773,7 +773,15 @@
     "catRegistros": "Registration and Policies",
     "catRegistrosDesc": "Official records and institutional policies of the association.",
     "catLegales": "Legal Framework",
-    "catLegalesDesc": "Legal documents, bylaws, and the organization's regime."
+    "catLegalesDesc": "Legal documents, bylaws, and the organization's regime.",
+    "recentTag": "Recent documents",
+    "openDoc": "View document",
+    "updatedLabel": "Updated",
+    "todos": "All",
+    "sliderPrev": "Previous document",
+    "sliderNext": "Next document",
+    "sliderDots": "Go to document",
+    "emptyDocs": "No documents in this category."
   },
   "contacto": {
     "heroTag": "CONTACT",

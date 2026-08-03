@@ -116,6 +116,8 @@ export type DocumentEntry = {
   previewImage?: SanityImage;
   externalUrl?: string;
   order?: number;
+  _createdAt?: string;
+  _updatedAt?: string;
 };
 
 export type VideoEntry = {

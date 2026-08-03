@@ -769,7 +769,15 @@
     "catRegistros": "Registro e Politicas",
     "catRegistrosDesc": "Registros oficiais e politicas institucionais da associacao.",
     "catLegales": "Marco Legal",
-    "catLegalesDesc": "Documentos legais, estatutos e regime da organizacao."
+    "catLegalesDesc": "Documentos legais, estatutos e regime da organizacao.",
+    "recentTag": "Documentos recentes",
+    "openDoc": "Ver documento",
+    "updatedLabel": "Atualizado",
+    "todos": "Todos",
+    "sliderPrev": "Documento anterior",
+    "sliderNext": "Proximo documento",
+    "sliderDots": "Ir para o documento",
+    "emptyDocs": "Nao ha documentos nesta categoria."
   },
   "contacto": {
     "heroTag": "Comunique-se",
