@@ -18,6 +18,7 @@ type CaminoSectionProps = {
 };
 
 const POSTERS = [
+  "EXP8.webp",
   "EXP1.webp",
   "EXP2.webp",
   "EXP3.webp",
@@ -25,10 +26,10 @@ const POSTERS = [
   "EXP5.webp",
   "EXP6.webp",
   "EXP7.webp",
-  "EXP8.webp",
   "EXP10.webp",
   "EXP11.webp",
   "EXP12.webp",
+  "Vaki.webp",
 ].map((src) => ({
   src: `/images/afiches/${src}`,
   alt: src.replace(".webp", ""),
@@ -58,7 +59,10 @@ export default function CaminoSection({
   return (
     <section
       className="section-dark section-bg-image bg-atmospheric-purple relative overflow-hidden py-20 sm:py-24"
-      style={{ "--section-bg-image": `url(${assetPath(bgImage)})` } as CSSProperties}
+      style={{
+        "--section-bg-image": `url(${assetPath(bgImage)})`,
+        "--section-bg-position": "center calc(50% + 30px)",
+      } as CSSProperties}
     >
       <div
         className="pointer-events-none absolute inset-0"
