@@ -317,13 +317,24 @@ export default function Header({ comoAyudarCard }: HeaderProps) {
                   onMouseEnter={() => handleMouseEnter(group.key)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <button
-                    className="flex items-center gap-1 whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
-                    aria-expanded={openDropdown === group.key}
-                    aria-haspopup="true"
-                  >
-                    {t(group.key)} <ChevronDown size={14} />
-                  </button>
+                  {group.key === "programas" ? (
+                    <Link
+                      href={`/${locale}/programas`}
+                      className="flex items-center gap-1 whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                      aria-haspopup="true"
+                      aria-expanded={openDropdown === group.key}
+                    >
+                      {t(group.key)} <ChevronDown size={14} />
+                    </Link>
+                  ) : (
+                    <button
+                      className="flex items-center gap-1 whitespace-nowrap rounded-[10px] px-3 py-2 text-sm font-semibold text-text-primary transition-colors hover:bg-bg-elevated"
+                      aria-expanded={openDropdown === group.key}
+                      aria-haspopup="true"
+                    >
+                      {t(group.key)} <ChevronDown size={14} />
+                    </button>
+                  )}
                   {openDropdown === group.key && renderSubmenu(group.items)}
                 </div>
               );

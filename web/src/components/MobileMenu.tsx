@@ -262,6 +262,13 @@ export default function MobileMenu() {
                     isOpen={expanded === "programas"}
                     onToggle={() => toggle("programas")}
                   >
+                    <Link
+                      href={`/${locale}/programas`}
+                      onClick={close}
+                      className="block rounded-[10px] px-3 py-2.5 text-sm font-semibold text-text-primary hover:bg-bg-elevated min-h-[44px]"
+                    >
+                      {t("programas")}
+                    </Link>
                     {/* Incidencia (with nested Marco Politico) */}
                     <div>
                       <button

@@ -20,7 +20,6 @@ import NewsCarousel, { type NewsItem } from "@/components/NewsCarousel";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import { assetPath } from "@/lib/asset-path";
-import { categoryColor } from "@/lib/category-colors";
 import { imageUrl } from "@/lib/sanity/image";
 import { getFotos } from "@/lib/get-fotos";
 import {
@@ -28,7 +27,6 @@ import {
   getFeaturedPartners,
   getImpactStats,
   getTestimonials,
-  getNoticias,
 } from "@/lib/sanity/fetch";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -63,12 +61,11 @@ export default async function HomePage({
   const g = await getTranslations({ locale, namespace: "generales" });
   const nt = await getTranslations({ locale, namespace: "noticias" });
 
-  const [cmsMilestones, cmsPartners, cmsStats, cmsTestimonials, cmsNoticias] = await Promise.all([
+  const [cmsMilestones, cmsPartners, cmsStats, cmsTestimonials] = await Promise.all([
     getMilestones(),
     getFeaturedPartners(),
     getImpactStats(),
     getTestimonials("home"),
-    getNoticias(),
   ]);
 
   const fotos = await getFotos();
@@ -175,22 +172,24 @@ export default async function HomePage({
       excerpt: nt("leyExcerpt"),
       color: "#4A154B",
     },
-    ...cmsNoticias
-      .filter((n) => Boolean(n.slug?.current))
-      .slice(0, 5)
-      .map((n, i) => {
-        const img = n.coverImage ? imageUrl(n.coverImage, 1600, 900) : null;
-        const fallback = assetPath(fotos.home.gallery[i % fotos.home.gallery.length].src);
-        return {
-          id: n._id,
-          href: `/${locale}/noticias/${n.slug?.current}`,
-          image: img || fallback,
-          tag: n.category ? nt(n.category) || n.category : "",
-          title: n.title || "",
-          excerpt: n.excerpt || "",
-          color: categoryColor(n.category || ""),
-        } as NewsItem;
-      }),
+    {
+      id: "dia-del-egresado",
+      href: `/${locale}/noticias/dia-del-egresado`,
+      image: assetPath("/images/eventos/encuentro-2025/GIS06445.webp"),
+      tag: nt("egresadoTag"),
+      title: nt("egresadoTitle"),
+      excerpt: nt("egresadoExcerpt"),
+      color: "#F7921E",
+    },
+    {
+      id: "casas-del-saber",
+      href: `/${locale}/noticias/casas-del-saber`,
+      image: assetPath(fotos.casasDelSaber.hero),
+      tag: nt("casasTag"),
+      title: nt("casasTitle"),
+      excerpt: nt("casasExcerpt"),
+      color: "#019E9F",
+    },
   ];
 
   const heroSlides: SliderSlide[] = newsItems.map((item) => ({

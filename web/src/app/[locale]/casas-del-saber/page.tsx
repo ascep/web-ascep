@@ -5,7 +5,7 @@ import CasasHero from "./CasasHero";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Home, Layers, BookOpen, Compass } from "lucide-react";
+import { Home, Layers, BookOpen, Compass, Users, Heart, Star, Target } from "lucide-react";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
@@ -63,6 +63,15 @@ export default async function CasasDelSaberPage({
       desc: t("seccion4Desc"),
       icon: Compass,
     },
+  ];
+
+  const roles = [
+    { title: t("role1Title"), desc: t("role1Desc"), icon: Home },
+    { title: t("role2Title"), desc: t("role2Desc"), icon: BookOpen },
+    { title: t("role3Title"), desc: t("role3Desc"), icon: Users },
+    { title: t("role4Title"), desc: t("role4Desc"), icon: Heart },
+    { title: t("role5Title"), desc: t("role5Desc"), icon: Star },
+    { title: t("role6Title"), desc: t("role6Desc"), icon: Target },
   ];
 
   return (
@@ -125,6 +134,40 @@ export default async function CasasDelSaberPage({
               {t("objetivoDesc")}
             </p>
           </AnimatedSection>
+        </div>
+      </section>
+
+      <section
+        className="section-bg-image relative overflow-hidden bg-purple-bg py-20"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.hero)})` } as CSSProperties}
+      >
+        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="mixed" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              {t("estructuraTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t("estructuraTitle")}
+            </h2>
+          </AnimatedSection>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {roles.map((role, i) => {
+              const Icon = role.icon;
+              return (
+                <AnimatedSection key={i} direction="up" delay={i * 0.06}>
+                  <div className="glass-card h-full rounded-[10px] p-6 transition-all hover:bg-white/15">
+                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
+                      <Icon size={22} className="text-ley-teal" />
+                    </div>
+                    <h3 className="mb-2 font-bold text-white">{role.title}</h3>
+                    <p className="text-sm leading-relaxed text-white/70">{role.desc}</p>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
+          </div>
         </div>
       </section>
 

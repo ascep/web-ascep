@@ -1,16 +1,27 @@
 import type { CSSProperties } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import PageHero from "@/components/PageHero";
+import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import {
+  ArrowRight,
+  Baby,
+  Briefcase,
+  Gavel,
+  HandHeart,
+  HeartPulse,
+  Home,
+  Megaphone,
+  PersonStanding,
+  Quote,
+  Shield,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
+import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
-import ImageParallax from "@/components/ImageParallax";
-import { ArrowRight } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { getPrograms, localize, sanityImage } from "@/lib/sanity/fetch";
-import { getTranslations } from "next-intl/server";
-import AnimatedSection from "@/components/AnimatedSection";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -24,23 +35,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
-const slugLabels: Record<string, string> = {
-  incidencia: "Liderazgo",
-  "avanza-joven": "Formacion",
-  empleo: "Insercion",
-  "mi-cuerpo": "Bienestar",
-  "marco-politico": "Incidencia",
-  "casas-del-saber": "Programa",
-};
-
-const slugToMsgKey: Record<string, string> = {
-  incidencia: "incidencia",
-  "avanza-joven": "avanza",
-  empleo: "empleo",
-  "mi-cuerpo": "miCuerpo",
-  "marco-politico": "marcoPolitico",
-  "casas-del-saber": "casas",
-};
+type ProjectRow = { proyecto: string; periodo: string; resultado: string };
+type ProjectCard = { titulo: string; desc: string };
 
 export default async function ProgramasPage({
   params,
@@ -51,128 +47,238 @@ export default async function ProgramasPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "programas" });
 
-  const cmsPrograms = await getPrograms();
+  const incidenciaProjects = t.raw("incidenciaProjects") as ProjectRow[];
+  const avanzaProjects = t.raw("avanzaProjects") as ProjectRow[];
+  const empleoProjects = t.raw("empleoProjects") as ProjectCard[];
+  const miCuerpoProjects = t.raw("miCuerpoProjects") as ProjectCard[];
+  const casasProjects = t.raw("casasProjects") as ProjectCard[];
 
-  const programs = cmsPrograms.length > 0
-    ? cmsPrograms.map((p) => ({
-        title: localize(p.title, locale) || "",
-        slug: p.slug?.current || "",
-        desc: localize(p.shortDescription, locale) || "",
-        image: sanityImage(p.heroImage) || (p.programLogo ? sanityImage(p.programLogo) : "") || "",
-        label: slugLabels[p.slug?.current || ""] || "",
-        msgKey: slugToMsgKey[p.slug?.current || ""] || p.slug?.current || "",
-      }))
-    : [
-        { title: t("incidenciaTitle"), slug: "incidencia", desc: t("incidenciaDesc"), image: assetPath(fotos.programas.cards.incidencia.image), label: t("pillLiderazgo"), msgKey: "incidencia" },
-        { title: t("avanzaTitle"), slug: "avanza-joven", desc: t("avanzaDesc"), image: assetPath(fotos.programas.cards.avanzaJoven.image), label: t("pillFormacion"), msgKey: "avanza" },
-        { title: t("empleoTitle"), slug: "empleo", desc: t("empleoDesc"), image: assetPath(fotos.programas.cards.fomento.image), label: t("pillInsercion"), msgKey: "empleo" },
-        { title: t("miCuerpoTitle"), slug: "mi-cuerpo", desc: t("miCuerpoDesc"), image: assetPath(fotos.programas.cards.miCuerpo.image), label: t("pillBienestar"), msgKey: "miCuerpo" },
-        { title: t("casasTitle"), slug: "casas-del-saber", desc: t("casasDesc"), image: "", label: t("pillPrograma"), msgKey: "casas" },
-      ];
+  const stats: { value: string; label: string; icon: LucideIcon; color: string; bg: string }[] = [
+    { value: t("cifra1"), label: t("cifra1Label"), icon: Users, color: "text-ley-purple", bg: "bg-ley-purple/10" },
+    { value: t("cifra2"), label: t("cifra2Label"), icon: Shield, color: "text-ley-teal", bg: "bg-ley-teal/10" },
+    { value: t("cifra3"), label: t("cifra3Label"), icon: Baby, color: "text-ley-cyan", bg: "bg-ley-cyan/10" },
+    { value: t("cifra4"), label: t("cifra4Label"), icon: HandHeart, color: "text-ley-orange", bg: "bg-ley-orange/10" },
+  ];
 
   return (
     <>
-      <PageHero
-        bgImage={assetPath(fotos.programas.hero)}
-        tag={t("badge")}
-        title={t("title")}
-        subtitle={t("desc")}
-      />
+      <section className="relative overflow-hidden bg-ley-purple text-white">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <Image
+            src={assetPath(fotos.programas.hero)}
+            alt=""
+            fill
+            className="object-cover opacity-15"
+            sizes="100vw"
+            priority
+          />
+        </div>
+        <div aria-hidden="true" className="pointer-events-none absolute -right-12 -top-12 hidden lg:block">
+          <Quote size={340} strokeWidth={1} className="text-white opacity-10" />
+        </div>
+        <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-ley-cyan/10" />
+        <div aria-hidden="true" className="pointer-events-none absolute -right-10 bottom-10 h-48 w-48 rounded-full bg-ley-orange/10" />
 
-      <section className="relative overflow-hidden bg-section-light py-16">
-        <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-10 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-orange/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
-              {t("estadisticasTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              {t("estadisticasTitle")}
-            </h2>
-          </AnimatedSection>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[1, 2, 3, 4].map((n, i) => (
-              <AnimatedSection key={n} direction="up" delay={i * 0.08}>
-                <div className="h-full rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 text-center transition-all hover:shadow-md">
-                  <p className="text-3xl font-extrabold text-brand-purple">{t(`cifra${n}`)}</p>
-                  <p className="mt-2 text-sm text-[var(--color-text-secondary)]">{t(`cifra${n}Label`)}</p>
+        <div className="relative mx-auto w-full max-w-7xl px-4 pb-16 pt-16 sm:px-6 sm:pb-24 sm:pt-24 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-12">
+            <div className="lg:col-span-7">
+              <span className="inline-block rounded-full border border-ley-yellow/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-ley-yellow">
+                {t("badge")}
+              </span>
+              <h1 className="mt-6 break-words text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
+                {t("title")} <span className="text-ley-cyan">{t("titleHighlight")}</span>
+              </h1>
+              <p className="mt-6 max-w-xl text-base leading-relaxed text-purple-100 sm:text-lg">
+                {t("desc")}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href={`/${locale}/quienes-somos`}
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-ley-orange px-6 py-3 text-sm font-bold text-white transition-all hover:bg-ley-orange/90 hover:shadow-lg"
+                >
+                  {t("heroCta1")} <ArrowRight size={16} />
+                </Link>
+                <Link
+                  href="#portafolio"
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-white/30 px-6 py-3 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/10"
+                >
+                  {t("heroCta2")}
+                </Link>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5">
+              <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
+                <div className="flex items-center gap-4">
+                  <Image
+                    src={assetPath("/logos/12 logo ascep blanco sin slogan.png")}
+                    alt="ASCEP"
+                    width={112}
+                    height={112}
+                    className="h-16 w-16 rounded-2xl bg-white/15 p-2"
+                  />
+                  <div>
+                    <p className="text-xl font-extrabold">ASCEP</p>
+                    <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-cyan">
+                      {t("heroCardTag")}
+                    </p>
+                  </div>
                 </div>
-              </AnimatedSection>
-            ))}
+                <p className="mt-6 text-sm leading-relaxed text-purple-100">{t("heroCardDesc")}</p>
+                <Link
+                  href={`/${locale}/donar`}
+                  className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
+                >
+                  {t("heroCardCta")} <HandHeart size={16} />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.hero)})` } as CSSProperties}>
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
+              {t("estadisticasTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-text-primary sm:text-4xl">
+              {t("estadisticasTitle")}
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {stats.map((stat, i) => {
+              const Icon = stat.icon;
+              return (
+                <AnimatedSection key={i} direction="up" delay={i * 0.08}>
+                  <div className="h-full rounded-3xl border border-border-default bg-bg-card p-8 text-center shadow-sm transition-shadow hover:shadow-md">
+                    <div className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl ${stat.bg}`}>
+                      <Icon size={26} className={stat.color} />
+                    </div>
+                    <p className="text-4xl font-black tracking-tight text-ley-purple">{stat.value}</p>
+                    <p className="mt-2 text-sm font-medium leading-relaxed text-text-secondary">{stat.label}</p>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
+          </div>
+
+          <AnimatedSection direction="up" delay={0.2}>
+            <div className="mt-12 flex flex-col items-center justify-between gap-6 rounded-3xl bg-ley-purple p-6 text-white sm:flex-row sm:p-8">
+              <div className="flex items-start gap-4">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-ley-teal">
+                  <Gavel size={26} className="text-white" />
+                </div>
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-widest text-ley-yellow">{t("leyBannerTag")}</p>
+                  <h3 className="mt-1 text-lg font-extrabold">{t("leyBannerTitle")}</h3>
+                  <p className="mt-1 max-w-2xl text-sm leading-relaxed text-purple-100">{t("leyBannerDesc")}</p>
+                </div>
+              </div>
+              <Link
+                href={`/${locale}/ley-de-egreso`}
+                className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-ley-orange px-6 py-3 text-sm font-bold text-white transition-all hover:bg-ley-orange/90 hover:shadow-lg"
+              >
+                {t("leyBannerCta")} <ArrowRight size={16} />
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <section id="portafolio" className="section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {programs.map((program, i) => (
-              <AnimatedSection key={program.slug} direction="up" delay={i * 0.1}>
-                <div className="group overflow-hidden rounded-[10px] bg-white shadow-sm transition-all hover:shadow-lg hover:-translate-y-1">
-                  <div className="relative h-52 overflow-hidden">
-                    {(() => {
-                      const href = program.slug === "casas-del-saber"
-                        ? `/${locale}/casas-del-saber`
-                        : `/${locale}/programas/${program.slug}`;
-                      return program.image && program.image.endsWith(".webp") ? (
-                        <Link href={href} className="relative block h-full">
-                          <ImageParallax src={program.image} alt={program.title} fill containerClassName="h-full" className="object-cover transition-transform duration-500 group-hover:scale-105" intensity={0.12} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-                          <span className="absolute bottom-4 left-4 rounded-[10px] bg-brand-purple px-3 py-1 text-xs font-semibold text-white z-10">{program.label}</span>
-                        </Link>
-                      ) : program.image ? (
-                        <Link href={href} className="relative block h-full">
-                          <div className="flex h-full w-full items-center justify-center bg-brand-teal/5">
-                            <Image src={program.image} alt={program.title} width={160} height={100} className="h-auto max-h-32 w-auto max-w-[80%] object-contain transition-transform duration-500 group-hover:scale-105" />
-                          </div>
-                          <span className="absolute bottom-4 left-4 rounded-[10px] bg-brand-purple px-3 py-1 text-xs font-semibold text-white z-10">{program.label}</span>
-                        </Link>
-                      ) : (
-                        <Link href={href} className="flex h-full w-full items-center justify-center bg-brand-purple/10">
-                          <span className="text-5xl font-bold text-brand-purple/20">{program.title.charAt(0)}</span>
-                        </Link>
-                      );
-                    })()}
-                  </div>
-                  <div className="p-6">
-                    <h3 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">
-                      {program.title}
-                    </h3>
-                    <p className="mb-4 text-sm text-[var(--color-text-secondary)]">
-                      {program.desc}
-                    </p>
-                    <div className="mb-4 space-y-2">
-                      <p className="text-xs font-bold uppercase tracking-wider text-white/80">
-                        {t("resultadosTitle")}
-                      </p>
-                      <ul className="space-y-1">
-                        {[1, 2, 3].map((ri) => {
-                          try {
-                            const res = t(`${program.msgKey}Result${ri}`);
-                            return (
-                              <li key={ri} className="flex items-start gap-2 text-xs text-[var(--color-text-secondary)]">
-                                <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-teal" />
-                                {res}
-                              </li>
-                            );
-                          } catch {
-                            return null;
-                          }
-                        })}
-                      </ul>
-                    </div>
-                    <Link
-                      href={program.slug === "casas-del-saber" ? `/${locale}/casas-del-saber` : `/${locale}/programas/${program.slug}`}
-                      className="inline-flex items-center gap-2 rounded-[10px] bg-brand-purple px-5 py-2.5 text-sm font-semibold text-white transition-all hover:shadow-md"
-                    >
-                      {t("leerMas")} <ArrowRight size={14} />
-                    </Link>
-                  </div>
-                </div>
+          <AnimatedSection className="mb-12 text-center">
+            <span className="mb-3 inline-block rounded-full border border-ley-yellow/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-yellow">
+              {t("portafolioTag")}
+            </span>
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">
+              {t("portafolioTitle")}
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-purple-100">
+              {t("portafolioDesc")}
+            </p>
+          </AnimatedSection>
+
+          <div className="space-y-10">
+            <AnimatedSection direction="up">
+              <ProgramTable
+                icon={Megaphone}
+                logo={assetPath(fotos.home.programs.incidencia.logo)}
+                iconBg="bg-ley-orange/15"
+                title={t("incidenciaTitle")}
+                desc={t("incidenciaDesc")}
+                rows={incidenciaProjects}
+                theadClass="bg-ley-orange"
+                btnClass="bg-ley-orange text-white hover:bg-ley-orange/90"
+                href={`/${locale}/programas/incidencia`}
+                leerMas={t("leerMas")}
+                colProyecto={t("tablaColProyecto")}
+                colPeriodo={t("tablaColPeriodo")}
+                colResultado={t("tablaColResultado")}
+              />
+            </AnimatedSection>
+
+            <AnimatedSection direction="up" delay={0.1}>
+              <ProgramTable
+                icon={PersonStanding}
+                logo={assetPath(fotos.home.programs.avanzaJoven.logo)}
+                iconBg="bg-ley-cyan/15"
+                title={t("avanzaTitle")}
+                desc={t("avanzaDesc")}
+                rows={avanzaProjects}
+                theadClass="bg-ley-cyan"
+                btnClass="bg-ley-cyan text-white hover:bg-ley-cyan/90"
+                href={`/${locale}/programas/avanza-joven`}
+                leerMas={t("leerMas")}
+                colProyecto={t("tablaColProyecto")}
+                colPeriodo={t("tablaColPeriodo")}
+                colResultado={t("tablaColResultado")}
+              />
+            </AnimatedSection>
+
+            <div className="grid gap-6 lg:grid-cols-3">
+              <AnimatedSection direction="up" delay={0.15}>
+                <ProgramCard
+                  icon={Briefcase}
+                  logo={assetPath(fotos.home.programs.fomento.logo)}
+                  iconBg="bg-ley-yellow/25"
+                  title={t("empleoTitle")}
+                  desc={t("empleoDesc")}
+                  items={empleoProjects}
+                  href={`/${locale}/programas/empleo`}
+                  leerMas={t("leerMas")}
+                />
               </AnimatedSection>
-            ))}
+              <AnimatedSection direction="up" delay={0.25}>
+                <ProgramCard
+                  icon={HeartPulse}
+                  logo={assetPath(fotos.home.programs.miCuerpo.logo)}
+                  iconBg="bg-ley-purple/10"
+                  title={t("miCuerpoTitle")}
+                  desc={t("miCuerpoDesc")}
+                  items={miCuerpoProjects}
+                  href={`/${locale}/programas/mi-cuerpo`}
+                  leerMas={t("leerMas")}
+                />
+              </AnimatedSection>
+              <AnimatedSection direction="up" delay={0.35}>
+                <ProgramCard
+                  icon={Home}
+                  iconBg="bg-ley-cyan"
+                  title={t("casasTitle")}
+                  desc={t("casasDesc")}
+                  items={casasProjects}
+                  href={`/${locale}/casas-del-saber`}
+                  leerMas={t("leerMas")}
+                />
+              </AnimatedSection>
+            </div>
           </div>
         </div>
       </section>
@@ -180,4 +286,135 @@ export default async function ProgramasPage({
   );
 }
 
+function ProgramTable({
+  icon: Icon,
+  logo,
+  iconBg,
+  btnClass = "bg-ley-purple text-white",
+  title,
+  desc,
+  rows,
+  theadClass,
+  href,
+  leerMas,
+  colProyecto,
+  colPeriodo,
+  colResultado,
+}: {
+  icon: LucideIcon;
+  logo?: string;
+  iconBg: string;
+  btnClass?: string;
+  title: string;
+  desc: string;
+  rows: ProjectRow[];
+  theadClass: string;
+  href: string;
+  leerMas: string;
+  colProyecto: string;
+  colPeriodo: string;
+  colResultado: string;
+}) {
+  return (
+    <div className="overflow-hidden rounded-3xl border border-border-default bg-bg-card shadow-sm">
+      <div className="flex flex-col gap-4 border-b border-border-default p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+        <div className="flex items-start gap-4">
+          <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${iconBg}`}>
+            {logo ? (
+              <Image src={logo} alt={title} width={48} height={48} className="h-full w-full rounded-2xl object-contain p-1.5" />
+            ) : (
+              <Icon size={24} className="text-white" />
+            )}
+          </div>
+          <div>
+            <h3 className="text-xl font-extrabold text-text-primary">{title}</h3>
+            <p className="mt-1 text-sm leading-relaxed text-text-secondary">{desc}</p>
+          </div>
+        </div>
+        <Link
+          href={href}
+          className={`inline-flex shrink-0 items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all hover:shadow-md ${btnClass}`}
+        >
+          {leerMas} <ArrowRight size={14} />
+        </Link>
+      </div>
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[560px] border-collapse text-left text-sm">
+          <caption className="sr-only">{title}</caption>
+          <thead className={theadClass}>
+            <tr>
+              <th scope="col" className="p-4 font-semibold text-white">{colProyecto}</th>
+              <th scope="col" className="p-4 font-semibold text-white">{colPeriodo}</th>
+              <th scope="col" className="p-4 font-semibold text-white">{colResultado}</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-border-default bg-bg-card">
+            {rows.map((row) => (
+              <tr key={row.proyecto} className="transition-colors hover:bg-ley-purple/5">
+                <td className="p-4 font-bold text-text-primary">{row.proyecto}</td>
+                <td className="whitespace-nowrap p-4 font-medium text-text-muted">{row.periodo}</td>
+                <td className="p-4 text-text-secondary">{row.resultado}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
 
+function ProgramCard({
+  icon: Icon,
+  logo,
+  iconBg,
+  btnClass = "bg-ley-purple text-white",
+  title,
+  desc,
+  items,
+  href,
+  leerMas,
+}: {
+  icon: LucideIcon;
+  logo?: string;
+  iconBg: string;
+  btnClass?: string;
+  title: string;
+  desc: string;
+  items: ProjectCard[];
+  href: string;
+  leerMas: string;
+}) {
+  return (
+    <div className="flex h-full flex-col rounded-3xl border border-border-default bg-bg-card p-6 shadow-sm transition-all hover:shadow-md">
+      <div className="flex items-start gap-4">
+        <div className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl ${iconBg}`}>
+          {logo ? (
+            <Image src={logo} alt={title} width={48} height={48} className="h-full w-full rounded-2xl object-contain p-1.5" />
+          ) : (
+            <Icon size={24} className="text-white" />
+          )}
+        </div>
+        <div>
+          <h3 className="text-lg font-extrabold leading-snug text-text-primary">{title}</h3>
+          <p className="mt-1 text-sm leading-relaxed text-text-secondary">{desc}</p>
+        </div>
+      </div>
+      <div className="mt-5 space-y-3">
+        {items.map((item) => (
+          <div key={item.titulo} className="rounded-2xl border border-border-default bg-bg-elevated p-4">
+            <p className="text-sm font-bold text-text-primary">{item.titulo}</p>
+            <p className="mt-1 text-xs leading-relaxed text-text-secondary">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div className="mt-auto pt-6">
+        <Link
+          href={href}
+          className={`inline-flex items-center gap-2 rounded-xl px-5 py-2.5 text-sm font-semibold transition-all hover:shadow-md ${btnClass}`}
+        >
+          {leerMas} <ArrowRight size={14} />
+        </Link>
+      </div>
+    </div>
+  );
+}

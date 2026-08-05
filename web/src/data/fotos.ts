@@ -15,8 +15,8 @@
  *   +-- enredate/          Fotos del programa Enredate
  *   +-- casas-del-saber/   Fotos de Casas del Saber
  *
- * When rendering, wrap values with assetPath(...) so production asset
- * remapping still works via src/lib/asset-map.ts.
+ * When rendering, wrap values with assetPath(...) to append the
+ * cache-busting version query parameter (?v=...) in production.
  */
 
 export const fotos = {

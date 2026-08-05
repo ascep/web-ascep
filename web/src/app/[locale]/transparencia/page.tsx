@@ -28,13 +28,13 @@ type FallbackFile = { name: string; path: string; updatedAt?: string; priority?:
 
 const fallbackDocuments: Record<string, FallbackFile[]> = {
   financieros: [
-    { name: "Estados Financieros 2025", path: "/documents/3.Estados-Financieros-2025_ASCEP.pdf", updatedAt: "2026-07-01", priority: 10 },
+    { name: "Estados Financieros 2025", path: "/documents/3.Estados-Financieros-2025_ASCEP.pdf", updatedAt: "2026-07-01", priority: 10, preview: "/images/pdf-previews/3-estados-financieros-2025-ascep.jpg" },
     { name: "Estados Financieros 2024", path: "/documents/3.Estados-Financieros-2024_ASCEP_firmados.pdf", updatedAt: "2025-03-01", preview: "/images/pdf-previews/3-estados-financieros-2024-ascep-firmados.jpg" },
     { name: "Estados Financieros 2023", path: "/documents/3.Estados_Financieros_2023_ASCEP.pdf", updatedAt: "2024-03-01", preview: "/images/pdf-previews/3-estados-financieros-2023-ascep.jpg" },
-    { name: "Estados Financieros 2022", path: "/documents/3.Estados-Financieros-2022_ASCEP.pdf", updatedAt: "2026-01-10", priority: 8 },
+    { name: "Estados Financieros 2022", path: "/documents/3.Estados-Financieros-2022_ASCEP.pdf", updatedAt: "2026-01-10", priority: 8, preview: "/images/pdf-previews/3-estados-financieros-2022-ascep.jpg" },
   ],
   informes: [
-    { name: "Informe de Gestion 2025", path: "/documents/2.Informe-de-Gestion-2025_ASCEP.pdf", updatedAt: "2026-04-01", priority: 9 },
+    { name: "Informe de Gestion 2025", path: "/documents/2.Informe-de-Gestion-2025_ASCEP.pdf", updatedAt: "2026-04-01", priority: 9, preview: "/images/pdf-previews/2-informe-de-gestion-2025-ascep.jpg" },
     { name: "Informe de Gestion 2024", path: "/documents/2.Informe-de-Gestion-2024-ASCEP_Maicol-Londono.pdf", updatedAt: "2025-02-01", preview: "/images/pdf-previews/2-informe-de-gestion-2024-ascep-maicol-londono.jpg" },
     { name: "Informe de Gestion 2023", path: "/documents/2.Informe_de_Gestion_2023.pdf", updatedAt: "2024-02-01", preview: "/images/pdf-previews/2-informe-de-gestion-2023.jpg" },
   ],

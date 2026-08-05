@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import { getTranslations } from "next-intl/server";
-import PageHero from "@/components/PageHero";
+import ProgramHero from "@/components/ProgramHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
@@ -101,22 +101,30 @@ export default async function IncidenciaPage({
 
   return (
     <>
-      <PageHero
+      <ProgramHero
         bgImage={sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.incidencia.image)}
-        tag="Programa"
-        title="Incidencia y Participacion"
-        subtitle="Fortalecemos la participacion ciudadana y la incidencia politica de los jovenes egresados."
+        tag={t("pillPrograma")}
+        title={t("incidenciaHeroTitle")}
+        highlight={t("incidenciaHeroHighlight")}
+        highlightClass="text-ley-orange"
+        subtitle={t("incidenciaHeroSubtitle")}
+        primaryCta={{ label: t("incidenciaHeroCta"), href: `/${locale}/ley-de-egreso` }}
+        cardLogo={assetPath(fotos.home.programs.incidencia.logo)}
+        cardTitle="ASCEP"
+        cardTag={t("incidenciaTitle")}
+        cardDesc={t("incidenciaDesc")}
+        cardCta={{ label: t("heroCta1"), href: `/${locale}/quienes-somos` }}
       />
 
       <section className="relative overflow-hidden bg-section-light py-20">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+            <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
               Informacion
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Que es <span className="text-brand-purple">Incidencia y Participacion</span>?
+              Que es <span className="text-ley-purple">Incidencia y Participacion</span>?
             </h2>
           </AnimatedSection>
           <div className="grid gap-12 md:grid-cols-2 items-center">
@@ -173,11 +181,11 @@ export default async function IncidenciaPage({
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+            <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
               Lineas
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Lineas de <span className="text-brand-purple">Accion</span>
+              Lineas de <span className="text-ley-purple">Accion</span>
             </h2>
             <p className="mt-4 text-[var(--color-text-secondary)]">
               El programa se estructura en torno a las siguientes lineas de accion
@@ -188,9 +196,9 @@ export default async function IncidenciaPage({
               const Icon = linea.icon;
               return (
                 <AnimatedSection key={linea.title} direction="up" delay={i * 0.06}>
-                  <div className="rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 text-center transition-all hover:shadow-md">
-                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-brand-purple/10">
-                      <Icon size={22} className="text-brand-purple" />
+                  <div className="rounded-[10px] border border-border-default bg-bg-card p-6 text-center transition-all hover:shadow-md">
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-ley-purple/10">
+                      <Icon size={22} className="text-ley-purple" />
                     </div>
                     <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">{linea.title}</h4>
                     <p className="text-sm text-[var(--color-text-muted)]">{linea.desc}</p>

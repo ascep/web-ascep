@@ -6,7 +6,7 @@
     "retosImage": "/images/eventos/2024/20241112_102357.webp",
     "gallery": [
       {
-        "src": "https://cdn.sanity.io/images/7vvy9nrc/production/f17e7f7d1bbd279d29772ab538e28b6c99c300c2-596x335.jpg",
+        "src": "https://cdn.sanity.io/images/7vvy9nrc/production/7da433239580b3d24a4f68460368b9842783fe9a-1116x1280.jpg",
         "alt": "Taller con jovenes"
       },
       {
@@ -18,7 +18,7 @@
         "alt": "Actividad grupal"
       },
       {
-        "src": "https://cdn.sanity.io/images/7vvy9nrc/production/06d9db3906b6e6a55e0832c80b2f21247ced0c98-4032x3024.webp",
+        "src": "https://cdn.sanity.io/images/7vvy9nrc/production/6430b7ecc80d5d669c9e39a264f9fe1dd09889b1-1280x960.jpg",
         "alt": "Acompanamiento psicosocial"
       },
       {
@@ -49,7 +49,7 @@
         "year": "2020",
         "title": "Primeras alianzas",
         "description": "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.",
-        "image": "https://cdn.sanity.io/images/7vvy9nrc/production/f17e7f7d1bbd279d29772ab538e28b6c99c300c2-596x335.jpg"
+        "image": "https://cdn.sanity.io/images/7vvy9nrc/production/7da433239580b3d24a4f68460368b9842783fe9a-1116x1280.jpg"
       },
       {
         "year": "2021",
@@ -138,7 +138,7 @@
         "year": "2020",
         "title": "Primeras alianzas",
         "description": "Establecemos vinculos con actores politicos y organizaciones internacionales como UNICEF, OIM y USAID para impulsar la agenda del egreso.",
-        "image": "https://cdn.sanity.io/images/7vvy9nrc/production/f17e7f7d1bbd279d29772ab538e28b6c99c300c2-596x335.jpg"
+        "image": "https://cdn.sanity.io/images/7vvy9nrc/production/7da433239580b3d24a4f68460368b9842783fe9a-1116x1280.jpg"
       },
       {
         "year": "2021",
@@ -269,7 +269,7 @@
         "alt": "Jovenes en taller de habilidades"
       },
       {
-        "src": "https://cdn.sanity.io/images/7vvy9nrc/production/06d9db3906b6e6a55e0832c80b2f21247ced0c98-4032x3024.webp",
+        "src": "https://cdn.sanity.io/images/7vvy9nrc/production/6430b7ecc80d5d669c9e39a264f9fe1dd09889b1-1280x960.jpg",
         "alt": "Acompanamiento psicosocial"
       },
       {
@@ -320,7 +320,7 @@
   },
   "planPadrino": {
     "hero": "https://cdn.sanity.io/images/7vvy9nrc/production/46b9d348b9eb78f4fa9c48af47d0f5ef1e37ee79-4032x3024.webp",
-    "section": "https://cdn.sanity.io/images/7vvy9nrc/production/06d9db3906b6e6a55e0832c80b2f21247ced0c98-4032x3024.webp"
+    "section": "https://cdn.sanity.io/images/7vvy9nrc/production/6430b7ecc80d5d669c9e39a264f9fe1dd09889b1-1280x960.jpg"
   },
   "voluntariado": {
     "hero": "/images/eventos/2024/20241112_100049.webp",

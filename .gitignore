@@ -31,6 +31,10 @@ web/public/images/UNICEF*
 # Large asset directories (deploy separately - documents only, too large for git)
 web/public/documents/
 
+# Raw AFICHES export (moved to C:\Users\Home\Desktop\ascep-backups\; re-adds are ignored)
+web/public/images/AFICHES 7 A*OS-20260803T152914Z-1-001/
+web/public/images/AFICHES 7 A*OS-20260803T152914Z-1-001.zip
+
 # opencode local config (not needed for deployment)
 .opencode/
 

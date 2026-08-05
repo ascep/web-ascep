@@ -55,6 +55,26 @@ export default async function NoticiasPage({
       bgImage: assetPath(fotos.leyEgreso.hero),
       featured: true,
     },
+    {
+      id: "casas-del-saber",
+      slug: "casas-del-saber",
+      title: t("casasTitle"),
+      excerpt: t("casasExcerpt"),
+      category: "programas",
+      categoryLabel: t("programas"),
+      ctaLabel: t("leerMas"),
+      bgImage: assetPath(fotos.casasDelSaber.hero),
+    },
+    {
+      id: "dia-del-egresado",
+      slug: "dia-del-egresado",
+      title: t("egresadoTitle"),
+      excerpt: t("egresadoExcerpt"),
+      category: "eventos",
+      categoryLabel: t("eventos"),
+      ctaLabel: t("leerMas"),
+      bgImage: assetPath("/images/eventos/encuentro-2025/GIS06445.webp"),
+    },
     ...noticias
       .filter((n): n is NoticiaWithSlug => Boolean(n.slug?.current))
       .map((noticia) => ({

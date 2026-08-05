@@ -142,10 +142,10 @@ function DashboardInner() {
 
   const filteredEntries = filter
     ? entries.filter(
-        (e) =>
-          e.key.toLowerCase().includes(filter.toLowerCase()) ||
-          e.path.toLowerCase().includes(filter.toLowerCase())
-      )
+      (e) =>
+        e.key.toLowerCase().includes(filter.toLowerCase()) ||
+        e.path.toLowerCase().includes(filter.toLowerCase())
+    )
     : null;
 
   const openPreview = (entry: FlatEntry) => {

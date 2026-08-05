@@ -1,7 +1,7 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import PageHero from "@/components/PageHero";
+import ProgramHero from "@/components/ProgramHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
@@ -133,23 +133,29 @@ export default async function AvanzaJovenPage({
 
   return (
     <>
-      <PageHero
+      <ProgramHero
         bgImage={sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.avanzaJoven.image)}
-        tag="Programa"
-        title="Avanza"
-        highlight="Joven"
-        subtitle="Un programa integral para jovenes en proceso de egreso del sistema de proteccion."
+        tag={t("pillPrograma")}
+        title={t("avanzaHeroTitle")}
+        highlight={t("avanzaHeroHighlight")}
+        subtitle={t("avanzaHeroSubtitle")}
+        primaryCta={{ label: t("avanzaHeroCta"), href: "#modulos" }}
+        cardLogo={assetPath(fotos.home.programs.avanzaJoven.logo)}
+        cardTitle="ASCEP"
+        cardTag={t("avanzaTitle")}
+        cardDesc={t("avanzaDesc")}
+        cardCta={{ label: t("avanzaCtaBtn"), href: `/${locale}/como-ayudar` }}
       />
 
       <section className="relative overflow-hidden bg-section-light py-20">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-8 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+            <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
               Informacion
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Que es <span className="text-brand-purple">Avanza Joven</span>?
+              Que es <span className="text-ley-purple">Avanza Joven</span>?
             </h2>
           </AnimatedSection>
           <AnimatedSection delay={0.1}>
@@ -208,8 +214,8 @@ export default async function AvanzaJovenPage({
             ].map((stat, i) => (
               <AnimatedSection key={stat.label} direction="up" delay={i * 0.1}>
                 <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
-                  <p className="text-3xl font-extrabold text-brand-secondary">{stat.value}</p>
-                  <p className="mt-2 text-sm text-[var(--color-text-muted)]">{stat.label}</p>
+                  <p className="text-3xl font-extrabold text-ley-teal">{stat.value}</p>
+                  <p className="mt-2 text-sm text-white/60">{stat.label}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -221,11 +227,11 @@ export default async function AvanzaJovenPage({
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+            <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
               {t("resultadosTitle2")}
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Resultados <span className="text-brand-purple">Esperados</span>
+              Resultados <span className="text-ley-purple">Esperados</span>
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
               Lo que buscamos lograr con cada joven que participa en Avanza Joven.
@@ -234,9 +240,9 @@ export default async function AvanzaJovenPage({
           <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-3">
             {[1, 2, 3].map((ri, i) => (
               <AnimatedSection key={ri} direction="up" delay={i * 0.08}>
-                <div className="flex h-full flex-col items-center rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 text-center transition-all hover:shadow-md">
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-brand-purple/10">
-                    <BookMarked size={22} className="text-brand-purple" />
+                <div className="flex h-full flex-col items-center rounded-[10px] border border-border-default bg-bg-card p-6 text-center transition-all hover:shadow-md">
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-ley-purple/10">
+                    <BookMarked size={22} className="text-ley-purple" />
                   </div>
                   <p className="text-sm text-[var(--color-text-secondary)]">{t(`avanzaResult${ri}`)}</p>
                 </div>
@@ -250,18 +256,18 @@ export default async function AvanzaJovenPage({
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
+            <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
               Objetivos
             </span>
             <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Objetivos <span className="text-brand-purple">Especificos</span>
+              Objetivos <span className="text-ley-purple">Especificos</span>
             </h2>
           </AnimatedSection>
           <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2">
             {objetivos.map((obj, i) => (
               <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                <div className="flex gap-4 rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 transition-all hover:shadow-md">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-brand-purple/10 text-lg font-bold text-brand-purple">
+                <div className="flex gap-4 rounded-[10px] border border-border-default bg-bg-card p-6 transition-all hover:shadow-md">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-ley-purple/10 text-lg font-bold text-ley-purple">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
@@ -275,7 +281,7 @@ export default async function AvanzaJovenPage({
         </div>
       </section>
 
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.cards.avanzaJoven.image)})` } as CSSProperties}>
+      <section id="modulos" className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.cards.avanzaJoven.image)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -294,13 +300,13 @@ export default async function AvanzaJovenPage({
                 <AnimatedSection key={mod.title} direction="up" delay={i * 0.06}>
                   <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
                     <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
-                      <Icon size={22} className="text-brand-secondary" />
+                      <Icon size={22} className="text-ley-teal" />
                     </div>
                     <span className="mb-2 inline-block rounded-full bg-white/10 px-3 py-0.5 text-xs font-semibold text-white/80">
                       {mod.code}
                     </span>
                     <h4 className="mb-1 font-bold text-white">{mod.title}</h4>
-                    <p className="text-sm text-[var(--color-text-muted)]">{mod.desc}</p>
+                    <p className="text-sm text-white/60">{mod.desc}</p>
                   </div>
                 </AnimatedSection>
               );
