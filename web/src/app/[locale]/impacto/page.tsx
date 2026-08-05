@@ -1,7 +1,9 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import PageHero from "@/components/PageHero";
+import DossierHero from "@/components/DossierHero";
+import SectionHeader from "@/components/SectionHeader";
+import PageCTA from "@/components/PageCTA";
 import MapaAlcanceASCEP from "@/components/MapaAlcanceASCEP";
 import ParallaxSection from "@/components/ParallaxSection";
 import DecoShapes from "@/components/DecoShapes";
@@ -9,7 +11,9 @@ import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import AnimatedSection from "@/components/AnimatedSection";
 import CountUp from "@/components/CountUp";
-import { Users, Calendar, GraduationCap, Layers, Target, AlertTriangle, Heart, ArrowRight } from "lucide-react";
+import {
+  Users, Calendar, GraduationCap, Layers, Target, AlertTriangle, Heart, Briefcase, type LucideIcon,
+} from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getImpactStats, getGalleryAlbums } from "@/lib/sanity/fetch";
@@ -37,11 +41,20 @@ const fallbackStats = [
   { end: 28, suffix: "", label: "Rango de edad de atencion", icon: "Users" },
 ];
 
-const iconMap: Record<string, React.ElementType> = {
+const iconMap: Record<string, LucideIcon> = {
   Users, Calendar, GraduationCap, Layers, Target,
 };
 
+const statAccents = [
+  { icon: "text-ley-orange", bg: "bg-ley-orange/10" },
+  { icon: "text-ley-cyan", bg: "bg-ley-cyan/10" },
+  { icon: "text-ley-yellow", bg: "bg-ley-yellow/10" },
+  { icon: "text-ley-teal", bg: "bg-ley-teal/10" },
+];
+
 const riesgos = ["riesgo1", "riesgo2", "riesgo3", "riesgo4", "riesgo5"];
+
+const resultadoIcons: LucideIcon[] = [Target, Users, Layers, Briefcase];
 
 export default async function ImpactoPage({
   params,
@@ -78,26 +91,69 @@ export default async function ImpactoPage({
 
   return (
     <div>
-      <PageHero
+      <DossierHero
         bgImage={assetPath(fotos.impacto.hero)}
         tag={t("heroTag")}
         title={t("heroTitle")}
+        highlight={t("heroTitle").split(" ").slice(1).join(" ")}
         subtitle={t("heroSubtitle")}
-      />
+        accent="orange"
+        primaryCta={{ label: t("statsTitle"), href: "#cifras" }}
+        secondaryCta={{ label: t("ctaTitle"), href: `/${locale}/donar` }}
+      >
+        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
+          <div className="flex items-center gap-4">
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
+              <Target size={28} className="text-ley-orange" />
+            </div>
+            <div>
+              <p className="text-xl font-extrabold">{t("heroTag")}</p>
+              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-orange">
+                {t("statsTag")}
+              </p>
+            </div>
+          </div>
+          <div className="mt-6 divide-y divide-white/10">
+            {impactStats.slice(0, 3).map((stat) => {
+              const Icon = iconMap[stat.icon] || Users;
+              return (
+                <div key={stat.label} className="flex items-center gap-4 py-4 first:pt-0 last:pb-0">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-ley-orange/10">
+                    <Icon size={20} className="text-ley-orange" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-2xl font-extrabold text-white">
+                      <CountUp
+                        end={parseInt(stat.end.toString().replace(/[^0-9]/g, ""))}
+                        suffix={stat.suffix}
+                      />
+                    </p>
+                    <p className="truncate text-xs text-purple-100">{stat.label}</p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+          <Link
+            href="#cifras"
+            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
+          >
+            {t("statsTitle")}
+          </Link>
+        </div>
+      </DossierHero>
 
       <ParallaxSection
         bgImage={assetPath(fotos.impacto.contextParallax)}
         overlay="bg-black/70"
-        className="py-20"
+        className="py-20 sm:py-24"
       >
-        <AnimatedSection className="mb-12 text-center">
-          <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">
-            {t("contextTag")}
-          </span>
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            {t("contextTitle")}
-          </h2>
-        </AnimatedSection>
+        <SectionHeader
+          tag={t("contextTag")}
+          title={t("contextTitle")}
+          accent="orange"
+          dark
+        />
         <div className="grid items-center gap-10 lg:grid-cols-5">
           <div className="space-y-4 lg:col-span-3">
             <AnimatedSection direction="up"><p className="text-base leading-relaxed text-white/80">{t("contextP1")}</p></AnimatedSection>
@@ -110,7 +166,7 @@ export default async function ImpactoPage({
               alt=""
               width={600}
               height={450}
-              className="w-full rounded-[10px] object-cover shadow-lg"
+              className="w-full rounded-3xl object-cover shadow-lg"
               intensity={0.2}
               style={{ aspectRatio: "4/3" }}
             />
@@ -118,23 +174,20 @@ export default async function ImpactoPage({
         </div>
       </ParallaxSection>
 
-      <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+      <section id="cifras" className="section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24">
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("statsTitle")}
-            </h2>
-          </AnimatedSection>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader tag={t("statsTag")} title={t("statsTitle")} accent="orange" dark />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {impactStats.map((stat, i) => {
               const Icon = iconMap[stat.icon] || Users;
+              const accent = statAccents[i % statAccents.length];
               return (
-                <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                  <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
-                    <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-[10px] bg-white/10">
-                      <Icon size={24} className="text-white" />
+                <AnimatedSection key={stat.label} direction="up" delay={i * 0.06}>
+                  <div className="glass-card rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:bg-white/15">
+                    <div className={`mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl ${accent.bg}`}>
+                      <Icon size={24} className={accent.icon} />
                     </div>
                     <div className="text-3xl font-bold text-white">
                       <CountUp
@@ -153,101 +206,106 @@ export default async function ImpactoPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              {t("porQueTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              {t("porQueTitle")}
-            </h2>
-          </AnimatedSection>
+          <SectionHeader tag={t("porQueTag")} title={t("porQueTitle")} accent="orange" />
           <div className="grid items-center gap-10 lg:grid-cols-5">
             <div className="lg:col-span-3">
-              <AnimatedSection className="mb-8 space-y-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
+              <AnimatedSection className="mb-8 space-y-4 text-base leading-relaxed text-text-secondary">
                 <p>{t("porQueP1")}</p>
-                <p className="font-semibold text-brand-orange">{t("porQueP2")}</p>
+                <p className="font-semibold text-ley-orange">{t("porQueP2")}</p>
               </AnimatedSection>
               <div className="grid gap-4 sm:grid-cols-2">
                 {riesgos.map((r, i) => (
                   <AnimatedSection key={r} direction="up" delay={i * 0.06}>
-                    <div className="flex items-start gap-3 rounded-[10px] border border-brand-orange/20 bg-brand-orange/5 p-4">
-                      <AlertTriangle size={18} className="mt-0.5 shrink-0 text-brand-orange" />
-                      <span className="text-sm text-[var(--color-text-secondary)]">{t(r)}</span>
+                    <div className="flex items-start gap-3 rounded-2xl border border-ley-orange/20 bg-ley-orange/5 p-4">
+                      <AlertTriangle size={18} className="mt-0.5 shrink-0 text-ley-orange" />
+                      <span className="text-sm text-text-secondary">{t(r)}</span>
                     </div>
                   </AnimatedSection>
                 ))}
               </div>
             </div>
             <AnimatedSection direction="right" delay={0.2} className="lg:col-span-2">
-              <ImageParallax
-                src={assetPath(fotos.impacto.porQueImage)}
-                alt=""
-                width={600}
-                height={450}
-                className="w-full rounded-[10px] object-cover shadow-lg"
-                intensity={0.2}
-                style={{ aspectRatio: "4/3" }}
-              />
+              <div className="relative">
+                <ImageParallax
+                  src={assetPath(fotos.impacto.porQueImage)}
+                  alt=""
+                  width={600}
+                  height={450}
+                  className="w-full rounded-3xl object-cover shadow-lg"
+                  intensity={0.2}
+                  style={{ aspectRatio: "4/3" }}
+                />
+                <div className="absolute -bottom-4 -right-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-ley-orange text-white shadow-lg">
+                  <Heart size={28} />
+                </div>
+              </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      <section
-        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
-        style={{ "--section-bg-image": `url(${assetPath(fotos.impacto.contextImage)})` } as CSSProperties}
-      >
-        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
-        <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              {t("resultadosTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("resultadosTitle")} <span className="text-white/80">{t("resultadosHighlight")}</span>
-            </h2>
-          </AnimatedSection>
+      <section className="relative overflow-hidden bg-ley-purple py-20 sm:py-24">
+        <div aria-hidden="true" className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-ley-cyan/10" />
+        <div aria-hidden="true" className="pointer-events-none absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-ley-orange/10" />
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            tag={t("resultadosTag")}
+            title={t("resultadosTitle")}
+            highlight={t("resultadosHighlight")}
+            accent="orange"
+            dark
+          />
           <div className="grid gap-6 sm:grid-cols-2">
-            {[1, 2, 3, 4].map((i) => (
-              <AnimatedSection key={i} direction="up" delay={i * 0.08}>
-                <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
-                  <p className="text-sm text-[var(--color-text-muted)]">
-                    {t(`resultado${i}`)}
-                  </p>
-                </div>
-              </AnimatedSection>
-            ))}
+            {[1, 2, 3, 4].map((i) => {
+              const Icon = resultadoIcons[i - 1];
+              return (
+                <AnimatedSection key={i} direction="up" delay={i * 0.08}>
+                  <div className="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 transition-all hover:-translate-y-1 hover:bg-white/10">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ley-orange/10">
+                      <Icon size={22} className="text-ley-orange" />
+                    </div>
+                    <div>
+                      <p className="text-sm leading-relaxed text-purple-100">
+                        {t(`resultado${i}`)}
+                      </p>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
-              <AnimatedSection direction="left">
-                <span className="mb-3 inline-block rounded-[10px] bg-brand-orange/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
-                  {t("presenciaTag")}
-                </span>
-              </AnimatedSection>
+              <SectionHeader
+                tag={t("presenciaTag")}
+                title={t("presenciaTitle")}
+                highlight={t("presenciaHighlight")}
+                desc={t("presenciaDesc")}
+                align="left"
+                accent="orange"
+              />
               <AnimatedSection direction="left" delay={0.1}>
-                <h2 className="mb-4 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-                  {t("presenciaTitle")} <span className="text-brand-orange">{t("presenciaHighlight")}</span>
-                </h2>
-              </AnimatedSection>
-              <AnimatedSection direction="left" delay={0.15}>
-                <p className="text-base leading-relaxed text-[var(--color-text-secondary)]">
-                  {t("presenciaDesc")}
-                </p>
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link
+                    href={`/${locale}/participa`}
+                    className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-ley-orange px-6 py-3 text-sm font-bold text-white transition-all hover:bg-ley-orange/90 hover:shadow-lg"
+                  >
+                    {t("ctaParticipa")}
+                  </Link>
+                </div>
               </AnimatedSection>
             </div>
             <AnimatedSection direction="right" delay={0.2}>
-              <div className="mx-auto aspect-[700/790] w-full max-w-[560px] overflow-hidden rounded-[10px] shadow-lg">
+              <div className="mx-auto aspect-[700/790] w-full max-w-[560px] overflow-hidden rounded-3xl shadow-lg">
                 <MapaAlcanceASCEP />
               </div>
             </AnimatedSection>
@@ -256,24 +314,23 @@ export default async function ImpactoPage({
       </section>
 
       <section
-        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        className="section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24"
         style={{ "--section-bg-image": `url(${assetPath(fotos.impacto.gallery[0])})` } as CSSProperties}
       >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              {t("galeriaTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("galeriaTitle")} <span className="text-white/80">{t("galeriaHighlight")}</span>
-            </h2>
-          </AnimatedSection>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            tag={t("galeriaTag")}
+            title={t("galeriaTitle")}
+            highlight={t("galeriaHighlight")}
+            accent="orange"
+            dark
+          />
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {galeriaImages.map((src, i) => (
+            {galeriaImages.slice(0, 8).map((src, i) => (
               <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                <div className="group relative overflow-hidden rounded-[10px]">
+                <div className="group relative overflow-hidden rounded-3xl">
                   <ImageParallax
                     src={src}
                     alt=""
@@ -290,48 +347,13 @@ export default async function ImpactoPage({
         </div>
       </section>
 
-      <section
-        className="relative overflow-hidden bg-brand-purple py-20 section-bg-image"
-        style={{ "--section-bg-image": `url(${assetPath(fotos.impacto.porQueImage)})` } as CSSProperties}
-      >
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.1),transparent_50%)]" />
-        <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
-          <AnimatedSection>
-            <span className="mb-3 inline-block rounded-[10px] bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              {t("ctaTag")}
-            </span>
-          </AnimatedSection>
-          <AnimatedSection delay={0.1}>
-            <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">
-              {t("ctaTitle")}
-            </h2>
-          </AnimatedSection>
-          <AnimatedSection delay={0.15}>
-            <p className="mb-8 text-base leading-relaxed text-white/80">
-              {t("ctaDesc")}
-            </p>
-          </AnimatedSection>
-          <AnimatedSection delay={0.2}>
-            <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Link
-                href={`/${locale}/donar`}
-                className="inline-flex items-center gap-2 rounded-[10px] bg-brand-orange px-8 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-orange-dark hover:shadow-lg"
-              >
-                <Heart size={18} />
-                {t("ctaDonar")}
-              </Link>
-              <Link
-                href={`/${locale}/participa`}
-                className="inline-flex items-center gap-2 rounded-[10px] border-2 border-white/30 px-8 py-3 text-sm font-semibold text-white transition-all hover:border-white hover:bg-white/10"
-              >
-                {t("ctaParticipa")}
-                <ArrowRight size={18} />
-              </Link>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+      <PageCTA
+        title={t("ctaTitle")}
+        desc={t("ctaDesc")}
+        icon={Heart}
+        primary={{ label: t("ctaDonar"), href: `/${locale}/donar` }}
+        secondary={{ label: t("ctaParticipa"), href: `/${locale}/participa` }}
+      />
     </div>
   );
 }
-
