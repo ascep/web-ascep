@@ -1,6 +1,6 @@
 import AnimatedSection from "./AnimatedSection";
 
-type SectionAccent = "cyan" | "orange" | "yellow" | "teal" | "purple";
+type SectionAccent = "cyan" | "orange" | "yellow" | "teal" | "purple" | "white";
 
 type SectionHeaderProps = {
   tag?: string;
@@ -17,7 +17,8 @@ const accentStyles: Record<SectionAccent, { pill: string; highlight: string }> =
   orange: { pill: "border-ley-orange/40 text-ley-orange", highlight: "text-ley-orange" },
   yellow: { pill: "border-ley-yellow/40 text-ley-yellow", highlight: "text-ley-yellow" },
   teal: { pill: "border-ley-teal/40 text-ley-teal", highlight: "text-ley-teal" },
-  purple: { pill: "border-brand-purple/30 text-brand-purple", highlight: "text-brand-purple" },
+  purple: { pill: "border-ley-purple/30 text-ley-purple", highlight: "text-ley-purple" },
+  white: { pill: "border-white/30 text-white/80", highlight: "text-white/80" },
 };
 
 export default function SectionHeader({

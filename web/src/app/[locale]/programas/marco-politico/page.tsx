@@ -1,10 +1,12 @@
 import type { CSSProperties } from "react";
 import { getTranslations } from "next-intl/server";
-import PageHero from "@/components/PageHero";
+import DossierHero from "@/components/DossierHero";
+import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ProgramVideosSection from "@/components/ProgramVideosSection";
+import { Scale, Landmark, ShieldCheck, HeartHandshake, Search, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getProgramBySlug, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
@@ -25,26 +27,30 @@ const fallbackPilares = [
   {
     title: "Derechos Humanos de la Ninez y Adolescencia",
     desc: "Colombia ha suscrito tratados internacionales como la Convencion sobre los Derechos del Nino, que establecen el interes superior del nino, el derecho a ser oido y el derecho a una familia. ASCEP aboga por la implementacion efectiva de estos principios en todas las politicas publicas dirigidas a la ninez y adolescencia.",
+    icon: HeartHandshake,
   },
   {
     title: "Ley de Infancia y Adolescencia (Ley 1098 de 2006)",
     desc: "Este codigo establece el marco normativo para la proteccion integral de los ninos, ninas y adolescentes en Colombia. ASCEP trabaja en la promocion de su cumplimiento efectivo, especialmente en lo relacionado con el proceso de egreso del sistema de proteccion y la garantia de derechos una vez cumplida la mayoria de edad.",
+    icon: Landmark,
   },
   {
     title: "Ley 2479 de 2025 - Ley Hijos del Estado",
     desc: "Esta ley, impulsada por los mismos egresados a traves de ASCEP, crea el Programa Nacional de Acompanamiento Integral para jovenes que egresan del sistema de proteccion del ICBF. Representa un hito en el reconocimiento estatal de la deuda historica con los jovenes que crecieron bajo proteccion del Estado.",
+    icon: ShieldCheck,
   },
   {
     title: "Politica Nacional de Primera Infancia, Ninez y Adolescencia",
     desc: "ASCEP participa activamente en los espacios de discusion y formulacion de esta politica, asegurando que las necesidades y derechos de los adolescentes y jovenes en proceso de egreso sean incluidos en los planes de desarrollo nacional y territorial.",
+    icon: Scale,
   },
 ];
 
 const fallbackEnfoques = [
-  { title: "Enfoque de Derechos", desc: "Todos los programas y acciones de ASCEP se fundamentan en el reconocimiento de los adolescentes y jovenes como sujetos titulares de derechos, promoviendo su ejercicio pleno y exigibilidad." },
-  { title: "Enfoque Diferencial y Territorial", desc: "Reconocemos las particularidades de los territorios y las poblaciones, adaptando nuestras estrategias a las realidades locales, culturales y etnicas de los jovenes que acompanamos." },
-  { title: "Enfoque de Genero", desc: "Incorporamos una perspectiva de genero en todas nuestras acciones, reconociendo las desigualdades estructurales y promoviendo la equidad entre hombres y mujeres jovenes." },
-  { title: "Participacion Protagonica", desc: "Los jovenes no son solo beneficiarios de nuestras acciones, sino protagonistas activos en la construccion de politicas, programas y decisiones que afectan sus vidas." },
+  { title: "Enfoque de Derechos", desc: "Todos los programas y acciones de ASCEP se fundamentan en el reconocimiento de los adolescentes y jovenes como sujetos titulares de derechos, promoviendo su ejercicio pleno y exigibilidad.", icon: Scale },
+  { title: "Enfoque Diferencial y Territorial", desc: "Reconocemos las particularidades de los territorios y las poblaciones, adaptando nuestras estrategias a las realidades locales, culturales y etnicas de los jovenes que acompanamos.", icon: Landmark },
+  { title: "Enfoque de Genero", desc: "Incorporamos una perspectiva de genero en todas nuestras acciones, reconociendo las desigualdades estructurales y promoviendo la equidad entre hombres y mujeres jovenes.", icon: HeartHandshake },
+  { title: "Participacion Protagonica", desc: "Los jovenes no son solo beneficiarios de nuestras acciones, sino protagonistas activos en la construccion de politicas, programas y decisiones que afectan sus vidas.", icon: ShieldCheck },
 ];
 
 const fallbackIncidencia = [
@@ -54,6 +60,8 @@ const fallbackIncidencia = [
   "Formacion de liderazgos juveniles para la incidencia politica y el ejercicio de la ciudadania activa.",
   "Seguimiento y monitoreo a la implementacion de la Ley 2479 de 2025 y otras normas relacionadas.",
 ];
+
+const incidenciaIcon = (i: number) => [Scale, Landmark, ShieldCheck, HeartHandshake, Search][i % 5] as LucideIcon;
 
 export default async function MarcoPoliticoPage({
   params,
@@ -76,6 +84,7 @@ export default async function MarcoPoliticoPage({
     ? cms.pillars.map((p) => ({
         title: localize(p.title, locale) || "",
         desc: localize(p.description, locale) || "",
+        icon: Scale,
       }))
     : fallbackPilares;
 
@@ -83,6 +92,7 @@ export default async function MarcoPoliticoPage({
     ? cms.crossCutting.map((e) => ({
         title: localize(e.title, locale) || "",
         desc: localize(e.description, locale) || "",
+        icon: Scale,
       }))
     : fallbackEnfoques;
 
@@ -90,29 +100,53 @@ export default async function MarcoPoliticoPage({
     ? cms.incidenciaItems.map((i) => localize(i, locale) || "")
     : fallbackIncidencia;
 
+  const heroImage = sanityImage(cms?.heroImage) || assetPath(fotos.programas.marcoPolitico.hero);
+
   return (
     <>
-      <PageHero
-        bgImage={sanityImage(cms?.heroImage) || assetPath(fotos.programas.marcoPolitico.hero)}
+      <DossierHero
+        bgImage={heroImage}
         tag="Marco Politico"
         title="Marco"
         highlight="Politico"
         subtitle="Conoce el marco legal y normativo que respalda nuestra labor."
-      />
+        accent="teal"
+      >
+        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
+          <div className="flex items-center gap-4">
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
+              <Scale size={28} className="text-ley-teal" />
+            </div>
+            <div>
+              <p className="text-xl font-extrabold">ASCEP</p>
+              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-teal">
+                Marco Politico
+              </p>
+            </div>
+          </div>
+          <p className="mt-6 text-sm leading-relaxed text-purple-100">
+            Fundamentos conceptuales, normativos y estrategicos que guian nuestra accion institucional.
+          </p>
+          <a
+            href="#pilares"
+            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
+          >
+            Pilares normativos
+          </a>
+        </div>
+      </DossierHero>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              Introduccion
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              <span className="text-brand-purple">Marco Politico</span> de ASCEP
-            </h2>
-          </AnimatedSection>
+          <SectionHeader
+            tag="Introduccion"
+            title="Marco"
+            highlight="Politico de ASCEP"
+            accent="teal"
+          />
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-4xl space-y-6 text-base text-[var(--color-text-secondary)]">
+            <div className="mx-auto max-w-4xl space-y-6 text-base text-text-secondary">
               <p>
                 El Marco Politico de ASCEP define los fundamentos conceptuales, normativos y estrategicos que guian nuestra accion institucional. Como organizacion liderada por egresados del sistema de proteccion estatal, nuestra incidencia se sustenta en un profundo conocimiento de las necesidades y desafios que enfrentan los jovenes en su transicion a la vida independiente.
               </p>
@@ -124,80 +158,95 @@ export default async function MarcoPoliticoPage({
         </div>
       </section>
 
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.marcoPolitico.hero)})` } as CSSProperties}>
+      <section id="pilares" className="section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              Pilares
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Pilares <span className="text-white/80">Normativos</span>
-            </h2>
-          </AnimatedSection>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            tag="Pilares"
+            title="Pilares"
+            highlight="Normativos"
+            accent="white"
+            dark
+          />
           <div className="grid gap-6 sm:grid-cols-2">
-            {pilares.map((pilar, i) => (
-              <AnimatedSection key={pilar.title} direction="up" delay={i * 0.06}>
-                <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
-                  <h3 className="mb-2 font-bold text-white">{pilar.title}</h3>
-                  <p className="text-sm text-white/70">{pilar.desc}</p>
-                </div>
-              </AnimatedSection>
-            ))}
+            {pilares.map((pilar, i) => {
+              const Icon = pilar.icon;
+              return (
+                <AnimatedSection key={pilar.title} direction="up" delay={i * 0.06}>
+                  <div className="glass-card flex gap-5 rounded-3xl p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ley-teal/10">
+                      <Icon size={22} className="text-ley-teal" />
+                    </div>
+                    <div>
+                      <h3 className="mb-2 font-bold text-white">{pilar.title}</h3>
+                      <p className="text-sm text-white/70">{pilar.desc}</p>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              Enfoques
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Enfoques <span className="text-brand-purple">Transversales</span>
-            </h2>
-          </AnimatedSection>
+          <SectionHeader
+            tag="Enfoques"
+            title="Enfoques"
+            highlight="Transversales"
+            accent="teal"
+          />
           <div className="grid gap-6 sm:grid-cols-2">
-            {enfoques.map((enf, i) => (
-              <AnimatedSection key={enf.title} direction="up" delay={i * 0.06}>
-                <div className="rounded-[10px] border border-brand-purple/20 bg-bg-card p-6 transition-all hover:shadow-md">
-                  <h3 className="mb-2 font-bold text-[var(--color-text-primary)]">{enf.title}</h3>
-                  <p className="text-sm text-[var(--color-text-secondary)]">{enf.desc}</p>
-                </div>
-              </AnimatedSection>
-            ))}
+            {enfoques.map((enf, i) => {
+              const Icon = enf.icon;
+              return (
+                <AnimatedSection key={enf.title} direction="up" delay={i * 0.06}>
+                  <div className="flex gap-5 rounded-3xl border border-ley-teal/20 bg-bg-card p-6 transition-all hover:-translate-y-1 hover:shadow-md">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ley-teal/10">
+                      <Icon size={22} className="text-ley-teal" />
+                    </div>
+                    <div>
+                      <h3 className="mb-2 font-bold text-text-primary">{enf.title}</h3>
+                      <p className="text-sm text-text-secondary">{enf.desc}</p>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.marcoPolitico.hero)})` } as CSSProperties}>
+      <section className="section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              Incidencia
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Ejes de <span className="text-white/80">Incidencia</span>
-            </h2>
-          </AnimatedSection>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            tag="Incidencia"
+            title="Ejes de"
+            highlight="Incidencia"
+            accent="white"
+            dark
+          />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {incidencia.map((item, i) => (
-              <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                <div className="flex gap-4 rounded-[10px] glass-card p-6 transition-all hover:bg-white/15">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-white/10 text-lg font-bold text-white/80">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <div>
-                    <p className="text-sm text-white/70">{item}</p>
+            {incidencia.map((item, i) => {
+              const Icon = incidenciaIcon(i);
+              return (
+                <AnimatedSection key={i} direction="up" delay={i * 0.06}>
+                  <div className="flex gap-4 rounded-3xl glass-card p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ley-teal/10">
+                      <Icon size={20} className="text-ley-teal" />
+                    </div>
+                    <div>
+                      <p className="text-sm text-white/70">{item}</p>
+                    </div>
                   </div>
-                </div>
-              </AnimatedSection>
-            ))}
+                </AnimatedSection>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -205,12 +254,9 @@ export default async function MarcoPoliticoPage({
       <ProgramVideosSection
         videos={videos}
         tabs={videoTabs}
-        bgImage={assetPath(fotos.programas.marcoPolitico.hero)}
+        bgImage={heroImage}
         locale={locale}
       />
     </>
   );
 }
-
-
-

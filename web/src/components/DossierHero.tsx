@@ -4,7 +4,7 @@ import { ArrowRight, Quote } from "lucide-react";
 
 export type HeroCta = { label: string; href: string; external?: boolean };
 
-type DossierAccent = "cyan" | "orange" | "yellow" | "teal";
+type DossierAccent = "cyan" | "orange" | "yellow" | "teal" | "purple";
 
 type DossierHeroProps = {
   bgImage: string;
@@ -42,6 +42,12 @@ const accentStyles: Record<DossierAccent, { badge: string; highlight: string; ct
     highlight: "text-ley-teal",
     cta: "bg-ley-teal text-white hover:bg-ley-teal/90",
     blob: "bg-ley-teal/10",
+  },
+  purple: {
+    badge: "border-ley-fuchsia/50 text-ley-fuchsia",
+    highlight: "text-ley-fuchsia",
+    cta: "bg-ley-fuchsia text-ley-purple hover:bg-ley-fuchsia/90",
+    blob: "bg-ley-fuchsia/10",
   },
 };
 
