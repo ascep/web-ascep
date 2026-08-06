@@ -1,5 +1,5 @@
 import { getTranslations } from "next-intl/server";
-import PageHero from "@/components/PageHero";
+import DossierHero from "@/components/DossierHero";
 import RutaCasasDelSaber from "@/components/RutaCasasDelSaber";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
@@ -29,12 +29,13 @@ export default async function RutaEgresoPage({
   const pageData = await getPageContent("casas-del-saber-ruta-egreso");
   return (
     <div>
-      <PageHero
+      <DossierHero
         bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.casasDelSaber.rutaEgreso)}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || t("heroHighlight")}
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
+        accent="orange"
       />
 
       <section className="relative overflow-hidden bg-section-light py-20">

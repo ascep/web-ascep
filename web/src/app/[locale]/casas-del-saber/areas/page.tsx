@@ -1,8 +1,10 @@
 import { getTranslations } from "next-intl/server";
-import PageHero from "@/components/PageHero";
+import DossierHero from "@/components/DossierHero";
+import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
+import { CheckCircle2 } from "lucide-react";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
@@ -29,33 +31,10 @@ export default async function AreasPage({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "casasDelSaberAreas" });
 
-  const areas = [
-    {
-      num: 1,
-      title: t("area1Title"),
-      desc: t("area1Desc"),
-    },
-    {
-      num: 2,
-      title: t("area2Title"),
-      desc: t("area2Desc"),
-    },
-    {
-      num: 3,
-      title: t("area3Title"),
-      desc: t("area3Desc"),
-    },
-    {
-      num: 4,
-      title: t("area4Title"),
-      desc: t("area4Desc"),
-    },
-    {
-      num: 5,
-      title: t("area5Title"),
-      desc: t("area5Desc"),
-    },
-  ];
+  const areas = [1, 2, 3, 4, 5].map((n) => ({
+    title: t(`area${n}Title`),
+    desc: t(`area${n}Desc`),
+  }));
 
   const objetivos = [
     { code: "OE1", title: t("oe1Title"), desc: t("oe1Desc") },
@@ -72,45 +51,37 @@ export default async function AreasPage({
     cells: [1, 2, 3, 4].map((c) => t(`matrizA${n}L${c}`)),
   }));
 
-  const roles = [
-    { role: t("role1Title"), desc: t("role1Desc") },
-    { role: t("role2Title"), desc: t("role2Desc") },
-    { role: t("role3Title"), desc: t("role3Desc") },
-    { role: t("role4Title"), desc: t("role4Desc") },
-    { role: t("role5Title"), desc: t("role5Desc") },
-    { role: t("role6Title"), desc: t("role6Desc") },
-  ];
+  const roles = [1, 2, 3, 4, 5, 6].map((n) => ({
+    role: t(`role${n}Title`),
+    desc: t(`role${n}Desc`),
+  }));
 
   const pageData = await getPageContent("casas-del-saber-areas");
   return (
     <div>
-      <PageHero
+      <DossierHero
         bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.casasDelSaber.areas)}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || t("heroHighlight")}
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
+        accent="orange"
       />
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              {t("objetivosTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              {t("objetivosTitle")}
-            </h2>
-            <p className="mx-auto mt-3 max-w-3xl text-[var(--color-text-muted)]">
-              {t("objetivosDesc")}
-            </p>
-          </AnimatedSection>
+          <SectionHeader
+            tag={t("objetivosTag")}
+            title={t("objetivosTitle")}
+            desc={t("objetivosDesc")}
+            accent="orange"
+          />
           <div className="grid gap-4 md:grid-cols-2">
             {objetivos.map((oe, i) => (
               <AnimatedSection key={oe.code} direction="up" delay={i * 0.06}>
-                <div className="flex h-full items-start gap-4 rounded-[10px] border border-[var(--color-border-subtle)] bg-bg-card p-6 shadow-sm">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] bg-brand-purple/10 text-sm font-bold text-brand-purple">
+                <div className="flex h-full items-start gap-4 rounded-3xl border border-border-default bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-ley-orange/40 hover:shadow-md">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ley-orange/10 text-sm font-bold text-ley-orange">
                     {oe.code}
                   </div>
                   <div>
@@ -124,30 +95,26 @@ export default async function AreasPage({
         </div>
       </section>
 
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.areas)})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.areas)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              {t("sectionTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("sectionTitle")}
-            </h2>
-          </AnimatedSection>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            tag={t("sectionTag")}
+            title={t("sectionTitle")}
+            accent="white"
+            dark
+          />
           <div className="space-y-6">
             {areas.map((area, i) => (
-              <AnimatedSection key={area.num} direction="up" delay={i * 0.08}>
-                <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
-                  <div className="flex items-start gap-4">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] bg-white/10 text-lg font-bold text-brand-secondary">
-                      {area.num}
-                    </div>
-                    <div>
-                      <h3 className="mb-2 text-xl font-bold text-[var(--color-text-primary)]">{area.title}</h3>
-                      <p className="text-[var(--color-text-muted)]">{area.desc}</p>
-                    </div>
+              <AnimatedSection key={area.title} direction="up" delay={i * 0.08}>
+                <div className="glass-card flex items-start gap-4 rounded-3xl p-6 transition-all hover:bg-white/15">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-white/10">
+                    <CheckCircle2 size={22} className="text-ley-orange" />
+                  </div>
+                  <div>
+                    <h3 className="mb-2 text-xl font-bold text-white">{area.title}</h3>
+                    <p className="text-[var(--color-text-muted)]">{area.desc}</p>
                   </div>
                 </div>
               </AnimatedSection>
@@ -156,30 +123,25 @@ export default async function AreasPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              {t("matrizTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              {t("matrizTitle")}
-            </h2>
-            <p className="mx-auto mt-3 max-w-3xl text-[var(--color-text-muted)]">
-              {t("matrizDesc")}
-            </p>
-          </AnimatedSection>
+          <SectionHeader
+            tag={t("matrizTag")}
+            title={t("matrizTitle")}
+            desc={t("matrizDesc")}
+            accent="orange"
+          />
           <AnimatedSection direction="up" delay={0.1}>
-            <div className="overflow-x-auto rounded-[10px] border border-[var(--color-border-subtle)] shadow-sm">
-              <table className="w-full min-w-[760px] border-collapse bg-bg-card text-left text-sm">
+            <div className="overflow-x-auto rounded-3xl border border-border-default shadow-sm">
+              <table className="w-full min-w-[760px] border-collapse bg-white text-left text-sm">
                 <thead>
-                  <tr className="border-b border-[var(--color-border-subtle)]">
-                    <th className="w-44 bg-brand-purple/5 px-4 py-3 font-semibold text-brand-purple">
+                  <tr className="border-b border-border-default">
+                    <th className="w-44 bg-ley-orange/5 px-4 py-3 font-semibold text-ley-orange">
                       {t("matrizColArea")}
                     </th>
                     {matrixLines.map((line) => (
-                      <th key={line} className="bg-brand-purple/5 px-4 py-3 font-semibold text-brand-purple">
+                      <th key={line} className="bg-ley-orange/5 px-4 py-3 font-semibold text-ley-orange">
                         {line}
                       </th>
                     ))}
@@ -187,7 +149,7 @@ export default async function AreasPage({
                 </thead>
                 <tbody>
                   {matrixRows.map((row) => (
-                    <tr key={row.area} className="border-b border-[var(--color-border-subtle)] last:border-0">
+                    <tr key={row.area} className="border-b border-border-default last:border-0">
                       <td className="px-4 py-3 align-top font-semibold text-[var(--color-text-primary)]">
                         {row.area}
                       </td>
@@ -205,22 +167,20 @@ export default async function AreasPage({
         </div>
       </section>
 
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.areas)})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.areas)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              {t("estructuraTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("estructuraTitle")}
-            </h2>
-          </AnimatedSection>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            tag={t("estructuraTag")}
+            title={t("estructuraTitle")}
+            accent="white"
+            dark
+          />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {roles.map((item, i) => (
               <AnimatedSection key={item.role} direction="up" delay={i * 0.06}>
-                <div className="glass-card h-full rounded-[10px] p-6 transition-all hover:bg-white/15">
+                <div className="glass-card h-full rounded-3xl p-6 transition-all hover:bg-white/15">
                   <h3 className="mb-2 font-bold text-white">{item.role}</h3>
                   <p className="text-sm text-[var(--color-text-muted)]">{item.desc}</p>
                 </div>

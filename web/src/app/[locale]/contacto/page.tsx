@@ -1,5 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import PageHero from "@/components/PageHero";
+import Link from "next/link";
+import DossierHero from "@/components/DossierHero";
+import SectionHeader from "@/components/SectionHeader";
 import ContactForm from "@/components/ContactForm";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
@@ -23,6 +25,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
+const infoCards = [
+  { icon: MapPin, iconColor: "bg-ley-cyan/15 text-ley-cyan", titleKey: "ubicacionTitle", valueKey: "ubicacionValue" },
+  { icon: Mail, iconColor: "bg-ley-teal/15 text-ley-teal", titleKey: "emailTitle", valueKey: "emailValue" },
+  { icon: MessageCircle, iconColor: "bg-ley-yellow/15 text-ley-yellow", titleKey: "whatsapp", valueKey: "phone" },
+  { icon: Share2, iconColor: "bg-ley-orange/15 text-ley-orange", titleKey: "redesTitle", valueKey: "redesDesc" },
+];
+
 export default async function ContactoPage({
   params,
 }: {
@@ -35,38 +44,59 @@ export default async function ContactoPage({
   const pageData = await getPageContent("contacto");
   return (
     <div>
-      <PageHero
+      <DossierHero
         bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.contacto.hero)}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || ""}
         subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
-      />
+        accent="cyan"
+        primaryCta={{ label: t("formTag"), href: "#form" }}
+      >
+        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
+          <div className="flex items-center gap-4">
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
+              <MapPin size={28} className="text-ley-cyan" />
+            </div>
+            <div>
+              <p className="text-xl font-extrabold">{t("formTitle")}</p>
+              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-cyan">
+                {t("ubicacionTitle")}
+              </p>
+            </div>
+          </div>
+          <p className="mt-6 text-sm leading-relaxed text-purple-100">
+            {t("ubicacionValue")}
+          </p>
+          <Link
+            href={`mailto:${t("emailValue")}`}
+            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
+          >
+            {t("emailValue")}
+          </Link>
+        </div>
+      </DossierHero>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.contacto.section)})` } as CSSProperties}>
+      <section id="form" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.contacto.section)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-2">
             <div>
+              <SectionHeader
+                tag={t("formTag")}
+                title={t("formTitle")}
+                accent="white"
+                dark
+              />
               <AnimatedSection direction="left">
-                <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-                  {t("formTag")}
-                </span>
-              </AnimatedSection>
-              <AnimatedSection direction="left" delay={0.1}>
-                <h2 className="mb-8 text-3xl font-bold text-white">
-                  {t("formTitle")}
-                </h2>
-              </AnimatedSection>
-              <AnimatedSection direction="left" delay={0.15}>
                 <ContactForm />
               </AnimatedSection>
             </div>
 
             <div>
               <AnimatedSection direction="right">
-                <div className="relative mb-6 overflow-hidden rounded-[10px]">
+                <div className="relative mb-6 overflow-hidden rounded-3xl">
                   <ImageParallax
                     src={assetPath(fotos.contacto.section)}
                     alt=""
@@ -75,7 +105,7 @@ export default async function ContactoPage({
                     className="h-40 w-full object-cover"
                     intensity={0.12}
                   />
-                  <div className="absolute inset-0 bg-brand-purple/60" />
+                  <div className="absolute inset-0 bg-ley-purple/60" />
                   <div className="absolute inset-0 flex items-center justify-center p-6">
                     <p className="text-center text-lg font-semibold text-white">
                       {t("bannerText")}
@@ -84,81 +114,66 @@ export default async function ContactoPage({
                 </div>
               </AnimatedSection>
               <div className="space-y-6">
-                <AnimatedSection direction="right" delay={0.05}>
-                  <div className="glass-card rounded-[10px] p-8 text-center transition-all hover:bg-white/15">
-                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-white/10">
-                      <MapPin size={24} className="text-brand-secondary" />
-                    </div>
-                    <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{t("ubicacionTitle")}</h4>
-                    <p className="text-sm text-[var(--color-text-muted)]">{t("ubicacionValue")}</p>
-                  </div>
-                </AnimatedSection>
-
-                <AnimatedSection direction="right" delay={0.1}>
-                  <div className="glass-card rounded-[10px] p-8 text-center transition-all hover:bg-white/15">
-                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-white/10">
-                      <Mail size={24} className="text-brand-secondary" />
-                    </div>
-                    <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{t("emailTitle")}</h4>
-                    <a
-                      href={`mailto:${t("emailValue")}`}
-                      className="text-sm text-white transition-colors hover:text-brand-secondary-dark hover:underline"
-                    >
-                      {t("emailValue")}
-                    </a>
-                  </div>
-                </AnimatedSection>
-
-                <AnimatedSection direction="right" delay={0.15}>
-                  <a
-                    href="https://wa.me/573025550107"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={tw("ariaLabel")}
-                    className="glass-card block rounded-[10px] p-8 text-center transition-all hover:bg-white/15"
-                  >
-                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-white/10">
-                      <MessageCircle size={24} className="text-brand-secondary" />
-                    </div>
-                    <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{tw("cardTitle")}</h4>
-                    <p className="text-sm text-[var(--color-text-muted)]">{tw("cardDesc")}</p>
-                    <p className="mt-1 text-sm font-semibold text-white transition-colors hover:text-brand-secondary-dark hover:underline">
-                      +57 302 555 0107
-                    </p>
-                  </a>
-                </AnimatedSection>
-
-                <AnimatedSection direction="right" delay={0.2}>
-                  <div className="glass-card rounded-[10px] p-8 text-center transition-all hover:bg-white/15">
-                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-[10px] bg-white/10">
-                      <Share2 size={24} className="text-brand-secondary" />
-                    </div>
-                    <h4 className="mb-2 text-lg font-bold text-[var(--color-text-primary)]">{t("redesTitle")}</h4>
-                    <p className="text-sm text-[var(--color-text-muted)]">{t("redesDesc")}</p>
-                  </div>
-                </AnimatedSection>
+                {infoCards.map((card, i) => {
+                  const Icon = card.icon;
+                  const isWhatsapp = card.titleKey === "whatsapp";
+                  const isEmail = card.titleKey === "emailTitle";
+                  const title = isWhatsapp ? tw("cardTitle") : t(card.titleKey);
+                  const value = isWhatsapp
+                    ? "+57 302 555 0107"
+                    : isEmail
+                      ? t(card.valueKey)
+                      : t(card.valueKey);
+                  const body = (
+                    <>
+                      <div className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl ${card.iconColor}`}>
+                        <Icon size={24} />
+                      </div>
+                      <h4 className="mb-2 text-lg font-bold text-white">{title}</h4>
+                      <p className="text-sm text-[var(--color-text-muted)]">{value}</p>
+                    </>
+                  );
+                  const className = "glass-card block rounded-3xl p-8 text-center transition-all hover:bg-white/15";
+                  return (
+                    <AnimatedSection key={card.titleKey} direction="right" delay={0.05 + i * 0.05}>
+                      {isWhatsapp ? (
+                        <a
+                          href="https://wa.me/573025550107"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={tw("ariaLabel")}
+                          className={className}
+                        >
+                          {body}
+                        </a>
+                      ) : isEmail ? (
+                        <a href={`mailto:${t("emailValue")}`} className={className}>
+                          {body}
+                        </a>
+                      ) : (
+                        <div className={className}>{body}</div>
+                      )}
+                    </AnimatedSection>
+                  );
+                })}
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              {t("ubicacionTitle")}
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Donde <span className="text-brand-purple">Encontrarnos</span>
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
-              {t("ubicacionValue")}
-            </p>
-          </AnimatedSection>
+          <SectionHeader
+            tag={t("ubicacionTitle")}
+            title="Donde Encontrarnos"
+            highlight="Encontrarnos"
+            desc={t("ubicacionValue")}
+            accent="cyan"
+          />
           <AnimatedSection direction="up">
-            <div className="relative h-[400px] overflow-hidden rounded-[10px] border border-brand-purple/20 shadow-sm">
+            <div className="relative h-[400px] overflow-hidden rounded-3xl border border-border-default shadow-sm">
               <iframe
                 title="Ubicacion ASCEP"
                 src="https://www.google.com/maps?q=Cali,Colombia&output=embed"
@@ -174,7 +189,3 @@ export default async function ContactoPage({
     </div>
   );
 }
-
-
-
-

@@ -1,11 +1,13 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
 import Image from "next/image";
-import PageHero from "@/components/PageHero";
+import Link from "next/link";
+import DossierHero from "@/components/DossierHero";
+import SectionHeader from "@/components/SectionHeader";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Building2, Globe, Briefcase, GraduationCap, Heart, Radio } from "lucide-react";
+import { Building2, Globe, Briefcase, GraduationCap, Heart, Radio, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getPartners } from "@/lib/sanity/fetch";
@@ -22,6 +24,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
   };
 }
+
+const sectorAccents = [
+  { icon: "text-ley-teal", bg: "bg-ley-teal/10" },
+  { icon: "text-ley-cyan", bg: "bg-ley-cyan/10" },
+  { icon: "text-ley-orange", bg: "bg-ley-orange/10" },
+  { icon: "text-ley-yellow", bg: "bg-ley-yellow/10" },
+];
 
 export default async function AliadosPage({
   params,
@@ -47,7 +56,7 @@ export default async function AliadosPage({
     : [];
   const partnerLogos = cmsLogos.length > 0 ? cmsLogos : fallbackLogos;
 
-  const sectors = [
+  const sectors: { sector: string; desc: string; aliados: string; icon: LucideIcon }[] = [
     { sector: t("sector1"), desc: t("sector1Desc"), aliados: t("sector1Aliados"), icon: Building2 },
     { sector: t("sector2"), desc: t("sector2Desc"), aliados: t("sector2Aliados"), icon: Globe },
     { sector: t("sector3"), desc: t("sector3Desc"), aliados: t("sector3Aliados"), icon: Briefcase },
@@ -58,29 +67,51 @@ export default async function AliadosPage({
 
   return (
     <div>
-      <PageHero
+      <DossierHero
         bgImage={assetPath(fotos.aliados.hero)}
         tag={t("heroTag")}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
-      />
+        accent="teal"
+        primaryCta={{ label: t("sectionTag"), href: "#aliados" }}
+      >
+        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
+          <div className="flex items-center gap-4">
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
+              <Building2 size={28} className="text-ley-teal" />
+            </div>
+            <div>
+              <p className="text-xl font-extrabold">{t("heroTitle")}</p>
+              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-teal">
+                {t("sectoresTitle")}
+              </p>
+            </div>
+          </div>
+          <p className="mt-6 text-sm leading-relaxed text-purple-100">
+            {t("sectionTitle")}
+          </p>
+          <Link
+            href={`/${locale}/contacto`}
+            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
+          >
+            {t("sectoresTag")}
+          </Link>
+        </div>
+      </DossierHero>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section id="aliados" className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              {t("sectionTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              {t("sectionTitle")}
-            </h2>
-          </AnimatedSection>
+          <SectionHeader
+            tag={t("sectionTag")}
+            title={t("sectionTitle")}
+            accent="teal"
+          />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {partnerLogos.map((logo) => (
               <div
                 key={logo.alt}
-                className="flex items-center justify-center rounded-[10px] border border-[var(--color-border)] p-8 transition-all hover:border-brand-primary/30"
+                className="flex items-center justify-center rounded-2xl border border-border-default bg-white p-8 transition-all hover:-translate-y-1 hover:border-ley-teal/40 hover:shadow-md"
               >
                 <Image
                   src={logo.src}
@@ -95,30 +126,29 @@ export default async function AliadosPage({
         </div>
       </section>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.aliados.hero)})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.aliados.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              {t("sectoresTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("sectoresTitle")}
-            </h2>
-          </AnimatedSection>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            tag={t("sectoresTag")}
+            title={t("sectoresTitle")}
+            accent="white"
+            dark
+          />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {sectors.map((item, i) => {
               const Icon = item.icon;
+              const accent = sectorAccents[i % sectorAccents.length];
               return (
                 <AnimatedSection key={item.sector} direction="up" delay={i * 0.08}>
-                  <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
-                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
-                      <Icon size={22} className="text-white" />
+                  <div className="glass-card flex h-full flex-col items-center rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:bg-white/15">
+                    <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${accent.bg}`}>
+                      <Icon size={22} className={accent.icon} />
                     </div>
-                    <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">{item.sector}</h4>
+                    <h4 className="mb-1 font-bold text-white">{item.sector}</h4>
                     <p className="mb-2 text-sm text-[var(--color-text-muted)]">{item.desc}</p>
-                    <p className="text-xs font-medium uppercase tracking-wider text-[var(--color-text-muted)]">{item.aliados}</p>
+                    <p className="mt-auto text-xs font-medium uppercase tracking-wider text-ley-teal">{item.aliados}</p>
                   </div>
                 </AnimatedSection>
               );
@@ -129,4 +159,3 @@ export default async function AliadosPage({
     </div>
   );
 }
-
