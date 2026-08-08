@@ -1,7 +1,9 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import ProgramHero from "@/components/ProgramHero";
+import DossierHero from "@/components/DossierHero";
+import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
@@ -131,33 +133,50 @@ export default async function AvanzaJovenPage({
       }))
     : fallbackModules;
 
+  const heroImage = sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.avanzaJoven.image);
+  const logoImage = assetPath(fotos.home.programs.avanzaJoven.logo);
+
   return (
     <>
-      <ProgramHero
-        bgImage={sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.avanzaJoven.image)}
+      <DossierHero
+        images={[heroImage, ...avanzaPhotos.slice(0, 2)]}
         tag={t("pillPrograma")}
         title={t("avanzaHeroTitle")}
         highlight={t("avanzaHeroHighlight")}
         subtitle={t("avanzaHeroSubtitle")}
+        accent="cyan"
         primaryCta={{ label: t("avanzaHeroCta"), href: "#modulos" }}
-        cardLogo={assetPath(fotos.home.programs.avanzaJoven.logo)}
-        cardTitle="ASCEP"
-        cardTag={t("avanzaTitle")}
-        cardDesc={t("avanzaDesc")}
-        cardCta={{ label: t("avanzaCtaBtn"), href: `/${locale}/como-ayudar` }}
-      />
+      >
+        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
+          <div className="flex items-center gap-4">
+            <Image
+              src={logoImage}
+              alt="ASCEP"
+              width={112}
+              height={112}
+              className="h-16 w-16 rounded-2xl bg-white/15 object-contain p-2"
+            />
+            <div>
+              <p className="text-xl font-extrabold">ASCEP</p>
+              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-cyan">
+                {t("avanzaTitle")}
+              </p>
+            </div>
+          </div>
+          <p className="mt-6 text-sm leading-relaxed text-purple-100">{t("avanzaDesc")}</p>
+          <Link
+            href={`/${locale}/como-ayudar`}
+            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
+          >
+            {t("avanzaCtaBtn")}
+          </Link>
+        </div>
+      </DossierHero>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-8 text-center">
-            <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
-              Informacion
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Que es <span className="text-ley-purple">Avanza Joven</span>?
-            </h2>
-          </AnimatedSection>
+          <SectionHeader tag="Informacion" title="Que es" highlight="Avanza Joven?" accent="cyan" />
           <AnimatedSection delay={0.1}>
             <div className="mx-auto max-w-3xl space-y-6 text-center text-base text-[var(--color-text-secondary)]">
               <p>
@@ -171,7 +190,7 @@ export default async function AvanzaJovenPage({
           <AnimatedSection delay={0.15}>
             <div className="mx-auto mt-10 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4">
               {avanzaPhotos.map((src) => (
-                <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-[10px]">
+                <div key={src} className="relative aspect-[4/3] overflow-hidden rounded-3xl">
                   <Image
                     src={src}
                     alt="Avanza Joven"
@@ -186,20 +205,13 @@ export default async function AvanzaJovenPage({
         </div>
       </section>
 
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.cards.avanzaJoven.image)})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              Objetivo
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Objetivo <span className="text-white/80">General</span>
-            </h2>
-          </AnimatedSection>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader tag="Objetivo" title="Objetivo" highlight="General" accent="white" dark />
           <AnimatedSection direction="up">
-            <div className="mx-auto max-w-4xl rounded-[10px] glass-card p-6 transition-all hover:bg-white/15">
+            <div className="mx-auto max-w-4xl rounded-3xl glass-card p-6 transition-all hover:bg-white/15">
               <p className="text-lg leading-relaxed text-white/70">
                 Fomentar y desarrollar las habilidades, competencias y recursos necesarios en jovenes que se acercan al limite de edad y deben egresar del sistema de proteccion, para que puedan ejercer su transicion hacia la vida independiente y autonoma, de manera responsable y progresiva.
               </p>
@@ -213,8 +225,8 @@ export default async function AvanzaJovenPage({
               { value: "2019", label: "Impulsando esta iniciativa" },
             ].map((stat, i) => (
               <AnimatedSection key={stat.label} direction="up" delay={i * 0.1}>
-                <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
-                  <p className="text-3xl font-extrabold text-ley-teal">{stat.value}</p>
+                <div className="glass-card rounded-3xl p-6 text-center transition-all hover:bg-white/15">
+                  <p className="text-3xl font-extrabold text-ley-cyan">{stat.value}</p>
                   <p className="mt-2 text-sm text-white/60">{stat.label}</p>
                 </div>
               </AnimatedSection>
@@ -223,56 +235,20 @@ export default async function AvanzaJovenPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
-              {t("resultadosTitle2")}
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Resultados <span className="text-ley-purple">Esperados</span>
-            </h2>
-            <p className="mx-auto mt-4 max-w-2xl text-[var(--color-text-secondary)]">
-              Lo que buscamos lograr con cada joven que participa en Avanza Joven.
-            </p>
-          </AnimatedSection>
-          <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-3">
-            {[1, 2, 3].map((ri, i) => (
-              <AnimatedSection key={ri} direction="up" delay={i * 0.08}>
-                <div className="flex h-full flex-col items-center rounded-[10px] border border-border-default bg-bg-card p-6 text-center transition-all hover:shadow-md">
-                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-ley-purple/10">
-                    <BookMarked size={22} className="text-ley-purple" />
-                  </div>
-                  <p className="text-sm text-[var(--color-text-secondary)]">{t(`avanzaResult${ri}`)}</p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative overflow-hidden bg-section-light py-20">
-        <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
-              Objetivos
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Objetivos <span className="text-ley-purple">Especificos</span>
-            </h2>
-          </AnimatedSection>
+          <SectionHeader tag="Objetivos" title="Objetivos" highlight="Especificos" accent="cyan" />
           <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2">
             {objetivos.map((obj, i) => (
               <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                <div className="flex gap-4 rounded-[10px] border border-border-default bg-bg-card p-6 transition-all hover:shadow-md">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-ley-purple/10 text-lg font-bold text-ley-purple">
+                <div className="flex gap-4 rounded-3xl border border-border-default bg-bg-card p-6 transition-all hover:shadow-md">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ley-cyan/10 text-lg font-bold text-ley-cyan">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <h3 className="font-bold text-[var(--color-text-primary)]">{obj.title}</h3>
-                    <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{obj.desc}</p>
+                    <h3 className="font-bold text-text-primary">{obj.title}</h3>
+                    <p className="mt-1 text-sm text-text-secondary">{obj.desc}</p>
                   </div>
                 </div>
               </AnimatedSection>
@@ -281,26 +257,19 @@ export default async function AvanzaJovenPage({
         </div>
       </section>
 
-      <section id="modulos" className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.cards.avanzaJoven.image)})` } as CSSProperties}>
+      <section id="modulos" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              Modulos
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              <span className="text-white/80">Modulos</span> del Programa
-            </h2>
-          </AnimatedSection>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader tag="Modulos" title="Modulos" highlight="del Programa" accent="white" dark />
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {modules.map((mod, i) => {
               const Icon = mod.icon;
               return (
                 <AnimatedSection key={mod.title} direction="up" delay={i * 0.06}>
-                  <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
-                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
-                      <Icon size={22} className="text-ley-teal" />
+                  <div className="glass-card rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:bg-white/15">
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-ley-cyan/10">
+                      <Icon size={22} className="text-ley-cyan" />
                     </div>
                     <span className="mb-2 inline-block rounded-full bg-white/10 px-3 py-0.5 text-xs font-semibold text-white/80">
                       {mod.code}
@@ -311,6 +280,31 @@ export default async function AvanzaJovenPage({
                 </AnimatedSection>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            tag={t("resultadosTitle2")}
+            title="Resultados"
+            highlight="Esperados"
+            accent="cyan"
+            desc="Lo que buscamos lograr con cada joven que participa en Avanza Joven."
+          />
+          <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-3">
+            {[1, 2, 3].map((ri, i) => (
+              <AnimatedSection key={ri} direction="up" delay={i * 0.08}>
+                <div className="flex h-full flex-col items-center rounded-3xl border border-border-default bg-bg-card p-6 text-center transition-all hover:shadow-md">
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-ley-cyan/10">
+                    <BookMarked size={22} className="text-ley-cyan" />
+                  </div>
+                  <p className="text-sm text-text-secondary">{t(`avanzaResult${ri}`)}</p>
+                </div>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
       </section>

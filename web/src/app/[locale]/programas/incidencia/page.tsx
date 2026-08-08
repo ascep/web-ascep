@@ -1,6 +1,9 @@
 import type { CSSProperties } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
-import ProgramHero from "@/components/ProgramHero";
+import DossierHero from "@/components/DossierHero";
+import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
@@ -99,42 +102,58 @@ export default async function IncidenciaPage({
     ? cms.results.map((r) => localize(r, locale) || "")
     : fallbackResultados;
 
+  const heroImage = sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.incidencia.image);
+  const logoImage = assetPath(fotos.home.programs.incidencia.logo);
+
   return (
     <>
-      <ProgramHero
-        bgImage={sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.incidencia.image)}
+      <DossierHero
+        images={[heroImage]}
         tag={t("pillPrograma")}
         title={t("incidenciaHeroTitle")}
         highlight={t("incidenciaHeroHighlight")}
-        highlightClass="text-ley-orange"
         subtitle={t("incidenciaHeroSubtitle")}
+        accent="orange"
         primaryCta={{ label: t("incidenciaHeroCta"), href: `/${locale}/ley-de-egreso` }}
-        cardLogo={assetPath(fotos.home.programs.incidencia.logo)}
-        cardTitle="ASCEP"
-        cardTag={t("incidenciaTitle")}
-        cardDesc={t("incidenciaDesc")}
-        cardCta={{ label: t("heroCta1"), href: `/${locale}/quienes-somos` }}
-      />
+      >
+        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
+          <div className="flex items-center gap-4">
+            <Image
+              src={logoImage}
+              alt="ASCEP"
+              width={112}
+              height={112}
+              className="h-16 w-16 rounded-2xl bg-white/15 object-contain p-2"
+            />
+            <div>
+              <p className="text-xl font-extrabold">ASCEP</p>
+              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-orange">
+                {t("incidenciaTitle")}
+              </p>
+            </div>
+          </div>
+          <p className="mt-6 text-sm leading-relaxed text-purple-100">{t("incidenciaDesc")}</p>
+          <Link
+            href={`/${locale}/quienes-somos`}
+            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
+          >
+            {t("heroCta1")}
+          </Link>
+        </div>
+      </DossierHero>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
-              Informacion
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Que es <span className="text-ley-purple">Incidencia y Participacion</span>?
-            </h2>
-          </AnimatedSection>
+          <SectionHeader tag="Informacion" title="Que es" highlight="Incidencia y Participacion?" accent="orange" />
           <div className="grid gap-12 md:grid-cols-2 items-center">
             <AnimatedSection direction="left">
-              <div className="relative h-72 overflow-hidden rounded-[10px] md:h-96">
-                <ImageParallax src={sanityImage(cms?.heroImage) || assetPath(fotos.programas.cards.incidencia.image)} alt="Incidencia y Participacion" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" intensity={0.2} />
+              <div className="relative h-72 overflow-hidden rounded-3xl md:h-96">
+                <ImageParallax src={heroImage} alt="Incidencia y Participacion" fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" intensity={0.2} />
               </div>
             </AnimatedSection>
             <AnimatedSection direction="right" delay={0.1}>
-              <div className="space-y-6 text-base text-[var(--color-text-secondary)]">
+              <div className="space-y-6 text-base text-text-secondary">
                 <p>
                   El Programa de Incidencia y Participacion tiene como objetivo desarrollar acciones que involucren a los actores clave y tomadores de decisiones en la construccion de estrategias que contribuyan a la transformacion de los cuidados alternativos, la no separacion familiar y la autonomia progresiva. Ademas, se debe realizar investigaciones que proporcione insumos para garantizar acciones claras sobre los tres ejes mencionados anteriormente.
                 </p>
@@ -147,23 +166,16 @@ export default async function IncidenciaPage({
         </div>
       </section>
 
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.cards.incidencia.image)})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              Objetivos
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Objetivos <span className="text-white/80">Especificos</span>
-            </h2>
-          </AnimatedSection>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader tag="Objetivos" title="Objetivos" highlight="Especificos" accent="white" dark />
           <div className="mx-auto grid max-w-4xl gap-4">
             {objetivos.map((obj, i) => (
               <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                <div className="flex gap-4 rounded-[10px] glass-card p-6 transition-all hover:bg-white/15">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-white/10 text-lg font-bold text-white/80">
+                <div className="flex gap-4 rounded-3xl glass-card p-6 transition-all hover:bg-white/15">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white/10 text-lg font-bold text-white/80">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
@@ -177,30 +189,26 @@ export default async function IncidenciaPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20">
+      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
-              Lineas
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              Lineas de <span className="text-ley-purple">Accion</span>
-            </h2>
-            <p className="mt-4 text-[var(--color-text-secondary)]">
-              El programa se estructura en torno a las siguientes lineas de accion
-            </p>
-          </AnimatedSection>
+          <SectionHeader
+            tag="Lineas"
+            title="Lineas de"
+            highlight="Accion"
+            accent="orange"
+            desc="El programa se estructura en torno a las siguientes lineas de accion"
+          />
           <div className="grid gap-6 sm:grid-cols-2">
             {lineas.map((linea, i) => {
               const Icon = linea.icon;
               return (
                 <AnimatedSection key={linea.title} direction="up" delay={i * 0.06}>
-                  <div className="rounded-[10px] border border-border-default bg-bg-card p-6 text-center transition-all hover:shadow-md">
-                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-ley-purple/10">
-                      <Icon size={22} className="text-ley-purple" />
+                  <div className="rounded-3xl border border-border-default bg-bg-card p-6 text-center transition-all hover:shadow-md">
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-ley-orange/10">
+                      <Icon size={22} className="text-ley-orange" />
                     </div>
-                    <h3 className="mb-1 font-bold text-[var(--color-text-primary)]">{linea.title}</h3>
+                    <h3 className="mb-1 font-bold text-text-primary">{linea.title}</h3>
                     <p className="text-sm text-[var(--color-text-muted)]">{linea.desc}</p>
                   </div>
                 </AnimatedSection>
@@ -210,22 +218,15 @@ export default async function IncidenciaPage({
         </div>
       </section>
 
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.cards.incidencia.image)})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              Resultados
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              Resultados <span className="text-white/80">Esperados</span>
-            </h2>
-          </AnimatedSection>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader tag="Resultados" title="Resultados" highlight="Esperados" accent="white" dark />
           <div className="grid gap-6 sm:grid-cols-3">
             {resultados.map((r, i) => (
               <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                <div className="glass-card rounded-[10px] p-6 transition-all hover:bg-white/15">
+                <div className="glass-card rounded-3xl p-6 transition-all hover:bg-white/15">
                   <p className="text-white/70">{r}</p>
                 </div>
               </AnimatedSection>
@@ -237,7 +238,7 @@ export default async function IncidenciaPage({
       <ProgramVideosSection
         videos={videos}
         tabs={videoTabs}
-        bgImage={assetPath(fotos.programas.cards.incidencia.image)}
+        bgImage={heroImage}
         locale={locale}
       />
     </>
