@@ -60,6 +60,16 @@ export default async function NoticiasPage({
       featured: true,
     },
     {
+      id: "resolucion-4775",
+      slug: "resolucion-4775",
+      title: t("res4775Title"),
+      excerpt: t("res4775Excerpt"),
+      category: "ley",
+      categoryLabel: t("leyTag"),
+      ctaLabel: t("leerMas"),
+      bgImage: assetPath(fotos.impacto.hero),
+    },
+    {
       id: "casas-del-saber",
       slug: "casas-del-saber",
       title: t("casasTitle"),
