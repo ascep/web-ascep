@@ -84,7 +84,7 @@ export default function HeroSlideshow({
   primaryCta,
   secondaryCta,
   children,
-  auto = 7000,
+  auto = 4500,
   className = "",
 }: HeroSlideshowProps) {
   const [active, setActive] = useState(0);

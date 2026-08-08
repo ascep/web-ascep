@@ -12,12 +12,12 @@ import {
   Home,
   Megaphone,
   PersonStanding,
-  Quote,
   Shield,
   Users,
   type LucideIcon,
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
+import DossierHero from "@/components/DossierHero";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import { assetPath } from "@/lib/asset-path";
@@ -62,80 +62,46 @@ export default async function ProgramasPage({
 
   return (
     <>
-      <section className="relative overflow-hidden bg-ley-purple text-white">
-        <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-          <Image
-            src={assetPath(fotos.programas.hero)}
-            alt=""
-            fill
-            className="object-cover opacity-15"
-            sizes="100vw"
-            priority
-          />
-        </div>
-        <div aria-hidden="true" className="pointer-events-none absolute -right-12 -top-12 hidden lg:block">
-          <Quote size={340} strokeWidth={1} className="text-white opacity-10" />
-        </div>
-        <div aria-hidden="true" className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-ley-cyan/10" />
-        <div aria-hidden="true" className="pointer-events-none absolute -right-10 bottom-10 h-48 w-48 rounded-full bg-ley-orange/10" />
-
-        <div className="relative mx-auto w-full max-w-7xl px-4 pb-16 pt-16 sm:px-6 sm:pb-24 sm:pt-24 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-12">
-            <div className="lg:col-span-7">
-              <span className="inline-block rounded-full border border-ley-yellow/40 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-ley-yellow">
-                {t("badge")}
-              </span>
-              <h1 className="mt-6 break-words text-4xl font-extrabold leading-[1.1] tracking-tight sm:text-5xl">
-                {t("title")} <span className="text-ley-cyan">{t("titleHighlight")}</span>
-              </h1>
-              <p className="mt-6 max-w-xl text-base leading-relaxed text-purple-100 sm:text-lg">
-                {t("desc")}
+      <DossierHero
+        images={[
+          assetPath(fotos.programas.hero),
+          assetPath(fotos.impacto.hero),
+          assetPath(fotos.casasDelSaber.hero),
+          assetPath(fotos.noticias.hero),
+        ]}
+        tag={t("badge")}
+        title={t("title")}
+        highlight={t("titleHighlight")}
+        subtitle={t("desc")}
+        accent="orange"
+        primaryCta={{ label: t("heroCta1"), href: `/${locale}/quienes-somos` }}
+        secondaryCta={{ label: t("heroCta2"), href: "#portafolio" }}
+      >
+        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
+          <div className="flex items-center gap-4">
+            <Image
+              src={assetPath("/logos/12 logo ascep blanco sin slogan.png")}
+              alt="ASCEP"
+              width={112}
+              height={112}
+              className="h-16 w-16 rounded-2xl bg-white/15 p-2"
+            />
+            <div>
+              <p className="text-xl font-extrabold">ASCEP</p>
+              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-cyan">
+                {t("heroCardTag")}
               </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link
-                  href={`/${locale}/quienes-somos`}
-                  className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-ley-orange px-6 py-3 text-sm font-bold text-white transition-all hover:bg-ley-orange/90 hover:shadow-lg"
-                >
-                  {t("heroCta1")} <ArrowRight size={16} />
-                </Link>
-                <Link
-                  href="#portafolio"
-                  className="inline-flex min-h-[48px] items-center gap-2 rounded-xl border border-white/30 px-6 py-3 text-sm font-bold text-white transition-all hover:border-white/60 hover:bg-white/10"
-                >
-                  {t("heroCta2")}
-                </Link>
-              </div>
-            </div>
-
-            <div className="lg:col-span-5">
-              <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
-                <div className="flex items-center gap-4">
-                  <Image
-                    src={assetPath("/logos/12 logo ascep blanco sin slogan.png")}
-                    alt="ASCEP"
-                    width={112}
-                    height={112}
-                    className="h-16 w-16 rounded-2xl bg-white/15 p-2"
-                  />
-                  <div>
-                    <p className="text-xl font-extrabold">ASCEP</p>
-                    <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-cyan">
-                      {t("heroCardTag")}
-                    </p>
-                  </div>
-                </div>
-                <p className="mt-6 text-sm leading-relaxed text-purple-100">{t("heroCardDesc")}</p>
-                <Link
-                  href={`/${locale}/donar`}
-                  className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
-                >
-                  {t("heroCardCta")} <HandHeart size={16} />
-                </Link>
-              </div>
             </div>
           </div>
+          <p className="mt-6 text-sm leading-relaxed text-purple-100">{t("heroCardDesc")}</p>
+          <Link
+            href={`/${locale}/donar`}
+            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
+          >
+            {t("heroCardCta")} <HandHeart size={16} />
+          </Link>
         </div>
-      </section>
+      </DossierHero>
 
       <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
         <DecoShapes variant="teal" />

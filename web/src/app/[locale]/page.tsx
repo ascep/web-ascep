@@ -10,10 +10,10 @@ import HomeTestimonials from "@/components/HomeTestimonials";
 import HomeCTA from "@/components/HomeCTA";
 import TimelineRoute, { type RouteItem } from "@/components/TimelineRoute";
 import ModeloGrid from "@/components/ModeloGrid";
-import ProgramCarousel from "@/components/ProgramCarousel";
+import ProgramGrid from "@/components/ProgramGrid";
 import LogoLoop from "@/components/LogoLoop";
 import GallerySection from "@/components/GallerySection";
-import NewsCarousel, { type NewsItem } from "@/components/NewsCarousel";
+import NewsGrid, { type NewsGridItem } from "@/components/NewsGrid";
 import ProgramCardGallery from "@/components/ProgramCardGallery";
 import ImageParallax from "@/components/ImageParallax";
 import { assetPath } from "@/lib/asset-path";
@@ -154,7 +154,7 @@ export default async function HomePage({
         role: h(t.roleKey),
       }));
 
-  const newsItems: NewsItem[] = [
+  const newsItems: NewsGridItem[] = [
     {
       id: "ley-hijos-del-estado",
       href: `/${locale}/noticias/ley-hijos-del-estado`,
@@ -342,7 +342,7 @@ export default async function HomePage({
         <ModeloGrid variant="dark" />
       </section>
 
-      <ProgramCarousel programs={resolvedPrograms} locale={locale} />
+      <ProgramGrid programs={resolvedPrograms} locale={locale} />
 
       <HomeTestimonials
         tag={h("testimonialsTag")}
@@ -365,7 +365,7 @@ export default async function HomePage({
             </p>
           </div>
 
-          <NewsCarousel items={newsItems} locale={locale} />
+          <NewsGrid items={newsItems} locale={locale} />
 
           <div className="mt-10 flex justify-center">
             <Link
