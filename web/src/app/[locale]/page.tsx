@@ -10,7 +10,6 @@ import HomeTestimonials from "@/components/HomeTestimonials";
 import HomeCTA from "@/components/HomeCTA";
 import TimelineRoute, { type RouteItem } from "@/components/TimelineRoute";
 import ModeloGrid from "@/components/ModeloGrid";
-import ProgramGrid from "@/components/ProgramGrid";
 import LogoLoop from "@/components/LogoLoop";
 import GallerySection from "@/components/GallerySection";
 import NewsGrid, { type NewsGridItem } from "@/components/NewsGrid";
@@ -74,56 +73,10 @@ export default async function HomePage({
     src: assetPath(item.src),
   }));
 
-  const fallbackPrograms = [
-    {
-      title: "Incidencia y Participacion",
-      desc: "Desarrollamos acciones que involucran a actores clave y tomadores de decisiones en la transformacion de los cuidados alternativos.",
-      ...fotos.home.programs.incidencia,
-      slug: "incidencia",
-      image: assetPath(fotos.home.programs.incidencia.image),
-      logo: assetPath(fotos.home.programs.incidencia.logo),
-    },
-    {
-      title: "Avanza Joven",
-      desc: "Programa disenado para brindar apoyo y herramientas a adolescentes que viven institucionalizados, potenciando habilidades para la vida.",
-      ...fotos.home.programs.avanzaJoven,
-      slug: "avanza-joven",
-      image: assetPath(fotos.home.programs.avanzaJoven.image),
-      logo: assetPath(fotos.home.programs.avanzaJoven.logo),
-    },
-    {
-      title: "Fomento para el Empleo y Emprendimiento",
-      desc: "Modelo piloto para promover capacidades laborales y fortalecer la empleabilidad de jovenes en proceso de egreso del sistema de proteccion.",
-      ...fotos.home.programs.fomento,
-      slug: "empleo",
-      image: assetPath(fotos.home.programs.fomento.image),
-      logo: assetPath(fotos.home.programs.fomento.logo),
-    },
-    {
-      title: "Mi Cuerpo, Mi Sexualidad, Mi Decision",
-      desc: "Programa para proveer condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad.",
-      ...fotos.home.programs.miCuerpo,
-      slug: "mi-cuerpo",
-      image: assetPath(fotos.home.programs.miCuerpo.image),
-      logo: assetPath(fotos.home.programs.miCuerpo.logo),
-    },
-    {
-      title: "Casas del Saber",
-      desc: "Espacio de acompanamiento integral para jovenes en proceso de egreso del sistema de proteccion estatal.",
-      ...fotos.home.programs.casasDelSaber,
-      slug: "casas-del-saber",
-      href: `/${locale}/casas-del-saber`,
-      image: assetPath(fotos.home.programs.casasDelSaber.image),
-      logo: assetPath(fotos.home.programs.casasDelSaber.logo),
-    },
-  ];
-
   const fallbackAliados = fotos.home.aliados.map((item) => ({
     ...item,
     src: assetPath(item.src),
   }));
-
-  const resolvedPrograms = fallbackPrograms;
 
   const cmsAliados = cmsPartners.length > 0
     ? cmsPartners.map((p) => ({
@@ -341,8 +294,6 @@ export default async function HomePage({
         <DecoShapes variant="mixed" />
         <ModeloGrid variant="dark" />
       </section>
-
-      <ProgramGrid programs={resolvedPrograms} locale={locale} />
 
       <HomeTestimonials
         tag={h("testimonialsTag")}

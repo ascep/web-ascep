@@ -137,7 +137,7 @@
     "cardTag": "Some seu talento"
   },
   "hero": {
-    "title": "Transformando a forma como o Estado aborda o cuidado e a protecao da infancia",
+    "title": "Transformando a forma como o Estado aborda o cuidado e a protecao da adolescencia e da juventude",
     "subtitle": "Somos egressos do sistema de protecao estatal, unidos para construir um futuro com autonomia e dignidade para cada jovem.",
     "cta": "Conheca nossos programas"
   },
@@ -494,7 +494,7 @@
   },
   "home": {
     "heroTag": "ASCEP",
-    "heroTitle": "Transformando a forma como o Estado aborda o cuidado e a protecao da infancia",
+    "heroTitle": "Transformando a forma como o Estado aborda o cuidado e a protecao da adolescencia e da juventude",
     "heroSubtitle": "Somos egressos do sistema de protecao estatal, unidos para construir um futuro com autonomia e dignidade para cada jovem.",
     "caminoTag": "7 anos de jornada",
     "caminoTitle": "Um caminho construido passo a passo",
@@ -546,7 +546,7 @@
     "porQueDesc": "Cada programa responde a uma lacuna do sistema de protecao e trabalha para fechá-la.",
     "aliadosTag": "Quem nos acompanha",
     "aliadosTitle": "Aliados estrategicos",
-    "heroBadge": "Trabalhando pela infancia",
+    "heroBadge": "Trabalhando pela adolescencia e pela juventude",
     "noticiasTag": "Noticias",
     "noticiasTitle": "Ultimas novidades",
     "noticiasDesc": "Fique por dentro das publicacoes e novidades da ASCEP.",
@@ -710,7 +710,7 @@
     "equipoTag": "EQUIPE",
     "equipoTitle": "Nossa",
     "equipoHighlight": "Equipe",
-    "equipoDesc": "Somos um grupo de pessoas egressas do Sistema de Proteção Estatal que, a partir da nossa própria experiência, trabalhamos para transformar a forma como o Estado aborda o cuidado da infância e da juventude na Colômbia.",
+    "equipoDesc": "Somos um grupo de pessoas egressas do Sistema de Proteção Estatal que, a partir da nossa própria experiência, trabalhamos para transformar a forma como o Estado aborda o cuidado da adolescência e da juventude na Colômbia.",
     "teamMaicolRole": "Diretor",
     "teamKevinRole": "Programador e Designer",
     "teamMonicaRole": "Equipe Psicossocial",
