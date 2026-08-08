@@ -81,7 +81,11 @@ export default async function ComoLoHacemosPage({
   return (
     <div>
       <DossierHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.comoLoHacemos.hero)}
+        images={[
+          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.comoLoHacemos.hero),
+          assetPath(fotos.comoLoHacemos.estrategiasImage),
+          assetPath(fotos.comoLoHacemos.lineasImage),
+        ]}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || t("heroHighlight")}
@@ -196,7 +200,7 @@ export default async function ComoLoHacemosPage({
                     <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${item.iconColor}`}>
                       <Icon size={22} />
                     </div>
-                    <h4 className="mb-1 font-bold text-white">{item.title}</h4>
+                    <h3 className="mb-1 font-bold text-white">{item.title}</h3>
                     <p className="text-sm text-[var(--color-text-muted)]">{item.desc}</p>
                   </div>
                 </AnimatedSection>
@@ -224,7 +228,7 @@ export default async function ComoLoHacemosPage({
                     <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${accent.bg}`}>
                       <CheckCircle2 size={18} className={accent.icon} />
                     </div>
-                    <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">{item.title}</h4>
+                    <h3 className="mb-1 font-bold text-[var(--color-text-primary)]">{item.title}</h3>
                     <p className="text-sm text-[var(--color-text-muted)]">{item.desc}</p>
                   </div>
                 </AnimatedSection>

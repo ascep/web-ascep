@@ -119,14 +119,6 @@ export const teamMembersQuery = groq`*[_type == "teamMember" && active == true] 
 // MILESTONES
 // ============================================================
 
-export const milestonesQuery = groq`*[_type == "milestone"] | order(order asc) {
-  _id,
-  year,
-  title,
-  description,
-  image,
-  order
-}`;
 
 // ============================================================
 // DOCUMENTS (transparencia)

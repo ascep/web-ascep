@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+import DossierHero from "@/components/DossierHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
@@ -6,6 +7,7 @@ import type { CSSProperties } from "react";
 import { BookOpen, Monitor, Palette, Heart } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
+import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -63,23 +65,21 @@ export default async function LineasPage({
     },
   ];
 
+  const pageData = await getPageContent("casas-del-saber-lineas");
   return (
     <div>
-      <section className="relative overflow-hidden bg-brand-purple py-24">
-        <div className="absolute -left-16 -top-16 h-64 w-64 rounded-full bg-brand-teal/10" />
-        <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-brand-orange/10" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <span className="mb-4 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-            {t("heroTag")}
-          </span>
-          <h1 className="text-4xl font-bold text-white sm:text-5xl">
-            {t("heroTitle")} <span className="text-white/80">{t("heroHighlight")}</span>
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg text-white/80">
-            {t("heroSubtitle")}
-          </p>
-        </div>
-      </section>
+      <DossierHero
+        images={[
+          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.casasDelSaber.modalidades),
+          assetPath(fotos.casasDelSaber.hero),
+          assetPath(fotos.casasDelSaber.areas),
+        ]}
+        tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
+        title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
+        highlight={localize(pageData?.hero?.highlight, locale) || t("heroHighlight")}
+        subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
+        accent="orange"
+      />
 
       <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.areas)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
@@ -98,11 +98,11 @@ export default async function LineasPage({
               const Icon = linea.icon;
               return (
                 <AnimatedSection key={linea.title} direction="up" delay={i * 0.1}>
-                  <div className="glass-card rounded-[10px] p-6 text-center transition-all hover:bg-white/15">
-                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
-                      <Icon size={22} className="text-brand-secondary" />
+                  <div className="glass-card rounded-3xl p-6 text-center transition-all hover:bg-white/15">
+                    <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${linea.bg}`}>
+                      <Icon size={22} className={linea.color} />
                     </div>
-                    <h4 className="mb-3 text-xl font-bold text-[var(--color-text-primary)]">{linea.title}</h4>
+                    <h3 className="mb-3 text-xl font-bold text-[var(--color-text-primary)]">{linea.title}</h3>
                     <div className="mb-4 text-left">
                       <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">Proposito</p>
                       <p className="text-sm text-[var(--color-text-muted)]">{linea.proposito}</p>

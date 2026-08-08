@@ -46,7 +46,7 @@ export default function Footer() {
                 <Link
                   key={key}
                   href={`/${locale}${href}`}
-                  className="text-sm text-white transition-colors hover:text-white"
+                  className="text-sm text-white transition-colors hover:text-white/70"
                 >
                   {t(key)}
                 </Link>
@@ -61,7 +61,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-white">
               <li>{f("ubicacion")}</li>
               <li>
-                <a href={`mailto:${f("email")}`} className="transition-colors hover:text-white">
+                <a href={`mailto:${f("email")}`} className="transition-colors hover:text-white/70">
                   {f("email")}
                 </a>
               </li>

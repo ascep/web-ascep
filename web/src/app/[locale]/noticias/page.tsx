@@ -96,7 +96,11 @@ export default async function NoticiasPage({
   return (
     <div>
       <DossierHero
-        bgImage={assetPath(fotos.noticias.hero)}
+        images={[
+          assetPath(fotos.noticias.hero),
+          assetPath(fotos.impacto.gallery[1]),
+          assetPath(fotos.impacto.gallery[2]),
+        ]}
         tag="Actualidad"
         title={t("title")}
         highlight={t("heroHighlight")}

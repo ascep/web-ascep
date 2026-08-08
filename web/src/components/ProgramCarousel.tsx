@@ -14,6 +14,7 @@ type Program = {
   logo: string;
   image: string;
   color: string;
+  href?: string;
 };
 
 type ProgramCarouselProps = {
@@ -28,6 +29,8 @@ const pillLabels: Record<string, string> = {
   incidencia: "pillLiderazgo",
   "mi-cuerpo": "pillBienestar",
   miCuerpo: "pillBienestar",
+  "casas-del-saber": "pillFormacion",
+  casasDelSaber: "pillFormacion",
 };
 
 export default function ProgramCarousel({ programs, locale }: ProgramCarouselProps) {
@@ -143,7 +146,7 @@ export default function ProgramCarousel({ programs, locale }: ProgramCarouselPro
                           {program.desc}
                         </p>
                         <Link
-                          href={`/${locale}/programas/${program.slug}`}
+                          href={program.href ?? `/${locale}/programas/${program.slug}`}
                           className="inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-semibold transition-all hover:shadow-lg"
                           style={{ color: program.color }}
                           onClick={(e) => e.stopPropagation()}
@@ -187,8 +190,8 @@ export default function ProgramCarousel({ programs, locale }: ProgramCarouselPro
                   key={p.slug}
                   onClick={() => { setIsPaused(true); setActive(i); }}
                   aria-label={`Go to ${p.title}`}
-                  className={`min-h-6 min-w-6 rounded-full p-2 transition-all ${
-                    i === active ? "bg-white" : "bg-white/30"
+                  className={`flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all ${
+                    i === active ? "bg-white" : "bg-white/30 hover:bg-white/50"
                   }`}
                 />
               ))}

@@ -1,5 +1,5 @@
 export const casasDelSaberGallery: string[] = [
-  "/images/casas-del-saber/GIS04876.webp",
+  "/images/casas-del-saber/GIS04894.webp",
   "/images/casas-del-saber/GIS04882.webp",
   "/images/casas-del-saber/GIS04888.webp",
   "/images/casas-del-saber/GIS04892.webp",

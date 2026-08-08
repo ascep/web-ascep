@@ -286,10 +286,10 @@ export default async function LeyPostPage({
 
                 <div className="rounded-2xl border border-border-subtle bg-bg-surface p-4 shadow-sm sm:p-6">
                   <MapaAlcanceASCEP
-                    baseColor="#4A154B"
-                    activeColor="#6C2B72"
-                    pinColor="#F7921E"
-                    labelColor="#4A154B"
+                    baseColor="var(--color-ley-purple)"
+                    activeColor="var(--color-ley-purple-dark)"
+                    pinColor="var(--color-ley-orange)"
+                    labelColor="var(--color-ley-purple)"
                     hideLegend
                   />
                 </div>

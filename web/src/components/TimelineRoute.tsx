@@ -122,7 +122,7 @@ function TimelineItem({
   const countLabel = `${count} ${count === 1 ? hitoSingular : hitoPlural}`;
 
   return (
-    <li className={`relative pl-14 sm:pl-[72px] ${item.highlight ? "" : ""}`}>
+    <li className="relative pl-14 sm:pl-[72px]">
       <div className="absolute left-0 top-2 flex w-11 justify-center sm:w-14" aria-hidden="true">
         <span
           className={`flex h-11 w-11 items-center justify-center rounded-full border-2 bg-[var(--color-bg-base)] font-display text-[15px] font-semibold sm:h-[44px] sm:w-[44px] ${

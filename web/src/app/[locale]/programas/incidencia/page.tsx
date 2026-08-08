@@ -167,7 +167,7 @@ export default async function IncidenciaPage({
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <h5 className="font-bold text-white">{obj.title}</h5>
+                    <h3 className="font-bold text-white">{obj.title}</h3>
                     <p className="mt-1 text-sm text-white/70">{obj.desc}</p>
                   </div>
                 </div>
@@ -200,7 +200,7 @@ export default async function IncidenciaPage({
                     <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-ley-purple/10">
                       <Icon size={22} className="text-ley-purple" />
                     </div>
-                    <h4 className="mb-1 font-bold text-[var(--color-text-primary)]">{linea.title}</h4>
+                    <h3 className="mb-1 font-bold text-[var(--color-text-primary)]">{linea.title}</h3>
                     <p className="text-sm text-[var(--color-text-muted)]">{linea.desc}</p>
                   </div>
                 </AnimatedSection>

@@ -76,13 +76,13 @@ export default function PodcastSection() {
       {totalPages > 1 && (
         <div className="mt-8 flex items-center justify-center gap-3">
           <button onClick={() => setPage((p) => Math.max(0, p - 1))} disabled={page === 0}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:bg-white/10 disabled:opacity-30"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:bg-white/10 disabled:opacity-30"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           <span className="text-sm text-white/60">{page + 1} / {totalPages}</span>
           <button onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))} disabled={page >= totalPages - 1}
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:bg-white/10 disabled:opacity-30"
+            className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white/70 transition-colors hover:bg-white/10 disabled:opacity-30"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -94,7 +94,7 @@ export default function PodcastSection() {
           onClick={() => setCurrentVideo(null)}>
           <div className="relative w-full max-w-3xl" onClick={(e) => e.stopPropagation()}>
             <button onClick={() => setCurrentVideo(null)}
-              className="absolute -right-3 -top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white text-black shadow-lg">
+              className="absolute -right-3 -top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white text-black shadow-lg">
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>

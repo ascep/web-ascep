@@ -271,7 +271,7 @@ export default async function AvanzaJovenPage({
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <div>
-                    <h5 className="font-bold text-[var(--color-text-primary)]">{obj.title}</h5>
+                    <h3 className="font-bold text-[var(--color-text-primary)]">{obj.title}</h3>
                     <p className="mt-1 text-sm text-[var(--color-text-secondary)]">{obj.desc}</p>
                   </div>
                 </div>
@@ -305,7 +305,7 @@ export default async function AvanzaJovenPage({
                     <span className="mb-2 inline-block rounded-full bg-white/10 px-3 py-0.5 text-xs font-semibold text-white/80">
                       {mod.code}
                     </span>
-                    <h4 className="mb-1 font-bold text-white">{mod.title}</h4>
+                    <h3 className="mb-1 font-bold text-white">{mod.title}</h3>
                     <p className="text-sm text-white/60">{mod.desc}</p>
                   </div>
                 </AnimatedSection>

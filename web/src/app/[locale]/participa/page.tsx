@@ -44,7 +44,11 @@ export default async function ParticipaPage({
   return (
     <div>
       <DossierHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.participa.hero)}
+        images={[
+          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.participa.hero),
+          assetPath(fotos.participa.section),
+          assetPath(fotos.impacto.gallery[1]),
+        ]}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || ""}
@@ -116,7 +120,7 @@ export default async function ParticipaPage({
                     <div className={`mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${style.iconColor}`}>
                       <Icon size={22} />
                     </div>
-                    <h4 className="mb-1 font-bold text-white">{t(`way${n}Title`)}</h4>
+                    <h3 className="mb-1 font-bold text-white">{t(`way${n}Title`)}</h3>
                     <p className="mb-4 text-sm text-[var(--color-text-muted)]">{t(`way${n}Desc`)}</p>
                     <ul className="mt-auto space-y-1">
                       {[1, 2, 3].map((j) => (

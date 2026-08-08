@@ -131,7 +131,7 @@ export default async function MiCuerpoPage({
   return (
     <>
       <DossierHero
-        bgImage={heroImage}
+        images={[heroImage, assetPath(fotos.impacto.gallery[1]), assetPath(fotos.impacto.gallery[2])]}
         tag="Programa"
         title="Mi Cuerpo, Mi Sexualidad,"
         highlight="Mi Vida"
@@ -245,7 +245,7 @@ export default async function MiCuerpoPage({
                     <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${accent.bg}`}>
                       <Icon size={22} className={accent.icon} />
                     </div>
-                    <h4 className="mb-1 font-bold text-text-primary">{comp.title}</h4>
+                    <h3 className="mb-1 font-bold text-text-primary">{comp.title}</h3>
                     <p className="text-sm text-text-muted">{comp.desc}</p>
                   </div>
                 </AnimatedSection>

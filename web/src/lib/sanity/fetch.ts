@@ -25,7 +25,6 @@ import {
   siteSettingsQuery,
   pageContentQuery,
   teamMembersQuery,
-  milestonesQuery,
   partnersQuery,
   featuredPartnersQuery,
   documentsQuery,
@@ -85,15 +84,6 @@ export type TeamMember = {
   name?: { es?: string; en?: string; pt?: string };
   role?: { es?: string; en?: string; pt?: string };
   photo?: SanityImage;
-  order?: number;
-};
-
-export type Milestone = {
-  _id: string;
-  year?: string;
-  title?: { es?: string; en?: string; pt?: string };
-  description?: { es?: string; en?: string; pt?: string };
-  image?: SanityImage;
   order?: number;
 };
 
@@ -247,11 +237,6 @@ export async function getPageContent(page: string): Promise<PageContent | null> 
 
 export async function getTeamMembers(): Promise<TeamMember[]> {
   const data = await sanityFetch<TeamMember[]>(teamMembersQuery);
-  return data ?? [];
-}
-
-export async function getMilestones(): Promise<Milestone[]> {
-  const data = await sanityFetch<Milestone[]>(milestonesQuery);
   return data ?? [];
 }
 

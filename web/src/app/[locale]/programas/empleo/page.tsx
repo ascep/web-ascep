@@ -98,7 +98,7 @@ export default async function EmpleoPage({
   return (
     <>
       <DossierHero
-        bgImage={heroImage}
+        images={[heroImage, assetPath(fotos.impacto.gallery[1]), assetPath(fotos.impacto.gallery[2])]}
         tag="Programa"
         title="Fomento para el Empleo"
         highlight="Juvenil"
@@ -228,7 +228,7 @@ export default async function EmpleoPage({
                     <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${accent.bg}`}>
                       <Icon size={22} className={accent.icon} />
                     </div>
-                    <h4 className="mb-1 font-bold text-white">{comp.title}</h4>
+                    <h3 className="mb-1 font-bold text-white">{comp.title}</h3>
                     <p className="text-sm text-[var(--color-text-muted)]">{comp.desc}</p>
                   </div>
                 </AnimatedSection>

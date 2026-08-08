@@ -34,7 +34,11 @@ export default async function ModalidadesPage({
   return (
     <div>
       <DossierHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.casasDelSaber.modalidades)}
+        images={[
+          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.casasDelSaber.modalidades),
+          assetPath(fotos.casasDelSaber.areas),
+          assetPath(fotos.casasDelSaber.hero),
+        ]}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || ""}

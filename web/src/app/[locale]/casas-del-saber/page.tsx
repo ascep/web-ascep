@@ -94,8 +94,8 @@ export default async function CasasDelSaberPage({
               return (
                 <AnimatedSection key={section.href} direction="up" delay={i * 0.08}>
                   <Link href={`/${locale}/casas-del-saber/${section.href}`}>
-                    <div className="group h-full rounded-[10px] border border-[var(--color-border-subtle)] bg-bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
-                      <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-[10px] bg-brand-purple/10">
+                    <div className="group h-full rounded-3xl border border-[var(--color-border-subtle)] bg-bg-card p-6 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg">
+                      <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-brand-purple/10">
                         <Icon size={20} className="text-brand-purple" />
                       </div>
                       <h3 className="mb-2 font-bold text-[var(--color-text-primary)]">{section.title}</h3>
@@ -157,8 +157,8 @@ export default async function CasasDelSaberPage({
               const Icon = role.icon;
               return (
                 <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                  <div className="glass-card h-full rounded-[10px] p-6 transition-all hover:bg-white/15">
-                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
+                  <div className="glass-card h-full rounded-3xl p-6 transition-all hover:bg-white/15">
+                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10">
                       <Icon size={22} className="text-ley-teal" />
                     </div>
                     <h3 className="mb-2 font-bold text-white">{role.title}</h3>

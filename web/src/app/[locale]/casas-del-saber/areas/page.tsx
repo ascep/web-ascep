@@ -60,7 +60,11 @@ export default async function AreasPage({
   return (
     <div>
       <DossierHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.casasDelSaber.areas)}
+        images={[
+          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.casasDelSaber.areas),
+          assetPath(fotos.casasDelSaber.hero),
+          assetPath(fotos.casasDelSaber.modalidades),
+        ]}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || t("heroHighlight")}

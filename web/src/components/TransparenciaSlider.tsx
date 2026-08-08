@@ -117,7 +117,7 @@ export default function TransparenciaSlider({
             type="button"
             onClick={prev}
             aria-label={prevLabel}
-            className="absolute left-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition-all hover:bg-black/50"
+            className="absolute left-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition-all hover:bg-black/50"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
@@ -125,7 +125,7 @@ export default function TransparenciaSlider({
             type="button"
             onClick={next}
             aria-label={nextLabel}
-            className="absolute right-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition-all hover:bg-black/50"
+            className="absolute right-0 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-black/30 text-white backdrop-blur-sm transition-all hover:bg-black/50"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -137,7 +137,7 @@ export default function TransparenciaSlider({
                 onClick={() => setActive(i)}
                 aria-label={`${dotsLabel} ${i + 1}`}
                 aria-current={i === active}
-                className="flex min-h-5 min-w-5 items-center justify-center rounded-full p-1"
+                className="flex min-h-11 min-w-11 items-center justify-center rounded-full"
               >
                 <span
                   className={`block h-2 w-2 rounded-full transition-all ${

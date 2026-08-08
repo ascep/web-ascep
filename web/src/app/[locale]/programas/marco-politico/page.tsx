@@ -105,7 +105,7 @@ export default async function MarcoPoliticoPage({
   return (
     <>
       <DossierHero
-        bgImage={heroImage}
+        images={[heroImage, assetPath(fotos.impacto.gallery[1]), assetPath(fotos.impacto.gallery[2])]}
         tag="Marco Politico"
         title="Marco"
         highlight="Politico"

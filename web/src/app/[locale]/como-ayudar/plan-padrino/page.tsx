@@ -187,7 +187,7 @@ export default async function PlanPadrinoPage({
           </div>
 
           <AnimatedSection delay={0.25}>
-            <div className="rounded-[10px] bg-gradient-to-br from-brand-teal to-brand-blue-dark p-8 text-center text-white sm:p-12">
+            <div className="rounded-[10px] bg-brand-primary p-8 text-center text-white sm:p-12">
               <CheckCircle size={40} className="mx-auto mb-4 text-white/80" />
               <h2 className="mb-4 text-2xl font-bold">{t("ctaTitle")}</h2>
               <p className="mb-8 text-white/80">{t("ctaDesc")}</p>

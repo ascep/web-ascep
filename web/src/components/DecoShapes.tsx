@@ -20,24 +20,24 @@ type DecoShapesProps = {
 
 const variants: Record<string, Shape[]> = {
   teal: [
-    { type: "circle", size: 400, x: "-10%", y: "-10%", color: "#019E9F", opacity: 0.05, blur: 80 },
-    { type: "circle", size: 250, x: "70%", y: "60%", color: "#44BCC5", opacity: 0.04, blur: 60 },
-    { type: "ring", size: 500, x: "50%", y: "20%", color: "#019E9F", opacity: 0.03, blur: 100 },
+    { type: "circle", size: 400, x: "-10%", y: "-10%", color: "var(--color-brand-primary)", opacity: 0.05, blur: 80 },
+    { type: "circle", size: 250, x: "70%", y: "60%", color: "var(--color-brand-secondary)", opacity: 0.04, blur: 60 },
+    { type: "ring", size: 500, x: "50%", y: "20%", color: "var(--color-brand-primary)", opacity: 0.03, blur: 100 },
   ],
   orange: [
-    { type: "circle", size: 350, x: "80%", y: "-5%", color: "#EC6620", opacity: 0.05, blur: 70 },
-    { type: "circle", size: 200, x: "-5%", y: "70%", color: "#EC6620", opacity: 0.04, blur: 50 },
-    { type: "blob", size: 450, x: "30%", y: "40%", color: "#F2CA11", opacity: 0.03, blur: 90 },
+    { type: "circle", size: 350, x: "80%", y: "-5%", color: "var(--color-brand-accent)", opacity: 0.05, blur: 70 },
+    { type: "circle", size: 200, x: "-5%", y: "70%", color: "var(--color-brand-accent)", opacity: 0.04, blur: 50 },
+    { type: "blob", size: 450, x: "30%", y: "40%", color: "var(--color-brand-yellow)", opacity: 0.03, blur: 90 },
   ],
   mixed: [
-    { type: "circle", size: 350, x: "-8%", y: "-8%", color: "#019E9F", opacity: 0.06, blur: 70 },
-    { type: "circle", size: 280, x: "75%", y: "10%", color: "#EC6620", opacity: 0.05, blur: 60 },
-    { type: "blob", size: 400, x: "40%", y: "60%", color: "#44BCC5", opacity: 0.04, blur: 80 },
-    { type: "ring", size: 350, x: "10%", y: "50%", color: "#F2CA11", opacity: 0.03, blur: 70 },
+    { type: "circle", size: 350, x: "-8%", y: "-8%", color: "var(--color-brand-primary)", opacity: 0.06, blur: 70 },
+    { type: "circle", size: 280, x: "75%", y: "10%", color: "var(--color-brand-accent)", opacity: 0.05, blur: 60 },
+    { type: "blob", size: 400, x: "40%", y: "60%", color: "var(--color-brand-secondary)", opacity: 0.04, blur: 80 },
+    { type: "ring", size: 350, x: "10%", y: "50%", color: "var(--color-brand-yellow)", opacity: 0.03, blur: 70 },
   ],
   subtle: [
-    { type: "circle", size: 300, x: "0%", y: "0%", color: "#019E9F", opacity: 0.03, blur: 100 },
-    { type: "circle", size: 200, x: "100%", y: "100%", color: "#44BCC5", opacity: 0.02, blur: 80 },
+    { type: "circle", size: 300, x: "0%", y: "0%", color: "var(--color-brand-primary)", opacity: 0.03, blur: 100 },
+    { type: "circle", size: 200, x: "100%", y: "100%", color: "var(--color-brand-secondary)", opacity: 0.02, blur: 80 },
   ],
 };
 

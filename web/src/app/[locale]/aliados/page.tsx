@@ -68,7 +68,11 @@ export default async function AliadosPage({
   return (
     <div>
       <DossierHero
-        bgImage={assetPath(fotos.aliados.hero)}
+        images={[
+          assetPath(fotos.aliados.hero),
+          assetPath(fotos.quienesSomos.hero),
+          assetPath(fotos.impacto.hero),
+        ]}
         tag={t("heroTag")}
         title={t("heroTitle")}
         subtitle={t("heroSubtitle")}
@@ -146,7 +150,7 @@ export default async function AliadosPage({
                     <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${accent.bg}`}>
                       <Icon size={22} className={accent.icon} />
                     </div>
-                    <h4 className="mb-1 font-bold text-white">{item.sector}</h4>
+                    <h3 className="mb-1 font-bold text-white">{item.sector}</h3>
                     <p className="mb-2 text-sm text-[var(--color-text-muted)]">{item.desc}</p>
                     <p className="mt-auto text-xs font-medium uppercase tracking-wider text-ley-teal">{item.aliados}</p>
                   </div>

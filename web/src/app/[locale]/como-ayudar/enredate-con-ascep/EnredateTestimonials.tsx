@@ -100,7 +100,7 @@ export default function EnredateTestimonials({
           <div className="flex items-center justify-center gap-4">
             <button
               onClick={prev}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10"
               aria-label="Previous testimonial"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -111,7 +111,7 @@ export default function EnredateTestimonials({
                 <button
                   key={i}
                   onClick={() => goTo(i)}
-                  className={`flex h-10 w-10 items-center justify-center rounded-full text-xs font-bold transition-all ${
+                  className={`flex h-11 w-11 items-center justify-center rounded-full text-xs font-bold transition-all ${
                     i === current
                       ? "bg-brand-orange text-white"
                       : "border border-white/20 text-white/60 hover:bg-white/10"
@@ -125,23 +125,27 @@ export default function EnredateTestimonials({
 
             <button
               onClick={next}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10"
+              className="flex h-11 w-11 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:bg-white/10"
               aria-label="Next testimonial"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
           </div>
 
-          <div className="mt-6 flex justify-center gap-2">
+          <div className="mt-6 flex justify-center">
             {testimonios.map((_, i) => (
               <button
                 key={i}
                 onClick={() => goTo(i)}
-                className={`h-2 rounded-full transition-all ${
-                  i === current ? "w-8 bg-white" : "w-2 bg-white/30 hover:bg-white/50"
-                }`}
+                className="flex min-h-11 min-w-11 items-center justify-center"
                 aria-label={`Go to testimonial ${i + 1}`}
-              />
+              >
+                <span
+                  className={`block h-2 rounded-full transition-all ${
+                    i === current ? "w-8 bg-white" : "w-2 bg-white/30 hover:bg-white/50"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>

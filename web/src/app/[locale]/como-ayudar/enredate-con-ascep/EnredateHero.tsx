@@ -109,16 +109,20 @@ export default function EnredateHero({
             </Link>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center">
             {slides.map((_, i) => (
               <button
                 key={i}
                 onClick={() => goTo(i)}
-                className={`h-2 rounded-full transition-all ${
-                  i === current ? "w-8 bg-white" : "w-2 bg-white/40 hover:bg-white/60"
-                }`}
+                className="flex min-h-11 min-w-11 items-center justify-center"
                 aria-label={`Go to slide ${i + 1}`}
-              />
+              >
+                <span
+                  className={`block h-2 rounded-full transition-all ${
+                    i === current ? "w-8 bg-white" : "w-2 bg-white/40 hover:bg-white/60"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>
@@ -173,13 +177,13 @@ export default function EnredateHero({
               </AnimatePresence>
 
               <button onClick={prev}
-                className="absolute -left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
+                className="absolute -left-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
                 aria-label="Previous slide"
               >
                 <ChevronLeft className="h-5 w-5" />
               </button>
               <button onClick={next}
-                className="absolute -right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
+                className="absolute -right-4 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur transition-colors hover:bg-white/20"
                 aria-label="Next slide"
               >
                 <ChevronRight className="h-5 w-5" />
@@ -194,7 +198,7 @@ export default function EnredateHero({
           onClick={() => setShowOverlay(false)}>
           <div className="relative w-full max-w-3xl" onClick={(e) => e.stopPropagation()}>
             <button onClick={() => setShowOverlay(false)}
-              className="absolute -right-3 -top-3 z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white text-black shadow-lg">
+              className="absolute -right-3 -top-3 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white text-black shadow-lg">
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
               </svg>

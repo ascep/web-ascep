@@ -64,7 +64,7 @@ export default function PostShare({ title, className = "", accent, shareLabel }:
       <button
         onClick={() => share("x")}
         aria-label="X"
-        className={`flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${hoverCls}`}
+        className={`flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${hoverCls}`}
       >
         <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass} aria-hidden="true">
           <path d={X_PATH} />
@@ -73,7 +73,7 @@ export default function PostShare({ title, className = "", accent, shareLabel }:
       <button
         onClick={() => share("linkedin")}
         aria-label="LinkedIn"
-        className={`flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${hoverCls}`}
+        className={`flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${hoverCls}`}
       >
         <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass} aria-hidden="true">
           <path d={LINKEDIN_PATH} />
@@ -82,7 +82,7 @@ export default function PostShare({ title, className = "", accent, shareLabel }:
       <button
         onClick={() => share("whatsapp")}
         aria-label="WhatsApp"
-        className={`flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${hoverCls}`}
+        className={`flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${hoverCls}`}
       >
         <svg viewBox="0 0 24 24" fill="currentColor" className={iconClass} aria-hidden="true">
           <path d={WHATSAPP_PATH} />
@@ -91,7 +91,7 @@ export default function PostShare({ title, className = "", accent, shareLabel }:
       <button
         onClick={copy}
         aria-label={shareLabel ?? t("compartir")}
-        className={`flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${copyHoverCls}`}
+        className={`flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors ${copyHoverCls}`}
       >
         {copied ? <Check className={iconClass} /> : <Link2 className={iconClass} />}
       </button>

@@ -110,7 +110,11 @@ export default async function ComoAyudarPage({
   return (
     <div>
       <DossierHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.home.retosImage)}
+        images={[
+          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.home.retosImage),
+          assetPath(fotos.home.aboutImage),
+          assetPath(fotos.home.gallery[0].src),
+        ]}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || ""}
@@ -221,7 +225,7 @@ export default async function ComoAyudarPage({
                     <div className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-2xl ${level.iconBg}`}>
                       <Icon size={24} className={level.iconColor} />
                     </div>
-                    <h4 className="mb-1 text-lg font-bold text-[var(--color-text-primary)]">{level.name}</h4>
+                    <h3 className="mb-1 text-lg font-bold text-[var(--color-text-primary)]">{level.name}</h3>
                     <p className="mb-2 text-sm text-[var(--color-text-muted)]">{level.plan}</p>
                     <p className={`mb-4 text-3xl font-bold ${level.priceColor}`}>{level.price}</p>
                     <p className="mb-4 text-sm leading-relaxed text-[var(--color-text-secondary)]">{level.desc}</p>

@@ -1,29 +1,26 @@
 import { getTranslations } from "next-intl/server";
-import type { CSSProperties } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import DecoShapes from "@/components/DecoShapes";
 import AnimatedSection from "@/components/AnimatedSection";
-import SliderHero from "@/components/SliderHero";
-import type { SliderSlide } from "@/components/SliderHero";
+import HeroSlideshow from "@/components/HeroSlideshow";
+import HomeKpiStrip from "@/components/HomeKpiStrip";
 import CaminoSection from "@/components/CaminoSection";
-import HomeStats from "@/components/HomeStats";
 import HomeTestimonials from "@/components/HomeTestimonials";
 import HomeCTA from "@/components/HomeCTA";
-import Timeline from "@/components/Timeline";
+import TimelineRoute, { type RouteItem } from "@/components/TimelineRoute";
 import ModeloGrid from "@/components/ModeloGrid";
 import ProgramCarousel from "@/components/ProgramCarousel";
 import LogoLoop from "@/components/LogoLoop";
-import MapaAlcanceASCEP from "@/components/MapaAlcanceASCEP";
 import GallerySection from "@/components/GallerySection";
 import NewsCarousel, { type NewsItem } from "@/components/NewsCarousel";
-import CursorGlow from "@/components/CursorGlow";
+import ProgramCardGallery from "@/components/ProgramCardGallery";
 import ImageParallax from "@/components/ImageParallax";
 import { assetPath } from "@/lib/asset-path";
 import { imageUrl } from "@/lib/sanity/image";
 import { getFotos } from "@/lib/get-fotos";
+import { buildTrayectoria } from "@/data/trayectoria";
 import {
-  getMilestones,
   getFeaturedPartners,
   getImpactStats,
   getTestimonials,
@@ -39,10 +36,10 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 const fallbackStats = [
-  { value: "71148", label: "NNA protegidos por el ICBF", icon: "Users", color: "#019E9F" },
+  { value: "71148", label: "NNA protegidos por el ICBF", icon: "Users", color: "#007374" },
   { value: "13000+", label: "Jovenes egresados", icon: "GraduationCap", color: "#44BCC5" },
-  { value: "5+", label: "Programas activos", icon: "Layers", color: "#EC6620" },
-  { value: "2019", label: "Inicio de operaciones", icon: "Calendar", color: "#EC6620" },
+  { value: "5+", label: "Programas activos", icon: "Layers", color: "#C45118" },
+  { value: "2017", label: "Constitucion formal", icon: "Calendar", color: "#C45118" },
 ];
 
 const fallbackTestimonialsKeys = [
@@ -61,8 +58,7 @@ export default async function HomePage({
   const g = await getTranslations({ locale, namespace: "generales" });
   const nt = await getTranslations({ locale, namespace: "noticias" });
 
-  const [cmsMilestones, cmsPartners, cmsStats, cmsTestimonials] = await Promise.all([
-    getMilestones(),
+  const [cmsPartners, cmsStats, cmsTestimonials] = await Promise.all([
     getFeaturedPartners(),
     getImpactStats(),
     getTestimonials("home"),
@@ -70,16 +66,12 @@ export default async function HomePage({
 
   const fotos = await getFotos();
 
+  const qs = await getTranslations({ locale, namespace: "quienesSomos" });
+  const trayectoria: RouteItem[] = buildTrayectoria(qs.raw("trayectoria") as RouteItem[], assetPath);
+
   const gallery = fotos.home.gallery.map((item) => ({
     ...item,
     src: assetPath(item.src),
-  }));
-
-  const fallbackMilestones = fotos.home.timeline.map((item) => ({
-    year: item.year,
-    title: item.title,
-    description: item.description,
-    image: assetPath(item.image),
   }));
 
   const fallbackPrograms = [
@@ -115,21 +107,21 @@ export default async function HomePage({
       image: assetPath(fotos.home.programs.miCuerpo.image),
       logo: assetPath(fotos.home.programs.miCuerpo.logo),
     },
+    {
+      title: "Casas del Saber",
+      desc: "Espacio de acompanamiento integral para jovenes en proceso de egreso del sistema de proteccion estatal.",
+      ...fotos.home.programs.casasDelSaber,
+      slug: "casas-del-saber",
+      href: `/${locale}/casas-del-saber`,
+      image: assetPath(fotos.home.programs.casasDelSaber.image),
+      logo: assetPath(fotos.home.programs.casasDelSaber.logo),
+    },
   ];
 
   const fallbackAliados = fotos.home.aliados.map((item) => ({
     ...item,
     src: assetPath(item.src),
   }));
-
-  const resolvedMilestones = cmsMilestones.length > 0
-    ? cmsMilestones.map((m, idx) => ({
-        year: m.year || fallbackMilestones[idx]?.year || "",
-        title: m.title?.es || fallbackMilestones[idx]?.title || "",
-        description: m.description?.es || fallbackMilestones[idx]?.description || "",
-        image: (m.image ? imageUrl(m.image) : null) || fallbackMilestones[idx]?.image || assetPath(fotos.home.timeline[0]?.image || ""),
-      }))
-    : fallbackMilestones;
 
   const resolvedPrograms = fallbackPrograms;
 
@@ -146,7 +138,7 @@ export default async function HomePage({
         value: s.prefix ? `${s.prefix}${s.value}` : `${s.value}${s.suffix || ""}`,
         label: s.label?.es || "",
         icon: s.icon || "Users",
-        color: s.color || "#019E9F",
+        color: s.color || "#007374",
       }))
     : fallbackStats;
 
@@ -188,41 +180,39 @@ export default async function HomePage({
       tag: nt("casasTag"),
       title: nt("casasTitle"),
       excerpt: nt("casasExcerpt"),
-      color: "#019E9F",
+      color: "#00A896",
     },
   ];
 
-  const heroSlides: SliderSlide[] = newsItems.map((item) => ({
-    image: item.image,
-    eyebrow: item.tag,
-    title: item.title,
-    description: item.excerpt,
-    cta: { label: nt("leerMas"), href: item.href },
-  }));
-
-  for (const { src, alt } of fotos.home.gallery) {
-    const image = assetPath(src);
-    if (heroSlides.some((s) => s.image === image)) continue;
-    heroSlides.push({
-      image,
-      eyebrow: h("galeriaTag"),
-      title: alt,
-      description: h("noticiasDesc"),
-      cta: { label: nt("leerMas"), href: `/${locale}/impacto` },
-    });
-  }
+  const heroImages = [
+    assetPath(fotos.home.heroImage),
+    assetPath(fotos.impacto.hero),
+    assetPath("/images/eventos/2024/20241112_102432.webp"),
+    assetPath("/images/eventos/2024/20241112_092855.webp"),
+    assetPath("/images/eventos/2024/20241112_095957.webp"),
+    assetPath("/images/eventos/2024/20241112_100147.webp"),
+    assetPath("/images/eventos/2024/20241112_102440.webp"),
+    assetPath("/images/eventos/2024/20241112_103725.webp"),
+    assetPath("/images/eventos/2024/20241112_111016.webp"),
+    assetPath("/images/eventos/encuentro-2025/GIS06447.webp"),
+    assetPath("/images/eventos/encuentro-2025/GIS06450.webp"),
+    assetPath("/images/eventos/encuentro-2025/GIS06460.webp"),
+    assetPath("/images/eventos/encuentro-2025/GIS06475.webp"),
+  ];
 
   return (
     <div>
-      <SliderHero
-        slides={heroSlides}
-        shadeColor="#019E9F"
-        className="min-h-[100svh]"
-        auto={6000}
-        ariaLabel={nt("sliderLabel")}
-        prevLabel={nt("sliderPrev")}
-        nextLabel={nt("sliderNext")}
+      <HeroSlideshow
+        images={heroImages}
+        tag={h("heroTag")}
+        title={h("heroTitle")}
+        subtitle={h("heroSubtitle")}
+        accent="teal"
+        primaryCta={{ label: h("aboutCta"), href: `/${locale}/quienes-somos` }}
+        secondaryCta={{ label: g("verMasImpacto"), href: `/${locale}/impacto` }}
       />
+
+      <HomeKpiStrip stats={resolvedStats} />
 
       <CaminoSection
         bgImage="/images/afiches/exp8-bg.webp"
@@ -278,7 +268,7 @@ export default async function HomePage({
                 />
               </div>
               <div className="absolute -bottom-4 -right-4 z-20 flex h-28 w-28 flex-col items-center justify-center rounded-[10px] bg-brand-orange text-white shadow-lg">
-                <span className="text-2xl font-extrabold">2019</span>
+                <span className="text-2xl font-extrabold">2017</span>
                 <span className="text-[10px] font-semibold uppercase leading-tight tracking-wider">{h("heroBadge")}</span>
               </div>
             </div>
@@ -294,7 +284,7 @@ export default async function HomePage({
               <span className="mb-3 inline-block rounded-[10px] bg-brand-orange/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
                 {h("retosTag")}
               </span>
-              <h2 className="mb-4 text-2xl font-bold leading-tight text-[var(--color-text-primary)] sm:text-3xl">
+              <h2 className="mb-4 text-3xl font-bold leading-tight text-[var(--color-text-primary)] sm:text-4xl">
                 {h("retosTitle")}
               </h2>
               <p className="mb-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
@@ -319,27 +309,14 @@ export default async function HomePage({
         </div>
       </section>
 
-      <section
-        className="section-dark relative overflow-hidden bg-purple-bg section-bg-image"
-        style={{ "--section-bg-image": `url(${assetPath(fotos.home.heroImage)})` } as CSSProperties}
-      >
-        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+      <section className="relative overflow-hidden bg-section-light py-20">
         <DecoShapes variant="teal" />
-        <HomeStats
-          variant="dark"
-          tag={h("statsTag")}
-          title={h("statsTitle")}
-          description={h("statsDesc")}
-          stats={resolvedStats}
-          map={<MapaAlcanceASCEP />}
-          cta={
-            <Link
-              href={`/${locale}/impacto`}
-              className="inline-flex items-center rounded-[10px] bg-brand-orange px-6 py-3 text-sm font-semibold text-white transition-all hover:bg-brand-orange-dark hover:shadow-lg"
-            >
-              {g("verMasImpacto")}
-            </Link>
-          }
+        <ProgramCardGallery
+          locale={locale}
+          tag={h("porQueTag")}
+          title={h("porQueTitle")}
+          subtitle={h("porQueDesc")}
+          accent="orange"
         />
       </section>
 
@@ -352,7 +329,11 @@ export default async function HomePage({
           <h2 className="mb-12 text-center text-3xl font-bold text-[var(--color-text-primary)]">
             {h("trayectoriaTitle")}
           </h2>
-          <Timeline items={resolvedMilestones} />
+          <TimelineRoute
+            items={trayectoria}
+            hitoSingular={qs("hitoSingular")}
+            hitoPlural={qs("hitoPlural")}
+          />
         </AnimatedSection>
       </section>
 

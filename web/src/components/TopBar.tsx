@@ -37,7 +37,7 @@ export default function TopBar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={social.label}
-                className="text-white transition-colors hover:text-white"
+                className="text-white transition-colors hover:text-white/70"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -53,14 +53,14 @@ export default function TopBar() {
           <span className="h-3 w-px bg-white/20 max-sm:hidden" />
           <a
             href="mailto:contacto@ascep.org"
-            className="text-xs text-white transition-colors hover:text-white max-sm:hidden"
+            className="text-xs text-white transition-colors hover:text-white/70 max-sm:hidden"
           >
             contacto@ascep.org
           </a>
           <span className="h-3 w-px bg-white/20 max-sm:hidden" />
           <a
             href="tel:3234831547"
-            className="text-xs text-white transition-colors hover:text-white max-sm:hidden"
+            className="text-xs text-white transition-colors hover:text-white/70 max-sm:hidden"
           >
             3234831547
           </a>

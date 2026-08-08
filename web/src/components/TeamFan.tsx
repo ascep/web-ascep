@@ -111,16 +111,20 @@ export default function TeamFan({ members }: TeamFanProps) {
         })}
       </div>
 
-      <div className="mt-6 flex items-center justify-center gap-2">
+      <div className="mt-6 flex items-center justify-center">
         {members.map((_, i) => (
           <button
             key={i}
             onClick={() => { setIsPaused(true); setActive(i); }}
             aria-label={`Ver miembro ${i + 1}`}
-            className={`h-2 rounded-full transition-all ${
-              i === active ? "w-8 bg-brand-secondary" : "w-2 bg-white/30"
-            }`}
-          />
+            className="flex min-h-11 min-w-11 items-center justify-center"
+          >
+            <span
+              className={`block h-2 rounded-full transition-all ${
+                i === active ? "w-8 bg-brand-secondary" : "w-2 bg-white/30"
+              }`}
+            />
+          </button>
         ))}
       </div>
 

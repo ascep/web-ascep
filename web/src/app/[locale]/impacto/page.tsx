@@ -11,8 +11,9 @@ import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import AnimatedSection from "@/components/AnimatedSection";
 import CountUp from "@/components/CountUp";
+import ProgramCardGallery from "@/components/ProgramCardGallery";
 import {
-  Users, Calendar, GraduationCap, Layers, Target, AlertTriangle, Heart, Briefcase, type LucideIcon,
+  Users, Calendar, GraduationCap, Layers, Target, Heart, Briefcase, type LucideIcon,
 } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
@@ -36,7 +37,7 @@ const fallbackStats = [
   { end: 12576, suffix: "", label: "NNA en declaratoria de adoptabilidad", icon: "Calendar" },
   { end: 3025, suffix: "", label: "NNA adoptados (2021-2024)", icon: "GraduationCap" },
   { end: 13000, suffix: "+", label: "Jovenes egresados del sistema (2011-2024)", icon: "Layers" },
-  { end: 2019, suffix: "", label: "Inicio de operaciones de ASCEP", icon: "Calendar" },
+  { end: 2017, suffix: "", label: "Constitucion formal de ASCEP", icon: "Calendar" },
   { end: 5, suffix: "+", label: "Programas activos", icon: "Target" },
   { end: 28, suffix: "", label: "Rango de edad de atencion", icon: "Users" },
 ];
@@ -51,8 +52,6 @@ const statAccents = [
   { icon: "text-ley-yellow", bg: "bg-ley-yellow/10" },
   { icon: "text-ley-teal", bg: "bg-ley-teal/10" },
 ];
-
-const riesgos = ["riesgo1", "riesgo2", "riesgo3", "riesgo4", "riesgo5"];
 
 const resultadoIcons: LucideIcon[] = [Target, Users, Layers, Briefcase];
 
@@ -92,7 +91,11 @@ export default async function ImpactoPage({
   return (
     <div>
       <DossierHero
-        bgImage={assetPath(fotos.impacto.hero)}
+        images={[
+          assetPath(fotos.impacto.hero),
+          assetPath(fotos.impacto.gallery[1]),
+          assetPath(fotos.impacto.gallery[2]),
+        ]}
         tag={t("heroTag")}
         title={t("heroTitle")}
         highlight={t("heroTitle").split(" ").slice(1).join(" ")}
@@ -206,45 +209,15 @@ export default async function ImpactoPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      <section className="relative overflow-hidden bg-section-light">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader tag={t("porQueTag")} title={t("porQueTitle")} accent="orange" />
-          <div className="grid items-center gap-10 lg:grid-cols-5">
-            <div className="lg:col-span-3">
-              <AnimatedSection className="mb-8 space-y-4 text-base leading-relaxed text-text-secondary">
-                <p>{t("porQueP1")}</p>
-                <p className="font-semibold text-ley-orange">{t("porQueP2")}</p>
-              </AnimatedSection>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {riesgos.map((r, i) => (
-                  <AnimatedSection key={r} direction="up" delay={i * 0.06}>
-                    <div className="flex items-start gap-3 rounded-2xl border border-ley-orange/20 bg-ley-orange/5 p-4">
-                      <AlertTriangle size={18} className="mt-0.5 shrink-0 text-ley-orange" />
-                      <span className="text-sm text-text-secondary">{t(r)}</span>
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-            </div>
-            <AnimatedSection direction="right" delay={0.2} className="lg:col-span-2">
-              <div className="relative">
-                <ImageParallax
-                  src={assetPath(fotos.impacto.porQueImage)}
-                  alt=""
-                  width={600}
-                  height={450}
-                  className="w-full rounded-3xl object-cover shadow-lg"
-                  intensity={0.2}
-                  style={{ aspectRatio: "4/3" }}
-                />
-                <div className="absolute -bottom-4 -right-4 flex h-20 w-20 items-center justify-center rounded-2xl bg-ley-orange text-white shadow-lg">
-                  <Heart size={28} />
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
+        <ProgramCardGallery
+          locale={locale}
+          tag={t("porQueTag")}
+          title={t("porQueTitle")}
+          subtitle={t("porQueP1")}
+          accent="orange"
+        />
       </section>
 
       <section className="relative overflow-hidden bg-ley-purple py-20 sm:py-24">

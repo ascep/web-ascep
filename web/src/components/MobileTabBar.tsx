@@ -62,9 +62,7 @@ export default function MobileTabBar() {
             <Link
               key={tab.key}
               href={`/${locale}${tab.href}`}
-              className={`flex flex-col items-center gap-0.5 px-3 py-1.5 min-h-[48px] min-w-[48px] relative ${
-                isActive ? "" : ""
-              }`}
+              className="relative flex min-h-[48px] min-w-[48px] flex-col items-center gap-0.5 px-3 py-1.5"
             >
               {isActive && (
                 <span className="absolute -top-1 left-1/2 h-1 w-8 -translate-x-1/2 rounded-full bg-brand-blue" />

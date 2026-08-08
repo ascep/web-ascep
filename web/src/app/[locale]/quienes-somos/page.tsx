@@ -1,5 +1,6 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import TimelineRoute, { type RouteItem } from "@/components/TimelineRoute";
 import StatsRings, { type RingStat } from "@/components/StatsRings";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -37,6 +38,7 @@ import { getFotos } from "@/lib/get-fotos";
 import LogoLoop from "@/components/LogoLoop";
 import { imageUrl } from "@/lib/sanity/image";
 import { getTeamMembers } from "@/lib/sanity/fetch";
+import { buildTrayectoria } from "@/data/trayectoria";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -116,17 +118,6 @@ const comoHacemos = [
   },
 ];
 
-const trayectoriaImages: Record<string, string> = {
-  "2013": "/images/eventos/2024/20241112_092855.webp",
-  "2017": "/images/eventos/encuentro-2025/GIS06447.webp",
-  "2019": "/images/eventos/2024/20241112_092951.webp",
-  "2021": "/images/eventos/2024/20241112_095957.webp",
-  "2022": "/images/eventos/encuentro-2025/GIS06450.webp",
-  "2023": "/images/eventos/2024/20241112_100147.webp",
-  "2024": "/images/eventos/2024/20241112_102515.webp",
-  "2025": "/images/eventos/2024/20241112_111016.webp",
-};
-
 export default async function QuienesSomosPage({
   params,
 }: {
@@ -176,10 +167,10 @@ export default async function QuienesSomosPage({
 
   const hitos = t.raw("hitos") as { value: string; label: string; detail: string }[];
 
-  const trayectoria: RouteItem[] = (t.raw("trayectoria") as RouteItem[]).map((m) => ({
-    ...m,
-    image: assetPath(trayectoriaImages[m.year] || ""),
-  }));
+  const trayectoria: RouteItem[] = buildTrayectoria(
+    t.raw("trayectoria") as RouteItem[],
+    assetPath,
+  );
 
   const statSegColors = [
     ["var(--color-brand-accent)", "var(--color-brand-secondary)", "var(--color-border-default)"],
@@ -276,9 +267,9 @@ export default async function QuienesSomosPage({
                   src={assetPath(fotos.quienesSomos.hero)}
                   alt={t("heroTitle")}
                   width={640}
-                  height={480}
+                  height={360}
                   className="w-full rounded-[10px] border border-white/10 object-cover shadow-2xl"
-                  style={{ aspectRatio: "4/3" }}
+                  style={{ aspectRatio: "16/9" }}
                   priority
                   intensity={0.2}
                 />
@@ -316,14 +307,28 @@ export default async function QuienesSomosPage({
       {/* Historia */}
       <section className="relative overflow-hidden bg-surface py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
             <AnimatedSection direction="left">
-              <div className="relative overflow-hidden rounded-[10px] shadow-xl">
-                <ImageParallax
-                  src={assetPath(fotos.quienesSomos.historiaImage)}
-                  alt={t("historiaTitle")}
-                  className="aspect-[4/3] w-full object-cover"
-                />
+              <div className="grid grid-cols-2 gap-3">
+                <div className="relative col-span-2 aspect-[16/9] overflow-hidden rounded-[10px] shadow-xl">
+                  <ImageParallax
+                    src={assetPath(fotos.quienesSomos.historiaImage)}
+                    alt={t("historiaTitle")}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                {fotos.quienesSomos.historiaGallery.map((src, i) => (
+                  <div key={src} className="relative aspect-square overflow-hidden rounded-[10px] shadow-md">
+                    <ImageParallax
+                      src={assetPath(src)}
+                      alt={`${t("historiaTitle")} ${i + 1}`}
+                      fill
+                      className="object-cover"
+                      intensity={0.15}
+                    />
+                  </div>
+                ))}
               </div>
             </AnimatedSection>
             <div>
@@ -338,31 +343,52 @@ export default async function QuienesSomosPage({
                 </h2>
               </AnimatedSection>
               {[1, 2, 3, 4, 5].map((i) => (
-                <AnimatedSection key={i} direction="up" delay={0.15 * i}>
-                  <p className="mb-4 text-lg leading-relaxed text-[var(--color-text-secondary)]">
+                <AnimatedSection key={i} direction="up" delay={0.1 * i}>
+                  <p className="mb-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
                     {t(`historiaP${i}`)}
                   </p>
                 </AnimatedSection>
               ))}
-              <AnimatedSection direction="up" delay={0.9}>
-                <div className="mt-6 rounded-[10px] border border-border-subtle bg-bg-card p-6">
-                  <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-brand-purple">
-                    {t("fundadoresTag")}
-                  </p>
-                  <ul className="space-y-2.5">
-                    {[1, 2, 3].map((i) => (
-                      <li key={i} className="flex items-center gap-3 text-[15px] font-semibold text-brand-purple-dark">
-                        <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand-teal/15 text-xs font-bold text-brand-purple-dark">
-                          {i}
-                        </span>
-                        {t(`fundador${i}`)}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </AnimatedSection>
             </div>
           </div>
+
+          {/* Fundadores */}
+          <AnimatedSection direction="up" delay={0.15} className="mt-14">
+            <p className="mb-5 text-center text-xs font-bold uppercase tracking-[0.2em] text-brand-purple">
+              {t("fundadoresTag")}
+            </p>
+            <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-3">
+              {[1, 2, 3].map((i) => {
+                const name = t(`fundador${i}`);
+                const photo = i === 2 ? assetPath(fotos.quienesSomos.team.maicol) : null;
+                const initials = name
+                  .split(" ")
+                  .slice(0, 2)
+                  .map((w) => w[0])
+                  .join("");
+                return (
+                  <div
+                    key={i}
+                    className="flex flex-col items-center rounded-[10px] border border-border-subtle bg-bg-card p-6 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
+                  >
+                    <div className="relative mb-3 h-16 w-16 overflow-hidden rounded-full border-2 border-brand-teal/30 bg-brand-teal/10">
+                      {photo ? (
+                        <Image src={photo} alt={name} fill sizes="64px" className="object-cover" />
+                      ) : (
+                        <span className="flex h-full w-full items-center justify-center text-lg font-bold text-brand-purple-dark">
+                          {initials}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-sm font-bold text-[var(--color-text-primary)]">{name}</p>
+                    <span className="mt-2 inline-block rounded-full bg-brand-purple/10 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-purple">
+                      Fundador
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -464,27 +490,27 @@ export default async function QuienesSomosPage({
               {t("propositoTitle")} <span className="text-white/80">{t("propositoHighlight")}</span>
             </h2>
           </AnimatedSection>
-          <div className="grid gap-6 sm:grid-cols-3">
-            <AnimatedSection direction="up" className="glass-card rounded-[10px] p-8 transition-all hover:bg-white/15">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
-                <Target size={22} className="text-brand-secondary" />
+          <div className="grid gap-5 sm:grid-cols-3">
+            <AnimatedSection direction="up" className="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-ley-cyan/40 bg-ley-cyan/10">
+                <Target size={20} className="text-ley-cyan" />
               </div>
-              <h3 className="mb-2 text-2xl font-bold text-white">{t("misionTitle")}</h3>
-              <p className="text-white/75">{t("misionDesc")}</p>
+              <h3 className="mb-2 text-lg font-bold text-white">{t("misionTitle")}</h3>
+              <p className="text-sm leading-relaxed text-white/75">{t("misionDesc")}</p>
             </AnimatedSection>
-            <AnimatedSection direction="up" delay={0.1} className="glass-card rounded-[10px] p-8 transition-all hover:bg-white/15">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
-                <Eye size={22} className="text-brand-secondary" />
+            <AnimatedSection direction="up" delay={0.1} className="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-ley-orange/40 bg-ley-orange/10">
+                <Eye size={20} className="text-ley-orange" />
               </div>
-              <h3 className="mb-2 text-2xl font-bold text-white">{t("visionTitle")}</h3>
-              <p className="text-white/75">{t("visionDesc")}</p>
+              <h3 className="mb-2 text-lg font-bold text-white">{t("visionTitle")}</h3>
+              <p className="text-sm leading-relaxed text-white/75">{t("visionDesc")}</p>
             </AnimatedSection>
-            <AnimatedSection direction="up" delay={0.2} className="glass-card rounded-[10px] p-8 transition-all hover:bg-white/15">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] bg-white/10">
-                <Heart size={22} className="text-brand-secondary" />
+            <AnimatedSection direction="up" delay={0.2} className="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
+              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-ley-yellow/40 bg-ley-yellow/10">
+                <Heart size={20} className="text-ley-yellow" />
               </div>
-              <h3 className="mb-2 text-2xl font-bold text-white">{t("propositoCardTitle")}</h3>
-              <p className="text-white/75">{t("propositoCardDesc")}</p>
+              <h3 className="mb-2 text-lg font-bold text-white">{t("propositoCardTitle")}</h3>
+              <p className="text-sm leading-relaxed text-white/75">{t("propositoCardDesc")}</p>
             </AnimatedSection>
           </div>
         </div>
@@ -531,7 +557,7 @@ export default async function QuienesSomosPage({
       <section
         className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
         style={{
-          "--section-bg-image": `url(${assetPath(fotos.quienesSomos.objetivoImage)})`,
+          "--section-bg-image": `url(${assetPath(fotos.quienesSomos.objetivoGeneralImage)})`,
         } as CSSProperties}
       >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
@@ -628,12 +654,12 @@ export default async function QuienesSomosPage({
                   src={assetPath(fotos.quienesSomos.poblacionImage)}
                   alt=""
                   width={600}
-                  height={450}
+                  height={276}
                   className="w-full rounded-[10px] object-cover shadow-xl"
                   intensity={0.2}
-                  style={{ aspectRatio: "4/3" }}
+                  style={{ aspectRatio: "2.17" }}
                 />
-                <div className="absolute -bottom-6 left-6 rounded-[10px] border border-border-subtle bg-bg-card p-5 shadow-xl">
+                <div className="absolute -bottom-6 -left-6 rounded-[10px] border border-border-subtle bg-bg-card p-5 shadow-xl">
                   <p className="text-4xl font-extrabold tabular-nums text-brand-primary sm:text-5xl">
                     {t("poblacionEdadValor")}
                   </p>
@@ -769,7 +795,7 @@ export default async function QuienesSomosPage({
       {/* Equipo */}
       <section
         className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
-        style={{ "--section-bg-image": `url(${assetPath(fotos.quienesSomos.sectionImage)})` } as CSSProperties}
+        style={{ "--section-bg-image": `url(${assetPath(fotos.quienesSomos.equipoImage)})` } as CSSProperties}
       >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />

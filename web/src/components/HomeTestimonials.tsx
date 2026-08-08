@@ -103,8 +103,8 @@ export default function HomeTestimonials({
                   key={i}
                   onClick={() => setActive(i)}
                   aria-label={`Go to testimonial ${i + 1}`}
-                  className={`min-h-6 min-w-6 rounded-full p-2 transition-all ${
-                    i === active ? "bg-white" : "bg-white/30"
+                  className={`flex min-h-11 min-w-11 items-center justify-center rounded-full transition-all ${
+                    i === active ? "bg-white" : "bg-white/30 hover:bg-white/50"
                   }`}
                 />
               ))}

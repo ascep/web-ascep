@@ -30,7 +30,11 @@ export default async function RutaEgresoPage({
   return (
     <div>
       <DossierHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.casasDelSaber.rutaEgreso)}
+        images={[
+          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.casasDelSaber.rutaEgreso),
+          assetPath(fotos.casasDelSaber.hero),
+          assetPath(fotos.casasDelSaber.areas),
+        ]}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || t("heroHighlight")}

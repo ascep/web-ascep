@@ -45,7 +45,11 @@ export default async function ContactoPage({
   return (
     <div>
       <DossierHero
-        bgImage={sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.contacto.hero)}
+        images={[
+          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.contacto.hero),
+          assetPath(fotos.contacto.section),
+          assetPath(fotos.quienesSomos.hero),
+        ]}
         tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
         title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
         highlight={localize(pageData?.hero?.highlight, locale) || ""}

@@ -14,11 +14,11 @@ import { useTranslations, useLocale } from "next-intl";
 import CursorGlow from "./CursorGlow";
 
 const dimensions = [
-  { titleKey: "dim1Title", descKey: "dim1Desc", icon: Heart, color: "#019E9F" },
+  { titleKey: "dim1Title", descKey: "dim1Desc", icon: Heart, color: "#007374" },
   { titleKey: "dim2Title", descKey: "dim2Desc", icon: Users, color: "#44BCC5" },
-  { titleKey: "dim3Title", descKey: "dim3Desc", icon: Globe, color: "#EC6620" },
-  { titleKey: "dim4Title", descKey: "dim4Desc", icon: Sparkles, color: "#EC6620" },
-  { titleKey: "dim5Title", descKey: "dim5Desc", icon: Target, color: "#019E9F" },
+  { titleKey: "dim3Title", descKey: "dim3Desc", icon: Globe, color: "#C45118" },
+  { titleKey: "dim4Title", descKey: "dim4Desc", icon: Sparkles, color: "#C45118" },
+  { titleKey: "dim5Title", descKey: "dim5Desc", icon: Target, color: "#007374" },
   { titleKey: "dim6Title", descKey: "dim6Desc", icon: TrendingUp, color: "#44BCC5" },
 ];
 
