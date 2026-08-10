@@ -278,7 +278,7 @@ export default async function ImpactoPage({
               </AnimatedSection>
             </div>
             <AnimatedSection direction="right" delay={0.2}>
-              <div className="mx-auto aspect-[700/790] w-full max-w-[560px] overflow-hidden rounded-3xl shadow-lg">
+              <div className="mx-auto w-full max-w-[560px] overflow-hidden rounded-3xl shadow-lg">
                 <MapaAlcanceASCEP />
               </div>
             </AnimatedSection>

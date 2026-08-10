@@ -4,10 +4,11 @@ import Image from "next/image";
 import Link from "next/link";
 import DossierHero from "@/components/DossierHero";
 import SectionHeader from "@/components/SectionHeader";
+import PageCTA from "@/components/PageCTA";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import AnimatedSection from "@/components/AnimatedSection";
-import { Building2, Globe, Briefcase, GraduationCap, Heart, Radio, type LucideIcon } from "lucide-react";
+import { Building2, Globe, Briefcase, GraduationCap, Heart, Radio, Handshake, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getPartners } from "@/lib/sanity/fetch";
@@ -115,14 +116,14 @@ export default async function AliadosPage({
             {partnerLogos.map((logo) => (
               <div
                 key={logo.alt}
-                className="flex items-center justify-center rounded-2xl border border-border-default bg-white p-8 transition-all hover:-translate-y-1 hover:border-ley-teal/40 hover:shadow-md"
+                className="flex h-28 items-center justify-center rounded-2xl border border-border-default bg-white p-6 transition-all hover:-translate-y-1 hover:border-ley-teal/40 hover:shadow-md"
               >
                 <Image
                   src={logo.src}
                   alt={logo.alt}
                   width={140}
-                  height={60}
-                  className="h-14 w-auto object-contain opacity-50 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+                  height={56}
+                  className="max-h-14 w-auto max-w-full object-contain opacity-50 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
                 />
               </div>
             ))}
@@ -160,6 +161,14 @@ export default async function AliadosPage({
           </div>
         </div>
       </section>
+
+      <PageCTA
+        title={t("ctaTitle")}
+        desc={t("ctaDesc")}
+        icon={Handshake}
+        primary={{ label: t("ctaBtn"), href: `/${locale}/contacto` }}
+        secondary={{ label: t("ctaBtnSecondary"), href: `/${locale}/como-ayudar` }}
+      />
     </div>
   );
 }

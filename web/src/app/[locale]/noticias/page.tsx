@@ -154,7 +154,7 @@ export default async function NoticiasPage({
         title={t("ctaTitle")}
         desc={t("ctaDesc")}
         icon={Newspaper}
-        primary={{ label: t("ctaBtn"), href: `/${locale}/enredate-con-ascep` }}
+        primary={{ label: t("ctaBtn"), href: `/${locale}/como-ayudar/enredate-con-ascep` }}
       />
     </div>
   );

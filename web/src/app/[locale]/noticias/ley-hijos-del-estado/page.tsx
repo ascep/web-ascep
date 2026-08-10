@@ -476,7 +476,7 @@ export default async function LeyPostPage({
               <div className="mt-4 rounded-2xl bg-ley-purple p-6 text-white shadow-sm sm:p-7">
                 <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-ley-yellow px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-ley-purple">
                   <Download size={12} />
-                  {t("recursoTag")}
+                  {t("rallyTag")}
                 </span>
                 <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                   <div className="min-w-0">
