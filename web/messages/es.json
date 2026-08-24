@@ -28,6 +28,7 @@
     "impacto": "Impacto",
     "contacto": "Contacto",
     "comoAyudar": "Como Ayudar",
+    "bolsaDeEmpleo": "Bolsa de Empleo",
     "donacionMonetaria": "Donacion Monetaria",
     "planPadrino": "Plan Padrino",
     "enredateConAscep": "Enrédate",
@@ -1772,7 +1773,33 @@
     "transparencia": {
       "title": "Transparencia - ASCEP",
       "description": "Informacion de transparencia y rendicion de cuentas de ASCEP como organizacion."
+    },
+    "bolsaDeEmpleo": {
+      "title": "Bolsa de Empleo - ASCEP",
+      "description": "Oportunidades laborales y empleabilidad para jovenes egresados del sistema de proteccion."
     }
+  },
+  "bolsaDeEmpleo": {
+    "badge": "PROXIMAMENTE",
+    "title": "Bolsa de Empleo ASCEP",
+    "subtitle": "Estamos preparando una plataforma integral para conectar a jovenes egresados del sistema de proteccion con oportunidades laborales y empresas comprometidas con la inclusion.",
+    "sectionTitle": "Como Funciona",
+    "sectionDesc": "Te mostraremos como conectamos a jovenes con oportunidades laborales reales que transforman sus vidas.",
+    "feature1Title": "Oportunidades Laborales",
+    "feature1Desc": "Acceso a ofertas de empleo y practicas laborales verificadas y adaptadas a tus competencias.",
+    "feature2Title": "Mentoria Profesional",
+    "feature2Desc": "Acompanamiento de profesionales que te prepararan para entrevistas y desarrollo laboral.",
+    "feature3Title": "Red de Empresas Aliadas",
+    "feature3Desc": "Conexion directa con empresas comprometidas con la inclusion y desarrollo de talento joven.",
+    "notificationTitle": "Se Notificado",
+    "notificationDesc": "Registrate para recibir notificaciones cuando lancemos la bolsa de empleo y acceso prioritario a las primeras oportunidades.",
+    "emailPlaceholder": "Tu correo electronico",
+    "notifyBtn": "Notificarme",
+    "ctaTitle": "Listo para el Siguiente Paso",
+    "ctaDesc": "Si tienes preguntas o quieres saber mas sobre la bolsa de empleo, no dudes en contactarnos.",
+    "ctaContactBtn": "Contactanos Ahora",
+    "ctaExplore": "Explorar Como Ayudar",
+    "ctaContact": "Contactanos"
   },
   "notFound": {
     "title": "Pagina no encontrada",

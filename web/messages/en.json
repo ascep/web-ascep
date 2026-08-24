@@ -28,6 +28,7 @@
     "impacto": "Impact",
     "contacto": "Contact",
     "comoAyudar": "How to Help",
+    "bolsaDeEmpleo": "Job Opportunities",
     "donacionMonetaria": "Monetary Donation",
     "planPadrino": "Sponsorship Plan",
     "enredateConAscep": "Connect",
@@ -1772,7 +1773,33 @@
     "transparencia": {
       "title": "Transparency - ASCEP",
       "description": "Transparency and accountability information for ASCEP as an organization."
+    },
+    "bolsaDeEmpleo": {
+      "title": "Job Opportunities - ASCEP",
+      "description": "Employment opportunities and employability for youth who have graduated from the state protection system."
     }
+  },
+  "bolsaDeEmpleo": {
+    "badge": "COMING SOON",
+    "title": "ASCEP Job Board",
+    "subtitle": "We are preparing a comprehensive platform to connect youth who have graduated from the state protection system with employment opportunities and companies committed to inclusion.",
+    "sectionTitle": "How It Works",
+    "sectionDesc": "Learn how we connect young people with real employment opportunities that transform their lives.",
+    "feature1Title": "Employment Opportunities",
+    "feature1Desc": "Access verified job offers and internships tailored to your skills and interests.",
+    "feature2Title": "Professional Mentoring",
+    "feature2Desc": "Support from professionals who will prepare you for interviews and career development.",
+    "feature3Title": "Network of Allied Companies",
+    "feature3Desc": "Direct connection with companies committed to inclusion and youth talent development.",
+    "notificationTitle": "Get Notified",
+    "notificationDesc": "Register to receive notifications when we launch the job board and get early access to the first opportunities.",
+    "emailPlaceholder": "Your email address",
+    "notifyBtn": "Notify Me",
+    "ctaTitle": "Ready for the Next Step",
+    "ctaDesc": "If you have questions or want to learn more about the job board, feel free to contact us.",
+    "ctaContactBtn": "Contact Us Now",
+    "ctaExplore": "Explore How to Help",
+    "ctaContact": "Contact Us"
   },
   "notFound": {
     "title": "Page not found",

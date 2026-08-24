@@ -87,6 +87,7 @@ const getNavStructure = (comoAyudarImage: string): NavGroup[] => [
       { key: "participa", href: "/participa" },
     ],
   },
+  { type: "link", key: "bolsaDeEmpleo", href: "/bolsa-de-empleo", badge: "PRONTO" },
   { type: "link", key: "contacto", href: "/contacto" },
 ];
 
