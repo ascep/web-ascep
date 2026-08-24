@@ -11,8 +11,9 @@ type HeroAccent = "cyan" | "orange" | "yellow" | "teal" | "purple";
 
 type HeroSlideshowProps = {
   images: string[];
+  video?: string;
   tag?: string;
-  title: React.ReactNode;
+  title?: React.ReactNode;
   highlight?: React.ReactNode;
   subtitle?: React.ReactNode;
   accent?: HeroAccent;
@@ -51,6 +52,46 @@ const accentStyles: Record<HeroAccent, { badge: string; highlight: string; cta: 
   },
 };
 
+function isYouTubeUrl(s: string): boolean {
+  return /^[a-zA-Z0-9_-]{11}$/.test(s) || s.includes("youtube.com") || s.includes("youtu.be");
+}
+
+function extractYouTubeId(s: string): string {
+  if (/^[a-zA-Z0-9_-]{11}$/.test(s)) return s;
+  try {
+    const url = new URL(s.includes("://") ? s : `https://${s}`);
+    if (url.hostname.includes("youtu.be")) return url.pathname.slice(1).split("?")[0];
+    return url.searchParams.get("v") || "";
+  } catch {
+    return s;
+  }
+}
+
+function HeroVideoBackground({ video, images, active, auto }: { video: string; images: string[]; active: number; auto: number }) {
+  if (isYouTubeUrl(video)) {
+    const ytId = extractYouTubeId(video);
+    return (
+      <iframe
+        src={`https://www.youtube-nocookie.com/embed/${ytId}?autoplay=1&mute=1&loop=1&playlist=${ytId}&controls=0&showinfo=0&iv_load_policy=3&modestbranding=1&rel=0&playsinline=1&disablekb=1`}
+        title=""
+        className="absolute inset-0 h-full w-full object-cover"
+        allow="autoplay; encrypted-media"
+        style={{ pointerEvents: "none" }}
+      />
+    );
+  }
+  return (
+    <video
+      src={video}
+      autoPlay
+      loop
+      muted
+      playsInline
+      className="absolute inset-0 h-full w-full object-cover"
+    />
+  );
+}
+
 function HeroLink({ cta, className }: { cta: HeroCta; className: string }) {
   if (cta.external) {
     return (
@@ -76,6 +117,7 @@ function HeroLink({ cta, className }: { cta: HeroCta; className: string }) {
 
 export default function HeroSlideshow({
   images,
+  video,
   tag,
   title,
   highlight,
@@ -93,13 +135,55 @@ export default function HeroSlideshow({
   const count = images.length;
   const accentCls = accentStyles[accent];
 
+  const hasText = !!(tag || title || subtitle);
+
   useEffect(() => {
-    if (prefersReducedMotion || paused || count <= 1) return;
+    if (video || prefersReducedMotion || paused || count <= 1) return;
     const timer = window.setInterval(() => {
       setActive((prev) => (prev + 1) % count);
     }, auto);
     return () => window.clearInterval(timer);
-  }, [auto, count, paused, prefersReducedMotion]);
+  }, [auto, count, paused, prefersReducedMotion, video]);
+
+  if (!hasText) {
+    return (
+      <section
+        className={`relative h-[50vh] overflow-hidden bg-ley-purple sm:h-[65vh] md:h-[75vh] lg:h-[85vh] ${className}`}
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={() => setPaused(false)}
+      >
+        <div aria-hidden="true" className="absolute inset-0">
+          {video ? (
+            <HeroVideoBackground video={video} images={images} active={active} auto={auto} />
+          ) : (
+            images.map((src, i) => (
+              <div
+                key={i}
+                className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+                style={{
+                  backgroundImage: `url("${src}")`,
+                  opacity: active === i ? 1 : 0,
+                  transform: active === i ? "scale(1.06)" : "scale(1)",
+                  transitionTimingFunction: "ease-out",
+                  transitionDuration: `${active === i ? auto : 1000}ms`,
+                }}
+              />
+            ))
+          )}
+        </div>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(10,16,32,0.45) 0%, transparent 50%)",
+          }}
+        />
+      </section>
+    );
+  }
 
   return (
     <section
@@ -110,19 +194,23 @@ export default function HeroSlideshow({
       onBlurCapture={() => setPaused(false)}
     >
       <div aria-hidden="true" className="absolute inset-0">
-        {images.map((src, i) => (
-          <div
-            key={i}
-            className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
-            style={{
-              backgroundImage: `url("${src}")`,
-              opacity: active === i ? 1 : 0,
-              transform: active === i ? "scale(1.06)" : "scale(1)",
-              transitionTimingFunction: "ease-out",
-              transitionDuration: `${active === i ? auto : 1000}ms`,
-            }}
-          />
-        ))}
+        {video ? (
+          <HeroVideoBackground video={video} images={images} active={active} auto={auto} />
+        ) : (
+          images.map((src, i) => (
+            <div
+              key={i}
+              className="absolute inset-0 bg-cover bg-center transition-opacity duration-1000"
+              style={{
+                backgroundImage: `url("${src}")`,
+                opacity: active === i ? 1 : 0,
+                transform: active === i ? "scale(1.06)" : "scale(1)",
+                transitionTimingFunction: "ease-out",
+                transitionDuration: `${active === i ? auto : 1000}ms`,
+              }}
+            />
+          ))
+        )}
       </div>
       <div
         aria-hidden="true"

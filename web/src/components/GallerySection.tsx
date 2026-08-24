@@ -17,17 +17,6 @@ type GallerySectionProps = {
   bgImage?: string;
 };
 
-const BENTO = [
-  { col: "md:col-span-2 md:row-span-2", h: "h-64 md:h-full" },
-  { col: "", h: "h-44 md:h-[calc(50%-4px)]" },
-  { col: "", h: "h-44 md:h-[calc(50%-4px)]" },
-  { col: "", h: "h-52" },
-  { col: "", h: "h-52" },
-  { col: "", h: "h-52" },
-  { col: "md:col-span-2", h: "h-44" },
-  { col: "", h: "h-44" },
-];
-
 const DIRS = [
   { y: 50, x: 0, s: 0.94 },
   { y: 0, x: 40, s: 0.96 },
@@ -42,14 +31,12 @@ const DIRS = [
 function Card({
   img,
   i,
-  bento,
   dir,
   reduced,
   onOpen,
 }: {
   img: GalleryImage;
   i: number;
-  bento: (typeof BENTO)[0];
   dir: (typeof DIRS)[0];
   reduced: boolean;
   onOpen: (i: number) => void;
@@ -85,7 +72,7 @@ function Card({
       viewport={{ once: true, margin: "-60px" }}
       transition={{ duration: 0.6, delay: reduced ? 0 : 0.1 + i * 0.08, ease: [0.23, 1, 0.32, 1] }}
       whileHover={reduced ? {} : { y: -6, scale: 1.015, rotateX: -3, rotateY: 3 }}
-      className={`group relative cursor-pointer overflow-hidden perspective-[1200px] ${bento.col}`}
+      className="group relative mb-3 block cursor-pointer overflow-hidden break-inside-avoid perspective-[1200px]"
       onClick={() => onOpen(i)}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
@@ -99,19 +86,21 @@ function Card({
       }}
       aria-label={`Ver imagen: ${img.alt}`}
     >
-      <div className="relative h-full overflow-hidden" style={{ transformStyle: "preserve-3d" }}>
+      <div className="relative overflow-hidden" style={{ transformStyle: "preserve-3d" }}>
         <motion.div
           style={reduced ? {} : { x: sx, y: sy }}
-          className="h-full will-change-transform"
+          className="will-change-transform"
         >
+          {/* width/height solo fijan la proporcion del placeholder; al cargar,
+              `h-auto` deja que mande la proporcion real de la foto. */}
           <Image
             src={img.src}
             alt={img.alt}
-            width={i === 0 ? 900 : 500}
-            height={i === 0 ? 600 : 333}
-            className={`w-full object-cover transition-transform duration-700 ease-out group-hover:scale-110 ${bento.h}`}
+            width={800}
+            height={600}
+            className="block h-auto w-full transition-transform duration-700 ease-out group-hover:scale-110"
             priority={i < 2}
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         </motion.div>
 
@@ -170,13 +159,12 @@ export default function GallerySection({ tag, title, images, bgImage }: GalleryS
             {title}
           </motion.h2>
 
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 md:gap-2">
+          <div className="columns-1 gap-3 sm:columns-2 lg:columns-3">
             {images.map((img, i) => (
               <Card
                 key={img.src}
                 img={img}
                 i={i}
-                bento={BENTO[i] || BENTO[BENTO.length - 1]}
                 dir={DIRS[i] || DIRS[DIRS.length - 1]}
                 reduced={!!reduced}
                 onOpen={setLbIdx}

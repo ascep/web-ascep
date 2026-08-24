@@ -6,6 +6,7 @@ export type DossierAccent = "cyan" | "orange" | "yellow" | "teal" | "purple";
 
 type DossierHeroProps = {
   images: string[];
+  video?: string;
   tag: string;
   title: string;
   highlight?: string;
@@ -18,6 +19,7 @@ type DossierHeroProps = {
 
 export default function DossierHero({
   images,
+  video,
   tag,
   title,
   highlight,
@@ -30,6 +32,7 @@ export default function DossierHero({
   return (
     <HeroSlideshow
       images={images}
+      video={video}
       tag={tag}
       title={title}
       highlight={highlight}

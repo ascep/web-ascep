@@ -62,48 +62,57 @@ export default async function ProgramasPage({
 
   return (
     <>
-      <DossierHero
-        images={[
-          assetPath(fotos.programas.hero),
-          assetPath(fotos.impacto.hero),
-          assetPath(fotos.casasDelSaber.hero),
-          assetPath(fotos.noticias.hero),
-        ]}
-        tag={t("badge")}
-        title={t("title")}
-        highlight={t("titleHighlight")}
-        subtitle={t("desc")}
-        accent="orange"
-        primaryCta={{ label: t("heroCta1"), href: `/${locale}/quienes-somos` }}
-        secondaryCta={{ label: t("heroCta2"), href: "#portafolio" }}
-      >
-        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
-          <div className="flex items-center gap-4">
-            <Image
-              src={assetPath("/logos/12 logo ascep blanco sin slogan.png")}
-              alt="ASCEP"
-              width={112}
-              height={112}
-              className="h-16 w-16 rounded-2xl bg-white/15 p-2"
-            />
-            <div>
-              <p className="text-xl font-extrabold">ASCEP</p>
-              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-cyan">
-                {t("heroCardTag")}
-              </p>
-            </div>
-          </div>
-          <p className="mt-6 text-sm leading-relaxed text-purple-100">{t("heroCardDesc")}</p>
-          <Link
-            href={`/${locale}/donar`}
-            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
-          >
-            {t("heroCardCta")} <HandHeart size={16} />
-          </Link>
+      {/* Hero — visual only */}
+      <div className="relative h-[50vh] overflow-hidden bg-ley-orange sm:h-[65vh] md:h-[75vh] lg:h-[85vh]">
+        <div aria-hidden="true" className="absolute inset-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url("${assetPath(fotos.programas.hero)}")` }}
+          />
         </div>
-      </DossierHero>
+        <div aria-hidden="true" className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,16,32,0.45) 0%, transparent 50%)" }} />
+      </div>
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      {/* Hero text */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+        <DecoShapes variant="orange" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
+                <Image
+                  src={assetPath("/logos/12 logo ascep blanco sin slogan.png")}
+                  alt="ASCEP"
+                  fill
+                  className="object-contain p-8"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <span className="mb-3 inline-block rounded-full border border-brand-orange/30 bg-brand-orange/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
+                {t("badge")}
+              </span>
+              <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
+                {t("title")} <span className="text-brand-orange">{t("titleHighlight")}</span>
+              </h1>
+              <p className="mt-6 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+                {t("desc")}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link href={`/${locale}/quienes-somos`} className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-orange px-7 py-3 text-sm font-bold text-white transition-all hover:bg-brand-orange/90 hover:shadow-lg">
+                  {t("heroCta1")}
+                </Link>
+                <a href="#portafolio" className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-brand-orange/30 px-7 py-3 text-sm font-bold text-brand-orange transition-all hover:border-brand-orange/60 hover:bg-brand-orange/5">
+                  {t("heroCta2")}
+                </a>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
@@ -155,7 +164,7 @@ export default async function ProgramasPage({
         </div>
       </section>
 
-      <section id="portafolio" className="section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.hero)})` } as CSSProperties}>
+      <section id="portafolio" className="section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

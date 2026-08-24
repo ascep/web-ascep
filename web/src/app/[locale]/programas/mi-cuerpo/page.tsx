@@ -1,6 +1,5 @@
 import type { CSSProperties } from "react";
 import { getTranslations } from "next-intl/server";
-import DossierHero from "@/components/DossierHero";
 import SectionHeader from "@/components/SectionHeader";
 import PageCTA from "@/components/PageCTA";
 import AnimatedSection from "@/components/AnimatedSection";
@@ -16,6 +15,8 @@ import { existsSync } from "fs";
 import { join } from "path";
 import { getProgramBySlug, getDocumentsByCategory, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
 import { fileUrl, imageUrl } from "@/lib/sanity/image";
+import YoutubeHeroBg from "@/components/YoutubeHeroBg";
+import { homeVideos } from "@/data/homeVideos";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -127,106 +128,181 @@ export default async function MiCuerpoPage({
 
   const heroImage = sanityImage(cms?.heroImage) || assetPath(fotos.home.gallery[0].src);
   const logoImage = sanityImage(cms?.programLogo) || assetPath(fotos.programas.cards.miCuerpo.image);
+  // Fotos reales de actividades para las secciones oscuras, en vez de usar
+  // siempre el logo del programa como fondo.
+  const supportImage1 = assetPath(fotos.impacto.gallery[6]);
+  const supportImage2 = assetPath(fotos.impacto.gallery[7]);
 
   return (
     <>
-      <DossierHero
-        images={[heroImage, assetPath(fotos.impacto.gallery[1]), assetPath(fotos.impacto.gallery[2])]}
-        tag="Programa"
-        title="Mi Cuerpo, Mi Sexualidad,"
-        highlight="Mi Vida"
-        subtitle="Promovemos el ejercicio pleno de los derechos sexuales y reproductivos."
-        accent="purple"
-        primaryCta={{ label: "Conocer el programa", href: "#objetivos" }}
-      >
-        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
-          <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
-              <Heart size={28} className="text-ley-fuchsia" />
-            </div>
-            <div>
-              <p className="text-xl font-extrabold">ASCEP</p>
-              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-fuchsia">
-                Programa
-              </p>
-            </div>
-          </div>
-          <p className="mt-6 text-sm leading-relaxed text-purple-100">
-            Promovemos el ejercicio pleno de los derechos sexuales y reproductivos.
-          </p>
-          <a
-            href="#componentes"
-            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
-          >
-            Componentes del programa
-          </a>
-        </div>
-      </DossierHero>
+      {/* Hero — visual only */}
+      <div className="relative h-[50vh] overflow-hidden bg-ley-purple sm:h-[65vh] md:h-[75vh] lg:h-[85vh]">
+        <YoutubeHeroBg
+          videoUrl={homeVideos.programas["mi-cuerpo"].hero || ""}
+          fallbackImage={heroImage}
+        />
+      </div>
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      {/* Hero text — imagen izquierda + texto derecha */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            tag="Informacion"
-            title="Que es"
-            highlight="Mi Cuerpo, Mi Sexualidad, Mi Decision?"
-            accent="purple"
-          />
-          <div className="grid items-center gap-12 md:grid-cols-2">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Izquierda — imagen */}
             <AnimatedSection direction="left">
-              <div className="relative flex h-72 items-center justify-center overflow-hidden rounded-3xl bg-ley-fuchsia/5 md:h-96">
-                <ImageParallax src={logoImage} alt="Mi Cuerpo, Mi Sexualidad, Mi Decision" width={240} height={150} className="h-auto max-h-48 w-auto max-w-[80%] object-contain" intensity={0.2} />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={logoImage}
+                  alt="Mi Cuerpo, Mi Sexualidad, Mi Vida"
+                  fill
+                  className="object-contain p-8"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-bold text-ley-purple backdrop-blur-sm">
+                  <Heart size={16} className="text-[#9333ea]" />
+                  Programa
+                </div>
               </div>
             </AnimatedSection>
-            <AnimatedSection direction="right" delay={0.1}>
-              <div className="space-y-6 text-base text-text-secondary">
+
+            {/* Derecha — texto */}
+            <AnimatedSection direction="right">
+              <span className="mb-3 inline-block rounded-full border border-[#9333ea]/30 bg-[#9333ea]/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#9333ea]">
+                Programa
+              </span>
+              <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
+                Mi Cuerpo, Mi Sexualidad, <span className="text-[#9333ea]">Mi Vida</span>
+              </h1>
+              <p className="mt-6 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+                Promovemos el ejercicio pleno de los derechos sexuales y reproductivos.
+              </p>
+              <div className="mt-6 flex items-center gap-4">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#9333ea]/10">
+                  <Heart size={26} className="text-[#9333ea]" />
+                </div>
+                <div>
+                  <p className="font-extrabold text-[var(--color-text-primary)]">ASCEP</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-[#9333ea]">Programa</p>
+                </div>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="#objetivos"
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-[#9333ea] px-7 py-3 text-sm font-bold text-white transition-all hover:bg-[#7e22ce] hover:shadow-lg"
+                >
+                  Conocer el programa
+                </a>
+                <a
+                  href="#componentes"
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-[#9333ea]/30 px-7 py-3 text-sm font-bold text-[#9333ea] transition-all hover:border-[#9333ea]/60 hover:bg-[#9333ea]/5"
+                >
+                  Componentes del programa
+                </a>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Que es — texto izquierda + imagen derecha */}
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Izquierda — texto */}
+            <AnimatedSection direction="left">
+              <span className="mb-3 inline-block rounded-full border border-[#9333ea]/30 bg-[#9333ea]/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#9333ea]">
+                Informacion
+              </span>
+              <h2 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
+                Que es <span className="text-[#9333ea]">Mi Cuerpo, Mi Sexualidad, Mi Decision?</span>
+              </h2>
+              <div className="mt-6 space-y-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
                 <p>
                   El programa esta disenado para proveer a los adolescentes y jovenes que viven bajo proteccion del Estado las condiciones que permitan el ejercicio libre, autonomo e informado de la sexualidad y el desarrollo en comunidad desde el punto de vista social, economico, cultural y politico.
                 </p>
               </div>
             </AnimatedSection>
+
+            {/* Derecha — imagen */}
+            <AnimatedSection direction="right">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={logoImage}
+                  alt="Mi Cuerpo, Mi Sexualidad, Mi Decision"
+                  fill
+                  className="object-contain p-8"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
-      <section id="objetivos" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${logoImage})` } as CSSProperties}>
+      {/* Objetivo General — texto izquierda + imagen derecha (dark) */}
+      <section id="objetivos" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${supportImage1})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Izquierda — texto */}
+            <AnimatedSection direction="left">
+              <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                Objetivo
+              </span>
+              <h2 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl">
+                Objetivo <span className="text-ley-fuchsia">General</span>
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-white/80">
+                Prevenir, promover, generar y desarrollar acciones que permitan las condiciones para el ejercicio pleno y autonomo de los derechos sexuales y reproductivos de los ninos, ninas, adolescentes y jovenes que viven bajo proteccion del Estado con enfoque de genero diferencial, contribuyendo a la preparacion para la vida adulta independiente.
+              </p>
+            </AnimatedSection>
+
+            {/* Derecha — imagen */}
+            <AnimatedSection direction="right">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={heroImage}
+                  alt="Objetivo General"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.1}
+                />
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Objetivos Especificos */}
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             tag="Objetivos"
             title="Objetivos"
             highlight="Especificos"
-            accent="white"
-            dark
+            accent="purple"
           />
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-4xl space-y-6">
-              <div className="rounded-3xl glass-card p-6 transition-all hover:bg-white/15">
-                <p className="text-lg leading-relaxed text-white/70">
-                  Prevenir, promover, generar y desarrollar acciones que permitan las condiciones para el ejercicio pleno y autonomo de los derechos sexuales y reproductivos de los ninos, ninas, adolescentes y jovenes que viven bajo proteccion del Estado con enfoque de genero diferencial, contribuyendo a la preparacion para la vida adulta independiente.
-                </p>
-              </div>
-              <div className="grid gap-4 sm:grid-cols-3">
-                {objetivosSecundarios.map((item, i) => (
-                  <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                    <div className="flex gap-4 rounded-3xl glass-card p-6 transition-all hover:bg-white/15">
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ley-fuchsia/10">
-                        <CheckCircle size={20} className="text-ley-fuchsia" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-white/70">{item}</p>
-                      </div>
-                    </div>
-                  </AnimatedSection>
-                ))}
-              </div>
-            </div>
-          </AnimatedSection>
+          <div className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2">
+            {objetivosSecundarios.map((item, i) => (
+              <AnimatedSection key={i} direction="up" delay={i * 0.06}>
+                <div className="flex gap-4 rounded-3xl border border-border-default bg-bg-card p-6 transition-all hover:shadow-lg">
+                  <CheckCircle size={20} className="mt-0.5 shrink-0 text-[#9333ea]" />
+                  <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{item}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section id="componentes" className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      <section id="componentes" className="relative overflow-hidden bg-section-light py-24 sm:py-32">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
@@ -235,7 +311,7 @@ export default async function MiCuerpoPage({
             highlight="Programa"
             accent="purple"
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {components.map((comp, i) => {
               const Icon = comp.icon;
               const accent = compAccents[i % compAccents.length];
@@ -255,7 +331,7 @@ export default async function MiCuerpoPage({
         </div>
       </section>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${logoImage})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${supportImage2})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -266,7 +342,7 @@ export default async function MiCuerpoPage({
             accent="white"
             dark
           />
-          <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-3">
+          <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3">
             {[1, 2, 3].map((ri, i) => (
               <AnimatedSection key={ri} direction="up" delay={i * 0.08}>
                 <div className="glass-card flex h-full flex-col items-center rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:bg-white/15">

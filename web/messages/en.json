@@ -40,8 +40,28 @@
     "apoyoTransforma": "Your support transforms lives"
   },
   "comoAyudar": {
+    "heroTag": "Make a difference",
     "heroTitle": "How to Help ASCEP",
     "heroSubtitle": "There are many ways to join our cause and contribute to the transformation of the state protection system in Colombia.",
+    "levelsTag": "SUPPORT LEVELS",
+    "levelsTitle": "Choose your level of commitment",
+    "levelsDesc": "Every level of support has a direct impact on the lives of the young people we accompany.",
+    "level1Name": "ASCEP Friend",
+    "level1Plan": "Monthly donation",
+    "level1Price": "$30.000",
+    "level1Desc": "Help cover educational materials and transportation for a young person's training workshops.",
+    "level1Cta": "I want to be a Friend",
+    "level2Name": "ASCEP Sponsor",
+    "level2Plan": "Monthly donation",
+    "level2Price": "$70.000",
+    "level2Desc": "Fund the monthly psychosocial support of a young person transitioning to independent living.",
+    "level2Cta": "I want to be a Sponsor",
+    "level3Name": "Allied Company",
+    "level3Plan": "Corporate alliance",
+    "level3Price": "From $500.000",
+    "level3Desc": "Your company can sponsor complete programs, offer internships, or make corporate donations.",
+    "level3Cta": "I want to be an Ally",
+    "recommended": "Recommended",
     "intro": "Your support is essential for us to continue accompanying young graduates of the protection system in their transition to independent adult life. Every contribution, no matter its size, creates a real impact in the lives of those who need it most.",
     "donacionMonetaria": "Monetary Donation",
     "donacionMonetariaDesc": "Make a one-time or recurring donation through our Vaki platform. Your donation goes directly to our training programs, psychosocial support, and job opportunities.",
@@ -254,9 +274,9 @@
     "participaTag": "PARTICIPATE"
   },
   "noticias": {
-  "title": "News",
-  "heroHighlight": "that Transform",
-  "subtitle": "Stay informed about our activities, achievements, and news in the transformation of alternative care systems in Colombia.",
+    "title": "News",
+    "heroHighlight": "that Transform",
+    "subtitle": "Stay informed about our activities, achievements, and news in the transformation of alternative care systems in Colombia.",
     "proximamente": "Coming Soon",
     "proximamenteDesc": "We will be publishing news, articles, and updates about our programs and advocacy. In the meantime, follow us on our social media.",
     "categorias": "Categories",
@@ -270,12 +290,12 @@
     "leyExcerpt": "Learn about the law that creates the National Comprehensive Support Program for young people leaving the ICBF protection system.",
     "leyTag": "Graduation Law",
     "leerMas": "Read more",
-  "compartir": "Share",
-  "ctaTag": "FOLLOW US",
-  "ctaTitle": "Stay connected",
-  "ctaDesc": "Follow us on social media and join our programs to keep up with stories transforming alternative care in Colombia.",
-  "ctaBtn": "Connect with ASCEP",
-  "lecturaMin": "{count} min read",
+    "compartir": "Share",
+    "ctaTag": "FOLLOW US",
+    "ctaTitle": "Stay connected",
+    "ctaDesc": "Follow us on social media and join our programs to keep up with stories transforming alternative care in Colombia.",
+    "ctaBtn": "Connect with ASCEP",
+    "lecturaMin": "{count} min read",
     "breadcrumbInicio": "Home",
     "breadcrumbNoticias": "News",
     "sliderLabel": "Featured stories",
@@ -552,7 +572,11 @@
     "noticiasTitle": "Latest updates",
     "noticiasDesc": "Stay up to date with ASCEP's publications and news.",
     "verTodasNoticias": "View all news",
-    "noticiasLeerMas": "Read more"
+    "noticiasLeerMas": "Read more",
+    "manifesto": "No young person leaving the protection system should have to face adult life without support.",
+    "voicesTag": "Stories in their own words",
+    "voicesTitle": "The voices behind this cause",
+    "voicesDesc": "Every video is a person who turned their experience in the protection system into a collective cause."
   },
   "enredateConAscep": {
     "heroSlide1Tag": "Connect with ASCEP",
@@ -635,7 +659,10 @@
     "uneteFormName": "Full name",
     "uneteFormEmail": "Email address",
     "uneteFormMsg": "Tell us how you would like to participate",
-    "uneteFormSubmit": "Submit"
+    "uneteFormSubmit": "Submit",
+    "miniDocsTag": "Mini Documentaries",
+    "miniDocsTitle": "Stories that Inspire",
+    "miniDocsDesc": "Short documentaries that tell the real stories of young people who aged out of the protection system."
   },
   "modelo": {
     "tag": "Our Approach",
@@ -671,6 +698,9 @@
     "historiaP3": "We are an organization that has overcome the learning curve and is now in a stage of growth, strengthening its advocacy across different programmatic lines. Our leadership has made us a reference nationally and across Latin America.",
     "historiaP4": "This has led us to be invited to different advocacy and decision-making spaces that contribute to transforming care systems for children, adolescents and young people with lived experience in institutional care.",
     "historiaP5": "We are a new voice for the transformation of care systems in Colombia and for accompanying adolescents and young people in their transition to an autonomous and independent life.",
+    "premioTag": "RECOGNITION",
+    "premioTitle": "Civic Award for Social Innovation",
+    "premioDesc": "In 2017, ASCEP was awarded First Place in the Civic Award for Social Innovation, recognizing our commitment to transforming care systems and defending the rights of adolescents and young people graduating from the protection system.",
     "propositoTag": "MISSION, VISION AND PURPOSE",
     "propositoTitle": "Our",
     "propositoHighlight": "Purpose",
@@ -1041,6 +1071,17 @@
     "heroSubtitle": "A comprehensive accompaniment space for young people in the process of leaving the state protection system.",
     "heroCta": "Learn about the modalities",
     "heroSecondary": "See the graduation route",
+    "comoEsTag": "WHAT IT IS",
+    "comoEsTitle": "Casas del Saber is a comprehensive accompaniment program for young people transitioning to an independent adult life",
+    "comoEsDesc1": "Every young person who graduates from the state protection system faces an enormous challenge: building their adult life without a family support network. Casas del Saber offers them a safe, community-based space to live, learn, and grow.",
+    "comoEsDesc2": "Through a pedagogical, residential, and self-sustainable model, the program accompanies each young person in five intervention areas: basic needs, psychosocial, socio-educational, labor insertion, and resource coordination.",
+    "comoEsDesc3": "It is not just a shelter. It is a home where every young person finds the tools to build their life project with autonomy, dignity, and purpose.",
+    "comoEsStat1": "8",
+    "comoEsStat1Label": "young people per house",
+    "comoEsStat2": "5",
+    "comoEsStat2Label": "intervention areas",
+    "comoEsStat3": "4",
+    "comoEsStat3Label": "thematic lines",
     "heroSlide1Tag": "Participation Modalities",
     "heroSlide1Title": "Two ways to participate",
     "heroSlide1Desc": "With housing services for those without a support network or stable conditions, or without housing services for those who have already resolved them.",
@@ -1359,7 +1400,8 @@
     "formacion": "Training",
     "insercion": "Insertion",
     "liderazgo": "Leadership",
-    "bienestar": "Wellness"
+    "bienestar": "Wellness",
+    "seePrograms": "See programs"
   },
   "footer": {
     "desc": "Association of Graduates of the Colombian State Protection System.",
@@ -1503,34 +1545,104 @@
     "leyBannerDesc": "Creates the Comprehensive Aftercare Program and consolidates support networks across the country.",
     "leyBannerCta": "Learn about the Law",
     "incidenciaProjects": [
-      { "proyecto": "Research \"More Autonomy, More Rights\"", "periodo": "Mar-Jul 2019", "resultado": "With UNICEF. Technical evidence for public policy on care leavers in Latin America." },
-      { "proyecto": "\"Families Where Affections Are\"", "periodo": "Oct 2021-Feb 2022", "resultado": "Lunaria Fund. Publication of the Love and Family handbook." },
-      { "proyecto": "\"Yes to the Aftercare Law\"", "periodo": "Jan-Apr 2021", "resultado": "Ongoing legislative advocacy for the aftercare law in Congress." },
-      { "proyecto": "Sowing hope, preserving dreams", "periodo": "Dec 2021", "resultado": "Strengthening protective environments for care leavers." },
-      { "proyecto": "Campaign \"Voices that Inspire\"", "periodo": "Dec 2023-Nov 2024", "resultado": "Design and implementation. Showcasing successful care-leaver stories nationwide." }
+      {
+        "proyecto": "Research \"More Autonomy, More Rights\"",
+        "periodo": "Mar-Jul 2019",
+        "resultado": "With UNICEF. Technical evidence for public policy on care leavers in Latin America."
+      },
+      {
+        "proyecto": "\"Families Where Affections Are\"",
+        "periodo": "Oct 2021-Feb 2022",
+        "resultado": "Lunaria Fund. Publication of the Love and Family handbook."
+      },
+      {
+        "proyecto": "\"Yes to the Aftercare Law\"",
+        "periodo": "Jan-Apr 2021",
+        "resultado": "Ongoing legislative advocacy for the aftercare law in Congress."
+      },
+      {
+        "proyecto": "Sowing hope, preserving dreams",
+        "periodo": "Dec 2021",
+        "resultado": "Strengthening protective environments for care leavers."
+      },
+      {
+        "proyecto": "Campaign \"Voices that Inspire\"",
+        "periodo": "Dec 2023-Nov 2024",
+        "resultado": "Design and implementation. Showcasing successful care-leaver stories nationwide."
+      }
     ],
     "avanzaProjects": [
-      { "proyecto": "EMPOWER Foundation - Grants 1 to 4", "periodo": "Aug 2020-Jul 2025", "resultado": "400 beneficiaries, 15 psychosocial professionals, 5 care centers, 1 aquaponic park." },
-      { "proyecto": "1st Grant Expansion", "periodo": "Apr-Nov 2025", "resultado": "New allies. 56 adolescents integrated, 2 centers, 2 high-impact educational outings." },
-      { "proyecto": "2nd Grant Expansion", "periodo": "Apr-Nov 2026", "resultado": "Timeline systematization. 28 children/adolescents in sustained accompaniment." },
-      { "proyecto": "Virtual English Course (ACUMEN)", "periodo": "Jan-Apr 2020", "resultado": "English skills training for youth under State care." },
-      { "proyecto": "Culture of Peace and Social Skills", "periodo": "Sep-Dec 2024", "resultado": "Adolescents in the juvenile justice system. Training in coexistence and peaceful conflict resolution." }
+      {
+        "proyecto": "EMPOWER Foundation - Grants 1 to 4",
+        "periodo": "Aug 2020-Jul 2025",
+        "resultado": "400 beneficiaries, 15 psychosocial professionals, 5 care centers, 1 aquaponic park."
+      },
+      {
+        "proyecto": "1st Grant Expansion",
+        "periodo": "Apr-Nov 2025",
+        "resultado": "New allies. 56 adolescents integrated, 2 centers, 2 high-impact educational outings."
+      },
+      {
+        "proyecto": "2nd Grant Expansion",
+        "periodo": "Apr-Nov 2026",
+        "resultado": "Timeline systematization. 28 children/adolescents in sustained accompaniment."
+      },
+      {
+        "proyecto": "Virtual English Course (ACUMEN)",
+        "periodo": "Jan-Apr 2020",
+        "resultado": "English skills training for youth under State care."
+      },
+      {
+        "proyecto": "Culture of Peace and Social Skills",
+        "periodo": "Sep-Dec 2024",
+        "resultado": "Adolescents in the juvenile justice system. Training in coexistence and peaceful conflict resolution."
+      }
     ],
     "empleoProjects": [
-      { "titulo": "Alvaralice (Since 2017)", "desc": "Civic Award for a Better City." },
-      { "titulo": "LET - Leadership, Entrepreneurship and Technology (2018)", "desc": "25 youth directly benefited." },
-      { "titulo": "LET Coverage (2019-2022)", "desc": "70+ beneficiaries in employability workshops." }
+      {
+        "titulo": "Alvaralice (Since 2017)",
+        "desc": "Civic Award for a Better City."
+      },
+      {
+        "titulo": "LET - Leadership, Entrepreneurship and Technology (2018)",
+        "desc": "25 youth directly benefited."
+      },
+      {
+        "titulo": "LET Coverage (2019-2022)",
+        "desc": "70+ beneficiaries in employability workshops."
+      }
     ],
     "miCuerpoProjects": [
-      { "titulo": "La Puerta Abierta / I.V.E. (2019)", "desc": "100 direct beneficiaries, 1,000 reach on social media." },
-      { "titulo": "Adolescence: A Change to Move Forward (2022)", "desc": "Edited educational handbooks." },
-      { "titulo": "PUENTES - Families in the Plural (2023-2024)", "desc": "50 adolescents, 1 toolkit." }
+      {
+        "titulo": "La Puerta Abierta / I.V.E. (2019)",
+        "desc": "100 direct beneficiaries, 1,000 reach on social media."
+      },
+      {
+        "titulo": "Adolescence: A Change to Move Forward (2022)",
+        "desc": "Edited educational handbooks."
+      },
+      {
+        "titulo": "PUENTES - Families in the Plural (2023-2024)",
+        "desc": "50 adolescents, 1 toolkit."
+      }
     ],
     "casasProjects": [
-      { "titulo": "Ciudadanos Triple A (2024-2025)", "desc": "12 pilot youth (75% women), 40% formal employment, 30% education." },
-      { "titulo": "Casas del Saber and Transformation (2026)", "desc": "Territorial expansion and consolidation underway." },
-      { "titulo": "Pedagogical, housing and self-sustainable model (2024-2026)", "desc": "Articulates 5 intervention areas with 4 thematic training lines for young people leaving care and care leavers." },
-      { "titulo": "Progressive Exit Route (2025-2026)", "desc": "Three-phase process (reception, active training and consolidation) with follow-up after leaving care." }
+      {
+        "titulo": "Ciudadanos Triple A (2024-2025)",
+        "desc": "12 pilot youth (75% women), 40% formal employment, 30% education."
+      },
+      {
+        "titulo": "Casas del Saber and Transformation (2026)",
+        "desc": "Territorial expansion and consolidation underway."
+      },
+      {
+        "titulo": "Pedagogical, housing and self-sustainable model (2024-2026)",
+        "desc": "Articulates 5 intervention areas with 4 thematic training lines for young people leaving care and care leavers."
+      },
+      {
+        "titulo": "Progressive Exit Route (2025-2026)",
+        "desc": "Three-phase process (reception, active training and consolidation) with follow-up after leaving care."
+      }
     ]
   },
   "metadata": {

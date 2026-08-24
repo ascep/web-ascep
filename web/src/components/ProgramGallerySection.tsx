@@ -38,22 +38,16 @@ export default async function ProgramGallerySection({
           </p>
         </AnimatedSection>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
           {images.slice(0, 8).map((src, i) => (
-            <AnimatedSection key={`${src}-${i}`} direction="up" delay={i * 0.06}>
-              <div
-                className={`group relative overflow-hidden rounded-[10px] ${
-                  i === 0 ? "sm:col-span-2 sm:row-span-2" : ""
-                }`}
-              >
+            <AnimatedSection key={`${src}-${i}`} direction="up" delay={i * 0.06} className="mb-4 break-inside-avoid">
+              <div className="group relative overflow-hidden rounded-[10px]">
                 <ImageParallax
                   src={src}
                   alt={overlayLabel}
-                  width={800}
-                  height={600}
-                  className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
-                    i === 0 ? "h-52 sm:h-full" : "h-52"
-                  }`}
+                  width={0}
+                  height={0}
+                  className="transition-transform duration-500 group-hover:scale-105"
                   intensity={0.1}
                 />
                 <div className="absolute inset-0 flex items-end bg-gradient-to-t from-black/50 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100">

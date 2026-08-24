@@ -10,7 +10,7 @@
         "alt": "Taller con jovenes"
       },
       {
-        "src": "https://cdn.sanity.io/images/7vvy9nrc/production/46b9d348b9eb78f4fa9c48af47d0f5ef1e37ee79-4032x3024.webp",
+        "src": "/images/uploads/home_gallery_1__src.webp",
         "alt": "Jovenes en taller de habilidades"
       },
       {
@@ -26,7 +26,7 @@
         "alt": "Sesion de trabajo"
       },
       {
-        "src": "https://cdn.sanity.io/images/7vvy9nrc/production/e2535b2894d56a4fa16b7c284004deb65fc01814-6000x3376.webp",
+        "src": "/images/uploads/home_gallery_5__src.webp",
         "alt": "Jornada educativa"
       },
       {
@@ -34,7 +34,7 @@
         "alt": "Encuentro ASCEP 2025"
       },
       {
-        "src": "https://cdn.sanity.io/images/7vvy9nrc/production/f827534de1531bddbdf5234db29bc879d5582716-6000x3376.webp",
+        "src": "/images/uploads/home_gallery_7__src.webp",
         "alt": "Momentos de integracion"
       }
     ],
@@ -67,7 +67,7 @@
     },
     "aliados": [
       {
-        "src": "/images/aliados/colombia.svg",
+        "src": "/images/aliados/colombia.webp",
         "alt": "Colombia"
       },
       {
@@ -111,7 +111,7 @@
     "hero": "/images/eventos/2024/20241112_092855.webp",
     "logos": [
       {
-        "src": "/images/aliados/colombia.svg",
+        "src": "/images/aliados/colombia.webp",
         "alt": "Colombia"
       },
       {

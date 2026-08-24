@@ -72,6 +72,10 @@ export default function ImageParallax({
   const x = useSpring(0, { stiffness: 120, damping: 20 });
   const y = useSpring(0, { stiffness: 120, damping: 20 });
 
+  // width=0/height=0 opts into "auto" sizing: the image renders at its real
+  // aspect ratio (h-auto) instead of being cropped into a fixed box.
+  const auto = !fill && width === 0 && height === 0;
+
   useEffect(() => {
     if (reducedMotion || isTouch) return;
 
@@ -95,12 +99,14 @@ export default function ImageParallax({
   return (
     <div
       ref={ref}
-      className={`overflow-hidden ${containerClassName}`}
+      // En modo `fill` el wrapper debe cubrir el contenedor posicionado del
+      // padre; sin esto se queda con altura 0 y la imagen no se ve.
+      className={`overflow-hidden ${fill ? "absolute inset-0 h-full w-full" : ""} ${containerClassName}`}
       style={style}
     >
       <motion.div
         style={reducedMotion || isTouch ? {} : { x, y }}
-        className="h-full w-full will-change-transform"
+        className={`will-change-transform ${auto ? "w-full" : "h-full w-full"}`}
       >
         {fill ? (
           <Image
@@ -108,6 +114,16 @@ export default function ImageParallax({
             alt={alt}
             fill
             className={`object-cover ${className}`}
+            priority={priority}
+            sizes={sizes}
+          />
+        ) : auto ? (
+          <Image
+            src={src}
+            alt={alt}
+            width={800}
+            height={600}
+            className={`block h-auto w-full ${className}`}
             priority={priority}
             sizes={sizes}
           />

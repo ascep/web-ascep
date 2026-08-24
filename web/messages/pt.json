@@ -40,8 +40,28 @@
     "apoyoTransforma": "Seu apoio transforma vidas"
   },
   "comoAyudar": {
+    "heroTag": "Faca a diferenca",
     "heroTitle": "Como ajudar a ASCEP",
     "heroSubtitle": "Ha muitas formas de se somar a nossa causa e contribuir para a transformacao do sistema de protecao estatal no Brasil.",
+    "levelsTag": "NIVEIS DE APOIO",
+    "levelsTitle": "Escolha seu nivel de compromisso",
+    "levelsDesc": "Cada nivel de apoio tem um impacto direto na vida dos jovens que acompanhamos.",
+    "level1Name": "Amigo ASCEP",
+    "level1Plan": "Doacao mensal",
+    "level1Price": "$30.000",
+    "level1Desc": "Ajude a cobrir materiais educativos e transporte para oficinas de formacao de um jovem.",
+    "level1Cta": "Quero ser Amigo",
+    "level2Name": "Padrinho ASCEP",
+    "level2Plan": "Doacao mensal",
+    "level2Price": "$70.000",
+    "level2Desc": "Financie o acompanhamento psicossocial mensal de um jovem em transicao para a vida independente.",
+    "level2Cta": "Quero ser Padrinho",
+    "level3Name": "Empresa Aliada",
+    "level3Plan": "Alianca corporativa",
+    "level3Price": "A partir de $500.000",
+    "level3Desc": "Sua empresa pode apadrinhar programas completos, oferecer estagios ou fazer doacoes corporativas.",
+    "level3Cta": "Quero ser Aliado",
+    "recommended": "Recomendado",
     "intro": "Seu apoio e fundamental para que possamos continuar acompanhando jovens egressos do sistema de protecao em sua transicao para a vida adulta independente. Cada contribuicao, independentemente do seu porte, gera um impacto real na vida de quem mais precisa.",
     "donacionMonetaria": "Doacao Monetaria",
     "donacionMonetariaDesc": "Faca uma contribuicao financeira unica ou recorrente atraves da nossa plataforma Vaki. Sua doacao e destinada diretamente aos nossos programas de formacao, apoio psicossocial e oportunidades profissionais.",
@@ -254,9 +274,9 @@
     "participaTag": "PARTICIPE"
   },
   "noticias": {
-  "title": "Noticias",
-  "heroHighlight": "que Transformam",
-  "subtitle": "Mantenha-se informado sobre nossas atividades, conquistas e novidades na transformacao do sistema de cuidados alternativos no Brasil.",
+    "title": "Noticias",
+    "heroHighlight": "que Transformam",
+    "subtitle": "Mantenha-se informado sobre nossas atividades, conquistas e novidades na transformacao do sistema de cuidados alternativos no Brasil.",
     "proximamente": "Em breve",
     "proximamenteDesc": "Estaremos publicando noticias, artigos e atualizacoes sobre nossos programas e incidencia. Enquanto isso, siga-nos nas nossas redes sociais.",
     "categorias": "Categorias",
@@ -270,12 +290,12 @@
     "leyExcerpt": "Conheca a norma que cria o Programa Nacional de Acompanhamento Integral para os jovens que saem do sistema de protecao do ICBF.",
     "leyTag": "Lei de Egresso",
     "leerMas": "Ler mais",
-  "compartir": "Partilhar",
-  "ctaTag": "SIGA-NOS",
-  "ctaTitle": "Fique conectado",
-  "ctaDesc": "Siga-nos nas redes sociais e participe dos nossos programas para acompanhar historias que transformam o sistema de cuidados alternativos na Colombia.",
-  "ctaBtn": "Conecte-se com a ASCEP",
-  "lecturaMin": "{count} min de leitura",
+    "compartir": "Partilhar",
+    "ctaTag": "SIGA-NOS",
+    "ctaTitle": "Fique conectado",
+    "ctaDesc": "Siga-nos nas redes sociais e participe dos nossos programas para acompanhar historias que transformam o sistema de cuidados alternativos na Colombia.",
+    "ctaBtn": "Conecte-se com a ASCEP",
+    "lecturaMin": "{count} min de leitura",
     "breadcrumbInicio": "Inicio",
     "breadcrumbNoticias": "Noticias",
     "sliderLabel": "Historias em destaque",
@@ -552,7 +572,11 @@
     "noticiasTitle": "Ultimas novidades",
     "noticiasDesc": "Fique por dentro das publicacoes e novidades da ASCEP.",
     "verTodasNoticias": "Ver todas as noticias",
-    "noticiasLeerMas": "Ler mais"
+    "noticiasLeerMas": "Ler mais",
+    "manifesto": "Nenhum jovem egresso do sistema deveria enfrentar a vida adulta sem apoio.",
+    "voicesTag": "Historias em primeira pessoa",
+    "voicesTitle": "Vozes que sustentam essa causa",
+    "voicesDesc": "Cada video e uma pessoa que transformou sua experiencia no sistema de protecao em uma causa coletiva."
   },
   "enredateConAscep": {
     "heroSlide1Tag": "Enredate com a ASCEP",
@@ -635,7 +659,10 @@
     "uneteFormName": "Nome completo",
     "uneteFormEmail": "E-mail",
     "uneteFormMsg": "Conte-nos como voce gostaria de participar",
-    "uneteFormSubmit": "Enviar"
+    "uneteFormSubmit": "Enviar",
+    "miniDocsTag": "Mini Documentarios",
+    "miniDocsTitle": "Historias que Inspiram",
+    "miniDocsDesc": "Documentarios curtos que contam as historias reais de jovens que sairam do sistema de protecao."
   },
   "modelo": {
     "tag": "Nosso Enfoque",
@@ -671,6 +698,9 @@
     "historiaP3": "Somos uma organização que superou a curva de aprendizado e agora está em uma etapa de crescimento e posicionamento da sua incidência nas diferentes linhas programáticas. Nossa liderança nos permitiu ser referência nacional e na região da América Latina.",
     "historiaP4": "Isso fez com que fôssemos convidados para diferentes espaços de incidência e tomada de decisão que contribuem para a transformação dos sistemas de cuidados para a infância, adolescência e juventude com experiência vivida em sistemas de cuidado institucional.",
     "historiaP5": "Somos uma nova voz para a transformação dos sistemas de cuidado na Colômbia e para o acompanhamento de adolescentes e jovens na sua transição para a vida autônoma e independente.",
+    "premioTag": "RECONHECIMENTO",
+    "premioTitle": "Prêmio Cívico de Inovação Social",
+    "premioDesc": "Em 2017, a ASCEP foi agraciada com o Primeiro Lugar no Prêmio Cívico de Inovação Social, em reconhecimento ao nosso compromisso com a transformação dos sistemas de cuidado e a defesa dos direitos de adolescentes e jovens egressos do sistema de proteção.",
     "propositoTag": "MISSÃO, VISÃO E PROPÓSITO",
     "propositoTitle": "Nosso",
     "propositoHighlight": "Propósito",
@@ -1041,6 +1071,17 @@
     "heroSubtitle": "Um espaco de acompanhamento integral para jovens em processo de egresso do sistema de protecao estatal.",
     "heroCta": "Conheca as modalidades",
     "heroSecondary": "Ver a rota de egresso",
+    "comoEsTag": "O QUE E",
+    "comoEsTitle": "Casas do Saber e um programa de acompanhamento integral para jovens em transicao para a vida adulta independiente",
+    "comoEsDesc1": "Cada jovem que egresa do sistema de protecao estatal enfrenta um enorme desafio: construir sua vida adulta sem uma rede de apoio familiar. Casas do Saber oferece um espaco seguro, comunitario e formativo onde viver, aprender e crescer.",
+    "comoEsDesc2": "Atraves de um modelo pedagogico, habitacional e autosustentavel, o programa acompanha cada jovem em cinco areas de intervencion: necessidades basicas, psicossocial, socioeducativo, insercao laboral e coordenacao de recursos.",
+    "comoEsDesc3": "Nao e so um abrigo. E um lar onde cada jovem encontra as ferramentas para construir seu projeto de vida com autonomia, dignidade e sentido.",
+    "comoEsStat1": "8",
+    "comoEsStat1Label": "jovens por casa",
+    "comoEsStat2": "5",
+    "comoEsStat2Label": "areas de intervencion",
+    "comoEsStat3": "4",
+    "comoEsStat3Label": "lineas de formacion",
     "heroSlide1Tag": "Modalidades de Participacao",
     "heroSlide1Title": "Duas formas de participar",
     "heroSlide1Desc": "Com servico habitacional para quem nao tem rede de apoio nem condicoes estaveis, ou sem servico habitacional para quem ja as resolveu.",
@@ -1359,7 +1400,8 @@
     "formacion": "Formacao",
     "insercion": "Insercao",
     "liderazgo": "Lideranca",
-    "bienestar": "Bem-estar"
+    "bienestar": "Bem-estar",
+    "seePrograms": "Ver programas"
   },
   "footer": {
     "desc": "Associacao de Egressos do Sistema de Protecao Estatal do Brasil.",
@@ -1503,34 +1545,104 @@
     "leyBannerDesc": "Cria o Programa de Acompanhamento Integral ao Egresso e consolida redes de apoio em todo o territorio nacional.",
     "leyBannerCta": "Conheca a Lei",
     "incidenciaProjects": [
-      { "proyecto": "Pesquisa \"Mais Autonomia, Mais Direitos\"", "periodo": "Mar-Jul 2019", "resultado": "Com UNICEF. Evidencia tecnica para politicas publicas sobre jovens egressos na America Latina." },
-      { "proyecto": "\"Familias onde estao os afetos\"", "periodo": "Out 2021-Fev 2022", "resultado": "Fundo Lunaria. Publicacao da cartilha Love and Family." },
-      { "proyecto": "\"Sim a Lei de Egresso\"", "periodo": "Jan-Abr 2021", "resultado": "Incidencia legislativa continua para a lei de egresso do sistema no Congresso." },
-      { "proyecto": "Semeando esperanca, preservando sonhos", "periodo": "Dez 2021", "resultado": "Fortalecimento de ambientes protetores para jovens egressos." },
-      { "proyecto": "Campanha \"Vozes que Inspiram\"", "periodo": "Dez 2023-Nov 2024", "resultado": "Desenho e implementacao. Visibilizacao de historias de sucesso de egressos em todo o pais." }
+      {
+        "proyecto": "Pesquisa \"Mais Autonomia, Mais Direitos\"",
+        "periodo": "Mar-Jul 2019",
+        "resultado": "Com UNICEF. Evidencia tecnica para politicas publicas sobre jovens egressos na America Latina."
+      },
+      {
+        "proyecto": "\"Familias onde estao os afetos\"",
+        "periodo": "Out 2021-Fev 2022",
+        "resultado": "Fundo Lunaria. Publicacao da cartilha Love and Family."
+      },
+      {
+        "proyecto": "\"Sim a Lei de Egresso\"",
+        "periodo": "Jan-Abr 2021",
+        "resultado": "Incidencia legislativa continua para a lei de egresso do sistema no Congresso."
+      },
+      {
+        "proyecto": "Semeando esperanca, preservando sonhos",
+        "periodo": "Dez 2021",
+        "resultado": "Fortalecimento de ambientes protetores para jovens egressos."
+      },
+      {
+        "proyecto": "Campanha \"Vozes que Inspiram\"",
+        "periodo": "Dez 2023-Nov 2024",
+        "resultado": "Desenho e implementacao. Visibilizacao de historias de sucesso de egressos em todo o pais."
+      }
     ],
     "avanzaProjects": [
-      { "proyecto": "Fundacao EMPOWER - Subvencoes 1 a 4", "periodo": "Ago 2020-Jul 2025", "resultado": "400 beneficiarios, 15 profissionais psicossociais, 5 centros de protecao, 1 parque aquaponico." },
-      { "proyecto": "1. Subvencao Ampliacao", "periodo": "Abr-Nov 2025", "resultado": "Novos aliados. 56 adolescentes integrados, 2 centros, 2 saidas pedagogicas de alto impacto." },
-      { "proyecto": "2. Subvencao Ampliacao", "periodo": "Abr-Nov 2026", "resultado": "Sistematizacao da linha do tempo. 28 criancas/adolescentes em acompanhamento sustentado." },
-      { "proyecto": "Curso Virtual de Ingles (ACUMEN)", "periodo": "Jan-Abr 2020", "resultado": "Formacao em competencias de ingles para jovens sob tutela do Estado." },
-      { "proyecto": "Cultura de Paz e Habilidades Sociais", "periodo": "Set-Dez 2024", "resultado": "Adolescentes do sistema penal. Formacao em convivencia e resolucao pacifica de conflitos." }
+      {
+        "proyecto": "Fundacao EMPOWER - Subvencoes 1 a 4",
+        "periodo": "Ago 2020-Jul 2025",
+        "resultado": "400 beneficiarios, 15 profissionais psicossociais, 5 centros de protecao, 1 parque aquaponico."
+      },
+      {
+        "proyecto": "1. Subvencao Ampliacao",
+        "periodo": "Abr-Nov 2025",
+        "resultado": "Novos aliados. 56 adolescentes integrados, 2 centros, 2 saidas pedagogicas de alto impacto."
+      },
+      {
+        "proyecto": "2. Subvencao Ampliacao",
+        "periodo": "Abr-Nov 2026",
+        "resultado": "Sistematizacao da linha do tempo. 28 criancas/adolescentes em acompanhamento sustentado."
+      },
+      {
+        "proyecto": "Curso Virtual de Ingles (ACUMEN)",
+        "periodo": "Jan-Abr 2020",
+        "resultado": "Formacao em competencias de ingles para jovens sob tutela do Estado."
+      },
+      {
+        "proyecto": "Cultura de Paz e Habilidades Sociais",
+        "periodo": "Set-Dez 2024",
+        "resultado": "Adolescentes do sistema penal. Formacao em convivencia e resolucao pacifica de conflitos."
+      }
     ],
     "empleoProjects": [
-      { "titulo": "Alvaralice (Desde 2017)", "desc": "Premio Civico por uma Cidade Melhor." },
-      { "titulo": "LET - Lideranca, Empreendedorismo e Tecnologia (2018)", "desc": "25 jovens beneficiados diretamente." },
-      { "titulo": "LET Cobertura (2019-2022)", "desc": "70+ beneficiarios em oficinas de empregabilidade." }
+      {
+        "titulo": "Alvaralice (Desde 2017)",
+        "desc": "Premio Civico por uma Cidade Melhor."
+      },
+      {
+        "titulo": "LET - Lideranca, Empreendedorismo e Tecnologia (2018)",
+        "desc": "25 jovens beneficiados diretamente."
+      },
+      {
+        "titulo": "LET Cobertura (2019-2022)",
+        "desc": "70+ beneficiarios em oficinas de empregabilidade."
+      }
     ],
     "miCuerpoProjects": [
-      { "titulo": "La Puerta Abierta / I.V.E. (2019)", "desc": "100 pessoas diretas, 1.000 alcance nas redes." },
-      { "titulo": "Adolescencia: Uma Mudanca para Avancar (2022)", "desc": "Cartilhas pedagogicas editadas." },
-      { "titulo": "PUENTES - Familias no Plural (2023-2024)", "desc": "50 adolescentes, 1 caixa de ferramentas." }
+      {
+        "titulo": "La Puerta Abierta / I.V.E. (2019)",
+        "desc": "100 pessoas diretas, 1.000 alcance nas redes."
+      },
+      {
+        "titulo": "Adolescencia: Uma Mudanca para Avancar (2022)",
+        "desc": "Cartilhas pedagogicas editadas."
+      },
+      {
+        "titulo": "PUENTES - Familias no Plural (2023-2024)",
+        "desc": "50 adolescentes, 1 caixa de ferramentas."
+      }
     ],
     "casasProjects": [
-      { "titulo": "Ciudadanos Triple A (2024-2025)", "desc": "12 jovens piloto (75% mulheres), 40% emprego formal, 30% educacao." },
-      { "titulo": "Casas del Saber e Transformacao (2026)", "desc": "Expansao e consolidacao territorial em execucao." },
-      { "titulo": "Modelo pedagogico, habitacional e autossustentavel (2024-2026)", "desc": "Articula 5 areas de intervencao com 4 linhas de formacao tematica para jovens em saida do acolhimento e egressos." },
-      { "titulo": "Rota de Egresso Progressiva (2025-2026)", "desc": "Processo em tres fases (acolhida, formacao ativa e consolidacao) com acompanhamento apos o egresso." }
+      {
+        "titulo": "Ciudadanos Triple A (2024-2025)",
+        "desc": "12 jovens piloto (75% mulheres), 40% emprego formal, 30% educacao."
+      },
+      {
+        "titulo": "Casas del Saber e Transformacao (2026)",
+        "desc": "Expansao e consolidacao territorial em execucao."
+      },
+      {
+        "titulo": "Modelo pedagogico, habitacional e autossustentavel (2024-2026)",
+        "desc": "Articula 5 areas de intervencao com 4 linhas de formacao tematica para jovens em saida do acolhimento e egressos."
+      },
+      {
+        "titulo": "Rota de Egresso Progressiva (2025-2026)",
+        "desc": "Processo em tres fases (acolhida, formacao ativa e consolidacao) com acompanhamento apos o egresso."
+      }
     ]
   },
   "metadata": {

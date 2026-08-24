@@ -12,6 +12,7 @@ import { Users, HeartHandshake, Handshake, DollarSign, CheckCircle2 } from "luci
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
+import { homeVideos } from "@/data/homeVideos";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -43,44 +44,69 @@ export default async function ParticipaPage({
   const pageData = await getPageContent("participa");
   return (
     <div>
-      <DossierHero
-        images={[
-          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.participa.hero),
-          assetPath(fotos.participa.section),
-          assetPath(fotos.impacto.gallery[1]),
-        ]}
-        tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
-        title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
-        highlight={localize(pageData?.hero?.highlight, locale) || ""}
-        subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
-        accent="yellow"
-        primaryCta={{ label: t("sectionTag"), href: "#formas" }}
-      >
-        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
-          <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
-              <Users size={28} className="text-ley-yellow" />
-            </div>
-            <div>
-              <p className="text-xl font-extrabold">{t("sectionTitle")}</p>
-              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-yellow">
-                {t("sectionTag")}
-              </p>
-            </div>
-          </div>
-          <p className="mt-6 text-sm leading-relaxed text-purple-100">
-            {t("bannerDesc")}
-          </p>
-          <Link
-            href={`/${locale}/contacto`}
-            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
-          >
-            {t("ctaBtn")}
-          </Link>
+      {/* Hero — visual only */}
+      <div className="relative h-[50vh] overflow-hidden bg-ley-yellow sm:h-[65vh] md:h-[75vh] lg:h-[85vh]">
+        <div aria-hidden="true" className="absolute inset-0">
+          {homeVideos.pages.participa.hero ? (
+            <video
+              src={homeVideos.pages.participa.hero}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url("${assetPath(fotos.participa.hero)}")` }}
+            />
+          )}
         </div>
-      </DossierHero>
+        <div aria-hidden="true" className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,16,32,0.45) 0%, transparent 50%)" }} />
+      </div>
 
-      <section id="formas" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.participa.section)})` } as CSSProperties}>
+      {/* Hero text */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+        <DecoShapes variant="orange" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
+                <ImageParallax
+                  src={assetPath(fotos.participa.section)}
+                  alt={t("heroTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <span className="mb-3 inline-block rounded-full border border-brand-yellow/30 bg-brand-yellow/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-yellow">
+                {t("heroTag")}
+              </span>
+              <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
+                {t("heroTitle")} <span className="text-brand-yellow">{t("sectionTag")}</span>
+              </h1>
+              <p className="mt-6 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+                {t("heroSubtitle")}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#formas" className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-yellow px-7 py-3 text-sm font-bold text-[var(--color-text-primary)] transition-all hover:bg-brand-yellow/90 hover:shadow-lg">
+                  {t("sectionTag")}
+                </a>
+                <Link href={`/${locale}/contacto`} className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-brand-yellow/30 px-7 py-3 text-sm font-bold text-brand-yellow transition-all hover:border-brand-yellow/60 hover:bg-brand-yellow/5">
+                  {t("ctaBtn")}
+                </Link>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <section id="formas" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${assetPath(fotos.participa.section)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

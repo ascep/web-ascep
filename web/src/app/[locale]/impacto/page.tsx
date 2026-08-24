@@ -1,7 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import DossierHero from "@/components/DossierHero";
 import SectionHeader from "@/components/SectionHeader";
 import PageCTA from "@/components/PageCTA";
 import MapaAlcanceASCEP from "@/components/MapaAlcanceASCEP";
@@ -10,6 +9,7 @@ import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import AnimatedSection from "@/components/AnimatedSection";
+import WaveMask from "@/components/WaveMask";
 import CountUp from "@/components/CountUp";
 import ProgramCardGallery from "@/components/ProgramCardGallery";
 import {
@@ -19,6 +19,7 @@ import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getImpactStats, getGalleryAlbums } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
+import { homeVideos } from "@/data/homeVideos";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -33,10 +34,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 }
 
 const fallbackStats = [
-  { end: 71148, suffix: "", label: "NNA en PARD protegidos por el ICBF", icon: "Users" },
-  { end: 12576, suffix: "", label: "NNA en declaratoria de adoptabilidad", icon: "Calendar" },
-  { end: 3025, suffix: "", label: "NNA adoptados (2021-2024)", icon: "GraduationCap" },
-  { end: 13000, suffix: "+", label: "Jovenes egresados del sistema (2011-2024)", icon: "Layers" },
+  { end: 13000, suffix: "+", label: "Jovenes egresados del sistema (2011-2024)", icon: "GraduationCap" },
   { end: 2017, suffix: "", label: "Constitucion formal de ASCEP", icon: "Calendar" },
   { end: 5, suffix: "+", label: "Programas activos", icon: "Target" },
   { end: 28, suffix: "", label: "Rango de edad de atencion", icon: "Users" },
@@ -90,66 +88,89 @@ export default async function ImpactoPage({
 
   return (
     <div>
-      <DossierHero
-        images={[
-          assetPath(fotos.impacto.hero),
-          assetPath(fotos.impacto.gallery[1]),
-          assetPath(fotos.impacto.gallery[2]),
-        ]}
-        tag={t("heroTag")}
-        title={t("heroTitle")}
-        highlight={t("heroTitle").split(" ").slice(1).join(" ")}
-        subtitle={t("heroSubtitle")}
-        accent="orange"
-        primaryCta={{ label: t("statsTitle"), href: "#cifras" }}
-        secondaryCta={{ label: t("ctaTitle"), href: `/${locale}/donar` }}
+      {/* Hero — visual only */}
+      <div
+        className="relative h-[50vh] overflow-hidden bg-ley-purple sm:h-[65vh] md:h-[75vh] lg:h-[85vh]"
       >
-        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
-          <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
-              <Target size={28} className="text-ley-orange" />
-            </div>
-            <div>
-              <p className="text-xl font-extrabold">{t("heroTag")}</p>
-              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-orange">
-                {t("statsTag")}
-              </p>
-            </div>
-          </div>
-          <div className="mt-6 divide-y divide-white/10">
-            {impactStats.slice(0, 3).map((stat) => {
-              const Icon = iconMap[stat.icon] || Users;
-              return (
-                <div key={stat.label} className="flex items-center gap-4 py-4 first:pt-0 last:pb-0">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-ley-orange/10">
-                    <Icon size={20} className="text-ley-orange" />
-                  </div>
-                  <div className="min-w-0">
-                    <p className="text-2xl font-extrabold text-white">
-                      <CountUp
-                        end={parseInt(stat.end.toString().replace(/[^0-9]/g, ""))}
-                        suffix={stat.suffix}
-                      />
-                    </p>
-                    <p className="truncate text-xs text-purple-100">{stat.label}</p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-          <Link
-            href="#cifras"
-            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
-          >
-            {t("statsTitle")}
-          </Link>
+        <div aria-hidden="true" className="absolute inset-0">
+          {homeVideos.pages.impacto.hero ? (
+            <video
+              src={homeVideos.pages.impacto.hero}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url("${assetPath(fotos.impacto.hero)}")` }}
+            />
+          )}
         </div>
-      </DossierHero>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(10,16,32,0.45) 0%, transparent 50%)",
+          }}
+        />
+      </div>
+
+      {/* Hero text — below visual */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+        <WaveMask fill="#4A154B" flip />
+        <DecoShapes variant="orange" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left" delay={0.1}>
+              <div className="overflow-hidden rounded-3xl shadow-lg">
+                <ImageParallax
+                  src={galeriaImages[0]}
+                  alt=""
+                  width={600}
+                  height={450}
+                  className="w-full object-cover"
+                  intensity={0.15}
+                  style={{ aspectRatio: "4/3" }}
+                />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+            <span className="mb-3 inline-block rounded-full border border-brand-accent/30 bg-brand-accent/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+              {t("heroTag")}
+            </span>
+            <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
+              {t("heroTitle")}
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+              {t("heroSubtitle")}
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href="#cifras"
+                className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-accent px-7 py-3 text-sm font-bold text-white transition-all hover:bg-brand-accent/90 hover:shadow-lg"
+              >
+                {t("statsTitle")}
+              </a>
+              <Link
+                href={`/${locale}/donar`}
+                className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-brand-accent/30 px-7 py-3 text-sm font-bold text-brand-accent transition-all hover:border-brand-accent/60 hover:bg-brand-accent/5"
+              >
+                {t("ctaTitle")}
+              </Link>
+            </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
 
       <ParallaxSection
         bgImage={assetPath(fotos.impacto.contextParallax)}
         overlay="bg-black/70"
-        className="py-20 sm:py-24"
+        className="py-24 sm:py-32"
       >
         <SectionHeader
           tag={t("contextTag")}
@@ -157,13 +178,13 @@ export default async function ImpactoPage({
           accent="orange"
           dark
         />
-        <div className="grid items-center gap-10 lg:grid-cols-5">
-          <div className="space-y-4 lg:col-span-3">
-            <AnimatedSection direction="up"><p className="text-base leading-relaxed text-white/80">{t("contextP1")}</p></AnimatedSection>
-            <AnimatedSection direction="up" delay={0.08}><p className="text-base leading-relaxed text-white/80">{t("contextP2")}</p></AnimatedSection>
-            <AnimatedSection direction="up" delay={0.15}><p className="text-base font-semibold leading-relaxed text-white">{t("contextP3")}</p></AnimatedSection>
-          </div>
-          <AnimatedSection direction="right" delay={0.2} className="lg:col-span-2">
+        <div className="mt-12 grid items-center gap-12 lg:grid-cols-2">
+          <AnimatedSection direction="left" className="space-y-4">
+            <p className="text-base leading-relaxed text-white/80">{t("contextP1")}</p>
+            <p className="text-base leading-relaxed text-white/80">{t("contextP2")}</p>
+            <p className="text-base font-semibold leading-relaxed text-white">{t("contextP3")}</p>
+          </AnimatedSection>
+          <AnimatedSection direction="right">
             <ImageParallax
               src={assetPath(fotos.impacto.contextImage)}
               alt=""
@@ -177,12 +198,13 @@ export default async function ImpactoPage({
         </div>
       </ParallaxSection>
 
-      <section id="cifras" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24">
+      <section id="cifras" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32">
+        <WaveMask fill="#FFFFFF" flip />
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader tag={t("statsTag")} title={t("statsTitle")} accent="orange" dark />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {impactStats.map((stat, i) => {
               const Icon = iconMap[stat.icon] || Users;
               const accent = statAccents[i % statAccents.length];
@@ -210,6 +232,7 @@ export default async function ImpactoPage({
       </section>
 
       <section className="relative overflow-hidden bg-section-light">
+        <WaveMask fill="#800080" flip />
         <DecoShapes variant="teal" />
         <ProgramCardGallery
           locale={locale}
@@ -220,7 +243,8 @@ export default async function ImpactoPage({
         />
       </section>
 
-      <section className="relative overflow-hidden bg-ley-purple py-20 sm:py-24">
+      <section className="relative overflow-hidden bg-ley-purple py-24 sm:py-32">
+        <WaveMask fill="#FFFFFF" flip />
         <div aria-hidden="true" className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-ley-cyan/10" />
         <div aria-hidden="true" className="pointer-events-none absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-ley-orange/10" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -230,33 +254,50 @@ export default async function ImpactoPage({
             highlight={t("resultadosHighlight")}
             accent="orange"
             dark
+            align="left"
           />
-          <div className="grid gap-6 sm:grid-cols-2">
-            {[1, 2, 3, 4].map((i) => {
-              const Icon = resultadoIcons[i - 1];
-              return (
-                <AnimatedSection key={i} direction="up" delay={i * 0.08}>
-                  <div className="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 transition-all hover:-translate-y-1 hover:bg-white/10">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ley-orange/10">
-                      <Icon size={22} className="text-ley-orange" />
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
+              {[1, 2, 3, 4].map((i) => {
+                const Icon = resultadoIcons[i - 1];
+                return (
+                  <AnimatedSection key={i} direction="up" delay={i * 0.08}>
+                    <div className="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 transition-all hover:-translate-y-1 hover:bg-white/10">
+                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ley-orange/10">
+                        <Icon size={22} className="text-ley-orange" />
+                      </div>
+                      <div>
+                        <p className="text-sm leading-relaxed text-purple-100">
+                          {t(`resultado${i}`)}
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm leading-relaxed text-purple-100">
-                        {t(`resultado${i}`)}
-                      </p>
-                    </div>
-                  </div>
-                </AnimatedSection>
-              );
-            })}
+                  </AnimatedSection>
+                );
+              })}
+            </div>
+            <AnimatedSection direction="right" delay={0.15}>
+              <div className="overflow-hidden rounded-3xl shadow-xl">
+                <ImageParallax
+                  src={galeriaImages[1] || galeriaImages[0]}
+                  alt={t("resultadosTitle")}
+                  width={700}
+                  height={560}
+                  className="w-full object-cover"
+                  intensity={0.15}
+                  style={{ aspectRatio: "5/4" }}
+                />
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+        <WaveMask fill="#4A154B" flip />
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
               <SectionHeader
                 tag={t("presenciaTag")}
@@ -267,7 +308,7 @@ export default async function ImpactoPage({
                 accent="orange"
               />
               <AnimatedSection direction="left" delay={0.1}>
-                <div className="mt-6 flex flex-wrap gap-3">
+                <div className="mt-12 flex flex-wrap gap-3">
                   <Link
                     href={`/${locale}/participa`}
                     className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-ley-orange px-6 py-3 text-sm font-bold text-white transition-all hover:bg-ley-orange/90 hover:shadow-lg"
@@ -287,9 +328,10 @@ export default async function ImpactoPage({
       </section>
 
       <section
-        className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24"
+        className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32"
         style={{ "--section-bg-image": `url(${assetPath(fotos.impacto.gallery[0])})` } as CSSProperties}
       >
+        <WaveMask fill="#FFFFFF" flip />
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -300,7 +342,7 @@ export default async function ImpactoPage({
             accent="orange"
             dark
           />
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {galeriaImages.slice(0, 8).map((src, i) => (
               <AnimatedSection key={i} direction="up" delay={i * 0.06}>
                 <div className="group relative overflow-hidden rounded-3xl">

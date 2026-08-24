@@ -1,15 +1,17 @@
 import type { CSSProperties } from "react";
 import { getTranslations } from "next-intl/server";
-import DossierHero from "@/components/DossierHero";
 import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
+import ImageParallax from "@/components/ImageParallax";
 import ProgramVideosSection from "@/components/ProgramVideosSection";
 import { Scale, Landmark, ShieldCheck, HeartHandshake, Search, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getProgramBySlug, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
+import YoutubeHeroBg from "@/components/YoutubeHeroBg";
+import { homeVideos } from "@/data/homeVideos";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -101,64 +103,116 @@ export default async function MarcoPoliticoPage({
     : fallbackIncidencia;
 
   const heroImage = sanityImage(cms?.heroImage) || assetPath(fotos.programas.marcoPolitico.hero);
+  const leyGallery = fotos.leyEgreso.gallery.map((src) => assetPath(src));
 
   return (
     <>
-      <DossierHero
-        images={[heroImage, assetPath(fotos.impacto.gallery[1]), assetPath(fotos.impacto.gallery[2])]}
-        tag="Marco Politico"
-        title="Marco"
-        highlight="Politico"
-        subtitle="Conoce el marco legal y normativo que respalda nuestra labor."
-        accent="teal"
-      >
-        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
-          <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
-              <Scale size={28} className="text-ley-teal" />
-            </div>
-            <div>
-              <p className="text-xl font-extrabold">ASCEP</p>
-              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-teal">
-                Marco Politico
-              </p>
-            </div>
-          </div>
-          <p className="mt-6 text-sm leading-relaxed text-purple-100">
-            Fundamentos conceptuales, normativos y estrategicos que guian nuestra accion institucional.
-          </p>
-          <a
-            href="#pilares"
-            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
-          >
-            Pilares normativos
-          </a>
-        </div>
-      </DossierHero>
+      {/* Hero — visual only */}
+      <div className="relative h-[50vh] overflow-hidden bg-ley-purple sm:h-[65vh] md:h-[75vh] lg:h-[85vh]">
+        <YoutubeHeroBg
+          videoUrl={homeVideos.programas["marco-politico"].hero || ""}
+          fallbackImage={heroImage}
+        />
+      </div>
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      {/* 2. Intro — imagen izquierda + texto derecha */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            tag="Introduccion"
-            title="Marco"
-            highlight="Politico de ASCEP"
-            accent="teal"
-          />
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-4xl space-y-6 text-base text-text-secondary">
-              <p>
-                El Marco Politico de ASCEP define los fundamentos conceptuales, normativos y estrategicos que guian nuestra accion institucional. Como organizacion liderada por egresados del sistema de proteccion estatal, nuestra incidencia se sustenta en un profundo conocimiento de las necesidades y desafios que enfrentan los jovenes en su transicion a la vida independiente.
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Izquierda — imagen */}
+            <AnimatedSection direction="left">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={heroImage}
+                  alt="Marco Politico"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-bold text-ley-purple backdrop-blur-sm">
+                  <Scale size={16} className="text-brand-teal" />
+                  Programa
+                </div>
+              </div>
+            </AnimatedSection>
+
+            {/* Derecha — texto */}
+            <AnimatedSection direction="right">
+              <span className="mb-3 inline-block rounded-full border border-brand-teal/30 bg-brand-teal/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-teal">
+                Marco Politico
+              </span>
+              <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
+                Marco <span className="text-brand-teal">Politico</span>
+              </h1>
+              <p className="mt-6 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+                Conoce el marco legal y normativo que respalda nuestra labor.
               </p>
-              <p>
-                Nuestro trabajo se enmarca en la Constitucion Politica de Colombia, los tratados internacionales de derechos humanos ratificados por el Estado colombiano, y el Codigo de Infancia y Adolescencia. A partir de este marco juridico, impulsamos transformaciones estructurales que garanticen el bienestar y la autonomia de las nuevas generaciones.
-              </p>
-            </div>
-          </AnimatedSection>
+              <div className="mt-6 flex items-center gap-4">
+                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-brand-teal/10">
+                  <Scale size={26} className="text-brand-teal" />
+                </div>
+                <div>
+                  <p className="font-extrabold text-[var(--color-text-primary)]">ASCEP</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-teal">Marco Politico</p>
+                </div>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a
+                  href="#pilares"
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-teal px-7 py-3 text-sm font-bold text-white transition-all hover:bg-[#004e4e] hover:shadow-lg"
+                >
+                  Pilares normativos
+                </a>
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
-      <section id="pilares" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
+      {/* 3. Que es — texto izquierda + imagen derecha */}
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Izquierda — texto */}
+            <AnimatedSection direction="left">
+              <span className="mb-3 inline-block rounded-full border border-brand-teal/30 bg-brand-teal/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-teal">
+                Introduccion
+              </span>
+              <h2 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
+                Marco <span className="text-brand-teal">Politico de ASCEP</span>
+              </h2>
+              <div className="mt-6 space-y-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
+                <p>
+                  El Marco Politico de ASCEP define los fundamentos conceptuales, normativos y estrategicos que guian nuestra accion institucional. Como organizacion liderada por egresados del sistema de proteccion estatal, nuestra incidencia se sustenta en un profundo conocimiento de las necesidades y desafios que enfrentan los jovenes en su transicion a la vida independiente.
+                </p>
+                <p>
+                  Nuestro trabajo se enmarca en la Constitucion Politica de Colombia, los tratados internacionales de derechos humanos ratificados por el Estado colombiano, y el Codigo de Infancia y Adolescencia. A partir de este marco juridico, impulsamos transformaciones estructurales que garanticen el bienestar y la autonomia de las nuevas generaciones.
+                </p>
+              </div>
+            </AnimatedSection>
+
+            {/* Derecha — imagen */}
+            <AnimatedSection direction="right">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={heroImage}
+                  alt="Marco Politico de ASCEP"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <section id="pilares" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${leyGallery[0] || heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -169,7 +223,7 @@ export default async function MarcoPoliticoPage({
             accent="white"
             dark
           />
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2">
             {pilares.map((pilar, i) => {
               const Icon = pilar.icon;
               return (
@@ -190,7 +244,7 @@ export default async function MarcoPoliticoPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
@@ -199,7 +253,7 @@ export default async function MarcoPoliticoPage({
             highlight="Transversales"
             accent="teal"
           />
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2">
             {enfoques.map((enf, i) => {
               const Icon = enf.icon;
               return (
@@ -220,7 +274,7 @@ export default async function MarcoPoliticoPage({
         </div>
       </section>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${leyGallery[2] || heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -231,7 +285,7 @@ export default async function MarcoPoliticoPage({
             accent="white"
             dark
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {incidencia.map((item, i) => {
               const Icon = incidenciaIcon(i);
               return (

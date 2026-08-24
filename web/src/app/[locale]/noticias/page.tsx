@@ -1,17 +1,16 @@
 import { getTranslations } from "next-intl/server";
 import type { CSSProperties } from "react";
-import Link from "next/link";
 import DossierHero from "@/components/DossierHero";
-import SectionHeader from "@/components/SectionHeader";
+import AnimatedSection from "@/components/AnimatedSection";
 import PageCTA from "@/components/PageCTA";
 import DecoShapes from "@/components/DecoShapes";
-import CursorGlow from "@/components/CursorGlow";
 import NoticiasFilterGrid, { type NoticiaCard } from "@/components/NoticiasFilterGrid";
 import { Newspaper } from "lucide-react";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
 import { getNoticias, type NoticiaEntry } from "@/lib/sanity/fetch";
 import { imageUrl } from "@/lib/sanity/image";
+import { homeVideos } from "@/data/homeVideos";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -105,47 +104,48 @@ export default async function NoticiasPage({
 
   return (
     <div>
-      <DossierHero
-        images={[
-          assetPath(fotos.noticias.hero),
-          assetPath(fotos.impacto.gallery[1]),
-          assetPath(fotos.impacto.gallery[2]),
-        ]}
-        tag="Actualidad"
-        title={t("title")}
-        highlight={t("heroHighlight")}
-        subtitle={t("subtitle")}
-        accent="yellow"
+      {/* Hero — visual only */}
+      <div
+        className="relative h-[50vh] overflow-hidden bg-ley-purple sm:h-[65vh] md:h-[75vh] lg:h-[85vh]"
       >
-        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
-          <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
-              <Newspaper size={28} className="text-ley-yellow" />
-            </div>
-            <div>
-              <p className="text-xl font-extrabold">{t("title")}</p>
-              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-yellow">
-                {t("sliderLabel")}
-              </p>
-            </div>
-          </div>
-          <p className="mt-6 text-sm leading-relaxed text-purple-100">
-            {t("proximamenteDesc")}
-          </p>
-          <Link
-            href="#categorias"
-            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
-          >
-            {t("categorias")}
-          </Link>
+        <div aria-hidden="true" className="absolute inset-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url("${assetPath(fotos.noticias.hero)}")` }}
+          />
         </div>
-      </DossierHero>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(10,16,32,0.45) 0%, transparent 50%)",
+          }}
+        />
+      </div>
 
-      <section id="categorias" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.noticias.hero)})` } as CSSProperties}>
-        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
-        <DecoShapes variant="mixed" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader tag={t("categorias")} title={t("title")} accent="yellow" dark />
+      {/* Hero text */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+        <DecoShapes variant="orange" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mx-auto max-w-3xl text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-accent/30 bg-brand-accent/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+              {t("categorias")}
+            </span>
+            <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
+              {t("title")} <span className="text-brand-accent">{t("heroHighlight")}</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+              {t("subtitle")}
+            </p>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Cards grid */}
+      <section id="categorias" className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <NoticiasFilterGrid locale={locale} categories={categoryOptions} cards={cards} />
         </div>
       </section>

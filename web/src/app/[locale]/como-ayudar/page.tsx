@@ -1,16 +1,15 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
-import DossierHero from "@/components/DossierHero";
-import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
+import SectionHeader from "@/components/SectionHeader";
 import PageCTA from "@/components/PageCTA";
 import { Heart, Users, Briefcase, ArrowRight } from "lucide-react";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path"
 import { getFotos } from "@/lib/get-fotos";
-import { getPageContent, localize, sanityImage } from "@/lib/sanity/fetch";
+import { homeVideos } from "@/data/homeVideos";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -32,7 +31,6 @@ export default async function ComoAyudarPage({
   const fotos = await getFotos();
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "comoAyudar" });
-  const pageData = await getPageContent("como-ayudar");
 
   const ways = [
     {
@@ -66,11 +64,11 @@ export default async function ComoAyudarPage({
 
   const levels = [
     {
-      name: "Amigo ASCEP",
-      plan: "Donacion mensual",
-      price: "$30.000",
-      desc: "Ayudas a cubrir materiales educativos y transporte para talleres de formacion de un joven.",
-      cta: "Quiero ser Amigo",
+      name: t("level1Name"),
+      plan: t("level1Plan"),
+      price: t("level1Price"),
+      desc: t("level1Desc"),
+      cta: t("level1Cta"),
       href: `/${locale}/donar`,
       iconBg: "bg-ley-teal/10",
       iconColor: "text-ley-teal",
@@ -79,11 +77,11 @@ export default async function ComoAyudarPage({
       icon: Heart,
     },
     {
-      name: "Padrino ASCEP",
-      plan: "Donacion mensual",
-      price: "$70.000",
-      desc: "Financias el acompanamiento psicosocial mensual de un joven en transicion a la vida independiente.",
-      cta: "Quiero ser Padrino",
+      name: t("level2Name"),
+      plan: t("level2Plan"),
+      price: t("level2Price"),
+      desc: t("level2Desc"),
+      cta: t("level2Cta"),
       href: `/${locale}/como-ayudar/plan-padrino`,
       iconBg: "bg-ley-orange/10",
       iconColor: "text-ley-orange",
@@ -93,11 +91,11 @@ export default async function ComoAyudarPage({
       icon: Users,
     },
     {
-      name: "Empresa Aliada",
-      plan: "Alianza corporativa",
-      price: "Desde $500.000",
-      desc: "Tu empresa puede apadrinar programas completos, ofrecer practicas laborales o realizar donaciones corporativas.",
-      cta: "Quiero ser Aliado",
+      name: t("level3Name"),
+      plan: t("level3Plan"),
+      price: t("level3Price"),
+      desc: t("level3Desc"),
+      cta: t("level3Cta"),
       href: `/${locale}/contacto`,
       iconBg: "bg-ley-cyan/10",
       iconColor: "text-ley-cyan",
@@ -109,42 +107,68 @@ export default async function ComoAyudarPage({
 
   return (
     <div>
-      <DossierHero
-        images={[
-          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.home.retosImage),
-          assetPath(fotos.home.aboutImage),
-          assetPath(fotos.home.gallery[0].src),
-        ]}
-        tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
-        title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
-        highlight={localize(pageData?.hero?.highlight, locale) || ""}
-        subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
-        accent="orange"
-        primaryCta={{ label: t("donacionMonetaria"), href: `/${locale}/donar` }}
+      {/* Hero — visual only */}
+      <div
+        className="relative h-[50vh] overflow-hidden bg-ley-purple sm:h-[65vh] md:h-[75vh] lg:h-[85vh]"
       >
-        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
-          <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
-              <Heart size={28} className="text-ley-orange" />
-            </div>
-            <div>
-              <p className="text-xl font-extrabold">{t("heroTitle")}</p>
-              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-orange">
-                {t("impactTag")}
-              </p>
-            </div>
-          </div>
-          <p className="mt-6 text-sm leading-relaxed text-purple-100">
-            {t("impactDesc")}
-          </p>
-          <Link
-            href={`/${locale}/contacto`}
-            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
-          >
-            {t("ctaBtn")}
-          </Link>
+        <div aria-hidden="true" className="absolute inset-0">
+          {homeVideos.pages.comoAyudar.hero ? (
+            <video
+              src={homeVideos.pages.comoAyudar.hero}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url("${assetPath(fotos.comoLoHacemos.hero)}")` }}
+            />
+          )}
         </div>
-      </DossierHero>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(10,16,32,0.45) 0%, transparent 50%)",
+          }}
+        />
+      </div>
+
+      {/* Hero text */}
+      <section className="relative overflow-hidden bg-surface py-16 sm:py-20">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mx-auto max-w-3xl text-center">
+            <span className="mb-3 inline-block rounded-full border border-brand-accent/30 bg-brand-accent/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+              {t("heroTag")}
+            </span>
+            <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
+              {t("heroTitle")} <span className="text-brand-accent">{t("heroHighlight")}</span>
+            </h1>
+            <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+              {t("heroSubtitle")}
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Link
+                href={`/${locale}/donar`}
+                className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-accent px-7 py-3 text-sm font-bold text-white transition-all hover:bg-brand-accent/90 hover:shadow-lg"
+              >
+                {t("donacionMonetaria")}
+              </Link>
+              <Link
+                href="#formas"
+                className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-brand-accent/30 px-7 py-3 text-sm font-bold text-brand-accent transition-all hover:border-brand-accent/60 hover:bg-brand-accent/5"
+              >
+                {t("levelsTitle")}
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
 
       <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.hero)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
@@ -204,9 +228,9 @@ export default async function ComoAyudarPage({
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            tag="NIVELES DE APOYO"
-            title="Elige tu nivel de compromiso"
-            desc="Cada nivel de apoyo tiene un impacto directo en la vida de los jovenes que acompanamos."
+            tag={t("levelsTag")}
+            title={t("levelsTitle")}
+            desc={t("levelsDesc")}
             accent="orange"
           />
           <div className="grid gap-6 sm:grid-cols-3">
@@ -217,7 +241,7 @@ export default async function ComoAyudarPage({
                   <div className={`flex h-full flex-col rounded-3xl border bg-white p-6 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md ${level.recommended ? "border-2 border-ley-orange/40" : "border-border-default"}`}>
                     {level.recommended ? (
                       <span className="mb-2 inline-block self-center rounded-full bg-ley-orange/10 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-ley-orange">
-                        Recomendado
+                        {t("recommended")}
                       </span>
                     ) : (
                       <span className="mb-2 inline-block h-6" />

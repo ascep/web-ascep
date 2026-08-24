@@ -4,6 +4,7 @@ export type ProgramaPorQue = {
   description: string;
   path: string;
   image: string;
+  youtubeId?: string;
   accent: "cyan" | "orange" | "yellow" | "teal" | "purple";
 };
 

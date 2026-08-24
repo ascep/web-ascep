@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import {
@@ -9,7 +8,6 @@ import {
   Check,
   ChevronRight,
   Clock,
-  Download,
   FileText,
   Gavel,
   Handshake,
@@ -26,6 +24,7 @@ import {
 import PostShare from "@/components/PostShare";
 import BackgroundVideo from "@/components/BackgroundVideo";
 import MapaAlcanceASCEP from "@/components/MapaAlcanceASCEP";
+import LeyGallery from "@/components/LeyGallery";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 
@@ -399,36 +398,11 @@ export default async function LeyPostPage({
               </div>
 
               {/* Galeria */}
-              <div id="galeria" className="mt-12 scroll-mt-28">
-                <h2 className="mb-2 text-2xl font-extrabold text-ley-purple sm:text-[1.75rem]">
-                  {le("galeriaTag")}
-                </h2>
-                <p className="mb-6 text-[1.05rem] leading-[1.8] text-text-secondary">
-                  {le("galeriaDesc")}
-                </p>
-                <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-                  {fotos.leyEgreso.gallery.map((src, i) => (
-                    <a
-                      key={src}
-                      href={assetPath(src)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group relative block overflow-hidden rounded-xl"
-                      aria-label={`${le("galeriaTag")} ${i + 1}`}
-                    >
-                      <div className="relative aspect-[4/3] w-full">
-                        <Image
-                          src={assetPath(src)}
-                          alt={`${le("galeriaTag")} ${i + 1}`}
-                          fill
-                          sizes="(min-width: 1024px) 25vw, (min-width: 640px) 33vw, 50vw"
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        />
-                      </div>
-                    </a>
-                  ))}
-                </div>
-              </div>
+              <LeyGallery
+                images={fotos.leyEgreso.gallery}
+                tag={le("galeriaTag")}
+                description={le("galeriaDesc")}
+              />
 
               {/* Cover banner */}
               <div className="mt-12 overflow-hidden rounded-2xl bg-ley-purple text-white shadow-md">
@@ -443,55 +417,6 @@ export default async function LeyPostPage({
                     <h3 className="text-xl font-bold leading-snug sm:text-2xl">{t("coverTitle")}</h3>
                     <p className="text-xs leading-relaxed text-purple-100 sm:text-sm">{t("coverDesc")}</p>
                   </div>
-                </div>
-              </div>
-
-              {/* Recurso oficial */}
-              <div className="mt-6 rounded-2xl bg-ley-purple p-6 text-white shadow-sm sm:p-7">
-                <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-ley-orange px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white">
-                  <Download size={12} />
-                  {t("recursoTag")}
-                </span>
-                <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="min-w-0">
-                    <h3 className="text-lg font-bold leading-snug sm:text-xl">{t("recursoTitle")}</h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-purple-100 sm:text-sm">{t("recursoDesc")}</p>
-                    <p className="mt-3 text-[11px] font-semibold uppercase tracking-wide text-ley-yellow">
-                      {t("recursoChips")}
-                    </p>
-                  </div>
-                  <a
-                    href={assetPath("/documents/KIT%20DE%20COMUNICACION%20LEY%20DE%20EGRESO%202026.pptx.pdf")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-bold text-ley-purple transition-colors hover:bg-ley-yellow"
-                  >
-                    <Download size={16} />
-                    {t("recursoBtn")}
-                  </a>
-                </div>
-              </div>
-
-              {/* Rally visual manual */}
-              <div className="mt-4 rounded-2xl bg-ley-purple p-6 text-white shadow-sm sm:p-7">
-                <span className="mb-3 inline-flex items-center gap-2 rounded-full bg-ley-yellow px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-ley-purple">
-                  <Download size={12} />
-                  {t("rallyTag")}
-                </span>
-                <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="min-w-0">
-                    <h3 className="text-lg font-bold leading-snug sm:text-xl">{t("rallyTitle")}</h3>
-                    <p className="mt-1.5 text-xs leading-relaxed text-purple-100 sm:text-sm">{t("rallyDesc")}</p>
-                  </div>
-                  <a
-                    href={assetPath("/documents/Manual-visual-Rally-Ley-2479.pdf")}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-colors hover:bg-white"
-                  >
-                    <Download size={16} />
-                    {t("rallyBtn")}
-                  </a>
                 </div>
               </div>
 

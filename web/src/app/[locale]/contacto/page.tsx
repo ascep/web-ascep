@@ -44,44 +44,55 @@ export default async function ContactoPage({
   const pageData = await getPageContent("contacto");
   return (
     <div>
-      <DossierHero
-        images={[
-          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.contacto.hero),
-          assetPath(fotos.contacto.section),
-          assetPath(fotos.quienesSomos.hero),
-        ]}
-        tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
-        title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
-        highlight={localize(pageData?.hero?.highlight, locale) || ""}
-        subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
-        accent="cyan"
-        primaryCta={{ label: t("formTag"), href: "#form" }}
-      >
-        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
-          <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
-              <MapPin size={28} className="text-ley-cyan" />
-            </div>
-            <div>
-              <p className="text-xl font-extrabold">{t("formTitle")}</p>
-              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-cyan">
-                {t("ubicacionTitle")}
-              </p>
-            </div>
-          </div>
-          <p className="mt-6 text-sm leading-relaxed text-purple-100">
-            {t("ubicacionValue")}
-          </p>
-          <Link
-            href={`mailto:${t("emailValue")}`}
-            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
-          >
-            {t("emailValue")}
-          </Link>
+      {/* Hero — visual only */}
+      <div className="relative h-[50vh] overflow-hidden bg-ley-cyan sm:h-[65vh] md:h-[75vh] lg:h-[85vh]">
+        <div aria-hidden="true" className="absolute inset-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url("${assetPath(fotos.contacto.hero)}")` }}
+          />
         </div>
-      </DossierHero>
+        <div aria-hidden="true" className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(10,16,32,0.45) 0%, transparent 50%)" }} />
+      </div>
 
-      <section id="form" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.contacto.section)})` } as CSSProperties}>
+      {/* Hero text */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
+                <ImageParallax
+                  src={assetPath(fotos.contacto.section)}
+                  alt={t("heroTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <span className="mb-3 inline-block rounded-full border border-brand-primary/30 bg-brand-primary/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary">
+                {t("heroTag")}
+              </span>
+              <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
+                {t("heroTitle")} <span className="text-brand-primary">{t("formTag")}</span>
+              </h1>
+              <p className="mt-6 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+                {t("heroSubtitle")}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#form" className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-primary px-7 py-3 text-sm font-bold text-white transition-all hover:bg-brand-primary-dark hover:shadow-lg">
+                  {t("formTag")}
+                </a>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <section id="form" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${assetPath(fotos.contacto.section)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -166,7 +177,7 @@ export default async function ContactoPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
@@ -175,19 +186,35 @@ export default async function ContactoPage({
             highlight="Encontrarnos"
             desc={t("ubicacionValue")}
             accent="cyan"
+            align="left"
           />
-          <AnimatedSection direction="up">
-            <div className="relative h-[400px] overflow-hidden rounded-3xl border border-border-default shadow-sm">
-              <iframe
-                title="Ubicacion ASCEP"
-                src="https://www.google.com/maps?q=Cali,Colombia&output=embed"
-                className="absolute inset-0 h-full w-full border-0"
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
-          </AnimatedSection>
+          <div className="grid gap-6 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <div className="relative h-[400px] overflow-hidden rounded-3xl shadow-lg">
+                <ImageParallax
+                  src={assetPath(fotos.contacto.hero)}
+                  alt={t("ubicacionValue")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <div className="relative h-[400px] overflow-hidden rounded-3xl border border-border-default shadow-sm">
+                <iframe
+                  title="Ubicacion ASCEP"
+                  src="https://www.google.com/maps?q=Cali,Colombia&output=embed"
+                  className="absolute inset-0 h-full w-full border-0"
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
+              </div>
+            </AnimatedSection>
+          </div>
+          {/* TODO: agregar fotografia real de la oficina/sede de ASCEP en Cali cuando este disponible */}
         </div>
       </section>
     </div>

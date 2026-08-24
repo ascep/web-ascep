@@ -1,44 +1,33 @@
 import type { CSSProperties } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import TimelineRoute, { type RouteItem } from "@/components/TimelineRoute";
-import DossierHero from "@/components/DossierHero";
 import StatsRings, { type RingStat } from "@/components/StatsRings";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
 import CursorGlow from "@/components/CursorGlow";
 import ImageParallax from "@/components/ImageParallax";
 import TeamFan from "@/components/TeamFan";
+import VideoFacade from "@/components/VideoFacade";
+import YoutubeHeroBg from "@/components/YoutubeHeroBg";
+import WaveMask from "@/components/WaveMask";
 import { getTranslations } from "next-intl/server";
 import {
   Target,
   Eye,
   Heart,
-  Link2,
-  Wrench,
-  Rocket,
-  Handshake,
-  ShieldCheck,
-  Scale,
-  Compass,
-  Gavel,
   Users,
+  Scale,
+  ShieldCheck,
+  Compass,
+  Handshake,
   SearchCheck,
-  Sparkles,
-  Home,
-  Sprout,
-  GraduationCap,
-  HeartPulse,
-  Briefcase,
-  Megaphone,
-  RefreshCw,
 } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import LogoLoop from "@/components/LogoLoop";
 import { imageUrl } from "@/lib/sanity/image";
 import { getTeamMembers } from "@/lib/sanity/fetch";
 import { buildTrayectoria } from "@/data/trayectoria";
+import { homeVideos } from "@/data/homeVideos";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -68,53 +57,14 @@ const objetivosEstrategicos = [
   {
     titleKey: "oe3Title",
     descKey: "oe3Desc",
-    icon: Wrench,
+    icon: SearchCheck,
     tileClass: "bg-brand-yellow/15 text-brand-yellow",
   },
   {
     titleKey: "oe4Title",
     descKey: "oe4Desc",
-    icon: SearchCheck,
+    icon: ShieldCheck,
     tileClass: "bg-white/15 text-white",
-  },
-];
-
-const dimensionKeys = [
-  { titleKey: "dimensionTitle1", descKey: "dimensionDesc1", icon: Sparkles, color: "text-brand-primary border-brand-primary/30" },
-  { titleKey: "dimensionTitle2", descKey: "dimensionDesc2", icon: Users, color: "text-brand-teal border-brand-teal/30" },
-  { titleKey: "dimensionTitle3", descKey: "dimensionDesc3", icon: Home, color: "text-brand-orange border-brand-orange/30" },
-  { titleKey: "dimensionTitle4", descKey: "dimensionDesc4", icon: Compass, color: "text-brand-primary-dark border-brand-primary-dark/30" },
-  { titleKey: "dimensionTitle5", descKey: "dimensionDesc5", icon: Target, color: "text-brand-accent-dark border-brand-accent-dark/30" },
-  { titleKey: "dimensionTitle6", descKey: "dimensionDesc6", icon: Sprout, color: "text-brand-teal-dark border-brand-teal-dark/30" },
-];
-
-const areas = [
-  { titleKey: "areaATitle", descKey: "areaADesc", icon: Heart, tileClass: "bg-brand-orange/15 text-brand-orange" },
-  { titleKey: "areaBTitle", descKey: "areaBDesc", icon: GraduationCap, tileClass: "bg-brand-teal/15 text-brand-teal" },
-  { titleKey: "areaCTitle", descKey: "areaCDesc", icon: HeartPulse, tileClass: "bg-brand-yellow/15 text-brand-yellow" },
-  { titleKey: "areaDTitle", descKey: "areaDDesc", icon: Briefcase, tileClass: "bg-brand-primary/15 text-brand-primary" },
-  { titleKey: "areaETitle", descKey: "areaEDesc", icon: Megaphone, tileClass: "bg-brand-secondary/15 text-brand-secondary" },
-  { titleKey: "areaFTitle", descKey: "areaFDesc", icon: RefreshCw, tileClass: "bg-white/15 text-white" },
-];
-
-const comoHacemos = [
-  {
-    icon: Link2,
-    titleKey: "conectarTitle",
-    descKey: "conectarDesc",
-    tileClass: "bg-brand-teal/15 text-brand-teal",
-  },
-  {
-    icon: Wrench,
-    titleKey: "facilitarTitle",
-    descKey: "facilitarDesc",
-    tileClass: "bg-brand-orange/15 text-brand-orange",
-  },
-  {
-    icon: Rocket,
-    titleKey: "impulsarTitle",
-    descKey: "impulsarDesc",
-    tileClass: "bg-brand-purple/15 text-brand-purple",
   },
 ];
 
@@ -127,11 +77,6 @@ export default async function QuienesSomosPage({
   const t = await getTranslations({ locale, namespace: "quienesSomos" });
   const fotos = await getFotos();
   const cmsTeam = await getTeamMembers();
-
-  const fallbackAliados = fotos.home.aliados.map((item) => ({
-    ...item,
-    src: assetPath(item.src),
-  }));
 
   const localTeamPhotos: Record<string, string> = {
     maicol: assetPath(fotos.quienesSomos.team.maicol),
@@ -221,26 +166,167 @@ export default async function QuienesSomosPage({
 
   return (
     <div className="min-h-screen">
-      {/* HERO */}
-      <DossierHero
-        images={[
-          assetPath(fotos.quienesSomos.hero),
-          assetPath(fotos.quienesSomos.sectionImage),
-          assetPath(fotos.quienesSomos.objetivoImage),
-          assetPath(fotos.quienesSomos.poblacionImage),
-          assetPath(fotos.quienesSomos.areasImage),
-        ]}
-        tag={t("heroTag")}
-        title={t("heroTitle")}
-        highlight={t("heroHighlight")}
-        subtitle={t("heroSubtitle")}
-        accent="orange"
-        primaryCta={{ label: t("heroCtaPrimary"), href: `/${locale}/programas` }}
-        secondaryCta={{ label: t("heroCtaSecondary"), href: `/${locale}/contacto` }}
-      />
+      {/* 1. HERO — video de fondo, sin texto */}
+      <div
+        className="relative h-[50vh] overflow-hidden bg-ley-purple sm:h-[65vh] md:h-[75vh] lg:h-[85vh]"
+      >
+        <div aria-hidden="true" className="absolute inset-0">
+          {homeVideos.premioCivico ? (
+            <YoutubeHeroBg
+              videoUrl={homeVideos.premioCivico}
+              fallbackImage={assetPath(fotos.quienesSomos.hero)}
+              startAt={20}
+            />
+          ) : homeVideos.pages.quienesSomos.hero ? (
+            <video
+              src={homeVideos.pages.quienesSomos.hero}
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url("${assetPath(fotos.quienesSomos.hero)}")` }}
+            />
+          )}
+        </div>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-[2]"
+          style={{
+            background:
+              "linear-gradient(to top, rgba(74,21,75,0.85) 0%, rgba(74,21,75,0.3) 40%, transparent 100%)",
+          }}
+        />
+        <WaveMask fill="#4A154B" />
+      </div>
 
-      {/* Hitos de origen */}
-      <section className="relative overflow-hidden bg-surface py-10">
+      {/* 2. TEXTO DEL HERO + MISION / VISION / PROPOSITO */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
+                <ImageParallax
+                  src={assetPath(fotos.quienesSomos.hero)}
+                  alt={t("heroTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <span className="mb-3 inline-block rounded-full border border-brand-primary/30 bg-brand-primary/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary">
+                {t("heroTag")}
+              </span>
+              <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
+                {t("heroTitle")} <span className="text-brand-primary">{t("heroHighlight")}</span>
+              </h1>
+              <p className="mt-6 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+                {t("heroSubtitle")}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href={`/${locale}/programas`}
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-primary px-7 py-3 text-sm font-bold text-white transition-all hover:bg-brand-primary-dark hover:shadow-lg"
+                >
+                  {t("heroCtaPrimary")}
+                </Link>
+                <Link
+                  href={`/${locale}/contacto`}
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-brand-primary/30 px-7 py-3 text-sm font-bold text-brand-primary transition-all hover:border-brand-primary/60 hover:bg-brand-primary/5"
+                >
+                  {t("heroCtaSecondary")}
+                </Link>
+              </div>
+            </AnimatedSection>
+          </div>
+
+          {/* Mision */}
+          <div className="mt-16 grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <div className="glass-card rounded-3xl border border-border-subtle bg-bg-card p-8 transition-all hover:-translate-y-1 hover:shadow-md">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-primary/30 bg-brand-primary/10">
+                  <Target size={22} className="text-brand-primary" />
+                </div>
+                <h3 className="mb-3 text-xl font-bold text-[var(--color-text-primary)]">{t("misionTitle")}</h3>
+                <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{t("misionDesc")}</p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={assetPath(fotos.quienesSomos.objetivoImage)}
+                  alt={t("misionTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+          </div>
+
+          {/* Vision */}
+          <div className="mt-16 grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={assetPath(fotos.quienesSomos.sectionImage)}
+                  alt={t("visionTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <div className="glass-card rounded-3xl border border-border-subtle bg-bg-card p-8 transition-all hover:-translate-y-1 hover:shadow-md">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-orange/30 bg-brand-orange/10">
+                  <Eye size={22} className="text-brand-orange" />
+                </div>
+                <h3 className="mb-3 text-xl font-bold text-[var(--color-text-primary)]">{t("visionTitle")}</h3>
+                <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{t("visionDesc")}</p>
+              </div>
+            </AnimatedSection>
+          </div>
+
+          {/* Proposito */}
+          <div className="mt-16 grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <div className="glass-card rounded-3xl border border-border-subtle bg-bg-card p-8 transition-all hover:-translate-y-1 hover:shadow-md">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-brand-yellow/30 bg-brand-yellow/10">
+                  <Heart size={22} className="text-brand-yellow" />
+                </div>
+                <h3 className="mb-3 text-xl font-bold text-[var(--color-text-primary)]">{t("propositoCardTitle")}</h3>
+                <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{t("propositoCardDesc")}</p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={assetPath(fotos.quienesSomos.historiaGallery[0])}
+                  alt={t("propositoCardTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Hitos de origen */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             {hitos.map((h, i) => (
@@ -256,31 +342,18 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
-      {/* Historia */}
-      <section className="relative overflow-hidden bg-surface py-20">
+      {/* 4. Historia (sin fundadores) */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
             <AnimatedSection direction="left">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="relative col-span-2 aspect-[16/9] overflow-hidden rounded-[10px] shadow-xl">
-                  <ImageParallax
-                    src={assetPath(fotos.quienesSomos.historiaImage)}
-                    alt={t("historiaTitle")}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-                {fotos.quienesSomos.historiaGallery.map((src, i) => (
-                  <div key={src} className="relative aspect-square overflow-hidden rounded-[10px] shadow-md">
-                    <ImageParallax
-                      src={assetPath(src)}
-                      alt={`${t("historiaTitle")} ${i + 1}`}
-                      fill
-                      className="object-cover"
-                      intensity={0.15}
-                    />
-                  </div>
-                ))}
+              <div className="relative aspect-[16/9] overflow-hidden rounded-[10px] shadow-xl">
+                <ImageParallax
+                  src={assetPath(fotos.quienesSomos.historiaImage)}
+                  alt={t("historiaTitle")}
+                  fill
+                  className="object-cover"
+                />
               </div>
             </AnimatedSection>
             <div>
@@ -303,49 +376,60 @@ export default async function QuienesSomosPage({
               ))}
             </div>
           </div>
-
-          {/* Fundadores */}
-          <AnimatedSection direction="up" delay={0.15} className="mt-14">
-            <p className="mb-5 text-center text-xs font-bold uppercase tracking-[0.2em] text-brand-purple">
-              {t("fundadoresTag")}
-            </p>
-            <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-3">
-              {[1, 2, 3].map((i) => {
-                const name = t(`fundador${i}`);
-                const photo = i === 2 ? assetPath(fotos.quienesSomos.team.maicol) : null;
-                const initials = name
-                  .split(" ")
-                  .slice(0, 2)
-                  .map((w) => w[0])
-                  .join("");
-                return (
-                  <div
-                    key={i}
-                    className="flex flex-col items-center rounded-[10px] border border-border-subtle bg-bg-card p-6 text-center shadow-sm transition-all hover:-translate-y-1 hover:shadow-md"
-                  >
-                    <div className="relative mb-3 h-16 w-16 overflow-hidden rounded-full border-2 border-brand-teal/30 bg-brand-teal/10">
-                      {photo ? (
-                        <Image src={photo} alt={name} fill sizes="64px" className="object-cover" />
-                      ) : (
-                        <span className="flex h-full w-full items-center justify-center text-lg font-bold text-brand-purple-dark">
-                          {initials}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-sm font-bold text-[var(--color-text-primary)]">{name}</p>
-                    <span className="mt-2 inline-block rounded-full bg-brand-purple/10 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-purple">
-                      Fundador
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </AnimatedSection>
         </div>
       </section>
 
-      {/* Cifras nacionales */}
-      <section className="relative overflow-hidden bg-section-light py-20">
+      {/* 4b. Premio Civico */}
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+        <DecoShapes variant="orange" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <span className="mb-3 inline-block rounded-full border border-brand-orange/30 bg-brand-orange/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
+                {t("premioTag")}
+              </span>
+              <h2 className="mt-4 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
+                {t("premioTitle")}
+              </h2>
+              <p className="mt-6 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+                {t("premioDesc")}
+              </p>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              {homeVideos.premioCivico ? (
+                <VideoFacade
+                  youtubeId={homeVideos.premioCivico}
+                  title={t("premioTitle")}
+                />
+              ) : (
+                <div className="relative aspect-[16/9] overflow-hidden rounded-3xl shadow-xl">
+                  <ImageParallax
+                    src={assetPath(fotos.quienesSomos.timeline[1].image)}
+                    alt={t("premioTitle")}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    intensity={0.15}
+                  />
+                </div>
+              )}
+            </AnimatedSection>
+          </div>
+          {homeVideos.premioCivicoFormativo && (
+            <div className="mt-12">
+              <AnimatedSection direction="up">
+                <VideoFacade
+                  youtubeId={homeVideos.premioCivicoFormativo}
+                  title={t("premioTitle")}
+                />
+              </AnimatedSection>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* 5. Cifras nacionales */}
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-6 text-center">
@@ -357,50 +441,48 @@ export default async function QuienesSomosPage({
             </h2>
           </AnimatedSection>
           <AnimatedSection delay={0.1}>
-            <p className="mb-10 text-center text-sm text-text-muted">{t("cifrasSource")}</p>
+            <p className="text-center text-sm text-text-muted">{t("cifrasSource")}</p>
           </AnimatedSection>
-          <StatsRings stats={cifrasStats} />
-        </div>
-      </section>
-
-      {/* Ley 2479 */}
-      <section
-        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
-        style={{
-          "--section-bg-image": `url(${assetPath(fotos.quienesSomos.objetivoImage)})`,
-        } as CSSProperties}
-      >
-        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
-        <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-8 lg:grid-cols-[auto_1fr]">
-            <AnimatedSection direction="left">
-              <div className="flex h-16 w-16 items-center justify-center rounded-full border border-white/30 text-brand-yellow">
-                <Gavel size={28} strokeWidth={1.6} aria-hidden="true" />
-              </div>
-            </AnimatedSection>
-            <AnimatedSection direction="right">
-              <span className="mb-4 inline-block rounded-[10px] bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-[0.1em] text-brand-yellow">
-                {t("ley2479Tag")}
-              </span>
-              <h2 className="mb-4 text-3xl font-bold text-white sm:text-4xl">{t("ley2479Title")}</h2>
-              <p className="max-w-[66ch] text-lg leading-relaxed text-white/80">{t("ley2479Desc")}</p>
-              <div className="mt-6 flex items-center gap-3 text-sm font-semibold text-white/70">
-                <span className="h-2 w-2 rounded-full bg-white/40" aria-hidden="true" />
-                <span>{t("ley2479Start")}</span>
-                <span className="relative h-px max-w-[140px] flex-1 overflow-hidden bg-white/30" aria-hidden="true">
-                  <span className="absolute inset-y-0 left-0 w-full bg-brand-yellow" />
-                </span>
-                <span className="h-2 w-2 rounded-full bg-brand-yellow" aria-hidden="true" />
-                <span>{t("ley2479End")}</span>
-              </div>
-            </AnimatedSection>
+          <div className="mt-12">
+            <StatsRings stats={cifrasStats} />
           </div>
         </div>
       </section>
 
-      {/* Trayectoria / ruta */}
-      <section className="relative overflow-hidden bg-section-light py-20">
+      {/* 6. ASCEP en video */}
+      {homeVideos.transformando && (
+        <section
+          className="section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32 section-bg-image"
+          style={{
+            "--section-bg-image": `url(${assetPath(fotos.quienesSomos.sectionImage)})`,
+          } as CSSProperties}
+        >
+          <WaveMask fill="#FFFFFF" flip />
+          <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
+          <DecoShapes variant="teal" />
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid items-center gap-12 lg:grid-cols-2">
+              <AnimatedSection direction="left">
+                <span className="mb-3 inline-block rounded-[10px] bg-white/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                  {t("propositoTag")}
+                </span>
+                <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
+                  {t("propositoTitle")} <span className="text-white/80">{t("propositoHighlight")}</span>
+                </h2>
+              </AnimatedSection>
+              <AnimatedSection direction="right" delay={0.1}>
+                <VideoFacade
+                  youtubeId={homeVideos.transformando}
+                  title={t("propositoTitle")}
+                />
+              </AnimatedSection>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 7. Trayectoria / ruta */}
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-4 text-center">
@@ -416,126 +498,60 @@ export default async function QuienesSomosPage({
               {t("trayectoriaLead")}
             </p>
           </AnimatedSection>
-          <TimelineRoute
-            items={trayectoria}
-            hitoSingular={t("hitoSingular")}
-            hitoPlural={t("hitoPlural")}
-          />
-        </div>
-      </section>
-
-      {/* Proposito / Mision / Vision */}
-      <section
-        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
-        style={{
-          "--section-bg-image": `url(${assetPath(fotos.quienesSomos.sectionImage)})`,
-        } as CSSProperties}
-      >
-        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
-        <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              {t("propositoTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("propositoTitle")} <span className="text-white/80">{t("propositoHighlight")}</span>
-            </h2>
-          </AnimatedSection>
-          <div className="grid gap-5 sm:grid-cols-3">
-            <AnimatedSection direction="up" className="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-ley-cyan/40 bg-ley-cyan/10">
-                <Target size={20} className="text-ley-cyan" />
-              </div>
-              <h3 className="mb-2 text-lg font-bold text-white">{t("misionTitle")}</h3>
-              <p className="text-sm leading-relaxed text-white/75">{t("misionDesc")}</p>
-            </AnimatedSection>
-            <AnimatedSection direction="up" delay={0.1} className="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-ley-orange/40 bg-ley-orange/10">
-                <Eye size={20} className="text-ley-orange" />
-              </div>
-              <h3 className="mb-2 text-lg font-bold text-white">{t("visionTitle")}</h3>
-              <p className="text-sm leading-relaxed text-white/75">{t("visionDesc")}</p>
-            </AnimatedSection>
-            <AnimatedSection direction="up" delay={0.2} className="glass-card rounded-2xl p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
-              <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl border border-ley-yellow/40 bg-ley-yellow/10">
-                <Heart size={20} className="text-ley-yellow" />
-              </div>
-              <h3 className="mb-2 text-lg font-bold text-white">{t("propositoCardTitle")}</h3>
-              <p className="text-sm leading-relaxed text-white/75">{t("propositoCardDesc")}</p>
-            </AnimatedSection>
+          <div className="mt-12">
+            <TimelineRoute
+              items={trayectoria}
+              hitoSingular={t("hitoSingular")}
+              hitoPlural={t("hitoPlural")}
+            />
           </div>
         </div>
       </section>
 
-      {/* Como lo hacemos */}
-      <section className="relative overflow-hidden bg-section-light py-20">
-        <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              {t("comoTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              {t("comoTitle")} <span className="text-brand-purple">{t("comoHighlight")}</span>
-            </h2>
-          </AnimatedSection>
-          <AnimatedSection delay={0.1}>
-            <p className="mx-auto mb-10 max-w-3xl text-center text-lg leading-relaxed text-[var(--color-text-secondary)]">
-              {t("comoDesc")}
-            </p>
-          </AnimatedSection>
-          <div className="grid gap-6 md:grid-cols-3">
-            {comoHacemos.map((item, i) => (
-              <AnimatedSection key={item.titleKey} direction="up" delay={i * 0.1}>
-                <div className="h-full rounded-[10px] border border-brand-teal/20 bg-bg-card p-8 transition-all hover:shadow-md">
-                  <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] ${item.tileClass}`}>
-                    <item.icon size={22} />
-                  </div>
-                  <h3 className="mb-2 text-xl font-bold text-[var(--color-text-primary)]">
-                    {t(item.titleKey)}
-                  </h3>
-                  <p className="text-[var(--color-text-secondary)]">
-                    {t(item.descKey)}
-                  </p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Objetivo general y objetivos estrategicos */}
+      {/* 8. Objetivo general y objetivos estrategicos */}
       <section
-        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        className="section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32 section-bg-image"
         style={{
           "--section-bg-image": `url(${assetPath(fotos.quienesSomos.objetivoGeneralImage)})`,
         } as CSSProperties}
       >
+        <WaveMask fill="#FFFFFF" flip />
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              {t("objetivoTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("objetivoTitle")} <span className="text-white/80">{t("objetivoHighlight")}</span>
-            </h2>
-          </AnimatedSection>
-          <AnimatedSection delay={0.1}>
-            <div className="relative mx-auto mb-16 max-w-3xl overflow-hidden rounded-[10px] border border-white/10 bg-white/10 p-8 backdrop-blur-sm">
-              <span className="absolute inset-y-0 left-0 w-1 bg-brand-yellow" aria-hidden="true" />
-              <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] bg-brand-yellow/15 text-brand-yellow">
-                  <Target size={22} />
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                {t("objetivoTag")}
+              </span>
+              <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">
+                {t("objetivoTitle")} <span className="text-white/80">{t("objetivoHighlight")}</span>
+              </h2>
+              <div className="relative mt-6 overflow-hidden rounded-[10px] border border-white/10 bg-white/10 p-8 backdrop-blur-sm">
+                <span className="absolute inset-y-0 left-0 w-1 bg-brand-yellow" aria-hidden="true" />
+                <div className="flex items-start gap-4">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-[10px] bg-brand-yellow/15 text-brand-yellow">
+                    <Target size={22} />
+                  </div>
+                  <p className="text-lg leading-relaxed text-white/85">
+                    {t("objetivoDesc")}
+                  </p>
                 </div>
-                <p className="text-lg leading-relaxed text-white/85">
-                  {t("objetivoDesc")}
-                </p>
               </div>
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={0.1}>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={assetPath(fotos.quienesSomos.objetivoImage)}
+                  alt={t("objetivoTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+          </div>
           <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("objetivosEstrategicosTag")}
@@ -564,28 +580,29 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
-      {/* Poblacion objetivo */}
-      <section className="relative overflow-hidden bg-section-light py-20">
+      {/* 9. Poblacion objetivo */}
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+        <WaveMask fill="#800080" flip />
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <AnimatedSection direction="up">
+              <AnimatedSection direction="left">
                 <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
                   {t("poblacionTag")}
                 </span>
               </AnimatedSection>
-              <AnimatedSection direction="up" delay={0.1}>
+              <AnimatedSection direction="left" delay={0.1}>
                 <h2 className="mb-4 text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
                   {t("poblacionTitle")} <span className="text-brand-orange">{t("poblacionHighlight")}</span>
                 </h2>
               </AnimatedSection>
-              <AnimatedSection direction="up" delay={0.15}>
+              <AnimatedSection direction="left" delay={0.15}>
                 <p className="text-lg leading-relaxed text-[var(--color-text-secondary)]">
                   {t("poblacionDesc")}
                 </p>
               </AnimatedSection>
-              <AnimatedSection direction="up" delay={0.2}>
+              <AnimatedSection direction="left" delay={0.2}>
                 <ul className="mt-6 flex flex-wrap gap-2.5">
                   {[1, 2, 3].map((i) => (
                     <li
@@ -625,84 +642,8 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
-      {/* Enfoque / Dimensiones */}
-      <section className="relative overflow-hidden bg-section-light py-20">
-        <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              {t("enfoqueTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              {t("enfoqueTitle")} <span className="text-brand-purple">{t("enfoqueHighlight")}</span>
-            </h2>
-          </AnimatedSection>
-          <AnimatedSection delay={0.1}>
-            <p className="mx-auto mb-8 max-w-3xl text-center text-lg leading-relaxed text-[var(--color-text-secondary)]">
-              {t("enfoqueDesc")}
-            </p>
-          </AnimatedSection>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {dimensionKeys.map((item, i) => (
-              <AnimatedSection key={item.titleKey} direction="up" delay={i * 0.05}>
-                <div className="h-full rounded-[10px] border border-border-subtle bg-bg-card p-6 transition-all hover:shadow-md">
-                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-full border ${item.color}`}>
-                    <item.icon size={20} strokeWidth={1.75} />
-                  </div>
-                  <h3 className="mb-2 font-bold text-[var(--color-text-primary)]">
-                    {t(item.titleKey)}
-                  </h3>
-                  <p className="text-sm text-[var(--color-text-secondary)]">
-                    {t(item.descKey)}
-                  </p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Areas de trabajo */}
-      <section
-        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
-        style={{ "--section-bg-image": `url(${assetPath(fotos.quienesSomos.areasImage)})` } as CSSProperties}
-      >
-        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
-        <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              {t("areasTrabajoTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("areasTrabajoTitle")} <span className="text-white/80">{t("areasTrabajoHighlight")}</span>
-            </h2>
-            <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-white/80">
-              {t("areasTrabajoDesc")}
-            </p>
-          </AnimatedSection>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {areas.map((area, i) => (
-              <AnimatedSection key={area.titleKey} direction="up" delay={i * 0.08}>
-                <div className="h-full rounded-[10px] border border-white/10 bg-white/10 p-6 transition-all hover:bg-white/15">
-                  <div className={`mb-4 flex h-11 w-11 items-center justify-center rounded-[10px] ${area.tileClass}`}>
-                    <area.icon size={22} />
-                  </div>
-                  <h3 className="mb-2 font-bold text-white">
-                    {t(area.titleKey)}
-                  </h3>
-                  <p className="text-sm leading-relaxed text-white/75">
-                    {t(area.descKey)}
-                  </p>
-                </div>
-              </AnimatedSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Valores y ODS */}
-      <section className="relative overflow-hidden bg-section-light py-20">
+      {/* 10. Valores y ODS */}
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
@@ -744,11 +685,12 @@ export default async function QuienesSomosPage({
         </div>
       </section>
 
-      {/* Equipo */}
+      {/* 11. Equipo */}
       <section
-        className="section-dark relative overflow-hidden bg-purple-bg py-20 section-bg-image"
+        className="section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32 section-bg-image"
         style={{ "--section-bg-image": `url(${assetPath(fotos.quienesSomos.equipoImage)})` } as CSSProperties}
       >
+        <WaveMask fill="#FFFFFF" flip />
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -767,25 +709,9 @@ export default async function QuienesSomosPage({
         <TeamFan members={team} />
       </section>
 
-      {/* Aliados */}
-      <section className="relative overflow-hidden bg-section-light py-20">
-        <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
-              {t("aliadosTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-[var(--color-text-primary)] sm:text-4xl">
-              {t("aliadosTitle")}
-            </h2>
-          </AnimatedSection>
-          <LogoLoop logos={fallbackAliados} />
-        </div>
-      </section>
-
-      {/* CTA final */}
+      {/* 12. CTA final */}
       <section
-        className="bg-brand-purple py-20 section-bg-image"
+        className="bg-brand-purple py-24 sm:py-32 section-bg-image"
         style={{ "--section-bg-image": `url(${assetPath(fotos.quienesSomos.hero)})` } as CSSProperties}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

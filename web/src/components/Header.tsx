@@ -55,7 +55,6 @@ const getNavStructure = (comoAyudarImage: string): NavGroup[] => [
       { key: "quienesSomos", href: "/quienes-somos" },
       { key: "comoLoHacemos", href: "/como-lo-hacemos" },
       { key: "impacto", href: "/impacto" },
-      { key: "aliados", href: "/aliados" },
     ],
   },
   {
@@ -83,13 +82,11 @@ const getNavStructure = (comoAyudarImage: string): NavGroup[] => [
     image: comoAyudarImage,
     cols: 1,
     items: [
+      { key: "enredateConAscep", href: "/como-ayudar/enredate-con-ascep" },
       { key: "donacionMonetaria", href: "/donar" },
-      { key: "planPadrino", href: "/como-ayudar/plan-padrino" },
-      { key: "voluntariado", href: "/como-ayudar/voluntariado" },
       { key: "participa", href: "/participa" },
     ],
   },
-  { type: "link", key: "enredateConAscep", href: "/como-ayudar/enredate-con-ascep", badge: "Nuevo" },
   { type: "link", key: "contacto", href: "/contacto" },
 ];
 

@@ -9,6 +9,9 @@ import ImageParallax from "@/components/ImageParallax";
 import AnimatedSection from "@/components/AnimatedSection";
 import PageCTA from "@/components/PageCTA";
 import LineasAccordion from "@/components/LineasAccordion";
+import VideoFacade from "@/components/VideoFacade";
+import WaveMask from "@/components/WaveMask";
+import { homeVideos } from "@/data/homeVideos";
 import type { CSSProperties, ReactNode } from "react";
 import {
   User,
@@ -136,47 +139,76 @@ export default async function ComoLoHacemosPage({
   ];
 
   const galeria = fotos.impacto.gallery.slice(0, 8);
+  const heroImage = sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.comoLoHacemos.hero);
 
   return (
     <div>
-      <DossierHero
-        images={[
-          sanityImage(pageData?.hero?.bgImage) || assetPath(fotos.comoLoHacemos.hero),
-          assetPath(fotos.comoLoHacemos.estrategiasImage),
-          assetPath(fotos.comoLoHacemos.lineasImage),
-        ]}
-        tag={localize(pageData?.hero?.tag, locale) || t("heroTag")}
-        title={localize(pageData?.hero?.title, locale) || t("heroTitle")}
-        highlight={localize(pageData?.hero?.highlight, locale) || t("heroHighlight")}
-        subtitle={localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
-        accent="cyan"
-        primaryCta={{ label: t("sectionTag"), href: "#estrategias" }}
-      >
-        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
-          <div className="flex items-center gap-4">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white/15">
-              <Zap size={28} className="text-ley-cyan" />
-            </div>
-            <div>
-              <p className="text-xl font-extrabold">{t("dimensionesTag")}</p>
-              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-cyan">
-                {t("enfoqueTag")}
-              </p>
-            </div>
-          </div>
-          <p className="mt-6 text-sm leading-relaxed text-purple-100">
-            {t("dimensionesDesc")}
-          </p>
-          <Link
-            href={`/${locale}/como-ayudar`}
-            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
-          >
-            {t("ctaBtn")}
-          </Link>
+      {/* Hero visual */}
+      <div className="relative h-[50vh] overflow-hidden bg-ley-cyan sm:h-[65vh] md:h-[75vh] lg:h-[85vh]">
+        <div aria-hidden="true" className="absolute inset-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url("${heroImage}")` }}
+          />
         </div>
-      </DossierHero>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to top, rgba(10,16,32,0.45) 0%, transparent 50%)" }}
+        />
+      </div>
 
-      <section id="estrategias" className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      {/* Hero text below */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+        <WaveMask fill="#007374" flip />
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
+                <ImageParallax
+                  src={assetPath(fotos.comoLoHacemos.estrategiasImage)}
+                  alt={t("heroTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <span className="mb-3 inline-block rounded-full border border-brand-primary/30 bg-brand-primary/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary">
+                {localize(pageData?.hero?.tag, locale) || t("heroTag")}
+              </span>
+              <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
+                {localize(pageData?.hero?.title, locale) || t("heroTitle")}{" "}
+                <span className="text-brand-primary">
+                  {localize(pageData?.hero?.highlight, locale) || t("heroHighlight")}
+                </span>
+              </h1>
+              <p className="mt-6 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+                {localize(pageData?.hero?.subtitle, locale) || t("heroSubtitle")}
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link
+                  href="#estrategias"
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-primary px-7 py-3 text-sm font-bold text-white transition-all hover:bg-brand-primary-dark hover:shadow-lg"
+                >
+                  {t("sectionTag")}
+                </Link>
+                <Link
+                  href={`/${locale}/como-ayudar`}
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-brand-primary/30 px-7 py-3 text-sm font-bold text-brand-primary transition-all hover:border-brand-primary/60 hover:bg-brand-primary/5"
+                >
+                  {t("ctaBtn")}
+                </Link>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <section id="estrategias" className="relative overflow-hidden bg-section-light py-24 sm:py-32">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
@@ -188,7 +220,7 @@ export default async function ComoLoHacemosPage({
           <SectionIntro
             src={assetPath(fotos.comoLoHacemos.estrategiasImage)}
             alt={t("sectionTitle")}
-            className="mb-12"
+            className="mt-12 mb-12"
           >
             <p className="text-lg leading-relaxed text-text-secondary">
               {t("bannerDesc")}
@@ -221,7 +253,8 @@ export default async function ComoLoHacemosPage({
         </div>
       </section>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.lineasImage)})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.lineasImage)})` } as CSSProperties}>
+        <WaveMask fill="#FFFFFF" flip />
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -232,37 +265,49 @@ export default async function ComoLoHacemosPage({
             dark
           />
 
-          <SectionIntro
-            src={assetPath(fotos.comoLoHacemos.estrategiasGallery[0])}
-            alt={t("enfoqueTitle")}
-            dark
-            className="mb-12"
-          >
-            <p className="text-lg leading-relaxed text-purple-100">
-              {t("enfoqueBanner")}
-            </p>
-          </SectionIntro>
+          {homeVideos.transformando ? (
+            <AnimatedSection delay={0.1} className="mx-auto mt-12 max-w-3xl">
+              <VideoFacade
+                youtubeId={homeVideos.transformando}
+                title={t("enfoqueTitle")}
+              />
+            </AnimatedSection>
+          ) : (
+            <>
+              <SectionIntro
+                src={assetPath(fotos.comoLoHacemos.estrategiasGallery[0])}
+                alt={t("enfoqueTitle")}
+                dark
+                className="mt-12 mb-12"
+              >
+                <p className="text-lg leading-relaxed text-purple-100">
+                  {t("enfoqueBanner")}
+                </p>
+              </SectionIntro>
 
-          <div className="grid gap-6 sm:grid-cols-3">
-            {enfoqueCards.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <AnimatedSection key={item.title} direction="up" delay={i * 0.1}>
-                  <div className="glass-card h-full rounded-3xl p-6 text-center transition-all hover:bg-white/15">
-                    <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${item.iconColor}`}>
-                      <Icon size={22} />
-                    </div>
-                    <h3 className="mb-1 font-bold text-white">{item.title}</h3>
-                    <p className="text-sm text-[var(--color-text-muted)]">{item.desc}</p>
-                  </div>
-                </AnimatedSection>
-              );
-            })}
-          </div>
+              <div className="grid gap-6 sm:grid-cols-3">
+                {enfoqueCards.map((item, i) => {
+                  const Icon = item.icon;
+                  return (
+                    <AnimatedSection key={item.title} direction="up" delay={i * 0.1}>
+                      <div className="glass-card h-full rounded-3xl p-6 text-center transition-all hover:bg-white/15">
+                        <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${item.iconColor}`}>
+                          <Icon size={22} />
+                        </div>
+                        <h3 className="mb-1 font-bold text-white">{item.title}</h3>
+                        <p className="text-sm text-[var(--color-text-muted)]">{item.desc}</p>
+                      </div>
+                    </AnimatedSection>
+                  );
+                })}
+              </div>
+            </>
+          )}
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+        <WaveMask fill="#800080" flip />
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
@@ -271,7 +316,7 @@ export default async function ComoLoHacemosPage({
             desc={t("dimensionesDesc")}
             accent="cyan"
           />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {dimensiones.map((item, i) => {
               const accent = dimensionAccents[i % dimensionAccents.length];
               return (
@@ -290,7 +335,8 @@ export default async function ComoLoHacemosPage({
         </div>
       </section>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.estrategiasImage)})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.estrategiasImage)})` } as CSSProperties}>
+        <WaveMask fill="#FFFFFF" flip />
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -305,7 +351,7 @@ export default async function ComoLoHacemosPage({
             src={assetPath(fotos.comoLoHacemos.lineasImage)}
             alt={t("lineasEstrategicasTitle")}
             dark
-            className="mb-10"
+            className="mt-12 mb-10"
           >
             <p className="text-lg leading-relaxed text-purple-100">
               {t("lineasEstrategicasDesc")}
@@ -317,31 +363,26 @@ export default async function ComoLoHacemosPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+        <WaveMask fill="#800080" flip />
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             tag={t("galeriaTag")}
             title={t("galeriaTitle")}
             desc={t("galeriaDesc")}
             accent="cyan"
           />
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
             {galeria.map((src, i) => (
-              <AnimatedSection key={`${src}-${i}`} direction="up" delay={i * 0.06}>
-                <div
-                  className={`group relative overflow-hidden rounded-3xl ${
-                    i === 0 ? "sm:col-span-2 sm:row-span-2" : ""
-                  }`}
-                >
+              <AnimatedSection key={`${src}-${i}`} direction="up" delay={i * 0.06} className="mb-4 break-inside-avoid">
+                <div className="group relative overflow-hidden rounded-3xl">
                   <ImageParallax
                     src={assetPath(src)}
                     alt={t("galeriaTitle")}
-                    width={800}
-                    height={600}
-                    className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
-                      i === 0 ? "h-52 sm:h-full" : "h-52"
-                    }`}
+                    width={0}
+                    height={0}
+                    className="transition-transform duration-500 group-hover:scale-105"
                     intensity={0.1}
                   />
                 </div>

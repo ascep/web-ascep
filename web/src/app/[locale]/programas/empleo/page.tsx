@@ -1,7 +1,6 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
-import DossierHero from "@/components/DossierHero";
 import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
 import DecoShapes from "@/components/DecoShapes";
@@ -12,6 +11,8 @@ import { BookOpen, Briefcase, Building, Search, Compass, Route, CheckCircle, typ
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getProgramBySlug, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
+import YoutubeHeroBg from "@/components/YoutubeHeroBg";
+import { homeVideos } from "@/data/homeVideos";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -94,112 +95,169 @@ export default async function EmpleoPage({
 
   const heroImage = sanityImage(cms?.heroImage) || assetPath(fotos.empleo.hero);
   const logoImage = sanityImage(cms?.programLogo) || assetPath(fotos.programas.cards.fomento.image);
+  // Empleo solo cuenta con una fotografia propia; se apoya en fotos reales de
+  // actividades/talleres de ASCEP para no repetir siempre la misma imagen.
+  const supportImage1 = assetPath(fotos.impacto.gallery[2]);
+  const supportImage2 = assetPath(fotos.impacto.gallery[5]);
 
   return (
     <>
-      <DossierHero
-        images={[heroImage, assetPath(fotos.impacto.gallery[1]), assetPath(fotos.impacto.gallery[2])]}
-        tag="Programa"
-        title="Fomento para el Empleo"
-        highlight="Juvenil"
-        subtitle="Estrategias de formacion y vinculacion laboral para jovenes sin cuidados parentales."
-        accent="orange"
-        primaryCta={{ label: "Conocer el programa", href: "#objetivo" }}
-      >
-        <div className="rounded-3xl border border-white/20 bg-white/10 p-8 backdrop-blur-md">
-          <div className="flex items-center gap-4">
-            <Image
-              src={logoImage}
-              alt="ASCEP"
-              width={112}
-              height={112}
-              className="h-16 w-16 rounded-2xl bg-white/15 object-contain p-2"
-            />
-            <div>
-              <p className="text-xl font-extrabold">ASCEP</p>
-              <p className="mt-0.5 text-xs font-semibold uppercase tracking-widest text-ley-orange">
-                Programa
-              </p>
-            </div>
-          </div>
-          <p className="mt-6 text-sm leading-relaxed text-purple-100">
-            Estrategias de formacion y vinculacion laboral para jovenes sin cuidados parentales.
-          </p>
-          <a
-            href="#componentes"
-            className="mt-8 inline-flex min-h-[48px] w-full items-center justify-center gap-2 rounded-xl bg-ley-yellow px-6 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-ley-yellow/90 hover:shadow-lg"
-          >
-            Componentes del programa
-          </a>
-        </div>
-      </DossierHero>
+      {/* Hero — visual only */}
+      <div className="relative h-[50vh] overflow-hidden bg-ley-purple sm:h-[65vh] md:h-[75vh] lg:h-[85vh]">
+        <YoutubeHeroBg
+          videoUrl={homeVideos.programas["empleo"].hero || ""}
+          fallbackImage={heroImage}
+        />
+      </div>
 
-      <section id="objetivo" className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      {/* 2. Intro — video/foto izquierda + texto derecha */}
+      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            tag="Informacion"
-            title="Que es el"
-            highlight="Programa?"
-            accent="orange"
-          />
-          <div className="grid items-center gap-12 md:grid-cols-2">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Izquierda — imagen/video */}
             <AnimatedSection direction="left">
-              <div className="relative flex h-72 items-center justify-center overflow-hidden rounded-3xl bg-ley-orange/5 md:h-96">
-                <ImageParallax src={logoImage} alt="Fomento para el Empleo y Emprendimiento" width={240} height={150} className="h-auto max-h-48 w-auto max-w-[80%] object-contain" intensity={0.2} />
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={logoImage}
+                  alt="Fomento para el Empleo"
+                  fill
+                  className="object-contain p-8"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-bold text-ley-purple backdrop-blur-sm">
+                  <Briefcase size={16} className="text-brand-orange" />
+                  Programa
+                </div>
               </div>
             </AnimatedSection>
-            <AnimatedSection direction="right" delay={0.1}>
-              <div className="space-y-6 text-base text-text-secondary">
+
+            {/* Derecha — texto */}
+            <AnimatedSection direction="right">
+              <span className="mb-3 inline-block rounded-full border border-brand-orange/30 bg-brand-orange/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
+                Programa
+              </span>
+              <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
+                Fomento para el Empleo <span className="text-brand-orange">Juvenil</span>
+              </h1>
+              <p className="mt-6 text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
+                Estrategias de formacion y vinculacion laboral para jovenes sin cuidados parentales.
+              </p>
+              <div className="mt-6 flex items-center gap-4">
+                <Image
+                  src={logoImage}
+                  alt="ASCEP"
+                  width={80}
+                  height={80}
+                  className="h-14 w-14 rounded-2xl object-contain"
+                />
+                <div>
+                  <p className="font-extrabold text-[var(--color-text-primary)]">ASCEP</p>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-brand-orange">Programa</p>
+                </div>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="#objetivo" className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-orange px-7 py-3 text-sm font-bold text-white transition-all hover:bg-[#d15a1a] hover:shadow-lg">
+                  Conocer el programa
+                </a>
+                <a href="#componentes" className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-brand-orange/30 px-7 py-3 text-sm font-bold text-brand-orange transition-all hover:border-brand-orange/60 hover:bg-brand-orange/5">
+                  Componentes del programa
+                </a>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. Que es — texto izquierda + imagen derecha */}
+      <section id="objetivo" className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+        <DecoShapes variant="teal" />
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Izquierda — texto */}
+            <AnimatedSection direction="left">
+              <span className="mb-3 inline-block rounded-full border border-brand-orange/30 bg-brand-orange/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
+                Informacion
+              </span>
+              <h2 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl">
+                Que es el <span className="text-brand-orange">Programa?</span>
+              </h2>
+              <div className="mt-6 space-y-4 text-base leading-relaxed text-[var(--color-text-secondary)]">
                 <p>
-                  El programa buscar desarrollar un modelo piloto, verificable y posteriormente replicable para promover capacidades y habilidades laborales y fortalecer la capacidad de empleabilidad y de vinculacion al mercado laboral de los y las adolescentes y jovenes en proceso de egreso o egresados del sistema de proteccion estatal colombiano- ICBF- a traves de un proceso de formacion que reconozca sus necesidades especiales y desventajas frente a la poblacion juvenil general y les permitan superar los deficits sociales, educativos y actitudinales, producto de largos anos de institucionalizacion, aislamiento social y separacion familiar.
+                  El programa buscar desarrollar un modelo piloto, verificable y posteriormente replicable para promover capacidades y habilidades laborales y fortalecer la capacidad de empleabilidad y de vinculacion al mercado laboral de los y las adolescentes y jovenes en proceso de egreso o egresados del sistema de proteccion estatal colombiano- ICBF-.
+                </p>
+                <p>
+                  A traves de un proceso de formacion que reconozca sus necesidades especiales y desventajas frente a la poblacion juvenil general y les permitan superar los deficits sociales, educativos y actitudinales, producto de largos anos de institucionalizacion, aislamiento social y separacion familiar.
                 </p>
               </div>
             </AnimatedSection>
+
+            {/* Derecha — imagen */}
+            <AnimatedSection direction="right">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={heroImage}
+                  alt="Fomento para el Empleo"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
+      {/* 4. Objetivo General — texto izquierda + imagen derecha (dark) */}
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${supportImage1})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            tag="Objetivo"
-            title="Objetivo"
-            highlight="General"
-            accent="white"
-            dark
-          />
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-4xl rounded-3xl glass-card p-6 transition-all hover:bg-white/15">
-              <p className="text-lg leading-relaxed text-white/70">
-                Generar estrategias de formacion y vinculacion laboral en adolescentes y jovenes sin cuidados parentales que esten en la ultima instancia del sistema de proteccion estatal y egresados, que les permita encontrar un empleo digno para el desarrollo de su proyecto de vida y la insercion socio laboral, contribuyendo asi al cierre de brechas en el empleo juvenil.
+          <div className="grid items-center gap-12 lg:grid-cols-2">
+            {/* Izquierda — texto */}
+            <AnimatedSection direction="left">
+              <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                Objetivo
+              </span>
+              <h2 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl">
+                Objetivo <span className="text-ley-orange">General</span>
+              </h2>
+              <p className="mt-6 text-lg leading-relaxed text-white/80">
+                Generar estrategias de formacion y vinculacion laboral en adolescentes y jovenes sin cuidados parentales que esten en la ultima instancia del sistema de proteccion estatal y egresados, que les permita encontrar un empleo digno para el desarrollo de su proyecto de vida y la insercion socio laboral.
               </p>
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
+
+            {/* Derecha — imagen */}
+            <AnimatedSection direction="right">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <ImageParallax
+                  src={heroImage}
+                  alt="Objetivo General"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  intensity={0.1}
+                />
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      {/* 5. Objetivos Especificos */}
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            tag="Objetivos"
-            title="Objetivos"
-            highlight="Especificos"
-            accent="orange"
-          />
-          <div className="mx-auto grid max-w-4xl gap-4 sm:grid-cols-2">
+          <SectionHeader tag="Objetivos" title="Objetivos" highlight="Especificos" accent="orange" />
+          <div className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2">
             {objetivos.map((item, i) => (
               <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                <div className="flex gap-4 rounded-3xl border border-ley-orange/20 bg-bg-card p-6 transition-all hover:shadow-md">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-ley-orange/10">
-                    <CheckCircle size={20} className="text-ley-orange" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-text-secondary">{item}</p>
-                  </div>
+                <div className="flex gap-4 rounded-3xl border border-border-default bg-bg-card p-6 transition-all hover:shadow-lg">
+                  <CheckCircle size={20} className="mt-0.5 shrink-0 text-brand-orange" />
+                  <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{item}</p>
                 </div>
               </AnimatedSection>
             ))}
@@ -207,29 +265,26 @@ export default async function EmpleoPage({
         </div>
       </section>
 
-      <section id="componentes" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
+      {/* 6. Componentes — dark grid */}
+      <section id="componentes" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${supportImage2})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            tag="Componentes"
-            title="Componentes del"
-            highlight="Programa"
-            accent="white"
-            dark
-          />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <SectionHeader tag="Componentes" title="Componentes del" highlight="Programa" accent="white" dark />
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {componentes.map((comp, i) => {
               const Icon = comp.icon;
               const accent = compAccents[i % compAccents.length];
               return (
                 <AnimatedSection key={comp.title} direction="up" delay={i * 0.06}>
-                  <div className="glass-card rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:bg-white/15">
-                    <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${accent.bg}`}>
-                      <Icon size={22} className={accent.icon} />
+                  <div className="glass-card rounded-3xl p-6 transition-all hover:-translate-y-1 hover:bg-white/15">
+                    <div className="mb-4 flex items-center gap-3">
+                      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${accent.bg}`}>
+                        <Icon size={22} className={accent.icon} />
+                      </div>
+                      <h3 className="font-bold text-white">{comp.title}</h3>
                     </div>
-                    <h3 className="mb-1 font-bold text-white">{comp.title}</h3>
-                    <p className="text-sm text-[var(--color-text-muted)]">{comp.desc}</p>
+                    <p className="text-sm leading-relaxed text-white/60">{comp.desc}</p>
                   </div>
                 </AnimatedSection>
               );
@@ -238,37 +293,34 @@ export default async function EmpleoPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
-        <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            tag="Metas"
-            title="Metas del Componente"
-            highlight="Estrategia"
-            accent="orange"
-          />
-          <AnimatedSection direction="up">
-            <div className="mx-auto max-w-4xl rounded-3xl border border-ley-orange/20 bg-bg-card p-6 transition-all hover:shadow-md">
-              <p className="text-lg leading-relaxed text-text-secondary">
-                Garantizar la inclusion laboral de los jovenes, articulando esfuerzos con el sector empresarial, de manera que sea un trabajo en conjunto donde la empresa suministra una persona que acompana al joven en su actividad laboral dentro de la compania, nosotros suministramos un representante y en el proceso de evaluacion ambas partes determinan las debilidades y fortalezas del joven.
-              </p>
-            </div>
+      {/* 7. Metas — bloque de color solido, sin repetir otra vez la misma foto */}
+      <section className="relative overflow-hidden bg-brand-orange py-20">
+        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <AnimatedSection>
+            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/85">
+              Metas
+            </span>
+            <h2 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl">
+              Metas del Componente Estrategia
+            </h2>
+            <p className="mt-6 text-base leading-relaxed text-white/85">
+              Garantizar la inclusion laboral de los jovenes, articulando esfuerzos con el sector empresarial, de manera que sea un trabajo en conjunto donde la empresa suministra una persona que acompana al joven en su actividad laboral dentro de la compania.
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-white/85">
+              Nosotros suministramos un representante y en el proceso de evaluacion ambas partes determinan las debilidades y fortalezas del joven.
+            </p>
           </AnimatedSection>
         </div>
       </section>
+      {/* TODO: agregar fotografia o video real de jovenes en procesos de formacion/vinculacion laboral del programa de Empleo */}
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
+      {/* 8. Resultados — dark */}
+      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            tag="Resultados"
-            title="Resultados"
-            highlight="Esperados"
-            accent="white"
-            dark
-          />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <SectionHeader tag="Resultados" title="Resultados" highlight="Esperados" accent="white" dark />
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {resultados.map((result, i) => (
               <AnimatedSection key={i} direction="up" delay={i * 0.06}>
                 <div className="glass-card flex h-full flex-col items-center rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:bg-white/15">

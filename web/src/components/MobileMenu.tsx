@@ -15,7 +15,6 @@ import {
   Building2,
   MessageCircle,
   Newspaper,
-  Play,
 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 import { assetPath } from "@/lib/asset-path";
@@ -104,22 +103,6 @@ export default function MobileMenu() {
   const [expanded, setExpanded] = useState<Section>(null);
   const [incidenciaOpen, setIncidenciaOpen] = useState(false);
   const [casasOpen, setCasasOpen] = useState(false);
-  const [showNuevo] = useState<boolean>(() => {
-    if (typeof window === "undefined") return false;
-    const val = window.localStorage.getItem("ascep_nuevo");
-    if (!val) {
-      window.localStorage.setItem("ascep_nuevo", "1");
-      return true;
-    }
-
-    const count = Number.parseInt(val, 10);
-    if (count < 2) {
-      window.localStorage.setItem("ascep_nuevo", String(count + 1));
-      return true;
-    }
-
-    return false;
-  });
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -375,33 +358,6 @@ export default function MobileMenu() {
                     </span>
                   </Link>
 
-                  {/* Enrédate con ASCEP */}
-                  <Link
-                    href={`/${locale}/como-ayudar/enredate-con-ascep`}
-                    onClick={close}
-                    className={`flex items-center gap-3 rounded-[10px] px-4 py-3 min-h-[48px] transition-colors ${
-                      showNuevo
-                        ? "border border-brand-orange/20 bg-brand-orange/5"
-                        : "border border-bg-elevated/20 hover:bg-bg-elevated"
-                    }`}
-                  >
-                    <div className={`flex h-8 w-8 items-center justify-center rounded-[8px] text-white transition-colors ${
-                      showNuevo ? "bg-brand-orange" : "bg-text-tertiary"
-                    }`}>
-                      <Play size={16} />
-                    </div>
-                    <div className="flex-1">
-                      <span className="text-sm font-bold text-text-primary">
-                        {t("enredateConAscep")}
-                      </span>
-                    </div>
-                    {showNuevo && (
-                      <span className="rounded-full bg-brand-orange/10 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-brand-orange">
-                        Nuevo
-                      </span>
-                    )}
-                  </Link>
-
                   {/* Cómo Ayudar */}
                   <AccordionItem
                     icon={Heart}
@@ -436,6 +392,13 @@ export default function MobileMenu() {
                       className="block rounded-[10px] px-3 py-2.5 text-sm font-semibold text-text-primary hover:bg-bg-elevated min-h-[44px]"
                     >
                       {t("participa")}
+                    </Link>
+                    <Link
+                      href={`/${locale}/como-ayudar/enredate-con-ascep`}
+                      onClick={close}
+                      className="block rounded-[10px] px-3 py-2.5 text-sm font-semibold text-text-primary hover:bg-bg-elevated min-h-[44px]"
+                    >
+                      {t("enredateConAscep")}
                     </Link>
                   </AccordionItem>
 

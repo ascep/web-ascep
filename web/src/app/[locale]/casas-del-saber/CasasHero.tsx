@@ -50,7 +50,9 @@ export default function CasasHero({
       <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
       <DecoShapes variant="mixed" />
 
-      <div className="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col items-center px-4 py-24 sm:px-6 lg:flex-row lg:px-8">
+      {/* items-stretch en movil: con items-center la columna de la imagen
+          encoge a 0 y el hero se queda sin fotografia. */}
+      <div className="relative mx-auto flex min-h-[85vh] max-w-7xl flex-col items-stretch px-4 py-24 sm:px-6 lg:flex-row lg:items-center lg:px-8">
         <div className="flex-1 lg:pr-16">
           <AnimatePresence mode="wait">
             <motion.div
