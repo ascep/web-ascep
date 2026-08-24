@@ -60,8 +60,23 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ url: result.sandbox_init_point || result.init_point });
-  } catch (error) {
+  } catch (error: any) {
     console.error("MP checkout error:", error);
-    return NextResponse.json({ error: "Error al crear el pago" }, { status: 500 });
+    
+    // Extract specific error message from Mercado Pago API
+    let errorMessage = "Error al crear el pago";
+    if (error?.response?.data?.message) {
+      errorMessage = error.response.data.message;
+    } else if (error?.message) {
+      errorMessage = error.message;
+    }
+    
+    return NextResponse.json(
+      { 
+        error: errorMessage,
+        details: error?.response?.data || error?.message
+      }, 
+      { status: 500 }
+    );
   }
 }

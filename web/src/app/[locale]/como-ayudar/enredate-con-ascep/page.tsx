@@ -10,6 +10,7 @@ import EnredateActividades from "./EnredateActividades";
 import EnredateStats from "./EnredateStats";
 import EnredateTestimonials from "./EnredateTestimonials";
 import DonationForm from "@/components/DonationForm";
+import BankTransferOption from "./BankTransferOption";
 import PodcastSection from "./PodcastSection";
 import PadProfileCard from "@/components/PadProfileCard";
 import CursorGlow from "@/components/CursorGlow";
@@ -144,7 +145,7 @@ export default async function EnredatePage({
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-start gap-12 lg:grid-cols-2">
-            {/* Izquierda — texto */}
+            {/* Izquierda — texto + stats + transferencia bancaria */}
             <AnimatedSection direction="left">
               <span className="mb-3 inline-block rounded-full border border-brand-orange/30 bg-brand-orange/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
                 Donacion
@@ -167,6 +168,11 @@ export default async function EnredatePage({
                   </div>
                 ))}
               </div>
+
+              {/* 4b. Transferencia Bancaria */}
+              <div className="mt-12">
+                <BankTransferOption />
+              </div>
             </AnimatedSection>
 
             {/* Derecha — formulario de donacion */}
@@ -178,8 +184,6 @@ export default async function EnredatePage({
           </div>
         </div>
       </section>
-
-      {/* 5. Videos e Historias */}
       <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />

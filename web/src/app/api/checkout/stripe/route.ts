@@ -56,8 +56,21 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Stripe checkout error:", error);
-    return NextResponse.json({ error: "Error al crear el pago" }, { status: 500 });
+    
+    // Extract specific error message from Stripe API
+    let errorMessage = "Error al crear el pago";
+    if (error?.message) {
+      errorMessage = error.message;
+    }
+    
+    return NextResponse.json(
+      { 
+        error: errorMessage,
+        details: error?.raw || error?.message
+      }, 
+      { status: 500 }
+    );
   }
 }

@@ -98,7 +98,10 @@ export default function DonationForm({ tiers = defaultTierOptions }: { tiers?: T
       if (data.url) {
         window.location.href = data.url;
       } else {
-        alert(data.error || t("errorPago"));
+        // Show detailed error message if available
+        const errorMsg = data.error || t("errorPago");
+        console.error("Payment error details:", data.details);
+        alert(errorMsg);
       }
     } catch {
       alert(t("errorConexion"));
