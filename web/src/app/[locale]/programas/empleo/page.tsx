@@ -111,9 +111,9 @@ export default async function EmpleoPage({
       </div>
 
       {/* 2. Intro — video/foto izquierda + texto derecha */}
-      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Izquierda — imagen/video */}
             <AnimatedSection direction="left">
@@ -172,9 +172,9 @@ export default async function EmpleoPage({
       </section>
 
       {/* 3. Que es — texto izquierda + imagen derecha */}
-      <section id="objetivo" className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section id="objetivo" className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Izquierda — texto */}
             <AnimatedSection direction="left">
@@ -212,7 +212,7 @@ export default async function EmpleoPage({
       </section>
 
       {/* 4. Objetivo General — texto izquierda + imagen derecha (dark) */}
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${supportImage1})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${supportImage1})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -248,9 +248,9 @@ export default async function EmpleoPage({
       </section>
 
       {/* 5. Objetivos Especificos */}
-      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader tag="Objetivos" title="Objetivos" highlight="Especificos" accent="orange" />
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2">
             {objetivos.map((item, i) => (
@@ -266,7 +266,7 @@ export default async function EmpleoPage({
       </section>
 
       {/* 6. Componentes — dark grid */}
-      <section id="componentes" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${supportImage2})` } as CSSProperties}>
+      <section id="componentes" className="section-dark section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${supportImage2})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -315,7 +315,7 @@ export default async function EmpleoPage({
       {/* TODO: agregar fotografia o video real de jovenes en procesos de formacion/vinculacion laboral del programa de Empleo */}
 
       {/* 8. Resultados — dark */}
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -43,7 +43,7 @@ export default async function RutaEgresoPage({
       />
 
       <section className="relative overflow-hidden bg-section-light py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <RutaCasasDelSaber />
         </div>
       </section>

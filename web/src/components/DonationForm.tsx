@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from "react";
-import { Coffee, Sunrise, Heart, Star, Rocket, CreditCard, Landmark, Loader, type LucideIcon } from "lucide-react";
+import { Coffee, Sunrise, Heart, Star, Rocket, Landmark, Loader, type LucideIcon } from "lucide-react";
 import { useTranslations, useLocale } from "next-intl";
 
 interface TierOption {
@@ -29,7 +29,7 @@ const iconMap: Record<string, LucideIcon> = {
   Rocket,
 };
 
-export default function DonationForm({ tiers = defaultTierOptions }: { tiers?: TierOption[] }) {
+export default function DonationForm({ tiers = defaultTierOptions, dark = false }: { tiers?: TierOption[]; dark?: boolean }) {
   const t = useTranslations("donationForm");
   const locale = useLocale();
   const [currency, setCurrency] = useState<"COP" | "USD">("COP");
@@ -44,10 +44,10 @@ export default function DonationForm({ tiers = defaultTierOptions }: { tiers?: T
     const t = window.setTimeout(() => {
       const params = new URLSearchParams(window.location.search);
       const method = params.get("method");
-      if (method === "mp" || method === "stripe") {
+      if (method === "mp") {
         setSelectedTier(50000);
         setCustom("");
-        setCurrency(method === "stripe" ? "USD" : "COP");
+        setCurrency("COP");
       }
     }, 0);
     return () => window.clearTimeout(t);
@@ -75,7 +75,7 @@ export default function DonationForm({ tiers = defaultTierOptions }: { tiers?: T
     setSelectedTier(null);
   };
 
-  const handleSubmit = async (gateway: "mercadopago" | "stripe") => {
+  const handleSubmit = async (gateway: "mercadopago") => {
     const amount = getAmount();
     if (!amount || amount < (currency === "COP" ? 2000 : 1)) return;
     setLoading(true);
@@ -115,16 +115,16 @@ export default function DonationForm({ tiers = defaultTierOptions }: { tiers?: T
   return (
     <div className="mx-auto max-w-lg">
       {/* Currency toggle */}
-      <div className="mb-8 flex justify-center rounded-[10px] bg-brand-purple/10 p-1">
+      <div className={`mb-8 flex justify-center rounded-[10px] p-1 ${dark ? "bg-white/10" : "bg-brand-purple/10"}`}>
         <button
           onClick={() => { setCurrency("COP"); setSelectedTier(null); setCustom(""); }}
-          className={`flex-1 rounded-[8px] py-2 text-sm font-semibold transition-all ${currency === "COP" ? "bg-brand-purple text-white shadow-sm" : "text-text-primary"}`}
+          className={`flex-1 rounded-[8px] py-2 text-sm font-semibold transition-all ${currency === "COP" ? (dark ? "bg-white/20 text-white shadow-sm" : "bg-brand-purple text-white shadow-sm") : (dark ? "text-white" : "text-text-primary")}`}
         >
           COP
         </button>
         <button
           onClick={() => { setCurrency("USD"); setSelectedTier(null); setCustom(""); }}
-          className={`flex-1 rounded-[8px] py-2 text-sm font-semibold transition-all ${currency === "USD" ? "bg-brand-purple text-white shadow-sm" : "text-text-primary"}`}
+          className={`flex-1 rounded-[8px] py-2 text-sm font-semibold transition-all ${currency === "USD" ? (dark ? "bg-white/20 text-white shadow-sm" : "bg-brand-purple text-white shadow-sm") : (dark ? "text-white" : "text-text-primary")}`}
         >
           USD
         </button>
@@ -142,19 +142,23 @@ export default function DonationForm({ tiers = defaultTierOptions }: { tiers?: T
               onClick={() => handleTierClick(tier.cop)}
               className={`flex items-center gap-4 rounded-[10px] border-2 p-4 text-left transition-all ${
                 active
-                  ? "border-brand-purple bg-brand-purple text-white"
-                  : "border-brand-purple/20 text-text-primary hover:border-brand-purple/50"
+                  ? dark
+                    ? "border-white/40 bg-white/15 text-white"
+                    : "border-brand-purple bg-brand-purple text-white"
+                  : dark
+                    ? "border-white/20 text-white hover:border-white/40"
+                    : "border-brand-purple/20 text-text-primary hover:border-brand-purple/50"
               }`}
             >
-              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] ${active ? "bg-white/20" : "bg-brand-purple/10"}`}>
-                <Icon size={18} className={active ? "text-white" : "text-brand-purple"} />
+              <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] ${active ? "bg-white/20" : dark ? "bg-white/10" : "bg-brand-purple/10"}`}>
+                <Icon size={18} className={active ? "text-white" : dark ? "text-ley-cyan" : "text-brand-purple"} />
               </div>
               <div className="flex-1">
-                <div className={`text-sm font-bold ${active ? "text-white" : "text-text-primary"}`}>{tier.label}</div>
-                <div className={`text-xs ${active ? "text-white/70" : "text-text-muted"}`}>{symbol}{val.toLocaleString()} {currency}</div>
+                <div className={`text-sm font-bold ${active ? "text-white" : dark ? "text-white" : "text-text-primary"}`}>{tier.label}</div>
+                <div className={`text-xs ${active ? "text-white/70" : dark ? "text-ley-cyan" : "text-text-muted"}`}>{symbol}{val.toLocaleString()} {currency}</div>
               </div>
-              <div className={`h-5 w-5 rounded-full border-2 ${active ? "border-white bg-white" : "border-brand-purple/30"}`}>
-                {active && <div className="m-0.5 h-3.5 w-3.5 rounded-full bg-brand-purple" />}
+              <div className={`h-5 w-5 rounded-full border-2 ${active ? "border-white bg-white" : dark ? "border-white/30" : "border-brand-purple/30"}`}>
+                {active && <div className={`m-0.5 h-3.5 w-3.5 rounded-full ${dark ? "bg-white" : "bg-brand-purple"}`} />}
               </div>
             </button>
           );
@@ -163,20 +167,24 @@ export default function DonationForm({ tiers = defaultTierOptions }: { tiers?: T
 
       {/* Custom amount */}
       <div className="mb-6">
-        <label className="mb-2 block text-xs font-medium text-text-muted uppercase tracking-wider">
+        <label className={`mb-2 block text-xs font-medium uppercase tracking-wider ${dark ? "text-white/60" : "text-text-muted"}`}>
           {t("customAmount")}
         </label>
         <div className="relative">
-          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted">{symbol}</span>
+          <span className={`absolute left-4 top-1/2 -translate-y-1/2 ${dark ? "text-white/50" : "text-text-muted"}`}>{symbol}</span>
           <input
             type="text"
             inputMode="numeric"
             value={custom}
             onChange={handleCustomChange}
             placeholder={currency === "COP" ? "50.000" : "30"}
-            className="w-full rounded-[10px] border border-border-default bg-bg-surface py-3 pl-8 pr-4 text-lg font-bold text-text-primary transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
+            className={`w-full rounded-[10px] border py-3 pl-8 pr-4 text-lg font-bold transition-all focus:outline-none focus:ring-2 focus:ring-brand-purple/20 ${
+              dark
+                ? "border-white/20 bg-white/10 text-white placeholder:text-white/40 focus:border-ley-cyan"
+                : "border-border-default bg-bg-surface text-text-primary focus:border-brand-purple"
+            }`}
           />
-          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-xs text-text-muted">{currency}</span>
+          <span className={`absolute right-4 top-1/2 -translate-y-1/2 text-xs ${dark ? "text-white/50" : "text-text-muted"}`}>{currency}</span>
         </div>
       </div>
 
@@ -187,21 +195,33 @@ export default function DonationForm({ tiers = defaultTierOptions }: { tiers?: T
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder={t("namePlaceholder")}
-          className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-3 text-sm text-text-primary transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
+          className={`w-full rounded-[10px] border px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-purple/20 ${
+            dark
+              ? "border-white/20 bg-white/10 text-white placeholder:text-white/40 focus:border-ley-cyan"
+              : "border-border-default bg-bg-surface text-text-primary focus:border-brand-purple"
+          }`}
         />
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder={t("emailPlaceholder")}
-          className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-3 text-sm text-text-primary transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
+          className={`w-full rounded-[10px] border px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-purple/20 ${
+            dark
+              ? "border-white/20 bg-white/10 text-white placeholder:text-white/40 focus:border-ley-cyan"
+              : "border-border-default bg-bg-surface text-text-primary focus:border-brand-purple"
+          }`}
         />
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder={t("messagePlaceholder")}
           rows={3}
-          className="w-full rounded-[10px] border border-border-default bg-bg-surface px-4 py-3 text-sm text-text-primary transition-all focus:border-brand-purple focus:outline-none focus:ring-2 focus:ring-brand-purple/20"
+          className={`w-full rounded-[10px] border px-4 py-3 text-sm transition-all focus:outline-none focus:ring-2 focus:ring-brand-purple/20 ${
+            dark
+              ? "border-white/20 bg-white/10 text-white placeholder:text-white/40 focus:border-ley-cyan"
+              : "border-border-default bg-bg-surface text-text-primary focus:border-brand-purple"
+          }`}
         />
       </div>
 
@@ -215,19 +235,11 @@ export default function DonationForm({ tiers = defaultTierOptions }: { tiers?: T
           {loading ? <Loader className="h-4 w-4 animate-spin" /> : <Landmark size={18} />}
           {loading ? t("processing") : amount ? t("donarConMercadoPago", { amount: `${symbol}${amount.toLocaleString()}` }) : t("donarMercadoPago")}
         </button>
-        <button
-          onClick={() => handleSubmit("stripe")}
-          disabled={loading || !amount}
-          className="flex items-center justify-center gap-2 rounded-[10px] border-2 border-brand-purple py-3 text-sm font-bold text-brand-purple transition-all hover:bg-brand-purple hover:text-white disabled:opacity-50"
-        >
-          {loading ? <Loader className="h-4 w-4 animate-spin" /> : <CreditCard size={18} />}
-          {loading ? t("processing") : amount ? t("pagarConTarjeta", { amount: `${symbol}${amount.toLocaleString()}` }) : t("pagarTarjeta")}
-        </button>
         <a
           href={DONATARIO_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-2 text-center text-xs text-text-muted underline underline-offset-2 hover:text-brand-purple"
+          className={`mt-2 text-center text-xs underline underline-offset-2 ${dark ? "text-white/50 hover:text-ley-cyan" : "text-text-muted hover:text-brand-purple"}`}
         >
           {t("donatario")}
         </a>

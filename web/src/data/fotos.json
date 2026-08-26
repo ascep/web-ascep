@@ -4,6 +4,46 @@
     "heroImage": "/images/eventos/encuentro-2025/GIS06445.webp",
     "aboutImage": "/images/equipo/GIS08548.webp",
     "retosImage": "/images/eventos/2024/20241112_102357.webp",
+    "heroSlideshow": [
+      "/images/eventos/encuentro-2025/GIS06445.webp",
+      "/images/eventos/encuentro-2025/GIS06455.webp",
+      "/images/eventos/2024/20241112_102432.webp",
+      "/images/eventos/2024/20241112_092855.webp",
+      "/images/eventos/2024/20241112_095957.webp",
+      "/images/eventos/2024/20241112_100147.webp",
+      "/images/eventos/2024/20241112_102440.webp",
+      "/images/eventos/2024/20241112_103725.webp",
+      "/images/eventos/2024/20241112_111016.webp",
+      "/images/eventos/encuentro-2025/GIS06447.webp",
+      "/images/eventos/encuentro-2025/GIS06450.webp",
+      "/images/eventos/encuentro-2025/GIS06460.webp",
+      "/images/eventos/encuentro-2025/GIS06475.webp"
+    ],
+    "caminoSectionBg": "/images/afiches/exp8-bg.webp",
+    "caminoSectionPosters": [
+      "/images/afiches/EXP8.webp",
+      "/images/afiches/EXP1.webp",
+      "/images/afiches/EXP2.webp",
+      "/images/afiches/EXP3.webp",
+      "/images/afiches/EXP4.webp",
+      "/images/afiches/EXP5.webp",
+      "/images/afiches/EXP6.webp",
+      "/images/afiches/EXP7.webp",
+      "/images/afiches/EXP10.webp",
+      "/images/afiches/EXP11.webp",
+      "/images/afiches/EXP12.webp",
+      "/images/afiches/Vaki.webp"
+    ],
+    "trayectoria": [
+      "/images/eventos/2024/20241112_092855.webp",
+      "/images/eventos/encuentro-2025/GIS06447.webp",
+      "/images/eventos/2024/20241112_092951.webp",
+      "/images/eventos/2024/20241112_095957.webp",
+      "/images/eventos/encuentro-2025/GIS06450.webp",
+      "/images/eventos/2024/20241112_100147.webp",
+      "/images/eventos/2024/20241112_102515.webp",
+      "/images/eventos/2024/20241112_111016.webp"
+    ],
     "gallery": [
       {
         "src": "https://cdn.sanity.io/images/7vvy9nrc/production/7da433239580b3d24a4f68460368b9842783fe9a-1116x1280.jpg",
@@ -103,9 +143,19 @@
       "kevin": "/images/equipo/phtos-ascep-kevin.jpg",
       "monica": "/images/equipo/phtos-ascep-monica.png",
       "jhon": "/images/equipo/phtos-ascep-jhon.png",
-      "ana": "/images/equipo/phtos-ascep.png",
-      "mafe": "/images/equipo/phtos-ascep.png"
-    }
+      "ana": "/images/equipo/phtos-ascep.jpg",
+      "mafe": "/images/equipo/eydi.jpeg"
+    },
+    "trayectoria": [
+      "/images/eventos/2024/20241112_092855.webp",
+      "/images/eventos/encuentro-2025/GIS06447.webp",
+      "/images/eventos/2024/20241112_092951.webp",
+      "/images/eventos/2024/20241112_095957.webp",
+      "/images/eventos/encuentro-2025/GIS06450.webp",
+      "/images/eventos/2024/20241112_100147.webp",
+      "/images/eventos/2024/20241112_102515.webp",
+      "/images/eventos/2024/20241112_111016.webp"
+    ]
   },
   "aliados": {
     "hero": "/images/eventos/2024/20241112_092855.webp",
@@ -195,14 +245,42 @@
     ]
   },
   "header": {
-    "leyEgresoCard": "/images/eventos/encuentro-2025/GIS06446.png",
+    "logo": {
+      "light": "/logos/03 logo ascep principal horizontal.png",
+      "dark": "/logos/12 logo ascep blanco sin slogan.png"
+    },
+    "leyEgresoCard": "/images/eventos/encuentro-2025/GIS04890.webp",
     "comoAyudarCard": "/images/eventos/encuentro-2025/GIS06447.webp"
   },
   "casasDelSaber": {
     "hero": "/images/casas-del-saber/GIS04881.webp",
     "areas": "/images/casas-del-saber/GIS04902.webp",
     "modalidades": "/images/casas-del-saber/GIS04926.webp",
-    "rutaEgreso": "/images/casas-del-saber/GIS04911.webp"
+    "rutaEgreso": "/images/casas-del-saber/GIS04911.webp",
+    "heroSlideshow": [
+      "/images/casas-del-saber/GIS04876.webp",
+      "/images/casas-del-saber/GIS04893.webp",
+      "/images/casas-del-saber/GIS04912.webp",
+      "/images/casas-del-saber/GIS04882.webp",
+      "/images/casas-del-saber/GIS04888.webp",
+      "/images/casas-del-saber/GIS04900.webp",
+      "/images/casas-del-saber/GIS04910.webp",
+      "/images/casas-del-saber/GIS04944.webp"
+    ],
+    "galleryPhotos": [
+      "/images/casas-del-saber/GIS04894.webp",
+      "/images/casas-del-saber/GIS04882.webp",
+      "/images/casas-del-saber/GIS04888.webp",
+      "/images/casas-del-saber/GIS04892.webp",
+      "/images/casas-del-saber/GIS04897.webp",
+      "/images/casas-del-saber/GIS04900.webp",
+      "/images/casas-del-saber/GIS04903.webp",
+      "/images/casas-del-saber/GIS04910.webp",
+      "/images/casas-del-saber/GIS04916.webp",
+      "/images/casas-del-saber/GIS04921.webp",
+      "/images/casas-del-saber/GIS04930.webp",
+      "/images/casas-del-saber/GIS04944.webp"
+    ]
   },
   "contacto": {
     "hero": "/images/equipo/GIS08546.webp",
@@ -248,15 +326,39 @@
     "context": "/images/eventos/2024/20241112_103406.webp"
   },
   "noticias": {
-    "hero": "/images/eventos/2024/20241112_103725.webp"
-  },
-  "participa": {
-    "hero": "/images/eventos/misc/GIS08510.webp",
-    "section": "/images/equipo/GIS08547.webp"
+    "hero": "/images/eventos/2024/20241112_103725.webp",
+    "diaDelEgresado": {
+      "hero": "/images/eventos/encuentro-2025/GIS06445.webp",
+      "gallery": [
+        "/images/eventos/encuentro-2025/GIS06446.webp",
+        "/images/eventos/encuentro-2025/GIS06450.webp",
+        "/images/eventos/encuentro-2025/GIS06453.webp",
+        "/images/eventos/encuentro-2025/GIS06460.webp",
+        "/images/eventos/encuentro-2025/GIS06470.webp",
+        "/images/eventos/encuentro-2025/GIS06475.webp"
+      ]
+    }
   },
   "transparencia": {
     "hero": "https://cdn.sanity.io/images/7vvy9nrc/production/f721860e302d326ee2755d39e0a908de56c463bc-1080x1350.png",
-    "section": "/images/eventos/2024/20241112_103402.webp"
+    "section": "/images/eventos/2024/20241112_103402.webp",
+    "pdfPreviews": [
+      "/images/pdf-previews/3-estados-financieros-2025-ascep.jpg",
+      "/images/pdf-previews/3-estados-financieros-2024-ascep-firmados.jpg",
+      "/images/pdf-previews/3-estados-financieros-2023-ascep.jpg",
+      "/images/pdf-previews/3-estados-financieros-2022-ascep.jpg",
+      "/images/pdf-previews/2-informe-de-gestion-2025-ascep.jpg",
+      "/images/pdf-previews/2-informe-de-gestion-2024-ascep-maicol-londono.jpg",
+      "/images/pdf-previews/2-informe-de-gestion-2023.jpg",
+      "/images/pdf-previews/1-registro-web-2025.jpg",
+      "/images/pdf-previews/1-registro-web-2024.jpg",
+      "/images/pdf-previews/4-rut-ascep.jpg",
+      "/images/pdf-previews/5-declaracion-renta-2023.jpg",
+      "/images/pdf-previews/6-certificado-requisitos.jpg",
+      "/images/pdf-previews/7-certificado-cargos-directivos-y-gerenciales.jpg",
+      "/images/pdf-previews/8-certificado-antecedentes-judiciales.jpg",
+      "/images/pdf-previews/9-formato-2530-2531.jpg"
+    ]
   },
   "enredate": {
     "gallery": [

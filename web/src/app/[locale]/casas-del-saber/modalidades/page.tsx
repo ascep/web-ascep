@@ -4,6 +4,7 @@ import SectionHeader from "@/components/SectionHeader";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
+import ImageParallax from "@/components/ImageParallax";
 import { Home, Users, CheckCircle2 } from "lucide-react";
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path"
@@ -46,15 +47,31 @@ export default async function ModalidadesPage({
         accent="orange"
       />
 
-      <section className="relative overflow-hidden bg-section-light py-20 sm:py-24">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            tag={t("poblacionTag")}
-            title={t("poblacionTitle")}
-            desc={t("poblacionDesc")}
-            accent="orange"
-          />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Intro a 2 columnas: evita el bloque blanco de solo texto */}
+          <div className="mb-12 grid items-center gap-10 lg:grid-cols-2">
+            <SectionHeader
+              tag={t("poblacionTag")}
+              title={t("poblacionTitle")}
+              desc={t("poblacionDesc")}
+              accent="orange"
+              align="left"
+            />
+            <AnimatedSection direction="right">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg">
+                <ImageParallax
+                  src={assetPath(fotos.casasDelSaber.galleryPhotos[8])}
+                  alt={t("poblacionTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+          </div>
           <div className="grid gap-4 md:grid-cols-3">
             {[1, 2, 3].map((n, i) => (
               <AnimatedSection key={n} direction="up" delay={i * 0.1}>
@@ -68,7 +85,7 @@ export default async function ModalidadesPage({
         </div>
       </section>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-20 sm:py-24" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.modalidades)})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.modalidades)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

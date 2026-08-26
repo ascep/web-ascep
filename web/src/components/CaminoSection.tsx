@@ -9,6 +9,7 @@ import { assetPath } from "@/lib/asset-path";
 
 type CaminoSectionProps = {
   bgImage: string;
+  posters: string[];
   tag: string;
   title: string;
   stepLabel: string;
@@ -16,32 +17,19 @@ type CaminoSectionProps = {
   nextLabel: string;
 };
 
-const POSTERS = [
-  "EXP8.webp",
-  "EXP1.webp",
-  "EXP2.webp",
-  "EXP3.webp",
-  "EXP4.webp",
-  "EXP5.webp",
-  "EXP6.webp",
-  "EXP7.webp",
-  "EXP10.webp",
-  "EXP11.webp",
-  "EXP12.webp",
-  "Vaki.webp",
-].map((src) => ({
-  src: `/images/afiches/${src}`,
-  alt: src.replace(".webp", ""),
-}));
-
 export default function CaminoSection({
   bgImage,
+  posters,
   tag,
   title,
   stepLabel,
   prevLabel,
   nextLabel,
 }: CaminoSectionProps) {
+  const POSTERS = posters.map((src) => ({
+    src,
+    alt: src.split("/").pop()?.replace(".webp", "") || "",
+  }));
   const [active, setActive] = useState(0);
   const prefersReducedMotion = useReducedMotion();
   const count = POSTERS.length;

@@ -1,20 +1,17 @@
 import { getTranslations } from "next-intl/server";
-import type { CSSProperties } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import SectionHeader from "@/components/SectionHeader";
 import PageCTA from "@/components/PageCTA";
 import MapaAlcanceASCEP from "@/components/MapaAlcanceASCEP";
-import ParallaxSection from "@/components/ParallaxSection";
-import DecoShapes from "@/components/DecoShapes";
-import CursorGlow from "@/components/CursorGlow";
-import ImageParallax from "@/components/ImageParallax";
 import AnimatedSection from "@/components/AnimatedSection";
+import ImageParallax from "@/components/ImageParallax";
+import VideoFacade from "@/components/VideoFacade";
 import WaveMask from "@/components/WaveMask";
 import CountUp from "@/components/CountUp";
-import ProgramCardGallery from "@/components/ProgramCardGallery";
-import {
-  Users, Calendar, GraduationCap, Layers, Target, Heart, Briefcase, type LucideIcon,
-} from "lucide-react";
+import DecoShapes from "@/components/DecoShapes";
+import CursorGlow from "@/components/CursorGlow";
+import { Heart, Compass, Handshake, Network, ArrowDown, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
 import { getImpactStats, getGalleryAlbums } from "@/lib/sanity/fetch";
@@ -33,25 +30,23 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   };
 }
 
+// Cifras de CONTEXTO del sistema de proteccion, no resultados de ASCEP.
+// La etiqueta de cada una conserva su periodo/alcance.
 const fallbackStats = [
-  { end: 13000, suffix: "+", label: "Jovenes egresados del sistema (2011-2024)", icon: "GraduationCap" },
-  { end: 2017, suffix: "", label: "Constitucion formal de ASCEP", icon: "Calendar" },
-  { end: 5, suffix: "+", label: "Programas activos", icon: "Target" },
-  { end: 28, suffix: "", label: "Rango de edad de atencion", icon: "Users" },
+  { end: 13000, suffix: "+", label: "Jovenes egresados del sistema (2011-2024)" },
+  { end: 2017, suffix: "", label: "Constitucion formal de ASCEP" },
+  { end: 5, suffix: "+", label: "Programas activos" },
+  { end: 28, suffix: "", label: "Rango de edad de atencion" },
 ];
-
-const iconMap: Record<string, LucideIcon> = {
-  Users, Calendar, GraduationCap, Layers, Target,
-};
 
 const statAccents = [
-  { icon: "text-ley-orange", bg: "bg-ley-orange/10" },
-  { icon: "text-ley-cyan", bg: "bg-ley-cyan/10" },
-  { icon: "text-ley-yellow", bg: "bg-ley-yellow/10" },
-  { icon: "text-ley-teal", bg: "bg-ley-teal/10" },
+  "var(--color-brand-primary)",
+  "var(--color-brand-accent)",
+  "var(--color-brand-primary-dark)",
+  "var(--color-ley-purple)",
 ];
 
-const resultadoIcons: LucideIcon[] = [Target, Users, Layers, Briefcase];
+const metodologiaIcons: LucideIcon[] = [Compass, Handshake, Network];
 
 export default async function ImpactoPage({
   params,
@@ -75,7 +70,6 @@ export default async function ImpactoPage({
         end: s.value || 0,
         suffix: s.suffix || "",
         label: s.label?.es || "",
-        icon: s.icon || "Users",
       }))
     : fallbackStats;
 
@@ -86,142 +80,168 @@ export default async function ImpactoPage({
     : [];
   const galeriaImages = cmsGaleria.length > 0 ? cmsGaleria : fallbackGaleria;
 
+  const riesgos = [1, 2, 3, 4, 5].map((i) => t(`riesgo${i}`));
+  const testimonios = [1, 2, 3].map((i) => ({
+    quote: t(`testimonio${i}`),
+    name: t(`testimonio${i}Name`),
+    role: t(`testimonio${i}Role`),
+  }));
+
   return (
     <div>
-      {/* Hero — visual only */}
-      <div
-        className="relative h-[50vh] overflow-hidden bg-ley-purple sm:h-[65vh] md:h-[75vh] lg:h-[85vh]"
-      >
+      {/* 1. HERO — video protagonista, mensaje con aire, sin tarjetas encima */}
+      <section className="relative flex min-h-[85svh] items-end overflow-hidden bg-ley-purple">
         <div aria-hidden="true" className="absolute inset-0">
-          {homeVideos.pages.impacto.hero ? (
-            <video
-              src={homeVideos.pages.impacto.hero}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          ) : (
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url("${assetPath(fotos.impacto.hero)}")` }}
-            />
-          )}
+          <video
+            src={assetPath("/videos/FONDO-WEB-16-9.mp4")}
+            poster={assetPath(fotos.impacto.hero)}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="metadata"
+            controls={false}
+            disablePictureInPicture
+            className="absolute inset-0 h-full w-full object-cover"
+          />
         </div>
         <div
           aria-hidden="true"
-          className="absolute inset-0"
+          className="absolute inset-0 z-[2]"
           style={{
             background:
-              "linear-gradient(to top, rgba(10,16,32,0.45) 0%, transparent 50%)",
+              "linear-gradient(to top, rgba(74,21,75,0.94) 0%, rgba(74,21,75,0.62) 42%, rgba(74,21,75,0.22) 72%, transparent 100%)",
           }}
         />
-      </div>
 
-      {/* Hero text — below visual */}
-      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
-        <WaveMask fill="#4A154B" flip />
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-24 sm:px-6 sm:pb-28 lg:px-8">
+          <AnimatedSection>
+            <span className="inline-block rounded-full border border-white/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+              {t("heroTag")}
+            </span>
+          </AnimatedSection>
+          <AnimatedSection delay={0.1}>
+            <h1 className="mt-6 max-w-3xl text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-4xl lg:text-[2.75rem]">
+              {t("heroTitle")}
+            </h1>
+          </AnimatedSection>
+          <AnimatedSection delay={0.18}>
+            <p className="mt-5 max-w-xl text-base leading-relaxed text-white/75 sm:text-lg">
+              {t("heroSubtitle")}
+            </p>
+          </AnimatedSection>
+          <AnimatedSection delay={0.26}>
+            <a
+              href="#desafio"
+              className="mt-9 inline-flex min-h-[48px] items-center gap-2 rounded-full bg-white px-7 py-3 text-sm font-bold text-ley-purple transition-all hover:bg-white/90"
+            >
+              {t("desafioTitle")} <ArrowDown size={16} />
+            </a>
+          </AnimatedSection>
+        </div>
+
+        {/* z-[5]: por encima del degradado (z-2), por debajo del contenido (z-10) */}
+        <WaveMask tone="cream" className="z-[5]" />
+      </section>
+
+      {/* 2. EL PROBLEMA — los 5 riesgos, lista editorial numerada (no tarjetas) */}
+      <section className="relative overflow-hidden bg-bg-cream py-16 sm:py-20">
         <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
-            <AnimatedSection direction="left" delay={0.1}>
-              <div className="overflow-hidden rounded-3xl shadow-lg">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:gap-16">
+            {/* sin lg:sticky: la seccion tiene overflow-hidden y sticky no
+                funciona de forma fiable dentro de ese contexto */}
+            <AnimatedSection direction="left">
+              <span className="mb-3 inline-block rounded-full border border-brand-accent/30 bg-brand-accent/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+                {t("porQueTag")}
+              </span>
+              <h2 className="mt-3 text-3xl font-bold text-text-primary sm:text-4xl">
+                {t("porQueTitle")}
+              </h2>
+              <p className="mt-5 text-base leading-relaxed text-text-secondary">
+                {t("porQueP2")}
+              </p>
+            </AnimatedSection>
+
+            <div className="divide-y divide-border-subtle border-y border-border-subtle">
+              {riesgos.map((riesgo, i) => (
+                <AnimatedSection key={i} direction="up" delay={i * 0.06}>
+                  <div className="flex items-baseline gap-5 py-5 sm:gap-7">
+                    <span className="shrink-0 text-2xl font-extrabold tabular-nums text-brand-accent/40 sm:text-3xl">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <p className="text-base leading-relaxed text-text-secondary sm:text-lg">
+                      {riesgo}
+                    </p>
+                  </div>
+                </AnimatedSection>
+              ))}
+            </div>
+          </div>
+        </div>
+        <WaveMask tone="white" />
+      </section>
+
+      {/* 3. POR QUE LO HACEMOS — contexto editorial, fotografia lateral */}
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <span className="mb-3 inline-block rounded-full border border-brand-primary/30 bg-brand-primary/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary-dark">
+                {t("contextTag")}
+              </span>
+              <h2 className="mt-3 text-3xl font-bold text-text-primary sm:text-4xl">
+                {t("contextTitle")}
+              </h2>
+              <p className="mt-5 text-base leading-relaxed text-text-secondary">{t("contextP1")}</p>
+              <p className="mt-4 text-base leading-relaxed text-text-secondary">{t("contextP2")}</p>
+              <p className="mt-4 text-base font-semibold leading-relaxed text-text-primary">
+                {t("contextP3")}
+              </p>
+            </AnimatedSection>
+            <AnimatedSection direction="right" delay={0.1}>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg lg:aspect-[4/5]">
                 <ImageParallax
-                  src={galeriaImages[0]}
-                  alt=""
-                  width={600}
-                  height={450}
-                  className="w-full object-cover"
+                  src={assetPath(fotos.impacto.porQueImage)}
+                  alt={t("contextTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   intensity={0.15}
-                  style={{ aspectRatio: "4/3" }}
                 />
               </div>
             </AnimatedSection>
-            <AnimatedSection direction="right">
-            <span className="mb-3 inline-block rounded-full border border-brand-accent/30 bg-brand-accent/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
-              {t("heroTag")}
-            </span>
-            <h1 className="mt-4 text-3xl font-extrabold leading-[1.08] tracking-tight text-[var(--color-text-primary)] sm:text-4xl lg:text-[2.5rem]">
-              {t("heroTitle")}
-            </h1>
-            <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--color-text-secondary)] sm:text-lg">
-              {t("heroSubtitle")}
-            </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a
-                href="#cifras"
-                className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-accent px-7 py-3 text-sm font-bold text-white transition-all hover:bg-brand-accent/90 hover:shadow-lg"
-              >
-                {t("statsTitle")}
-              </a>
-              <Link
-                href={`/${locale}/donar`}
-                className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-brand-accent/30 px-7 py-3 text-sm font-bold text-brand-accent transition-all hover:border-brand-accent/60 hover:bg-brand-accent/5"
-              >
-                {t("ctaTitle")}
-              </Link>
-            </div>
-            </AnimatedSection>
           </div>
         </div>
+        <WaveMask tone="teal" />
       </section>
 
-      <ParallaxSection
-        bgImage={assetPath(fotos.impacto.contextParallax)}
-        overlay="bg-black/70"
-        className="py-24 sm:py-32"
-      >
-        <SectionHeader
-          tag={t("contextTag")}
-          title={t("contextTitle")}
-          accent="orange"
-          dark
-        />
-        <div className="mt-12 grid items-center gap-12 lg:grid-cols-2">
-          <AnimatedSection direction="left" className="space-y-4">
-            <p className="text-base leading-relaxed text-white/80">{t("contextP1")}</p>
-            <p className="text-base leading-relaxed text-white/80">{t("contextP2")}</p>
-            <p className="text-base font-semibold leading-relaxed text-white">{t("contextP3")}</p>
-          </AnimatedSection>
-          <AnimatedSection direction="right">
-            <ImageParallax
-              src={assetPath(fotos.impacto.contextImage)}
-              alt=""
-              width={600}
-              height={450}
-              className="w-full rounded-3xl object-cover shadow-lg"
-              intensity={0.2}
-              style={{ aspectRatio: "4/3" }}
-            />
-          </AnimatedSection>
-        </div>
-      </ParallaxSection>
-
-      <section id="cifras" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32">
-        <WaveMask fill="#FFFFFF" flip />
-        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
-        <DecoShapes variant="mixed" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader tag={t("statsTag")} title={t("statsTitle")} accent="orange" dark />
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {impactStats.map((stat, i) => {
-              const Icon = iconMap[stat.icon] || Users;
-              const accent = statAccents[i % statAccents.length];
+      {/* 4. COMO ACOMPANAMOS — teal estructural */}
+      <section className="section-dark relative overflow-hidden bg-brand-primary py-16 sm:py-20">
+        <CursorGlow color="rgba(255,255,255,0.06)" size={500} opacity={0.5} />
+        <DecoShapes variant="subtle" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            tag={t("metodologiaTag")}
+            title={t("metodologiaTitle")}
+            accent="white"
+            dark
+            align="left"
+          />
+          <div className="grid gap-6 md:grid-cols-3">
+            {[1, 2, 3].map((n, i) => {
+              const Icon = metodologiaIcons[i];
               return (
-                <AnimatedSection key={stat.label} direction="up" delay={i * 0.06}>
-                  <div className="glass-card rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:bg-white/15">
-                    <div className={`mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl ${accent.bg}`}>
-                      <Icon size={24} className={accent.icon} />
+                <AnimatedSection key={n} direction="up" delay={i * 0.08}>
+                  <div className="glass-card h-full rounded-3xl p-7 transition-all hover:-translate-y-1 hover:bg-white/15">
+                    <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-white/15">
+                      <Icon size={22} className="text-white" />
                     </div>
-                    <div className="text-3xl font-bold text-white">
-                      <CountUp
-                        end={parseInt(stat.end.toString().replace(/[^0-9]/g, ""))}
-                        suffix={stat.suffix}
-                      />
-                    </div>
-                    <p className="mt-1 text-sm text-[var(--color-text-muted)]">
-                      {stat.label}
+                    <h3 className="mb-2 text-lg font-bold text-white">
+                      {t(`metodologia${n}Title`)}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-white/75">
+                      {t(`metodologia${n}Desc`)}
                     </p>
                   </div>
                 </AnimatedSection>
@@ -229,75 +249,113 @@ export default async function ImpactoPage({
             })}
           </div>
         </div>
+        <WaveMask tone="white" />
       </section>
 
-      <section className="relative overflow-hidden bg-section-light">
-        <WaveMask fill="#800080" flip />
-        <DecoShapes variant="teal" />
-        <ProgramCardGallery
-          locale={locale}
-          tag={t("porQueTag")}
-          title={t("porQueTitle")}
-          subtitle={t("porQueP1")}
-          accent="orange"
-        />
-      </section>
+      {/* 5. VOCES — los 4 videos reales son los protagonistas de la pagina */}
+      <section id="voces" className="relative overflow-hidden bg-section-light py-16 sm:py-20">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 max-w-2xl">
+            <span className="mb-3 inline-block rounded-full border border-brand-accent/30 bg-brand-accent/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
+              {t("testimoniosTag")}
+            </span>
+            <h2 className="mt-3 text-3xl font-bold text-text-primary sm:text-4xl">
+              {t("testimoniosTitle")}
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-text-secondary">
+              {t("historiaDetras")}
+            </p>
+          </AnimatedSection>
 
-      <section className="relative overflow-hidden bg-ley-purple py-24 sm:py-32">
-        <WaveMask fill="#FFFFFF" flip />
-        <div aria-hidden="true" className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-ley-cyan/10" />
-        <div aria-hidden="true" className="pointer-events-none absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-ley-orange/10" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <SectionHeader
-            tag={t("resultadosTag")}
-            title={t("resultadosTitle")}
-            highlight={t("resultadosHighlight")}
-            accent="orange"
-            dark
-            align="left"
-          />
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-1">
-              {[1, 2, 3, 4].map((i) => {
-                const Icon = resultadoIcons[i - 1];
-                return (
-                  <AnimatedSection key={i} direction="up" delay={i * 0.08}>
-                    <div className="flex gap-4 rounded-3xl border border-white/10 bg-white/5 p-6 transition-all hover:-translate-y-1 hover:bg-white/10">
-                      <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-ley-orange/10">
-                        <Icon size={22} className="text-ley-orange" />
-                      </div>
-                      <div>
-                        <p className="text-sm leading-relaxed text-purple-100">
-                          {t(`resultado${i}`)}
-                        </p>
-                      </div>
-                    </div>
-                  </AnimatedSection>
-                );
-              })}
-            </div>
-            <AnimatedSection direction="right" delay={0.15}>
-              <div className="overflow-hidden rounded-3xl shadow-xl">
-                <ImageParallax
-                  src={galeriaImages[1] || galeriaImages[0]}
-                  alt={t("resultadosTitle")}
-                  width={700}
-                  height={560}
-                  className="w-full object-cover"
-                  intensity={0.15}
-                  style={{ aspectRatio: "5/4" }}
-                />
-              </div>
-            </AnimatedSection>
+          {/* El primer video ocupa el doble: el video manda, no la tarjeta */}
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {homeVideos.testimonios.map((v, i) => (
+              <AnimatedSection
+                key={v.youtubeId}
+                direction="up"
+                delay={i * 0.08}
+                className={i === 0 ? "lg:col-span-2" : ""}
+              >
+                <VideoFacade youtubeId={v.youtubeId} title={`${v.author} — ${v.role}`} />
+                <p className="mt-3 text-base font-bold text-text-primary">{v.author}</p>
+                <p className="text-sm text-text-muted">{v.role}</p>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          {/* Testimonios en texto: cita editorial, sin tarjeta generica */}
+          <div className="mt-16 grid gap-10 md:grid-cols-3">
+            {testimonios.map((tst, i) => (
+              <AnimatedSection key={tst.name} direction="up" delay={i * 0.08}>
+                <blockquote>
+                  <p className="text-base italic leading-relaxed text-text-secondary">
+                    &ldquo;{tst.quote}&rdquo;
+                  </p>
+                  <footer className="mt-4">
+                    <p className="text-sm font-bold text-text-primary">{tst.name}</p>
+                    <p className="text-xs text-text-muted">{tst.role}</p>
+                  </footer>
+                </blockquote>
+              </AnimatedSection>
+            ))}
           </div>
         </div>
+        <WaveMask tone="cream" />
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
-        <WaveMask fill="#4A154B" flip />
-        <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+      {/* 6. EL DESAFIO EN CIFRAS — contexto, no resultados de ASCEP.
+          Fondo claro para que los numeros tengan maximo contraste. */}
+      <section id="desafio" className="relative overflow-hidden bg-bg-cream py-16 sm:py-20">
+        <DecoShapes variant="subtle" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-12 max-w-2xl">
+            <span className="mb-3 inline-block rounded-full border border-brand-primary/30 bg-brand-primary/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary-dark">
+              {t("desafioTag")}
+            </span>
+            <h2 className="mt-3 text-3xl font-bold text-text-primary sm:text-4xl">
+              {t("desafioTitle")}
+            </h2>
+          </AnimatedSection>
+
+          {/* Jerarquia: numero -> etiqueta */}
+          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+            {impactStats.map((stat, i) => (
+              <AnimatedSection key={`${stat.label}-${i}`} direction="up" delay={i * 0.08}>
+                <div className="border-t-2 border-border-default pt-5">
+                  <p
+                    className="text-4xl font-extrabold tabular-nums leading-none sm:text-5xl"
+                    style={{ color: statAccents[i % statAccents.length] }}
+                  >
+                    <CountUp end={stat.end} suffix={stat.suffix} />
+                  </p>
+                  <p className="mt-3 text-sm leading-relaxed text-text-secondary">{stat.label}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          {/* Puente hacia las historias: la idea central de la pagina */}
+          <AnimatedSection delay={0.2}>
+            <div className="mt-14 border-t border-border-subtle pt-8">
+              <p className="text-xl font-bold text-text-primary sm:text-2xl">
+                {t("historiaDetras")}
+              </p>
+              <a
+                href="#voces"
+                className="mt-4 inline-flex min-h-[44px] items-center gap-2 text-sm font-bold text-brand-accent transition-colors hover:text-brand-accent-dark"
+              >
+                {t("verVoces")} <ArrowDown size={15} className="-rotate-90" />
+              </a>
+            </div>
+          </AnimatedSection>
+        </div>
+        <WaveMask tone="white" />
+      </section>
+
+      {/* 7. PRESENCIA — mapa */}
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
               <SectionHeader
                 tag={t("presenciaTag")}
@@ -305,63 +363,93 @@ export default async function ImpactoPage({
                 highlight={t("presenciaHighlight")}
                 desc={t("presenciaDesc")}
                 align="left"
-                accent="orange"
+                accent="teal"
               />
               <AnimatedSection direction="left" delay={0.1}>
-                <div className="mt-12 flex flex-wrap gap-3">
-                  <Link
-                    href={`/${locale}/participa`}
-                    className="inline-flex min-h-[48px] items-center gap-2 rounded-xl bg-ley-orange px-6 py-3 text-sm font-bold text-white transition-all hover:bg-ley-orange/90 hover:shadow-lg"
-                  >
-                    {t("ctaParticipa")}
-                  </Link>
-                </div>
+                <Link
+                  href={`/${locale}/participa`}
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-brand-accent px-7 py-3 text-sm font-bold text-white transition-all hover:bg-brand-accent-dark hover:shadow-lg"
+                >
+                  {t("ctaParticipa")}
+                </Link>
               </AnimatedSection>
             </div>
             <AnimatedSection direction="right" delay={0.2}>
-              <div className="mx-auto w-full max-w-[560px] overflow-hidden rounded-3xl shadow-lg">
+              <div className="mx-auto w-full max-w-[560px] overflow-hidden">
                 <MapaAlcanceASCEP />
               </div>
             </AnimatedSection>
           </div>
         </div>
+        <WaveMask tone="purple" />
       </section>
 
-      <section
-        className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32"
-        style={{ "--section-bg-image": `url(${assetPath(fotos.impacto.gallery[0])})` } as CSSProperties}
-      >
-        <WaveMask fill="#FFFFFF" flip />
+      {/* 8. LO QUE BUSCAMOS — son METAS, no logros alcanzados */}
+      <section className="section-dark relative overflow-hidden bg-ley-purple py-16 sm:py-20">
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
-            tag={t("galeriaTag")}
-            title={t("galeriaTitle")}
-            highlight={t("galeriaHighlight")}
-            accent="orange"
+            tag={t("resultadosTag")}
+            title={t("resultadosTitle")}
+            highlight={t("resultadosHighlight")}
+            accent="white"
             dark
+            align="left"
           />
-          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {galeriaImages.slice(0, 8).map((src, i) => (
-              <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                <div className="group relative overflow-hidden rounded-3xl">
-                  <ImageParallax
-                    src={src}
-                    alt=""
-                    width={400}
-                    height={300}
-                    className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    intensity={0.1}
-                  />
-                  <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
+          {/* borde por item: `divide-y` en grid de 2 columnas dibuja lineas en
+              posiciones impredecibles */}
+          <div className="grid sm:grid-cols-2 sm:gap-x-12">
+            {[1, 2, 3, 4].map((n, i) => (
+              <AnimatedSection key={n} direction="up" delay={i * 0.08}>
+                <div className="flex items-baseline gap-5 border-t border-white/15 py-6">
+                  <span className="shrink-0 text-xl font-extrabold tabular-nums text-white/35">
+                    {String(n).padStart(2, "0")}
+                  </span>
+                  <p className="text-base leading-relaxed text-purple-100">{t(`resultado${n}`)}</p>
                 </div>
               </AnimatedSection>
             ))}
           </div>
         </div>
+        <WaveMask tone="cream" />
       </section>
 
+      {/* 9. GALERIA — masonry, proporciones reales */}
+      <section className="relative overflow-hidden bg-bg-cream py-16 sm:py-20">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <SectionHeader
+            tag={t("galeriaTag")}
+            title={t("galeriaTitle")}
+            highlight={t("galeriaHighlight")}
+            accent="teal"
+            align="left"
+          />
+          <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+            {galeriaImages.slice(0, 9).map((src, i) => (
+              <AnimatedSection key={i} direction="up" delay={i * 0.05} className="mb-4 break-inside-avoid">
+                <div className="overflow-hidden rounded-3xl">
+                  <Image
+                    src={src}
+                    alt=""
+                    width={0}
+                    height={0}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="block h-auto w-full"
+                    style={{ width: "100%", height: "auto" }}
+                  />
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+        {/* PageCTA es un componente global y su fondo es morado (lo comparten
+            7 paginas). La mascara respeta ese color real en vez de anunciar uno
+            que no existe. Ver nota sobre el CTA naranja en el reporte. */}
+        <WaveMask tone="purple" />
+      </section>
+
+      {/* 10. CTA */}
       <PageCTA
         title={t("ctaTitle")}
         desc={t("ctaDesc")}

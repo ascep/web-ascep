@@ -93,7 +93,7 @@ function AccordionItem({
   );
 }
 
-export default function MobileMenu() {
+export default function MobileMenu({ logoLight, logoDark }: { logoLight: string; logoDark: string }) {
   const t = useTranslations("nav");
   const locale = useLocale();
   const pathname = usePathname();
@@ -148,7 +148,7 @@ export default function MobileMenu() {
               <div className="flex items-center justify-between border-b border-border-subtle px-4 py-3">
                 <Link href={`/${locale}`} onClick={close}>
                   <Image
-                    src={assetPath(theme === "dark" ? "/logos/12 logo ascep blanco sin slogan.png" : "/logos/10 logo ascep horizontal azul.png")}
+                    src={assetPath(theme === "dark" ? logoDark : logoLight)}
                     alt="ASCEP"
                     width={120}
                     height={40}

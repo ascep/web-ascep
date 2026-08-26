@@ -1,11 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import Image from "next/image";
-import DossierHero from "@/components/DossierHero";
 import SectionHeader from "@/components/SectionHeader";
 import DecoShapes from "@/components/DecoShapes";
-import CursorGlow from "@/components/CursorGlow";
-import ImageParallax from "@/components/ImageParallax";
 import AnimatedSection from "@/components/AnimatedSection";
 import PageCTA from "@/components/PageCTA";
 import LineasAccordion from "@/components/LineasAccordion";
@@ -70,7 +67,7 @@ function SectionIntro({
           alt={alt}
           fill
           sizes="(min-width: 1024px) 50vw, 100vw"
-          className={`object-cover ${dark ? "ring-1 ring-white/10" : ""}`}
+          className="object-cover"
         />
       </div>
       <div>{children}</div>
@@ -159,20 +156,18 @@ export default async function ComoLoHacemosPage({
       </div>
 
       {/* Hero text below */}
-      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
-        <WaveMask fill="#007374" flip />
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <AnimatedSection direction="left">
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
-                <ImageParallax
+                <Image
                   src={assetPath(fotos.comoLoHacemos.estrategiasImage)}
                   alt={t("heroTitle")}
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  intensity={0.15}
                 />
               </div>
             </AnimatedSection>
@@ -208,9 +203,9 @@ export default async function ComoLoHacemosPage({
         </div>
       </section>
 
-      <section id="estrategias" className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section id="estrategias" className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             tag={t("sectionTag")}
             title={t("sectionTitle")}
@@ -232,7 +227,7 @@ export default async function ComoLoHacemosPage({
               const Icon = strategy.icon;
               return (
                 <AnimatedSection key={strategy.title} direction="up" delay={i * 0.08}>
-                  <div className="h-full rounded-3xl border border-border-default bg-white p-6 transition-all hover:-translate-y-1 hover:border-ley-cyan/40 hover:shadow-md">
+                  <div className="h-full rounded-3xl border border-border-subtle bg-white p-6">
                     <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-2xl ${strategy.iconClass}`}>
                       <Icon size={22} />
                     </div>
@@ -253,9 +248,8 @@ export default async function ComoLoHacemosPage({
         </div>
       </section>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.lineasImage)})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-brand-primary py-16 sm:py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.lineasImage)})` } as CSSProperties}>
         <WaveMask fill="#FFFFFF" flip />
-        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
@@ -306,10 +300,10 @@ export default async function ComoLoHacemosPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <WaveMask fill="#800080" flip />
         <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             tag={t("dimensionesTag")}
             title={t("dimensionesTitle")}
@@ -321,9 +315,9 @@ export default async function ComoLoHacemosPage({
               const accent = dimensionAccents[i % dimensionAccents.length];
               return (
                 <AnimatedSection key={item.title} direction="up" delay={i * 0.06}>
-                  <div className="h-full rounded-3xl border border-border-default bg-white p-6 shadow-sm transition-all hover:-translate-y-1 hover:border-ley-cyan/40 hover:shadow-md">
+                  <div className="h-full rounded-3xl border border-border-subtle bg-white p-6">
                     <div className={`mb-3 flex h-10 w-10 items-center justify-center rounded-xl ${accent.bg}`}>
-                      <CheckCircle2 size={18} className={accent.icon} />
+                      <span className={`text-sm font-bold ${accent.icon}`}>{String(i + 1).padStart(2, "0")}</span>
                     </div>
                     <h3 className="mb-1 font-bold text-[var(--color-text-primary)]">{item.title}</h3>
                     <p className="text-sm text-[var(--color-text-muted)]">{item.desc}</p>
@@ -335,9 +329,8 @@ export default async function ComoLoHacemosPage({
         </div>
       </section>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.estrategiasImage)})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-brand-primary py-16 sm:py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.comoLoHacemos.estrategiasImage)})` } as CSSProperties}>
         <WaveMask fill="#FFFFFF" flip />
-        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
@@ -363,7 +356,7 @@ export default async function ComoLoHacemosPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <WaveMask fill="#800080" flip />
         <DecoShapes variant="teal" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -377,13 +370,12 @@ export default async function ComoLoHacemosPage({
             {galeria.map((src, i) => (
               <AnimatedSection key={`${src}-${i}`} direction="up" delay={i * 0.06} className="mb-4 break-inside-avoid">
                 <div className="group relative overflow-hidden rounded-3xl">
-                  <ImageParallax
+                  <Image
                     src={assetPath(src)}
                     alt={t("galeriaTitle")}
-                    width={0}
-                    height={0}
-                    className="transition-transform duration-500 group-hover:scale-105"
-                    intensity={0.1}
+                    width={600}
+                    height={400}
+                    className="w-full rounded-3xl object-cover"
                   />
                 </div>
               </AnimatedSection>

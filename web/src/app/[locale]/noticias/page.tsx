@@ -86,7 +86,7 @@ export default async function NoticiasPage({
       category: "eventos",
       categoryLabel: t("eventos"),
       ctaLabel: t("leerMas"),
-      bgImage: assetPath("/images/eventos/encuentro-2025/GIS06445.webp"),
+      bgImage: assetPath(fotos.noticias.diaDelEgresado.hero),
     },
     ...noticias
       .filter((n): n is NoticiaWithSlug => Boolean(n.slug?.current))
@@ -125,9 +125,9 @@ export default async function NoticiasPage({
       </div>
 
       {/* Hero text */}
-      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mx-auto max-w-3xl text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-accent/30 bg-brand-accent/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
               {t("categorias")}
@@ -143,9 +143,9 @@ export default async function NoticiasPage({
       </section>
 
       {/* Cards grid */}
-      <section id="categorias" className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section id="categorias" className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <NoticiasFilterGrid locale={locale} categories={categoryOptions} cards={cards} />
         </div>
       </section>

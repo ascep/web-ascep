@@ -136,9 +136,9 @@ export default async function IncidenciaPage({
       </div>
 
       {/* Hero text */}
-      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Izquierda — imagen */}
             <AnimatedSection direction="left">
@@ -204,9 +204,9 @@ export default async function IncidenciaPage({
       </section>
 
       {/* Que es — texto izquierda + imagen derecha */}
-      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Izquierda — texto */}
             <AnimatedSection direction="left">
@@ -257,7 +257,7 @@ export default async function IncidenciaPage({
       </div>
 
       {/* Objetivos Especificos — texto izquierda + imagen derecha (dark) */}
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${leyGallery[1] || heroImage})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${leyGallery[1] || heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -302,9 +302,9 @@ export default async function IncidenciaPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             tag="Lineas"
             title="Lineas de"
@@ -331,7 +331,7 @@ export default async function IncidenciaPage({
         </div>
       </section>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${leyGallery[5] || heroImage})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${leyGallery[5] || heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

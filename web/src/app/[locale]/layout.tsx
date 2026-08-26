@@ -33,7 +33,7 @@ export default async function LocaleLayout({
       <ThemeProvider>
         <ScrollProgress />
         <TopBar />
-        <Header comoAyudarCard={fotos.header.comoAyudarCard} />
+        <Header comoAyudarCard={fotos.header.comoAyudarCard} logoLight={fotos.header.logo.light} logoDark={fotos.header.logo.dark} />
         <main className="flex-1 pb-24 md:pb-0">{children}</main>
         <MobileTabBar />
         <Footer />

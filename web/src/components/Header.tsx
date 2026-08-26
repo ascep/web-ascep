@@ -44,6 +44,8 @@ type NavGroup = {
 
 type HeaderProps = {
   comoAyudarCard: string;
+  logoLight: string;
+  logoDark: string;
 };
 
 const getNavStructure = (comoAyudarImage: string): NavGroup[] => [
@@ -93,7 +95,7 @@ const getNavStructure = (comoAyudarImage: string): NavGroup[] => [
 
 type DropdownState = string | null;
 
-export default function Header({ comoAyudarCard }: HeaderProps) {
+export default function Header({ comoAyudarCard, logoLight, logoDark }: HeaderProps) {
   const t = useTranslations("nav");
   const locale = useLocale();
   const { theme } = useTheme();
@@ -259,7 +261,7 @@ export default function Header({ comoAyudarCard }: HeaderProps) {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <Link href={`/${locale}`} className="flex items-center gap-2">
           <Image
-            src={assetPath(theme === "dark" ? "/logos/12 logo ascep blanco sin slogan.png" : "/logos/10 logo ascep horizontal azul.png")}
+            src={assetPath(theme === "dark" ? logoDark : logoLight)}
             alt="ASCEP"
             width={144}
             height={48}
@@ -414,7 +416,7 @@ export default function Header({ comoAyudarCard }: HeaderProps) {
         </div>
       </div>
     </header>
-    <MobileMenu />
+    <MobileMenu logoLight={logoLight} logoDark={logoDark} />
     <SearchDialog open={searchOpen} onClose={() => setSearchOpen(false)} />
   </>
   );

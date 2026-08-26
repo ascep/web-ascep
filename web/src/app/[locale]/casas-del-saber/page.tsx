@@ -11,7 +11,6 @@ import { Home, Layers, BookOpen, Compass, Users, Heart, Star, Target } from "luc
 import type { CSSProperties } from "react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { casasDelSaberGallery, casasDelSaberHeroImages } from "@/data/casas-del-saber-photos";
 import { homeVideos } from "@/data/homeVideos";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
@@ -62,7 +61,7 @@ export default async function CasasDelSaberPage({
       {/* 1. Hero — slideshow */}
       <CasasHero
         slides={slides}
-        images={casasDelSaberHeroImages.map(assetPath)}
+        images={fotos.casasDelSaber.heroSlideshow.map(assetPath)}
         ctaLabel={t("heroCta")}
         ctaHref={`/${locale}/casas-del-saber/modalidades`}
         secondaryLabel={t("heroSecondary")}
@@ -70,9 +69,9 @@ export default async function CasasDelSaberPage({
       />
 
       {/* 2. Que es Casas del Saber — 2 col */}
-      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <AnimatedSection direction="left">
               <span className="mb-3 inline-block rounded-full border border-brand-purple/30 bg-brand-purple/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
@@ -123,12 +122,12 @@ export default async function CasasDelSaberPage({
 
       {/* 3. Proposito — dark section */}
       <section
-        className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32"
-        style={{ "--section-bg-image": `url(${assetPath(casasDelSaberHeroImages[2] || fotos.casasDelSaber.hero)})` } as CSSProperties}
+        className="section-bg-image section-dark relative overflow-hidden bg-ley-purple py-16 sm:py-20"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.heroSlideshow[2] || fotos.casasDelSaber.hero)})` } as CSSProperties}
       >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-6 text-center">
             <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("propositoTag")}
@@ -151,9 +150,9 @@ export default async function CasasDelSaberPage({
       </section>
 
       {/* 4. Navegacion — 4 cards to sub-pages */}
-      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-orange/30 bg-brand-orange/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-orange">
               {t("sectionTag")}
@@ -187,12 +186,12 @@ export default async function CasasDelSaberPage({
 
       {/* 5. Estructura y roles */}
       <section
-        className="section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32"
-        style={{ "--section-bg-image": `url(${assetPath(casasDelSaberGallery[3] || fotos.casasDelSaber.hero)})` } as CSSProperties}
+        className="section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20"
+        style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.galleryPhotos[3] || fotos.casasDelSaber.hero)})` } as CSSProperties}
       >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("estructuraTag")}
@@ -221,10 +220,10 @@ export default async function CasasDelSaberPage({
       </section>
 
       {/* 6. Galeria */}
-      {casasDelSaberGallery.length > 0 && (
-        <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      {fotos.casasDelSaber.galleryPhotos.length > 0 && (
+        <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
           <DecoShapes variant="teal" />
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <AnimatedSection className="mb-12 text-center">
               <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
                 {t("galeriaTag")}
@@ -237,7 +236,7 @@ export default async function CasasDelSaberPage({
               </p>
             </AnimatedSection>
             <div className="columns-1 gap-3 sm:columns-2 lg:columns-3">
-              {casasDelSaberGallery.map((src, i) => (
+              {fotos.casasDelSaber.galleryPhotos.map((src, i) => (
                 <AnimatedSection key={src} direction="up" delay={i * 0.03} className="mb-3 break-inside-avoid">
                   <div className="group relative overflow-hidden rounded-3xl">
                     <Image
@@ -258,10 +257,10 @@ export default async function CasasDelSaberPage({
 
       {/* 7. Testimonios en video */}
       {homeVideos.programas["casas-del-saber"]?.testimonials && homeVideos.programas["casas-del-saber"].testimonials.length > 0 && (
-        <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${assetPath(casasDelSaberHeroImages[5] || fotos.casasDelSaber.hero)})` } as CSSProperties}>
+        <section className="section-dark section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.heroSlideshow[5] || fotos.casasDelSaber.hero)})` } as CSSProperties}>
           <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
           <DecoShapes variant="teal" />
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <AnimatedSection className="mb-12 text-center">
               <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
                 Testimonios
@@ -285,7 +284,7 @@ export default async function CasasDelSaberPage({
       )}
 
       {/* 8. CTA */}
-      <section className="relative overflow-hidden bg-brand-purple py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-brand-purple py-16 sm:py-20">
         <div className="absolute -left-16 -top-16 h-64 w-64 rounded-full bg-brand-teal/10" />
         <div className="absolute -right-16 -bottom-16 h-48 w-48 rounded-full bg-brand-orange/10" />
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">

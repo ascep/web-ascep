@@ -25,7 +25,6 @@ import {
 import PostShare from "@/components/PostShare";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { casasDelSaberGallery } from "@/data/casas-del-saber-photos";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -309,7 +308,7 @@ export default async function CasasPostPage({
                   {t("galeriaDesc")}
                 </p>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-                  {casasDelSaberGallery.slice(0, 6).map((src, i) => (
+                  {fotos.casasDelSaber.galleryPhotos.slice(0, 6).map((src: string, i: number) => (
                     <a
                       key={src}
                       href={assetPath(src)}

@@ -141,7 +141,7 @@ export default async function EnredatePage({
       />
 
       {/* 4. Donar — formulario real */}
-      <section id="donar" className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section id="donar" className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-start gap-12 lg:grid-cols-2">
@@ -184,7 +184,7 @@ export default async function EnredatePage({
           </div>
         </div>
       </section>
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
+      <section className="section-bg-image section-dark relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -207,7 +207,7 @@ export default async function EnredatePage({
       />
 
       {/* 6. Podcast */}
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
+      <section className="section-bg-image section-dark relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="orange" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -223,7 +223,7 @@ export default async function EnredatePage({
       </section>
 
       {/* 7. Voluntariado — texto izq + imagen der */}
-      <section id="voluntariado" className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section id="voluntariado" className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
@@ -288,7 +288,7 @@ export default async function EnredatePage({
       </section>
 
       {/* 8. Plan Padrino — proceso + perfiles */}
-      <section id="plan-padrino" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${assetPath(fotos.planPadrino.section)})` } as CSSProperties}>
+      <section id="plan-padrino" className="section-dark section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.planPadrino.section)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -378,7 +378,7 @@ export default async function EnredatePage({
       />
 
       {/* 12. CTA final */}
-      <section className="relative overflow-hidden bg-ley-purple py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-ley-purple py-16 sm:py-20">
         <div aria-hidden="true" className="pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-ley-cyan/10" />
         <div aria-hidden="true" className="pointer-events-none absolute -bottom-16 -right-16 h-64 w-64 rounded-full bg-ley-orange/10" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

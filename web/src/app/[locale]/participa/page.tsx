@@ -67,9 +67,9 @@ export default async function ParticipaPage({
       </div>
 
       {/* Hero text */}
-      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <AnimatedSection direction="left">
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
@@ -106,7 +106,7 @@ export default async function ParticipaPage({
         </div>
       </section>
 
-      <section id="formas" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${assetPath(fotos.participa.section)})` } as CSSProperties}>
+      <section id="formas" className="section-dark section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.participa.section)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

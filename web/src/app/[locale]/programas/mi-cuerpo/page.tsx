@@ -1,20 +1,15 @@
-import type { CSSProperties } from "react";
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import SectionHeader from "@/components/SectionHeader";
 import PageCTA from "@/components/PageCTA";
 import AnimatedSection from "@/components/AnimatedSection";
-import DecoShapes from "@/components/DecoShapes";
-import CursorGlow from "@/components/CursorGlow";
-import ImageParallax from "@/components/ImageParallax";
 import ProgramGallerySection from "@/components/ProgramGallerySection";
 import ProgramVideosSection from "@/components/ProgramVideosSection";
 import { Heart, MapPin, Scale, Shield, AlertTriangle, Handshake, Users, Star, Brain, CheckCircle, type LucideIcon } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
-import { existsSync } from "fs";
-import { join } from "path";
-import { getProgramBySlug, getDocumentsByCategory, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
-import { fileUrl, imageUrl } from "@/lib/sanity/image";
+import { getProgramBySlug, getVideos, localize, sanityImage } from "@/lib/sanity/fetch";
+import { imageUrl } from "@/lib/sanity/image";
 import YoutubeHeroBg from "@/components/YoutubeHeroBg";
 import { homeVideos } from "@/data/homeVideos";
 
@@ -59,18 +54,6 @@ const fallbackSecundarios = [
   "Integrar los grupos de trabajo a otros grupos, colectivos y redes externas a ICBF y los centros de proteccion.",
 ];
 
-const localRevistas = [
-  "Ana P", "Ana Sofia", "Claudia Celina", "Dayana", "Eliana", "Gisell",
-  "Ingrid T", "Karen J", "Kata", "Laura", "Mabel", "Maria Camila",
-  "Mercy", "Milena", "Nicol", "Sahary", "Saray", "Sofia",
-  "Tati", "Tina", "Yeri", "Yerli",
-]
-  .filter((name) => existsSync(join(process.cwd(), "public", "documents", "avenza joven pdf", "revistas", `${name}.pdf`)))
-  .map((name) => ({
-    title: `Revista ${name}`,
-    href: assetPath(`/documents/avenza joven pdf/revistas/${name}.pdf`),
-  }));
-
 export default async function MiCuerpoPage({
   params,
 }: {
@@ -81,33 +64,9 @@ export default async function MiCuerpoPage({
   const t = await getTranslations({ locale, namespace: "programas" });
   const cms = await getProgramBySlug("mi-cuerpo");
 
-  const [revistas, informes, videos] = await Promise.all([
-    getDocumentsByCategory("revistas"),
-    getDocumentsByCategory("informes"),
+  const [videos] = await Promise.all([
     getVideos(locale),
   ]);
-
-  const informeIntegrado = informes.find((r) =>
-    /informe integrado/i.test(localize(r.title, locale) || localize(r.title, "es") || ""),
-  );
-  const informeItem = informeIntegrado
-    ? [{
-        title: localize(informeIntegrado.title, locale) || "Informe Integrado ASCEP 2018",
-        href: informeIntegrado.externalUrl || fileUrl(informeIntegrado.file) || "#",
-        cover: imageUrl(informeIntegrado.previewImage, 240, 320) || undefined,
-      }]
-    : [];
-
-  const revistasList = [
-    ...informeItem,
-    ...(revistas.length > 0
-      ? revistas.map((r) => ({
-          title: localize(r.title, locale) || "Revista",
-          href: r.externalUrl || fileUrl(r.file) || "#",
-          cover: imageUrl(r.previewImage, 240, 320) || undefined,
-        }))
-      : localRevistas),
-  ];
 
   const videoTabs = [
     { id: "testimonios", label: t("videoTabTestimonios") },
@@ -128,10 +87,6 @@ export default async function MiCuerpoPage({
 
   const heroImage = sanityImage(cms?.heroImage) || assetPath(fotos.home.gallery[0].src);
   const logoImage = sanityImage(cms?.programLogo) || assetPath(fotos.programas.cards.miCuerpo.image);
-  // Fotos reales de actividades para las secciones oscuras, en vez de usar
-  // siempre el logo del programa como fondo.
-  const supportImage1 = assetPath(fotos.impacto.gallery[6]);
-  const supportImage2 = assetPath(fotos.impacto.gallery[7]);
 
   return (
     <>
@@ -144,27 +99,18 @@ export default async function MiCuerpoPage({
       </div>
 
       {/* Hero text — imagen izquierda + texto derecha */}
-      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
-        <DecoShapes variant="teal" />
+      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
-            {/* Izquierda — imagen */}
+            {/* Izquierda — logo */}
             <AnimatedSection direction="left">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-                <ImageParallax
-                  src={logoImage}
-                  alt="Mi Cuerpo, Mi Sexualidad, Mi Vida"
-                  fill
-                  className="object-contain p-8"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  intensity={0.15}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
-                <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-bold text-ley-purple backdrop-blur-sm">
-                  <Heart size={16} className="text-[#9333ea]" />
-                  Programa
-                </div>
-              </div>
+              <Image
+                src={logoImage}
+                alt="Mi Cuerpo, Mi Sexualidad, Mi Decision"
+                width={1516}
+                height={606}
+                className="w-full object-contain"
+              />
             </AnimatedSection>
 
             {/* Derecha — texto */}
@@ -206,12 +152,10 @@ export default async function MiCuerpoPage({
         </div>
       </section>
 
-      {/* Que es — texto izquierda + imagen derecha */}
+      {/* Que es — texto izquierda + logo derecha */}
       <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
-        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
-            {/* Izquierda — texto */}
             <AnimatedSection direction="left">
               <span className="mb-3 inline-block rounded-full border border-[#9333ea]/30 bg-[#9333ea]/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-[#9333ea]">
                 Informacion
@@ -226,30 +170,23 @@ export default async function MiCuerpoPage({
               </div>
             </AnimatedSection>
 
-            {/* Derecha — imagen */}
             <AnimatedSection direction="right">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-                <ImageParallax
-                  src={logoImage}
-                  alt="Mi Cuerpo, Mi Sexualidad, Mi Decision"
-                  fill
-                  className="object-contain p-8"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  intensity={0.15}
-                />
-              </div>
+              <Image
+                src={logoImage}
+                alt="Mi Cuerpo, Mi Sexualidad, Mi Decision"
+                width={1516}
+                height={606}
+                className="w-full object-contain"
+              />
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* Objetivo General — texto izquierda + imagen derecha (dark) */}
-      <section id="objetivos" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${supportImage1})` } as CSSProperties}>
-        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
-        <DecoShapes variant="mixed" />
+      {/* Objetivo General */}
+      <section id="objetivos" className="section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
-            {/* Izquierda — texto */}
             <AnimatedSection direction="left">
               <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
                 Objetivo
@@ -262,18 +199,14 @@ export default async function MiCuerpoPage({
               </p>
             </AnimatedSection>
 
-            {/* Derecha — imagen */}
             <AnimatedSection direction="right">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
-                <ImageParallax
-                  src={heroImage}
-                  alt="Objetivo General"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  intensity={0.1}
-                />
-              </div>
+              <Image
+                src={heroImage}
+                alt="Objetivo General"
+                width={6000}
+                height={3376}
+                className="w-full object-cover"
+              />
             </AnimatedSection>
           </div>
         </div>
@@ -281,7 +214,6 @@ export default async function MiCuerpoPage({
 
       {/* Objetivos Especificos */}
       <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
-        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             tag="Objetivos"
@@ -292,7 +224,7 @@ export default async function MiCuerpoPage({
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2">
             {objetivosSecundarios.map((item, i) => (
               <AnimatedSection key={i} direction="up" delay={i * 0.06}>
-                <div className="flex gap-4 rounded-3xl border border-border-default bg-bg-card p-6 transition-all hover:shadow-lg">
+                <div className="flex gap-4 rounded-3xl border border-border-default bg-bg-card p-6">
                   <CheckCircle size={20} className="mt-0.5 shrink-0 text-[#9333ea]" />
                   <p className="text-sm leading-relaxed text-[var(--color-text-secondary)]">{item}</p>
                 </div>
@@ -303,7 +235,6 @@ export default async function MiCuerpoPage({
       </section>
 
       <section id="componentes" className="relative overflow-hidden bg-section-light py-24 sm:py-32">
-        <DecoShapes variant="teal" />
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             tag="Componentes"
@@ -317,7 +248,7 @@ export default async function MiCuerpoPage({
               const accent = compAccents[i % compAccents.length];
               return (
                 <AnimatedSection key={comp.title} direction="up" delay={i * 0.06}>
-                  <div className="rounded-3xl border border-ley-fuchsia/20 bg-bg-card p-6 text-center transition-all hover:-translate-y-1 hover:shadow-md">
+                  <div className="rounded-3xl border border-ley-fuchsia/20 bg-bg-card p-6 text-center">
                     <div className={`mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl ${accent.bg}`}>
                       <Icon size={22} className={accent.icon} />
                     </div>
@@ -331,9 +262,7 @@ export default async function MiCuerpoPage({
         </div>
       </section>
 
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${supportImage2})` } as CSSProperties}>
-        <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
-        <DecoShapes variant="mixed" />
+      <section className="section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader
             tag={t("resultadosTitle2")}
@@ -345,7 +274,7 @@ export default async function MiCuerpoPage({
           <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-3">
             {[1, 2, 3].map((ri, i) => (
               <AnimatedSection key={ri} direction="up" delay={i * 0.08}>
-                <div className="glass-card flex h-full flex-col items-center rounded-3xl p-6 text-center transition-all hover:-translate-y-1 hover:bg-white/15">
+                <div className="glass-card flex h-full flex-col items-center rounded-3xl p-6 text-center">
                   <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-ley-fuchsia/10">
                     <Star size={22} className="text-ley-fuchsia" />
                   </div>
@@ -360,7 +289,7 @@ export default async function MiCuerpoPage({
       <ProgramGallerySection
         images={fotos.impacto.gallery.slice(0, 8)}
         overlayLabel="Mi Cuerpo, Mi Sexualidad, Mi Decision"
-        magazines={revistasList}
+        magazines={[]}
         locale={locale}
       />
 

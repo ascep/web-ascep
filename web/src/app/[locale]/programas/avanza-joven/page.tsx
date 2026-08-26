@@ -259,9 +259,9 @@ export default async function AvanzaJovenPage({
       </section>
 
       {/* 2. Que es — texto izquierda + video/foto derecha */}
-      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             {/* Izquierda — texto */}
             <AnimatedSection direction="left">
@@ -309,9 +309,9 @@ export default async function AvanzaJovenPage({
       </section>
 
       {/* 4. Proceso — video izquierda + pasos derecha */}
-      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-start gap-12 lg:grid-cols-2">
             {/* Izquierda — video */}
             <AnimatedSection direction="left">
@@ -353,7 +353,7 @@ export default async function AvanzaJovenPage({
       </section>
 
       {/* 5. Objetivo General — texto izquierda + stats/derecha */}
-      <section className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
+      <section className="section-dark section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -409,9 +409,9 @@ export default async function AvanzaJovenPage({
       </section>
 
       {/* 6. Objetivos Especificos — grid 2 cols con iconos */}
-      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <SectionHeader tag="Objetivos" title="Objetivos" highlight="Especificos" accent="cyan" />
           <div className="mx-auto mt-12 grid max-w-5xl gap-5 sm:grid-cols-2">
             {objetivos.map((obj, i) => (
@@ -430,7 +430,7 @@ export default async function AvanzaJovenPage({
       </section>
 
       {/* 7. Modulos — dark grid */}
-      <section id="modulos" className="section-dark section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
+      <section id="modulos" className="section-dark section-bg-image relative overflow-hidden bg-ley-purple py-16 sm:py-20" style={{ "--section-bg-image": `url(${heroImage})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -460,9 +460,9 @@ export default async function AvanzaJovenPage({
       </section>
 
       {/* 8. Resultados — texto izquierda + cards derecha */}
-      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-start gap-12 lg:grid-cols-2">
             {/* Izquierda — texto */}
             <AnimatedSection direction="left">
@@ -520,7 +520,7 @@ export default async function AvanzaJovenPage({
       <CtaBanner
         title={t("avanzaCtaTitle")}
         description={t("avanzaCtaDesc")}
-        href="/como-ayudar"
+        href={`/${locale}/como-ayudar`}
         buttonLabel={t("avanzaCtaBtn")}
       />
     </>

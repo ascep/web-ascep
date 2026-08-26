@@ -3,7 +3,7 @@
 import { useTranslations, useLocale } from "next-intl";
 import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Landmark, CreditCard, ExternalLink } from "lucide-react";
+import { X, Landmark, ExternalLink } from "lucide-react";
 
 const DONATARIO_URL = "https://donatario.com/recaudo/8cec07d1-f20c-4e30-adb1-5f4eedd9de2a";
 
@@ -64,26 +64,7 @@ export default function DonationSheet({
                     Mercado Pago
                   </div>
                   <div className="text-xs text-text-muted">
-                    Paga con PSE, Nequi, Daviplata o tarjeta (COP)
-                  </div>
-                </div>
-                <ExternalLink size={18} className="text-text-muted" />
-              </Link>
-
-              <Link
-                href={`/${locale}/donar?method=stripe`}
-                onClick={onClose}
-                className="flex items-center gap-4 rounded-[10px] border border-brand-purple/20 bg-brand-purple/5 p-4 transition-colors hover:bg-brand-purple/10"
-              >
-                <div className="flex h-12 w-12 items-center justify-center rounded-[10px] bg-brand-purple text-white">
-                  <CreditCard size={22} />
-                </div>
-                <div className="flex-1">
-                  <div className="text-sm font-bold text-text-primary">
-                    Stripe
-                  </div>
-                  <div className="text-xs text-text-muted">
-                    Paga con tarjeta de cr\u00e9dito internacional (USD)
+                    PSE, Nequi, Daviplata o tarjeta nacional e internacional
                   </div>
                 </div>
                 <ExternalLink size={18} className="text-text-muted" />

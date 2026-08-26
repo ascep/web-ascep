@@ -24,7 +24,7 @@ export const metadata: Metadata = {
       "Somos un grupo de personas egresadas del Sistema de Proteccion Estatal de Colombia que trabajamos para transformar la vida de jovenes en el sistema de proteccion.",
     images: [
       {
-        url: "/logos/10%20logo%20ascep%20horizontal%20azul.png",
+        url: "/logos/03%20logo%20ascep%20principal%20horizontal.png",
         width: 1200,
         height: 630,
         alt: "ASCEP",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     title: "ASCEP - Asociacion de Egresados del Sistema de Proteccion Estatal",
     description:
       "Somos un grupo de personas egresadas del Sistema de Proteccion Estatal de Colombia que trabajamos para transformar la vida de jovenes en el sistema de proteccion.",
-    images: ["/logos/10%20logo%20ascep%20horizontal%20azul.png"],
+    images: ["/logos/03%20logo%20ascep%20principal%20horizontal.png"],
   },
 };
 
@@ -50,12 +50,15 @@ export default async function RootLayout({
   return (
     <html lang={locale} className={`${inter.variable} h-full antialiased overflow-x-hidden`} suppressHydrationWarning>
       <head>
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#019E9F" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="ASCEP" />
-        <link rel="apple-touch-icon" href="/logos/10%20logo%20ascep%20horizontal%20azul.png" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -65,7 +68,7 @@ export default async function RootLayout({
               name: "ASCEP",
               alternateName: "Asociación de Egresados del Sistema de Protección Estatal",
               url: "https://ascep.org",
-              logo: "https://ascep.org/logos/10%20logo%20ascep%20horizontal%20azul.png",
+              logo: "https://ascep.org/logos/03%20logo%20ascep%20principal%20horizontal.png",
               description: "Somos un grupo de personas egresadas del Sistema de Protección Estatal de Colombia que trabajamos para transformar la vida de jóvenes en el sistema de protección.",
               address: {
                 "@type": "PostalAddress",

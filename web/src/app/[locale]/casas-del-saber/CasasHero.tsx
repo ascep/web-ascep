@@ -46,7 +46,7 @@ export default function CasasHero({
   const dur = prefersReduced ? 0 : 0.6;
 
   return (
-    <section className="relative min-h-[85vh] overflow-hidden bg-purple-bg">
+    <section className="relative min-h-[85vh] overflow-hidden bg-ley-purple">
       <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
       <DecoShapes variant="mixed" />
 

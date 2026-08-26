@@ -3,6 +3,7 @@ import DossierHero from "@/components/DossierHero";
 import AnimatedSection from "@/components/AnimatedSection";
 import CursorGlow from "@/components/CursorGlow";
 import DecoShapes from "@/components/DecoShapes";
+import ImageParallax from "@/components/ImageParallax";
 import type { CSSProperties } from "react";
 import { BookOpen, Monitor, Palette, Heart } from "lucide-react";
 import { assetPath } from "@/lib/asset-path";
@@ -81,18 +82,33 @@ export default async function LineasPage({
         accent="orange"
       />
 
-      <section className="section-bg-image section-dark relative overflow-hidden bg-purple-bg py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.areas)})` } as CSSProperties}>
+      <section className="section-bg-image section-dark relative overflow-hidden bg-ley-purple py-20" style={{ "--section-bg-image": `url(${assetPath(fotos.casasDelSaber.areas)})` } as CSSProperties}>
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-12 text-center">
-            <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
-              {t("sectionTag")}
-            </span>
-            <h2 className="text-3xl font-bold text-white sm:text-4xl">
-              {t("sectionTitle")}
-            </h2>
-          </AnimatedSection>
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          {/* Intro a 2 columnas: da presencia a la fotografia real del programa */}
+          <div className="mb-12 grid items-center gap-10 lg:grid-cols-2">
+            <AnimatedSection direction="left">
+              <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
+                {t("sectionTag")}
+              </span>
+              <h2 className="text-3xl font-bold text-white sm:text-4xl">
+                {t("sectionTitle")}
+              </h2>
+            </AnimatedSection>
+            <AnimatedSection direction="right">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-lg">
+                <ImageParallax
+                  src={assetPath(fotos.casasDelSaber.galleryPhotos[9])}
+                  alt={t("sectionTitle")}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  intensity={0.15}
+                />
+              </div>
+            </AnimatedSection>
+          </div>
           <div className="grid gap-6 lg:grid-cols-2">
             {lineas.map((linea, i) => {
               const Icon = linea.icon;

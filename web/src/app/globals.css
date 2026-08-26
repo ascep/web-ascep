@@ -46,6 +46,8 @@
   --color-text-muted: #71717A;
   --color-border-subtle: #E4E4E7;
   --color-border-default: #D4D4D8;
+  /* Superficie de descanso del ritmo cromatico (crema institucional) */
+  --color-bg-cream: #E8F4F4;
 
   --atmospheric-teal: radial-gradient(ellipse 80% 60% at 20% 30%, #019E9F15 0%, transparent 60%);
   --atmospheric-orange: radial-gradient(ellipse 60% 50% at 80% 70%, #EC662010 0%, transparent 50%);
@@ -63,12 +65,14 @@
   --color-text-muted: #6B6B82;
   --color-border-subtle: #2A2A3E;
   --color-border-default: #3A3A52;
+  --color-bg-cream: #12181C;
 }
 
 .bg-bg-base { background-color: var(--color-bg-base); }
 .bg-bg-surface { background-color: var(--color-bg-surface); }
 .bg-bg-elevated { background-color: var(--color-bg-elevated); }
 .bg-bg-card { background-color: var(--color-bg-card); }
+.bg-bg-cream { background-color: var(--color-bg-cream); }
 .text-text-primary { color: var(--color-text-primary); }
 .text-text-secondary { color: var(--color-text-secondary); }
 .text-text-muted { color: var(--color-text-muted); }
@@ -188,6 +192,22 @@ textarea:focus-visible,
 @keyframes float-2 {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(5px, -10px) scale(1.02); }
+}
+
+/* ZPrime toast animation */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-toast-in {
+  animation: toast-in 0.3s ease-out;
 }
 
 @media (prefers-reduced-motion: reduce) {

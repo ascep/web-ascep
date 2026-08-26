@@ -94,11 +94,11 @@ const fallbackFaq = [
   },
   {
     question: "¿Puedo hacer una donación recurrente?",
-    answer: "Sí. Puedes configurar donaciones mensuales a través de Mercado Pago o Stripe seleccionando el monto de tu preferencia. También puedes contactarnos para establecer un Plan Padrino con aportes periódicos.",
+    answer: "Sí. Puedes configurar donaciones mensuales a través de Mercado Pago seleccionando el monto de tu preferencia. También puedes contactarnos para establecer un Plan Padrino con aportes periódicos.",
   },
   {
     question: "¿Qué métodos de pago aceptan?",
-    answer: "Aceptamos pagos con tarjeta de crédito, débito (a través de Mercado Pago y Stripe), y también donaciones por PSE, Nequi y efectivo a través de Donatario.",
+    answer: "Aceptamos pagos con tarjeta de crédito y débito, nacional o internacional, a través de Mercado Pago, y también donaciones por PSE, Nequi y efectivo a través de Donatario.",
   },
   {
     question: "¿Cómo sé que mi donación llegó?",
@@ -211,12 +211,12 @@ export default async function DonarPage({
 
       {/* Impact stats */}
       <section
-        className="section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32 section-bg-image"
+        className="section-dark relative overflow-hidden bg-ley-purple py-16 sm:py-20 section-bg-image"
         style={{ "--section-bg-image": `url(${assetPath(fotos.donar.gallery[0].src)})` } as CSSProperties}
       >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("impactoTag")}
@@ -248,9 +248,9 @@ export default async function DonarPage({
       </section>
 
       {/* Donation tiers */}
-      <section         className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section         className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
             <h3 className="text-2xl font-bold text-[var(--color-text-primary)] sm:text-3xl">
               {t("pequenasAcciones")}
@@ -277,12 +277,12 @@ export default async function DonarPage({
 
       {/* Gallery */}
       <section
-        className="section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32 section-bg-image"
+        className="section-dark relative overflow-hidden bg-ley-purple py-16 sm:py-20 section-bg-image"
         style={{ "--section-bg-image": `url(${assetPath(fotos.donar.gallery[2].src)})` } as CSSProperties}
       >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               {t("asiTrabajamos")}
@@ -327,9 +327,9 @@ export default async function DonarPage({
       </section>
 
       {/* Form + info */}
-      <section         className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section         className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-purple">
               {t("eligeDonacion")}
@@ -417,12 +417,12 @@ export default async function DonarPage({
 
       {/* FAQ */}
       <section
-        className="section-dark relative overflow-hidden bg-purple-bg py-24 sm:py-32 section-bg-image"
+        className="section-dark relative overflow-hidden bg-ley-purple py-16 sm:py-20 section-bg-image"
         style={{ "--section-bg-image": `url(${assetPath(fotos.donar.gallerySecond)})` } as CSSProperties}
       >
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-white/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/80">
               FAQ

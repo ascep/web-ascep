@@ -28,7 +28,7 @@ export default function EnredateActividades({
   locale,
 }: EnredateActividadesProps) {
   return (
-    <section className="section-dark relative overflow-hidden bg-purple-bg py-20">
+    <section className="section-dark relative overflow-hidden bg-ley-purple py-20">
       <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
       <DecoShapes variant="orange" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

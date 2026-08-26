@@ -1,4 +1,3 @@
-import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { getTranslations } from "next-intl/server";
@@ -17,8 +16,8 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import AnimatedSection from "@/components/AnimatedSection";
-import DossierHero from "@/components/DossierHero";
 import DecoShapes from "@/components/DecoShapes";
+import WaveMask from "@/components/WaveMask";
 import CursorGlow from "@/components/CursorGlow";
 import { assetPath } from "@/lib/asset-path";
 import { getFotos } from "@/lib/get-fotos";
@@ -74,9 +73,9 @@ export default async function ProgramasPage({
       </div>
 
       {/* Hero text */}
-      <section className="relative overflow-hidden bg-surface py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <AnimatedSection direction="left">
               <div className="relative aspect-[4/3] overflow-hidden rounded-3xl shadow-xl">
@@ -112,9 +111,9 @@ export default async function ProgramasPage({
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-section-light py-24 sm:py-32">
+      <section className="relative overflow-hidden bg-section-light py-16 sm:py-20">
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-ley-teal/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-teal">
               {t("estadisticasTag")}
@@ -162,12 +161,13 @@ export default async function ProgramasPage({
             </div>
           </AnimatedSection>
         </div>
+        <WaveMask tone="teal" />
       </section>
 
-      <section id="portafolio" className="section-bg-image relative overflow-hidden bg-purple-bg py-24 sm:py-32" style={{ "--section-bg-image": `url(${assetPath(fotos.programas.hero)})` } as CSSProperties}>
+      <section id="portafolio" className="section-dark relative overflow-hidden bg-brand-primary py-16 sm:py-20">
         <CursorGlow color="rgba(1, 158, 159, 0.06)" size={500} opacity={0.5} />
         <DecoShapes variant="mixed" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-ley-yellow/40 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-ley-yellow">
               {t("portafolioTag")}

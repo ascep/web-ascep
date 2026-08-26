@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import DecoShapes from "@/components/DecoShapes";
 import AnimatedSection from "@/components/AnimatedSection";
 import CaminoSection from "@/components/CaminoSection";
+import CtaBanner from "@/components/CtaBanner";
 import WaveMask from "@/components/WaveMask";
 import HomeKpiStrip from "@/components/HomeKpiStrip";
 import HomeCTA from "@/components/HomeCTA";
@@ -17,7 +18,6 @@ import ImageParallax from "@/components/ImageParallax";
 import { assetPath } from "@/lib/asset-path";
 import { imageUrl } from "@/lib/sanity/image";
 import { getFotos } from "@/lib/get-fotos";
-import { buildTrayectoria } from "@/data/trayectoria";
 import { programasPorQue } from "@/data/programasPorQue";
 import { homeVideos } from "@/data/homeVideos";
 import {
@@ -61,7 +61,12 @@ export default async function HomePage({
 
   const fotos = await getFotos();
 
-  const qsTrayectoria: RouteItem[] = buildTrayectoria(qs.raw("trayectoria") as RouteItem[], assetPath);
+  const qsRaw = qs.raw("trayectoria") as Array<{ year: string; title?: string; description?: string; items?: string[] }>;
+  const qsTrayectoria: RouteItem[] = qsRaw.map((m, i) => ({
+    year: m.year,
+    items: m.items || [m.title || "", m.description || ""].filter(Boolean),
+    image: assetPath(fotos.home.trayectoria[i] || ""),
+  }));
 
   const gallery = fotos.home.gallery.map((item) => ({
     ...item,
@@ -105,21 +110,7 @@ export default async function HomePage({
         description: statDescription(s.label),
       }));
 
-  const heroImages = [
-    assetPath(fotos.home.heroImage),
-    assetPath(fotos.impacto.hero),
-    assetPath("/images/eventos/2024/20241112_102432.webp"),
-    assetPath("/images/eventos/2024/20241112_092855.webp"),
-    assetPath("/images/eventos/2024/20241112_095957.webp"),
-    assetPath("/images/eventos/2024/20241112_100147.webp"),
-    assetPath("/images/eventos/2024/20241112_102440.webp"),
-    assetPath("/images/eventos/2024/20241112_103725.webp"),
-    assetPath("/images/eventos/2024/20241112_111016.webp"),
-    assetPath("/images/eventos/encuentro-2025/GIS06447.webp"),
-    assetPath("/images/eventos/encuentro-2025/GIS06450.webp"),
-    assetPath("/images/eventos/encuentro-2025/GIS06460.webp"),
-    assetPath("/images/eventos/encuentro-2025/GIS06475.webp"),
-  ];
+  const heroImages = fotos.home.heroSlideshow.map((src) => assetPath(src));
 
   const programasConVideo = programasPorQue.map((p) => ({
     ...p,
@@ -139,7 +130,7 @@ export default async function HomePage({
     {
       id: "dia-del-egresado",
       href: `/${locale}/noticias/dia-del-egresado`,
-      image: assetPath("/images/eventos/encuentro-2025/GIS06445.webp"),
+      image: assetPath(fotos.noticias.diaDelEgresado.hero),
       tag: nt("egresadoTag"),
       title: nt("egresadoTitle"),
       excerpt: nt("egresadoExcerpt"),
@@ -245,22 +236,22 @@ export default async function HomePage({
 
       {/* 3. CAMINO — 7 anos de camino */}
       <section className="relative">
-        <WaveMask fill="#4A154B" flip />
         <CaminoSection
-          bgImage="/images/afiches/exp8-bg.webp"
+          bgImage={assetPath(fotos.home.caminoSectionBg)}
+          posters={[...fotos.home.caminoSectionPosters]}
           tag={h("caminoTag")}
           title={h("caminoTitle")}
           stepLabel={h("caminoStep")}
           prevLabel={h("caminoPrev")}
           nextLabel={h("caminoNext")}
         />
+        <WaveMask tone="white" />
       </section>
 
       {/* 3b. EL PROBLEMA — cifras nacionales reales (ICBF) */}
       <section className="relative overflow-hidden bg-section-light py-20">
-        <WaveMask fill="#FFFFFF" flip />
         <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-2xl">
             <span className="mb-3 inline-block rounded-[10px] bg-brand-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
               {h("retosTag")}
@@ -295,9 +286,8 @@ export default async function HomePage({
 
       {/* 4. TRANSFORMANDO — video institucional */}
       <section className="relative overflow-hidden bg-section-light py-20">
-        <WaveMask fill="#FFFFFF" flip />
         <DecoShapes variant="orange" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <AnimatedSection direction="left">
               {homeVideos.transformando ? (
@@ -347,7 +337,7 @@ export default async function HomePage({
       {/* 5. TRAYECTORIA */}
       <section className="relative overflow-hidden bg-section-light py-20">
         <DecoShapes variant="subtle" />
-        <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <AnimatedSection className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-accent">
             {h("trayectoriaTag")}
           </span>
@@ -360,11 +350,11 @@ export default async function HomePage({
             hitoPlural={qs("hitoPlural")}
           />
         </AnimatedSection>
+        <WaveMask tone="purple" />
       </section>
 
       {/* 5b. LEY 2479 — el logro historico de incidencia */}
       <section className="relative overflow-hidden bg-ley-purple py-20">
-        <WaveMask fill="#4A154B" flip />
         <div className="absolute inset-0 opacity-[0.05]">
           <div className="absolute -right-20 -top-20 h-[300px] w-[300px] rounded-full bg-brand-teal" />
           <div className="absolute -bottom-20 -left-20 h-[250px] w-[250px] rounded-full bg-brand-orange" />
@@ -403,13 +393,13 @@ export default async function HomePage({
             </AnimatedSection>
           </div>
         </div>
+        <WaveMask tone="white" />
       </section>
 
       {/* 6. PROGRAMAS EN VIDEO — abrebocas de cada programa */}
       <section className="relative overflow-hidden bg-section-light py-20">
-        <WaveMask fill="#FFFFFF" flip />
         <DecoShapes variant="teal" />
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-12 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-primary/30 bg-brand-primary/[0.06] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-brand-primary">
               {h("porQueTag")}
@@ -463,11 +453,11 @@ export default async function HomePage({
             })}
           </div>
         </div>
+        <WaveMask tone="purple" />
       </section>
 
       {/* 7. VOCES DE NUESTRA COMUNIDAD — testimonios en texto y en video */}
       <section className="relative overflow-hidden bg-ley-purple py-20">
-        <WaveMask fill="#4A154B" flip />
         <div className="absolute inset-0 opacity-[0.05]">
           <div className="absolute -right-20 -top-20 h-[300px] w-[300px] rounded-full bg-brand-teal" />
           <div className="absolute -bottom-20 -left-20 h-[250px] w-[250px] rounded-full bg-brand-orange" />
@@ -493,9 +483,16 @@ export default async function HomePage({
               { text: h("testimonial2Text"), author: h("testimonial2Author"), role: h("testimonial2Role") },
             ].map((tst, i) => (
               <AnimatedSection key={tst.author} direction="up" delay={i * 0.08}>
-                <blockquote className="border-l-4 border-brand-yellow/70 pl-5">
+                <blockquote className="relative pt-8">
+                  {/* Comilla tipografica en vez de un borde decorativo lateral */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-0 top-0 select-none text-6xl leading-none text-brand-yellow/40"
+                  >
+                    &ldquo;
+                  </span>
                   <p className="text-lg italic leading-relaxed text-white/90">
-                    &ldquo;{tst.text}&rdquo;
+                    {tst.text}
                   </p>
                   <footer className="mt-4">
                     <p className="text-sm font-semibold text-white">{tst.author}</p>
@@ -527,13 +524,22 @@ export default async function HomePage({
             </div>
           )}
         </div>
+        <WaveMask tone="white" />
       </section>
+
+      {/* 7b. LLAMADO A DONAR — justo despues de las voces, que es el punto
+          emocional mas alto de la pagina */}
+      <CtaBanner
+        title={h("donateCtaTitle")}
+        description={h("donateCtaDesc")}
+        href={`/${locale}/donar`}
+        buttonLabel={h("donateCtaBtn")}
+      />
 
       {/* 8. NOVEDADES / NOTICIAS */}
       <section className="relative overflow-hidden bg-section-light py-20">
-        <WaveMask fill="#FFFFFF" flip />
         <DecoShapes variant="teal" />
-        <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <AnimatedSection className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-10 text-center">
             <span className="mb-3 inline-block rounded-full border border-brand-purple/30 px-4 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-brand-accent">
               {h("noticiasTag")}
@@ -558,6 +564,7 @@ export default async function HomePage({
             </Link>
           </div>
         </AnimatedSection>
+        <WaveMask tone="purple" />
       </section>
 
       {/* 9. GALERIA */}
@@ -570,9 +577,8 @@ export default async function HomePage({
 
       {/* 10. ALIADOS */}
       <section className="relative overflow-hidden bg-section-light py-20">
-        <WaveMask fill="#FFFFFF" flip />
         <DecoShapes variant="teal" />
-        <AnimatedSection className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <AnimatedSection className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <span className="mb-3 block text-center text-xs font-semibold uppercase tracking-[0.25em] text-brand-accent">
             {h("aliadosTag")}
           </span>
@@ -581,6 +587,7 @@ export default async function HomePage({
           </h2>
           <LogoLoop logos={resolvedAliados} />
         </AnimatedSection>
+        <WaveMask tone="orange" />
       </section>
 
       {/* 11. CTA / CONTACTO */}

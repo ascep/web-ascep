@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import PostShare from "@/components/PostShare";
 import { assetPath } from "@/lib/asset-path";
+import { getFotos } from "@/lib/get-fotos";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -32,16 +33,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     },
   };
 }
-
-const heroImage = "/images/eventos/encuentro-2025/GIS06445.webp";
-const galleryImages = [
-  "/images/eventos/encuentro-2025/GIS06446.webp",
-  "/images/eventos/encuentro-2025/GIS06450.webp",
-  "/images/eventos/encuentro-2025/GIS06453.webp",
-  "/images/eventos/encuentro-2025/GIS06460.webp",
-  "/images/eventos/encuentro-2025/GIS06470.webp",
-  "/images/eventos/encuentro-2025/GIS06475.webp",
-];
 
 const toc = [
   { id: "que-es", label: "queEs" },
@@ -67,6 +58,7 @@ export default async function EgresadoPostPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "egresadoPost" });
+  const fotos = await getFotos();
 
   const title = `${t("title")} ${t("titleHighlight")}`;
 
@@ -79,7 +71,7 @@ export default async function EgresadoPostPage({
       <section className="relative overflow-hidden bg-ley-purple text-white">
         <div aria-hidden="true" className="pointer-events-none absolute inset-0">
           <Image
-            src={assetPath(heroImage)}
+            src={assetPath(fotos.noticias.diaDelEgresado.hero)}
             alt=""
             fill
             className="object-cover opacity-20"
@@ -228,7 +220,7 @@ export default async function EgresadoPostPage({
                   {t("galeriaDesc")}
                 </p>
                 <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-                  {galleryImages.map((src, i) => (
+                  {fotos.noticias.diaDelEgresado.gallery.map((src, i) => (
                     <a
                       key={src}
                       href={assetPath(src)}
@@ -259,7 +251,7 @@ export default async function EgresadoPostPage({
                 <h3 className="text-2xl font-bold sm:text-3xl">{t("ctaTitle")}</h3>
                 <p className="max-w-xl text-base text-purple-100">{t("ctaDesc")}</p>
                 <Link
-                  href={`/${locale}/enredate-con-ascep`}
+                  href={`/${locale}/como-ayudar/enredate-con-ascep`}
                   className="inline-flex items-center gap-2 rounded-xl bg-white px-7 py-3 font-semibold text-ley-purple transition-all hover:bg-ley-yellow hover:shadow-lg"
                 >
                   {t("ctaBtn")}

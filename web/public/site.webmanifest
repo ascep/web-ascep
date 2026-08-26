@@ -1,0 +1,26 @@
+{
+  "name": "ASCEP - Asociación de Egresados del Sistema de Protección Estatal",
+  "short_name": "ASCEP",
+  "icons": [
+    {
+      "src": "/favicon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png"
+    },
+    {
+      "src": "/web-app-manifest-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/web-app-manifest-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "theme_color": "#019E9F",
+  "background_color": "#ffffff",
+  "display": "standalone"
+}
